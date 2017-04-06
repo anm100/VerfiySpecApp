@@ -157,6 +157,7 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 			 */
 			this.CordinateX=arg0.getX()-9;
 			this.CordinateX=arg0.getY()-29;	
+			
 			/*
 			 * remove listener 
 			 */
