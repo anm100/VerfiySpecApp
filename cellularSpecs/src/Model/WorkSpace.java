@@ -3,8 +3,12 @@ package Model;
 import java.io.Serializable;
 import java.util.*;
 
+import our.Utils.Logger;
+
 public class WorkSpace implements Serializable { 
 private static WorkSpace instance =null ; 
+private static Logger log; 
+
 private  String  workSpaceName;
 private   boolean IsPressed;
 private HashMap <String,Screen> screensMap ; 
@@ -29,7 +33,9 @@ public  static WorkSpace  getInstance()
 public static void setInstance(WorkSpace instance) {
 	WorkSpace.instance = instance;
 }
-
+public static Logger getLog() {
+	return log;
+}
 public void addScreen(String screenName , Screen s){
 	this.screensMap.put(screenName,s);	
 }

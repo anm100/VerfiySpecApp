@@ -5,10 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
-
-
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -16,7 +12,6 @@ import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.Map;
 
-import utils.WriteObject;
 import Model.Screen;
 import Model.WorkSpace;
 import ToolGUI.*;
@@ -28,9 +23,8 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 	 MainScreenGui mainScreenGui;
 	AddScreenGUI addScreen;
 	WorkSpace wk=WorkSpace.getInstance();
-
 	
-	private  static boolean  clicked;
+	private  static boolean clicked;
 	
 	public WorkSpaceController(NewSpecGUI newSpecGui,MainScreenGui mainSpecGui)
 	{
@@ -108,6 +102,7 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 			mainScreenGui.setSpecNameLabel(wk.getWorkSpaceName());
 			mainScreenGui.getContentPane().add(screenTempGui);
 			}
+			mainScreenGui.setSpecNameLabel(wk.getWorkSpaceName());
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();
 		break;
