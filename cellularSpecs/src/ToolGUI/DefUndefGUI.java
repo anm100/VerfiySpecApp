@@ -70,14 +70,14 @@ public class DefUndefGUI extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//ScreenGUI j=new ScreenGUI
-				ScreenGUI j=MainScreenGui.screenPanels.get(MainScreenGui.screenPanels.size()-1);
+			//	ScreenGUI j=MainScreenGui.screenPanels.get(MainScreenGui.screenPanels.size()-1);
 				JLabel lblNewLabel=new JLabel ();
 				 lblNewLabel=CreateLabel("New label",x,y,hight,width);
 				 	y=y+30;
 				 	System.out.print(lblNewLabel.getText().toString());
-				      j.panel.add(lblNewLabel);
-			        j.repaint();
-			        j.revalidate();
+//				      j.panel.add(lblNewLabel);
+//			        j.repaint();
+//			        j.revalidate();
 
 			    	dispose();
 			    	

@@ -8,24 +8,65 @@ import java.awt.event.MouseListener;
 
 
 
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Iterator;
+import java.util.Map;
+
+import utils.WriteObject;
 import Model.Screen;
 import Model.WorkSpace;
 import ToolGUI.*;
 
 public class WorkSpaceController implements ActionListener,MouseListener {
+	private int CordinateX; 
+	private int CordinateY; 
 	NewSpecGUI newSpecGui;
 	 MainScreenGui mainScreenGui;
 	AddScreenGUI addScreen;
 	WorkSpace wk=WorkSpace.getInstance();
+
 	
 	private  static boolean  clicked;
 	
 	public WorkSpaceController(NewSpecGUI newSpecGui,MainScreenGui mainSpecGui)
 	{
 		this.newSpecGui=newSpecGui;
-		//this.workSpace=workSpace;
 		this.mainScreenGui=mainSpecGui;
 			 
+	}
+	public void OpenSpecFromFile(String fileName){
+		
+		try (ObjectInputStream ois
+			= new ObjectInputStream(new FileInputStream(fileName+".ser"))) {
+
+			WorkSpace.setInstance((WorkSpace) ois.readObject());
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+
+	}
+
+	
+	public void SaveSpecToFile(String fileName){
+		
+		WorkSpace w= WorkSpace.getInstance();
+		
+		try (ObjectOutputStream oos =
+				new ObjectOutputStream(new FileOutputStream(fileName+".ser"))) {
+
+			oos.writeObject(w);
+			System.out.println("Done.. write to file "+fileName+".ser");
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 	}
 	/**
 	 * @wbp.parser.entryPoint
@@ -56,24 +97,40 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		case("New"):
 		break;
 		case("Open.."):
+			OpenSpecFromFile("ahmad1");
+			Screen s ;
+			Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+			while(it.hasNext()){
+				Map.Entry pair =(Map.Entry) it.next(); 
+				s= (Screen)pair.getValue();			
+			
+			ScreenGUI screenTempGui=new ScreenGUI(s.getScreenName(),s.getCordinateX(),s.getCordinateY());
+			mainScreenGui.setSpecNameLabel(wk.getWorkSpaceName());
+			mainScreenGui.getContentPane().add(screenTempGui);
+			}
+			mainScreenGui.getContentPane().repaint();
+			mainScreenGui.getContentPane().revalidate();
 		break;
 		case("Save SPEC"):
+			WorkSpace w= WorkSpace.getInstance();
+			SaveSpecToFile(w.getWorkSpaceName()); 
 		break;
 		case("Verifiy SPEC"):
 		break;
 		case("ShowResults"):
 		break;
 		case("Save"):
-			Screen screen=wk.getTheLastScreen();
-			System.out.println(addScreen.getScreenName().getText().toString());
+			Screen screen = new Screen();
 			screen.setScreenName(addScreen.getScreenName().getText().toString());
-			System.out.println(addScreen.getDescription().getText().toString());
 			screen.setDescription(addScreen.getDescription().getText().toString());
+			screen.setCordinateX(this.CordinateX);
+			screen.setCordinateY(this.CordinateY);
+
 			ScreenGUI screenGUI=new ScreenGUI(screen.getScreenName(),screen.getCordinateX(),screen.getCordinateY());//there is a problem
 			AddScreenController a=new AddScreenController();
 			//screenGUI.addScreenListener(a);
-			wk.addScreen(screen);
-			mainScreenGui.setSpecNameLabel("saeed");
+			wk.addScreen(screen.getScreenName(), screen);
+			mainScreenGui.setSpecNameLabel(wk.getWorkSpaceName());
 			mainScreenGui.getContentPane().add(screenGUI);
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();
@@ -95,16 +152,17 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		if(wk.getisIsClicked()==true)
 		{
-			
-			Screen screen=new Screen();
-			screen.setCordinateX((arg0.getX()-9));
-			screen.setCordinateY((arg0.getY()-29));	
-			
+			/*
+			 * save temporary CordinateX &CordinateY of new screen 
+			 */
+			this.CordinateX=arg0.getX()-9;
+			this.CordinateX=arg0.getY()-29;	
+			/*
+			 * remove listener 
+			 */
 			mainScreenGui.removeMouseListener((MouseListener)this);
-			System.out.print("b");
-			wk.addScreen(screen);
 			 addScreen=new AddScreenGUI();
-			AddScreenController addScreenControlle=new AddScreenController(addScreen,wk,mainScreenGui);
+			AddScreenController addScreenControlle=new AddScreenController(addScreen,mainScreenGui);
 			addScreen.addScreenListener(this);
 			addScreen.setVisible(true);
 			

@@ -1,15 +1,17 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Screen {
+public class Screen implements Serializable{
 	private String  screenName;
 	private int  cordinateX;
 	private int cordinateY;
 	private int height;
 	private int width;
 	private String description;
-	private  ArrayList<Element> elements = new ArrayList<Element>();
+	private  List<Element> elements = new ArrayList<Element>();
 	/**
 	 * @return the screenName
 	 */
@@ -95,6 +97,10 @@ public class Screen {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public List<Element> getElements() {
+		return elements;
 	}
 	public void addElement(Element element) {
 		this.elements.add(element);

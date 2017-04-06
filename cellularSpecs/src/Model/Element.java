@@ -1,9 +1,17 @@
 package Model;
 
-public class Element {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Element implements Serializable{
 private String elementName;
 private String type;
 private String paramName;
+//private List <Action> actions= new ArrayList<>(); 
+//private List <MyCondition> conditions= new ArrayList<>(); 
+
+public Element() {}
 /**
  * @return the elementName
  */

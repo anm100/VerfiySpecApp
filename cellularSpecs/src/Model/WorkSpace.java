@@ -1,36 +1,44 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class WorkSpace { 
-private  String  workSpaceName;
-private   ArrayList<Screen> screens=new ArrayList<Screen>() ;
-private   boolean IsPressed;
-public static   boolean IsClicked;
+public class WorkSpace implements Serializable { 
 private static WorkSpace instance =null ; 
+private  String  workSpaceName;
+private   boolean IsPressed;
+private HashMap <String,Screen> screensMap ; 
+public static boolean IsClicked;
 
+private  WorkSpace()
+{
+		this.IsPressed=false;
+		screensMap=new HashMap<String,Screen>();
+		this.IsClicked=false;
+}
 
 public  static WorkSpace  getInstance()
 {
-	if (instance== null)
-	{
+	if(null==instance ){
 	instance=new WorkSpace();
 	}
 	return instance;
 }
 
 
+public static void setInstance(WorkSpace instance) {
+	WorkSpace.instance = instance;
+}
 
+public void addScreen(String screenName , Screen s){
+	this.screensMap.put(screenName,s);	
+}
+public Screen getScreenByName(String screenName){
+	return this.screensMap.get(screenName);
+}
 public boolean isIsPressed() {
 	return IsPressed;
 }
-
-private  WorkSpace()
-{
-		this.IsPressed=false;
-		this.IsClicked=false;
-}
-
 /**
  * @return the workSpaceName
  */
@@ -44,21 +52,22 @@ public String getWorkSpaceName() {
 public void setWorkSpaceName(String workSpaceName) {
 	this.workSpaceName = workSpaceName;
 }
-public void addScreen(Screen screen) {
-	this.screens.add(screen);
-}
+
 /**
  * @return the isPressed
  */
-public boolean getisIsPressed() {
+public boolean getIsPressed() {
 	return IsPressed;
 }
+
+public HashMap<String,Screen> getScreensMap() {
+	return screensMap;
+}
+
+
 /**
  * @param isPressed the isPressed to set
  */
-public void setIsPressed(boolean isPressed) {
-	IsPressed = isPressed;
-}
 public boolean getisIsClicked() {
 	return IsClicked;
 }
@@ -66,23 +75,22 @@ public boolean getisIsClicked() {
 public void setIsClicked(boolean isClicked) {
 	IsClicked = isClicked;
 }
-public Screen getScreenByname(String screeName) {
-	return null;
+public void setIsPressed(boolean isPressed) {
+	IsPressed = isPressed;
+}
+//public Screen getTheLastScreen() {
+//	int index=screens.size()-1;
+//	Screen screen2=new Screen();
+//	 screen2=screens.get(index);
+//	 screens.remove(index);
+//	return screen2;
+//}
+//public ArrayList<Screen> getScreenArray() {
 //	return screens;
-}
-public Screen getTheLastScreen() {
-	int index=screens.size()-1;
-	Screen screen2=new Screen();
-	 screen2=screens.get(index);
-	 screens.remove(index);
-	return screen2;
-}
-public ArrayList<Screen> getScreenArray() {
-	return screens;
-}
-
-public void setScreens(Screen screen) {
-	this.screens.add(screen);
-}
+//}
+//
+//public void setScreens(Screen screen) {
+//	this.screens.add(screen);
+//}
 
 }

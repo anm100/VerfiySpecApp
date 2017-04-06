@@ -10,15 +10,13 @@ import ToolGUI.*;
 public class AddScreenController implements ActionListener {
 	private AddScreenGUI addScreenGUI;
 	private   MainScreenGui mainScreenGui ;
-	private WorkSpace workSpace;
 	public AddScreenController()
 	{
 		
 	}
-public AddScreenController(AddScreenGUI addScreen,WorkSpace workSpace, MainScreenGui mainScreenGui)
+public AddScreenController(AddScreenGUI addScreen, MainScreenGui mainScreenGui)
 {
 	this.addScreenGUI=addScreen;
-	this.workSpace=workSpace;		
 	this.mainScreenGui=mainScreenGui;
 }
 @Override
