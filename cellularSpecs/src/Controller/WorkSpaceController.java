@@ -91,18 +91,21 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		case("New"):
 		break;
 		case("Open.."):
-			OpenSpecFromFile("ahmad1");
+			OpenSpecFromFile("aaa");
+		mainScreenGui.dispose();
+		mainScreenGui=new MainScreenGui();
+		mainScreenGui.setVisible(true);
 			Screen s ;
 			Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 			while(it.hasNext()){
 				Map.Entry pair =(Map.Entry) it.next(); 
 				s= (Screen)pair.getValue();			
-			
+				
 			ScreenGUI screenTempGui=new ScreenGUI(s.getScreenName(),s.getCordinateX(),s.getCordinateY());
-			mainScreenGui.setSpecNameLabel(wk.getWorkSpaceName());
 			mainScreenGui.getContentPane().add(screenTempGui);
 			}
-			mainScreenGui.setSpecNameLabel(wk.getWorkSpaceName());
+			mainScreenGui.addMainScreenListener(this);
+			mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();
 		break;
@@ -125,7 +128,7 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 			AddScreenController a=new AddScreenController();
 			//screenGUI.addScreenListener(a);
 			wk.addScreen(screen.getScreenName(), screen);
-			mainScreenGui.setSpecNameLabel(wk.getWorkSpaceName());
+			mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
 			mainScreenGui.getContentPane().add(screenGUI);
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();

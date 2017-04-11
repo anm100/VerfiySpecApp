@@ -12,11 +12,13 @@ import ToolGUI.NewSpecGUI;
 
 public  class MVCCspecVerification{
 	private static NewSpecGUI newSpecGUI=new NewSpecGUI();
-	private static MainScreenGui mainScreenGui=new MainScreenGui();
+	private static MainScreenGui mainScreenGui;
 	private static WorkSpaceController workSpaceController;
 	static JFrame mainFram;
 	public static void main(String[] args) {
 		    WorkSpace workSpace=WorkSpace.getInstance();
+			mainScreenGui= new MainScreenGui(); 
+
 		workSpaceController=new WorkSpaceController(newSpecGUI,mainScreenGui);
 		newSpecGUI.addWorkSpaceListener(workSpaceController);
 		newSpecGUI.setVisible(true);
@@ -30,7 +32,7 @@ public  class MVCCspecVerification{
 		}
 	
 		newSpecGUI.dispose();
-		mainScreenGui.setSpecNameLabel(workSpace.getWorkSpaceName());
+		mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
 		mainScreenGui.addMainScreenListener(workSpaceController);
 		//mainScreenGui.addMainScreenMouseListener(workSpaceController);
 		mainScreenGui.setVisible(true);
