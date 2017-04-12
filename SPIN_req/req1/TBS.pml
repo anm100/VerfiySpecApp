@@ -6,13 +6,14 @@ CreatNewEventScreen}
 mtype state= BoPo-MainSreen ;
 active proctype vm()
 {
-Do
-if
+do
 :: state== BoPo-MainSreen ->
-atomic{ state= CreatNewEventScreen
-}
+if
+::atomic{ state= CreatNewEventScreen}
+fi
 :: state== CreatNewEventScreen ->
-atomic{ state= BoPo-MainSreen }
+if
+::atomic{ state= BoPo-MainSreen }
 fi
 od
 }
