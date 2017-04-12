@@ -37,7 +37,7 @@ public class MainScreenGui extends JFrame  {
 		btnAddscreen.setBounds(25, 55, 99, 23);
 		getContentPane().add(btnAddscreen);
 		
-		 specNameLabel = new JLabel("<Spec name>");
+		specNameLabel = new JLabel();
 		specNameLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		specNameLabel.setBounds(34, 11, 163, 35);
 		getContentPane().add(specNameLabel);
