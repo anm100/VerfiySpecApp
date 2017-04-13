@@ -7,7 +7,7 @@ import our.Utils.Logger;
 
 public class WorkSpace implements Serializable { 
 private static WorkSpace instance =null ; 
-//private static Logger log; 
+private static Logger logger; 
 
 private  String  workSpaceName;
 private   boolean IsPressed;
@@ -33,9 +33,9 @@ public  static WorkSpace getInstance()
 public static void setInstance(WorkSpace instance) {
 	WorkSpace.instance = instance;
 }
-/*public static Logger getLog() {
-	return log;
-}*/
+public static Logger getLog() {
+	return logger;
+}
 public void addScreen(String screenName , Screen s){
 	this.screensMap.put(screenName,s);	
 }

@@ -1,0 +1,32 @@
+mtype = { BoPo_MainSreen,CreateNewEvent,SignIn,changeParmX}
+mtype state=SignIn
+byte cnt=2
+ltl r3 {!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParmX)U(state==BoPo_MainSreen))))}
+active proctype vm()
+{
+do
+:: state== SignIn ->
+	if
+	::(cnt<=2)->atomic{cnt=cnt-1;state=SignIn}
+	::cnt==0 -> atomic{state=changeParmX}	
+	::(cnt<0) ->atomic{ state=BoPo_MainSreen;cnt=5}
+	fi
+::state == changeParmX->
+	if
+	::atomic{ state=SignIn;cnt=-1}
+	fi
+:: state== BoPo_MainSreen ->
+	if	
+	::atomic{ state=CreateNewEvent}
+	fi
+:: state== CreateNewEvent ->
+	if
+	::(cnt>5)->atomic{cnt=cnt-1} 
+	fi 
+od
+}
+
+
+
+
+ 

@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -12,6 +11,9 @@ import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.swing.JFileChooser;
+
+import ui.utils.FileChooser;
 import Model.Screen;
 import Model.WorkSpace;
 import ToolGUI.*;
@@ -45,8 +47,6 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 
 
 	}
-
-	
 	public void SaveSpecToFile(String fileName){
 		
 		WorkSpace w= WorkSpace.getInstance();
@@ -91,6 +91,18 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		case("New"):
 		break;
 		case("Open.."):
+			   JFileChooser c = new JFileChooser();
+	      // Demonstrate "Open" dialog:
+	      int rVal = c.showOpenDialog(null);
+	      if (rVal == JFileChooser.APPROVE_OPTION) {
+	    	  WorkSpace.getLog().info(c.getSelectedFile().getName());
+	    	  WorkSpace.getLog().info(c.getCurrentDirectory().toString());
+	      }
+	      if (rVal == JFileChooser.CANCEL_OPTION) {
+	    	  WorkSpace.getLog().info("cancel");
+	    	  WorkSpace.getLog().info(c.getCurrentDirectory().toString());
+	      }
+	      
 			OpenSpecFromFile("aaa");
 		mainScreenGui.dispose();
 		mainScreenGui=new MainScreenGui();
@@ -110,8 +122,8 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 			mainScreenGui.getContentPane().revalidate();
 		break;
 		case("Save SPEC"):
-			WorkSpace w= WorkSpace.getInstance();
-			SaveSpecToFile(w.getWorkSpaceName()); 
+		
+			SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
 		break;
 		case("Verifiy SPEC"):
 		break;

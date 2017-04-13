@@ -1,0 +1,11 @@
+never r2 {    /* !([] ((! ((state==BoPo_MainSreen))) || (<> (! ((state==BoPo_MainSreen)))))) */
+T0_init:
+	if
+	:: (! ((! ((state==BoPo_MainSreen))))) -> goto accept_S4
+	:: (1) -> goto T0_init
+	fi;
+accept_S4:
+	if
+	:: (! ((! ((state==BoPo_MainSreen))))) -> goto accept_S4
+	fi;
+}
