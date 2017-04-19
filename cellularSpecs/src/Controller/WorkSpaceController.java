@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
@@ -91,17 +92,7 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		case("New"):
 		break;
 		case("Open.."):
-			   JFileChooser c = new JFileChooser();
-	      // Demonstrate "Open" dialog:
-	      int rVal = c.showOpenDialog(null);
-	      if (rVal == JFileChooser.APPROVE_OPTION) {
-	    	  WorkSpace.getLog().info(c.getSelectedFile().getName());
-	    	  WorkSpace.getLog().info(c.getCurrentDirectory().toString());
-	      }
-	      if (rVal == JFileChooser.CANCEL_OPTION) {
-	    	  WorkSpace.getLog().info("cancel");
-	    	  WorkSpace.getLog().info(c.getCurrentDirectory().toString());
-	      }
+			 
 	      
 			OpenSpecFromFile("aaa");
 		mainScreenGui.dispose();
@@ -126,6 +117,15 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 			SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
 		break;
 		case("Verifiy SPEC"):
+
+			try {
+				Runtime.getRuntime().exec("cmd /c start b.bat");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+
 		break;
 		case("ShowResults"):
 		break;
