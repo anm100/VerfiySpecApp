@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ui.utils.FileChooser;
 import Model.Screen;
@@ -72,7 +73,7 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		
 		switch(e.getActionCommand())
 		{
-		case("Create"):
+		case("OK"):
 			String st=null;
 			st=newSpecGui.getSpecName().getText().toString();
 			wk.setWorkSpaceName(st);
@@ -81,7 +82,25 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 				wk.notify();
 			}
 		break;
+		case("Browse.."):
+		JFileChooser chooser = new JFileChooser();
+		String workingDir = System.getProperty("user.dir");
+		System.out.print(workingDir);
+	    chooser.setCurrentDirectory(new java.io.File("."));
+	    chooser.getCurrentDirectory();
+	    chooser.setDialogTitle("select a directory as workspace ");
+	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	    chooser.setAcceptAllFileFilterUsed(false);
+
+	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+	      System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
+	      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+	    } else {
+	      System.out.println("No Selection ");
+	    }
+
 		
+		break;
 		case("AddScreen"):
 
 		System.out.println("AddScreen");
