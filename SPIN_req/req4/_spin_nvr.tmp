@@ -1,0 +1,15 @@
+never r1 {    /* !([] ((! (((ack==1)) || ((ack==0)))) || (! (<> ((! ((ack==0))) && (! ((ack==1)))))))) */
+T0_init:
+	if
+	:: (! ((! (((ack==1)) || ((ack==0))))) && ((! ((ack==0))) && (! ((ack==1))))) -> goto accept_all
+	:: (! ((! (((ack==1)) || ((ack==0)))))) -> goto T0_S4
+	:: (1) -> goto T0_init
+	fi;
+T0_S4:
+	if
+	:: (((! ((ack==0))) && (! ((ack==1))))) -> goto accept_all
+	:: (1) -> goto T0_S4
+	fi;
+accept_all:
+	skip
+}

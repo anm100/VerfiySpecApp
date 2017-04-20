@@ -6,12 +6,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ui.utils.FileChooser;
 import Model.Screen;
@@ -71,7 +73,7 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		
 		switch(e.getActionCommand())
 		{
-		case("Create"):
+		case("OK"):
 			String st=null;
 			st=newSpecGui.getSpecName().getText().toString();
 			wk.setWorkSpaceName(st);
@@ -80,7 +82,25 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 				wk.notify();
 			}
 		break;
+		case("Browse.."):
+		JFileChooser chooser = new JFileChooser();
+		String workingDir = System.getProperty("user.dir");
+		System.out.print(workingDir);
+	    chooser.setCurrentDirectory(new java.io.File("."));
+	    chooser.getCurrentDirectory();
+	    chooser.setDialogTitle("select a directory as workspace ");
+	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	    chooser.setAcceptAllFileFilterUsed(false);
+
+	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+	      System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
+	      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+	    } else {
+	      System.out.println("No Selection ");
+	    }
+
 		
+		break;
 		case("AddScreen"):
 
 		System.out.println("AddScreen");
@@ -91,17 +111,7 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		case("New"):
 		break;
 		case("Open.."):
-			   JFileChooser c = new JFileChooser();
-	      // Demonstrate "Open" dialog:
-	      int rVal = c.showOpenDialog(null);
-	      if (rVal == JFileChooser.APPROVE_OPTION) {
-	    	  WorkSpace.getLog().info(c.getSelectedFile().getName());
-	    	  WorkSpace.getLog().info(c.getCurrentDirectory().toString());
-	      }
-	      if (rVal == JFileChooser.CANCEL_OPTION) {
-	    	  WorkSpace.getLog().info("cancel");
-	    	  WorkSpace.getLog().info(c.getCurrentDirectory().toString());
-	      }
+			 
 	      
 			OpenSpecFromFile("aaa");
 		mainScreenGui.dispose();
@@ -126,6 +136,15 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 			SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
 		break;
 		case("Verifiy SPEC"):
+
+			try {
+				Runtime.getRuntime().exec("cmd /c start b.bat");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+
 		break;
 		case("ShowResults"):
 		break;

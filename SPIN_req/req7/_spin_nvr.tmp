@@ -1,0 +1,30 @@
+never r1 {    /* !([] ((! ((state==ChangeName))) U ((state==ChangeName)))) */
+T0_init:
+	if
+	:: (! (((state==ChangeName)))) -> goto accept_S4
+	:: (! ((! ((state==ChangeName)))) && ! (((state==ChangeName)))) -> goto accept_all
+	:: (1) -> goto T0_init
+	fi;
+accept_S4:
+	if
+	:: (! (((state==ChangeName)))) -> goto accept_S4
+	:: (! ((! ((state==ChangeName)))) && ! (((state==ChangeName)))) -> goto accept_all
+	fi;
+accept_all:
+	skip
+}
+never r2 {    /* !([] ((! ((Name==2))) || (((Name==2)) U ((state==ChangeName))))) */
+T0_init:
+	if
+	:: (! ((! ((Name==2)))) && ! (((state==ChangeName)))) -> goto accept_S4
+	:: (! ((! ((Name==2)))) && ! (((Name==2))) && ! (((state==ChangeName)))) -> goto accept_all
+	:: (1) -> goto T0_init
+	fi;
+accept_S4:
+	if
+	:: (! (((state==ChangeName)))) -> goto accept_S4
+	:: (! (((Name==2))) && ! (((state==ChangeName)))) -> goto accept_all
+	fi;
+accept_all:
+	skip
+}
