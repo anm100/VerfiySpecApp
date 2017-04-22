@@ -7,6 +7,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import Controller.AddScreenController;
+import Controller.WorkSpaceController;
+
 import java.awt.Color;
 
 import javax.swing.JButton;
@@ -23,16 +26,19 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import javax.swing.ScrollPaneConstants;
 
-public class ScreenGUI extends JPanel {
-
-	public static JPanel panel;
+public class ScreenGUI extends JScrollPane {
 	private int x=0,y=0,width=143,hight=40;
 	private JTextField	textField;
 	protected String screenName;
@@ -40,72 +46,104 @@ public class ScreenGUI extends JPanel {
 	private JMenuItem button;
 	private JMenuItem defUndef;
 	private JMenuItem List;
-	
-	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) {
-		setBackground(Color.WHITE);
-		setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		setSize(163, 220);
-		setLayout(null);
-		setLocation(getCordinateX, getCordinateY);
-  		textField = new JTextField();
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(1, 1, 123, 32);
-		add(panel_1);
-		panel_1.setLayout(null);
+	private JMenuItem changeName;
+	private JMenuItem deleteScreen;
+	private JMenuItem moveScreen;
+	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) 
+	{
+
+		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
-		JLabel label = new JLabel(screenName);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		label.setBounds(1, 5, 122, 22);
-		panel_1.add(label);
+		JPanel mainScreenPanel = new JPanel();
+		mainScreenPanel.setBackground(Color.WHITE);
+		setViewportView(mainScreenPanel);
+		mainScreenPanel.setSize(163, 228);
+		setSize(163, 228);
+		mainScreenPanel.setLayout(null);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(125, 1, 35, 32);
-		add(panel_2);
-		   OnOfGUI onOffGui=new OnOfGUI(screenName);
-			 DefUndefGUI  defUndefGUI=new DefUndefGUI(screenName);
-	  		  ListTypeGUI listTypeGui=new ListTypeGUI(screenName);
-		   
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBorder(null);
-        scrollPane.setViewportBorder(null);
-        scrollPane.setBounds(1, 35, 159, 174);
-        add(scrollPane);
-         panel = new JPanel();
-         panel.setForeground(Color.WHITE);
-         panel.setBackground(Color.WHITE);
-        scrollPane.setViewportView(panel);
-        panel.setBorder(null);
-        panel.setLayout(null);
-		 JMenuBar menubar = new JMenuBar();
-		 menubar.setBackground(UIManager.getColor("Button.disabledShadow"));
-		 menubar.setBorderPainted(false);
-		 panel_2.add(menubar);
-		 JMenu newMenu = new JMenu("+");
-		 newMenu.setBackground(Color.WHITE);
-		 newMenu.addActionListener(new ActionListener() {
-		 	public void actionPerformed(ActionEvent arg0) {
-		 	//	frameScreenPanels.addElement(screenName, scrennGui);
-		 	}
-		 });
-		 	JMenuItem onOff = new JMenuItem("On/Off");
-	        JMenuItem button = new JMenuItem("button");
-	        JMenuItem defUndef = new JMenuItem("defined/undefined");
-	        JMenuItem List = new JMenuItem("List");
+		JLabel element = new JLabel("New element");
+
+		element.setBounds(1, 21, 143, 39);
+		mainScreenPanel.add(element);
+		
+
+		JLabel screenLabel = new JLabel("saeed");
+
+		screenLabel.setBounds(1, 0, 119, 22);
+		mainScreenPanel.add(screenLabel);
+	       screenLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
+	       
+	       JMenuBar menuBar = new JMenuBar();
+	       menuBar.setBounds(120, 0, 93, 21);
+	       mainScreenPanel.add(menuBar);
+	       JMenu newMenu = new JMenu("+");
+	        onOff = new JMenuItem("On/Off");
+	         button = new JMenuItem("button");
+	         defUndef = new JMenuItem("defined/undefined");
+	         List = new JMenuItem("List");
+	        
 	        
 	        newMenu.add(onOff);
 	        newMenu.add(button);
 	        newMenu.add(List);
 	        newMenu.add(defUndef);
-	        menubar.add(newMenu);
+	        menuBar.add(newMenu);
+	      
+	    
+		       JMenuBar menuOpt = new JMenuBar();
+      	       menuOpt.setBounds(5, 5, 10, 10);
+      	       add(menuOpt);
+      	       
+
+      	        menuOpt.setBackground(UIManager.getColor("Button.disabledShadow"));
+      	        menuOpt.setBorderPainted(false);					 
+      	        JMenu opt1 = new JMenu("");
+      	        
+      	        	opt1.setBounds(1, 1, 1, 1);
+      	        	opt1.setBackground(Color.WHITE);
+      	        	 changeName = new JMenuItem("Change screen name");
+      	        	 moveScreen = new JMenuItem("Move screen");
+      	        	 deleteScreen = new JMenuItem("Delete screen");
+      
+      	        	opt1.add(changeName);
+      	        	opt1.add(moveScreen);
+      	        	opt1.add(deleteScreen);
+      	        	
+      	        	    
+      	        	     //  opt1.setLocation(arg0.getX(),arg0.getY());
+      	        	       menuOpt.add(opt1);
+      	        			addMouseListener(new MouseAdapter() {
+      	        				@Override
+      	        				public void mousePressed(MouseEvent e) {
+      	        					menuOpt.setLocation(e.getX(), e.getY());
+      	        					opt1.doClick();
+      	        					repaint();
+      	        					revalidate();
+
+      	        				}
+      	        			});       	       
+	
+		 
+	}
+	public void addScreenMouseListener(AddScreenController addScreenController) {
+		// TODO Auto-generated method stub
+		this.addMouseMotionListener(addScreenController);
+		this.addMouseListener(addScreenController);
+	}
+	public void addScreenMouseListener2(WorkSpaceController addScreenController) {
+		// TODO Auto-generated method stub
+		this.addMouseMotionListener(addScreenController);
+		this.addMouseListener(addScreenController);
 	}
 	public void addScreenListener(ActionListener listenForOperation){       
-		onOff.addActionListener(listenForOperation);
-		button.addActionListener(listenForOperation);
-		defUndef.addActionListener(listenForOperation);
-		List.addActionListener(listenForOperation);
+		changeName.addActionListener(listenForOperation);
+		moveScreen.addActionListener(listenForOperation);
+		deleteScreen.addActionListener(listenForOperation);  
+			onOff.addActionListener(listenForOperation);
+			button.addActionListener(listenForOperation);
+			defUndef.addActionListener(listenForOperation);
+			List.addActionListener(listenForOperation);
 }
+	
 }

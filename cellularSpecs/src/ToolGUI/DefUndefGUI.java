@@ -18,6 +18,8 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.border.LineBorder;
 
+import Controller.AddScreenController;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -124,5 +126,9 @@ public class DefUndefGUI extends JFrame {
 	      lblNewLabel.setText(" "+textField.getText().toString()+"");
 	      return lblNewLabel;
 		// TODO Auto-generated method stub
+	}
+	public void setDefUndefistener(AddScreenController DefUndefTypeListener ){       
+		
+		btnSave.addActionListener(DefUndefTypeListener);
 	}
 }

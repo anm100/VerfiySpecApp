@@ -17,9 +17,11 @@ public  class MVCCspecVerification{
 	static JFrame mainFram;
 	public static void main(String[] args) {
 		    WorkSpace workSpace=WorkSpace.getInstance();
-			mainScreenGui= new MainScreenGui(); 
-
-		workSpaceController=new WorkSpaceController(newSpecGUI,mainScreenGui);
+			
+		    mainScreenGui=MainScreenGui.getInstance();
+		WorkSpaceController.setInstance(newSpecGUI,mainScreenGui);
+		workSpaceController=WorkSpaceController.getInstance();
+		
 		newSpecGUI.addWorkSpaceListener(workSpaceController);
 		newSpecGUI.setVisible(true);
 			synchronized(workSpace){

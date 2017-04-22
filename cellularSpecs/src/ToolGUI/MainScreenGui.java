@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Controller.WorkSpaceController;
+import Model.Screen;
+import Model.WorkSpace;
 
 import javax.swing.JButton;
 
@@ -29,7 +31,20 @@ public class MainScreenGui extends JFrame  {
 	private JButton btnRunVerification;
 	private JButton btnShowresults;
 	
-	 public MainScreenGui() {
+	
+	private static MainScreenGui instance =null ; 
+
+	public  static MainScreenGui getInstance()
+	{
+		if(null==instance ){
+		instance=new MainScreenGui();
+		}
+		return instance;
+	}
+	
+	
+	
+	private  MainScreenGui() {
 		setSize(750,600);
 		getContentPane().setLayout(null);
 		
@@ -80,6 +95,10 @@ public class MainScreenGui extends JFrame  {
 		public void addMainScreenMouseListener(MouseListener WorkSpaceController){       
 		
 			this.addMouseListener(WorkSpaceController);
+		}
+		public void addMainScreenMouseListener(MouseMotionListener WorkSpaceController)
+		{
+			this.addMouseMotionListener(WorkSpaceController);
 		}
 		
 }

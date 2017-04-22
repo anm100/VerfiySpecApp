@@ -12,6 +12,9 @@ import javax.swing.JList;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.border.LineBorder;
+
+import Controller.AddScreenController;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -25,6 +28,7 @@ public class ButtonTypeGUI extends JFrame {
 	private JTextField txtUndefined;
 	private JTextField textField;
 	private int i ; 
+	private JButton butSave;
 	public ButtonTypeGUI(String ScreenName)
 	{
 		setTitle(ScreenName+"standart button" );
@@ -130,11 +134,13 @@ public class ButtonTypeGUI extends JFrame {
 		button.setBounds(226, 312, 116, 23);
 		getContentPane().add(button);
 		
-		JButton button_1 = new JButton("Save");
-		button_1.setBounds(104, 312, 112, 23);
-		getContentPane().add(button_1);
+		 butSave = new JButton("Save");
+		butSave.setBounds(104, 312, 112, 23);
+		getContentPane().add(butSave);
+			
+	}
+	public void setButtonTypeListener(AddScreenController ButtonTypeListener ){       
 		
-
-		
+		butSave.addActionListener(ButtonTypeListener);
 	}
 }

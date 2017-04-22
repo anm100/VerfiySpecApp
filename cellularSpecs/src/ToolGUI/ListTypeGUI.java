@@ -17,6 +17,7 @@ import javax.swing.JList;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.border.LineBorder;
 
@@ -34,12 +35,16 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.event.PopupMenuListener;
+
+import Controller.AddScreenController;
+
 import javax.swing.event.PopupMenuEvent;
 
 public class ListTypeGUI extends JFrame {
 	private JTextField txtUndefined;
 	private JTextField textField;
 	private String values[]={""} ; 
+	JButton butListSave;
 	public ListTypeGUI(String ScreenName)
 	{
 		setTitle("List Element");
@@ -109,9 +114,10 @@ public class ListTypeGUI extends JFrame {
 		button.setBounds(20, 243, 236, 28);
 		getContentPane().add(button);
 		
-		JButton button_1 = new JButton("Save");
-		button_1.setBounds(120, 295, 112, 23);
-		getContentPane().add(button_1);
+		 butListSave = new JButton("Save");
+		 butListSave.setToolTipText("");
+		butListSave.setBounds(120, 295, 112, 23);
+		getContentPane().add(butListSave);
 		
 		JButton button_2 = new JButton("Cancel");
 		button_2.setBounds(242, 295, 116, 23);
@@ -130,10 +136,12 @@ public class ListTypeGUI extends JFrame {
 				System.out.println(values.toString());
 			}
 		});
-
-
-		
 		
 	}
+	public void setListTypeListener(AddScreenController listTypeListener ){       
+		
+		 butListSave.addActionListener(listTypeListener);
+	}
 	
+
 }

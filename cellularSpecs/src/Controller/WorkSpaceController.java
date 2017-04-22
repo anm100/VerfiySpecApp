@@ -1,40 +1,67 @@
 package Controller;
 
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import javax.swing.JFileChooser;
 
 import ui.utils.FileChooser;
 import Model.Screen;
 import Model.WorkSpace;
 import ToolGUI.*;
+import our.Utils.Logger;
 
-public class WorkSpaceController implements ActionListener,MouseListener {
+public class WorkSpaceController implements ActionListener,MouseListener,MouseMotionListener {
 	private int CordinateX; 
 	private int CordinateY; 
+	private int x=0;
+	private int y=0;
+	private String specName=null;
+	private String workSpaceLocation=null;
+	public Boolean inner =false;
+
+	private static  Boolean GetNewLocation=false;
+
 	NewSpecGUI newSpecGui;
 	 MainScreenGui mainScreenGui;
-	AddScreenGUI addScreen;
+	private AddScreenGUI addScreen;
+	private Screen screen;
+	 ScreenGUI screenGUI;
+	AddScreenController addScreenController;
 	WorkSpace wk=WorkSpace.getInstance();
 	
 	private  static boolean clicked;
 	
-	public WorkSpaceController(NewSpecGUI newSpecGui,MainScreenGui mainSpecGui)
+	
+	private static WorkSpaceController instance =null ; 
+
+	private  WorkSpaceController(NewSpecGUI newSpecGui,MainScreenGui mainSpecGui)
 	{
 		this.newSpecGui=newSpecGui;
 		this.mainScreenGui=mainSpecGui;
-			 
 	}
+
+	public  static WorkSpaceController getInstance()
+	{
+		return instance;
+	}
+	public  static 	void setInstance(NewSpecGUI newSpecGui,MainScreenGui mainSpecGui)
+	{
+		WorkSpaceController.instance=new WorkSpaceController(newSpecGui,mainSpecGui);
+	}
+	
 	public void OpenSpecFromFile(String fileName){
 		
 		try (ObjectInputStream ois
@@ -73,9 +100,8 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		switch(e.getActionCommand())
 		{
 		case("Create"):
-			String st=null;
-			st=newSpecGui.getSpecName().getText().toString();
-			wk.setWorkSpaceName(st);
+		specName=newSpecGui.getSpecName().getText().toString();
+			wk.setWorkSpaceName(specName);
 			wk.setIsPressed(true);
 			synchronized(wk){
 				wk.notify();
@@ -84,19 +110,25 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		
 		case("AddScreen"):
 
-		System.out.println("AddScreen");
-
+					System.out.println("AddScreen");
+					addScreen=new AddScreenGUI();
+					addScreen.addScreenListener(this);
+					 addScreen.setVisible(true);
+					/*mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+					wk.setIsClicked(true);*/
 					mainScreenGui.addMainScreenMouseListener((MouseListener)this);
-					wk.setIsClicked(true);
+					mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
         break;
 		case("New"):
+			
 		break;
+		
 		case("Open.."):
 			 
 	      
 			OpenSpecFromFile("aaa");
-		mainScreenGui.dispose();
-		mainScreenGui=new MainScreenGui();
+		mainScreenGui=null;
+		mainScreenGui=MainScreenGui.getInstance();
 		mainScreenGui.setVisible(true);
 			Screen s ;
 			Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
@@ -112,6 +144,25 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();
 		break;
+		
+		case("Browse.."):
+		JFileChooser chooser = new JFileChooser();
+		String workingDir = System.getProperty("user.dir");
+	    chooser.setCurrentDirectory(new java.io.File("."));
+	    chooser.getCurrentDirectory();
+	    chooser.setDialogTitle("select a directory as workspace ");
+	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	    chooser.setAcceptAllFileFilterUsed(false);
+
+	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+	      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+	    } else {
+	      System.out.println("No Selection ");
+	    }
+	    workSpaceLocation=chooser.getSelectedFile().toString();
+		
+		break;
+		
 		case("Save SPEC"):
 		
 			SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
@@ -130,54 +181,48 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 		case("ShowResults"):
 		break;
 		case("Save"):
-			Screen screen = new Screen();
+			screen = new Screen();
 			screen.setScreenName(addScreen.getScreenName().getText().toString());
 			screen.setDescription(addScreen.getDescription().getText().toString());
 			screen.setCordinateX(this.CordinateX);
 			screen.setCordinateY(this.CordinateY);
-
-			ScreenGUI screenGUI=new ScreenGUI(screen.getScreenName(),screen.getCordinateX(),screen.getCordinateY());//there is a problem
-			AddScreenController a=new AddScreenController();
+			GetNewLocation=true;
+			 screenGUI=new ScreenGUI(screen.getScreenName(),screen.getCordinateX(),screen.getCordinateY());//there is a problem
 			//screenGUI.addScreenListener(a);
 			wk.addScreen(screen.getScreenName(), screen);
+			 addScreenController= new AddScreenController();
+			
+			screenGUI.addScreenMouseListener2(this);
 			mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
 			mainScreenGui.getContentPane().add(screenGUI);
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();
 			addScreen.dispose();
 			break;
-		case("List"):
-		break;
-		case("defined/undefined"):
-			break;
-		case("On/Off"):
-			break;
-		case("button"):
-		break;
+
 		
 		}
 
 	}
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if(wk.getisIsClicked()==true)
-		{
-			/*
-			 * save temporary CordinateX &CordinateY of new screen 
-			 */
-			this.CordinateX=arg0.getX()-9;
-			this.CordinateX=arg0.getY()-29;	
-			
-			/*
-			 * remove listener 
-			 */
-			mainScreenGui.removeMouseListener((MouseListener)this);
-			 addScreen=new AddScreenGUI();
-			AddScreenController addScreenControlle=new AddScreenController(addScreen,mainScreenGui);
-			addScreen.addScreenListener(this);
-			addScreen.setVisible(true);
-			
-		}
+
 	}
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
@@ -192,10 +237,47 @@ public class WorkSpaceController implements ActionListener,MouseListener {
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		if(this.GetNewLocation==true)
+		{
+			screenGUI.removeMouseListener(this);
+			screenGUI.removeMouseMotionListener(this);
+			screenGUI.addScreenListener(addScreenController);
+			GetNewLocation=false;
+		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		//System.out.println(arg0.getSource().getClass().getSimpleName().toString());
+		if(arg0.getSource().getClass().getSimpleName().toString().equals("MainScreenGui") && GetNewLocation==true)
+		{
+			CordinateX	=arg0.getX()-4;
+			CordinateY	=arg0.getY()-22;
+			screenGUI.setLocation(arg0.getX()-4,arg0.getY()-22);
+		}
+		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI") && GetNewLocation==true)
+		{
+			CordinateX=CordinateX+arg0.getX();
+			CordinateY=CordinateY+arg0.getX();
+			screenGUI.setLocation(CordinateX,CordinateY);
+		}
+		
+	}
+	
+	public Boolean getGetNewLocation() {
+		return GetNewLocation;
+	}
+	public void setGetNewLocation(Boolean getNewLocation) {
+		GetNewLocation = getNewLocation;
 	}
 }
