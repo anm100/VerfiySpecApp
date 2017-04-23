@@ -101,10 +101,10 @@ public class Screen implements Serializable{
 		this.description = description;
 	}
 	
-	public void addScreen(String elementName , Element s){
+	public void addElement(String elementName , Element s){
 		this.elementsMap.put(elementName,s);	
 	}
-	public Element getScreenByName(String elementName){
+	public Element getElementByName(String elementName){
 		return this.elementsMap.get(elementName);
 	}
 }

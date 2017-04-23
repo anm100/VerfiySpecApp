@@ -20,6 +20,7 @@ import javax.swing.border.LineBorder;
 
 import Controller.AddScreenController;
 import Controller.ElementController;
+import Controller.WorkSpaceController;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -120,8 +121,11 @@ public class OnOfGUI extends JFrame {
 	public JTextField getElementName() {
 		return elementName;
 	}
-	public void setOnOffListener(ElementController OnOfTypeListener ){       
-		
+	
+	public String getScreenName() {
+		return ScreenName;
+	}
+	public void setOnOffListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);
 	}
 }

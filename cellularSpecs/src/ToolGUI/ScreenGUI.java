@@ -40,7 +40,7 @@ import javax.swing.ScrollPaneConstants;
 
 public class ScreenGUI extends JScrollPane {
 	private int x=0,y=0,width=143,hight=40;
-	private JTextField	textField;
+	
 	protected String screenName;
 	private JMenuItem onOff;
 	private JMenuItem button;
@@ -51,7 +51,7 @@ public class ScreenGUI extends JScrollPane {
 	private JMenuItem moveScreen;
 	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) 
 	{
-
+		this.screenName=screenName;
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
@@ -68,7 +68,7 @@ public class ScreenGUI extends JScrollPane {
 		mainScreenPanel.add(element);
 		
 
-		JLabel screenLabel = new JLabel("");
+		JLabel screenLabel = new JLabel(screenName);
 
 		screenLabel.setBounds(1, 0, 119, 22);
 		mainScreenPanel.add(screenLabel);
@@ -140,10 +140,23 @@ public class ScreenGUI extends JScrollPane {
 		changeName.addActionListener(listenForOperation);
 		moveScreen.addActionListener(listenForOperation);
 		deleteScreen.addActionListener(listenForOperation);  
-			onOff.addActionListener(listenForOperation);
-			button.addActionListener(listenForOperation);
-			emptyNempty.addActionListener(listenForOperation);
-			List.addActionListener(listenForOperation);
+		
+		onOff.addActionListener(listenForOperation);
+		onOff.setActionCommand("_menu_onOff_type");
+			
+		button.addActionListener(listenForOperation);
+		button.setActionCommand("_menu_button_type");
+			
+		emptyNempty.addActionListener(listenForOperation);
+		emptyNempty.setActionCommand("_menu_emptyNotEmpty_type");
+		
+		List.addActionListener(listenForOperation);
+		List.setActionCommand("_menu_list_type");
+
 }
+	
+	public String getScreenName() {
+		return screenName;
+	}
 	
 }

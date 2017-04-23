@@ -15,11 +15,13 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import javax.swing.JFileChooser;
 
 import ui.utils.FileChooser;
 import Model.Screen;
 import Model.WorkSpace;
+import Model.twoElementType;
 import ToolGUI.*;
 import our.Utils.Logger;
 
@@ -33,7 +35,7 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 	public Boolean inner =false;
 
 	private static  Boolean GetNewLocation=false;
-
+	OnOfGUI  onOfGUI; 
 	NewSpecGUI newSpecGui;
 	 MainScreenGui mainScreenGui;
 	private AddScreenGUI addScreen;
@@ -189,6 +191,7 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 			GetNewLocation=true;
 			 screenGUI=new ScreenGUI(screen.getScreenName(),screen.getCordinateX(),screen.getCordinateY());//there is a problem
 			//screenGUI.addScreenListener(a);
+			WorkSpace.getLog().debug("this screen name "+screen.getScreenName());
 			wk.addScreen(screen.getScreenName(), screen);
 			 addScreenController= new AddScreenController();
 			
@@ -198,6 +201,24 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();
 			addScreen.dispose();
+			break;
+		case("_menu_onOff_type"):
+			WorkSpace.getLog().debug("this on/off button to create new window");
+			onOfGUI= new OnOfGUI(screenGUI.getScreenName());
+			onOfGUI.setVisible(true);
+			onOfGUI.setOnOffListener(this);
+			break;
+		case "_save_on_off":
+			
+			WorkSpace.getLog().debug("do _save_on_off.. ");
+			twoElementType elm= new twoElementType();
+			elm.setParamName(onOfGUI.getElementName().getText());
+			WorkSpace.getInstance().getScreenByName(onOfGUI.getScreenName()).addElement(elm.getParamName(), elm);
+			WorkSpace.getLog().debug("do "+elm.getParamName()+elm.toString());
+			
+			WorkSpace.getLog().debug("--show element in GUI");
+			
+			
 			break;
 
 		
@@ -241,7 +262,7 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 		{
 			screenGUI.removeMouseListener(this);
 			screenGUI.removeMouseMotionListener(this);
-			screenGUI.addScreenListener(addScreenController);
+			screenGUI.addScreenListener(this);
 			GetNewLocation=false;
 		}
 	}

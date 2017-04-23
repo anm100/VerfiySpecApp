@@ -37,10 +37,15 @@ public void actionPerformed(ActionEvent arg0) {
 	WorkSpace.getLog().debug("choose which operation we will do in element");
 	switch(arg0.getActionCommand())
 	{
+	/*
+	 * 
+	 */
 	case "_save_on_off":
-		WorkSpace.getLog().debug("do _save_on_off.. ");
-		
-		break;
+//		WorkSpace.getLog().debug("do _save_on_off.. ");
+//		String nameElm =onOfGUI.getElementName().getText();
+//		WorkSpace.getInstance().
+//		
+//		break;
 		
 	}
 

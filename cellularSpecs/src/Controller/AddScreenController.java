@@ -71,12 +71,7 @@ public void actionPerformed(ActionEvent arg0) {
 	case("Empty/NotEmpty"):
 		WorkSpace.getLog().debug("this empty/notEmpty button to create new window");
 		break;
-	case("On/Off"):
-		WorkSpace.getLog().debug("this on/off button to create new window");
-		OnOfGUI  onOfGUI= new OnOfGUI(WorkSpaceController.getInstance().screenGUI.getName());
-		onOfGUI.setVisible(true);
-		onOfGUI.setOnOffListener(new ElementController(onOfGUI));
-		break;
+
 	case("button"):
 		WorkSpace.getLog().debug("you chosed button type element");
 	break;
