@@ -111,10 +111,13 @@ public class ScreenGUI extends JScrollPane {
       	        			addMouseListener(new MouseAdapter() {
       	        				@Override
       	        				public void mousePressed(MouseEvent e) {
+      	        					if(e.getButton()== MouseEvent.BUTTON3)
+      	        					{
       	        					menuOpt.setLocation(e.getX(), e.getY());
       	        					opt1.doClick();
       	        					repaint();
       	        					revalidate();
+      	        					}
 
       	        				}
       	        			});       	       

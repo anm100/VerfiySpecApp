@@ -310,10 +310,14 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 		// TODO Auto-generated method stub
 		if(this.GetNewLocation==true)
 		{
-			screenGUI.removeMouseListener(this);
-			screenGUI.removeMouseMotionListener(this);
+			//screenGUI.removeMouseListener(this);
+			//screenGUI.removeMouseMotionListener(this);
 			screenGUI.addScreenListener(this);
 			GetNewLocation=false;
+		}
+		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI"))
+		{
+			screenGUI=((ScreenGUI)arg0.getComponent());
 		}
 	}
 	@Override
