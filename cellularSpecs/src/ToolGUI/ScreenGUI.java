@@ -1,41 +1,34 @@
 package ToolGUI;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 import Controller.AddScreenController;
 import Controller.WorkSpaceController;
+import Model.Element;
 
 import java.awt.Color;
 
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
+
 
 import java.awt.Font;
 
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
+
+import java.awt.event.MouseEvent;
+
 import javax.swing.UIManager;
-import javax.swing.border.EtchedBorder;
-import java.awt.SystemColor;
+
 import java.awt.event.MouseAdapter;
+
 import javax.swing.ScrollPaneConstants;
 
 public class ScreenGUI extends JScrollPane {
@@ -49,13 +42,15 @@ public class ScreenGUI extends JScrollPane {
 	private JMenuItem changeName;
 	private JMenuItem deleteScreen;
 	private JMenuItem moveScreen;
+	private int lastCoordinateElem=21; 
+	private JPanel mainScreenPanel;
 	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) 
 	{
 		this.screenName=screenName;
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
-		JPanel mainScreenPanel = new JPanel();
+		mainScreenPanel = new JPanel();
 		mainScreenPanel.setBackground(Color.WHITE);
 		setViewportView(mainScreenPanel);
 		mainScreenPanel.setSize(163, 228);
@@ -64,7 +59,7 @@ public class ScreenGUI extends JScrollPane {
 		
 		JLabel element = new JLabel("New element");
 
-		element.setBounds(1, 21, 143, 39);
+		element.setBounds(1, lastCoordinateElem, 143, 39);
 		mainScreenPanel.add(element);
 		
 
@@ -72,7 +67,7 @@ public class ScreenGUI extends JScrollPane {
 
 		screenLabel.setBounds(1, 0, 119, 22);
 		mainScreenPanel.add(screenLabel);
-	       screenLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
+	    screenLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
 	       
 	       JMenuBar menuBar = new JMenuBar();
 	       menuBar.setBounds(120, 0, 93, 21);
@@ -125,6 +120,13 @@ public class ScreenGUI extends JScrollPane {
       	        			});       	       
 	
 		 
+	}
+	public void addElementLabel (Element elem){
+		
+		JLabel element = new JLabel(elem.getParamName());
+		this.lastCoordinateElem+=10; 
+		element.setBounds(1, lastCoordinateElem, 143, 39);
+		mainScreenPanel.add(element);
 	}
 	public void addScreenMouseListener(AddScreenController addScreenController) {
 		// TODO Auto-generated method stub

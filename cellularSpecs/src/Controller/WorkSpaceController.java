@@ -202,6 +202,14 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 			mainScreenGui.getContentPane().revalidate();
 			addScreen.dispose();
 			break;
+		case "Delete screen":
+			WorkSpace.getLog().debug("delete screen case");
+			WorkSpaceController.getInstance().screenGUI.setVisible(false);
+			break;
+		case "Move screen":
+			WorkSpace.getLog().debug("Move screen");
+			WorkSpaceController.getInstance().setGetNewLocation(true);
+			break; 
 		case("_menu_onOff_type"):
 			WorkSpace.getLog().debug("this on/off button to create new window");
 			onOfGUI= new OnOfGUI(screenGUI.getScreenName());
@@ -217,7 +225,9 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 			WorkSpace.getLog().debug("do "+elm.getParamName()+elm.toString());
 			
 			WorkSpace.getLog().debug("--show element in GUI");
-			
+			screenGUI.addElementLabel(elm);
+			mainScreenGui.getContentPane().repaint();
+			mainScreenGui.getContentPane().revalidate();
 			
 			break;
 

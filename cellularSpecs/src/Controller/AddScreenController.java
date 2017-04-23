@@ -53,14 +53,7 @@ public void actionPerformed(ActionEvent arg0) {
 	WorkSpace.getLog().debug(" which operation we will do in AddScreenControll");
 	switch(arg0.getActionCommand())
 	{
-	case "Delete screen":
-		WorkSpace.getLog().debug("delete screen case");
-		WorkSpaceController.getInstance().screenGUI.setVisible(false);
-		break;
-	case "Move screen":
-		WorkSpace.getLog().debug("Move screen");
-		WorkSpaceController.getInstance().setGetNewLocation(true);
-		break;
+
 	case("List"):
 		elementName="List";
 		WorkSpace.getLog().debug("you chosed List type element");
