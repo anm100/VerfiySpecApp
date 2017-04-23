@@ -22,7 +22,6 @@ import ToolGUI.*;
 public class AddScreenController implements ActionListener,MouseListener,MouseMotionListener {
 	private AddScreenGUI addScreenGUI;
 	private   MainScreenGui mainScreenGui ;
-	ElementController elementController ; 
 	private  int x,y;
 	private String elementName;
 
@@ -55,11 +54,7 @@ public void actionPerformed(ActionEvent arg0) {
 	{
 
 	case("List"):
-		elementName="List";
-		WorkSpace.getLog().debug("you chosed List type element");
-		ListTypeGUI  listTypeGUI=new ListTypeGUI(WorkSpaceController.getInstance().screenGUI.getName());
-		listTypeGUI.setVisible(true);
-		listTypeGUI.setListTypeListener(new ElementController(listTypeGUI));
+	
 	break;
 	case("Empty/NotEmpty"):
 		WorkSpace.getLog().debug("this empty/notEmpty button to create new window");

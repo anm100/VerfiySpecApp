@@ -37,20 +37,25 @@ import javax.swing.JSeparator;
 
 import java.awt.Button;
 import java.awt.SystemColor;
+
 import javax.swing.UIManager;
 
-public class DefUndefGUI extends JFrame {
+public class EmptyNotEmptyGUI extends JFrame {
 	protected JTextField txtUndefined;
-	protected JTextField textField;
+	protected JTextField elementName;
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
-	public DefUndefGUI(String ScreenName)
+	String ScreenName; 
+
+	public EmptyNotEmptyGUI(String ScreenName)
 	{
+		this.ScreenName=ScreenName; 
+
 		setTitle(ScreenName+"Empty/NotEmpty");
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
-		JLabel lblOnoff = new JLabel("<dynamic>-Empty/NotEmpty");
+		JLabel lblOnoff = new JLabel(ScreenName+"-Empty/NotEmpty");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
 		lblOnoff.setBounds(20, 11, 361, 36);
 		getContentPane().add(lblOnoff);
@@ -63,10 +68,10 @@ public class DefUndefGUI extends JFrame {
 		lblDefaulval.setBounds(30, 103, 64, 14);
 		getContentPane().add(lblDefaulval);
 		
-		textField = new JTextField();
-		textField.setBounds(104, 65, 152, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		elementName = new JTextField();
+		elementName.setBounds(104, 65, 152, 20);
+		getContentPane().add(elementName);
+		elementName.setColumns(10);
 		
 		 btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
@@ -123,12 +128,20 @@ public class DefUndefGUI extends JFrame {
 	       JLabel lblNewLabel = new JLabel(string);
 	        lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 	        lblNewLabel.setBounds(x2, y2, hight2, width2);
-	      lblNewLabel.setText(" "+textField.getText().toString()+"");
+	      lblNewLabel.setText(" "+elementName.getText().toString()+"");
 	      return lblNewLabel;
 		// TODO Auto-generated method stub
 	}
-	public void setDefUndefistener(AddScreenController DefUndefTypeListener ){       
+	public void setEmptyNEmptyListener(ActionListener DefUndefTypeListener ){       
 		
 		btnSave.addActionListener(DefUndefTypeListener);
+		btnSave.setActionCommand("_save_EmptyNEmpty");
+
+	}
+	public JTextField getElementName() {
+		return elementName;
+	}
+	public String getScreenName() {
+		return ScreenName;
 	}
 }

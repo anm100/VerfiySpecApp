@@ -4,26 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListElementType implements Serializable, Element {
+public class OnOffType implements Serializable, Element {
 private String paramName;
 private String paramVal; 
-private final  String type="List"; 
-private List <String> values= new ArrayList<>(); 
+private final String type="on/off"; 
+//private List <Action> actions= new ArrayList<>(); 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
-public ListElementType() {}
-
-public List<String> getValues() {
-	return values;
-}
-
-public void setValues(List<String> values) {
-	this.values = values;
-}
-
-public String getType() {
-	return type;
-}
+public OnOffType() {}
 
 public String getParamName() {
 	return paramName;
@@ -38,7 +26,7 @@ public void setParamName(String paramName) {
 @Override
 public String getParamVal() {
 	// TODO Auto-generated method stub
-	return this.paramVal; 
+	return paramVal;
 }
 
 @Override
@@ -51,6 +39,13 @@ public void loadElement() {
 	// TODO Auto-generated method stub
 	
 }
+
+@Override
+public String getType() {
+	// TODO Auto-generated method stub
+	return this.type;
+}
+
 
 
 }

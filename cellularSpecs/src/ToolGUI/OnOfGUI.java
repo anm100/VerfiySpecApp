@@ -2,44 +2,25 @@ package ToolGUI;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JList;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 import javax.swing.border.LineBorder;
 
-import Controller.AddScreenController;
-import Controller.ElementController;
-import Controller.WorkSpaceController;
+
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 
-import java.awt.Component;
-
-import javax.swing.Box;
 import javax.swing.JSeparator;
-
-import java.awt.Button;
-import java.awt.SystemColor;
-
 import javax.swing.UIManager;
 
 public class OnOfGUI extends JFrame {

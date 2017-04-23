@@ -121,13 +121,7 @@ public class ScreenGUI extends JScrollPane {
 	
 		 
 	}
-	public void addElementLabel (Element elem){
-		
-		JLabel element = new JLabel(elem.getParamName());
-		this.lastCoordinateElem+=10; 
-		element.setBounds(1, lastCoordinateElem, 143, 39);
-		mainScreenPanel.add(element);
-	}
+
 	public void addScreenMouseListener(AddScreenController addScreenController) {
 		// TODO Auto-generated method stub
 		this.addMouseMotionListener(addScreenController);
@@ -159,6 +153,14 @@ public class ScreenGUI extends JScrollPane {
 	
 	public String getScreenName() {
 		return screenName;
+	}
+	
+	public void addElementLabel (Element elem){
+		
+		JLabel element = new JLabel(elem.getParamName()+":"+elem.getType());
+		this.lastCoordinateElem+=10; 
+		element.setBounds(1, lastCoordinateElem, 143, 39);
+		mainScreenPanel.add(element);
 	}
 	
 }

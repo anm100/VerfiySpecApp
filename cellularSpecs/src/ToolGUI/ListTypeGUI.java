@@ -13,13 +13,7 @@ import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JList;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -28,31 +22,24 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.AncestorEvent;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
 
 import javax.swing.event.PopupMenuListener;
-
-import Controller.AddScreenController;
-import Controller.ElementController;
-
 import javax.swing.event.PopupMenuEvent;
 
 public class ListTypeGUI extends JFrame {
-	private JTextField txtUndefined;
-	private JTextField textField;
+	private JTextField elementName;
 	private String values[]={""} ; 
 	JButton butListSave;
-	public ListTypeGUI(String ScreenName)
+	String ScreenName; 
+	public ListTypeGUI(String screenName)
 	{
+		this.ScreenName=screenName; 
 		setTitle("List Element");
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
-		JLabel lblOnoff = new JLabel(ScreenName+"-List Element");
+		JLabel lblOnoff = new JLabel(screenName+"-List Element");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
 		lblOnoff.setBounds(20, 11, 361, 36);
 		getContentPane().add(lblOnoff);
@@ -65,10 +52,10 @@ public class ListTypeGUI extends JFrame {
 		lblDefaulval.setBounds(21, 218, 64, 14);
 		getContentPane().add(lblDefaulval);
 		
-		textField = new JTextField();
-		textField.setBounds(104, 65, 152, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		elementName = new JTextField();
+		elementName.setBounds(104, 65, 152, 20);
+		getContentPane().add(elementName);
+		elementName.setColumns(10);
 		JComboBox comboBox = new JComboBox();
 
 
@@ -139,9 +126,16 @@ public class ListTypeGUI extends JFrame {
 		});
 		
 	}
-	public void setListTypeListener(ElementController listTypeListener ){       
+	public void setListTypeListener(ActionListener listTypeListener ){       
 		
 		 butListSave.addActionListener(listTypeListener);
+		 butListSave.setActionCommand("_save_List");
+	}
+	public JTextField getElementName() {
+		return elementName;
+	}
+	public String getScreenName() {
+		return ScreenName;
 	}
 	
 

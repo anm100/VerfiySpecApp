@@ -1,7 +1,5 @@
 package Controller;
 
-import java.awt.MouseInfo;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,18 +10,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.JFileChooser;
 
-import ui.utils.FileChooser;
+import Model.EmptyNEmptyType;
+import Model.ListElementType;
 import Model.Screen;
 import Model.WorkSpace;
-import Model.twoElementType;
+import Model.OnOffType;
 import ToolGUI.*;
-import our.Utils.Logger;
 
 public class WorkSpaceController implements ActionListener,MouseListener,MouseMotionListener {
 	private int CordinateX; 
@@ -31,21 +28,18 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 	private int x=0;
 	private int y=0;
 	private String specName=null;
-	private String workSpaceLocation=null;
 	public Boolean inner =false;
 
 	private static  Boolean GetNewLocation=false;
 	OnOfGUI  onOfGUI; 
+	ListTypeGUI  listTypeGUI;
+	EmptyNotEmptyGUI emptyNotEmptyGUI;
 	NewSpecGUI newSpecGui;
 	 MainScreenGui mainScreenGui;
 	private AddScreenGUI addScreen;
 	private Screen screen;
 	 ScreenGUI screenGUI;
 	AddScreenController addScreenController;
-	WorkSpace wk=WorkSpace.getInstance();
-	
-	private  static boolean clicked;
-	
 	
 	private static WorkSpaceController instance =null ; 
 
@@ -78,13 +72,11 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 
 	}
 	public void SaveSpecToFile(String fileName){
-		
-		WorkSpace w= WorkSpace.getInstance();
-		
+				
 		try (ObjectOutputStream oos =
 				new ObjectOutputStream(new FileOutputStream(fileName+".ser"))) {
 
-			oos.writeObject(w);
+			oos.writeObject(WorkSpace.getInstance());
 			System.out.println("Done.. write to file "+fileName+".ser");
 
 		} catch (Exception ex) {
@@ -103,10 +95,10 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 		{
 		case("Create"):
 		specName=newSpecGui.getSpecName().getText().toString();
-			wk.setWorkSpaceName(specName);
-			wk.setIsPressed(true);
-			synchronized(wk){
-				wk.notify();
+		WorkSpace.getInstance().setWorkSpaceName(specName);
+			WorkSpace.getInstance().setIsPressed(true);
+			synchronized(WorkSpace.getInstance()){
+				WorkSpace.getInstance().notify();
 			}
 		break;
 		
@@ -161,7 +153,7 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 	    } else {
 	      System.out.println("No Selection ");
 	    }
-	    workSpaceLocation=chooser.getSelectedFile().toString();
+			chooser.getSelectedFile().toString();
 		
 		break;
 		
@@ -192,7 +184,7 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 			 screenGUI=new ScreenGUI(screen.getScreenName(),screen.getCordinateX(),screen.getCordinateY());//there is a problem
 			//screenGUI.addScreenListener(a);
 			WorkSpace.getLog().debug("this screen name "+screen.getScreenName());
-			wk.addScreen(screen.getScreenName(), screen);
+			WorkSpace.getInstance().addScreen(screen.getScreenName(), screen);
 			 addScreenController= new AddScreenController();
 			
 			screenGUI.addScreenMouseListener2(this);
@@ -209,7 +201,12 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 		case "Move screen":
 			WorkSpace.getLog().debug("Move screen");
 			WorkSpaceController.getInstance().setGetNewLocation(true);
-			break; 
+			break;
+			
+			/*
+			 *  operation in Elements type gui 
+			 */
+			
 		case("_menu_onOff_type"):
 			WorkSpace.getLog().debug("this on/off button to create new window");
 			onOfGUI= new OnOfGUI(screenGUI.getScreenName());
@@ -219,7 +216,7 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 		case "_save_on_off":
 			
 			WorkSpace.getLog().debug("do _save_on_off.. ");
-			twoElementType elm= new twoElementType();
+			OnOffType elm= new OnOffType();
 			elm.setParamName(onOfGUI.getElementName().getText());
 			WorkSpace.getInstance().getScreenByName(onOfGUI.getScreenName()).addElement(elm.getParamName(), elm);
 			WorkSpace.getLog().debug("do "+elm.getParamName()+elm.toString());
@@ -228,8 +225,51 @@ public class WorkSpaceController implements ActionListener,MouseListener,MouseMo
 			screenGUI.addElementLabel(elm);
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();
+		
 			
 			break;
+		case "_menu_list_type": 
+			WorkSpace.getLog().debug("you chosed List type element");
+		    listTypeGUI=new ListTypeGUI(screenGUI.getScreenName());
+			listTypeGUI.setVisible(true);
+			listTypeGUI.setListTypeListener(this);
+			
+			break; 
+		case "_save_List":
+			WorkSpace.getLog().debug("do _save_list.. ");
+			ListElementType l= new ListElementType();
+			l.setParamName(listTypeGUI.getElementName().getText());
+			WorkSpace.getInstance().getScreenByName(listTypeGUI.getScreenName()).addElement(l.getParamName(), l);
+			WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
+			
+			WorkSpace.getLog().debug("--show element in GUI");
+			screenGUI.addElementLabel(l);
+			mainScreenGui.getContentPane().repaint();
+			mainScreenGui.getContentPane().revalidate();
+		
+			break; 		
+			case("_menu_emptyNotEmpty_type"):
+				WorkSpace.getLog().debug("this on/off button to create new window");
+				emptyNotEmptyGUI= new EmptyNotEmptyGUI(screenGUI.getScreenName());
+				emptyNotEmptyGUI.setVisible(true);
+				emptyNotEmptyGUI.setEmptyNEmptyListener(this);
+				break;
+			case "_save_EmptyNEmpty":
+				
+				WorkSpace.getLog().debug("do _save_on_off.. ");
+				EmptyNEmptyType em= new EmptyNEmptyType();
+				em.setParamName(emptyNotEmptyGUI.getElementName().getText());
+				WorkSpace.getInstance().getScreenByName(emptyNotEmptyGUI.getScreenName()).addElement(em.getParamName(), em);
+				WorkSpace.getLog().debug("do "+em.getParamName()+em.toString());
+				
+				WorkSpace.getLog().debug("--show element in GUI");
+				screenGUI.addElementLabel(em);
+				mainScreenGui.getContentPane().repaint();
+				mainScreenGui.getContentPane().revalidate();
+			
+				
+				break;
+			
 
 		
 		}

@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class twoElementType implements Serializable, Element {
+public class EmptyNEmptyType implements Serializable, Element {
 private String paramName;
 private String paramVal; 
+private final String type="Empty/NotEmpty"; 
 //private List <Action> actions= new ArrayList<>(); 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
-public twoElementType() {}
+public EmptyNEmptyType() {}
 
 public String getParamName() {
 	return paramName;
@@ -35,9 +36,17 @@ public void setParamVal(String paramVal) {
 
 @Override
 public void loadElement() {
-	// TODO Auto-generated metho d stub
+	// TODO Auto-generated method stub
 	
 }
+
+@Override
+public String getType() {
+	// TODO Auto-generated method stub
+	return this.type;
+}
+
+
 
 }
 
