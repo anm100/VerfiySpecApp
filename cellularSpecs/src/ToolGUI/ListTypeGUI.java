@@ -37,6 +37,7 @@ import java.beans.PropertyChangeEvent;
 import javax.swing.event.PopupMenuListener;
 
 import Controller.AddScreenController;
+import Controller.ElementController;
 
 import javax.swing.event.PopupMenuEvent;
 
@@ -138,7 +139,7 @@ public class ListTypeGUI extends JFrame {
 		});
 		
 	}
-	public void setListTypeListener(AddScreenController listTypeListener ){       
+	public void setListTypeListener(ElementController listTypeListener ){       
 		
 		 butListSave.addActionListener(listTypeListener);
 	}

@@ -10,7 +10,7 @@ import Model.WorkSpace;
 import ToolGUI.MainScreenGui;
 import ToolGUI.NewSpecGUI;
 
-public  class MVCCspecVerification{
+public  class Application{
 	private static NewSpecGUI newSpecGUI=new NewSpecGUI();
 	private static MainScreenGui mainScreenGui;
 	private static WorkSpaceController workSpaceController;

@@ -53,7 +53,7 @@ public void actionPerformed(ActionEvent arg0) {
 	switch(arg0.getActionCommand())
 	{
 	case "Delete screen":
-		WorkSpace.getLog().debug("you  to delete screen ");
+		WorkSpace.getLog().debug("delete screen case");
 		WorkSpaceController.getInstance().screenGUI.setVisible(false);
 		break;
 	case "Move screen":
@@ -103,10 +103,8 @@ public void mouseMoved(MouseEvent arg0) {
 public void mouseClicked(MouseEvent arg0) {
 	if(arg0.getButton()== MouseEvent.BUTTON3)
 	{
-		System.out.println("abc");
 
 					 
-   	System.out.println("def");
 	}
 	// TODO Auto-generated method stub
 	

@@ -19,6 +19,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.border.LineBorder;
 
 import Controller.AddScreenController;
+import Controller.ElementController;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -37,6 +38,7 @@ import javax.swing.JSeparator;
 
 import java.awt.Button;
 import java.awt.SystemColor;
+
 import javax.swing.UIManager;
 
 public class OnOfGUI extends JFrame {
@@ -128,7 +130,7 @@ public class OnOfGUI extends JFrame {
 		// TODO Auto-generated method stub
 	}
 	
-	public void setOnOffListener(AddScreenController OnOfTypeListener ){       
+	public void setOnOffListener(ElementController OnOfTypeListener ){       
 		
 		btnSave.addActionListener(OnOfTypeListener);
 	}

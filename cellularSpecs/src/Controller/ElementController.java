@@ -53,32 +53,7 @@ public void actionPerformed(ActionEvent arg0) {
 	switch(arg0.getActionCommand())
 	{
 	case "Delete screen":
-		WorkSpace.getLog().debug("you  to delete screen ");
-		WorkSpaceController.getInstance().screenGUI.setVisible(false);
-		break;
-	case "Move screen":
-		WorkSpace.getLog().debug("Move screen");
-		WorkSpaceController.getInstance().setGetNewLocation(true);
-		break;
-	case("List"):
-		elementName="List";
-		WorkSpace.getLog().debug("you chosed List type element");
-		ListTypeGUI  listTypeGUI=new ListTypeGUI(WorkSpaceController.getInstance().screenGUI.getName());
-		listTypeGUI.setVisible(true);
-		listTypeGUI.setListTypeListener(this);
-	break;
-	case("Empty/NotEmpty"):
-		WorkSpace.getLog().debug("this defined button to create new window");
-		break;
-	case("On/Off"):
-		WorkSpace.getLog().debug("this on/off button to create new window");
-		OnOfGUI  onOfGUI= new OnOfGUI(WorkSpaceController.getInstance().screenGUI.getName());
-		onOfGUI.setVisible(true);
-		onOfGUI.setOnOffListener(this);
-		break;
-	case("button"):
-		WorkSpace.getLog().debug("you chosed button type element");
-	break;
+		
 	}
 
 	//System.out.println(arg0.getActionCommand().toString()); Button name
