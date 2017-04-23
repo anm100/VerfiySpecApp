@@ -6,10 +6,11 @@ import java.util.*;
 import our.Utils.Logger;
 
 public class WorkSpace implements Serializable { 
+
+private  String  workSpaceName;
 private static WorkSpace instance =null ; 
 private static Logger logger; 
 
-private  String  workSpaceName;
 private   boolean IsPressed;
 private HashMap <String,Screen> screensMap ; 
 public static boolean IsClicked;

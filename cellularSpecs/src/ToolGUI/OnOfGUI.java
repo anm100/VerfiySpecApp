@@ -43,11 +43,13 @@ import javax.swing.UIManager;
 
 public class OnOfGUI extends JFrame {
 	protected JTextField txtUndefined;
-	protected JTextField textField;
+	protected JTextField elementName;
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
+	String ScreenName; 
 	public OnOfGUI(String ScreenName)
 	{
+		this.ScreenName=ScreenName; 
 		setTitle("ON-OFF");
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -65,29 +67,14 @@ public class OnOfGUI extends JFrame {
 		lblDefaulval.setBounds(30, 103, 64, 14);
 		getContentPane().add(lblDefaulval);
 		
-		textField = new JTextField();
-		textField.setBounds(104, 65, 152, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		elementName = new JTextField();
+		elementName.setBounds(104, 65, 152, 20);
+		getContentPane().add(elementName);
+		elementName.setColumns(10);
 		
 		 btnSave = new JButton("Save");
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//ScreenGUI j=new ScreenGUI
-				//ScreenGUI j=MainScreenGui.screenPanels.get(MainScreenGui.screenPanels.size()-1);
-				JLabel lblNewLabel=new JLabel ();
-				 lblNewLabel=CreateLabel("New label",x,y,hight,width);
-				 	y=y+30;
-				 	System.out.print(lblNewLabel.getText().toString());
-				//      j.panel.add(lblNewLabel);
-			  //      j.repaint();
-			   //     j.revalidate();
-
-			    	dispose();
-			    	
-				
-			}
-		});
+		 btnSave.setActionCommand("_save_on_off");
+			
 		btnSave.setBounds(128, 287, 112, 23);
 		getContentPane().add(btnSave);
 		
@@ -125,11 +112,14 @@ public class OnOfGUI extends JFrame {
 	       JLabel lblNewLabel = new JLabel(string);
 	        lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 	        lblNewLabel.setBounds(x2, y2, hight2, width2);
-	      lblNewLabel.setText(" "+textField.getText().toString()+"");
+	      lblNewLabel.setText(" "+elementName.getText().toString()+"");
 	      return lblNewLabel;
 		// TODO Auto-generated method stub
 	}
 	
+	public JTextField getElementName() {
+		return elementName;
+	}
 	public void setOnOffListener(ElementController OnOfTypeListener ){       
 		
 		btnSave.addActionListener(OnOfTypeListener);

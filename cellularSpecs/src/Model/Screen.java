@@ -2,6 +2,7 @@ package Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Screen implements Serializable{
@@ -11,17 +12,18 @@ public class Screen implements Serializable{
 	private int height;
 	private int width;
 	private String description;
-	private  List<Element> elements = new ArrayList<Element>();
+	private HashMap <String,Element> elementsMap;
 	/**
 	 * @return the screenName
 	 */
 	public Screen()
 	{
-		
+		this.elementsMap= new HashMap<String,Element>();
 	}
 	public Screen(String screenName,int cordinateX,int cordinateY,int height,int width,
 			String description)
 	{
+	this.elementsMap= new HashMap<String,Element>();
 	this.screenName=screenName;
 	this.cordinateX=cordinateX;
 	this.cordinateY=cordinateY;
@@ -99,10 +101,10 @@ public class Screen implements Serializable{
 		this.description = description;
 	}
 	
-	public List<Element> getElements() {
-		return elements;
+	public void addScreen(String elementName , Element s){
+		this.elementsMap.put(elementName,s);	
 	}
-	public void addElement(Element element) {
-		this.elements.add(element);
+	public Element getScreenByName(String elementName){
+		return this.elementsMap.get(elementName);
 	}
 }

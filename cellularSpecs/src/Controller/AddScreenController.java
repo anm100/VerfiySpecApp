@@ -22,6 +22,7 @@ import ToolGUI.*;
 public class AddScreenController implements ActionListener,MouseListener,MouseMotionListener {
 	private AddScreenGUI addScreenGUI;
 	private   MainScreenGui mainScreenGui ;
+	ElementController elementController ; 
 	private  int x,y;
 	private String elementName;
 
@@ -49,7 +50,7 @@ public void setY(int y) {
 	this.y = y;
 }
 public void actionPerformed(ActionEvent arg0) {
-	WorkSpace.getLog().debug("choose which operation we will do in AddScreenControll");
+	WorkSpace.getLog().debug(" which operation we will do in AddScreenControll");
 	switch(arg0.getActionCommand())
 	{
 	case "Delete screen":
@@ -65,16 +66,16 @@ public void actionPerformed(ActionEvent arg0) {
 		WorkSpace.getLog().debug("you chosed List type element");
 		ListTypeGUI  listTypeGUI=new ListTypeGUI(WorkSpaceController.getInstance().screenGUI.getName());
 		listTypeGUI.setVisible(true);
-		listTypeGUI.setListTypeListener(this);
+		listTypeGUI.setListTypeListener(new ElementController(listTypeGUI));
 	break;
 	case("Empty/NotEmpty"):
-		WorkSpace.getLog().debug("this defined button to create new window");
+		WorkSpace.getLog().debug("this empty/notEmpty button to create new window");
 		break;
 	case("On/Off"):
 		WorkSpace.getLog().debug("this on/off button to create new window");
 		OnOfGUI  onOfGUI= new OnOfGUI(WorkSpaceController.getInstance().screenGUI.getName());
 		onOfGUI.setVisible(true);
-		onOfGUI.setOnOffListener(this);
+		onOfGUI.setOnOffListener(new ElementController(onOfGUI));
 		break;
 	case("button"):
 		WorkSpace.getLog().debug("you chosed button type element");
@@ -86,7 +87,6 @@ public void actionPerformed(ActionEvent arg0) {
 	switch(elementName+" "+arg0.getActionCommand())
 	{
 	case ("List Save"):
-		elementName=null;
 	System.out.println(elementName+""+arg0.getActionCommand());
 	break;
 	}
