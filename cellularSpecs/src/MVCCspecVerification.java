@@ -18,7 +18,7 @@ public  class MVCCspecVerification{
 	public static void main(String[] args) {
 		    WorkSpace workSpace=WorkSpace.getInstance();
 			
-		    mainScreenGui=MainScreenGui.getInstance();
+		mainScreenGui=MainScreenGui.getInstance();
 		WorkSpaceController.setInstance(newSpecGUI,mainScreenGui);
 		workSpaceController=WorkSpaceController.getInstance();
 		

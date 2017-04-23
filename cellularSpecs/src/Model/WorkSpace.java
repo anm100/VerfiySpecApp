@@ -25,6 +25,7 @@ public  static WorkSpace getInstance()
 {
 	if(null==instance ){
 	instance=new WorkSpace();
+	logger=new Logger(true);
 	}
 	return instance;
 }

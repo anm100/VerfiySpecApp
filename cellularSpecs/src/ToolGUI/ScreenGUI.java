@@ -44,7 +44,7 @@ public class ScreenGUI extends JScrollPane {
 	protected String screenName;
 	private JMenuItem onOff;
 	private JMenuItem button;
-	private JMenuItem defUndef;
+	private JMenuItem emptyNempty;
 	private JMenuItem List;
 	private JMenuItem changeName;
 	private JMenuItem deleteScreen;
@@ -68,7 +68,7 @@ public class ScreenGUI extends JScrollPane {
 		mainScreenPanel.add(element);
 		
 
-		JLabel screenLabel = new JLabel("saeed");
+		JLabel screenLabel = new JLabel("");
 
 		screenLabel.setBounds(1, 0, 119, 22);
 		mainScreenPanel.add(screenLabel);
@@ -80,14 +80,14 @@ public class ScreenGUI extends JScrollPane {
 	       JMenu newMenu = new JMenu("+");
 	        onOff = new JMenuItem("On/Off");
 	         button = new JMenuItem("button");
-	         defUndef = new JMenuItem("defined/undefined");
+	         emptyNempty = new JMenuItem("Empty/NotEmpty");
 	         List = new JMenuItem("List");
 	        
 	        
 	        newMenu.add(onOff);
 	        newMenu.add(button);
 	        newMenu.add(List);
-	        newMenu.add(defUndef);
+	        newMenu.add(emptyNempty);
 	        menuBar.add(newMenu);
 	      
 	    
@@ -142,7 +142,7 @@ public class ScreenGUI extends JScrollPane {
 		deleteScreen.addActionListener(listenForOperation);  
 			onOff.addActionListener(listenForOperation);
 			button.addActionListener(listenForOperation);
-			defUndef.addActionListener(listenForOperation);
+			emptyNempty.addActionListener(listenForOperation);
 			List.addActionListener(listenForOperation);
 }
 	
