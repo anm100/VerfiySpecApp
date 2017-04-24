@@ -3,7 +3,7 @@ package ToolGUI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Controller.WorkSpaceController;
+import Controller.Router;
 import Model.Screen;
 import Model.WorkSpace;
 

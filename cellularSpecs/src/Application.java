@@ -13,14 +13,14 @@ import ToolGUI.NewSpecGUI;
 public  class Application{
 	private static NewSpecGUI newSpecGUI=new NewSpecGUI();
 	private static MainScreenGui mainScreenGui;
-	private static WorkSpaceController workSpaceController;
+	private static Router workSpaceController;
 	static JFrame mainFram;
 	public static void main(String[] args) {
 		    WorkSpace workSpace=WorkSpace.getInstance();
 			
 		mainScreenGui=MainScreenGui.getInstance();
-		WorkSpaceController.setInstance(newSpecGUI,mainScreenGui);
-		workSpaceController=WorkSpaceController.getInstance();
+		Router.setInstance(newSpecGUI,mainScreenGui);
+		workSpaceController=Router.getInstance();
 		
 		newSpecGUI.addWorkSpaceListener(workSpaceController);
 		newSpecGUI.setVisible(true);

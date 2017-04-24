@@ -6,7 +6,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import Controller.AddScreenController;
-import Controller.WorkSpaceController;
+import Controller.Router;
 import Model.Element;
 
 import java.awt.Color;
@@ -130,7 +130,7 @@ public class ScreenGUI extends JScrollPane {
 		this.addMouseMotionListener(addScreenController);
 		this.addMouseListener(addScreenController);
 	}
-	public void addScreenMouseListener2(WorkSpaceController addScreenController) {
+	public void addScreenMouseListener2(Router addScreenController) {
 		// TODO Auto-generated method stub
 		this.addMouseMotionListener(addScreenController);
 		this.addMouseListener(addScreenController);

@@ -6,17 +6,22 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JList;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.border.LineBorder;
 
 import Controller.AddScreenController;
 
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -26,11 +31,13 @@ import javax.swing.JRadioButton;
 
 public class ButtonTypeGUI extends JFrame {
 	private JTextField txtUndefined;
-	private JTextField textField;
+	private JTextField elementName;
 	private int i ; 
 	private JButton butSave;
+	private String ScreenName; 
 	public ButtonTypeGUI(String ScreenName)
 	{
+		this.ScreenName=ScreenName; 
 		setTitle(ScreenName+"standart button" );
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -48,10 +55,10 @@ public class ButtonTypeGUI extends JFrame {
 		lblDetails.setBounds(37, 95, 57, 14);
 		getContentPane().add(lblDetails);
 		
-		textField = new JTextField();
-		textField.setBounds(104, 65, 152, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		elementName = new JTextField();
+		elementName.setBounds(104, 65, 152, 20);
+		getContentPane().add(elementName);
+		elementName.setColumns(10);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Show Screens"}));
@@ -139,8 +146,16 @@ public class ButtonTypeGUI extends JFrame {
 		getContentPane().add(butSave);
 			
 	}
-	public void setButtonTypeListener(AddScreenController ButtonTypeListener ){       
-		
+
+	public JTextField getElementName() {
+		return elementName;
+	}
+	
+	public String getScreenName() {
+		return ScreenName;
+	}
+	public void setButtonTListener(ActionListener ButtonTypeListener ){       
 		butSave.addActionListener(ButtonTypeListener);
+		butSave.setActionCommand("_save_standart_button");
 	}
 }

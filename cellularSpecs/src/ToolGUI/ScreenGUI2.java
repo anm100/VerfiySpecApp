@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import Controller.AddScreenController;
-import Controller.WorkSpaceController;
+import Controller.Router;
 
 import java.awt.Color;
 
@@ -131,7 +131,7 @@ public class ScreenGUI2 extends JPanel {
 	          	        	JMenuItem moveScreen = new JMenuItem("Move screen");
 	          	        	moveScreen.addActionListener(new ActionListener() {
 	          	        		public void actionPerformed(ActionEvent e) {
-	          	        			WorkSpaceController.getInstance().setGetNewLocation(true);
+	          	        			Router.getInstance().setGetNewLocation(true);
 	          	        			
 	          	        		}
 	          	        	});

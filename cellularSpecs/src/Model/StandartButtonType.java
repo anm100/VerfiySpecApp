@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnOffType implements Serializable, Element {
+public class StandartButtonType implements Serializable, Element {
 private String paramName;
 private String paramVal; 
 private List<Action> actions=new  ArrayList<Action>(); 
@@ -12,7 +12,7 @@ private final String type="on/off";
 //private List <Action> actions= new ArrayList<>(); 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
-public OnOffType() {}
+public StandartButtonType() {}
 
 public String getParamName() {
 	return paramName;
