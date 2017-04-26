@@ -14,14 +14,7 @@ private final String optLogic= "&";
 //private List <Action> actions= new ArrayList<>(); 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
-	public void fillval(){
-		for (int i=0 ; i<5;i++){
-	
-		conds.add(new MyCondition(new String("val"+i),new String(""+i)));
-		}
-		WorkSpace.getLog().info(getStringPromela());;
-	
-}
+
 public StandartButtonType() {
 	
 }
@@ -64,7 +57,7 @@ public  String getStringPromela(){
 	 conditons+=""+i.getParamName()+i.getOpt()+i.getParamVal()+this.optLogic;
  }
  
-	return "::(+"+conditons+")->atomic(state="+getTrans().getToScreen()+");" ; 
+	return "::("+conditons+")->atomic(state="+getTrans().getToScreen().getScreenName()+");" ; 
 }
 @Override
 public String getType() {
@@ -74,6 +67,9 @@ public String getType() {
 
 public  Transition getTrans() {
 	return trans;
+}
+public List<MyCondition> getConds() {
+	return conds;
 }
 
 

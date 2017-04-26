@@ -31,6 +31,17 @@ public class Screen implements Serializable{
 	this.width=width;
 	this. description= description;
 	}
+	
+	/*
+	 *debug/////////////////
+	 */
+	
+	public Screen(String s) {
+		this.screenName=s;
+	}
+	 /*
+	*debug////////////////////
+	 */
 	public String getScreenName() {
 		return screenName;
 	}
