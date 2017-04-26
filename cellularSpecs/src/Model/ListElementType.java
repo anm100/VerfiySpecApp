@@ -52,6 +52,12 @@ public void loadElement() {
 	
 }
 
+@Override
+public String getStringPromela() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 
 }
 

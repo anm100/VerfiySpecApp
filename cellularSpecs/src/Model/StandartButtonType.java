@@ -50,14 +50,20 @@ public void loadElement() {
 	
 }
 public  String getStringPromela(){
-	String conditons=new String("");
-
- for(MyCondition i:conds)
+	String conditons=new String(conds.get(0).getParamName()
+								+conds.get(0).getOpt()
+								+conds.get(0).getParamVal());
+	
+ for(int i=1;i<conds.size(); i++)
  {
-	 conditons+=""+i.getParamName()+i.getOpt()+i.getParamVal()+this.optLogic;
+	 conditons+=""+this.optLogic
+			 	+conds.get(i).getParamName()
+			 	+conds.get(i).getOpt()
+			 	+conds.get(i).getParamVal();
  }
- 
-	return "::("+conditons+")->atomic(state="+getTrans().getToScreen().getScreenName()+");" ; 
+	return "::("+conditons+")->atomic(state="
+				+getTrans().getToScreen().getScreenName()
+				+");" ; 
 }
 @Override
 public String getType() {

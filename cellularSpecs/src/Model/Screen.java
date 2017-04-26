@@ -3,7 +3,11 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import ToolGUI.ScreenGUI;
 
 public class Screen implements Serializable{
 	private String  screenName;
@@ -38,6 +42,8 @@ public class Screen implements Serializable{
 	
 	public Screen(String s) {
 		this.screenName=s;
+		this.elementsMap= new HashMap<String,Element>();
+
 	}
 	 /*
 	*debug////////////////////
@@ -117,5 +123,20 @@ public class Screen implements Serializable{
 	}
 	public Element getElementByName(String elementName){
 		return this.elementsMap.get(elementName);
+	}
+	public  String getStringPromela(){
+		Element e ;
+		String elemets=new String("");
+		Iterator it = this.elementsMap.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			e= (Element)pair.getValue();
+			elemets+=""+e.getStringPromela()+"\n";
+		}
+
+		return "::(state=="+this.getScreenName()+")->\n"
+				+"if\n"
+				+elemets
+				+"fi"; 
 	}
 }

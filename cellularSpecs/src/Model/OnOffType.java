@@ -47,6 +47,12 @@ public String getType() {
 	return this.type;
 }
 
+@Override
+public String getStringPromela() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 
 
 }
