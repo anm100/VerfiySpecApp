@@ -13,7 +13,6 @@ import Model.WorkSpace;
 import ToolGUI.ButtonTypeGUI;
 import ToolGUI.EmptyNotEmptyGUI;
 import ToolGUI.ListTypeGUI;
-import ToolGUI.MainScreenGui;
 import ToolGUI.OnOfGUI;
 import ToolGUI.ScreenGUI;
 
@@ -55,8 +54,8 @@ public class WorkSpaceController {
 		
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
-		MainScreenGui.getInstance().getContentPane().repaint();
-		MainScreenGui.getInstance().getContentPane().revalidate();
+		Router.getInstance().getMainScreenGui().getContentPane().repaint();
+		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
 		
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI,EmptyNotEmptyGUI elementGui,EmptyNEmptyType l)
@@ -68,8 +67,8 @@ public class WorkSpaceController {
 		
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
-		MainScreenGui.getInstance().getContentPane().repaint();
-		MainScreenGui.getInstance().getContentPane().revalidate();
+		Router.getInstance().getMainScreenGui().getContentPane().repaint();
+		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
 		
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
@@ -80,8 +79,8 @@ public class WorkSpaceController {
 		
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
-		MainScreenGui.getInstance().getContentPane().repaint();
-		MainScreenGui.getInstance().getContentPane().revalidate();		
+		Router.getInstance().getMainScreenGui().getContentPane().repaint();
+		Router.getInstance().getMainScreenGui().getContentPane().revalidate();		
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
 		
@@ -91,7 +90,7 @@ public class WorkSpaceController {
 		
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
-		MainScreenGui.getInstance().getContentPane().repaint();
-		MainScreenGui.getInstance().getContentPane().revalidate();		
+		Router.getInstance().getMainScreenGui().getContentPane().repaint();
+		Router.getInstance().getMainScreenGui().getContentPane().revalidate();		
 	}
 }

@@ -59,6 +59,20 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		Router.instance=new Router(newSpecGui);
 	}
 	
+	
+
+	public MainScreenGui getMainScreenGui() {
+		return mainScreenGui;
+	}
+
+	public void setMainScreenGui(String specName) {
+		this.mainScreenGui=new MainScreenGui();
+		this.mainScreenGui.setSpecNameLabel(specName);
+		this.mainScreenGui.addMainScreenListener(this);
+		this.mainScreenGui.setVisible(true);
+		
+		this.specName=specName;
+	}
 
 	/**
 	 * @wbp.parser.entryPoint
@@ -70,7 +84,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		switch(e.getActionCommand())
 		{
 		case("Create"):
-		specName=newSpecGui.getSpecName().getText().toString();
+		
+		this.specName=newSpecGui.getSpecName().getText().toString();
+		this.setMainScreenGui(specName);
 		WorkSpace.getInstance().setWorkSpaceName(specName);
 			WorkSpace.getInstance().setIsPressed(true);
 			synchronized(WorkSpace.getInstance()){
@@ -97,8 +113,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			 
 	      
 		WorkSpaceController.OpenSpecFromFile("aaa");
-		mainScreenGui=null;
-		mainScreenGui=MainScreenGui.getInstance();
+		
+		this.setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
 		mainScreenGui.setVisible(true);
 			Screen s ;
 			Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
@@ -109,8 +125,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			ScreenGUI screenTempGui=new ScreenGUI(s.getScreenName(),s.getCordinateX(),s.getCordinateY());
 			mainScreenGui.getContentPane().add(screenTempGui);
 			}
-			mainScreenGui.addMainScreenListener(this);
-			mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();
 		break;
@@ -164,7 +178,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			 addScreenController= new AddScreenController();
 			
 			screenGUI.addScreenMouseListener2(this);
-			mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
+			//mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
 			mainScreenGui.getContentPane().add(screenGUI);
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();

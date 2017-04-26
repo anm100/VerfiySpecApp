@@ -29,7 +29,6 @@ public class AddScreenController implements ActionListener,MouseListener,MouseMo
 	{
 		this.x=0;
 		this.y=0;	
-		this.mainScreenGui=MainScreenGui.getInstance();
 	}
 public AddScreenController(MainScreenGui mainScreenGui,ScreenGUI screenGui)
 {

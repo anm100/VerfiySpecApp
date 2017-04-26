@@ -31,13 +31,9 @@ public class MainScreenGui extends JFrame  {
 	private JButton btnRunVerification;
 	private JButton btnShowresults;
 	
-	
-	private static MainScreenGui instance =null ; 
-
-
-	
-	
 	public  MainScreenGui() {
+		
+	
 		setSize(750,600);
 		getContentPane().setLayout(null);
 		
@@ -58,7 +54,6 @@ public class MainScreenGui extends JFrame  {
 		btnNew.setBounds(412, 17, 89, 23);
 		getContentPane().add(btnNew);
 
-		
 		 btnExport = new JButton("Save SPEC");
 		btnExport.setBounds(610, 17, 99, 23);
 		getContentPane().add(btnExport);
