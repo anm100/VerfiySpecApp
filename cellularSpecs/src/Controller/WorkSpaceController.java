@@ -1,5 +1,10 @@
 package Controller;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
 import Model.OnOffType;
@@ -13,6 +18,33 @@ import ToolGUI.OnOfGUI;
 import ToolGUI.ScreenGUI;
 
 public class WorkSpaceController {
+	
+	public static void OpenSpecFromFile(String fileName){
+		
+		try (ObjectInputStream ois
+			= new ObjectInputStream(new FileInputStream(fileName+".ser"))) {
+
+			WorkSpace.setInstance( (WorkSpace) ois.readObject());
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+
+	}
+	public static void SaveSpecToFile(String fileName){
+				
+		try (ObjectOutputStream oos =
+				new ObjectOutputStream(new FileOutputStream(fileName+".ser"))) {
+
+			oos.writeObject(WorkSpace.getInstance());
+			System.out.println("Done.. write to file "+fileName+".ser");
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
 
 	public static void addelementToGUI(ScreenGUI screenGUI,ListTypeGUI elementGui,ListElementType l)
 	{

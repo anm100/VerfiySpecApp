@@ -13,17 +13,17 @@ import ToolGUI.NewSpecGUI;
 public  class Application{
 	private static NewSpecGUI newSpecGUI=new NewSpecGUI();
 	private static MainScreenGui mainScreenGui;
-	private static Router workSpaceController;
 	static JFrame mainFram;
 	public static void main(String[] args) {
-		    WorkSpace workSpace=WorkSpace.getInstance();
-			
+	   WorkSpace workSpace=WorkSpace.getInstance();	
 		mainScreenGui=MainScreenGui.getInstance();
-		Router.setInstance(newSpecGUI,mainScreenGui);
-		workSpaceController=Router.getInstance();
+		Router.setInstance(newSpecGUI);
 		
-		newSpecGUI.addWorkSpaceListener(workSpaceController);
+		newSpecGUI.addWorkSpaceListener(Router.getInstance());
 		newSpecGUI.setVisible(true);
+		
+		mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
+		mainScreenGui.addMainScreenListener(Router.getInstance());
 			synchronized(workSpace){
 				try {
 					workSpace.wait();
@@ -34,8 +34,7 @@ public  class Application{
 		}
 	
 		newSpecGUI.dispose();
-		mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
-		mainScreenGui.addMainScreenListener(workSpaceController);
+	
 		//mainScreenGui.addMainScreenMouseListener(workSpaceController);
 		mainScreenGui.setVisible(true);
 		

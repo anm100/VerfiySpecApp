@@ -34,17 +34,10 @@ public class MainScreenGui extends JFrame  {
 	
 	private static MainScreenGui instance =null ; 
 
-	public  static MainScreenGui getInstance()
-	{
-		if(null==instance ){
-		instance=new MainScreenGui();
-		}
-		return instance;
-	}
+
 	
 	
-	
-	private  MainScreenGui() {
+	public  MainScreenGui() {
 		setSize(750,600);
 		getContentPane().setLayout(null);
 		

@@ -45,47 +45,21 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	
 	private static Router instance =null ; 
 
-	private  Router(NewSpecGUI newSpecGui,MainScreenGui mainSpecGui)
+	private  Router(NewSpecGUI newSpecGui)
 	{
 		this.newSpecGui=newSpecGui;
-		this.mainScreenGui=mainSpecGui;
 	}
 
 	public  static Router getInstance()
 	{
 		return instance;
 	}
-	public  static 	void setInstance(NewSpecGUI newSpecGui,MainScreenGui mainSpecGui)
+	public  static 	void setInstance(NewSpecGUI newSpecGui)
 	{
-		Router.instance=new Router(newSpecGui,mainSpecGui);
+		Router.instance=new Router(newSpecGui);
 	}
 	
-	public void OpenSpecFromFile(String fileName){
-		
-		try (ObjectInputStream ois
-			= new ObjectInputStream(new FileInputStream(fileName+".ser"))) {
 
-			WorkSpace.setInstance( (WorkSpace) ois.readObject());
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-
-	}
-	public void SaveSpecToFile(String fileName){
-				
-		try (ObjectOutputStream oos =
-				new ObjectOutputStream(new FileOutputStream(fileName+".ser"))) {
-
-			oos.writeObject(WorkSpace.getInstance());
-			System.out.println("Done.. write to file "+fileName+".ser");
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-	}
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -122,7 +96,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		case("Open.."):
 			 
 	      
-			OpenSpecFromFile("aaa");
+		WorkSpaceController.OpenSpecFromFile("aaa");
 		mainScreenGui=null;
 		mainScreenGui=MainScreenGui.getInstance();
 		mainScreenGui.setVisible(true);
@@ -161,7 +135,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		
 		case("Save SPEC"):
 		
-			SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
+			WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
 		break;
 		case("Verifiy SPEC"):
 
