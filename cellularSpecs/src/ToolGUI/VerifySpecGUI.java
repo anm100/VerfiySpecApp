@@ -6,11 +6,24 @@ import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+
 import javax.swing.JProgressBar;
 import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 
+import Controller.Router;
+import java.awt.event.ActionEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+
 public class VerifySpecGUI extends JFrame{
+	private static   JButton btnRun;
+	private JComboBox comboBox;
+
 	public VerifySpecGUI() {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -19,6 +32,7 @@ public class VerifySpecGUI extends JFrame{
 		chckbxAll.setBackground(Color.WHITE);
 		chckbxAll.setBounds(23, 138, 97, 23);
 		getContentPane().add(chckbxAll);
+		
 		
 		JCheckBox chckbxThereIs = new JCheckBox("There is Always an exit from any screen.");
 		chckbxThereIs.setBackground(Color.WHITE);
@@ -69,12 +83,13 @@ public class VerifySpecGUI extends JFrame{
 		lblNote.setBounds(33, 298, 443, 14);
 		getContentPane().add(lblNote);
 		
-		JButton btnSave = new JButton("Run");
-		btnSave.setBounds(265, 433, 113, 23);
-		getContentPane().add(btnSave);
+		 btnRun = new JButton("Run");
+		btnRun.setActionCommand("Run_verifectaion");
+		btnRun.setBounds(65, 433, 113, 23);
+		getContentPane().add(btnRun);
 		
 		JButton btnCancel = new JButton("cancel");
-		btnCancel.setBounds(388, 433, 107, 23);
+		btnCancel.setBounds(213, 433, 107, 23);
 		getContentPane().add(btnCancel);
 		
 		JLabel lblVerifySpec = new JLabel("<Spec name> - Verify spec");
@@ -92,7 +107,7 @@ public class VerifySpecGUI extends JFrame{
 		lblChooseRootScreen.setBounds(23, 71, 122, 14);
 		getContentPane().add(lblChooseRootScreen);
 		
-		JComboBox comboBox = new JComboBox();
+		 comboBox = new JComboBox();
 		comboBox.setBounds(142, 67, 102, 23);
 		getContentPane().add(comboBox);
 		
@@ -100,4 +115,14 @@ public class VerifySpecGUI extends JFrame{
 		separator.setBounds(65, 108, 586, 23);
 		getContentPane().add(separator);
 	}
+	public String getRoot() {
+		String st=comboBox.getSelectedItem().toString();
+		return st;
+	}
+
+	public static  void setVerifySpecGUI(ActionListener verifySpecGUIListener) {
+		btnRun.addActionListener(verifySpecGUIListener);
+	}
+
+	
 }

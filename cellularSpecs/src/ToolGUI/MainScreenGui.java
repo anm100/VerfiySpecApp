@@ -59,6 +59,7 @@ public class MainScreenGui extends JFrame  {
 		getContentPane().add(btnExport);
 		
 		btnRunVerification= new JButton("Verifiy SPEC");
+
 		btnRunVerification.setBounds(442, 513, 136, 23);
 		getContentPane().add(btnRunVerification);
 		
@@ -79,6 +80,7 @@ public class MainScreenGui extends JFrame  {
 			btnOpen.addActionListener(listenForOperation);
 			btnRunVerification.addActionListener(listenForOperation);
 			btnShowresults.addActionListener(listenForOperation);
+			btnRunVerification.addActionListener(listenForOperation);
 	}
 		public void addMainScreenMouseListener(MouseListener WorkSpaceController){       
 		

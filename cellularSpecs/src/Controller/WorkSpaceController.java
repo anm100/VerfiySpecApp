@@ -44,7 +44,10 @@ public class WorkSpaceController {
 		}
 
 	}
-
+	public static void addScreenToGUI(ScreenGUI screenGUI,ListTypeGUI elementGui,ListElementType l)
+	{
+		
+	}
 	public static void addelementToGUI(ScreenGUI screenGUI,ListTypeGUI elementGui,ListElementType l)
 	{
 	
@@ -93,4 +96,5 @@ public class WorkSpaceController {
 		Router.getInstance().getMainScreenGui().getContentPane().repaint();
 		Router.getInstance().getMainScreenGui().getContentPane().revalidate();		
 	}
+
 }

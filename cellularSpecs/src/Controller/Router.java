@@ -21,17 +21,20 @@ import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
 import Model.OnOffType;
+import Model.RequirementList;
 import ToolGUI.*;
 
 public class Router implements ActionListener,MouseListener,MouseMotionListener {
 	private int CordinateX; 
 	private int CordinateY; 
+	private VerifySpecGUI verifySpecGUI;
 	private int x=0;
 	private int y=0;
 	private String specName=null;
 	public Boolean inner =false;
-
+	private RequirementList requirementList;
 	private static  Boolean GetNewLocation=false;
+	CreatePromela createPromela=new CreatePromela();
 	OnOfGUI  onOfGUI; 
 	ListTypeGUI  listTypeGUI;
 	EmptyNotEmptyGUI emptyNotEmptyGUI;
@@ -60,7 +63,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	}
 	
 	
-
 	public MainScreenGui getMainScreenGui() {
 		return mainScreenGui;
 	}
@@ -70,7 +72,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		this.mainScreenGui.setSpecNameLabel(specName);
 		this.mainScreenGui.addMainScreenListener(this);
 		this.mainScreenGui.setVisible(true);
-		
 		this.specName=specName;
 	}
 
@@ -84,22 +85,20 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		switch(e.getActionCommand())
 		{
 		case("Create"):
-		
+			WorkSpace.getInstance().setWorkSpaceName(specName);
+			WorkSpace.getLog().debug("Create New Spec");
 		this.specName=newSpecGui.getSpecName().getText().toString();
 		this.setMainScreenGui(specName);
-		WorkSpace.getInstance().setWorkSpaceName(specName);
-			WorkSpace.getInstance().setIsPressed(true);
-			synchronized(WorkSpace.getInstance()){
-				WorkSpace.getInstance().notify();
-			}
+
+		this.newSpecGui.dispose();
+
 		break;
 		
 		case("AddScreen"):
-
-					System.out.println("AddScreen");
-					addScreen=new AddScreenGUI();
-					addScreen.addScreenListener(this);
-					 addScreen.setVisible(true);
+			WorkSpace.getLog().debug("do_AddScreen.. ");
+			addScreen=new AddScreenGUI();
+			addScreen.addScreenListener(this);
+			addScreen.setVisible(true);
 					/*mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 					wk.setIsClicked(true);*/
 					mainScreenGui.addMainScreenMouseListener((MouseListener)this);
@@ -152,16 +151,25 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
 		break;
 		case("Verifiy SPEC"):
-
-			try {
+			WorkSpace.getLog().debug("verifiy Spec case");
+		 verifySpecGUI=new VerifySpecGUI();
+		VerifySpecGUI.setVerifySpecGUI(this);
+		verifySpecGUI.setVisible(true);
+			/*try {
 				Runtime.getRuntime().exec("cmd /c start b.bat");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-
+			}*/
 
 		break;
+		case("Run_verifectaion"):
+			WorkSpace.getLog().debug("Run_verifectaion");
+			requirementList=new RequirementList();
+			VerificationController.addToRequirmentList(verifySpecGUI);
+
+		break;
+
 		case("ShowResults"):
 		break;
 		case("Save"):
@@ -247,6 +255,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		}
 
 	}
+	public RequirementList getRequirementList() {
+		return requirementList;
+	}
+
 	public int getX() {
 		return x;
 	}
