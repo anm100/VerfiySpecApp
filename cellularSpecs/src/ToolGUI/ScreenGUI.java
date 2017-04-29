@@ -46,9 +46,8 @@ public class ScreenGUI extends JScrollPane {
 	private JPanel mainScreenPanel;
 	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) 
 	{
+		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		this.screenName=screenName;
-		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		mainScreenPanel = new JPanel();
 		mainScreenPanel.setBackground(Color.WHITE);
@@ -56,11 +55,6 @@ public class ScreenGUI extends JScrollPane {
 		mainScreenPanel.setSize(163, 228);
 		setSize(163, 228);
 		mainScreenPanel.setLayout(null);
-		
-		JLabel element = new JLabel("New element");
-
-		element.setBounds(1, lastCoordinateElem, 143, 39);
-		mainScreenPanel.add(element);
 		
 
 		JLabel screenLabel = new JLabel(screenName);
@@ -125,7 +119,7 @@ public class ScreenGUI extends JScrollPane {
 		 
 	}
 
-	public void addScreenMouseListener(AddScreenController addScreenController) {
+	public void addScreenMouseListener(Router addScreenController) {
 		// TODO Auto-generated method stub
 		this.addMouseMotionListener(addScreenController);
 		this.addMouseListener(addScreenController);

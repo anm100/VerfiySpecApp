@@ -41,6 +41,10 @@ public static Logger getLog() {
 public void addScreen(String screenName , Screen s){
 	this.screensMap.put(screenName,s);	
 }
+public void updateScreen(String screenName , Screen s){
+	this.screensMap.remove(screenName);
+	this.screensMap.put(screenName,s);	
+}
 public Screen getScreenByName(String screenName){
 	return this.screensMap.get(screenName);
 }
