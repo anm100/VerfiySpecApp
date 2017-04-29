@@ -51,10 +51,13 @@ public class ScreenGUI extends JScrollPane {
 		
 		mainScreenPanel = new JPanel();
 		mainScreenPanel.setBackground(Color.WHITE);
+		
 		setViewportView(mainScreenPanel);
 		mainScreenPanel.setSize(163, 228);
 		setSize(163, 228);
+		mainScreenPanel.setBounds(getCordinateX, getCordinateY, 163, 228);
 		mainScreenPanel.setLayout(null);
+		
 		
 
 		JLabel screenLabel = new JLabel(screenName);
