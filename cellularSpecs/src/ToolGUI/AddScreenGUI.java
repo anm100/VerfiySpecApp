@@ -93,6 +93,7 @@ public class AddScreenGUI extends JFrame {
 
 	public void addScreenListener(ActionListener listenForOperation){       
 		bnSave.addActionListener(listenForOperation);
+		bnSave.setActionCommand("_save_add_screen");
 }
 
 }

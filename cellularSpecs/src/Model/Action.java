@@ -1,6 +1,8 @@
 package Model;
 
-public class Action {
+import java.io.Serializable;
+
+public class Action implements Serializable {
 
 
 }

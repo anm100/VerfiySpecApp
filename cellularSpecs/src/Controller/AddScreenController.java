@@ -19,7 +19,7 @@ import Model.Screen;
 import Model.WorkSpace;
 import ToolGUI.*;
 
-public class AddScreenController implements ActionListener,MouseListener,MouseMotionListener {
+public class AddScreenController {
 	private AddScreenGUI addScreenGUI;
 	private   MainScreenGui mainScreenGui ;
 	private  int x,y;
@@ -72,40 +72,5 @@ public void actionPerformed(ActionEvent arg0) {
 	System.out.println(elementName+""+arg0.getActionCommand());
 	break;
 	}
-}
-@Override
-public void mouseDragged(MouseEvent arg0) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public void mouseMoved(MouseEvent arg0) {
-}
-@Override
-public void mouseClicked(MouseEvent arg0) {
-	if(arg0.getButton()== MouseEvent.BUTTON3)
-	{
-
-					 
-	}
-	// TODO Auto-generated method stub
-	
-	
-}
-@Override
-public void mouseEntered(MouseEvent arg0) {
-}
-@Override
-public void mouseExited(MouseEvent arg0) {
-}
-@Override
-public void mousePressed(MouseEvent arg0) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public void mouseReleased(MouseEvent arg0) {
-	// TODO Auto-generated method stub
-	
 }
 }

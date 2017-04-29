@@ -20,7 +20,10 @@ public class appTest {
 		screen.addElement(s.getParamName()+j, s);
 	 }
 			System.out.println(screen.getStringPromela());
+			System.out.println(screen.getStringPromela());
+			System.out.println(screen.getStringPromela());
 
+			
 	}
 
 }

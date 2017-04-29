@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
 
@@ -25,6 +26,7 @@ import Model.RequirementList;
 import ToolGUI.*;
 
 public class Router implements ActionListener,MouseListener,MouseMotionListener {
+	private static Router instance =null ; 
 	private int CordinateX; 
 	private int CordinateY; 
 	private VerifySpecGUI verifySpecGUI;
@@ -34,47 +36,19 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	public Boolean inner =false;
 	private RequirementList requirementList;
 	private static  Boolean GetNewLocation=false;
-	CreatePromela createPromela=new CreatePromela();
-	OnOfGUI  onOfGUI; 
-	ListTypeGUI  listTypeGUI;
-	EmptyNotEmptyGUI emptyNotEmptyGUI;
-	NewSpecGUI newSpecGui;
-	ButtonTypeGUI buttonTypeGUI; 
-	 MainScreenGui mainScreenGui;
+	private OnOfGUI  onOfGUI; 
+	private ListTypeGUI  listTypeGUI;
+	private EmptyNotEmptyGUI emptyNotEmptyGUI;
+	private NewSpecGUI newSpecGui;
+	private ButtonTypeGUI buttonTypeGUI; 
+	private MainScreenGui mainScreenGui;
 	private AddScreenGUI addScreen;
 	private Screen screen;
-	 ScreenGUI screenGUI;
-	AddScreenController addScreenController;
-	
-	private static Router instance =null ; 
-
+	private ScreenGUI screenGUI;
 	private  Router(NewSpecGUI newSpecGui)
 	{
 		this.newSpecGui=newSpecGui;
 	}
-
-	public  static Router getInstance()
-	{
-		return instance;
-	}
-	public  static 	void setInstance(NewSpecGUI newSpecGui)
-	{
-		Router.instance=new Router(newSpecGui);
-	}
-	
-	
-	public MainScreenGui getMainScreenGui() {
-		return mainScreenGui;
-	}
-
-	public void setMainScreenGui(String specName) {
-		this.mainScreenGui=new MainScreenGui();
-		this.mainScreenGui.setSpecNameLabel(specName);
-		this.mainScreenGui.addMainScreenListener(this);
-		this.mainScreenGui.setVisible(true);
-		this.specName=specName;
-	}
-
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -85,10 +59,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		switch(e.getActionCommand())
 		{
 		case("Create"):
-			WorkSpace.getInstance().setWorkSpaceName(specName);
-			WorkSpace.getLog().debug("Create New Spec");
-		this.specName=newSpecGui.getSpecName().getText().toString();
-		this.setMainScreenGui(specName);
+			this.specName=newSpecGui.getSpecName();
+			WorkSpace.getInstance().setWorkSpaceName(newSpecGui.getSpecName());
+			WorkSpace.getLog().debug("Create New Spec\n"+"spec name:"+newSpecGui.getSpecName());
+			this.setMainScreenGui(specName);
 
 		this.newSpecGui.dispose();
 
@@ -116,7 +90,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		this.setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
 		mainScreenGui.setVisible(true);
 			Screen s ;
-			Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+			Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 			while(it.hasNext()){
 				Map.Entry pair =(Map.Entry) it.next(); 
 				s= (Screen)pair.getValue();			
@@ -167,12 +141,13 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpace.getLog().debug("Run_verifectaion");
 			requirementList=new RequirementList();
 			VerificationController.addToRequirmentList(verifySpecGUI);
+			WorkSpace.getLog().debug(VerificationController.translateToPROMELA());
 
 		break;
 
 		case("ShowResults"):
 		break;
-		case("Save"):
+		case("_save_add_screen"):
 			screen = new Screen();
 			screen.setScreenName(addScreen.getScreenName().getText().toString());
 			screen.setDescription(addScreen.getDescription().getText().toString());
@@ -181,9 +156,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			GetNewLocation=true;
 			 screenGUI=new ScreenGUI(screen.getScreenName(),screen.getCordinateX(),screen.getCordinateY());//there is a problem
 			//screenGUI.addScreenListener(a);
-			WorkSpace.getLog().debug("this screen name "+screen.getScreenName());
 			WorkSpace.getInstance().addScreen(screen.getScreenName(), screen);
-			 addScreenController= new AddScreenController();
+			WorkSpace.getLog().debug("this screen name  added -> "+screen.getScreenName());
+
 			
 			screenGUI.addScreenMouseListener2(this);
 			//mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
@@ -332,7 +307,27 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		}
 		
 	}
+	private void setMainScreenGui(String specName) {
+		this.mainScreenGui=new MainScreenGui();
+		this.mainScreenGui.setSpecNameLabel(specName);
+		this.mainScreenGui.addMainScreenListener(this);
+		this.mainScreenGui.setVisible(true);
+		this.specName=specName;
+	}
+	public  static Router getInstance()
+	{
+		return instance;
+	}
+	public  static 	void setInstance(NewSpecGUI newSpecGui)
+	{
+		Router.instance=new Router(newSpecGui);
+	}
 	
+	
+	public MainScreenGui getMainScreenGui() {
+		return mainScreenGui;
+	}
+
 	public Boolean getGetNewLocation() {
 		return GetNewLocation;
 	}

@@ -10,7 +10,7 @@ private String paramVal;
 private  Transition trans ;
 private  List<MyCondition> conds= new ArrayList <MyCondition>(); 
 private final String type="regular Button"; 
-private final String optLogic= "&"; 
+private final String optLogic= "&&"; 
 //private List <Action> actions= new ArrayList<>(); 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 

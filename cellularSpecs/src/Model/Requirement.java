@@ -1,7 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 
-public class Requirement {
+
+public class Requirement implements Serializable{
 	private String  rID; 
 	private String formula;
 	private boolean isSelected;

@@ -39,6 +39,7 @@ import java.awt.SystemColor;
 
 public class NewSpecGUI extends JFrame{
 	private JTextField specName2;
+	private JTextField specName_new;
 	private JTextField specLocation2;
 	private JButton btnOpen2;
 	private JButton btnCreate1;
@@ -161,10 +162,10 @@ public class NewSpecGUI extends JFrame{
 		   specLocation2.setText(System.getProperty("user.dir"));
 		   specLocation2.setColumns(10);
 		   
-		   specName2=new JTextField();
-		   specName2.setBounds(78, 70, 465, 20);
-		   panel_1.add(specName2);
-		   specName2.setColumns(10);
+		   specName_new=new JTextField();
+		   specName_new.setBounds(78, 70, 465, 20);
+		   panel_1.add(specName_new);
+		   specName_new.setColumns(10);
 		   
 		   JLabel lblPath1 = new JLabel("Location:");
 		   lblPath1.setBounds(10, 114, 53, 14);
@@ -179,12 +180,10 @@ public class NewSpecGUI extends JFrame{
 		   panel_1.add(lblVerifySpec1);
 		   lblVerifySpec1.setFont(new Font("Tahoma", Font.BOLD, 18));
 	}
-	public JTextField getSpecName() {
-		return specName2;
+	public String getSpecName() {
+		return specName_new.getText().toString();
 	}
-	public void setSpecName(JTextField specName) {
-		this.specName2 = specName;
-	}
+
 	public JTextField getSpecLocation() {
 		return specLocation2;
 	}
