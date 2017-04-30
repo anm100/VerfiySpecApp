@@ -86,7 +86,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			 
 	      
 		WorkSpaceController.OpenSpecFromFile("aaa");
-		
+		mainScreenGui.dispose();
 		this.setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
 		mainScreenGui.setVisible(true);
 			Screen s ;
@@ -96,8 +96,13 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				s= (Screen)pair.getValue();			
 				
 			ScreenGUI screenTempGui=new ScreenGUI(s.getScreenName(),s.getCordinateX(),s.getCordinateY());
+			screenTempGui.setLocation(s.getCordinateX(),s.getCordinateY());
+			screenTempGui.addScreenMouseListener(this);
+			screenTempGui.addScreenListener(this);
 			mainScreenGui.getContentPane().add(screenTempGui);
 			}
+			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 			mainScreenGui.getContentPane().repaint();
 			mainScreenGui.getContentPane().revalidate();
 		break;

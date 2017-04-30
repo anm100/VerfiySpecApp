@@ -24,8 +24,8 @@ public class VerificationController {
 		WorkSpace w  =WorkSpace.getInstance();
 		return "mytype={"+getAllScreenName()
 						 +"};\n"
-						 +"do"
 						 +getLTLReq()
+						 +"do"
 						 +getPG()
 						 +"od";
 	}
