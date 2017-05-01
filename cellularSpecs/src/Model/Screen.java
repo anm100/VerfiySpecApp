@@ -124,6 +124,9 @@ public class Screen implements Serializable{
 	public Element getElementByName(String elementName){
 		return this.elementsMap.get(elementName);
 	}
+	public HashMap<String, Element> getElementsMap() {
+		return elementsMap;
+	}
 	public  String getStringPromela(){
 		Element e ;
 		String elemets=new String("");

@@ -2,6 +2,8 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -14,18 +16,21 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 
+import Model.Element;
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
 import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
 import Model.OnOffType;
+import Model.Requirement;
 import Model.RequirementList;
 import ToolGUI.*;
 
-public class Router implements ActionListener,MouseListener,MouseMotionListener {
+public class Router implements ActionListener,MouseListener,MouseMotionListener, ItemListener {
 	private static Router instance =null ; 
 	private int cordinateX; 
 	private int cordinateY; 
@@ -35,6 +40,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private String specName;
 	public Boolean inner =false;
 	private RequirementList requirementList;
+
 	private static  Boolean GetNewLocation=false;
 	private OnOfGUI  onOfGUI; 
 	private ListTypeGUI  listTypeGUI;
@@ -45,10 +51,14 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private AddScreenGUI addScreen;
 	private Screen screen;
 	private ScreenGUI screenGUI;
+	private String[] st;
 	private  Router(NewSpecGUI newSpecGui)
 	{
 		this.newSpecGui=newSpecGui;
+		requirementList=new RequirementList();
+		setRequiremens(requirementList);
 	}
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -63,29 +73,22 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpace.getInstance().setWorkSpaceName(newSpecGui.getSpecName());
 			WorkSpace.getLog().debug("Create New Spec\n"+"spec name:"+newSpecGui.getSpecName());
 			this.setMainScreenGui(specName);
-
 		this.newSpecGui.dispose();
-
 		break;
-		
 		case("AddScreen"):
 			WorkSpace.getLog().debug("do_AddScreen.. ");
 			addScreen=new AddScreenGUI();
 			addScreen.addScreenListener(this);
 			addScreen.setVisible(true);
-					/*mainScreenGui.addMainScreenMouseListener((MouseListener)this);
-					wk.setIsClicked(true);*/
-					mainScreenGui.addMainScreenMouseListener((MouseListener)this);
-					mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
+			/*mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+				wk.setIsClicked(true);*/
+			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
         break;
 		case("New"):
-			
 		break;
-		
-		case("Open.."):
-			 
-	      
-		WorkSpaceController.OpenSpecFromFile("aaa");
+		case("Open.."):     
+			WorkSpaceController.OpenSpecFromFile("aaa");
 		mainScreenGui.dispose();
 		this.setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
 		mainScreenGui.setVisible(true);
@@ -93,12 +96,19 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 			while(it.hasNext()){
 				Map.Entry pair =(Map.Entry) it.next(); 
-				s= (Screen)pair.getValue();			
-				
-			ScreenGUI screenTempGui=new ScreenGUI(s.getScreenName(),s.getCordinateX(),s.getCordinateY());
+				s= (Screen)pair.getValue();	
+				Iterator<Entry<String, Element>> itElement=s.getElementsMap().entrySet().iterator();
+				ScreenGUI screenTempGui=new ScreenGUI(s.getScreenName(),s.getCordinateX(),s.getCordinateY());
 			screenTempGui.setLocation(s.getCordinateX(),s.getCordinateY());
 			screenTempGui.addScreenMouseListener(this);
 			screenTempGui.addScreenListener(this);
+			
+			while(itElement.hasNext()){
+					Map.Entry pair2 =(Map.Entry) itElement.next(); 
+					Element	element= (Element)pair2.getValue();
+					screenTempGui.addElementLabel(element);
+				}
+		
 			mainScreenGui.getContentPane().add(screenTempGui);
 			}
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
@@ -134,13 +144,13 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		 verifySpecGUI=new VerifySpecGUI();
 		VerifySpecGUI.setVerifySpecGUI(this);
 		verifySpecGUI.setVisible(true);
+		//	verifySpecGUI.addRootScreen(st);
 			/*try {
 				Runtime.getRuntime().exec("cmd /c start b.bat");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}*/
-
 		break;
 		case("Run_verifectaion"):
 			WorkSpace.getLog().debug("Run_verifectaion");
@@ -190,6 +200,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			onOfGUI= new OnOfGUI(screenGUI.getScreenName());
 			onOfGUI.setVisible(true);
 			onOfGUI.setOnOffListener(this);
+			
 			break;
 		case "_save_on_off":
 			
@@ -224,19 +235,39 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				buttonTypeGUI= new ButtonTypeGUI(screenGUI.getScreenName());
 				buttonTypeGUI.setVisible(true);
 				buttonTypeGUI.setButtonTListener(this);
+					Screen s1 ;
+					int i=0;
+					 st=new String[WorkSpace.getInstance().getScreensMap().size()] ;
+					Iterator<Entry<String, Screen>> it1 = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+					while(it1.hasNext()){
+						Map.Entry pair =(Map.Entry) it1.next(); 
+						s1= (Screen)pair.getValue();	
+						st[i]=s1.getScreenName();
+						 i++; 	
+					}  
+			        buttonTypeGUI.addTooScreenComboBox(st);
+			        String st1[]=new String[ScreenController.getAllparms().size()];
+			        for(i=0;i< ScreenController.getAllparms().size();i++)
+			        {
+			        	st1[i]= ScreenController.getAllparms().get(i).getParamName();
+			        	
+			        }
+			        buttonTypeGUI.addParamsNameToComboBox(st1);
+			        buttonTypeGUI.setParamChangeListener(this);
 				break;
 				
 			case "_save_standart_button": 
 				WorkSpace.getLog().debug("do _save_standart_button.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, buttonTypeGUI, new StandartButtonType());
-				break; 
-
-		
+				break;
 		}
 
 	}
 	public RequirementList getRequirementList() {
 		return requirementList;
+	}
+	public void setRequirementList(RequirementList requirementList) {
+		this.requirementList = requirementList;
 	}
 
 	public int getX() {
@@ -348,5 +379,80 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	}
 	public void setGetNewLocation(Boolean getNewLocation) {
 		GetNewLocation = getNewLocation;
+	}
+	private void setRequiremens(RequirementList requirementList) {
+		Requirement req1=new Requirement();
+		req1.setReq("There is Always an exit from any screen.");
+		req1.setrID("req1");
+		req1.setFormula("ltl req1 {[]((state==BoPo_MainSreen) -> (<>(!(state==BoPo_MainSreen))))}");
+		req1.setSelected(false);
+		requirementList.addRequirement(req1);
+		
+		Requirement req2=new Requirement();
+		req2.setReq("There is a screen (root), such that each screen is reached from it.");
+		req2.setrID("req2");
+		req2.setFormula("null");
+		req2.setSelected(false);
+		requirementList.addRequirement(req2);
+		
+		Requirement req3=new Requirement();
+		req3.setReq("We can't  move from screen_j to screen_i without changing or defining a parameter.");
+		req3.setrID("req3");
+		req3.setFormula("ltl req3 {!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParmX)U(state==BoPo_MainSreen))))}");
+		req3.setSelected(false);
+		requirementList.addRequirement(req3);
+		
+		Requirement req4=new Requirement();
+		req4.setReq("Parameter cannot accept value that is not defined in the List of the possible values.");
+		req4.setrID("req4");
+		req4.setFormula("ltl req4 {[](((ack==ON) ||(ack==OFF))->(!<>((!(ack==OFF))&&(!(ack==ON)))))}");
+		req4.setSelected(false);
+		requirementList.addRequirement(req4);
+		
+		Requirement req5=new Requirement();
+		req5.setReq("There is no path to a screen that allows  \"Illegal parameters values\".");
+		req5.setrID("req5");
+		req5.setFormula("null");
+		req5.setSelected(false);
+		requirementList.addRequirement(req5);
+		
+		Requirement req6=new Requirement();
+		req6.setReq("Each list of parameters must be defined before entering a screen.");
+		req6.setrID("req6");
+		req6.setFormula("ltl req6 {[]((state==BoPo_MainSreen)->((title==NotEmpty)&&(max==NotEmpty)&&(chooseCategory==NotEmpty)))}");
+		req6.setSelected(false);
+		requirementList.addRequirement(req6);
+		
+		Requirement req7=new Requirement();
+		req7.setReq("Parameters values cannot change unless it was intended to do so in its path");
+		req7.setrID("req7");
+		req7.setFormula("null");
+		req7.setSelected(false);
+		requirementList.addRequirement(req7);
+		
+		Requirement req8=new Requirement();
+		req8.setReq("If a Parameter changes  in a specific state the change should be updated wherever the parameter is used.");
+		req8.setrID("req8");
+		req8.setFormula("null");
+		req8.setSelected(false);
+		requirementList.addRequirement(req8);
+		
+		Requirement req9=new Requirement();
+		req9.setReq("All parameters always must be consistent.");
+		req9.setrID("req9");
+		req9.setFormula("null");
+		req9.setSelected(false);		
+		requirementList.addRequirement(req9);
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		WorkSpace.getLog().debug(e.getItem().toString());
+		for(int i=0;i< ScreenController.getAllparms().size();i++)
+		if(e.getItem().toString().equals(ScreenController.getAllparms().get(i).getParamName()))
+		{
+			buttonTypeGUI.addParamsValuesToComboBox(ScreenController.getAllparms().get(i).getValues());
+		break;	
+		}
 	}
 }

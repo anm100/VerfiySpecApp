@@ -5,12 +5,13 @@ import java.io.Serializable;
 public class MyCondition implements Serializable {
 	private String paramName; 
 	private String paramVal ; 
-	private final String opt="==";
+	private  String opt="==";
 	
-	public MyCondition(String paramName, String paramVal) {
+	public MyCondition(String paramName, String paramVal, String opt2) {
 		super();
 		this.paramName = paramName;
 		this.paramVal = paramVal;
+		this.opt= opt2; 
 	}
 	public String getParamName() {
 		return paramName;

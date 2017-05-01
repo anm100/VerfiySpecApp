@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Transition implements Serializable {
 	private int TransitionID ; 
-	private Screen fromScreen; 
-	private Screen toScreen ;
+	private String fromScreen; 
+	private String toScreen ;
 	
 	
-	public Transition(Screen fromScreen, Screen toScreen) {
+	public Transition(String string, String string2) {
 		super();
-		this.fromScreen = fromScreen;
-		this.toScreen = toScreen;
+		this.fromScreen = string;
+		this.toScreen = string2;
 	}
 	public int getTransitionID() {
 		return TransitionID;
@@ -19,16 +19,16 @@ public class Transition implements Serializable {
 	public void setTransitionID(int transitionID) {
 		TransitionID = transitionID;
 	}
-	public Screen getFromScreen() {
+	public String getFromScreen() {
 		return fromScreen;
 	}
-	public void setFromScreen(Screen fromScreen) {
+	public void setFromScreen(String fromScreen) {
 		this.fromScreen = fromScreen;
 	}
-	public Screen getToScreen() {
+	public String getToScreen() {
 		return toScreen;
 	}
-	public void setToScreen(Screen toScreen) {
+	public void setToScreen(String toScreen) {
 		this.toScreen = toScreen;
 	} 
 	

@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -23,61 +24,85 @@ import javax.swing.event.ChangeEvent;
 public class VerifySpecGUI extends JFrame{
 	private static   JButton btnRun;
 	private JComboBox comboBox;
+	private ArrayList<JCheckBox> req =new ArrayList<JCheckBox>();
+	public ArrayList<JCheckBox> getReq() {
+		return req;
+	}
+
+	public void setReq(ArrayList<JCheckBox> req) {
+		this.req = req;
+	}
 
 	public VerifySpecGUI() {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
-		JCheckBox chckbxAll = new JCheckBox("All");
-		chckbxAll.setBackground(Color.WHITE);
-		chckbxAll.setBounds(23, 138, 97, 23);
-		getContentPane().add(chckbxAll);
+		JCheckBox allReq = new JCheckBox("All");
+		allReq.setBackground(Color.WHITE);
+		allReq.setBounds(23, 138, 97, 23);
+		allReq.addItemListener(new ItemListener() {
+		    @Override
+		    public void itemStateChanged(ItemEvent e) {
+		    	selectall(IsSelect(e));
+		    }
+		});
+		getContentPane().add(allReq);
+		req.add(allReq);
+		setSize(700,500);
 		
+		JCheckBox req1 = new JCheckBox("There is Always an exit from any screen.");
+		req1.setBackground(Color.WHITE);
+		req1.setBounds(23, 162, 243, 23);
+		getContentPane().add(req1);
+		req.add(req1);
 		
-		JCheckBox chckbxThereIs = new JCheckBox("There is Always an exit from any screen.");
-		chckbxThereIs.setBackground(Color.WHITE);
-		chckbxThereIs.setBounds(23, 162, 243, 23);
-		getContentPane().add(chckbxThereIs);
+		JCheckBox req2 = new JCheckBox("There is a screen (root), such that each screen is reached from it.");
+		req2.setBackground(Color.WHITE);
+		req2.setBounds(23, 188, 371, 23);
+		getContentPane().add(req2);
+		req.add(req2);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("There is a screen (root), such that each screen is reached from it.");
-		chckbxNewCheckBox.setBackground(Color.WHITE);
-		chckbxNewCheckBox.setBounds(23, 188, 371, 23);
-		getContentPane().add(chckbxNewCheckBox);
+		JCheckBox req3 = new JCheckBox("We can't  move from screen_j to screen_i without changing or defining a parameter.");
+		req3.setBackground(Color.WHITE);
+		req3.setBounds(23, 216, 459, 23);
+		getContentPane().add(req3);
+		req.add(req3);
 		
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("We can't  move from screen_j to screen_i without changing or defining a parameter.");
-		chckbxNewCheckBox_1.setBackground(Color.WHITE);
-		chckbxNewCheckBox_1.setBounds(23, 216, 459, 23);
-		getContentPane().add(chckbxNewCheckBox_1);
+		JCheckBox req4 = new JCheckBox("Parameter cannot accept value that is not defined in the List of the possible values.");
+		req4.setBackground(Color.WHITE);
+		req4.setBounds(23, 242, 427, 23);
+		getContentPane().add(req4);
+		req.add(req4);
 		
-		JCheckBox chckbxNewCheckBox_2 = new JCheckBox("Parameter cannot accept value that is not defined in the List of the possible values.");
-		chckbxNewCheckBox_2.setBackground(Color.WHITE);
-		chckbxNewCheckBox_2.setBounds(23, 242, 427, 23);
-		getContentPane().add(chckbxNewCheckBox_2);
+		JCheckBox req5 = new JCheckBox("There is no path to a screen that allows  \"Illegal parameters values\".");
+		req5.setBackground(Color.WHITE);
+		req5.setBounds(23, 268, 427, 23);
+		getContentPane().add(req5);
+		req.add(req5);
 		
-		JCheckBox chckbxNewCheckBox_3 = new JCheckBox("There is no path to a screen that allows  \"Illegal parameters values\".");
-		chckbxNewCheckBox_3.setBackground(Color.WHITE);
-		chckbxNewCheckBox_3.setBounds(23, 268, 427, 23);
-		getContentPane().add(chckbxNewCheckBox_3);
+		JCheckBox req6 = new JCheckBox("Each list of parameters must be defined before entering a screen.");
+		req6.setBackground(Color.WHITE);
+		req6.setBounds(23, 322, 427, 23);
+		getContentPane().add(req6);
+		req.add(req6);
 		
-		JCheckBox chckbxNewCheckBox_5 = new JCheckBox("Each list of parameters must be defined before entering a screen.");
-		chckbxNewCheckBox_5.setBackground(Color.WHITE);
-		chckbxNewCheckBox_5.setBounds(23, 322, 427, 23);
-		getContentPane().add(chckbxNewCheckBox_5);
+		JCheckBox req7 = new JCheckBox("Parameters values cannot change unless it was intended to do so in its path");
+		req7.setBackground(Color.WHITE);
+		req7.setBounds(23, 348, 427, 23);
+		getContentPane().add(req7);
+		req.add(req7);
 		
-		JCheckBox chckbxNewCheckBox_6 = new JCheckBox("Parameters values cannot change unless it was intended to do so in its path");
-		chckbxNewCheckBox_6.setBackground(Color.WHITE);
-		chckbxNewCheckBox_6.setBounds(23, 348, 427, 23);
-		getContentPane().add(chckbxNewCheckBox_6);
+		JCheckBox req8 = new JCheckBox("If a Parameter changes  in a specific state the change should be updated wherever the parameter is used.");
+		req8.setBackground(Color.WHITE);
+		req8.setBounds(23, 374, 543, 23);
+		getContentPane().add(req8);
+		req.add(req8);
 		
-		JCheckBox chckbxNewCheckBox_7 = new JCheckBox("If a Parameter changes  in a specific state the change should be updated wherever the parameter is used.");
-		chckbxNewCheckBox_7.setBackground(Color.WHITE);
-		chckbxNewCheckBox_7.setBounds(23, 374, 543, 23);
-		getContentPane().add(chckbxNewCheckBox_7);
-		
-		JCheckBox chckbxNewCheckBox_8 = new JCheckBox("All parameters always must be consistent.");
-		chckbxNewCheckBox_8.setBackground(Color.WHITE);
-		chckbxNewCheckBox_8.setBounds(23, 399, 270, 23);
-		getContentPane().add(chckbxNewCheckBox_8);
+		JCheckBox req9 = new JCheckBox("All parameters always must be consistent.");
+		req9.setBackground(Color.WHITE);
+		req9.setBounds(23, 399, 270, 23);
+		getContentPane().add(req9);
+		req.add(req9);
 		
 		JLabel lblNote = new JLabel("note: (Illegal i.e. value that does not defined in the list of the parameters values)");
 		lblNote.setBounds(33, 298, 443, 14);
@@ -115,6 +140,24 @@ public class VerifySpecGUI extends JFrame{
 		separator.setBounds(65, 108, 586, 23);
 		getContentPane().add(separator);
 	}
+
+	private void selectall(boolean flag) {
+		int i;
+		for(i=1;i<10;i++)
+		{
+			JCheckBox  temp=req.get(i);
+			temp.setSelected(flag);
+			req.remove(i);
+			req.add(i,temp);
+		}
+		
+	}
+	private boolean IsSelect(ItemEvent e) {
+        if(e.getStateChange() == ItemEvent.SELECTED)
+    		return true;
+    else 
+    	return false;
+	}
 	public String getRoot() {
 		String st=comboBox.getSelectedItem().toString();
 		return st;
@@ -122,6 +165,14 @@ public class VerifySpecGUI extends JFrame{
 
 	public static  void setVerifySpecGUI(ActionListener verifySpecGUIListener) {
 		btnRun.addActionListener(verifySpecGUIListener);
+		//allReq.addItemListener(verifySpecGUIListener);
+	}
+	public void addRootScreen(String[] st) {
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel(st);
+        comboBox.setModel(cbm);
+		this.comboBox = comboBox;
+		// TODO Auto-generated method stub
+		
 	}
 
 	

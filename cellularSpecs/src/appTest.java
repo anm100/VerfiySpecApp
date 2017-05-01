@@ -15,7 +15,7 @@ public class appTest {
 
 		for (int i=0 ; i<5;i++){
 			s.setParamName("a"+i);
-			s.getConds().add(new MyCondition(new String("val"+i),new String(""+i)));
+	//		s.getConds().add(new MyCondition(new String("val"+i),new String(""+i)));
 			}
 		screen.addElement(s.getParamName()+j, s);
 	 }

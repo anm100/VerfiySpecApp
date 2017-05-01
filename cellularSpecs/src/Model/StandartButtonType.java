@@ -18,8 +18,13 @@ private final String optLogic= "&&";
 public StandartButtonType() {
 	
 }
-public void setTransition(Screen from , Screen to) {
-	trans= new Transition(from,to);
+public void addCondition(String name, String Val,String opt){
+	MyCondition c = new MyCondition(name, Val,opt); 
+	this.conds.add(c);
+	
+}
+public void setTransition(String string , String string2) {
+	trans= new Transition(string,string2);
 	
 }
 
@@ -62,7 +67,7 @@ public  String getStringPromela(){
 			 	+conds.get(i).getParamVal();
  }
 	return "::("+conditons+")->atomic(state="
-				+getTrans().getToScreen().getScreenName()
+				+getTrans().getToScreen()
 				+");" ; 
 }
 @Override
@@ -78,6 +83,11 @@ public List<MyCondition> getConds() {
 	return conds;
 }
 
+@Override
+public String [] getValues() {	
+	String [] p ={"un pressed","pressed"};
+	return p;
+}
 
 }
 

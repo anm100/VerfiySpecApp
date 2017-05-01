@@ -28,6 +28,7 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
 
 public class ListTypeGUI extends JFrame {
+	private JTextArea textArea;
 	private JTextField elementName;
 	private String values[]={""} ; 
 	JButton butListSave;
@@ -72,7 +73,7 @@ public class ListTypeGUI extends JFrame {
 		scrollPane.setBounds(104, 96, 149, 108);
 		getContentPane().add(scrollPane);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		setSize(501, 405);
 		
@@ -125,6 +126,12 @@ public class ListTypeGUI extends JFrame {
 			}
 		});
 		
+	}
+	public String[] getValues() {
+		return textArea.getText().split("\n");
+	}
+	public void setValues(String[] values) {
+		this.values = values;
 	}
 	public void setListTypeListener(ActionListener listTypeListener ){       
 		

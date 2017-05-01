@@ -17,7 +17,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.border.LineBorder;
 
-import Controller.AddScreenController;
+import Controller.ScreenController;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -28,6 +28,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JSeparator;
 import javax.swing.JRadioButton;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class ButtonTypeGUI extends JFrame {
 	private JTextField txtUndefined;
@@ -35,6 +37,10 @@ public class ButtonTypeGUI extends JFrame {
 	private int i ; 
 	private JButton butSave;
 	private String ScreenName; 
+	private JComboBox toScreenComboBox;
+	private JComboBox paramName;
+	private JComboBox comboBoxVal;
+	private JComboBox OpComboBox; 
 	public ButtonTypeGUI(String ScreenName)
 	{
 		this.ScreenName=ScreenName; 
@@ -51,19 +57,19 @@ public class ButtonTypeGUI extends JFrame {
 		lblName.setBounds(37, 68, 46, 14);
 		getContentPane().add(lblName);
 		
-		JLabel lblDetails = new JLabel("Move To : ");
-		lblDetails.setBounds(37, 95, 57, 14);
-		getContentPane().add(lblDetails);
+		JLabel lblMoveTo = new JLabel("Move To : ");
+		lblMoveTo.setBounds(37, 95, 57, 14);
+		getContentPane().add(lblMoveTo);
 		
 		elementName = new JTextField();
 		elementName.setBounds(104, 65, 152, 20);
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Show Screens"}));
-		comboBox_1.setBounds(104, 92, 152, 20);
-		getContentPane().add(comboBox_1);
+		 toScreenComboBox = new JComboBox();
+		toScreenComboBox.setModel(new DefaultComboBoxModel(new String[] {"Show Screens"}));
+		toScreenComboBox.setBounds(104, 92, 152, 20);
+		getContentPane().add(toScreenComboBox);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 144, 418, 14);
@@ -74,25 +80,32 @@ public class ButtonTypeGUI extends JFrame {
 		lblConditions.setBounds(20, 144, 93, 20);
 		getContentPane().add(lblConditions);
  
-		JButton btnNewButton = new JButton("+");
-		JLabel lblElement = new JLabel("Choose param");
-		lblElement.setBounds(10, 198, 74, 14);
-		getContentPane().add(lblElement);
+		JButton btnAddCond = new JButton("+");
+		JLabel lblParam = new JLabel("Choose param");
+		lblParam.setBounds(10, 198, 74, 14);
+		getContentPane().add(lblParam);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(82, 195, 80, 20);
-		getContentPane().add(comboBox_2);
+		 paramName = new JComboBox();
+		 paramName.addItemListener(new ItemListener() {
+		 	public void itemStateChanged(ItemEvent e) {
+		 	}
+		 });
+
+
+
+		paramName.setBounds(73, 195, 80, 20);
+		getContentPane().add(paramName);
 		
 		JLabel lblValue = new JLabel("value\r\n");
 		lblValue.setBounds(172,198, 41, 14);
 		getContentPane().add(lblValue);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(252, 195, 80, 20);
-		getContentPane().add(comboBox_3);
+		 comboBoxVal = new JComboBox();
+		comboBoxVal.setBounds(252, 195, 80, 20);
+		getContentPane().add(comboBoxVal);
 		i=0;
 		setSize(464, 390);
-		btnNewButton.addActionListener(new ActionListener() {
+		btnAddCond.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 	
 				JLabel lblElement = new JLabel("element:");
@@ -117,13 +130,13 @@ public class ButtonTypeGUI extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(98, 144, 41, 23);
-		getContentPane().add(btnNewButton);
+		btnAddCond.setBounds(98, 144, 41, 23);
+		getContentPane().add(btnAddCond);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"=", "<>", ">", "<"}));
-		comboBox.setBounds(202, 195, 41, 20);
-		getContentPane().add(comboBox);
+		OpComboBox = new JComboBox();
+		OpComboBox.setModel(new DefaultComboBoxModel(new String[] {"=", "<>", ">", "<"}));
+		OpComboBox.setBounds(202, 195, 41, 20);
+		getContentPane().add(OpComboBox);
 		
 		JLabel lblOperator = new JLabel("operator:");
 		lblOperator.setBounds(263, 155, 46, 14);
@@ -150,12 +163,45 @@ public class ButtonTypeGUI extends JFrame {
 	public JTextField getElementName() {
 		return elementName;
 	}
+	public String getParmName(){
+		return (String) paramName.getSelectedItem(); 
+	}
+	public String getParmVal(){
+		return (String) comboBoxVal.getSelectedItem(); 
+	}
+	public String getCondopt(){
+		return (String) OpComboBox.getSelectedItem(); 
+	}
+	public String getMoveTo(){
+		return (String) toScreenComboBox.getSelectedItem(); 
+	}
+	
 	
 	public String getScreenName() {
 		return ScreenName;
 	}
+	public void addTooScreenComboBox(String[] arr) {
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel(arr);
+        toScreenComboBox.setModel(cbm);
+		//this.toScreenComboBox = toScreenComboBox;
+	}
+	public void addParamsNameToComboBox(String[] arr) {
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel(arr);
+        paramName.setModel(cbm);
+		//this.paramName = paramName;
+	}
+	public void addParamsValuesToComboBox(String[] arr) {
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel(arr);
+        comboBoxVal.setModel(cbm);
+		//this.toScreenComboBox = toScreenComboBox;
+	}
 	public void setButtonTListener(ActionListener ButtonTypeListener ){       
 		butSave.addActionListener(ButtonTypeListener);
 		butSave.setActionCommand("_save_standart_button");
+	}
+	public void setParamChangeListener(ItemListener ButtonTypeListener )
+	{       
+		paramName.addItemListener(ButtonTypeListener);
+		
 	}
 }

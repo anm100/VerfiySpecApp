@@ -53,6 +53,11 @@ public String getStringPromela() {
 	return null;
 }
 
+@Override
+public String [] getValues() {
+	String [] p ={"ON","OFF"};
+	return p;
+}
 
 
 }

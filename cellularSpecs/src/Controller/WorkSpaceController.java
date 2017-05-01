@@ -52,7 +52,13 @@ public class WorkSpaceController {
 	{
 	
 		l.setParamName(elementGui.getElementName().getText());
+		WorkSpace.getLog().debug("--show values for element :"+elementGui.getValues());
+		l.setValues(elementGui.getValues());
+		WorkSpace.getLog().debug("values from element :: update"+l.getValues()[0]);
+
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
+		WorkSpace.getLog().debug("add element to workspace struct");
+
 		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
 		
 		WorkSpace.getLog().debug("--show element in GUI");
@@ -88,6 +94,8 @@ public class WorkSpaceController {
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
 		
 		l.setParamName(elementGui.getElementName().getText());
+		l.addCondition(elementGui.getParmName(), elementGui.getParmVal(), elementGui.getCondopt());
+		l.setTransition(screenGUI.getScreenName(), elementGui.getMoveTo());
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
 		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
 		

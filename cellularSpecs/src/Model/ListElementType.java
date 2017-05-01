@@ -8,16 +8,19 @@ public class ListElementType implements Serializable, Element {
 private String paramName;
 private String paramVal; 
 private final  String type="List"; 
-private List <String> values= new ArrayList<>(); 
+private String [] values=null; 
+
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
 public ListElementType() {}
 
-public List<String> getValues() {
+public String [] getValues() {
+	
+	
 	return values;
 }
 
-public void setValues(List<String> values) {
+public void setValues(String [] values) {
 	this.values = values;
 }
 
