@@ -49,7 +49,7 @@ public String getType() {
 @Override
 public String getStringPromela() {
 	// TODO Auto-generated method stub
-	return null;
+	return "";
 }
 
 @Override
