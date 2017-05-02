@@ -65,6 +65,7 @@ public class WorkSpaceController {
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().getContentPane().repaint();
 		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
+		elementGui.dispose();
 		
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI,EmptyNotEmptyGUI elementGui,EmptyNEmptyType l)
@@ -78,7 +79,8 @@ public class WorkSpaceController {
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().getContentPane().repaint();
 		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
-		
+		elementGui.dispose();
+
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
 		
@@ -89,7 +91,9 @@ public class WorkSpaceController {
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().getContentPane().repaint();
-		Router.getInstance().getMainScreenGui().getContentPane().revalidate();		
+		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
+		elementGui.dispose();
+
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
 		
@@ -102,7 +106,9 @@ public class WorkSpaceController {
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().getContentPane().repaint();
-		Router.getInstance().getMainScreenGui().getContentPane().revalidate();		
+		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
+		elementGui.dispose();
+
 	}
 
 }
