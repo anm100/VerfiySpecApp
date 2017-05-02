@@ -89,7 +89,7 @@ public class NewSpecGUI extends JFrame{
 	    bar.add(btnOpenSpec);
 	    setVisible(true);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(615, 300);
+		setSize(626, 333);
 	    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
 	    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
 	    setLocation(x, y);
@@ -149,6 +149,7 @@ public class NewSpecGUI extends JFrame{
 		 panel_1.add(btnCancel1);
 		 
 		  btnCreate1 = new JButton("Create");
+		  btnCreate1.setActionCommand("_create_NewSpec");
 		  btnCreate1.setBounds(124, 155, 89, 23);
 		  panel_1.add(btnCreate1);
 		  

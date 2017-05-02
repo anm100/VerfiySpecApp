@@ -68,12 +68,16 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		
 		switch(e.getActionCommand())
 		{
-		case("Create"):
+		case("_create_NewSpec"):
+			if(this.getMainScreenGui() !=null)
+			{
+				getMainScreenGui().dispose();
+			}
 			this.specName=newSpecGui.getSpecName();
 			WorkSpace.getInstance().setWorkSpaceName(newSpecGui.getSpecName());
 			WorkSpace.getLog().debug("Create New Spec\n"+"spec name:"+newSpecGui.getSpecName());
 			this.setMainScreenGui(specName);
-		this.newSpecGui.dispose();
+			this.newSpecGui.dispose();
 		break;
 		case("AddScreen"):
 			WorkSpace.getLog().debug("do_AddScreen.. ");
@@ -85,8 +89,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
         break;
-		case("New"):
-		break;
 		case("Open.."):     
 			WorkSpaceController.OpenSpecFromFile("aaa");
 		mainScreenGui.dispose();

@@ -52,6 +52,7 @@ public class MainScreenGui extends JFrame  {
 		
 		 btnNew = new JButton("New");
 		btnNew.setBounds(412, 17, 89, 23);
+		btnNew.setActionCommand("_create_NewSpec");
 		getContentPane().add(btnNew);
 
 		 btnExport = new JButton("Save SPEC");
