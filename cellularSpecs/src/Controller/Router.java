@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 
 import Model.Element;
@@ -56,7 +57,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	{
 		this.newSpecGui=newSpecGui;
 		requirementList=new RequirementList();
-		setRequiremens(requirementList);
 	}
 
 	/**
@@ -140,9 +140,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
 		break;
 		case("Verifiy SPEC"):
+			VerificationController.setRequiremens();
+	
 			WorkSpace.getLog().debug("verifiy Spec case");
 		 verifySpecGUI=new VerifySpecGUI();
 		VerifySpecGUI.setVerifySpecGUI(this);
+		VerifySpecGUI.setCheckBoxListener(this);
 		verifySpecGUI.setVisible(true);
 		//	verifySpecGUI.addRootScreen(st);
 			/*try {
@@ -154,7 +157,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		break;
 		case("Run_verifectaion"):
 			WorkSpace.getLog().debug("Run_verifectaion");
-			requirementList=new RequirementList();
 			VerificationController.addToRequirmentList(verifySpecGUI);
 			WorkSpace.getLog().debug(VerificationController.translateToPROMELA());
 
@@ -380,79 +382,75 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	public void setGetNewLocation(Boolean getNewLocation) {
 		GetNewLocation = getNewLocation;
 	}
-	private void setRequiremens(RequirementList requirementList) {
-		Requirement req1=new Requirement();
-		req1.setReq("There is Always an exit from any screen.");
-		req1.setrID("req1");
-		req1.setFormula("ltl req1 {[]((state==BoPo_MainSreen) -> (<>(!(state==BoPo_MainSreen))))}");
-		req1.setSelected(false);
-		requirementList.addRequirement(req1);
-		
-		Requirement req2=new Requirement();
-		req2.setReq("There is a screen (root), such that each screen is reached from it.");
-		req2.setrID("req2");
-		req2.setFormula("null");
-		req2.setSelected(false);
-		requirementList.addRequirement(req2);
-		
-		Requirement req3=new Requirement();
-		req3.setReq("We can't  move from screen_j to screen_i without changing or defining a parameter.");
-		req3.setrID("req3");
-		req3.setFormula("ltl req3 {!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParmX)U(state==BoPo_MainSreen))))}");
-		req3.setSelected(false);
-		requirementList.addRequirement(req3);
-		
-		Requirement req4=new Requirement();
-		req4.setReq("Parameter cannot accept value that is not defined in the List of the possible values.");
-		req4.setrID("req4");
-		req4.setFormula("ltl req4 {[](((ack==ON) ||(ack==OFF))->(!<>((!(ack==OFF))&&(!(ack==ON)))))}");
-		req4.setSelected(false);
-		requirementList.addRequirement(req4);
-		
-		Requirement req5=new Requirement();
-		req5.setReq("There is no path to a screen that allows  \"Illegal parameters values\".");
-		req5.setrID("req5");
-		req5.setFormula("null");
-		req5.setSelected(false);
-		requirementList.addRequirement(req5);
-		
-		Requirement req6=new Requirement();
-		req6.setReq("Each list of parameters must be defined before entering a screen.");
-		req6.setrID("req6");
-		req6.setFormula("ltl req6 {[]((state==BoPo_MainSreen)->((title==NotEmpty)&&(max==NotEmpty)&&(chooseCategory==NotEmpty)))}");
-		req6.setSelected(false);
-		requirementList.addRequirement(req6);
-		
-		Requirement req7=new Requirement();
-		req7.setReq("Parameters values cannot change unless it was intended to do so in its path");
-		req7.setrID("req7");
-		req7.setFormula("null");
-		req7.setSelected(false);
-		requirementList.addRequirement(req7);
-		
-		Requirement req8=new Requirement();
-		req8.setReq("If a Parameter changes  in a specific state the change should be updated wherever the parameter is used.");
-		req8.setrID("req8");
-		req8.setFormula("null");
-		req8.setSelected(false);
-		requirementList.addRequirement(req8);
-		
-		Requirement req9=new Requirement();
-		req9.setReq("All parameters always must be consistent.");
-		req9.setrID("req9");
-		req9.setFormula("null");
-		req9.setSelected(false);		
-		requirementList.addRequirement(req9);
-	}
+
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
+		JCheckBox s=(JCheckBox)(e.getSource());
+		WorkSpace.getLog().debug(s.getActionCommand());
+		switch(s.getActionCommand())
+		{
+		case "1":
 		WorkSpace.getLog().debug(e.getItem().toString());
 		for(int i=0;i< ScreenController.getAllparms().size();i++)
 		if(e.getItem().toString().equals(ScreenController.getAllparms().get(i).getParamName()))
 		{
 			buttonTypeGUI.addParamsValuesToComboBox(ScreenController.getAllparms().get(i).getValues());
 		break;	
+		}
+		break;
+		case "req1":
+			WorkSpace.getLog().debug("req1 is selected");
+			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,0);
+			WorkSpace.getLog().debug(requirementList.getReqlist().get(0).getReq());
+		break;
+		
+		case "req2":
+			WorkSpace.getLog().debug("req2 is selected");
+			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,1);
+			WorkSpace.getLog().debug(requirementList.getReqlist().get(1).getReq());
+		break;
+		
+		case "req3":
+			WorkSpace.getLog().debug("req3 is selected");
+			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,2);
+			WorkSpace.getLog().debug(requirementList.getReqlist().get(2).getReq());
+		break;
+		
+		case "req4":
+			WorkSpace.getLog().debug("req4 is selected");
+			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,3);
+			WorkSpace.getLog().debug(requirementList.getReqlist().get(3).getReq());
+		break;
+		
+		case "req5":
+			WorkSpace.getLog().debug("req5 is selected");
+			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,4);
+			WorkSpace.getLog().debug(requirementList.getReqlist().get(4).getReq());
+		break;
+		
+		case "req6":
+			WorkSpace.getLog().debug("req6 is selected");
+			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,5);
+			WorkSpace.getLog().debug(requirementList.getReqlist().get(5).getReq());
+		break;
+		
+		case "req7":
+			WorkSpace.getLog().debug("req7 is selected");
+			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,6);
+			WorkSpace.getLog().debug(requirementList.getReqlist().get(6).getReq());
+		break;
+		
+		case "req8":
+			WorkSpace.getLog().debug("req8 is selected");
+			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,7);
+			WorkSpace.getLog().debug(requirementList.getReqlist().get(7).getReq());
+		break;
+		case "req9":
+			WorkSpace.getLog().debug("req9 is selected");
+			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,8);
+			WorkSpace.getLog().debug(requirementList.getReqlist().get(8).getReq());
+		break;
 		}
 	}
 }

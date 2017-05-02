@@ -11,7 +11,7 @@ public class appTest {
 		Screen screen= new Screen("a");
 	 for(int j=0; j<5;j++){
 		s = new StandartButtonType();
-		s.setTransition(screen,new Screen("b"));
+		//s.setTransition(screen,new Screen("b"));
 
 		for (int i=0 ; i<5;i++){
 			s.setParamName("a"+i);
