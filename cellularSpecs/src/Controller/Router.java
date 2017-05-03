@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -160,7 +161,16 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		case("Run_verifectaion"):
 			WorkSpace.getLog().debug("Run_verifectaion");
 			VerificationController.addToRequirmentList(verifySpecGUI);
-			WorkSpace.getLog().debug(VerificationController.translateToPROMELA());
+			WorkSpace.getLog().info(VerificationController.translateToPROMELA());
+			WorkSpace.getLog().debug("create pml file ");
+
+			try{
+			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
+			    writer.println(VerificationController.translateToPROMELA());
+			    writer.close();
+			} catch (IOException eb) {
+			   // do something
+			}
 
 		break;
 
