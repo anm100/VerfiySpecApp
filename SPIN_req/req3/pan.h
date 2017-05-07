@@ -1,5 +1,5 @@
 #define SpinVersion	"Spin Version 6.1.0 -- 4 May 2011"
-#define PanSource	"req3.pml"
+#define PanSource	"newreq3.pml"
 
 #define G_long	4
 #define G_int	4
@@ -74,32 +74,22 @@ typedef struct S_F_MAP {
 	char *fnm; int from; int upto;
 } S_F_MAP;
 
-#define nstates1	59	/* r3 */
-#define endstate1	58
+#define nstates1	18	/* r3 */
+#define endstate1	17
 short src_ln1 [] = {
-	  0,   3,   3,   4,   4,   5,   5,   6, 
-	  6,   2,   8,  10,  10,  11,  11,  12, 
-	 12,  13,  13,   9,  15,  17,  17,  18, 
-	 18,  19,  19,  20,  20,  16,  22,  24, 
-	 24,  25,  25,  23,  27,  29,  29,  30, 
-	 30,  31,  31,  32,  32,  33,  33,  34, 
-	 34,  28,  36,  38,  38,  39,  39,  37, 
-	 41,  42,  43,   0, };
+	  0,   3,   3,   4,   4,   2,   6,   8, 
+	  8,   7,  10,  12,  12,  13,  13,  11, 
+	 15,  15,   0, };
 S_F_MAP src_file1 [] = {
 	{ "-", 0, 0 },
-	{ "_spin_nvr.tmp", 1, 58 },
-	{ "-", 59, 60 }
+	{ "_spin_nvr.tmp", 1, 17 },
+	{ "-", 18, 19 }
 };
 short *src_claim;
 uchar reached1 [] = {
-	  0,   1,   1,   1,   1,   1,   1,   1, 
-	  1,   0,   1,   1,   1,   1,   1,   1, 
-	  1,   1,   1,   0,   1,   1,   1,   1, 
-	  1,   1,   1,   1,   1,   0,   1,   1, 
-	  1,   1,   1,   0,   1,   1,   1,   1, 
-	  1,   1,   1,   1,   1,   1,   1,   1, 
+	  0,   1,   1,   1,   1,   0,   1,   1, 
 	  1,   0,   1,   1,   1,   1,   1,   0, 
-	  1,   1,   0,   0, };
+	  1,   0,   0, };
 uchar *loopstate1;
 
 #define nstates0	39	/* vm */
@@ -107,12 +97,12 @@ uchar *loopstate1;
 short src_ln0 [] = {
 	  0,  11,  13,  13,  14,  14,  12,  16, 
 	 16,  18,  18,  17,  20,  20,  22,  22, 
-	 21,  27,  27,  29,  29,  29,  28,  32, 
-	 32,  34,  34,  34,  33,  36,  36,  38, 
-	 38,  37,  41,  10,  42,  10,  42,   0, };
+	 21,  25,  25,  27,  27,  27,  26,  30, 
+	 30,  32,  32,  32,  31,  34,  34,  36, 
+	 36,  35,  38,  10,  39,  10,  39,   0, };
 S_F_MAP src_file0 [] = {
 	{ "-", 0, 0 },
-	{ "req3.pml", 1, 38 },
+	{ "newreq3.pml", 1, 38 },
 	{ "-", 39, 40 }
 };
 uchar reached0 [] = {
@@ -138,8 +128,8 @@ struct {
 } code_lookup[] = {
 	{ (char *) 0, "" }
 };
-#define _T5	40
-#define _T2	41
+#define _T5	23
+#define _T2	24
 #define T_ID	unsigned char
 #define WS		4 /* word size in bytes */
 #define SYNC	0
@@ -454,12 +444,12 @@ uchar *loopstate2;  /* np_ */
 #define endstate2	2 /* np_ */
 
 #define start2	0 /* np_ */
-#define start1	9
+#define start1	5
 #define start0	35
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
-	#define ACCEPT_LAB	4 /* user-defined accept labels */
+	#define ACCEPT_LAB	1 /* user-defined accept labels */
 #endif
 #ifdef MEMCNT
 	#ifdef MEMLIM
@@ -586,7 +576,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	42
+#define NTRANS	25
 #ifdef PEG
 	long peg[NTRANS];
 #endif

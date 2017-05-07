@@ -1,11 +1,10 @@
-#line 1 "req3.pml"
-#line 2 "req3.pml"
-#line 3 "req3.pml"
+#define Empty 0
+#define NotEmpty 1 
 mtype = { BoPo_MainSreen,SignIn,changeParamUserName,changeParamEmail,enterWuser,enterWemail,CreateNewEvent}
 mtype state=SignIn;
-byte username=0;
-byte email=0;
-ltl r3 {!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParamUserName)U(state==BoPo_MainSreen))))}
+byte username=Empty;
+byte email=Empty;
+ltl r3 {(state==SignIn) -> ((!([]<>changeParamUserName))-> <>(state !=SignIn))}
 active proctype vm()
 {
 do
@@ -23,22 +22,19 @@ do
 	::atomic{state=changeParamEmail}	
 	fi
 		
-	
-	
 ::state == changeParamUserName->
 	if
-	::atomic{ username=1;state=BoPo_MainSreen}
+	::atomic{ username=NotEmpty;state=BoPo_MainSreen}
 	fi
 	
 ::state == changeParamEmail->
 	if
-	::atomic{ email=1;state=BoPo_MainSreen}
+	::atomic{ email=NotEmpty;state=BoPo_MainSreen}
 	fi
 :: state== BoPo_MainSreen ->
 	if	
 	::atomic{ state=CreateNewEvent}
 	fi
-
 od
 }
 

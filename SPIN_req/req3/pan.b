@@ -13,42 +13,8 @@
 		;
 		;
 		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
-		;
 		
-	case 25: /* STATE 58 */
+	case 8: /* STATE 17 */
 		;
 		p_restor(II);
 		;
@@ -59,13 +25,13 @@
 ;
 		;
 		
-	case 27: /* STATE 2 */
+	case 10: /* STATE 2 */
 		;
 		now.state = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 28: /* STATE 4 */
+	case 11: /* STATE 4 */
 		;
 		now.state = trpt->bup.oval;
 		;
@@ -73,7 +39,7 @@
 ;
 		;
 		
-	case 30: /* STATE 9 */
+	case 13: /* STATE 9 */
 		;
 		now.state = trpt->bup.oval;
 		;
@@ -81,7 +47,7 @@
 ;
 		;
 		
-	case 32: /* STATE 14 */
+	case 15: /* STATE 14 */
 		;
 		now.state = trpt->bup.oval;
 		;
@@ -89,7 +55,7 @@
 ;
 		;
 		
-	case 34: /* STATE 20 */
+	case 17: /* STATE 20 */
 		;
 		now.state = trpt->bup.ovals[1];
 		username = trpt->bup.ovals[0];
@@ -99,7 +65,7 @@
 ;
 		;
 		
-	case 36: /* STATE 26 */
+	case 19: /* STATE 26 */
 		;
 		now.state = trpt->bup.ovals[1];
 		email = trpt->bup.ovals[0];
@@ -109,13 +75,13 @@
 ;
 		;
 		
-	case 38: /* STATE 31 */
+	case 21: /* STATE 31 */
 		;
 		now.state = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 39: /* STATE 38 */
+	case 22: /* STATE 38 */
 		;
 		p_restor(II);
 		;

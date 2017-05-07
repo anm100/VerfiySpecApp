@@ -1,44 +1,16 @@
-never r3 {    /* !((! ((state==SignIn))) U (! ((! ((state==SignIn))) || (((state==changeParamUserName)) U ((state==BoPo_MainSreen)))))) */
+never r3 {    /* !((! ((state==SignIn))) || ((! (! ([] (<> (changeParamUserName))))) || (<> ((state!=SignIn))))) */
 T0_init:
 	if
-	:: ((((! ((state==SignIn)))) || (((state==BoPo_MainSreen))))) -> goto accept_S20
-	:: (((state==changeParamUserName))) -> goto T0_S39
-	:: (! ((! ((state==SignIn)))) && ((state==BoPo_MainSreen))) -> goto accept_all
-	:: (! ((! ((state==SignIn)))) && ((state==changeParamUserName))) -> goto T0_S51
+	:: (! ((! ((state==SignIn)))) && ! (((state!=SignIn))) && ! ((changeParamUserName))) -> goto accept_S18
+	:: (! ((! ((state==SignIn)))) && ! (((state!=SignIn)))) -> goto T0_S22
 	fi;
-accept_S20:
+accept_S18:
 	if
-	:: ((((! ((state==SignIn)))) || (((state==BoPo_MainSreen))))) -> goto T0_init
-	:: (((state==changeParamUserName))) -> goto T0_S39
-	:: (! ((! ((state==SignIn)))) && ((state==BoPo_MainSreen))) -> goto accept_all
-	:: (! ((! ((state==SignIn)))) && ((state==changeParamUserName))) -> goto T0_S51
+	:: (! (((state!=SignIn))) && ! ((changeParamUserName))) -> goto accept_S18
 	fi;
-accept_S39:
+T0_S22:
 	if
-	:: (((state==BoPo_MainSreen))) -> goto T0_init
-	:: (((state==changeParamUserName))) -> goto T0_S39
-	:: (! ((! ((state==SignIn)))) && ((state==BoPo_MainSreen))) -> goto accept_all
-	:: (! ((! ((state==SignIn)))) && ((state==changeParamUserName))) -> goto T0_S51
+	:: (! (((state!=SignIn))) && ! ((changeParamUserName))) -> goto accept_S18
+	:: (! (((state!=SignIn)))) -> goto T0_S22
 	fi;
-accept_S51:
-	if
-	:: (((state==BoPo_MainSreen))) -> goto accept_all
-	:: (((state==changeParamUserName))) -> goto T0_S51
-	fi;
-T0_S39:
-	if
-	:: (((state==BoPo_MainSreen))) -> goto accept_S20
-	:: (((state==changeParamUserName))) -> goto T0_S39
-	:: (((state==BoPo_MainSreen)) && ((state==changeParamUserName))) -> goto accept_S39
-	:: (! ((! ((state==SignIn)))) && ((state==BoPo_MainSreen))) -> goto accept_all
-	:: (! ((! ((state==SignIn)))) && ((state==BoPo_MainSreen)) && ((state==changeParamUserName))) -> goto accept_S51
-	:: (! ((! ((state==SignIn)))) && ((state==changeParamUserName))) -> goto T0_S51
-	fi;
-T0_S51:
-	if
-	:: (((state==BoPo_MainSreen))) -> goto accept_all
-	:: (((state==changeParamUserName))) -> goto T0_S51
-	fi;
-accept_all:
-	skip
 }
