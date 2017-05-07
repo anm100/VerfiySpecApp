@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.text.JTextComponent;
 
+import Model.WorkSpace;
+
 public class AddScreenGUI extends JFrame {
 	private JTextField ScreenName;
 	private JButton bnSave;
@@ -36,7 +38,7 @@ public class AddScreenGUI extends JFrame {
 		lblScreenName.setBounds(10, 53, 84, 14);
 		getContentPane().add(lblScreenName);
 		
-		ScreenName = new JTextField();
+		ScreenName = new JTextField("screen"+WorkSpace.numScreen++);
 		ScreenName.setBounds(91, 50, 309, 20);
 		getContentPane().add(ScreenName);
 		ScreenName.setColumns(10);

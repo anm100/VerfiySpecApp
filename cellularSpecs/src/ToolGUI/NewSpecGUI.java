@@ -155,6 +155,8 @@ public class NewSpecGUI extends JFrame{
 		  
 		   btnBrowse1 = new JButton("Browse..");
 		   btnBrowse1.setBounds(469, 114, 75, 23);
+		   btnBrowse1.setActionCommand("_open_Spec");
+
 		   panel_1.add(btnBrowse1);
 		   
 		   specLocation2 = new JTextField();
@@ -163,7 +165,7 @@ public class NewSpecGUI extends JFrame{
 		   specLocation2.setText(System.getProperty("user.dir"));
 		   specLocation2.setColumns(10);
 		   
-		   specName_new=new JTextField();
+		   specName_new=new JTextField("DefaultSpec");
 		   specName_new.setBounds(78, 70, 465, 20);
 		   panel_1.add(specName_new);
 		   specName_new.setColumns(10);

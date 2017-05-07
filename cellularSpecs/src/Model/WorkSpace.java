@@ -9,7 +9,10 @@ public class WorkSpace implements Serializable {
 
 private  String  workSpaceName;
 private static WorkSpace instance =null ; 
-private static Logger logger; 
+private static Logger logger;
+/*
+ * number of screens on workspace 
+ */public static int numScreen;
 
 private   boolean IsPressed;
 private HashMap <String,Screen> screensMap ; 
@@ -20,6 +23,7 @@ private  WorkSpace()
 		this.IsPressed=false;
 		screensMap=new HashMap<String,Screen>();
 		this.IsClicked=false;
+		numScreen=1; 
 }
 
 public  static WorkSpace getInstance()

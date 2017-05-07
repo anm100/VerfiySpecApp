@@ -97,8 +97,10 @@ public class WorkSpaceController {
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
 		
-		l.setParamName(elementGui.getElementName().getText());
+		l.setParamName(elementGui.getElementName().getText());elementGui.getParmName();
+		if(!elementGui.getParmName().equals("")){
 		l.addCondition(elementGui.getParmName(), elementGui.getParmVal(), elementGui.getCondopt());
+		}
 		l.setTransition(screenGUI.getScreenName(), elementGui.getMoveTo());
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
 		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());

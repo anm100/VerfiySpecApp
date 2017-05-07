@@ -14,6 +14,7 @@ public class ScreenController {
 	public static ArrayList<Element> getAllparms(){
 		ArrayList<Element> params = new ArrayList<Element>(); 
 		Screen s ;
+		
 		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 

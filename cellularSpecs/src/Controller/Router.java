@@ -92,8 +92,21 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
         break;
-		case("Open.."):     
-			WorkSpaceController.OpenSpecFromFile("aaa");
+		case("_open_Spec"): 
+//			JFileChooser chooser = new JFileChooser();
+//		String workingDir = System.getProperty("user.dir");
+//	    chooser.setCurrentDirectory(new java.io.File("."));
+//	    chooser.getCurrentDirectory();
+//	    chooser.setDialogTitle("select a directory as workspace ");
+//	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//	    chooser.setAcceptAllFileFilterUsed(false);
+//
+//	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+//	      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+//	    } else {
+//	      System.out.println("No Selection ");
+//	    }
+			WorkSpaceController.OpenSpecFromFile("DefaultSpec");
 		mainScreenGui.dispose();
 		this.setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
 		mainScreenGui.setVisible(true);
@@ -123,20 +136,20 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		break;
 		
 		case("Browse.."):
-		JFileChooser chooser = new JFileChooser();
-		String workingDir = System.getProperty("user.dir");
-	    chooser.setCurrentDirectory(new java.io.File("."));
-	    chooser.getCurrentDirectory();
-	    chooser.setDialogTitle("select a directory as workspace ");
-	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	    chooser.setAcceptAllFileFilterUsed(false);
+			JFileChooser chooser1 = new JFileChooser();
+			String workingDir1 = System.getProperty("user.dir");
+		    chooser1.setCurrentDirectory(new java.io.File("."));
+		    chooser1.getCurrentDirectory();
+		    chooser1.setDialogTitle("select a directory as workspace ");
+		    chooser1.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		    chooser1.setAcceptAllFileFilterUsed(false);
 
-	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-	      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
-	    } else {
-	      System.out.println("No Selection ");
-	    }
-			chooser.getSelectedFile().toString();
+		    if (chooser1.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		      System.out.println("getSelectedFile() : " + chooser1.getSelectedFile());
+		    } else {
+		      System.out.println("No Selection ");
+		    }
+			chooser1.getSelectedFile().toString();
 		
 		break;
 		
@@ -262,8 +275,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 						 i++; 	
 					}  
 			        buttonTypeGUI.addTooScreenComboBox(st);
-			        String st1[]=new String[ScreenController.getAllparms().size()];
-			        for(i=0;i< ScreenController.getAllparms().size();i++)
+			        String st1[]=new String[ScreenController.getAllparms().size()+1];
+			        st1[0]="";
+			        for(i=1;i< ScreenController.getAllparms().size();i++)
 			        {
 			        	st1[i]= ScreenController.getAllparms().get(i).getParamName();
 			        	
