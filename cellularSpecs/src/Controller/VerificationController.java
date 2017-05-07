@@ -32,11 +32,12 @@ public class VerificationController {
 	public static String translateToPROMELA(){
 		WorkSpace w  =WorkSpace.getInstance();
 		return "mytype={"+getAllScreenName()
-						 +"};\n"
+						 +"changeParam};\n"
 						 +getLTLReq()
-						 +"do"
+						 +"active proctype vm()\n{\n"
+						 +"do\n"
 						 +getPG()
-						 +"od";
+						 +"od\n}";
 	}
 	private static String getLTLReq() {
 		String st="";

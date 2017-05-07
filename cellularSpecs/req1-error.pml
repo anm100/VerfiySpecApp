@@ -1,4 +1,4 @@
-mtype = { BoPo_MainSreen,CreateNewEvent}
+mtype = { BoPo_MainSreen,CreateNewEvent,changeParamX}
 	mtype state= BoPo_MainSreen ;
 ltl r2 {[]((state==BoPo_MainSreen) -> (<>(!(state==BoPo_MainSreen))))}
 active proctype vm()

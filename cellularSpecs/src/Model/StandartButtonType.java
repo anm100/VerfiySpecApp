@@ -55,10 +55,15 @@ public void loadElement() {
 	
 }
 public  String getStringPromela(){
-	String conditons=new String(conds.get(0).getParamName()
-								+conds.get(0).getOpt()
-								+conds.get(0).getParamVal());
-	
+	String conditons;
+	if(conds.size()== 0){
+		return "::atomic(state="
+				+getTrans().getToScreen()
+				+");" ; 
+	}
+	conditons=new String(conds.get(0).getParamName()
+			+conds.get(0).getOpt()
+			+conds.get(0).getParamVal());
  for(int i=1;i<conds.size(); i++)
  {
 	 conditons+=""+this.optLogic

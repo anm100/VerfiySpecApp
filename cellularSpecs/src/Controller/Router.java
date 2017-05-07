@@ -73,6 +73,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			if(this.getMainScreenGui() !=null)
 			{
 				getMainScreenGui().dispose();
+				WorkSpace.setInstance(null);
+				WorkSpace.getInstance().setWorkSpaceName(newSpecGui.getSpecName());
 			}
 			this.specName=newSpecGui.getSpecName();
 			WorkSpace.getInstance().setWorkSpaceName(newSpecGui.getSpecName());

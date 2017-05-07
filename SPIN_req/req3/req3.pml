@@ -1,6 +1,6 @@
 #define Empty 0
 #define NotEmpty 1 
-mtype = { BoPo_MainSreen,,SignIn,changeParamUserName,changeParamEmail,enterWuser,enterWemail,CreateNewEvent}
+mtype = { BoPo_MainSreen,SignIn,changeParamUserName,changeParamEmail,enterWuser,enterWemail,CreateNewEvent}
 mtype state=SignIn;
 byte username=Empty;
 byte email=Empty;
@@ -15,7 +15,7 @@ do
 	fi
 ::state == enterWuser->
 	if
-	::atomic{state=changeParamUserName}	
+	::atomic{state=BoPo_MainSreen}	
 	fi
 ::state == enterWemail->
 	if
@@ -27,11 +27,11 @@ do
 ::state == changeParamUserName->
 	if
 	::atomic{ username=NotEmpty;state=BoPo_MainSreen}
-	fiBoPo_MainSreen
+	fi
 	
 ::state == changeParamEmail->
 	if
-	::atomic{ email=NotEmpty=NotEmpty;state=changeParamUserName}
+	::atomic{ email=NotEmpty;state=BoPo_MainSreen}
 	fi
 :: state== BoPo_MainSreen ->
 	if	
