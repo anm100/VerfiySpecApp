@@ -7,8 +7,22 @@
 		;
 		;
 		;
+		;
+		;
+		;
+		;
+		;
+		;
+		;
+		;
+		;
+		;
+		;
+		;
+		;
+		;
 		
-	case 5: /* STATE 11 */
+	case 12: /* STATE 33 */
 		;
 		p_restor(II);
 		;
@@ -19,7 +33,13 @@
 ;
 		;
 		
-	case 7: /* STATE 2 */
+	case 14: /* STATE 2 */
+		;
+		now.state = trpt->bup.oval;
+		;
+		goto R999;
+
+	case 15: /* STATE 4 */
 		;
 		now.state = trpt->bup.oval;
 		;
@@ -27,13 +47,21 @@
 ;
 		;
 		
-	case 9: /* STATE 7 */
+	case 17: /* STATE 9 */
+		;
+		now.state = trpt->bup.oval;
+		;
+		goto R999;
+;
+		;
+		
+	case 19: /* STATE 14 */
 		;
 		now.state = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 10: /* STATE 14 */
+	case 20: /* STATE 21 */
 		;
 		p_restor(II);
 		;

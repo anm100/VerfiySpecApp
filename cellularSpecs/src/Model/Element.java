@@ -10,6 +10,7 @@ public interface Element {
 	public String getType(); 
 	String [] getValues();
 	public void loadElement(); 
+	
 	public  String getStringPromela();
 
 }

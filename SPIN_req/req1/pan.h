@@ -1,5 +1,5 @@
 #define SpinVersion	"Spin Version 6.1.0 -- 4 May 2011"
-#define PanSource	"req1.pml"
+#define PanSource	"req1_final_error.pml"
 
 #define G_long	4
 #define G_int	4
@@ -74,35 +74,43 @@ typedef struct S_F_MAP {
 	char *fnm; int from; int upto;
 } S_F_MAP;
 
-#define nstates1	12	/* r2 */
-#define endstate1	11
+#define nstates1	34	/* r2 */
+#define endstate1	33
 short src_ln1 [] = {
-	  0,   3,   3,   4,   4,   2,   6,   8, 
-	  8,   7,  10,  10,   0, };
+	  0,   3,   3,   4,   4,   5,   5,   6, 
+	  6,   7,   7,   2,   9,  11,  11,  10, 
+	 13,  15,  15,  14,  17,  19,  19,  20, 
+	 20,  18,  22,  24,  24,  25,  25,  23, 
+	 27,  27,   0, };
 S_F_MAP src_file1 [] = {
 	{ "-", 0, 0 },
-	{ "_spin_nvr.tmp", 1, 11 },
-	{ "-", 12, 13 }
+	{ "_spin_nvr.tmp", 1, 33 },
+	{ "-", 34, 35 }
 };
 short *src_claim;
 uchar reached1 [] = {
-	  0,   1,   1,   1,   1,   0,   1,   1, 
-	  1,   0,   1,   0,   0, };
+	  0,   1,   1,   1,   1,   1,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   0, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   1,   1,   1,   0, 
+	  1,   0,   0, };
 uchar *loopstate1;
 
-#define nstates0	15	/* vm */
-#define endstate0	14
+#define nstates0	22	/* vm */
+#define endstate0	21
 short src_ln0 [] = {
-	  0,   7,   9,   9,   8,  11,  11,  13, 
-	 13,  12,  15,   6,  16,   6,  16,   0, };
+	  0,   8,  10,  10,  11,  11,   9,  15, 
+	 15,  17,  17,  16,  19,  19,  21,  21, 
+	 20,  23,   7,  24,   7,  24,   0, };
 S_F_MAP src_file0 [] = {
 	{ "-", 0, 0 },
-	{ "req1.pml", 1, 14 },
-	{ "-", 15, 16 }
+	{ "req1_final_error.pml", 1, 21 },
+	{ "-", 22, 23 }
 };
 uchar reached0 [] = {
-	  0,   1,   1,   1,   0,   1,   1,   1, 
-	  1,   0,   1,   0,   1,   1,   0,   0, };
+	  0,   1,   1,   1,   1,   1,   0,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  0,   1,   0,   1,   1,   0,   0, };
 uchar *loopstate0;
 struct {
 	int tp; short *src;
@@ -120,8 +128,8 @@ struct {
 } code_lookup[] = {
 	{ (char *) 0, "" }
 };
-#define _T5	11
-#define _T2	12
+#define _T5	21
+#define _T2	22
 #define T_ID	unsigned char
 #define WS		4 /* word size in bytes */
 #define SYNC	0
@@ -152,22 +160,22 @@ int Btypes[] = {
 typedef struct P1 { /* r2 */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 7; /* state    */
 } P1;
-#define Air1	(sizeof(P1) - 2)
+#define Air1	(sizeof(P1) - 3)
 #define Pvm	((P0 *)this)
 typedef struct P0 { /* vm */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 7; /* state    */
 } P0;
-#define Air0	(sizeof(P0) - 2)
+#define Air0	(sizeof(P0) - 3)
 typedef struct P2 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 3; /* proctype */
-	unsigned _p   : 5; /* state    */
+	unsigned _p   : 7; /* state    */
 } P2;
-#define Air2	(sizeof(P2) - 2)
+#define Air2	(sizeof(P2) - 3)
 
 #define Pclaim	P0
 #ifndef NCLAIMS
@@ -434,12 +442,12 @@ uchar *loopstate2;  /* np_ */
 #define endstate2	2 /* np_ */
 
 #define start2	0 /* np_ */
-#define start1	5
-#define start0	11
+#define start1	11
+#define start0	18
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
-	#define ACCEPT_LAB	1 /* user-defined accept labels */
+	#define ACCEPT_LAB	2 /* user-defined accept labels */
 #endif
 #ifdef MEMCNT
 	#ifdef MEMLIM
@@ -566,7 +574,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	13
+#define NTRANS	23
 #ifdef PEG
 	long peg[NTRANS];
 #endif
