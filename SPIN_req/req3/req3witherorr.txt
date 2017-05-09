@@ -1,10 +1,10 @@
 #define Empty 0
 #define NotEmpty 1 
-mtype = { BoPo_MainSreen,,SignIn,changeParamUserName,changeParamEmail,enterWuser,enterWemail,CreateNewEvent}
+mtype = { BoPo_MainSreen,SignIn,changeParamUserName,changeParamEmail,enterWuser,enterWemail,CreateNewEvent}
 mtype state=SignIn;
 byte username=Empty;
 byte email=Empty;
-ltl r3 {!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParamUserName)U(state==BoPo_MainSreen))))}
+ltl r3 {[]((state==SignIn)->((state==SignIn)U(state!=SignIn)&&(!(state!=changeParamUserName U(state==BoPo_MainSreen)))))}
 active proctype vm()
 {
 do
@@ -22,22 +22,19 @@ do
 	::atomic{state=changeParamEmail}	
 	fi
 		
-	
-	
 ::state == changeParamUserName->
 	if
 	::atomic{ username=NotEmpty;state=BoPo_MainSreen}
-	fiBoPo_MainSreen
+	fi
 	
 ::state == changeParamEmail->
 	if
-	::atomic{ email=NotEmpty=NotEmpty;state=changeParamUserName}
+	::atomic{ email=NotEmpty;state=BoPo_MainSreen}
 	fi
 :: state== BoPo_MainSreen ->
 	if	
 	::atomic{ state=CreateNewEvent}
 	fi
-
 od
 }
 
