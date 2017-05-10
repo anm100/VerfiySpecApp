@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListElementType implements Serializable, Element {
-private String paramName;
-private String paramVal; 
+private ParamList parameter ; 
 private final  String type="List"; 
-private String [] values=null; 
 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
@@ -17,11 +15,11 @@ public ListElementType() {}
 public String [] getValues() {
 	
 	
-	return values;
+	return this.parameter.getValues();
 }
 
 public void setValues(String [] values) {
-	this.values = values;
+	this.parameter.setValues(values);
 }
 
 public String getType() {
@@ -29,36 +27,34 @@ public String getType() {
 }
 
 public String getParamName() {
-	return paramName;
+	return parameter.getParamName();
 }
 /**
  * @param paramName the paramName to set
  */
-public void setParamName(String paramName) {
-	this.paramName = paramName;
-}
+
 
 @Override
 public String getParamVal() {
 	// TODO Auto-generated method stub
-	return this.paramVal; 
-}
-
-@Override
-public void setParamVal(String paramVal) {
-	this.paramVal=paramVal;	
+	return this.parameter.getParamVal(); 
 }
 
 @Override
 public void loadElement() {
-	// TODO Auto-generated method stub
-	
+	// TODO Auto-generated method stub	
 }
 
 @Override
 public String getStringPromela() {
 	// TODO Auto-generated method stub
 	return "";
+}
+
+@Override
+public void setParam(Param param) {
+	// TODO Auto-generated method stub
+	 this.parameter=(ParamList) param;
 }
 
 

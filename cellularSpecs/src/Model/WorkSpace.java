@@ -16,6 +16,8 @@ private static Logger logger;
 
 private   boolean IsPressed;
 private HashMap <String,Screen> screensMap ; 
+private HashMap <String,Param> ParamsMap ; 
+
 public static boolean IsClicked;
 
 private  WorkSpace()
