@@ -84,7 +84,15 @@ public  Transition getTrans() {
 public List<MyCondition> getConds() {
 	return conds;
 }
-
+public void setParamName(String name) {
+	// TODO Auto-generated method stub
+	this.parameter.setParamName(name);
+}
+public String [] getValues() {
+	
+	
+	return null;
+}
 
 }
 

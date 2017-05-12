@@ -47,6 +47,16 @@ public void setParam(Param param) {
 	 this.parameter=(ParamList) param;
 }
 
+@Override
+public void setParamName(String name) {
+	// TODO Auto-generated method stub
+	this.parameter.setParamName(name);
+}
+public String [] getValues() {
+	
+	
+	return null;
+}
 
 
 }
