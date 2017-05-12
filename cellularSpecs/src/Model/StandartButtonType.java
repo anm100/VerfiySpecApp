@@ -90,8 +90,9 @@ public void setParamName(String name) {
 }
 public String [] getValues() {
 	
+	String [] arr= {"pressed","not pressed"};
 	
-	return null;
+	return arr;
 }
 
 }

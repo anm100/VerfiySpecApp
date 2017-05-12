@@ -53,8 +53,9 @@ public void setParamName(String name) {
 
 public String [] getValues() {
 	
+	String [] arr= {"ON","OFF"};
 	
-	return null;
+	return arr;
 }
 }
 
