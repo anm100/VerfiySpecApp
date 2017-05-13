@@ -275,11 +275,11 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 						 i++; 	
 					}  
 			        buttonTypeGUI.addTooScreenComboBox(st);
-			        String st1[]=new String[ScreenController.getAllparms().size()+1];
+			        String st1[]=new String[ScreenController.getparams().size()+1];
 			        st1[0]="";
-			        for(i=1;i< ScreenController.getAllparms().size();i++)
+			        for(i=1;i< ScreenController.getparams().size();i++)
 			        {
-			        	st1[i]= ScreenController.getAllparms().get(i).getParamName();
+			        	st1[i]= ScreenController.getparams().get(i).getParamName();
 			        	
 			        }
 			        buttonTypeGUI.addParamsNameToComboBox(st1);
@@ -420,10 +420,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		{
 		case "1":
 		WorkSpace.getLog().debug(e.getItem().toString());
-		for(int i=0;i< ScreenController.getAllparms().size();i++)
-		if(e.getItem().toString().equals(ScreenController.getAllparms().get(i).getParamName()))
+		for(int i=0;i< ScreenController.getparams().size();i++)
+		if(e.getItem().toString().equals(ScreenController.getparams().get(i).getParamName()))
 		{
-			buttonTypeGUI.addParamsValuesToComboBox(ScreenController.getAllparms().get(i).getValues());
+			buttonTypeGUI.addParamsValuesToComboBox(ScreenController.getparams().get(i).getValues());
 		break;	
 		}
 		break;

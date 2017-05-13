@@ -31,7 +31,7 @@ public class VerificationController {
 	}
 	public static String translateToPROMELA(){
 		WorkSpace w  =WorkSpace.getInstance();
-		return "mytype={"+getAllScreenName()
+		return "mytype={"+ScreenController.getAllScreenName()
 						 +"changeParam};\n"
 						 +getLTLReq()
 						 +"active proctype vm()\n{\n"
@@ -62,19 +62,7 @@ public class VerificationController {
 		}
 		return sAll;
 	}
-	private static String getAllScreenName(){
-		String sAll = new String("");
-		Screen s = new Screen(); 
-		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
-		while(it.hasNext()){
-			Map.Entry pair =(Map.Entry) it.next(); 
-			s= (Screen)pair.getValue();	
-			sAll+=s.getScreenName()+",";
-			
-		}
-		
-		return sAll; 
-	}
+
 	static void setRequiremens() {
 		
 		Requirement req1=new Requirement();

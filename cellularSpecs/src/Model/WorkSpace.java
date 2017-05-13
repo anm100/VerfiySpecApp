@@ -18,12 +18,13 @@ private   boolean IsPressed;
 private HashMap <String,Screen> screensMap ; 
 private HashMap <String,Param> ParamsMap ; 
 
-public static boolean IsClicked;
+public boolean IsClicked;
 
 private  WorkSpace()
 {
 		this.IsPressed=false;
 		screensMap=new HashMap<String,Screen>();
+		ParamsMap=new HashMap<String,Param>();
 		this.IsClicked=false;
 		numScreen=1; 
 }
@@ -96,19 +97,9 @@ public void setIsClicked(boolean isClicked) {
 public void setIsPressed(boolean isPressed) {
 	IsPressed = isPressed;
 }
-//public Screen getTheLastScreen() {
-//	int index=screens.size()-1;
-//	Screen screen2=new Screen();
-//	 screen2=screens.get(index);
-//	 screens.remove(index);
-//	return screen2;
-//}
-//public ArrayList<Screen> getScreenArray() {
-//	return screens;
-//}
-//
-//public void setScreens(Screen screen) {
-//	this.screens.add(screen);
-//}
+
+public HashMap<String, Param> getParamsMap() {
+	return ParamsMap;
+}
 
 }

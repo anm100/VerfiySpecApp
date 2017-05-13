@@ -54,8 +54,8 @@ public void setParamName(String name) {
 }
 public String [] getValues() {
 	
-	
-	return null;
+	return ElementType.getEmptyNotEmptyType().split(",")	
+;
 }
 
 
