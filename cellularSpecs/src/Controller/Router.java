@@ -54,6 +54,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	private Screen screen;
 	private ScreenGUI screenGUI;
 	private String[] st;
+	private AddActionGUI addActionGUI;
 	private  Router(NewSpecGUI newSpecGui)
 	{
 		this.newSpecGui=newSpecGui;
@@ -229,13 +230,23 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			onOfGUI= new OnOfGUI(screenGUI.getScreenName());
 			onOfGUI.setVisible(true);
 			onOfGUI.setOnOffListener(this);
+			String st[]=ScreenController.getParametersName("on/off");
+			onOfGUI.setParameterName(st);
 			
 			break;
 		case "_save_on_off":
 			
 			WorkSpace.getLog().debug("do _save_on_off.. ");
 			WorkSpaceController.addelementToGUI(screenGUI, onOfGUI,new OnOffType());
+			
 			break;
+		case "_add_Action_OnOff":
+			
+			 addActionGUI=new AddActionGUI();
+			// addActionGUI.setParameterName(onOfGUI.getParamName());
+			addActionGUI.setVisible(true);
+		
+		break;
 			
 		case "_menu_list_type": 
 			WorkSpace.getLog().debug("you chosed List type element");

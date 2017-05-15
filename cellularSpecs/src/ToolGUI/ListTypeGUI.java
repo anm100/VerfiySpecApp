@@ -45,8 +45,8 @@ public class ListTypeGUI extends JFrame {
 		lblOnoff.setBounds(20, 11, 361, 36);
 		getContentPane().add(lblOnoff);
 		
-		JLabel lblName = new JLabel("Name:");
-		lblName.setBounds(20, 68, 46, 14);
+		JLabel lblName = new JLabel("Element Name:");
+		lblName.setBounds(20, 44, 74, 14);
 		getContentPane().add(lblName);
 		
 		JLabel lblDefaulval = new JLabel("DefaultVal:");
@@ -54,9 +54,16 @@ public class ListTypeGUI extends JFrame {
 		getContentPane().add(lblDefaulval);
 		
 		elementName = new JTextField();
-		elementName.setBounds(104, 65, 152, 20);
+		elementName.setBounds(104, 41, 152, 20);
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
+		
+		JComboBox parameterNAme = new JComboBox();
+		parameterNAme.setModel(new DefaultComboBoxModel(new String[] {"new parameter", "1", "2", "3", "4", "5"}));
+		parameterNAme.setBounds(104, 63, 152, 22);
+		getContentPane().add(parameterNAme);
+		setSize(501, 367);
+		
 		JComboBox comboBox = new JComboBox();
 
 
@@ -111,6 +118,10 @@ public class ListTypeGUI extends JFrame {
 		JButton button_2 = new JButton("Cancel");
 		button_2.setBounds(242, 295, 116, 23);
 		getContentPane().add(button_2);
+		
+		JLabel lblParameterName = new JLabel("Parameter name");
+		lblParameterName.setBounds(20, 67, 89, 14);
+		getContentPane().add(lblParameterName);
 		setSize(501, 378);
 		
 		comboBox.addPopupMenuListener(new PopupMenuListener() {

@@ -57,7 +57,6 @@ public static Element getElementByName(String elementName){
 	return params;
 	}
 
-	
 	public static String getAllScreenName(){
 		String sAll = new String("");
 		Screen s = new Screen(); 
@@ -70,6 +69,17 @@ public static Element getElementByName(String elementName){
 		}
 		
 		return sAll; 
+	}
+	public static String[] getParametersName(String type) {
+		
+		ArrayList<Param> params ;
+		params=getparams(type);
+		String st[]=new String[params.size()];
+		for(int i=0;i<params.size();i++)
+		{
+			st[i]=params.get(i).getParamName();
+		}
+	return st;
 	}
 	
 

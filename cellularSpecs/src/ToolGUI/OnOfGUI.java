@@ -1,5 +1,7 @@
 package ToolGUI;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,16 +20,23 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 
 import javax.swing.JSeparator;
 import javax.swing.UIManager;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class OnOfGUI extends JFrame {
 	protected JTextField txtUndefined;
 	protected JTextField elementName;
+	protected JButton AddAction;
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
+	private JComboBox parameterName;
+	private String defaultValue;
+
 	String ScreenName; 
 	public OnOfGUI(String ScreenName)
 	{
@@ -35,6 +44,7 @@ public class OnOfGUI extends JFrame {
 		setTitle("ON-OFF");
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
+		
 		
 		JLabel lblOnoff = new JLabel(ScreenName+"- ONOFF");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
@@ -46,13 +56,20 @@ public class OnOfGUI extends JFrame {
 		getContentPane().add(lblName);
 		
 		JLabel lblDefaulval = new JLabel("DefaultVal:");
-		lblDefaulval.setBounds(30, 103, 64, 14);
+		lblDefaulval.setBounds(30, 120, 64, 14);
 		getContentPane().add(lblDefaulval);
 		
 		elementName = new JTextField();
-		elementName.setBounds(104, 65, 152, 20);
+		elementName.setBounds(118, 65, 152, 20);
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
+
+		parameterName = new JComboBox();
+		parameterName.setModel(new DefaultComboBoxModel(new String[] {"new parameter"}));
+		parameterName.setEditable(true);
+		parameterName.setBounds(118, 89, 152, 22);
+		getContentPane().add(parameterName);
+		setSize(501, 367);
 		
 		 btnSave = new JButton("Save");
 		 btnSave.setActionCommand("_save_on_off");
@@ -65,28 +82,49 @@ public class OnOfGUI extends JFrame {
 		getContentPane().add(btnCancel);
 		
 		JRadioButton rdbtnOn = new JRadioButton("ON");
-		rdbtnOn.setBounds(100, 96, 78, 28);
+		rdbtnOn.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(rdbtnOn.isSelected())
+					setDefaultValue(rdbtnOn.getText());
+				}
+		});
+
+		rdbtnOn.setSelected(false);
+		rdbtnOn.setBounds(118, 113, 72, 28);
 		getContentPane().add(rdbtnOn);
 		
 		JRadioButton rdbtnOff = new JRadioButton("OFF");
+		rdbtnOff.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+			if(rdbtnOff.isSelected())
+				setDefaultValue(rdbtnOff.getText());
+			}
+		});
 		rdbtnOff.setSelected(true);
-		rdbtnOff.setBounds(178, 96, 78, 28);
+		setDefaultValue(rdbtnOn.getText());
+		rdbtnOff.setBounds(192, 113, 78, 28);
 		getContentPane().add(rdbtnOff);
+		ButtonGroup group = new ButtonGroup();
+
+		group.add(rdbtnOn);
+		group.add(rdbtnOff);
+		
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(30, 145, 445, 2);
 		getContentPane().add(separator);
 		ImageIcon imageForOne = new ImageIcon(getClass().getResource("../add.png"));
-		JButton button = new JButton("Add action",imageForOne);
-		button.setFont(new Font("Tahoma", Font.BOLD, 11));
-		button.setHorizontalAlignment(SwingConstants.LEADING);
-		button.setBackground(UIManager.getColor("Button.highlight"));
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button.setBounds(20, 145, 236, 28);
-		getContentPane().add(button);
+		 AddAction = new JButton("Add action",imageForOne);
+		AddAction.setFont(new Font("Tahoma", Font.BOLD, 11));
+		AddAction.setHorizontalAlignment(SwingConstants.LEADING);
+		AddAction.setBackground(UIManager.getColor("Button.highlight"));
+		AddAction.setActionCommand("_add_Action_OnOff");
+		AddAction.setBounds(20, 145, 236, 28);
+		getContentPane().add(AddAction);
+		
+		JLabel lblNewLabel_1 = new JLabel("Parameter name");
+		lblNewLabel_1.setBounds(29, 93, 79, 14);
+		getContentPane().add(lblNewLabel_1);
 		setSize(501, 378);
 		
 	}
@@ -99,14 +137,28 @@ public class OnOfGUI extends JFrame {
 		// TODO Auto-generated method stub
 	}
 	
-	public JTextField getElementName() {
-		return elementName;
+	public String getElementName() {
+		return elementName.getText().toString();
 	}
 	
 	public String getScreenName() {
 		return ScreenName;
 	}
+	public String getDefaultValue() {
+		return this.defaultValue;
+	}
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
+	}
+	public String getParameterName() {
+		return parameterName.getSelectedItem().toString();
+	}
+	public void setParameterName(String []  parameterNames) {
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
+        parameterName.setModel(cbm);
+	}
 	public void setOnOffListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);
+		AddAction.addActionListener(OnOfTypeListener);
 	}
 }

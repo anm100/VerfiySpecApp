@@ -64,11 +64,11 @@ public class EmptyNotEmptyGUI extends JFrame {
 		getContentPane().add(lblName);
 		
 		JLabel lblDefaulval = new JLabel("DefaultVal:");
-		lblDefaulval.setBounds(30, 103, 64, 14);
+		lblDefaulval.setBounds(32, 139, 64, 14);
 		getContentPane().add(lblDefaulval);
 		
 		elementName = new JTextField();
-		elementName.setBounds(104, 65, 152, 20);
+		elementName.setBounds(114, 65, 142, 20);
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
 		
@@ -98,16 +98,16 @@ public class EmptyNotEmptyGUI extends JFrame {
 		getContentPane().add(btnCancel);
 		
 		JRadioButton rdbtnOn = new JRadioButton("NotEmpty");
-		rdbtnOn.setBounds(100, 96, 78, 28);
+		rdbtnOn.setBounds(102, 132, 78, 28);
 		getContentPane().add(rdbtnOn);
 		
 		JRadioButton rdbtnOff = new JRadioButton("Empty");
 		rdbtnOff.setSelected(true);
-		rdbtnOff.setBounds(178, 96, 84, 28);
+		rdbtnOff.setBounds(182, 132, 78, 28);
 		getContentPane().add(rdbtnOff);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(30, 145, 445, 2);
+		separator.setBounds(38, 173, 445, 2);
 		getContentPane().add(separator);
 		ImageIcon imageForOne = new ImageIcon(getClass().getResource("../add.png"));
 		JButton button = new JButton("Add action",imageForOne);
@@ -118,8 +118,17 @@ public class EmptyNotEmptyGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		button.setBounds(20, 145, 236, 28);
+		button.setBounds(20, 186, 236, 28);
 		getContentPane().add(button);
+		
+		JLabel lblParameterName = new JLabel("Parameter name");
+		lblParameterName.setBounds(29, 103, 79, 14);
+		getContentPane().add(lblParameterName);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"new parameter", "1", "2", "3", "4", "5"}));
+		comboBox.setBounds(114, 96, 142, 22);
+		getContentPane().add(comboBox);
 		setSize(501, 367);
 		
 	}

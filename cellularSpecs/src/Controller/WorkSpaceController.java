@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Parameter;
 
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
@@ -15,6 +16,7 @@ import ToolGUI.EmptyNotEmptyGUI;
 import ToolGUI.ListTypeGUI;
 import ToolGUI.OnOfGUI;
 import ToolGUI.ScreenGUI;
+import Model.Param;
 
 public class WorkSpaceController {
 	
@@ -83,11 +85,12 @@ public class WorkSpaceController {
 
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
-		
-		l.setParamName(elementGui.getElementName().getText());
+
+		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
+		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
 		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
-		
+		WorkSpace.getInstance().getParamsMap().put(elementGui.getParameterName(), p);
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().getContentPane().repaint();
@@ -97,7 +100,8 @@ public class WorkSpaceController {
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
 		
-		l.setParamName(elementGui.getElementName().getText());elementGui.getParmName();
+		l.setParamName(elementGui.getElementName().getText());
+		elementGui.getParmName();
 		if(!elementGui.getParmName().equals("")){
 		l.addCondition(elementGui.getParmName(), elementGui.getParmVal(), elementGui.getCondopt());
 		}

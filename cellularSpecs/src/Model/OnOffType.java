@@ -44,7 +44,7 @@ public String getStringPromela() {
 @Override
 public void setParam(Param param) {
 	// TODO Auto-generated method stub
-	 this.parameter=(ParamList) param;
+	 this.parameter=param;
 }
 public void setParamName(String name) {
 	// TODO Auto-generated method stub

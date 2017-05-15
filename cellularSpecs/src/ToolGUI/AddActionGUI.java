@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -20,19 +22,40 @@ import javax.swing.Icon;
 
 public class AddActionGUI extends JFrame
 {
+	private JComboBox parameterName,parameterValue;
+	public JComboBox getParameterValue() {
+		return parameterValue;
+	}
+	public void setParameterValue(String [] parameterValue) {
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterValue);
+        this.parameterValue.setModel(cbm);
+	}
+	public JComboBox getParameterName() {
+		return parameterName;
+	}
+	public void setParameterName(String [] parameter) {
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameter);
+        parameterName.setModel(cbm);
+	}
 	public AddActionGUI() {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"<dynamic>"}));
-		comboBox.setEnabled(false);
-		comboBox.setBounds(116, 83, 84, 20);
-		getContentPane().add(comboBox);
+		parameterName = new JComboBox();
+		parameterName.setModel(new DefaultComboBoxModel(new String[] {"<dynamic>"}));
+		parameterName.setEnabled(false);
+		parameterName.setBounds(129, 83, 84, 20);
+		getContentPane().add(parameterName);
 		
 		JLabel lblChooseParam = new JLabel("Choose param:\r\n");
 		lblChooseParam.setBounds(42, 152, 84, 14);
 		getContentPane().add(lblChooseParam);
+		
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize(626, 333);
+	    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+	    setLocation(x, y);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(118, 149, 79, 20);
@@ -73,9 +96,9 @@ public class AddActionGUI extends JFrame
 		lblValue.setBounds(231, 86, 41, 14);
 		getContentPane().add(lblValue);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(267, 83, 84, 20);
-		getContentPane().add(comboBox_3);
+		 parameterValue = new JComboBox();
+		parameterValue.setBounds(267, 83, 84, 20);
+		getContentPane().add(parameterValue);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(22, 213, 550, 20);

@@ -101,5 +101,11 @@ public void setIsPressed(boolean isPressed) {
 public HashMap<String, Param> getParamsMap() {
 	return ParamsMap;
 }
-
+public void addParameterToHash(String ParameterName , Param p){
+	this.ParamsMap.put(ParameterName,p);	
+}
+public void updatParameterInHash(String ParameterName , Param p){
+	this.ParamsMap.remove(ParameterName);
+	this.ParamsMap.put(ParameterName,p);	
+}
 }
