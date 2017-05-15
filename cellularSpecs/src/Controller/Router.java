@@ -42,7 +42,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	private String specName;
 	public Boolean inner =false;
 	private RequirementList requirementList;
-
+	private String [] st; 
 	private static  Boolean GetNewLocation=false;
 	private OnOfGUI  onOfGUI; 
 	private ListTypeGUI  listTypeGUI;
@@ -53,7 +53,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	private AddScreenGUI addScreen;
 	private Screen screen;
 	private ScreenGUI screenGUI;
-	private String[] st;
 	private AddActionGUI addActionGUI;
 	private  Router(NewSpecGUI newSpecGui)
 	{
@@ -230,8 +229,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			onOfGUI= new OnOfGUI(screenGUI.getScreenName());
 			onOfGUI.setVisible(true);
 			onOfGUI.setOnOffListener(this);
-			String st[]=ScreenController.getParametersName("on/off");
-			onOfGUI.setParameterName(st);
+			onOfGUI.setParameterName(ScreenController.getParametersName("on/off"));
 			
 			break;
 		case "_save_on_off":
@@ -291,7 +289,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			        for(i=1;i< ScreenController.getparams().size();i++)
 			        {
 			        	st1[i]= ScreenController.getparams().get(i).getParamName();
-			        	
 			        }
 			        buttonTypeGUI.addParamsNameToComboBox(st1);
 			        buttonTypeGUI.setParamChangeListener(this);

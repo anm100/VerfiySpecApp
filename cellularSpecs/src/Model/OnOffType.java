@@ -51,12 +51,9 @@ public void setParamName(String name) {
 	this.parameter.setParamName(name);
 }
 
-public String [] getValues() {
-	
-	String [] arr= {"ON","OFF"};
-	
-	return arr;
-}
+/*
+ * now get values only in Param Class 
+ */
 }
 
 

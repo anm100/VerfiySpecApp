@@ -60,7 +60,9 @@ public void setParamName(String name) {
 	// TODO Auto-generated method stub
 	this.parameter.setParamName(name);
 }
-
+/*
+ * now get values only in Param Class 
+ */
 
 }
 

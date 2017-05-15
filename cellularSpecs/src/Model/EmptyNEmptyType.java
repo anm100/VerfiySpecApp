@@ -7,8 +7,8 @@ import java.util.List;
 public class EmptyNEmptyType implements Serializable, Element {
 private Param parameter; 
 private final String type="Empty/NotEmpty"; 
-//private List <Action> actions= new ArrayList<>(); 
-//private List <MyCondition> conditions= new ArrayList<>(); 
+private List <Action> actions= new ArrayList<>(); 
+private List <MyCondition> conditions= new ArrayList<>(); 
 
 public EmptyNEmptyType() {}
 
@@ -52,11 +52,9 @@ public void setParamName(String name) {
 	// TODO Auto-generated method stub
 	this.parameter.setParamName(name);
 }
-public String [] getValues() {
-	
-	return ElementType.getEmptyNotEmptyType().split(",")	
-;
-}
+/*
+ * now get values only in Param Class 
+ */
 
 
 }

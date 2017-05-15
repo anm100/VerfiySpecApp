@@ -80,21 +80,16 @@ public  String getStringPromela(){
 
 public  Transition getTrans() {
 	return trans;
-}
+	}
 public List<MyCondition> getConds() {
 	return conds;
-}
+	}
 public void setParamName(String name) {
 	// TODO Auto-generated method stub
 	this.parameter.setParamName(name);
+	}
 }
-public String [] getValues() {
-	
-	String [] arr= {"pressed","not pressed"};
-	
-	return arr;
-}
-
-}
-
+/*
+ * now get values only in Param Class 
+ */
 
