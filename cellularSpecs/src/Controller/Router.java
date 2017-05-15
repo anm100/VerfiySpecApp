@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 
 import Model.Element;
@@ -233,6 +234,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			String st[]=ScreenController.getParametersName("on/off");
 			onOfGUI.setParameterName(st);
 			
+			
 			break;
 		case "_save_on_off":
 			
@@ -243,6 +245,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		case "_add_Action_OnOff":
 			
 			 addActionGUI=new AddActionGUI();
+			 addActionGUI.setParameterName(onOfGUI.getParameterName());
+			String [] values= WorkSpace.getInstance().getParamsMap().get(onOfGUI.getParameterName()).getValues();//add attribute to param with defult values ->ask
+			 addActionGUI.setParameterValue(values);
 			// addActionGUI.setParameterName(onOfGUI.getParamName());
 			addActionGUI.setVisible(true);
 		
@@ -425,7 +430,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		JCheckBox s=(JCheckBox)(e.getSource());
+		System.out.println("aaaaa");
+		JComboBox s=(JComboBox)(e.getSource());
+		onOfGUI.setOnOff((WorkSpace.getInstance().getParamsMap().get(s.getSelectedItem().toString()).getParamVal()));
+		/*JCheckBox s=(JCheckBox)(e.getSource());
 		WorkSpace.getLog().debug(s.getActionCommand());
 		switch(s.getActionCommand())
 		{
@@ -491,5 +499,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			WorkSpace.getLog().debug(requirementList.getReqlist().get(8).getReq());
 		break;
 		}
+		*/
 	}
 }
