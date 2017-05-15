@@ -71,7 +71,6 @@ public static Element getElementByName(String elementName){
 		return sAll; 
 	}
 	public static String[] getParametersName(String type) {
-		
 		ArrayList<Param> params ;
 		params=getparams(type);
 		String st[]=new String[params.size()];

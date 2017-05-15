@@ -23,6 +23,7 @@ import javax.swing.Icon;
 public class AddActionGUI extends JFrame
 {
 	private JComboBox parameterName,parameterValue;
+	private JButton btnSave;
 	public JComboBox getParameterValue() {
 		return parameterValue;
 	}
@@ -33,8 +34,11 @@ public class AddActionGUI extends JFrame
 	public JComboBox getParameterName() {
 		return parameterName;
 	}
-	public void setParameterName(String [] parameter) {
-        DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameter);
+	// set 
+	public void setParameterName(String  parameter) {
+		String st[]=new String[1];
+		st[0]=parameter;
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel(st);
         parameterName.setModel(cbm);
 	}
 	public AddActionGUI() {
@@ -52,7 +56,7 @@ public class AddActionGUI extends JFrame
 		getContentPane().add(lblChooseParam);
 		
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(626, 333);
+		setSize(626, 400);
 	    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
 	    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
 	    setLocation(x, y);
@@ -124,8 +128,9 @@ public class AddActionGUI extends JFrame
 		button.setBounds(502, 121, 41, 21);
 		getContentPane().add(button);
 		
-		JButton btnSave = new JButton("Save");
-		btnSave.setBounds(133, 320, 112, 23);
+		 btnSave = new JButton("Save");
+		btnSave.setBounds(119, 320, 112, 23);
+		btnSave.setActionCommand("_save_action");
 		getContentPane().add(btnSave);
 		
 		JButton button_2 = new JButton("cancel");
@@ -143,5 +148,9 @@ public class AddActionGUI extends JFrame
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(22, 114, 550, 20);
 		getContentPane().add(separator_1);
+	}
+	public void setAddActionListener (ActionListener AddActionListener ){       
+		btnSave.addActionListener(AddActionListener);
+		
 	}
 }

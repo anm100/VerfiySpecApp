@@ -36,6 +36,7 @@ public class OnOfGUI extends JFrame {
 	protected static JButton btnSave;
 	private JComboBox parameterName;
 	private String defaultValue;
+	private JRadioButton rdbtnOff,rdbtnOn ;
 
 	String ScreenName; 
 	public OnOfGUI(String ScreenName)
@@ -81,7 +82,7 @@ public class OnOfGUI extends JFrame {
 		btnCancel.setBounds(250, 287, 116, 23);
 		getContentPane().add(btnCancel);
 		
-		JRadioButton rdbtnOn = new JRadioButton("ON");
+		 rdbtnOn = new JRadioButton("ON");
 		rdbtnOn.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if(rdbtnOn.isSelected())
@@ -93,7 +94,7 @@ public class OnOfGUI extends JFrame {
 		rdbtnOn.setBounds(118, 113, 72, 28);
 		getContentPane().add(rdbtnOn);
 		
-		JRadioButton rdbtnOff = new JRadioButton("OFF");
+		rdbtnOff = new JRadioButton("OFF");
 		rdbtnOff.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 			if(rdbtnOff.isSelected())
@@ -157,8 +158,16 @@ public class OnOfGUI extends JFrame {
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
         parameterName.setModel(cbm);
 	}
+	public void setOnOff(String defultvalue) {
+	if(getDefaultValue().equals(defaultValue))
+		rdbtnOff.setSelected(true);
+	else
+		rdbtnOn.setSelected(true);
+		
+	}
 	public void setOnOffListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);
 		AddAction.addActionListener(OnOfTypeListener);
+		parameterName.addActionListener(OnOfTypeListener);
 	}
 }

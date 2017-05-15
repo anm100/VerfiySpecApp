@@ -7,6 +7,7 @@ public class Param implements Serializable{
 	private String paramName; 
 	private String paramVal;
 	private String type;
+	private String[] defultValues;
 	
 
 	
@@ -15,7 +16,9 @@ public class Param implements Serializable{
 		this.paramName = paramName;
 		this.paramVal = paramVal;
 		this.type = type;
+		this.defultValues=defultValues;
 	}
+
 	public String getParamName() {
 		return paramName;
 	}
