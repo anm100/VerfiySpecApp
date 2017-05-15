@@ -11,7 +11,23 @@ import java.awt.event.ActionEvent;
 
 
 
+
+
+
+
+
+
+
+
 import javax.swing.border.LineBorder;
+
+
+
+
+
+
+
+
 
 
 
@@ -30,20 +46,25 @@ import javax.swing.UIManager;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import Model.ElementType;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
 public class AddParamterGUI extends JFrame {
 	protected JTextField txtUndefined;
-	protected JTextField elementName;
+	protected JTextField ParamName;
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
 	private String values[]={""} ; 
-	String ScreenName; 
+	private JRadioButton rdbtnOff; 
+	private  JRadioButton rdbtnOn; 
+	private String typeParam; 
+	private String defaultValue; 
+	private JTextArea	textArea; 
 	public AddParamterGUI()
 	{
-		this.ScreenName=ScreenName; 
-		setTitle("ON-OFF");
+		setTitle("Add new paramter");
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
@@ -61,13 +82,13 @@ public class AddParamterGUI extends JFrame {
 		lblDefaulval.setBounds(30, 241, 84, 14);
 		getContentPane().add(lblDefaulval);
 		
-		elementName = new JTextField();
-		elementName.setBounds(129, 65, 202, 20);
-		getContentPane().add(elementName);
-		elementName.setColumns(10);
+		ParamName = new JTextField();
+		ParamName.setBounds(129, 65, 202, 20);
+		getContentPane().add(ParamName);
+		ParamName.setColumns(10);
 		
 		 btnSave = new JButton("Save");
-		 btnSave.setActionCommand("_save_on_off");
+		 btnSave.setActionCommand("_save_new_param_ex");
 			
 		btnSave.setBounds(84, 286, 112, 23);
 		getContentPane().add(btnSave);
@@ -76,18 +97,31 @@ public class AddParamterGUI extends JFrame {
 		btnCancel.setBounds(206, 286, 116, 23);
 		getContentPane().add(btnCancel);
 		
-		JRadioButton rdbtnOn = new JRadioButton();
+		rdbtnOn = new JRadioButton();
 		rdbtnOn.setBounds(130, 119, 100, 28);
 		rdbtnOn.setVisible(false);
+		rdbtnOn.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(rdbtnOn.isSelected())
+					setDefaultValue(rdbtnOn.getText());
+				}
+		});
 		getContentPane().add(rdbtnOn);
 		
-		JRadioButton rdbtnOff = new JRadioButton();
+	    rdbtnOff = new JRadioButton();
 		rdbtnOff.setText("off");
 		rdbtnOff.setVisible(false);
 		rdbtnOff.setSelected(true);
 		rdbtnOff.setBounds(232, 119, 100, 28);
 		getContentPane().add(rdbtnOff);
-		
+		rdbtnOff.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(rdbtnOff.isSelected())
+					setDefaultValue(rdbtnOff.getText());
+				}
+
+			
+		});
 		JLabel lblType = new JLabel("Type:");
 		lblType.setBounds(30, 95, 78, 14);
 		getContentPane().add(lblType);
@@ -104,7 +138,7 @@ public class AddParamterGUI extends JFrame {
 		comboBox.setBounds(129, 238, 152, 20);
 		getContentPane().add(comboBox);
 		comboBox.setVisible(false);
-		
+	
 		
 		JLabel lblValues = new JLabel("Values:");
 		lblValues.setBounds(30, 126, 64, 14);
@@ -115,15 +149,12 @@ public class AddParamterGUI extends JFrame {
 		scrollPane.setBounds(129, 119, 149, 108);
 		getContentPane().add(scrollPane);
 		
-		JTextArea	textArea = new JTextArea();
+		textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		scrollPane.setVisible(false);
 		values=textArea.getText().split("\n");
 		setSize(410, 361);
 		comboBox.setModel(new DefaultComboBoxModel(values));
-		
-		
-		
 		
 		TypeBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
@@ -135,6 +166,7 @@ public class AddParamterGUI extends JFrame {
 				rdbtnOn.setVisible(false);
 				switch(TypeBox.getSelectedItem().toString()){
 				case"ON/OFF Type":
+					typeParam=ElementType.getOnOffType();
 					lblDefaulval.setBounds(30, 126, 64, 14);
 					rdbtnOff.setText("OFF");
 					rdbtnOn.setText("ON");
@@ -143,6 +175,7 @@ public class AddParamterGUI extends JFrame {
 					rdbtnOn.setVisible(true);
 					break; 
 				case"Empty/NotEmpty Type":
+					typeParam=ElementType.getEmptyNotEmptyType();
 					lblDefaulval.setBounds(30, 126, 64, 14);
 					rdbtnOff.setText("Empty");
 					rdbtnOn.setText("NotEmpty");
@@ -151,50 +184,58 @@ public class AddParamterGUI extends JFrame {
 					rdbtnOn.setVisible(true);
 					break; 
 				case"List Type":
+					typeParam=ElementType.getListType();
+
 					comboBox.setVisible(true);
 					lblDefaulval.setBounds(30, 241, 64, 14);
 					lblValues.setVisible(true);
 					scrollPane.setVisible(true);
 					lblDefaulval.setVisible(true);
-
 					break; 
+					
 				default:
+					typeParam=null; 
 					comboBox.setVisible(false);
 					lblValues.setVisible(false);
 					scrollPane.setVisible(false);
 					lblDefaulval.setVisible(false);
 					rdbtnOff.setVisible(false);
 					rdbtnOn.setVisible(false);
-					break; 
-					
-					
+					break; 	
 				}
 				
 				
 			}
 		});
 	
-		ImageIcon imageForOne = new ImageIcon(getClass().getResource("../add.png"));
 		setSize(410, 360);
 		
 	}
-	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
-	       JLabel lblNewLabel = new JLabel(string);
-	        lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1));
-	        lblNewLabel.setBounds(x2, y2, hight2, width2);
-	      lblNewLabel.setText(" "+elementName.getText().toString()+"");
-	      return lblNewLabel;
-		// TODO Auto-generated method stub
+
+	public  void setOnOff(String defualtvalue) {
+	if(getDefaultValue().equals(defualtvalue))
+		rdbtnOff.setSelected(true);
+	else
+		rdbtnOn.setSelected(true);
+		
 	}
-	
-	public JTextField getElementName() {
-		return elementName;
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
 	}
-	
-	public String getScreenName() {
-		return ScreenName;
+	public  String getDefaultValue() {
+		return this.defaultValue;
 	}
-	public void setOnOffListener(ActionListener OnOfTypeListener ){       
+	public String getParamType(){
+		return this.typeParam;
+	}
+	public String[] getValues() {
+		return textArea.getText().split("\n");
+	}
+	public String getParameterName() {
+		return ParamName.getText();
+	}
+	public void setAddParamListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);
 	}
+	
 }

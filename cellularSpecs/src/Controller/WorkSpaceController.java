@@ -6,11 +6,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Parameter;
 
+import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
 import Model.OnOffType;
+import Model.ParamList;
 import Model.StandartButtonType;
 import Model.WorkSpace;
+import ToolGUI.AddParamterGUI;
 import ToolGUI.ButtonTypeGUI;
 import ToolGUI.EmptyNotEmptyGUI;
 import ToolGUI.ListTypeGUI;
@@ -115,6 +118,20 @@ public class WorkSpaceController {
 		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
 		elementGui.dispose();
 
+	}
+	public static void addNewParam(AddParamterGUI addparamter) {
+		
+		if(addparamter.getParamType().equals(ElementType.getListType())){
+			ParamList p =new ParamList(addparamter.getParameterName(), addparamter.getDefaultValue(), addparamter.getParamType());
+			p.setValues(addparamter.getValues());
+			WorkSpace.getInstance().getParamsMap().put(p.getParamName(), p);
+
+		}
+		else {
+			Param p =new Param(addparamter.getParameterName(), addparamter.getDefaultValue(), addparamter.getParamType());
+			WorkSpace.getInstance().getParamsMap().put(p.getParamName(), p);
+
+		}
 	}
 
 }

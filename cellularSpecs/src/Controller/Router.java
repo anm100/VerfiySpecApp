@@ -55,6 +55,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	private Screen screen;
 	private ScreenGUI screenGUI;
 	private AddActionGUI addActionGUI;
+	private AddParamterGUI addparamter;
 	private  Router(NewSpecGUI newSpecGui)
 	{
 		this.newSpecGui=newSpecGui;
@@ -302,6 +303,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			case "_save_standart_button": 
 				WorkSpace.getLog().debug("do _save_standart_button.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, buttonTypeGUI, new StandartButtonType());
+				break;
+				
+			case "_save_new_param_ex":
+				WorkSpaceController.addNewParam(addparamter);
 				break;
 		}
 
