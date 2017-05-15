@@ -1,28 +1,26 @@
-import Model.MyCondition;
-import Model.Screen;
-import Model.StandartButtonType;
+import javax.swing.UIManager;
+
+import ToolGUI.AddParamterGUI;
 
 
 public class appTest {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		StandartButtonType s;
-		Screen screen= new Screen("a");
-	 for(int j=0; j<5;j++){
-		s = new StandartButtonType();
-		//s.setTransition(screen,new Screen("b"));
-
-		for (int i=0 ; i<5;i++){
-			s.setParamName("a"+i);
-	//		s.getConds().add(new MyCondition(new String("val"+i),new String(""+i)));
-			}
-		screen.addElement(s.getParamName()+j, s);
-	 }
-			System.out.println(screen.getStringPromela());
-			System.out.println(screen.getStringPromela());
-			System.out.println(screen.getStringPromela());
-
+		try {
+            //here you can put the selected theme class name in JTattoo
+            UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+ 
+        } catch (ClassNotFoundException ex) {
+        //    java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+        //    java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+        //    java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            //java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+		
+		(new AddParamterGUI()).setVisible(true);
 			
 	}
 
