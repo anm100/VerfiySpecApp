@@ -301,7 +301,13 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 				break;
 				
 			case "_save_new_param_ex":
+				if (addparamterGUI.getParamType() !=null){
 				WorkSpaceController.addNewParam(addparamterGUI);
+				} else {
+					WorkSpace.getLog().debug("not allowed , you should choose type first");
+					addparamterGUI.expectionbtnSave();
+
+				}
 				break;
 		}
 

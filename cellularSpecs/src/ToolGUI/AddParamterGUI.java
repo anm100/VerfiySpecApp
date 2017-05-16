@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 
 
 
+
 import javax.swing.border.LineBorder;
 
 
@@ -32,6 +33,8 @@ import javax.swing.border.LineBorder;
 
 
 
+
+import javax.swing.border.MatteBorder;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -62,6 +65,7 @@ public class AddParamterGUI extends JFrame {
 	private String typeParam; 
 	private String defaultValue; 
 	private JTextArea	textArea; 
+	private JComboBox TypeBox;
 	public AddParamterGUI()
 	{
 		setTitle("Add new paramter");
@@ -126,7 +130,7 @@ public class AddParamterGUI extends JFrame {
 		lblType.setBounds(30, 95, 78, 14);
 		getContentPane().add(lblType);
 		
-		JComboBox TypeBox = new JComboBox();
+		TypeBox = new JComboBox();
 		TypeBox.setModel(new DefaultComboBoxModel(new String[] {"", "ON/OFF Type", "Empty/NotEmpty Type", "List Type"}));
 		TypeBox.setBounds(129, 92, 202, 20);
 		getContentPane().add(TypeBox);
@@ -158,6 +162,7 @@ public class AddParamterGUI extends JFrame {
 		
 		TypeBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
+				TypeBox.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));		
 				comboBox.setVisible(false);
 				lblValues.setVisible(false);
 				scrollPane.setVisible(false);
@@ -218,6 +223,11 @@ public class AddParamterGUI extends JFrame {
 	else
 		rdbtnOn.setSelected(true);
 		
+	}
+	public void expectionbtnSave(){
+		TypeBox.setFocusable(true);
+		TypeBox.requestFocus();
+		TypeBox.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));		
 	}
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
