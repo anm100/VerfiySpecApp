@@ -42,19 +42,23 @@ public static Element getElementByName(String elementName){
 	return params; 	
 	}
 	@SuppressWarnings("rawtypes")
-	public static ArrayList<Param> getparams(String type){
-		ArrayList<Param> params = new ArrayList<Param>();
+	public static String [] getParams(String type, String screenName){
+		ArrayList<String> params = new ArrayList<String>();
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
+		Screen s= WorkSpace.getInstance().getScreenByName(screenName);
 		Param p;
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			 p =(Param)pair.getValue();
-			if(p.getType().equals(type))
+			if(p.getType().equals(type) && s.getElementByName(p.getParamName()) == null)
 			{		
-			params.add(p);	
+			params.add(p.getParamName());	
 			}
 		}
-	return params;
+		String[] stockArr = new String[params.size()];
+		stockArr = params.toArray(stockArr);
+		
+	return stockArr;
 	}
 
 	public static String getAllScreenName(){
@@ -70,16 +74,7 @@ public static Element getElementByName(String elementName){
 		
 		return sAll; 
 	}
-	public static String[] getParametersName(String type) {
-		ArrayList<Param> params ;
-		params=getparams(type);
-		String st[]=new String[params.size()];
-		for(int i=0;i<params.size();i++)
-		{
-			st[i]=params.get(i).getParamName();
-		}
-	return st;
-	}
+
 	
 
 }

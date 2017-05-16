@@ -91,5 +91,9 @@ public class MainScreenGui extends JFrame  {
 		{
 			this.addMouseMotionListener(WorkSpaceController);
 		}
+		public void refreshWorkspace(){
+			getContentPane().repaint();
+			getContentPane().revalidate();
+		}
 		
 }

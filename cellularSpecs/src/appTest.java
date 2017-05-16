@@ -1,6 +1,9 @@
 import javax.swing.UIManager;
 
+import Controller.Router;
+import Controller.WorkSpaceController;
 import ToolGUI.AddParamterGUI;
+import ToolGUI.NewSpecGUI;
 
 
 public class appTest {
@@ -19,8 +22,12 @@ public class appTest {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             //java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-		
-		(new AddParamterGUI()).setVisible(true);
+		NewSpecGUI newSpecGUI=new NewSpecGUI();
+		Router.setInstance(newSpecGUI);
+		WorkSpaceController.setup("test");
+		AddParamterGUI gui=	new AddParamterGUI();
+		gui.setVisible(true);
+	//	gui.setAddParamListener(Router.getInstance());
 			
 	}
 

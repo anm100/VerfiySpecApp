@@ -23,6 +23,16 @@ import Model.Param;
 
 public class WorkSpaceController {
 	
+	public static void setup(String specName){
+		if(Router.getInstance().getMainScreenGui() != null)
+		{
+			Router.getInstance().getMainScreenGui().dispose();
+			WorkSpace.setInstance(null);
+			WorkSpace.getInstance().setWorkSpaceName("Default SPEC");
+		}
+		WorkSpace.getInstance().setWorkSpaceName(specName);
+		WorkSpace.getLog().debug("Create New Spec\n"+"spec name:"+specName);
+	}
 	public static void OpenSpecFromFile(String fileName){
 		
 		try (ObjectInputStream ois
@@ -68,8 +78,7 @@ public class WorkSpaceController {
 		
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
-		Router.getInstance().getMainScreenGui().getContentPane().repaint();
-		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
+		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.dispose();
 		
 	}
@@ -82,8 +91,7 @@ public class WorkSpaceController {
 		
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
-		Router.getInstance().getMainScreenGui().getContentPane().repaint();
-		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
+		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.dispose();
 
 	}
@@ -96,8 +104,7 @@ public class WorkSpaceController {
 		WorkSpace.getInstance().getParamsMap().put(elementGui.getParameterName(), p);
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
-		Router.getInstance().getMainScreenGui().getContentPane().repaint();
-		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
+		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.dispose();
 
 	}
@@ -114,24 +121,27 @@ public class WorkSpaceController {
 		
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
-		Router.getInstance().getMainScreenGui().getContentPane().repaint();
-		Router.getInstance().getMainScreenGui().getContentPane().revalidate();
+		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.dispose();
 
 	}
 	public static void addNewParam(AddParamterGUI addparamter) {
-		
+		WorkSpace.getLog().debug("check type:"+addparamter.getParamType());
 		if(addparamter.getParamType().equals(ElementType.getListType())){
 			ParamList p =new ParamList(addparamter.getParameterName(), addparamter.getDefaultValue(), addparamter.getParamType());
 			p.setValues(addparamter.getValues());
 			WorkSpace.getInstance().getParamsMap().put(p.getParamName(), p);
-
+			WorkSpace.getLog().debug("add param list"+p.getParamName());
 		}
 		else {
 			Param p =new Param(addparamter.getParameterName(), addparamter.getDefaultValue(), addparamter.getParamType());
 			WorkSpace.getInstance().getParamsMap().put(p.getParamName(), p);
+			WorkSpace.getLog().debug("add param on/off - empty/notEmpty"+p.getParamName());
+			WorkSpace.getLog().debug("getfrom hash param the parm"+WorkSpace.getInstance().getParamsMap().get(p.getParamName()));
 
 		}
+		
+
 	}
 
 }

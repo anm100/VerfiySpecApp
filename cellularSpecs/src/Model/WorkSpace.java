@@ -29,6 +29,7 @@ private  WorkSpace()
 		numScreen=1; 
 }
 
+
 public  static WorkSpace getInstance()
 {
 	if(null==instance ){

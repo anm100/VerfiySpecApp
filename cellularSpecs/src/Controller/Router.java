@@ -24,6 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import Model.Element;
+import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
 import Model.Screen;
@@ -62,7 +63,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		this.newSpecGui=newSpecGui;
 		requirementList=new RequirementList();
 	}
-
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -73,25 +73,21 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		switch(e.getActionCommand())
 		{
 		case("_create_NewSpec"):
-			if(this.getMainScreenGui() !=null)
-			{
-				getMainScreenGui().dispose();
-				WorkSpace.setInstance(null);
-				WorkSpace.getInstance().setWorkSpaceName(newSpecGui.getSpecName());
-			}
-			this.specName=newSpecGui.getSpecName();
-			WorkSpace.getInstance().setWorkSpaceName(newSpecGui.getSpecName());
-			WorkSpace.getLog().debug("Create New Spec\n"+"spec name:"+newSpecGui.getSpecName());
-			this.setMainScreenGui(specName);
-			this.newSpecGui.dispose();
+			
+			WorkSpaceController.setup(newSpecGui.getSpecName());
+			setMainScreenGui(specName);
+			newSpecGui.dispose();
+			this.addparamterGUI=new AddParamterGUI();
+			addparamterGUI.setVisible(true);
+			addparamterGUI.setAddParamListener(this);
+	;
 		break;
 		case("AddScreen"):
 			WorkSpace.getLog().debug("do_AddScreen.. ");
 			addScreen=new AddScreenGUI();
 			addScreen.addScreenListener(this);
 			addScreen.setVisible(true);
-			/*mainScreenGui.addMainScreenMouseListener((MouseListener)this);
-				wk.setIsClicked(true);*/
+
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
         break;
@@ -134,8 +130,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			}
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
-			mainScreenGui.getContentPane().repaint();
-			mainScreenGui.getContentPane().revalidate();
+			mainScreenGui.refreshWorkspace();
 		break;
 		
 		case("Browse.."):
@@ -210,8 +205,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			screenGUI.addScreenMouseListener2(this);
 			//mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
 			mainScreenGui.getContentPane().add(screenGUI);
-			mainScreenGui.getContentPane().repaint();
-			mainScreenGui.getContentPane().revalidate();
+			mainScreenGui.refreshWorkspace();
 			addScreen.dispose();
 			break;
 		case "Delete screen":
@@ -232,7 +226,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			onOfGUI= new OnOfGUI(screenGUI.getScreenName());
 			onOfGUI.setVisible(true);
 			onOfGUI.setOnOffListener(this);
-			onOfGUI.setParameterName(ScreenController.getParametersName("on/off"));
+			onOfGUI.setParameterName(ScreenController.getParams(ElementType.getOnOffType(),screenGUI.getScreenName()));
 			
 			
 			break;
