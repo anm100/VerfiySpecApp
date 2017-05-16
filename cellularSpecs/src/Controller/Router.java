@@ -77,9 +77,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			WorkSpaceController.setup(newSpecGui.getSpecName());
 			setMainScreenGui(specName);
 			newSpecGui.dispose();
-			this.addparamterGUI=new AddParamterGUI();
-			addparamterGUI.setVisible(true);
-			addparamterGUI.setAddParamListener(this);
+//			this.addparamterGUI=new AddParamterGUI();
+//			addparamterGUI.setVisible(true);
+//			addparamterGUI.setAddParamListener(this);
 	;
 		break;
 		case("AddScreen"):
@@ -226,6 +226,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			onOfGUI= new OnOfGUI(screenGUI.getScreenName());
 			onOfGUI.setVisible(true);
 			onOfGUI.setOnOffListener(this);
+			onOfGUI.setParamChangeListener(this);
+			String [] st ={"aaaaa"};
 			onOfGUI.setParameterName(ScreenController.getParams(ElementType.getOnOffType(),screenGUI.getScreenName()));
 			
 			
@@ -441,9 +443,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		System.out.println("aaaaa");
-		JComboBox s=(JComboBox)(e.getSource());
-		onOfGUI.setOnOff((WorkSpace.getInstance().getParamsMap().get(s.getSelectedItem().toString()).getParamVal()));
+	JComboBox s=(JComboBox)(e.getSource());
+	WorkSpace.getLog().debug("PARAM:"+WorkSpace.getInstance().getParamsMap().get(s.getSelectedItem().toString()));
+	//	onOfGUI.setOnOff(		(WorkSpace.getInstance().getParamsMap().get(s.getSelectedItem().toString()).getParamVal()
 //		JCheckBox s=(JCheckBox)(e.getSource());
 //		WorkSpace.getLog().debug(s.getActionCommand());
 //		switch(s.getActionCommand())

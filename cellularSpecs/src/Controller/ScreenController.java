@@ -44,6 +44,9 @@ public static Element getElementByName(String elementName){
 	@SuppressWarnings("rawtypes")
 	public static String [] getParams(String type, String screenName){
 		ArrayList<String> params = new ArrayList<String>();
+		params.add("");
+		params.add("New..");
+
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		Screen s= WorkSpace.getInstance().getScreenByName(screenName);
 		Param p;
