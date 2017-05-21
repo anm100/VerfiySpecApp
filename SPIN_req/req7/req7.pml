@@ -6,8 +6,11 @@
 mtype = {BoPo_MainSreen,ChangeName};
 byte Name=Empty;
 mtype state=ChangeName
-ltl r1 {[]((!(state==ChangeName))U(state==ChangeName))}
-ltl r2 {[]((Name==Empty)->((Name==Empty)U(state==ChangeName)))}
+
+ltl req7 {
+[]((name==Empty)->(!<>((!(state==ChangeName))U(name!=Empty))))
+}
+
 active proctype vm()
 {
 do
