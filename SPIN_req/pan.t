@@ -24,91 +24,122 @@ settable(void)
 
 	trans = (Trans ***) emalloc(3*sizeof(Trans **));
 
-	/* proctype 1: vm1 */
+	/* proctype 1: r8 */
 
-	trans[1] = (Trans **) emalloc(48*sizeof(Trans *));
+	trans[1] = (Trans **) emalloc(25*sizeof(Trans *));
 
-	trans[1][45]	= settr(46,0,44,1,0,".(goto)", 0, 2, 0);
-	T = trans[1][44] = settr(45,0,0,0,0,"DO", 0, 2, 0);
-	T = T->nxt	= settr(45,0,1,0,0,"DO", 0, 2, 0);
-	T = T->nxt	= settr(45,0,9,0,0,"DO", 0, 2, 0);
-	T = T->nxt	= settr(45,0,21,0,0,"DO", 0, 2, 0);
-	T = T->nxt	= settr(45,0,30,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(45,0,40,0,0,"DO", 0, 2, 0);
-	trans[1][1]	= settr(2,0,7,3,0,"((state==LoginScreen))", 1, 2, 0);
-	T = trans[1][7] = settr(8,0,0,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(8,0,4,0,0,"IF", 0, 2, 0);
-	    T->nxt	= settr(8,0,6,0,0,"IF", 0, 2, 0);
-	T = trans[ 1][4] = settr(5,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(5,2,2,0,0,"ATOMIC", 1, 2, 0);
-	trans[1][2]	= settr(3,0,44,4,4,"state = ChangeAirplaneMode", 1, 2, 0); /* m: 3 -> 0,44 */
-	reached1[3] = 1;
-	trans[1][3]	= settr(0,0,0,0,0,"actions[0] = 1",0,0,0);
-	trans[1][8]	= settr(9,0,44,1,0,".(goto)", 0, 2, 0);
-	T = trans[ 1][6] = settr(7,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(7,2,5,0,0,"ATOMIC", 1, 2, 0);
-	trans[1][5]	= settr(6,0,44,5,5,"state = CreateNewEvent", 1, 2, 0);
-	trans[1][9]	= settr(10,0,19,6,0,"((state==ChangeAirplaneMode))", 1, 2, 0);
-	T = trans[1][19] = settr(20,0,0,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(20,0,10,0,0,"IF", 0, 2, 0);
-	    T->nxt	= settr(20,0,18,0,0,"IF", 0, 2, 0);
-	trans[1][10]	= settr(11,0,16,7,0,"((airplaneMode==0))", 1, 2, 0);
-	T = trans[ 1][16] = settr(17,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(17,2,11,0,0,"ATOMIC", 1, 2, 0);
-	trans[1][11]	= settr(12,0,44,8,8,"state = ChangeWifi", 1, 2, 0); /* m: 12 -> 0,44 */
-	reached1[12] = 1;
-	trans[1][12]	= settr(0,0,0,0,0,"actions[0] = 1",0,0,0);
-	trans[1][13]	= settr(0,0,0,0,0,"airplaneMode = 1",0,0,0);
-	trans[1][14]	= settr(0,0,0,0,0,"wifiParam = 0",0,0,0);
-	trans[1][15]	= settr(0,0,0,0,0,"bluParam = 0",0,0,0);
-	trans[1][20]	= settr(21,0,44,1,0,".(goto)", 0, 2, 0);
-	T = trans[ 1][18] = settr(19,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(19,2,17,0,0,"ATOMIC", 1, 2, 0);
-	trans[1][17]	= settr(18,0,44,9,9,"state = CreateNewEvent", 1, 2, 0);
-	trans[1][21]	= settr(22,0,28,10,0,"((state==ChangeWifi))", 1, 2, 0);
-	T = trans[1][28] = settr(29,0,0,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(29,0,22,0,0,"IF", 0, 2, 0);
-	    T->nxt	= settr(29,0,27,0,0,"IF", 0, 2, 0);
-	trans[1][22]	= settr(23,0,25,11,0,"((actions[0]==1))", 1, 2, 0);
-	T = trans[ 1][25] = settr(26,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(26,2,23,0,0,"ATOMIC", 1, 2, 0);
-	trans[1][23]	= settr(24,0,44,12,12,"state = changebluParam", 1, 2, 0); /* m: 24 -> 0,44 */
-	reached1[24] = 1;
-	trans[1][24]	= settr(0,0,0,0,0,"wifiParam = 0",0,0,0);
-	trans[1][29]	= settr(30,0,44,1,0,".(goto)", 0, 2, 0);
-	T = trans[ 1][27] = settr(28,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(28,2,26,0,0,"ATOMIC", 1, 2, 0);
-	trans[1][26]	= settr(27,0,44,13,13,"state = CreateNewEvent", 1, 2, 0);
-	trans[1][30]	= settr(31,0,38,14,0,"((state==changebluParam))", 1, 2, 0);
-	T = trans[1][38] = settr(39,0,0,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(39,0,31,0,0,"IF", 0, 2, 0);
-	    T->nxt	= settr(39,0,37,0,0,"IF", 0, 2, 0);
-	trans[1][31]	= settr(32,0,35,15,0,"((actions[0]==1))", 1, 2, 0);
-	T = trans[ 1][35] = settr(36,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(36,2,32,0,0,"ATOMIC", 1, 2, 0);
-	trans[1][32]	= settr(33,0,44,16,16,"state = LoginScreen", 1, 2, 0); /* m: 33 -> 0,44 */
-	reached1[33] = 1;
-	trans[1][33]	= settr(0,0,0,0,0,"actions[0] = 0",0,0,0);
-	trans[1][34]	= settr(0,0,0,0,0,"bluParam = 0",0,0,0);
-	trans[1][39]	= settr(40,0,44,1,0,".(goto)", 0, 2, 0);
-	T = trans[ 1][37] = settr(38,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(38,2,36,0,0,"ATOMIC", 1, 2, 0);
-	trans[1][36]	= settr(37,0,44,17,17,"state = CreateNewEvent", 1, 2, 0);
-	trans[1][40]	= settr(41,0,43,18,0,"((state==CreateNewEvent))", 1, 2, 0);
-	T = trans[ 1][43] = settr(44,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(44,2,42,0,0,"ATOMIC", 1, 2, 0);
-	T = trans[ 1][42] = settr(43,0,0,0,0,"sub-sequence", 1, 2, 0);
-	T->nxt	= settr(43,0,41,0,0,"sub-sequence", 1, 2, 0);
-	trans[1][41]	= settr(42,0,44,19,19,"state = LoginScreen", 1, 2, 0);
-	trans[1][46]	= settr(47,0,47,1,0,"break", 0, 2, 0);
-	trans[1][47]	= settr(48,0,0,20,20,"-end-", 0, 3500, 0);
+	T = trans[1][9] = settr(58,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(58,0,1,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(58,0,3,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(58,0,5,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(58,0,7,0,0,"IF", 0, 2, 0);
+	trans[1][1]	= settr(50,0,15,3,0,"((!(!((airplaneMode==1)))&&!((wifiParam==0))))", 1, 2, 0);
+	trans[1][2]	= settr(51,0,15,1,0,"goto accept_S5", 0, 2, 0);
+	trans[1][10]	= settr(59,0,15,1,0,".(goto)", 0, 2, 0);
+	trans[1][3]	= settr(52,0,23,4,0,"((((!(!((airplaneMode==1)))&&!((bluParam==0)))&&!((state==ChangeAirplaneMode)))||((!(!((airplaneMode==1)))&&!((state==ChangeAirplaneMode)))&&!((wifiParam==0)))))", 1, 2, 0);
+	trans[1][4]	= settr(53,0,23,1,0,"goto accept_all", 0, 2, 0);
+	trans[1][5]	= settr(54,0,21,5,0,"((!(!((airplaneMode==1)))&&!((bluParam==0))))", 1, 2, 0);
+	trans[1][6]	= settr(55,0,21,1,0,"goto accept_S10", 0, 2, 0);
+	trans[1][7]	= settr(56,0,9,1,0,"(1)", 0, 2, 0);
+	trans[1][8]	= settr(57,0,9,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[1][15] = settr(64,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(64,0,11,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(64,0,13,0,0,"IF", 0, 2, 0);
+	trans[1][11]	= settr(60,0,15,6,0,"(!((wifiParam==0)))", 1, 2, 0);
+	trans[1][12]	= settr(61,0,15,1,0,"goto accept_S5", 0, 2, 0);
+	trans[1][16]	= settr(65,0,21,1,0,".(goto)", 0, 2, 0);
+	trans[1][13]	= settr(62,0,23,7,0,"((!((state==ChangeAirplaneMode))&&!((wifiParam==0))))", 1, 2, 0);
+	trans[1][14]	= settr(63,0,23,1,0,"goto accept_all", 0, 2, 0);
+	T = trans[1][21] = settr(70,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(70,0,17,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(70,0,19,0,0,"IF", 0, 2, 0);
+	trans[1][17]	= settr(66,0,21,8,0,"(!((bluParam==0)))", 1, 2, 0);
+	trans[1][18]	= settr(67,0,21,1,0,"goto accept_S10", 0, 2, 0);
+	trans[1][22]	= settr(71,0,23,1,0,".(goto)", 0, 2, 0);
+	trans[1][19]	= settr(68,0,23,9,0,"((!((bluParam==0))&&!((state==ChangeAirplaneMode))))", 1, 2, 0);
+	trans[1][20]	= settr(69,0,23,1,0,"goto accept_all", 0, 2, 0);
+	trans[1][23]	= settr(72,0,24,1,0,"(1)", 0, 2, 0);
+	trans[1][24]	= settr(73,0,0,10,10,"-end-", 0, 3500, 0);
 
-	/* proctype 0: :init: */
+	/* proctype 0: vm1 */
 
-	trans[0] = (Trans **) emalloc(3*sizeof(Trans *));
+	trans[0] = (Trans **) emalloc(51*sizeof(Trans *));
 
-	trans[0][1]	= settr(0,0,2,21,21,"(run vm1())", 0, 2, 0);
-	trans[0][2]	= settr(1,0,0,22,22,"-end-", 0, 3500, 0);
+	trans[0][48]	= settr(47,0,47,1,0,".(goto)", 0, 2, 0);
+	T = trans[0][47] = settr(46,0,0,0,0,"DO", 0, 2, 0);
+	T = T->nxt	= settr(46,0,1,0,0,"DO", 0, 2, 0);
+	T = T->nxt	= settr(46,0,12,0,0,"DO", 0, 2, 0);
+	T = T->nxt	= settr(46,0,20,0,0,"DO", 0, 2, 0);
+	T = T->nxt	= settr(46,0,35,0,0,"DO", 0, 2, 0);
+	    T->nxt	= settr(46,0,43,0,0,"DO", 0, 2, 0);
+	trans[0][1]	= settr(0,0,10,11,0,"((state==LoginScreen))", 1, 2, 0);
+	T = trans[0][10] = settr(9,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(9,0,2,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(9,0,7,0,0,"IF", 0, 2, 0);
+	trans[0][2]	= settr(1,0,6,12,0,"((airplaneMode==0))", 1, 2, 0);
+	T = trans[ 0][6] = settr(5,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(5,2,3,0,0,"ATOMIC", 1, 2, 0);
+	trans[0][3]	= settr(2,0,47,13,13,"state = ChangeAirplaneMode", 1, 2, 0); /* m: 4 -> 0,47 */
+	reached0[4] = 1;
+	trans[0][4]	= settr(0,0,0,0,0,"airplaneMode = 1",0,0,0);
+	trans[0][5]	= settr(0,0,0,0,0,"actions[0] = 1",0,0,0);
+	trans[0][11]	= settr(10,0,47,1,0,".(goto)", 0, 2, 0);
+	trans[0][7]	= settr(6,0,9,14,0,"((airplaneMode==1))", 1, 2, 0);
+	T = trans[ 0][9] = settr(8,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(8,2,8,0,0,"ATOMIC", 1, 2, 0);
+	trans[0][8]	= settr(7,0,47,15,15,"state = CreateNewEvent", 1, 2, 0);
+	trans[0][12]	= settr(11,0,18,16,0,"((state==ChangeAirplaneMode))", 1, 2, 0);
+	T = trans[0][18] = settr(17,0,0,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(17,0,13,0,0,"IF", 0, 2, 0);
+	trans[0][13]	= settr(12,0,17,17,0,"((airplaneMode==1))", 1, 2, 0);
+	T = trans[ 0][17] = settr(16,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(16,2,14,0,0,"ATOMIC", 1, 2, 0);
+	trans[0][14]	= settr(13,0,47,18,18,"state = ChangeWifi", 1, 2, 0); /* m: 15 -> 0,47 */
+	reached0[15] = 1;
+	trans[0][15]	= settr(0,0,0,0,0,"wifiParam = 0",0,0,0);
+	trans[0][16]	= settr(0,0,0,0,0,"actions[1] = 1",0,0,0);
+	trans[0][19]	= settr(18,0,47,1,0,".(goto)", 0, 2, 0);
+	trans[0][20]	= settr(19,0,33,19,0,"((state==ChangeWifi))", 1, 2, 0);
+	T = trans[0][33] = settr(32,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(32,0,21,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(32,0,27,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(32,0,30,0,0,"IF", 0, 2, 0);
+	trans[0][21]	= settr(20,0,26,20,0,"(((actions[0]==1)&&(actions[1]==1)))", 1, 2, 0);
+	T = trans[ 0][26] = settr(25,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(25,2,22,0,0,"ATOMIC", 1, 2, 0);
+	trans[0][22]	= settr(21,0,47,21,21,"state = changebluParam", 1, 2, 0); /* m: 23 -> 0,47 */
+	reached0[23] = 1;
+	trans[0][23]	= settr(0,0,0,0,0,"bluParam = 0",0,0,0);
+	trans[0][24]	= settr(0,0,0,0,0,"actions[1] = 0",0,0,0);
+	trans[0][25]	= settr(0,0,0,0,0,"actions[2] = 1",0,0,0);
+	trans[0][34]	= settr(33,0,47,1,0,".(goto)", 0, 2, 0);
+	trans[0][27]	= settr(26,0,29,22,0,"((((actions[0]==0)&&(actions[1]==1))&&(wifiParam==1)))", 1, 2, 0);
+	T = trans[ 0][29] = settr(28,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(28,2,28,0,0,"ATOMIC", 1, 2, 0);
+	trans[0][28]	= settr(27,0,47,23,23,"state = CreateNewEvent", 1, 2, 0);
+	trans[0][30]	= settr(29,0,32,24,0,"((((actions[0]==0)&&(actions[1]==1))&&(wifiParam==0)))", 1, 2, 0);
+	T = trans[ 0][32] = settr(31,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(31,2,31,0,0,"ATOMIC", 1, 2, 0);
+	trans[0][31]	= settr(30,0,47,25,25,"state = CreateNewEvent", 1, 2, 0);
+	trans[0][35]	= settr(34,0,41,26,0,"((state==changebluParam))", 1, 2, 0);
+	T = trans[0][41] = settr(40,0,0,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(40,0,36,0,0,"IF", 0, 2, 0);
+	trans[0][36]	= settr(35,0,40,27,0,"((((actions[0]==1)&&(actions[1]==1))&&(actions[2]==1)))", 1, 2, 0);
+	T = trans[ 0][40] = settr(39,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(39,2,37,0,0,"ATOMIC", 1, 2, 0);
+	trans[0][37]	= settr(36,0,47,28,28,"state = LoginScreen", 1, 2, 0); /* m: 38 -> 0,47 */
+	reached0[38] = 1;
+	trans[0][38]	= settr(0,0,0,0,0,"actions[0] = 0",0,0,0);
+	trans[0][39]	= settr(0,0,0,0,0,"actions[2] = 0",0,0,0);
+	trans[0][42]	= settr(41,0,47,1,0,".(goto)", 0, 2, 0);
+	trans[0][43]	= settr(42,0,46,29,0,"((state==CreateNewEvent))", 1, 2, 0);
+	T = trans[ 0][46] = settr(45,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(45,2,45,0,0,"ATOMIC", 1, 2, 0);
+	T = trans[ 0][45] = settr(44,0,0,0,0,"sub-sequence", 1, 2, 0);
+	T->nxt	= settr(44,0,44,0,0,"sub-sequence", 1, 2, 0);
+	trans[0][44]	= settr(43,0,47,30,30,"state = CreateNewEvent", 1, 2, 0);
+	trans[0][49]	= settr(48,0,50,1,0,"break", 0, 2, 0);
+	trans[0][50]	= settr(49,0,0,31,31,"-end-", 0, 3500, 0);
 	/* np_ demon: */
 	trans[_NP_] = (Trans **) emalloc(2*sizeof(Trans *));
 	T = trans[_NP_][0] = settr(9997,0,1,_T5,0,"(np_)", 1,2,0);

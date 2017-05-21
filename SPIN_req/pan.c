@@ -584,10 +584,11 @@ addproc(int calling_pid, int n)
 		reached2[0] = 1;
 		accpstate[2][1] = 1;
 		break;
-	case 1:	/* vm1 */
+	case 1:	/* r8 */
 		((P1 *)pptr(h))->_t = 1;
-		((P1 *)pptr(h))->_p = 44;
-		reached1[44]=1;
+		((P1 *)pptr(h))->_p = 9;
+		reached1[9]=1;
+		src_claim = src_ln1;
 		/* params: */
 		/* locals: */
 #ifdef VAR_RANGES
@@ -596,10 +597,10 @@ addproc(int calling_pid, int n)
 		locinit1(h);
 #endif
 		break;
-	case 0:	/* :init: */
+	case 0:	/* vm1 */
 		((P0 *)pptr(h))->_t = 0;
-		((P0 *)pptr(h))->_p = 1;
-		reached0[1]=1;
+		((P0 *)pptr(h))->_p = 47;
+		reached0[47]=1;
 		/* params: */
 		/* locals: */
 #ifdef VAR_RANGES
@@ -707,6 +708,9 @@ run(void)
 	stopstate[0][endstate0] = 1;
 	stopstate[1][endstate1] = 1;
 	stopstate[2][endstate2] = 1;
+	accpstate[1][23] = 1;
+	accpstate[1][21] = 1;
+	accpstate[1][15] = 1;
 	retrans(0, nstates0, start0, src_ln0, reached0, loopstate0);
 	retrans(1, nstates1, start1, src_ln1, reached1, loopstate1);
 	if (state_tables)
@@ -10621,15 +10625,9 @@ iniglobals(int calling_pid)
 		}
 	}
 		now.airplaneMode = 0;
-		wifiParam = 1;
-		bluParam = 1;
+		now.wifiParam = 1;
+		now.bluParam = 1;
 		now.state = 28;
-	{	int l_in;
-		for (l_in = 0; l_in < 4; l_in++)
-		{
-			screen[l_in] = 0;
-		}
-	}
 #ifdef VAR_RANGES
 	{	int l_in;
 		for (l_in = 0; l_in < 5; l_in++)
@@ -10638,6 +10636,8 @@ iniglobals(int calling_pid)
 		}
 	}
 		logval("airplaneMode", now.airplaneMode);
+		logval("wifiParam", now.wifiParam);
+		logval("bluParam", now.bluParam);
 		logval("state", now.state);
 #endif
 }
@@ -12339,6 +12339,8 @@ c_globals(void)
 		}
 	}
 	printf("	byte   airplaneMode:	%d\n", now.airplaneMode);
+	printf("	byte   wifiParam:	%d\n", now.wifiParam);
+	printf("	byte   bluParam:	%d\n", now.bluParam);
 }
 void
 c_locals(int pid, int tp)

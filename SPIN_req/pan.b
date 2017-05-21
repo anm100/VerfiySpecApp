@@ -2,107 +2,117 @@
 	default: Uerror("bad return move");
 	case  0: goto R999; /* nothing to undo */
 
-		 /* PROC vm1 */
-;
-		;
-		
-	case 4: /* STATE 3 */
-		;
-		now.actions[0] = trpt->bup.ovals[1];
-		now.state = trpt->bup.ovals[0];
-		;
-		ungrab_ints(trpt->bup.ovals, 2);
-		goto R999;
-
-	case 5: /* STATE 5 */
-		;
-		now.state = trpt->bup.oval;
-		;
-		goto R999;
+		 /* CLAIM r8 */
 ;
 		;
 		;
 		;
-		
-	case 8: /* STATE 15 */
 		;
-		bluParam = trpt->bup.ovals[4];
-		wifiParam = trpt->bup.ovals[3];
-		now.airplaneMode = trpt->bup.ovals[2];
-		now.actions[0] = trpt->bup.ovals[1];
-		now.state = trpt->bup.ovals[0];
 		;
-		ungrab_ints(trpt->bup.ovals, 5);
-		goto R999;
-
-	case 9: /* STATE 17 */
 		;
-		now.state = trpt->bup.oval;
 		;
-		goto R999;
-;
+		;
+		;
+		;
 		;
 		;
 		;
 		
-	case 12: /* STATE 24 */
-		;
-		wifiParam = trpt->bup.ovals[1];
-		now.state = trpt->bup.ovals[0];
-		;
-		ungrab_ints(trpt->bup.ovals, 2);
-		goto R999;
-
-	case 13: /* STATE 26 */
-		;
-		now.state = trpt->bup.oval;
-		;
-		goto R999;
-;
-		;
-		;
-		;
-		
-	case 16: /* STATE 34 */
-		;
-		bluParam = trpt->bup.ovals[2];
-		now.actions[0] = trpt->bup.ovals[1];
-		now.state = trpt->bup.ovals[0];
-		;
-		ungrab_ints(trpt->bup.ovals, 3);
-		goto R999;
-
-	case 17: /* STATE 36 */
-		;
-		now.state = trpt->bup.oval;
-		;
-		goto R999;
-;
-		;
-		
-	case 19: /* STATE 41 */
-		;
-		now.state = trpt->bup.oval;
-		;
-		goto R999;
-
-	case 20: /* STATE 47 */
+	case 10: /* STATE 24 */
 		;
 		p_restor(II);
 		;
 		;
 		goto R999;
 
-		 /* PROC :init: */
-
-	case 21: /* STATE 1 */
+		 /* PROC vm1 */
+;
 		;
 		;
-		delproc(0, now._nr_pr-1);
+		;
+		
+	case 13: /* STATE 5 */
+		;
+		now.actions[0] = trpt->bup.ovals[2];
+		now.airplaneMode = trpt->bup.ovals[1];
+		now.state = trpt->bup.ovals[0];
+		;
+		ungrab_ints(trpt->bup.ovals, 3);
+		goto R999;
+;
+		;
+		
+	case 15: /* STATE 8 */
+		;
+		now.state = trpt->bup.oval;
+		;
+		goto R999;
+;
+		;
+		;
+		;
+		
+	case 18: /* STATE 16 */
+		;
+		now.actions[1] = trpt->bup.ovals[2];
+		now.wifiParam = trpt->bup.ovals[1];
+		now.state = trpt->bup.ovals[0];
+		;
+		ungrab_ints(trpt->bup.ovals, 3);
+		goto R999;
+;
+		;
+		;
+		;
+		
+	case 21: /* STATE 25 */
+		;
+		now.actions[2] = trpt->bup.ovals[3];
+		now.actions[1] = trpt->bup.ovals[2];
+		now.bluParam = trpt->bup.ovals[1];
+		now.state = trpt->bup.ovals[0];
+		;
+		ungrab_ints(trpt->bup.ovals, 4);
+		goto R999;
+;
+		;
+		
+	case 23: /* STATE 28 */
+		;
+		now.state = trpt->bup.oval;
+		;
+		goto R999;
+;
+		;
+		
+	case 25: /* STATE 31 */
+		;
+		now.state = trpt->bup.oval;
+		;
+		goto R999;
+;
+		;
+		;
+		;
+		
+	case 28: /* STATE 39 */
+		;
+		now.actions[2] = trpt->bup.ovals[2];
+		now.actions[0] = trpt->bup.ovals[1];
+		now.state = trpt->bup.ovals[0];
+		;
+		ungrab_ints(trpt->bup.ovals, 3);
+		goto R999;
+;
+		;
+		
+	case 30: /* STATE 44 */
+		;
+		now.state = trpt->bup.oval;
 		;
 		goto R999;
 
-	case 22: /* STATE 2 */
+	case 31: /* STATE 50 */
 		;
 		p_restor(II);
 		;

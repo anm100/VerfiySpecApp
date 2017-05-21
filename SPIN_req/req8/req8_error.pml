@@ -27,7 +27,7 @@ do
 
 :: (state== ChangeAirplaneMode) ->
 	if	
-	::(airplaneMode==1)->atomic{ state=ChangeWifi;wifiParam=0;;actions[1]=1}
+	::(airplaneMode==1)->atomic{ state=ChangeWifi;wifiParam=1;;actions[1]=1}
 	fi
 
 :: (state== ChangeWifi) ->
