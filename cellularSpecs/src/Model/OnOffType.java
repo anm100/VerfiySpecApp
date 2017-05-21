@@ -7,7 +7,7 @@ import java.util.List;
 public class OnOffType implements Serializable, Element {
 private Param parameter; 
 private List<Action> actions=new  ArrayList<Action>(); 
-private final String type="on/off"; 
+private final String type=ElementType.getOnOffType(); 
 //private List <Action> actions= new ArrayList<>(); 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 

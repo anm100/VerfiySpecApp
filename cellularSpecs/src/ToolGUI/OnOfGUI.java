@@ -35,7 +35,7 @@ public class OnOfGUI extends JFrame {
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
 	private JComboBox parameterName;
-	private String defaultValue;
+	private String defaultValue=new String("OFF");
 	private JRadioButton rdbtnOff,rdbtnOn ;
 
 	String ScreenName; 
@@ -67,7 +67,6 @@ public class OnOfGUI extends JFrame {
 
 		parameterName = new JComboBox();
 		parameterName.setModel(new DefaultComboBoxModel(new String[] {"new parameter"}));
-		parameterName.setEditable(true);
 		parameterName.setBounds(118, 89, 152, 22);
 		getContentPane().add(parameterName);
 		setSize(501, 367);
@@ -168,6 +167,10 @@ public class OnOfGUI extends JFrame {
 	public void setOnOffListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);
 		AddAction.addActionListener(OnOfTypeListener);
-		parameterName.addActionListener(OnOfTypeListener);
+
+	}
+	public void setParamChangeListener(ItemListener OnOfTypeListener)
+	{
+	parameterName.addItemListener(OnOfTypeListener);
 	}
 }
