@@ -1,0 +1,26 @@
+
+(Spin Version 6.1.0 -- 4 May 2011)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	- (not selected)
+	assertion violations	+
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	+
+
+State-vector 24 byte, depth reached 19, errors: 0
+       28 states, stored
+        8 states, matched
+       36 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+    2.539	memory usage (Mbyte)
+
+unreached in init
+	(0 of 2 states)
+unreached in proctype vm1
+	example.pml:48, state 47, "-end-"
+	(1 of 47 states)
+
+pan: elapsed time 0 seconds
