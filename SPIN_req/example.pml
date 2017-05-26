@@ -27,19 +27,20 @@ do
 
 :: (state== ChangeAirplaneMode) ->
 	if	
-	::(airplaneMode==1)->atomic{ state=ChangeWifi;wifiParam=0;;actions[1]=1}
+	::(airplaneMode==1)->atomic{ state=ChangeWifi;wifiParam=1;;actions[1]=1}
 	fi
 
 :: (state== ChangeWifi) ->
 	if	
 	::(actions[0]==1 && actions[1]==1)->atomic{ state=changebluParam;bluParam=0;actions[1]=0;actions[2]=1}
 	::(actions[0]==0 && actions[1]==1 && wifiParam==1)->atomic{ state=CreateNewEvent;}
-	::(actions[0]==0 && actions[1]==1 && wifiParam==0)->atomic{ state=CreateNewEvent;}
+	::(actions[0]==0 && actions[1]==1 && wifiParam==0 && )->atomic{ state=CreateNewEvent;}
+	::
 	fi
 
 :: (state== changebluParam) ->
 	if	
-	::(actions[0]==1 && actions[1]==1 && actions[2]==1)->atomic{ state=LoginScreen;actions[0]=0;;actions[2]=0}
+	::(actions[0]==1 && actions[2]==1)->atomic{ state=LoginScreen;actions[0]=0;;actions[2]=0}
 	fi
 
 :: (state== CreateNewEvent)->atomic{{state=CreateNewEvent;}}	

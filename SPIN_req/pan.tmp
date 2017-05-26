@@ -1,0 +1,6 @@
+C:\Users\AHMADM~1\AppData\Local\Temp\cc754X9J.o:pan.c:(.text+0x9dc): undefined reference to `c_globals'
+C:\Users\AHMADM~1\AppData\Local\Temp\cc754X9J.o:pan.c:(.text+0xa0e): undefined reference to `c_locals'
+C:\Users\AHMADM~1\AppData\Local\Temp\cc754X9J.o:pan.c:(.text+0x3c6e): undefined reference to `c_globals'
+C:\Users\AHMADM~1\AppData\Local\Temp\cc754X9J.o:pan.c:(.text+0x3caa): undefined reference to `c_locals'
+C:\Users\AHMADM~1\AppData\Local\Temp\cc754X9J.o:pan.c:(.text+0x8237): undefined reference to `active_procs'
+collect2.exe: error: ld returned 1 exit status

@@ -47,6 +47,8 @@ public class MainScreenGui extends JFrame  {
 		getContentPane().add(specNameLabel);
 		
 		 btnOpen = new JButton("Open..");
+		 
+		btnOpen.setActionCommand("_open_Spec");
 		btnOpen.setBounds(511, 17, 89, 23);
 		getContentPane().add(btnOpen);
 		

@@ -1,3 +1,22 @@
+never r7 {    /* !([] ((! ((wifiParam==1))) || (! (X (((state!=ChangeWifi)) U ((wifiParam==0))))))) */
+T0_init:
+	if
+	:: (! ((! ((wifiParam==1))))) -> goto accept_S3
+	:: (1) -> goto T0_init
+	fi;
+accept_S3:
+	if
+	:: (((wifiParam==0))) -> goto accept_all
+	:: (((state!=ChangeWifi))) -> goto T0_S3
+	fi;
+T0_S3:
+	if
+	:: (((wifiParam==0))) -> goto accept_all
+	:: (((state!=ChangeWifi))) -> goto T0_S3
+	fi;
+accept_all:
+	skip
+}
 never r8 {    /* !([] ((! ((airplaneMode==1))) || ((((((state==ChangeAirplaneMode)) || ((state==ChangeWifi))) || ((state==changebluParam))) U ((wifiParam==0))) && (((((state==ChangeAirplaneMode)) || ((state==ChangeWifi))) || ((state==changebluParam))) U ((bluParam==0)))))) */
 T0_init:
 	if

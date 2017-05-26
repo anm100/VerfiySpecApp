@@ -1,5 +1,5 @@
 #define SpinVersion	"Spin Version 6.1.0 -- 4 May 2011"
-#define PanSource	"example.pml"
+#define PanSource	"req8_error.pml"
 
 #define G_long	4
 #define G_int	4
@@ -62,44 +62,90 @@ char *trailfilename;
 #endif
 #ifdef NP
 	#define HAS_NP	2
-	#define VERI	1	/* np_ */
+	#define VERI	3	/* np_ */
 #endif
 #ifndef NOCLAIM
-	#define NCLAIMS	1
+	#define NCLAIMS	2
 	#ifndef NP
-		#define VERI	0
+		#define VERI	2
 	#endif
 #endif
 typedef struct S_F_MAP {
 	char *fnm; int from; int upto;
 } S_F_MAP;
 
-#define nstates0	25	/* r8 */
-#define endstate0	24
-short src_ln0 [] = {
-	  0,   3,   3,   4,   4,   5,   5,   6, 
-	  6,   2,   8,  10,  10,  11,  11,   9, 
-	 13,  15,  15,  16,  16,  14,  18,  19, 
-	 20,   0, };
-S_F_MAP src_file0 [] = {
+#define nstates2	25	/* r8 */
+#define endstate2	24
+short src_ln2 [] = {
+	  0,  22,  22,  23,  23,  24,  24,  25, 
+	 25,  21,  27,  29,  29,  30,  30,  28, 
+	 32,  34,  34,  35,  35,  33,  37,  38, 
+	 39,   0, };
+S_F_MAP src_file2 [] = {
 	{ "-", 0, 0 },
 	{ "_spin_nvr.tmp", 1, 24 },
 	{ "-", 25, 26 }
 };
 short *src_claim;
-uchar reached0 [] = {
+uchar reached2 [] = {
 	  0,   1,   1,   1,   1,   1,   1,   1, 
 	  1,   0,   1,   1,   1,   1,   1,   0, 
 	  1,   1,   1,   1,   1,   0,   1,   1, 
 	  0,   0, };
+uchar *loopstate2;
+
+#define nstates1	21	/* r7 */
+#define endstate1	20
+short src_ln1 [] = {
+	  0,   3,   3,   4,   4,   2,   6,   8, 
+	  8,   9,   9,   7,  11,  13,  13,  14, 
+	 14,  12,  16,  17,  18,   0, };
+S_F_MAP src_file1 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 20 },
+	{ "-", 21, 22 }
+};
+uchar reached1 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   0,   0, };
+uchar *loopstate1;
+
+#define nstates0	50	/* vm1 */
+#define endstate0	49
+short src_ln0 [] = {
+	  0,  24,  26,  26,  26,  26,  26,  27, 
+	 27,  27,  25,  30,  30,  32,  32,  32, 
+	 32,  32,  31,  35,  35,  37,  37,  37, 
+	 37,  37,  37,  38,  38,  38,  39,  39, 
+	 39,  36,  42,  42,  44,  44,  44,  44, 
+	 44,  43,  47,  47,  47,  47,  23,  49, 
+	 23,  49,   0, };
+S_F_MAP src_file0 [] = {
+	{ "-", 0, 0 },
+	{ "req8_error.pml", 1, 49 },
+	{ "-", 50, 51 }
+};
+uchar reached0 [] = {
+	  0,   1,   1,   1,   0,   0,   0,   1, 
+	  1,   0,   0,   1,   1,   1,   1,   0, 
+	  0,   0,   0,   1,   1,   1,   1,   0, 
+	  0,   0,   0,   1,   1,   0,   1,   1, 
+	  0,   0,   1,   1,   1,   1,   0,   0, 
+	  0,   0,   1,   1,   1,   0,   0,   1, 
+	  1,   0,   0, };
 uchar *loopstate0;
 struct {
 	int tp; short *src;
 } src_all[] = {
+	{ 2, &src_ln2[0] },
+	{ 1, &src_ln1[0] },
 	{ 0, &src_ln0[0] },
 	{ 0, (short *) 0 }
 };
 S_F_MAP *flref[] = {
+	src_file2,
+	src_file1,
 	src_file0 
 };
 struct {
@@ -107,8 +153,8 @@ struct {
 } code_lookup[] = {
 	{ (char *) 0, "" }
 };
-#define _T5	11
-#define _T2	12
+#define _T5	38
+#define _T2	39
 #define T_ID	unsigned char
 #define WS		4 /* word size in bytes */
 #define SYNC	0
@@ -124,34 +170,62 @@ struct {
 	#endif
 #endif
 char *procname[] = {
+   "vm1",
+   "r7",
    "r8",
    ":np_:",
 };
 
 enum btypes { NONE=0, N_CLAIM=1, I_PROC=2, A_PROC=3, P_PROC=4, E_TRACE=5, N_TRACE=6 };
 int Btypes[] = {
+   3,	/* vm1 */
+   1,	/* r7 */
    1,	/* r8 */
    0	/* :np_: */
 };
 
-typedef struct P0 { /* r8 */
+typedef struct P2 { /* r8 */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 2; /* proctype */
-	unsigned _p   : 6; /* state    */
-} P0;
-#define Air0	(sizeof(P0) - 2)
-typedef struct P1 { /* np_ */
+	unsigned _t   : 3; /* proctype */
+	unsigned _p   : 7; /* state    */
+} P2;
+#define Air2	(sizeof(P2) - 3)
+typedef struct P1 { /* r7 */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 2; /* proctype */
-	unsigned _p   : 6; /* state    */
+	unsigned _t   : 3; /* proctype */
+	unsigned _p   : 7; /* state    */
 } P1;
-#define Air1	(sizeof(P1) - 2)
+#define Air1	(sizeof(P1) - 3)
+#define Pvm1	((P0 *)this)
+typedef struct P0 { /* vm1 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 3; /* proctype */
+	unsigned _p   : 7; /* state    */
+} P0;
+#define Air0	(sizeof(P0) - 3)
+typedef struct P3 { /* np_ */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 3; /* proctype */
+	unsigned _p   : 7; /* state    */
+} P3;
+#define Air3	(sizeof(P3) - 3)
 
-#define Pclaim	P0
-#ifndef NCLAIMS
-	#define NCLAIMS 1
-#endif
+#ifndef NOCLAIM
+	#undef VERI
+	#define VERI	4
+	#define Pclaim	P4
+
+typedef struct P4 {
+	unsigned _pid : 8; /* always zero */
+	unsigned _t   : 3; /* active-claim type  */
+	unsigned _p   : 7; /* active-claim state */
+	unsigned _n   : 2; /* active-claim index */
+	uchar c_cur[NCLAIMS]; /* claim-states */
+} P4;
 uchar spin_c_typ[NCLAIMS]; /* claim-types */
+	#define Air4	(0)
+
+#endif
 #if defined(BFS) && defined(REACH)
 	#undef REACH
 #endif
@@ -409,18 +483,20 @@ int _; /* a predefined write-only variable */
 #define FORWARD_MOVES	"pan.m"
 #define REVERSE_MOVES	"pan.b"
 #define TRANSITIONS	"pan.t"
-#define _NP_	1
-uchar reached1[3];  /* np_ */
-uchar *loopstate1;  /* np_ */
-#define nstates1	3 /* np_ */
-#define endstate1	2 /* np_ */
+#define _NP_	3
+uchar reached3[3];  /* np_ */
+uchar *loopstate3;  /* np_ */
+#define nstates3	3 /* np_ */
+#define endstate3	2 /* np_ */
 
-#define start1	0 /* np_ */
-#define start0	9
+#define start3	0 /* np_ */
+#define start2	9
+#define start1	5
+#define start0	46
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
-	#define ACCEPT_LAB	3 /* user-defined accept labels */
+	#define ACCEPT_LAB	5 /* user-defined accept labels */
 #endif
 #ifdef MEMCNT
 	#ifdef MEMLIM
@@ -449,15 +525,15 @@ uchar *loopstate1;  /* np_ */
 	#define MEMLIM	(2048)	/* need a default, using 2 GB */
 #endif
 #define PROG_LAB	0 /* progress labels */
-uchar *accpstate[2];
-uchar *progstate[2];
-uchar *loopstate[2];
-uchar *reached[2];
-uchar *stopstate[2];
-uchar *visstate[2];
-short *mapstate[2];
+uchar *accpstate[4];
+uchar *progstate[4];
+uchar *loopstate[4];
+uchar *reached[4];
+uchar *stopstate[4];
+uchar *visstate[4];
+short *mapstate[4];
 #ifdef HAS_CODE
-	int NrStates[2];
+	int NrStates[4];
 #endif
 #define NQS	0
 short q_flds[1];
@@ -547,3 +623,8 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
+#define NTRANS	40
+#ifdef PEG
+	long peg[NTRANS];
+#endif
+void select_claim(int);

@@ -36,6 +36,16 @@ public class Screen implements Serializable{
 	this. description= description;
 	}
 	
+	public Screen(String screenName,int cordinateX,int cordinateY,String description)
+	{
+	this.elementsMap= new HashMap<String,Element>();
+	this.screenName=screenName;
+	this.cordinateX=cordinateX;
+	this.cordinateY=cordinateY;
+	this. description= description;
+	}
+	
+	
 	/*
 	 *debug/////////////////
 	 */

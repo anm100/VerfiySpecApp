@@ -27,6 +27,6 @@ public  class Application{
 		newSpecGUI.addWorkSpaceListener(Router.getInstance());
 		newSpecGUI.setVisible(true);	
 		//newSpecGUI.dispose();	
+		}
+	
 	}
-
-}

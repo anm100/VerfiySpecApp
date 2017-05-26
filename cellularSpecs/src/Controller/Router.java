@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
+import our.Utils.BulidSpec;
 import Model.Element;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
@@ -105,7 +106,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 //	    } else {
 //	      System.out.println("No Selection ");
 //	    }
-			WorkSpaceController.OpenSpecFromFile("DefaultSpec");
+			//WorkSpaceController.OpenSpecFromFile("DefaultSpec");
+			WorkSpace.getLog().debug("open spec");
+			BulidSpec.build();
 		mainScreenGui.dispose();
 		this.setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
 		mainScreenGui.setVisible(true);

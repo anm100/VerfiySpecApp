@@ -39,7 +39,7 @@ do
 
 :: (state== changebluParam) ->
 	if	
-	::(actions[0]==1 && actions[1]==1 && actions[2]==1)->atomic{ state=LoginScreen;actions[0]=0;;actions[2]=0}
+	::(actions[0]==1 && actions[1]==1 && actions[2]==1)->atomic{ state=LoginScreen;actions[0]=0;actions[2]=0}
 	fi
 
 :: (state== CreateNewEvent)->atomic{{state=CreateNewEvent;}}	
