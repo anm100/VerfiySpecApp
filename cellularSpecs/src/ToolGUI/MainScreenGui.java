@@ -1,22 +1,11 @@
 package ToolGUI;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import Controller.Router;
-import Model.Screen;
-import Model.WorkSpace;
-
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 
 import javax.swing.JLabel;
 
@@ -43,7 +32,7 @@ public class MainScreenGui extends JFrame  {
 		
 		specNameLabel = new JLabel();
 		specNameLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		specNameLabel.setBounds(34, 11, 163, 35);
+		specNameLabel.setBounds(34, 11, 356, 35);
 		getContentPane().add(specNameLabel);
 		
 		 btnOpen = new JButton("Open..");

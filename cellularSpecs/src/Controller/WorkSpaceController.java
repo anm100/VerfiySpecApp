@@ -36,7 +36,7 @@ public class WorkSpaceController {
 	public static void OpenSpecFromFile(String fileName){
 		
 		try (ObjectInputStream ois
-			= new ObjectInputStream(new FileInputStream(fileName+".ser"))) {
+			= new ObjectInputStream(new FileInputStream(fileName))) {
 
 			WorkSpace.setInstance( (WorkSpace) ois.readObject());
 
@@ -47,7 +47,6 @@ public class WorkSpaceController {
 
 	}
 	public static void SaveSpecToFile(String fileName){
-				
 		try (ObjectOutputStream oos =
 				new ObjectOutputStream(new FileOutputStream(fileName+".ser"))) {
 

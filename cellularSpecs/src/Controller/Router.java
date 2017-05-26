@@ -22,6 +22,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import our.Utils.BulidSpec;
 import Model.Element;
@@ -76,22 +78,13 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		case("_create_NewSpec"):
 			
 			WorkSpaceController.setup(newSpecGui.getSpecName());
+			specName=newSpecGui.getSpecName();
 			setMainScreenGui(specName);
 			newSpecGui.dispose();
 //			this.addparamterGUI=new AddParamterGUI();
 //			addparamterGUI.setVisible(true);
 //			addparamterGUI.setAddParamListener(this);
-	;
 		break;
-		case("AddScreen"):
-			WorkSpace.getLog().debug("do_AddScreen.. ");
-			addScreen=new AddScreenGUI();
-			addScreen.addScreenListener(this);
-			addScreen.setVisible(true);
-
-			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
-			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
-        break;
 		case("_open_Spec"): 
 //			JFileChooser chooser = new JFileChooser();
 //		String workingDir = System.getProperty("user.dir");
@@ -112,6 +105,11 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		mainScreenGui.dispose();
 		this.setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
 		mainScreenGui.setVisible(true);
+
+			//WorkSpaceController.OpenSpecFromFile(newSpecGui.getSpecLocation());
+			setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName());
+
+		
 			Screen s ;
 			Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 			while(it.hasNext()){
@@ -155,8 +153,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		break;
 		
 		case("Save SPEC"):
-		
-			WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
+			chooseFileLocation();//chose the folder and save the file 
+		//WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
+		case("Save "):
+			
+		//WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
+			
 		break;
 		case("Verifiy SPEC"):
 			VerificationController.setRequiremens();
@@ -174,6 +176,16 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 				e1.printStackTrace();
 			}*/
 		break;
+		case("AddScreen"):
+			WorkSpace.getLog().debug("do_AddScreen.. ");
+			addScreen=new AddScreenGUI();
+			addScreen.addScreenListener(this);
+			addScreen.setVisible(true);
+
+			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
+        break;
+		
 		case("Run_verifectaion"):
 			WorkSpace.getLog().debug("Run_verifectaion");
 			VerificationController.addToRequirmentList(verifySpecGUI);
@@ -317,6 +329,24 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		}
 
 	}
+	private void chooseFileLocation() {
+		JFileChooser chooser = new JFileChooser();
+		chooser.setCurrentDirectory(new java.io.File(WorkSpace.getInstance().getWorkSpaceLocation()));
+		chooser.setAcceptAllFileFilterUsed(false);
+		chooser.setDialogType(JFileChooser.SAVE_DIALOG);
+		FileFilter filter = new FileNameExtensionFilter("SPEC (.ser) ", new String[] {".ser"});
+		chooser.addChoosableFileFilter(filter);
+		chooser.setDialogTitle("SaveSpec ");
+		
+		if(chooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION)
+		{
+			System.out.println(chooser.getSelectedFile().getParentFile());
+			WorkSpace.getInstance().setWorkSpaceLocation(chooser.getSelectedFile().getParentFile().toString());
+			WorkSpaceController.SaveSpecToFile(chooser.getSelectedFile().toString());
+		}
+
+		
+	}
 	public RequirementList getRequirementList() {
 		return requirementList;
 	}
@@ -408,11 +438,14 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		
 	}
 	private void setMainScreenGui(String specName) {
+		if(mainScreenGui!=null)
+			mainScreenGui.dispose();
 		this.mainScreenGui=new MainScreenGui();
 		this.mainScreenGui.setSpecNameLabel(specName);
 		this.mainScreenGui.addMainScreenListener(this);
 		this.mainScreenGui.setVisible(true);
 		this.specName=specName;
+		mainScreenGui.setVisible(true);
 	}
 	public  static Router getInstance()
 	{
