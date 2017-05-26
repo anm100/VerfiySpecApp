@@ -23,187 +23,165 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBox;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JProgressBar;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.SystemColor;
+import javax.swing.JRadioButton;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class NewSpecGUI extends JFrame{
-	private JTextField specName2;
-	private JTextField specName_new;
-	private JTextField specLocation2;
-	private JButton btnOpen2;
-	private JButton btnCreate1;
-	private JButton btnCancel2;
-	private JButton btnCancel1;
-	private JButton btnBrowse2;
-	private JButton btnBrowse1;
-	private JButton bntNewSpec;
-	private JButton btnOpenSpec;
+	private JTextField specLocation;
+	private JButton btnOK;
+	private JButton btnBrowse;
 	private JPanel panel_1;
-	private JPanel panel_2;
+	private JTextField SPECName;
+	private JRadioButton rdbtnOpenSpec;
+	private JButton btnCancel;
 	public NewSpecGUI() {
 	getContentPane().setBackground(Color.WHITE);
-	getContentPane().setLayout(null);
-	bntNewSpec = new JButton("New");
-	btnOpenSpec = new JButton("Open");
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 panel_2=new JPanel();
-    panel_1 = new JPanel();
-   
-	bntNewSpec.setBackground(Color.WHITE);
-	btnOpenSpec.setBackground(SystemColor.inactiveCaptionText);
-	JMenuBar bar = new JMenuBar();
-	setJMenuBar(bar);
-	 NewPanel();
-	 OpenPanel();
-	 getContentPane().add(panel_1);
-	 bntNewSpec.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent arg0) {
-	    		bntNewSpec.setBackground(Color.WHITE);
-	    		btnOpenSpec.setBackground(SystemColor.inactiveCaptionText);
-	    		getContentPane().remove(panel_2);
-	    		getContentPane().add(panel_1);
-	    		getContentPane().repaint();
-	    	}
-	    });
-	 btnOpenSpec.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		btnOpenSpec.setBackground(Color.WHITE);
-	    		bntNewSpec.setBackground(SystemColor.inactiveCaptionText);
-	    		getContentPane().remove(panel_1);
-	    		getContentPane().add(panel_2);
-	    		getContentPane().repaint();
-	    	}
-	    });
-	 	bar.add(bntNewSpec);
-	    bar.add(btnOpenSpec);
+	getContentPane().setLayout(null);	 
+	 JLabel Spec = new JLabel("SPEC");
+	 Spec.setBounds(10, 11, 40, 37);
+	 getContentPane().add(Spec);
+	 Spec.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	 
+	 JRadioButton rdbtnCreateNewSpec = new JRadioButton("Create New SPEC");
+	 rdbtnCreateNewSpec.setActionCommand("Create_New_SPEC");
+
+
+
+	 rdbtnCreateNewSpec.setBackground(Color.WHITE);
+	 rdbtnCreateNewSpec.setBounds(10, 55, 195, 23);
+	 getContentPane().add(rdbtnCreateNewSpec);
+	
+	 SPECName = new JTextField();
+	 SPECName.setText("DefaultSpec");
+	 SPECName.setBounds(87, 85, 189, 20);
+	 getContentPane().add(SPECName);
+	 SPECName.setColumns(10);
+	 
+	 JLabel lblSpecName = new JLabel("SPEC name:");
+	 
+	 lblSpecName.setBounds(10, 88, 75, 14);
+	 getContentPane().add(lblSpecName);
+	 
+	 rdbtnOpenSpec = new JRadioButton("Open SPEC");
+	 rdbtnOpenSpec.setActionCommand("Open_SPEC");
+
+	 rdbtnOpenSpec.setBackground(Color.WHITE);
+	 rdbtnOpenSpec.setBounds(10, 112, 109, 23);
+	 getContentPane().add(rdbtnOpenSpec);
 	    setVisible(true);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(626, 333);
+		setSize(319, 333);
 	    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
 	    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
 	    setLocation(x, y);
-	}
-	private void OpenPanel() {
-		panel_2.setBounds(0, 0, 607, 248);
-		panel_2.setBackground(Color.WHITE);;
-		panel_2.setLayout(null);
-		panel_2.setBounds(0, 0, 607, 248);
-		panel_2.setBackground(Color.WHITE);;
-		panel_2.setLayout(null);
-		 btnCancel2 = new JButton("Abort");
-		 btnCancel2.setBounds(287, 158, 107, 23);
-		 panel_2.add(btnCancel2);
-		 
-		  btnOpen2 = new JButton("Open");
-		  btnOpen2.setBounds(124, 155, 89, 23);
-		  panel_2.add(btnOpen2);
-		  
-		   btnBrowse2 = new JButton("Browse..");
-		   btnBrowse2.setBounds(469, 114, 75, 23);
-		   panel_2.add(btnBrowse2);
-		   
-		   specLocation2 = new JTextField();
-		   specLocation2.setBounds(78, 113, 390, 20);
-		   panel_2.add(specLocation2);
-		   specLocation2.setText(System.getProperty("user.dir"));
-		   specLocation2.setColumns(10);
-		   
-		   specName2=new JTextField();
-		   specName2.setEditable(false);
-		   specName2.setBounds(78, 70, 465, 20);
-		   panel_2.add(specName2);
-		   specName2.setColumns(10);
-		   
-		   JLabel lblPath2 = new JLabel("Location:");
-		   lblPath2.setBounds(10, 114, 53, 14);
-		   panel_2.add(lblPath2);
-		   
-		   JLabel lblStatus2 = new JLabel("Spec name: ");
-		   lblStatus2.setBounds(10, 74, 107, 14);
-		   panel_2.add(lblStatus2);
-		   
-		   JLabel lblOpenSpec2 = new JLabel("Open workspace");
-		   lblOpenSpec2.setBounds(0, 0, 263, 45);
-		   panel_2.add(lblOpenSpec2);
-		   lblOpenSpec2.setFont(new Font("Tahoma", Font.BOLD, 18));
-	
-	}
+	    btnOK = new JButton("OK");
+		btnOK.setActionCommand("_create_NewSpec");
+		btnOK.setBounds(47, 211, 89, 23);
+		getContentPane().add(btnOK);  
+		btnBrowse = new JButton("Browse..");
+		btnBrowse.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {   		
+			JFileChooser chooser = new JFileChooser();
+			chooser.setAcceptAllFileFilterUsed(false);
+			
+			FileFilter filter = new FileNameExtensionFilter("SPEC file", new String[] {"ser"});
+			chooser.addChoosableFileFilter(filter);
 
-	private void NewPanel() {
-		panel_1.setBounds(0, 0, 607, 248);
-		panel_1.setBackground(Color.WHITE);;
-		panel_1.setLayout(null);
-		 btnCancel1 = new JButton("Abort");
-		 btnCancel1.setBounds(287, 158, 107, 23);
-		 panel_1.add(btnCancel1);
-		 
-		  btnCreate1 = new JButton("Create");
-		  btnCreate1.setActionCommand("_create_NewSpec");
-		  btnCreate1.setBounds(124, 155, 89, 23);
-		  panel_1.add(btnCreate1);
-		  
-		   btnBrowse1 = new JButton("Browse..");
-		   btnBrowse1.setBounds(469, 114, 75, 23);
-		   btnBrowse1.setActionCommand("_open_Spec");
+			String workingDir = System.getProperty("user.dir");
+			chooser.setCurrentDirectory(new java.io.File("."));
+			chooser.getCurrentDirectory();
+			chooser.setDialogTitle("select a directory as workspace ");
+	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+	    	System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+	    	specLocation.setText(chooser.getSelectedFile().getPath());
+	    } else {
+	      System.out.println("No Selection ");
+	    }
+		   	}
+		   });
+		   btnBrowse.setBounds(10, 146, 75, 23);
+		   btnBrowse.setActionCommand("_open_Spec");
+		   
 
-		   panel_1.add(btnBrowse1);
+		  getContentPane().add(btnBrowse);
 		   
-		   specLocation2 = new JTextField();
-		   specLocation2.setBounds(78, 113, 390, 20);
-		   panel_1.add(specLocation2);
-		   specLocation2.setText(System.getProperty("user.dir"));
-		   specLocation2.setColumns(10);
+		   specLocation = new JTextField();
+		   specLocation.setEditable(false);
+		   specLocation.setBounds(87, 147, 189, 20);
+		   getContentPane().add(specLocation);
+		   specLocation.setText(System.getProperty("user.dir"));
+		   specLocation.setColumns(10);
 		   
-		   specName_new=new JTextField("DefaultSpec");
-		   specName_new.setBounds(78, 70, 465, 20);
-		   panel_1.add(specName_new);
-		   specName_new.setColumns(10);
+		   btnCancel = new JButton("Cancel");
+		   btnCancel.setBounds(174, 211, 91, 23);
+		   getContentPane().add(btnCancel);
 		   
-		   JLabel lblPath1 = new JLabel("Location:");
-		   lblPath1.setBounds(10, 114, 53, 14);
-		   panel_1.add(lblPath1);
-		   
-		   JLabel lblStatus1 = new JLabel("Spec name: ");
-		   lblStatus1.setBounds(10, 74, 107, 14);
-		   panel_1.add(lblStatus1);
-		   
-		   JLabel lblVerifySpec1 = new JLabel("New workspace");
-		   lblVerifySpec1.setBounds(0, 0, 263, 45);
-		   panel_1.add(lblVerifySpec1);
-		   lblVerifySpec1.setFont(new Font("Tahoma", Font.BOLD, 18));
-	}
+		   ButtonGroup group = new ButtonGroup();
+		   rdbtnCreateNewSpec.setSelected(true);
+		   group.add(rdbtnCreateNewSpec);
+		   group.add(rdbtnOpenSpec);
+			btnBrowse.setEnabled(false);
+ 			specLocation.setEnabled(false);
+ 			SPECName.setEnabled(true);
+		   	rdbtnCreateNewSpec.addActionListener(new ActionListener() {
+				 	public void actionPerformed(ActionEvent arg0) {
+				 		{
+				 			btnOK.setActionCommand("_create_NewSpec");
+				 			btnBrowse.setEnabled(false);
+				 			specLocation.setEnabled(false);
+				 			SPECName.setEnabled(true);
+				 			
+				 		}
+				 	}
+				 });
+			 rdbtnOpenSpec.addActionListener(new ActionListener() {
+				 	public void actionPerformed(ActionEvent arg0) {
+				 		btnOK.setActionCommand("_open_Spec");
+				 		SPECName.setEnabled(false);
+			 			btnBrowse.setEnabled(true);
+			 			specLocation.setEnabled(true);
+				 		
+				 	}
+				 });
+			 
+	} 
 	public String getSpecName() {
-		return specName_new.getText().toString();
+		return SPECName.getText().toString();
 	}
 
-	public JTextField getSpecLocation() {
-		return specLocation2;
+	public String getSpecLocation() {
+		return specLocation.getText().toString();
 	}
 	public void setSpecLocation(JTextField specLocation) {
-		this.specLocation2 = specLocation;
+		this.specLocation = specLocation;
 	}
 	public void addWorkSpaceListener(ActionListener listenForOperation){           
-		  btnOpen2.addActionListener(listenForOperation);
-		  btnCancel2.addActionListener(listenForOperation);
-		  btnBrowse2.addActionListener(listenForOperation);
-		  btnBrowse1.addActionListener(listenForOperation);
-		  btnCreate1.addActionListener(listenForOperation);
+		  btnOK.addActionListener(listenForOperation);
 		      }
-	  private class EditListener implements ActionListener {
+	/*  private class EditListener implements ActionListener {  				""
 		    public void actionPerformed(ActionEvent e) {
 		      System.out.println(e.getActionCommand());
 		    }
-		  }
-	  
+		  }*/
 }

@@ -8,6 +8,7 @@ import our.Utils.Logger;
 public class WorkSpace implements Serializable { 
 
 private  String  workSpaceName;
+private String workSpaceLocation;
 private static WorkSpace instance =null ; 
 private static Logger logger;
 /*
@@ -22,6 +23,7 @@ public boolean IsClicked;
 
 private  WorkSpace()
 {
+		this.workSpaceLocation=System.getProperty("user.dir");
 		this.IsPressed=false;
 		screensMap=new HashMap<String,Screen>();
 		ParamsMap=new HashMap<String,Param>();
@@ -108,5 +110,13 @@ public void addParameterToHash(String ParameterName , Param p){
 public void updatParameterInHash(String ParameterName , Param p){
 	this.ParamsMap.remove(ParameterName);
 	this.ParamsMap.put(ParameterName,p);	
+}
+public String getWorkSpaceLocation() {
+	return workSpaceLocation;
+}
+
+
+public void setWorkSpaceLocation(String workSpaceLocation) {
+	this.workSpaceLocation = workSpaceLocation;
 }
 }

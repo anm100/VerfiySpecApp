@@ -43,7 +43,7 @@ public class MainScreenGui extends JFrame  {
 		
 		specNameLabel = new JLabel();
 		specNameLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		specNameLabel.setBounds(34, 11, 163, 35);
+		specNameLabel.setBounds(34, 11, 356, 35);
 		getContentPane().add(specNameLabel);
 		
 		 btnOpen = new JButton("Open..");
