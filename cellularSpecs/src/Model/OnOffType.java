@@ -7,7 +7,8 @@ import java.util.List;
 public class OnOffType implements Serializable, Element {
 private Param parameter; 
 private List<Action> actions=new  ArrayList<Action>(); 
-private final String type=ElementType.getOnOffType(); 
+private final String type=ElementType.getOnOffType();
+private String elementName; 
 //private List <Action> actions= new ArrayList<>(); 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
@@ -41,14 +42,14 @@ public String getStringPromela() {
 	return "";
 }
 
-@Override
 public void setParam(Param param) {
 	// TODO Auto-generated method stub
 	 this.parameter=param;
 }
-public void setParamName(String name) {
+public void setElementName(String name) {
 	// TODO Auto-generated method stub
-	this.parameter.setParamName(name);
+	this.elementName=name;
+
 }
 
 /*

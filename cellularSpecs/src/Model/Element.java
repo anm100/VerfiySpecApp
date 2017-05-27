@@ -5,8 +5,7 @@ import java.util.List;
 public interface Element {
 	public String getParamName(); 
 	public String getParamVal(); 
-	public void setParam(Param param);
-	public void setParamName(String name);
+	public void setElementName(String name);
 	public String getType(); 
 	public void loadElement(); 
 	public  String getStringPromela();

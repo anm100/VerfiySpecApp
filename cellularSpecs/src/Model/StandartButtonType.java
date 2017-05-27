@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StandartButtonType implements Serializable, Element {
-private Param parameter;
+private String elementName; 
 private  Transition trans ;
 private  List<MyCondition> conds= new ArrayList <MyCondition>(); 
 private final String type="regular Button"; 
@@ -32,7 +32,7 @@ public String getType() {
 }
 
 public String getParamName() {
-	return parameter.getParamName();
+	return this.elementName;
 }
 /**
  * @param paramName the paramName to set
@@ -41,7 +41,7 @@ public String getParamName() {
 @Override
 public String getParamVal() {
 	// TODO Auto-generated method stub
-	return this.parameter.getParamVal(); 
+	return "defined"; 
 }
 
 @Override
@@ -49,13 +49,6 @@ public void loadElement() {
 	// TODO Auto-generated method stub	
 }
 
-
-
-@Override
-public void setParam(Param param) {
-	// TODO Auto-generated method stub
-	 this.parameter=(ParamList) param;
-}
 public  String getStringPromela(){
 	String conditons;
 	if(conds.size()== 0){
@@ -84,9 +77,9 @@ public  Transition getTrans() {
 public List<MyCondition> getConds() {
 	return conds;
 	}
-public void setParamName(String name) {
+public void setElementName(String name) {
 	// TODO Auto-generated method stub
-	this.parameter.setParamName(name);
+	this.elementName= name;
 	}
 }
 /*

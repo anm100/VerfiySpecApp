@@ -65,7 +65,7 @@ public class WorkSpaceController {
 	public static void addelementToGUI(ScreenGUI screenGUI,ListTypeGUI elementGui,ListElementType l)
 	{
 	
-		l.setParamName(elementGui.getElementName().getText());
+		l.setElementName(elementGui.getElementName().getText());
 		WorkSpace.getLog().debug("--show values for element :"+elementGui.getValues());
 		l.setValues(elementGui.getValues());
 		WorkSpace.getLog().debug("values from element :: update"+l.getValues()[0]);
@@ -84,7 +84,7 @@ public class WorkSpaceController {
 	public static void addelementToGUI(ScreenGUI screenGUI,EmptyNotEmptyGUI elementGui,EmptyNEmptyType l)
 	{
 	
-		l.setParamName(elementGui.getElementName().getText());
+		l.setElementName(elementGui.getElementName().getText());
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
 		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
 		
@@ -109,7 +109,7 @@ public class WorkSpaceController {
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
 		
-		l.setParamName(elementGui.getElementName().getText());
+		l.setElementName(elementGui.getElementName().getText());
 		elementGui.getParmName();
 		if(!elementGui.getParmName().equals("")){
 		l.addCondition(elementGui.getParmName(), elementGui.getParmVal(), elementGui.getCondopt());

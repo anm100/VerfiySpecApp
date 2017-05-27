@@ -6,6 +6,7 @@ import java.util.List;
 
 public class EmptyNEmptyType implements Serializable, Element {
 private Param parameter; 
+private String elementName;
 private final String type="Empty/NotEmpty"; 
 private List <Action> actions= new ArrayList<>(); 
 private List <MyCondition> conditions= new ArrayList<>(); 
@@ -41,16 +42,16 @@ public String getStringPromela() {
 	return "";
 }
 
-@Override
+
 public void setParam(Param param) {
 	// TODO Auto-generated method stub
-	 this.parameter=(ParamList) param;
+	 this.parameter=(Param) param;
 }
 
 @Override
-public void setParamName(String name) {
+public void setElementName(String name) {
 	// TODO Auto-generated method stub
-	this.parameter.setParamName(name);
+	this.elementName=name;
 }
 /*
  * now get values only in Param Class 

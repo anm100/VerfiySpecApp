@@ -6,7 +6,8 @@ import java.util.List;
 
 public class ListElementType implements Serializable, Element {
 private ParamList parameter ; 
-private final  String type="List"; 
+private final  String type="List";
+private String elementName; 
 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
@@ -51,14 +52,14 @@ public String getStringPromela() {
 	return "";
 }
 
-@Override
+
 public void setParam(Param param) {
 	// TODO Auto-generated method stub
 	 this.parameter=(ParamList) param;
 }
-public void setParamName(String name) {
+public void setElementName(String name) {
 	// TODO Auto-generated method stub
-	this.parameter.setParamName(name);
+	this.elementName=name;
 }
 /*
  * now get values only in Param Class 
