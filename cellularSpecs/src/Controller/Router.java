@@ -86,23 +86,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 //			addparamterGUI.setAddParamListener(this);
 		break;
 		case("_open_Spec"): 
-//			JFileChooser chooser = new JFileChooser();
-//		String workingDir = System.getProperty("user.dir");
-//	    chooser.setCurrentDirectory(new java.io.File("."));
-//	    chooser.getCurrentDirectory();
-//	    chooser.setDialogTitle("select a directory as workspace ");
-//	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//	    chooser.setAcceptAllFileFilterUsed(false);
-//
-//	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-//	      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
-//	    } else {
-//	      System.out.println("No Selection ");
-//	    }
-			//WorkSpaceController.OpenSpecFromFile("DefaultSpec");
-			WorkSpace.getLog().debug("open spec");
-			BulidSpec.build();
-		mainScreenGui.dispose();
+			//WorkSpace.getLog().debug("open spec"+newSpecGui.getSpecLocation());
+
+			WorkSpaceController.OpenSpecFromFile(newSpecGui.getSpecLocation());
+		//	BulidSpec.build();
+		if(mainScreenGui !=null)mainScreenGui.dispose();
+		
 		this.setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
 		mainScreenGui.setVisible(true);
 

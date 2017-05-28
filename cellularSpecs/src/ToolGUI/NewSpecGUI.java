@@ -1,60 +1,37 @@
 package ToolGUI;
-import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
-import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JCheckBox;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Toolkit;
 
-import javax.swing.JProgressBar;
-import javax.swing.JComboBox;
+
 import javax.swing.JFileChooser;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
+
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.UIManager;
+
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import java.awt.SystemColor;
 import javax.swing.JRadioButton;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
 
 public class NewSpecGUI extends JFrame{
 	private JTextField specLocation;
 	private JButton btnOK;
 	private JButton btnBrowse;
-	private JPanel panel_1;
 	private JTextField SPECName;
 	private JRadioButton rdbtnOpenSpec;
 	private JButton btnCancel;
+	private JFileChooser chooser; 
 	public NewSpecGUI() {
 	getContentPane().setBackground(Color.WHITE);
 	getContentPane().setLayout(null);	 
@@ -102,7 +79,7 @@ public class NewSpecGUI extends JFrame{
 		btnBrowse = new JButton("Browse..");
 		btnBrowse.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {   		
-			JFileChooser chooser = new JFileChooser();
+			 chooser = new JFileChooser();
 			chooser.setAcceptAllFileFilterUsed(false);
 			
 			FileFilter filter = new FileNameExtensionFilter("SPEC file", new String[] {"ser"});
@@ -130,7 +107,6 @@ public class NewSpecGUI extends JFrame{
 		   specLocation.setEditable(false);
 		   specLocation.setBounds(87, 147, 189, 20);
 		   getContentPane().add(specLocation);
-		   specLocation.setText(System.getProperty("user.dir"));
 		   specLocation.setColumns(10);
 		   
 		   btnCancel = new JButton("Cancel");
@@ -179,9 +155,5 @@ public class NewSpecGUI extends JFrame{
 	public void addWorkSpaceListener(ActionListener listenForOperation){           
 		  btnOK.addActionListener(listenForOperation);
 		      }
-	/*  private class EditListener implements ActionListener {  				""
-		    public void actionPerformed(ActionEvent e) {
-		      System.out.println(e.getActionCommand());
-		    }
-		  }*/
+
 }
