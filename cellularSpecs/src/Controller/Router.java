@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -34,6 +35,7 @@ import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
 import Model.OnOffType;
+import Model.Param;
 import Model.Requirement;
 import Model.RequirementList;
 import ToolGUI.*;
@@ -243,6 +245,16 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
 				break;
+			case"_add_conditions":
+				
+				ArrayList<Param> params;
+//				params=ScreenController.getparams();
+				AddConditonGui  addConditonGui=new AddConditonGui();
+				
+				break; 
+			case"_save_conditions":
+				
+				break;
 			case"_menu_button_type":
 				WorkSpace.getLog().debug("this _menu_button_type to create new window");
 				buttonTypeGUI= new ButtonTypeGUI(screenGUI.getScreenName());
@@ -259,14 +271,14 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 						 i++; 	
 					}  
 			        buttonTypeGUI.addTooScreenComboBox(st);
-			        String st1[]=new String[ScreenController.getparams().size()+1];
-			        st1[0]="";
-			        for(i=1;i< ScreenController.getparams().size();i++)
-			        {
-			        	st1[i]= ScreenController.getparams().get(i).getParamName();
-			        }
-			        buttonTypeGUI.addParamsNameToComboBox(st1);
-			        buttonTypeGUI.setParamChangeListener(this);
+//			        String st1[]=new String[ScreenController.getparams().size()+1];
+//			        st1[0]="";
+//			        for(i=1;i< ScreenController.getparams().size();i++)
+//			        {
+//			        	st1[i]= ScreenController.getparams().get(i).getParamName();
+//			        }
+//			        buttonTypeGUI.addParamsNameToComboBox(st1);
+//			        buttonTypeGUI.setParamChangeListener(this);
 				break;
 				
 			case "_save_standart_button": 
@@ -361,10 +373,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			WorkSpace.getLog().debug("get from hash "+stemp.getScreenName()+":update is "+"x:"+stemp.getCordinateX()+" Y:"+stemp.getCordinateY());
 			WorkSpace.getLog().debug("screenGUI added successfully ,update coordinate X + Y in workspace hash");
 		}
-		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI"))
-		{
-			screenGUI=((ScreenGUI)arg0.getComponent());
-		}
+	
 	
 	}
 	@Override
@@ -392,6 +401,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			this.cordinateX=cordinateX+arg0.getX();
 			this.cordinateY=cordinateY+arg0.getX();
 			screenGUI.setLocation(cordinateX,cordinateY);
+		}
+		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI") && GetNewLocation==false)
+		{
+			screenGUI=((ScreenGUI)arg0.getComponent());
 		}
 		
 	}
