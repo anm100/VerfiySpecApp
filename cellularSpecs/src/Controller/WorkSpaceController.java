@@ -146,7 +146,7 @@ public class WorkSpaceController {
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
 		
-		l.setElementName(elementGui.getElementName().getText());
+		/*l.setElementName(elementGui.getElementName().getText());
 		elementGui.getParmName();
 		if(!elementGui.getParmName().equals("")){
 		l.addCondition(elementGui.getParmName(), elementGui.getParmVal(), elementGui.getCondopt());
@@ -159,7 +159,7 @@ public class WorkSpaceController {
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.dispose();
-
+*/
 	}
 	public static void addNewParam(AddParamterGUI addparamter) {
 		WorkSpace.getLog().debug("check type:"+addparamter.getParamType());
