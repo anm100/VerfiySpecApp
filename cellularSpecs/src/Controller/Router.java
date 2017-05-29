@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -34,6 +35,7 @@ import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
 import Model.OnOffType;
+import Model.Param;
 import Model.Requirement;
 import Model.RequirementList;
 import ToolGUI.*;
@@ -274,6 +276,16 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			case "_save_EmptyNEmpty":
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
+				break;
+			case"_add_conditions":
+				
+				ArrayList<Param> params = new ArrayList<Param>();
+				params=ScreenController.getparams();
+				AddConditonGui  addConditonGui=new AddConditonGui(params);
+				
+				break; 
+			case"_save_conditions":
+				
 				break;
 			case"_menu_button_type":
 				WorkSpace.getLog().debug("this _menu_button_type to create new window");

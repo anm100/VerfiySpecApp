@@ -9,6 +9,7 @@ import Model.ElementType;
 import Model.Param;
 import Model.Screen;
 import Model.WorkSpace;
+import ToolGUI.AddConditonGui;
 import ToolGUI.ScreenGUI;
 
 public class ScreenController {
@@ -30,7 +31,7 @@ public static Element getElementByName(String elementName){
 		
 	}
 	@SuppressWarnings("rawtypes")
-	public static ArrayList<Param> getparams(){
+	public static String [] getparams(){//get all the parameters arraylist
 		ArrayList<Param> params = new ArrayList<Param>();
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		
@@ -39,7 +40,14 @@ public static Element getElementByName(String elementName){
 			params.add((Param)pair.getValue());	
 			}
 		
-	return params; 	
+		String[] stockArr = new String[params.size()];
+		stockArr = params.toArray(stockArr);	
+	return stockArr;
+	}
+	public static String [] getdefaultValues(String paramName){//get all the the parameter values
+		Param p;
+		p=WorkSpace.getInstance().getParamsByName(paramName);
+		return(p.getValues());	
 	}
 	@SuppressWarnings("rawtypes")
 	public static String [] getParams(String type, String screenName){
@@ -59,8 +67,7 @@ public static Element getElementByName(String elementName){
 			}
 		}
 		String[] stockArr = new String[params.size()];
-		stockArr = params.toArray(stockArr);
-		
+		stockArr = params.toArray(stockArr);	
 	return stockArr;
 	}
 

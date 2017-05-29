@@ -63,6 +63,9 @@ public void updateScreen(String screenName , Screen s){
 public Screen getScreenByName(String screenName){
 	return this.screensMap.get(screenName);
 }
+public Param getParamsByName(String paramName){
+	return this.ParamsMap.get(paramName);
+}
 public boolean isIsPressed() {
 	return IsPressed;
 }
