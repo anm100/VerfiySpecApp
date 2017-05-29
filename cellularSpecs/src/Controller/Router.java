@@ -86,41 +86,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 //			addparamterGUI.setAddParamListener(this);
 		break;
 		case("_open_Spec"): 
-			//WorkSpace.getLog().debug("open spec"+newSpecGui.getSpecLocation());
-
+			WorkSpace.getLog().debug("open spec"+newSpecGui.getSpecLocation());
 			WorkSpaceController.OpenSpecFromFile(newSpecGui.getSpecLocation());
-		//	BulidSpec.build();
-		if(mainScreenGui !=null)mainScreenGui.dispose();
-		
-		this.setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
-		mainScreenGui.setVisible(true);
-
-			//WorkSpaceController.OpenSpecFromFile(newSpecGui.getSpecLocation());
-			setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName());
-
-		
-			Screen s ;
-			Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
-			while(it.hasNext()){
-				Map.Entry pair =(Map.Entry) it.next(); 
-				s= (Screen)pair.getValue();	
-				Iterator<Entry<String, Element>> itElement=s.getElementsMap().entrySet().iterator();
-				ScreenGUI screenTempGui=new ScreenGUI(s.getScreenName(),s.getCordinateX(),s.getCordinateY());
-			screenTempGui.setLocation(s.getCordinateX(),s.getCordinateY());
-			screenTempGui.addScreenMouseListener(this);
-			screenTempGui.addScreenListener(this);
-			
-			while(itElement.hasNext()){
-					Map.Entry pair2 =(Map.Entry) itElement.next(); 
-					Element	element= (Element)pair2.getValue();
-					screenTempGui.addElementLabel(element);
-				}
-		
-			mainScreenGui.getContentPane().add(screenTempGui);
-			}
-			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
-			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
-			mainScreenGui.refreshWorkspace();
+			WorkSpaceController.createSpecGUI();
 		break;
 		
 		case("Browse.."):
@@ -397,6 +365,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		{
 			screenGUI=((ScreenGUI)arg0.getComponent());
 		}
+	
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
@@ -426,7 +395,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		}
 		
 	}
-	private void setMainScreenGui(String specName) {
+	void setMainScreenGui(String specName) {
 		if(mainScreenGui!=null)
 			mainScreenGui.dispose();
 		this.mainScreenGui=new MainScreenGui();

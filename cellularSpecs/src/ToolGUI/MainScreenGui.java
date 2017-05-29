@@ -2,14 +2,21 @@ package ToolGUI;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 
+
+
 import javax.swing.JLabel;
 
+import our.Utils.BulidSpec;
+import Controller.WorkSpaceController;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 
 public class MainScreenGui extends JFrame  {
 	private JLabel specNameLabel;
@@ -19,6 +26,7 @@ public class MainScreenGui extends JFrame  {
 	private JButton btnExport;
 	private JButton btnRunVerification;
 	private JButton btnShowresults;
+	private JButton btnDebugButton;
 	
 	public  MainScreenGui() {
 		
@@ -58,6 +66,16 @@ public class MainScreenGui extends JFrame  {
 		 btnShowresults = new JButton("ShowResults");
 		btnShowresults.setBounds(588, 513, 136, 23);
 		getContentPane().add(btnShowresults);
+		
+		btnDebugButton = new JButton("debug open spec");
+		btnDebugButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BulidSpec.build();
+				WorkSpaceController.createSpecGUI();
+			}
+		});
+		btnDebugButton.setBounds(26, 443, 171, 41);
+		getContentPane().add(btnDebugButton);
 	 }
 		public JLabel getSpecNameLabel() {
 			return specNameLabel;
@@ -86,5 +104,4 @@ public class MainScreenGui extends JFrame  {
 			getContentPane().repaint();
 			getContentPane().revalidate();
 		}
-		
 }

@@ -1,16 +1,23 @@
 package Controller;
 
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Parameter;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import Model.Element;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
 import Model.OnOffType;
 import Model.ParamList;
+import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
 import ToolGUI.AddParamterGUI;
@@ -43,8 +50,38 @@ public class WorkSpaceController {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
-
+	
+	}
+	
+	public static void createSpecGUI(){
+	if(Router.getInstance().getMainScreenGui() !=null)
+		Router.getInstance().getMainScreenGui().dispose();
+		
+		Router.getInstance().setMainScreenGui(WorkSpace.getInstance().getWorkSpaceName().toString());
+		Router.getInstance().getMainScreenGui().setVisible(true);		
+			Screen s ;
+			Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+			while(it.hasNext()){
+				Map.Entry pair =(Map.Entry) it.next(); 
+				s= (Screen)pair.getValue();	
+				Iterator<Entry<String, Element>> itElement=s.getElementsMap().entrySet().iterator();
+				ScreenGUI screenTempGui=new ScreenGUI(s.getScreenName(),s.getCordinateX(),s.getCordinateY());
+			screenTempGui.setLocation(s.getCordinateX(),s.getCordinateY());
+			screenTempGui.addScreenMouseListener(Router.getInstance());
+			screenTempGui.addScreenListener(Router.getInstance());
+			
+			while(itElement.hasNext()){
+					Map.Entry pair2 =(Map.Entry) itElement.next(); 
+					Element	element= (Element)pair2.getValue();
+					screenTempGui.addElementLabel(element);
+				}
+		
+			Router.getInstance().getMainScreenGui().getContentPane().add(screenTempGui);
+			}
+			Router.getInstance().getMainScreenGui().addMainScreenMouseListener((MouseListener)Router.getInstance());
+			Router.getInstance().getMainScreenGui().addMainScreenMouseListener((MouseMotionListener)Router.getInstance());
+			Router.getInstance().getMainScreenGui().refreshWorkspace();
+		
 	}
 	public static void SaveSpecToFile(String fileName){
 		try (ObjectOutputStream oos =

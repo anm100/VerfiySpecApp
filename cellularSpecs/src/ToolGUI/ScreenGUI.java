@@ -12,7 +12,10 @@ import java.awt.Color;
 
 
 
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Insets;
 
 import javax.swing.JLabel;
 
@@ -22,13 +25,21 @@ import javax.swing.JScrollPane;
 
 
 
+
+
+
 import java.awt.event.MouseEvent;
 
 import javax.swing.UIManager;
 
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
 
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
+import java.awt.SystemColor;
 
 public class ScreenGUI extends JScrollPane {
 	private int x=0,y=0,width=143,hight=40;
@@ -43,6 +54,7 @@ public class ScreenGUI extends JScrollPane {
 	private JMenuItem moveScreen;
 	private int lastCoordinateElem=21; 
 	private JPanel mainScreenPanel;
+	private ArrayList<JLabel> lablelelement = new ArrayList<JLabel>();
 	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) 
 	{
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -157,9 +169,28 @@ public class ScreenGUI extends JScrollPane {
 	public void addElementLabel (Element elem){
 		
 		JLabel element = new JLabel(elem.getParamName()+":"+elem.getType());
-		this.lastCoordinateElem+=10; 
-		element.setBounds(1, lastCoordinateElem, 143, 39);
+		this.lastCoordinateElem+=25; 
+		element.setBounds(1, lastCoordinateElem, 143, 25);
+		element.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(180, 180, 180)));
+
+		element.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                onMouseClicked(e);
+            }
+        });
+   
+		this.lablelelement.add(element); 
 		mainScreenPanel.add(element);
 	}
-	
+	private void onMouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		// to know what the label we are clicked 
+		for (int i = 0; i < lablelelement.size(); i++)
+            if (e.getSource() == lablelelement.get(i)) {
+                System.out.println("Label  " + lablelelement.get(i).getText() + " was clicked");
+            }
+    }
 }
+	
+
