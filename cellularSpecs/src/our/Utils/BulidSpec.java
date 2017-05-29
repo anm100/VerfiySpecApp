@@ -37,7 +37,7 @@ public class BulidSpec {
 		Param p = new Param("user", "Empty", ElementType.getEmptyNotEmptyType());
 		e1.setParam(p);
 		wk.getScreenByName("loginScreen").addElement(e1.getParamName(), e1);
-		
+		WorkSpace.getInstance().addParameterToHash(e1.getParamName(), p);
 	}
 }
 

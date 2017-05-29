@@ -246,9 +246,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 				WorkSpaceController.addelementToGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
 				break;
 			case"_add_conditions":
-				
-				ArrayList<Param> params;
-//				params=ScreenController.getparams();
 				AddConditonGui  addConditonGui=new AddConditonGui();
 				
 				break; 

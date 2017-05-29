@@ -31,18 +31,19 @@ public static Element getElementByName(String elementName){
 		
 	}
 	@SuppressWarnings("rawtypes")
-	public static String [] getparams(){//get all the parameters arraylist
-		ArrayList<Param> params = new ArrayList<Param>();
+	public static String[] getparams(){//get all the parameters arraylist
+		ArrayList<String> params = new ArrayList<String>();
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
-		
+		Param p;
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
-			params.add((Param)pair.getValue());	
-			}
-		
+			 p =(Param)pair.getValue();
+			params.add(p.getParamName());	
+		}
 		String[] stockArr = new String[params.size()];
 		stockArr = params.toArray(stockArr);	
 	return stockArr;
+	
 	}
 	public static String [] getdefaultValues(String paramName){//get all the the parameter values
 		Param p;
