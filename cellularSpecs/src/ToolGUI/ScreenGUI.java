@@ -7,26 +7,17 @@ import javax.swing.JPanel;
 
 import Controller.Router;
 import Model.Element;
+import Model.ElementType;
+import Model.WorkSpace;
 
 import java.awt.Color;
-
-
-
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Insets;
 
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
 
 import javax.swing.JScrollPane;
-
-
-
-
-
 
 import java.awt.event.MouseEvent;
 
@@ -36,10 +27,7 @@ import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
-import java.awt.SystemColor;
 
 public class ScreenGUI extends JScrollPane {
 	private int x=0,y=0,width=143,hight=40;
@@ -186,9 +174,23 @@ public class ScreenGUI extends JScrollPane {
 	private void onMouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		// to know what the label we are clicked 
+		String [] params;
 		for (int i = 0; i < lablelelement.size(); i++)
             if (e.getSource() == lablelelement.get(i)) {
-                System.out.println("Label  " + lablelelement.get(i).getText() + " was clicked");
+            	// search the label is selcted
+                WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
+                params=lablelelement.get(i).getText().toString().split(":");
+                // getText split in ":" the index 1 is type of element 
+                if(params[1].equals(ElementType.getEmptyNotEmptyType())){
+                	
+                }else if (params[1].equals(ElementType.getOnOffType())){
+                	
+                }else if (params[1].equals(ElementType.getListType())){
+                	
+                
+                }else if (params[1].equals(ElementType.getStandartBtnType())){
+                	
+                }
             }
     }
 }

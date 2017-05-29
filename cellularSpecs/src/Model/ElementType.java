@@ -8,7 +8,7 @@ public class ElementType implements Serializable {
 	
 	private final static String onOffType=new String ("ON,OFF");
 	private final static String emptyNotEmpty=new String ("Empty,Not Empty");
-	private final static String standartBtnType=new String ("Pressed,Not pressed");
+	private final static String standartBtnType=new String ("reqular Button");
 	private final static String ListType=new String ("List");
 
 	

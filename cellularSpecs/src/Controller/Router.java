@@ -203,8 +203,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			onOfGUI.setParamChangeListener(this);
 			String [] st ={"aaaaa"};
 			onOfGUI.setParameterName(ScreenController.getParams(ElementType.getOnOffType(),screenGUI.getScreenName()));
-			
-			
 			break;
 		case "_save_on_off":
 			
