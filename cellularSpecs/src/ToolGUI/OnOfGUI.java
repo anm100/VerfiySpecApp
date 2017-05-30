@@ -6,11 +6,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
+
+import ui.utils.MyTableModel;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,7 +24,10 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
+
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 
 import Controller.ElementController;
@@ -37,7 +45,9 @@ public class OnOfGUI extends JFrame {
 	private JComboBox parameterName;
 	private String defaultValue=new String("OFF");
 	private JRadioButton rdbtnOff,rdbtnOn ;
-
+	private  JTable apps_table;
+	private  int colNumber=3;
+	private Object[][] data = {};
 	String ScreenName; 
 	public OnOfGUI(String ScreenName,String eName)
 	{
@@ -78,11 +88,11 @@ public class OnOfGUI extends JFrame {
 		 btnSave = new JButton("Save");
 		 btnSave.setActionCommand("_save_on_off");
 			
-		btnSave.setBounds(128, 287, 112, 23);
+		btnSave.setBounds(20, 312, 112, 23);
 		getContentPane().add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(250, 287, 116, 23);
+		btnCancel.setBounds(192, 312, 116, 23);
 		getContentPane().add(btnCancel);
 		
 		 rdbtnOn = new JRadioButton("ON");
@@ -131,6 +141,22 @@ public class OnOfGUI extends JFrame {
 		getContentPane().add(lblNewLabel_1);
 		setSize(501, 378);
 		
+		JScrollPane apps_scrollPane = new JScrollPane();
+		apps_scrollPane.setBounds(10, 184, 292, 117);
+		getContentPane().add(apps_scrollPane);
+		String[] doc_columnNames = { "parameter Name", "=", "Value"};
+		apps_table = new JTable();
+			apps_table.setModel(new MyTableModel(doc_columnNames,data));
+			apps_table.setFillsViewportHeight(false);
+			apps_table.setSurrendersFocusOnKeystroke(true);
+			apps_table.setShowVerticalLines(false);
+			apps_table.setRowHeight(20);
+			apps_table.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			
+			apps_scrollPane.setViewportView(apps_table);
+			apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			apps_table.setBackground(Color.WHITE);
+		
 	}
 	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
 	       JLabel lblNewLabel = new JLabel(string);
@@ -167,6 +193,32 @@ public class OnOfGUI extends JFrame {
 	else
 		rdbtnOn.setSelected(true);
 		
+	}
+	public  void addToTable(String [] st)//add new row with st value to the table 
+	{
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		dm.addRow(st);
+	}
+	public  void removeToTable(int index)//remove row number index
+	{
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		dm.removeRow(index);
+	}
+	public  String[] readFromTable(int index)//remove row number index
+	{
+		   String[] result = new String[colNumber];
+		   for (int i = 0; i < colNumber; i++) {
+		result[i]=apps_table.getModel().getValueAt(index, i).toString();
+		   }
+		   return result;
+		  
+	}
+	public void addToTable(String paramName, String OP, String value) {
+		String [] st={paramName,OP,value};
+		 addToTable(st);
+	}
+	public int  getRowsNumber(){  
+		return(apps_table.getRowCount());
 	}
 	public void setOnOffListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);

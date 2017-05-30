@@ -203,17 +203,16 @@ public class Appointments {
 		JScrollPane apps_scrollPane = new JScrollPane();
 		apps_scrollPane.setBounds(10, 170, 600, 208);
 		app.getContentPane().add(apps_scrollPane);
-
 		String[] doc_columnNames = { "Speciality", "Doctor", "Clinic", "Date", "Hour" };
 		Object[][] doc_data = {};
 		apps_table = new JTable();
 		apps_table.setModel(new MyTableModel(doc_columnNames, doc_data));
-		getAppointments();
 		apps_table.setFillsViewportHeight(true);
 		apps_table.setSurrendersFocusOnKeystroke(true);
 		apps_table.setShowVerticalLines(false);
 		apps_table.setRowHeight(30);
 		apps_table.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
 		apps_scrollPane.setViewportView(apps_table);
 		apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		apps_table.setBackground(Color.WHITE);

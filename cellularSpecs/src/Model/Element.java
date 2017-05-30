@@ -9,5 +9,5 @@ public interface Element {
 	public String getType(); 
 	public void loadElement(); 
 	public  String getStringPromela();
-
+	
 }

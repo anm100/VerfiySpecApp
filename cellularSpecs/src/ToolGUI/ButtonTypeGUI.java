@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -16,8 +17,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import Controller.ScreenController;
+import our.Utils.BulidSpec;
+import ui.utils.MyTableModel;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -27,6 +32,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JRadioButton;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -35,6 +41,8 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JMenuBar;
 import javax.swing.DropMode;
 import java.awt.TextArea;
@@ -47,10 +55,14 @@ public class ButtonTypeGUI extends JFrame {
 	private JTextField txtUndefined;
 	private JTextField elementName;
 	private int i ; 
+	private  int colNumber=3;
 	private JButton butSave;
 	private String ScreenName; 
 	private JComboBox toScreenComboBox;
 	private Button addNewCond;
+	private Object[][] data = {};
+	private   JTable apps_table;
+	
 	public ButtonTypeGUI(String ScreenName)
 	{
 		this.ScreenName=ScreenName; 
@@ -89,13 +101,12 @@ public class ButtonTypeGUI extends JFrame {
 		setSize(464, 390);
 		
 		JButton button = new JButton("cancel");
-		button.setBounds(226, 312, 116, 23);
+		button.setBounds(226, 329, 116, 23);
 		getContentPane().add(button);
 		
 		 butSave = new JButton("Save");
-		butSave.setBounds(104, 312, 112, 23);
+		butSave.setBounds(104, 329, 112, 23);
 		getContentPane().add(butSave);
-		butSave.setActionCommand("_save_standart_button");
 		
 		JButton btnException = new JButton("Exception");
 		btnException.setBounds(10, 171, 91, 23);
@@ -117,33 +128,58 @@ public class ButtonTypeGUI extends JFrame {
 		panel.add(bar);
 		bar.add(btnCondition);
 		bar.add(btnException);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(20, 198, 304, 103);
-		getContentPane().add(scrollPane);
-		
-		Panel panel_1 = new Panel();
-		scrollPane.setViewportView(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(0, 28, 229, 14);
-		panel_1.add(lblNewLabel);
-		
-		 addNewCond = new Button("+");
-		addNewCond.setBounds(20, 170, 33, 22);
-		addNewCond.setActionCommand("_add_conditions");
-		getContentPane().add(addNewCond);
 
-	   
-		
+			
+			JPanel panel_1 = new JPanel();
+			panel_1.setBounds(10, 156, 436, 172);
+			getContentPane().add(panel_1);
+			panel_1.setLayout(null);
+				
+				JScrollPane apps_scrollPane = new JScrollPane();
+				apps_scrollPane.setBounds(0, 45, 292, 117);
+				panel_1.add(apps_scrollPane);
+				String[] doc_columnNames = { "parameter Name", "=", "Value"};
+				apps_table = new JTable();
+					apps_table.setModel(new MyTableModel(doc_columnNames,data));
+					apps_table.setFillsViewportHeight(false);
+					apps_table.setSurrendersFocusOnKeystroke(true);
+					apps_table.setShowVerticalLines(false);
+					apps_table.setRowHeight(20);
+					apps_table.setFont(new Font("Tahoma", Font.PLAIN, 16));
+					
+					apps_scrollPane.setViewportView(apps_table);
+					apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					apps_table.setBackground(Color.WHITE);
+					
+					
+					JRadioButton radioButton = new JRadioButton("AND");
+					radioButton.setBounds(298, 38, 46, 36);
+					panel_1.add(radioButton);
+					
+					JRadioButton radioButton_1 = new JRadioButton("OR");
+					radioButton_1.setBounds(346, 38, 46, 36);
+					panel_1.add(radioButton_1);
+					
+					JLabel label = new JLabel("operator:");
+					label.setBounds(312, 21, 46, 14);
+					panel_1.add(label);
+					
+					 addNewCond = new Button("+");
+					 addNewCond.setBounds(0, 21, 33, 27);
+					 panel_1.add(addNewCond);
+					 addNewCond.setActionCommand("_add_conditions");
+					 
+					 JLabel label_1 = new JLabel("  In order to move to another screen, a list of condition must be  met");
+					 label_1.setBounds(0, 0, 377, 14);
+					 panel_1.add(label_1);
+
+
+			
 			
 	}
 
-	public JTextField getElementName() {
-		return elementName;
+	public String  getElementName() {
+		return elementName.getText().toString();
 	}
 
 
@@ -163,7 +199,41 @@ public class ButtonTypeGUI extends JFrame {
 
 	public void setButtonTListener(ActionListener ButtonTypeListener ){       
 		butSave.addActionListener(ButtonTypeListener);
+		butSave.setActionCommand("_save_standart_button");
 		addNewCond.addActionListener(ButtonTypeListener);
+
+	}
+	public  void addToTable(String [] st)//add new row with st value to the table 
+	{
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		dm.addRow(st);
+	}
+	public  void removeToTable(int index)//remove row number index
+	{
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		dm.removeRow(index);
+	}
+	public  String[] readFromTable(int index)//remove row number index
+	{
+		   String[] result = new String[colNumber];
+		   for (int i = 0; i < colNumber; i++) {
+		result[i]=apps_table.getModel().getValueAt(index, i).toString();
+		   }
+		   return result;
+		  
+	}
+	public void addToTable(String paramName, String OP, String value) {
+		String [] st={paramName,OP,value};
+		 addToTable(st);
+	}
+	public int  getRowsNumber(){  
+		return(apps_table.getRowCount());
+	}
+	
+	public void addConditionListener(ActionListener listenForOperation){  
+		butSave.addActionListener(listenForOperation);
 	}
 
+
+	
 }
