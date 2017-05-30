@@ -136,7 +136,7 @@ public class WorkSpaceController {
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
-		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
+		WorkSpace.getLog().debug("do "+l.getParamName());
 		WorkSpace.getInstance().getParamsMap().put(elementGui.getParameterName(), p);
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
@@ -145,21 +145,22 @@ public class WorkSpaceController {
 
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
-		
-		/*l.setElementName(elementGui.getElementName().getText());
-		elementGui.getParmName();
-		if(!elementGui.getParmName().equals("")){
-		l.addCondition(elementGui.getParmName(), elementGui.getParmVal(), elementGui.getCondopt());
+		int size;
+		l.setElementName(elementGui.getElementName());
+		size=elementGui.getRowsNumber();
+		for(int i=0;i<size;i++)
+		{
+			String [] st=elementGui.readFromTable(i);
+			l.addCondition(st[0], st[1], st[2]);	
 		}
 		l.setTransition(screenGUI.getScreenName(), elementGui.getMoveTo());
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
-		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
-		
+		WorkSpace.getLog().debug("do "+l.getElementName());
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.dispose();
-*/
+
 	}
 	public static void addNewParam(AddParamterGUI addparamter) {
 		WorkSpace.getLog().debug("check type:"+addparamter.getParamType());

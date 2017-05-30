@@ -7,7 +7,7 @@ import java.util.List;
 public class StandartButtonType implements Serializable, Element {
 private String elementName; 
 private  Transition trans ;
-private  List<MyCondition> conds= new ArrayList <MyCondition>(); 
+private  ArrayList<MyCondition> conds= new ArrayList <MyCondition>(); 
 private final String type="regular Button"; 
 private final String optLogic= "&&"; 
 //private List <Action> actions= new ArrayList<>(); 
@@ -32,6 +32,9 @@ public String getType() {
 }
 
 public String getParamName() {
+	return this.elementName;
+}
+public String getElementName() {
 	return this.elementName;
 }
 /**

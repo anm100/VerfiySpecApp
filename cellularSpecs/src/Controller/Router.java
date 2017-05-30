@@ -62,6 +62,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	private Screen screen;
 	private ScreenGUI screenGUI;
 	private AddActionGUI addActionGUI;
+	private AddConditonGui addConditonGui;
 	private AddParamterGUI addparamterGUI;
 	private  Router(NewSpecGUI newSpecGui)
 	{
@@ -243,13 +244,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
 				break;
-			case"_add_conditions":
-				AddConditonGui  addConditonGui=new AddConditonGui();
-				
-				break; 
-			case"_save_conditions":
-				
-				break;
 			case"_menu_button_type":
 				WorkSpace.getLog().debug("this _menu_button_type to create new window");
 				buttonTypeGUI= new ButtonTypeGUI(screenGUI.getScreenName());
@@ -276,11 +270,20 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 //			        buttonTypeGUI.setParamChangeListener(this);
 				break;
 				
-			case "_save_standart_button": 
+			case"_save_standart_button": 
 				WorkSpace.getLog().debug("do _save_standart_button.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, buttonTypeGUI, new StandartButtonType());
 				break;
-				
+			case"_add_conditions"://open AddActionGui in order to add condition
+				WorkSpace.getLog().debug("+ add  a condition from ButoonTypeGUI  ");
+				  addConditonGui=new AddConditonGui();
+				  addConditonGui.setAddAconditionListener(this);
+				  addConditonGui.setVisible(true);
+				break; 
+			case"_save_new_condition":
+				WorkSpace.getLog().debug("Save  a condition from AddConditionGUI");
+				buttonTypeGUI.addToTable(addConditonGui.getParamName(),"=",addConditonGui.getValue());
+				break;
 			case "_save_new_param_ex":
 				if (addparamterGUI.getParamType() !=null){
 				WorkSpaceController.addNewParam(addparamterGUI);
