@@ -7,7 +7,7 @@ import java.util.List;
 public class EmptyNEmptyType implements Serializable, Element {
 private Param parameter; 
 private String elementName;
-private final String type="Empty/NotEmpty"; 
+private final String type=ElementType.getEmptyNotEmptyType(); 
 private List <Action> actions= new ArrayList<>(); 
 private List <MyCondition> conditions= new ArrayList<>(); 
 

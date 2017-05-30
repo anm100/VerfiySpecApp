@@ -10,10 +10,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-
 import javax.swing.border.LineBorder;
-
-
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,9 +19,12 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
-
 import javax.swing.JSeparator;
 import javax.swing.UIManager;
+
+import Controller.ElementController;
+import Model.WorkSpace;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
@@ -39,8 +39,12 @@ public class OnOfGUI extends JFrame {
 	private JRadioButton rdbtnOff,rdbtnOn ;
 
 	String ScreenName; 
-	public OnOfGUI(String ScreenName)
+	public OnOfGUI(String ScreenName,String eName)
 	{
+		if (ElementController.elementIsExist(ScreenName,eName ))
+		{
+			WorkSpace.getLog().debug(" filling data to this gui");
+		}
 		this.ScreenName=ScreenName; 
 		setTitle("ON-OFF");
 		getContentPane().setBackground(Color.WHITE);

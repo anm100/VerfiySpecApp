@@ -174,22 +174,25 @@ public class ScreenGUI extends JScrollPane {
 	private void onMouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		// to know what the label we are clicked 
-		String [] params;
+		String [] datalabel;
 		for (int i = 0; i < lablelelement.size(); i++)
             if (e.getSource() == lablelelement.get(i)) {
-            	// search the label is selcted
-                WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
-                params=lablelelement.get(i).getText().toString().split(":");
-                // getText split in ":" the index 1 is type of element 
-                if(params[1].equals(ElementType.getEmptyNotEmptyType())){
-                	
-                }else if (params[1].equals(ElementType.getOnOffType())){
-                	
-                }else if (params[1].equals(ElementType.getListType())){
-                	
+            	// search the label is selected
+                datalabel=lablelelement.get(i).getText().toString().split(":");
+                WorkSpace.getLog().debug("Label data  " + datalabel[0]+datalabel[1] + "->1");
+                // getText - split by ":" the index 1 = type of element 
+                if(datalabel[1].equals(ElementType.getEmptyNotEmptyType())){
+                    WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
+
+                	(new OnOfGUI(getScreenName(),datalabel[0])).setVisible(true);
+                }else if (datalabel[1].equals(ElementType.getOnOffType())){
+                    WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
+                	(new OnOfGUI(getScreenName(),datalabel[0])).setVisible(true);
+                }else if (datalabel[1].equals(ElementType.getListType())){
+                    WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
                 
-                }else if (params[1].equals(ElementType.getStandartBtnType())){
-                	
+                }else if (datalabel[1].equals(ElementType.getStandartBtnType())){
+                    WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
                 }
             }
     }

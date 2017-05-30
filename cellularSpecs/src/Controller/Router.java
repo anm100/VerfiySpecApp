@@ -197,7 +197,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			
 		case("_menu_onOff_type"):
 			WorkSpace.getLog().debug("this on/off button to create new window");
-			onOfGUI= new OnOfGUI(screenGUI.getScreenName());
+			onOfGUI= new OnOfGUI(screenGUI.getScreenName(),null);
 			onOfGUI.setVisible(true);
 			onOfGUI.setOnOffListener(this);
 			onOfGUI.setParamChangeListener(this);
@@ -218,7 +218,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			 addActionGUI.setParameterValue(values);
 			// addActionGUI.setParameterName(onOfGUI.getParamName());
 			addActionGUI.setVisible(true);
-		
 		break;
 			
 		case "_menu_list_type": 
