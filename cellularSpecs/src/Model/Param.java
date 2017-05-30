@@ -41,7 +41,7 @@ public class Param implements Serializable{
 		if (ElementType.getEmptyNotEmptyType().equals(this.type)){
 			return ElementType.getEmptyNotEmptyType().split(",");
 		}
-		else if(ElementType.getEmptyNotEmptyType().equals(this.type)){
+		else if(ElementType.getOnOffType().equals(this.type)){
 			return ElementType.getOnOffType().split(",");
 			}
 		
