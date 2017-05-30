@@ -16,6 +16,7 @@ public class BulidSpec {
 
 	public static void build(){
 		wk.setWorkSpaceName("spec automat building");
+		addParmsOnOff();
 		addScreens();
 		addelements();
 		WorkSpace.setInstance(wk); 
@@ -65,12 +66,18 @@ public class BulidSpec {
 		for (int i=0 ; i< data.length; i++){
 			on = new OnOffType();
 			on.setElementName(data[i]);
-			p = new Param(data[i], "off", ElementType.getOnOffType());
+			p = new Param(data[i], "on", ElementType.getOnOffType());
 			on.setParam(p);
 			wk.addParameterToHash(p.getParamName(), p);
 			wk.getScreenByName("screen2").addElement(on.getParamName(), on);
 		}
-
-		
 	}
-}
+		private static void addParmsOnOff(){
+			for (int i=0; i<10;i++){
+			Param p = new Param("onOff_"+i, "off", ElementType.getOnOffType());
+				wk.addParameterToHash(p.getParamName(), p);
+
+				
+			}
+		}
+	}

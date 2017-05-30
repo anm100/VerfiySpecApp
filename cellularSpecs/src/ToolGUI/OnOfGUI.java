@@ -15,6 +15,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 
+
+
+
+
 import ui.utils.MyTableModel;
 
 import java.awt.Color;
@@ -24,17 +28,19 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
-
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 
 import Controller.ElementController;
+import Controller.ScreenController;
+import Model.ElementType;
 import Model.WorkSpace;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.util.ArrayList;
 
 public class OnOfGUI extends JFrame {
 	protected JTextField txtUndefined;
@@ -43,7 +49,7 @@ public class OnOfGUI extends JFrame {
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
 	private JComboBox parameterName;
-	private String defaultValue=new String("OFF");
+	private String defaultValue=new String("");
 	private JRadioButton rdbtnOff,rdbtnOn ;
 	private  JTable apps_table;
 	private  int colNumber=3;
@@ -51,10 +57,7 @@ public class OnOfGUI extends JFrame {
 	String ScreenName; 
 	public OnOfGUI(String ScreenName,String eName)
 	{
-		if (ElementController.elementIsExist(ScreenName,eName ))
-		{
-			WorkSpace.getLog().debug(" filling data to this gui");
-		}
+	
 		this.ScreenName=ScreenName; 
 		setTitle("ON-OFF");
 		getContentPane().setBackground(Color.WHITE);
@@ -144,7 +147,7 @@ public class OnOfGUI extends JFrame {
 		JScrollPane apps_scrollPane = new JScrollPane();
 		apps_scrollPane.setBounds(10, 184, 292, 117);
 		getContentPane().add(apps_scrollPane);
-		String[] doc_columnNames = { "parameter Name", "=", "Value"};
+		String[] doc_columnNames = { "action","condition"};
 		apps_table = new JTable();
 			apps_table.setModel(new MyTableModel(doc_columnNames,data));
 			apps_table.setFillsViewportHeight(false);
@@ -156,7 +159,19 @@ public class OnOfGUI extends JFrame {
 			apps_scrollPane.setViewportView(apps_table);
 			apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			apps_table.setBackground(Color.WHITE);
+			if (ElementController.elementIsExist(ScreenName,eName ))
+			{
+				WorkSpace.getLog().debug(" filling data to this gui");
+				loadData(ElementController.getDataOfElement(ScreenName,eName)); 
+			}
 		
+	}
+	private void loadData(	ArrayList <String> e) {
+		elementName.setText(e.get(0));
+		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,e.get(1)));
+		parameterName.setSelectedItem(e.get(1));
+		setDefaultValue(e.get(2));
+		setOnOff(e.get(2));
 	}
 	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
 	       JLabel lblNewLabel = new JLabel(string);
@@ -188,7 +203,7 @@ public class OnOfGUI extends JFrame {
         parameterName.setModel(cbm);
 	}
 	public void setOnOff(String defultvalue) {
-	if(getDefaultValue().equals(defaultValue))
+	if(getDefaultValue().equals(defultvalue))
 		rdbtnOff.setSelected(true);
 	else
 		rdbtnOn.setSelected(true);

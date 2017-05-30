@@ -42,7 +42,7 @@ public class ScreenGUI extends JScrollPane {
 	private JMenuItem moveScreen;
 	private int lastCoordinateElem=21; 
 	private JPanel mainScreenPanel;
-	private ArrayList<JLabel> lablelelement = new ArrayList<JLabel>();
+	private ArrayList<JLabel> labelElement = new ArrayList<JLabel>();
 	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) 
 	{
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -168,31 +168,30 @@ public class ScreenGUI extends JScrollPane {
             }
         });
    
-		this.lablelelement.add(element); 
+		this.labelElement.add(element); 
 		mainScreenPanel.add(element);
 	}
 	private void onMouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		// to know what the label we are clicked 
 		String [] datalabel;
-		for (int i = 0; i < lablelelement.size(); i++)
-            if (e.getSource() == lablelelement.get(i)) {
+		for (int i = 0; i < labelElement.size(); i++)
+            if (e.getSource() == labelElement.get(i)) {
             	// search the label is selected
-                datalabel=lablelelement.get(i).getText().toString().split(":");
+                datalabel=labelElement.get(i).getText().toString().split(":");
                 WorkSpace.getLog().debug("Label data  " + datalabel[0]+datalabel[1] + "->1");
                 // getText - split by ":" the index 1 = type of element 
                 if(datalabel[1].equals(ElementType.getEmptyNotEmptyType())){
-                    WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
-
-                	(new OnOfGUI(getScreenName(),datalabel[0])).setVisible(true);
+                    WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                 }else if (datalabel[1].equals(ElementType.getOnOffType())){
-                    WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
+                    WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                 	(new OnOfGUI(getScreenName(),datalabel[0])).setVisible(true);
                 }else if (datalabel[1].equals(ElementType.getListType())){
-                    WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
+                    WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                 
                 }else if (datalabel[1].equals(ElementType.getStandartBtnType())){
-                    WorkSpace.getLog().debug("Label  " + lablelelement.get(i).getText() + " was clicked");
+                    WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
+                	(new ButtonTypeGUI(getScreenName())).setVisible(true);
                 }
             }
     }
