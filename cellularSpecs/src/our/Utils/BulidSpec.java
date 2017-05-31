@@ -12,15 +12,15 @@ import ToolGUI.EmptyNotEmptyGUI;
 
 public class BulidSpec {
 	
-	static WorkSpace wk=WorkSpace.getInstance();
+	static WorkSpace wk;
 
 	public static void build(){
-		wk.setWorkSpaceName("spec automat building");
+		WorkSpace.setInstance(null); 
+		wk=WorkSpace.getInstance();
+		wk.setWorkSpaceName("example ");
 		addParmsOnOff();
 		addScreens();
 		addelements();
-		String [] p={"user","pass"};
-		addConditions("loginScreen","log in", p); 
 		WorkSpace.setInstance(wk); 
 	}
 	
@@ -28,72 +28,60 @@ public class BulidSpec {
 	private static void addScreens(){
 	
 		wk.addScreen("loginScreen", new Screen("loginScreen", 38, 102, "login for app"));
-		wk.addScreen("screen2", new Screen("screen2", 210, 102, "login for app"));
-		wk.addScreen("createNewEvent", new Screen("createNewEvent", 380, 102, "login for app"));
+		wk.addScreen("mainScreen", new Screen("mainScreen", 210, 102, "login for app"));
+		wk.addScreen("createNewEvent", new Screen("createNewEvent", 380, 102, " The user creates new event. Upon creating the event the user becomes the moderator of the event."));
 		
 	}
 	private  static void addelements(){
 		Param p;
 		StandartButtonType s; 
-		EmptyNEmptyType e1;
-		
-		OnOffType on; 
-		/*
+		/* 
 		 * data for  log in screen 
 		 */
 
-		
-		//add user field 
-		e1 = new EmptyNEmptyType();
-		e1.setElementName("user");
-		p = new Param("user", "Empty", ElementType.getEmptyNotEmptyType());
-		e1.setParam(p);
-		wk.addParameterToHash(p.getParamName(), p);
-		wk.getScreenByName("loginScreen").addElement(e1.getParamName(), e1);
-		
-		//add pass field
-		e1 = new EmptyNEmptyType();
-		e1.setElementName("pass");
-		p = new Param("pass", "Empty", ElementType.getEmptyNotEmptyType());
-		e1.setParam(p);
-		wk.addParameterToHash(p.getParamName(), p);
-		wk.getScreenByName("loginScreen").addElement(e1.getParamName(), e1);
-		
 		// login button 
 		s = new StandartButtonType();
 		s.setElementName("log in");
-		s.setTransition("loginScreen","screen2");
+		s.setTransition("loginScreen","mainScreen");
 		wk.getScreenByName("loginScreen").addElement(s.getParamName(),s);
-		
+		addElemenEmpty("loginScreen",new String[] {"user","pass"});
+		addConditions("loginScreen","log in", new String [] {"user","pass"}); 
 
+		
 		/*
 		 *data for screen 2		
 		 */
-		String [] data ={"wifi","bluetooth","airplane_mode"};
+		addElemenEmpty("mainScreen",new String[] {"wifi","bluetooth","airplane_mode"});
 		
-		for (int i=0 ; i< data.length; i++){
-			on = new OnOffType();
-			on.setElementName(data[i]);
-			p = new Param(data[i], "on", ElementType.getOnOffType());
-			on.setParam(p);
-			wk.addParameterToHash(p.getParamName(), p);
-			wk.getScreenByName("screen2").addElement(on.getParamName(), on);
-		}
-	}
-	/*private static void addElemenEmpty(String screenName,String button, String [] fields){
-		EmptyNEmptyType e; 
-		Screen s; 
-		s=wk.getScreenByName(screenName);
-		
-		
-	}*/
-		private static void addParmsOnOff(){
-			for (int i=0; i<10;i++){
-			Param p = new Param("onOff_"+i, "off", ElementType.getOnOffType());
-				wk.addParameterToHash(p.getParamName(), p);
+		/*
+		 * add data to create event
+		 */
+		s = new StandartButtonType();
+		s.setElementName("save");
+		s.setTransition("createNewEvent","mainScreen");
+		wk.getScreenByName("createNewEvent").addElement(s.getParamName(),s);
+		addElemenEmpty("createNewEvent",new String[] {"title", "description", "date", "time","more details",});
+	addConditions("createNewEvent","save", new String [] {"title", "description", "date", "time"}); 
 
-				
+	}
+	
+	
+		private static void addElemenEmpty(String screenName, String [] fields){
+			EmptyNEmptyType e; 
+			Screen s; 
+			Param p; 
+			for (int i=0 ; i< fields.length; i++){
+				e = new EmptyNEmptyType();
+				e.setElementName(fields[i]);
+				p = new Param(fields[i],"Empty", ElementType.getEmptyNotEmptyType());
+				e.setParam(p);
+				wk.addParameterToHash(p.getParamName(), p);
+				wk.getScreenByName(screenName).addElement(e.getParamName(), e);
 			}
+			
+			s=wk.getScreenByName(screenName);
+			
+			
 		}
 		private static void addConditions(String screenName,String button, String [] fields) {
 			/*
@@ -114,5 +102,17 @@ public class BulidSpec {
 		/*
 		 * ==== for create new event 
 		 */
+		}
+		private static void addAction(String ScreenName,String elementName){
+			
+			
+		}
+		private static void addParmsOnOff(){
+			for (int i=0; i<10;i++){
+			Param p = new Param("onOff_"+i, "off", ElementType.getOnOffType());
+				wk.addParameterToHash(p.getParamName(), p);
+
+				
+			}
 		}
 	}

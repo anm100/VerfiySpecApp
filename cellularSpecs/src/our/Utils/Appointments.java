@@ -52,6 +52,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.awt.Frame;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  * Appointments window , shows all needed information about specific patient :
@@ -256,6 +258,11 @@ public class Appointments {
 		});
 		newApp_btn.setBounds(10, 140, 174, 30);
 		app.getContentPane().add(newApp_btn);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel());
+		comboBox.setBounds(367, 0, 52, 39);
+		app.getContentPane().add(comboBox);
 
 		// ---------------------------------
 		app.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { logo }));
