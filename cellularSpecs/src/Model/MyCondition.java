@@ -13,6 +13,12 @@ public class MyCondition implements Serializable {
 		this.paramVal = paramVal;
 		this.opt= opt2; 
 	}
+	public MyCondition(String condition) {
+		super();
+		String [] s=condition.split(opt);
+		this.paramName = s[0];
+		this.paramVal = s[1];
+	}
 	public String getParamName() {
 		return paramName;
 	}

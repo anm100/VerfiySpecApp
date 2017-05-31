@@ -15,6 +15,14 @@ public class Action implements Serializable {
 		this.paramVal = paramVal;
 		this.cond = cond;
 	}
+	//action: wifi=on
+	public Action(String action) {
+		super();
+		String [] s = action.split("=");
+		this.paramName = s[0];
+		this.paramVal = s[1];
+		cond=new ArrayList<MyCondition>();
+	}
 	public String getParamName() {
 		return paramName;
 	}
@@ -30,8 +38,11 @@ public class Action implements Serializable {
 	public ArrayList<MyCondition> getCond() {
 		return cond;
 	}
-	public void setCond(ArrayList<MyCondition> cond) {
-		this.cond = cond;
+	/*
+	 * cond : airplanemode == on 
+	 */
+	public void addCond(String cond) {
+		this.cond.add(new MyCondition( cond));
 	} 
 	
 }

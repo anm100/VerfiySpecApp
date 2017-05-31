@@ -49,7 +49,7 @@ public class ElementController {
 	return st;
 	}
 	public static String[][] getActrion(String sName,String eName ){
-		ElementActionInterface   s=(ElementActionInterface) WorkSpace.getInstance().getScreenByName(sName).getElementByName(eName);
+		OnOffType   s=(OnOffType) WorkSpace.getInstance().getScreenByName(sName).getElementByName(eName);
 		int numOfActions=s.getActions().size();
 		String [][] st=new String[numOfActions][2];
 		for(int i=0;i<numOfActions;i++)

@@ -1,6 +1,8 @@
 package our.Utils;
 
+import Model.Action;
 import Model.Element;
+import Model.ElementActionInterface;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.OnOffType;
@@ -51,8 +53,8 @@ public class BulidSpec {
 		/*
 		 *data for screen 2		
 		 */
-		addElemenEmpty("mainScreen",new String[] {"wifi","bluetooth","airplane_mode"});
-		
+		addElementONOFF("mainScreen",new String[] {"wifi","bluetooth","airplane_mode"});
+		addAction("mainScreen","airplane_mode");
 		/*
 		 * add data to create event
 		 */
@@ -83,6 +85,23 @@ public class BulidSpec {
 			
 			
 		}
+		private static void addElementONOFF(String screenName, String [] fields){
+			OnOffType e; 
+			Screen s; 
+			Param p; 
+			for (int i=0 ; i< fields.length; i++){
+				e = new OnOffType();
+				e.setElementName(fields[i]);
+				p = new Param(fields[i],"off", ElementType.getOnOffType());
+				e.setParam(p);
+				wk.addParameterToHash(p.getParamName(), p);
+				wk.getScreenByName(screenName).addElement(e.getParamName(), e);
+			}
+			
+			s=wk.getScreenByName(screenName);
+			
+			
+		}
 		private static void addConditions(String screenName,String button, String [] fields) {
 			/*
 			 * for log in screen 
@@ -96,16 +115,25 @@ public class BulidSpec {
 				s.addCondition(e1.getParamName(),"==","NotEmpty");
 			}
 			//update element 
-			WorkSpace.getLog().debug(""+s.getConds().size());
 			wk.getScreenByName(screenName).addElement(s.getELementName(), s);
 			
 		/*
 		 * ==== for create new event 
 		 */
 		}
-		private static void addAction(String ScreenName,String elementName){
+		private static void addAction(String screenName,String elementName){
 			
+			OnOffType e = (OnOffType) wk.getScreenByName(screenName).getElementByName(elementName);
+			Action action =new Action("wifi=OFF");
+			action.addCond("airplane_mode==ON");
+			e.addAction(action);
 			
+			action =new Action("bluetooth=OFF");
+			action.addCond("airplane_mode==ON");
+			e.addAction(action);
+			//update 
+			wk.getScreenByName(screenName).addElement(e.getELementName(), e);
+
 		}
 		private static void addParmsOnOff(){
 			for (int i=0; i<10;i++){
