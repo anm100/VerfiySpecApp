@@ -19,7 +19,7 @@ public StandartButtonType() {
 }
 
 
-public void addCondition(String name, String Val,String opt){
+public void addCondition(String name,String opt ,String Val){
 	MyCondition c = new MyCondition(name, Val,opt); 
 	this.conds.add(c);
 	

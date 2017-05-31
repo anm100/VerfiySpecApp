@@ -19,9 +19,12 @@ public class BulidSpec {
 		addParmsOnOff();
 		addScreens();
 		addelements();
+		String [] p={"user","pass"};
+		addConditions("loginScreen","log in", p); 
 		WorkSpace.setInstance(wk); 
 	}
 	
+
 	private static void addScreens(){
 	
 		wk.addScreen("loginScreen", new Screen("loginScreen", 38, 102, "login for app"));
@@ -56,6 +59,7 @@ public class BulidSpec {
 		wk.addParameterToHash(p.getParamName(), p);
 		wk.getScreenByName("loginScreen").addElement(e1.getParamName(), e1);
 		
+		// login button 
 		s = new StandartButtonType();
 		s.setElementName("log in");
 		s.setTransition("loginScreen","screen2");
@@ -76,6 +80,13 @@ public class BulidSpec {
 			wk.getScreenByName("screen2").addElement(on.getParamName(), on);
 		}
 	}
+	/*private static void addElemenEmpty(String screenName,String button, String [] fields){
+		EmptyNEmptyType e; 
+		Screen s; 
+		s=wk.getScreenByName(screenName);
+		
+		
+	}*/
 		private static void addParmsOnOff(){
 			for (int i=0; i<10;i++){
 			Param p = new Param("onOff_"+i, "off", ElementType.getOnOffType());
@@ -83,5 +94,25 @@ public class BulidSpec {
 
 				
 			}
+		}
+		private static void addConditions(String screenName,String button, String [] fields) {
+			/*
+			 * for log in screen 
+			 */
+			// TODO Auto-generated method stub
+			StandartButtonType s;
+			EmptyNEmptyType e1;
+			s=(StandartButtonType) wk.getScreenByName(screenName).getElementByName(button);
+			for (int i=0 ; i<fields.length;i++){
+				e1=(EmptyNEmptyType) wk.getScreenByName(screenName).getElementByName(fields[i]);
+				s.addCondition(e1.getParamName(),"==","NotEmpty");
+			}
+		
+			//update element 
+			wk.getScreenByName(screenName).addElement(s.getELementName(), s);
+			
+		/*
+		 * ==== for create new event 
+		 */
 		}
 	}
