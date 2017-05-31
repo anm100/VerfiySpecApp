@@ -65,8 +65,6 @@ public class ButtonTypeGUI extends JFrame {
 	private Button addNewCond;
 	private Object[][] data = {};
 	private   JTable apps_table;
-	private String eName;
-	
 	public ButtonTypeGUI(String ScreenName,String eName)
 	{
 		this.ScreenName=ScreenName; 
@@ -179,12 +177,12 @@ public class ButtonTypeGUI extends JFrame {
 					 if (ElementController.elementIsExist(ScreenName,eName ))
 						{
 							WorkSpace.getLog().debug(" filling data to ButtonTypegui");
-							loadData(ElementController.getDataOfElement(ScreenName,eName)); 
+							loadData(ElementController.getDataOfElement(ScreenName,eName), eName); 
 						}
 			        DefaultComboBoxModel cbm = new DefaultComboBoxModel(ScreenController.getScreenNameNames());
 			        toScreenComboBox.setModel(cbm);
 				}
-				private void loadData(ArrayList <String> e) {
+				private void loadData(ArrayList <String> e,String eName) {
 					elementName.setText(e.get(0));
 			        DefaultComboBoxModel cbm = new DefaultComboBoxModel(ScreenController.getScreenNameNames());
 			        toScreenComboBox.setModel(cbm);

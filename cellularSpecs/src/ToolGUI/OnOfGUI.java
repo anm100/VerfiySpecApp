@@ -162,15 +162,16 @@ public class OnOfGUI extends JFrame {
 			if (ElementController.elementIsExist(ScreenName,eName ))
 			{
 				WorkSpace.getLog().debug(" filling data to this gui");
-				loadData(ElementController.getDataOfElement(ScreenName,eName)); 
+				loadData(ElementController.getDataOfElement(ScreenName,eName),eName) ; 
 			}
 		
 	}
-	private void loadData(	ArrayList <String> e) {
+	private void loadData(	ArrayList <String> e,String eName) {
 		elementName.setText(e.get(0));
 		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,e.get(1)));
 		parameterName.setSelectedItem(e.get(1));
 		setOnOff(e.get(2));
+		addToTable(ElementController.getActrion(ScreenName,eName));
 	}
 	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
 	       JLabel lblNewLabel = new JLabel(string);

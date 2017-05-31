@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import Model.Element;
 import Model.ElementActionInterface;
+import Model.MyCondition;
 import Model.OnOffType;
 import Model.Param;
 import Model.Screen;
@@ -51,15 +52,18 @@ public class ElementController {
 		ElementActionInterface   s=(ElementActionInterface) WorkSpace.getInstance().getScreenByName(sName).getElementByName(eName);
 		int numOfActions=s.getActions().size();
 		String [][] st=new String[numOfActions][2];
-		
 		for(int i=0;i<numOfActions;i++)
 		{
+			ArrayList<MyCondition> m =s.getActions().get(i).getCond();
 		st[i][0]=(s.getActions().get(i).getParamName()+"="+s.getActions().get(i).getParamVal());//add action to the firstRow
-		for(int j=0;j<s.getActions().get(i).getCond().size();j++)
+		String operator="";
+		String st1="";
+		for(int j=0;j<m.size();j++)
 		{
-			
+			st1=st1+operator+m.get(j).getParamName()+m.get(j).getOpt()+m.get(j).getParamVal();
+			operator="&&";
 		}
-	
+		st[i][1]=st1;
 	}
 		return st;
 }
