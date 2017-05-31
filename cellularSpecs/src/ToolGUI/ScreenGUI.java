@@ -195,7 +195,7 @@ public class ScreenGUI extends JScrollPane {
                 }else if (datalabel[1].equals(ElementType.getStandartBtnType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                     ButtonTypeGUI  buttonTypeGUI= new ButtonTypeGUI(getScreenName(),datalabel[0]);
-                    buttonTypeGUI.addToTable(ElementController.getConditions(getScreenName(),labelElement.get(i).getText()));
+                    buttonTypeGUI.addToTable(ElementController.getConditions(getScreenName(),datalabel[0]));
                     buttonTypeGUI.setVisible(true);
                     onOff.setVisible(true);
                 }

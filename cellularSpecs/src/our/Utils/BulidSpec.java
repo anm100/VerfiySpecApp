@@ -107,8 +107,8 @@ public class BulidSpec {
 				e1=(EmptyNEmptyType) wk.getScreenByName(screenName).getElementByName(fields[i]);
 				s.addCondition(e1.getParamName(),"==","NotEmpty");
 			}
-		
 			//update element 
+			WorkSpace.getLog().debug(""+s.getConds().size());
 			wk.getScreenByName(screenName).addElement(s.getELementName(), s);
 			
 		/*
