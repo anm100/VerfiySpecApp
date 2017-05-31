@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnOffType implements Serializable, Element {
+public class OnOffType implements Serializable, Element,ElementActionInterface {
 private Param parameter; 
-private List<Action> actions=new  ArrayList<Action>(); 
+private ArrayList<Action> actions=new  ArrayList<Action>(); 
 private final String type=ElementType.getOnOffType();
 private String elementName; 
 //private List <Action> actions= new ArrayList<>(); 
@@ -53,6 +53,12 @@ public void setElementName(String name) {
 	// TODO Auto-generated method stub
 	this.elementName=name;
 
+}
+
+@Override
+public ArrayList<Action> getActions() {
+	// TODO Auto-generated method stub
+	return actions;
 }
 
 /*

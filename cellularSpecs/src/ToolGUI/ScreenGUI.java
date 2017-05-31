@@ -188,6 +188,8 @@ public class ScreenGUI extends JScrollPane {
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                     OnOfGUI  onOff= new OnOfGUI(getScreenName(),datalabel[0]);
                     onOff.setVisible(true);
+                    onOff.addToTable(ElementController.getActrion(getScreenName(),datalabel[0]));
+
                     //.onOff.setOnOffListener(Router.getInstance());// add new case for editing
                 }else if (datalabel[1].equals(ElementType.getListType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
@@ -195,7 +197,6 @@ public class ScreenGUI extends JScrollPane {
                 }else if (datalabel[1].equals(ElementType.getStandartBtnType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                     ButtonTypeGUI  buttonTypeGUI= new ButtonTypeGUI(getScreenName(),datalabel[0]);
-                    buttonTypeGUI.addToTable(ElementController.getConditions(getScreenName(),datalabel[0]));
                     buttonTypeGUI.setVisible(true);
                     onOff.setVisible(true);
                 }

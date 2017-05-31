@@ -136,7 +136,7 @@ public class OnOfGUI extends JFrame {
 		AddAction.setHorizontalAlignment(SwingConstants.LEADING);
 		AddAction.setBackground(UIManager.getColor("Button.highlight"));
 		AddAction.setActionCommand("_add_Action_OnOff");
-		AddAction.setBounds(20, 145, 236, 28);
+		AddAction.setBounds(20, 145, 307, 28);
 		getContentPane().add(AddAction);
 		
 		JLabel lblNewLabel_1 = new JLabel("Parameter name");
@@ -208,11 +208,6 @@ public class OnOfGUI extends JFrame {
 		rdbtnOn.setSelected(true);
 		
 	}
-	public  void addToTable(String [] st)//add new row with st value to the table 
-	{
-		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
-		dm.addRow(st);
-	}
 	public  void removeToTable(int index)//remove row number index
 	{
 		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
@@ -227,9 +222,17 @@ public class OnOfGUI extends JFrame {
 		   return result;
 		  
 	}
-	public void addToTable(String paramName, String OP, String value) {
-		String [] st={paramName,OP,value};
-		 addToTable(st);
+	public  void addToTable(String [] st)//add new row with st value to the table 
+	{
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		dm.addRow(st);
+	}
+	public  void addToTable(String [][] st)//adding matrix to jtable 
+	{
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		  int row = st.length;
+		  for(int i=0;i<row;i++)
+		dm.addRow(st[i]);
 	}
 	public int  getRowsNumber(){  
 		return(apps_table.getRowCount());

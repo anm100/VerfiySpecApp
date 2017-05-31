@@ -1,14 +1,15 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Action implements Serializable {
 	
 	private String paramName; 
 	private String paramVal;
-	private MyCondition cond;
+	private ArrayList<MyCondition> cond;
 	
-	public Action(String paramName, String paramVal, MyCondition cond) {
+	public Action(String paramName, String paramVal, ArrayList<MyCondition> cond) {
 		super();
 		this.paramName = paramName;
 		this.paramVal = paramVal;
@@ -26,10 +27,10 @@ public class Action implements Serializable {
 	public void setParamVal(String paramVal) {
 		this.paramVal = paramVal;
 	}
-	public MyCondition getCond() {
+	public ArrayList<MyCondition> getCond() {
 		return cond;
 	}
-	public void setCond(MyCondition cond) {
+	public void setCond(ArrayList<MyCondition> cond) {
 		this.cond = cond;
 	} 
 	
