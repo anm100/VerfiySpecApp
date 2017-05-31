@@ -75,7 +75,7 @@ public class AddActionGUI extends JFrame
 		
 		JLabel lblOnoff = new JLabel("<dynamic>- ON/OFF - Add Action");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
-		lblOnoff.setBounds(22, 21, 361, 36);
+		lblOnoff.setBounds(22, 11, 361, 36);
 		getContentPane().add(lblOnoff);
 		
 		JLabel lblNewLabel = new JLabel("Condition for action: ");

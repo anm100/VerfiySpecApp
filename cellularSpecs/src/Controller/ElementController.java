@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import Model.Element;
+import Model.ElementActionInterface;
+import Model.OnOffType;
 import Model.Param;
 import Model.Screen;
 import Model.StandartButtonType;
@@ -45,5 +47,21 @@ public class ElementController {
 		}
 	return st;
 	}
+	public static String[][] getActrion(String sName,String eName ){
+		ElementActionInterface   s=(ElementActionInterface) WorkSpace.getInstance().getScreenByName(sName).getElementByName(eName);
+		int numOfActions=s.getActions().size();
+		String [][] st=new String[numOfActions][2];
+		
+		for(int i=0;i<numOfActions;i++)
+		{
+		st[i][0]=(s.getActions().get(i).getParamName()+"="+s.getActions().get(i).getParamVal());//add action to the firstRow
+		for(int j=0;j<s.getActions().get(i).getCond().size();j++)
+		{
+			
+		}
+	
+	}
+		return st;
 }
 
+}
