@@ -1,12 +1,10 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ListElementType implements Serializable, Element {
 private ParamList parameter ; 
-private final  String type="List";
+private final  String type=ElementType.getListType();
 private String elementName; 
 
 //private List <MyCondition> conditions= new ArrayList<>(); 
@@ -14,9 +12,10 @@ private String elementName;
 public ListElementType() {}
 
 public String [] getValues() {
-	
-	
-	return this.parameter.getValues();
+		return this.parameter.getValues();
+}
+public String getELementName() {
+	return elementName;
 }
 
 public void setValues(String [] values) {

@@ -21,6 +21,9 @@ public String getType() {
 public String getParamName() {
 	return parameter.getParamName();
 }
+public String getELementName() {
+	return elementName;
+}
 /**
  * @param paramName the paramName to set
  */

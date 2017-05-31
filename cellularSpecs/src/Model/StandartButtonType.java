@@ -8,7 +8,7 @@ public class StandartButtonType implements Serializable, Element {
 private String elementName; 
 private  Transition trans ;
 private  ArrayList<MyCondition> conds= new ArrayList <MyCondition>(); 
-private final String type="regular Button"; 
+private final String type=ElementType.getStandartBtnType(); 
 private final String optLogic= "&&"; 
 //private List <Action> actions= new ArrayList<>(); 
 //private List <MyCondition> conditions= new ArrayList<>(); 
@@ -17,8 +17,10 @@ private final String optLogic= "&&";
 public StandartButtonType() {
 	
 }
-public void addCondition(String name, String opt,String Val){
-	MyCondition c = new MyCondition(name,opt,Val); 
+
+
+public void addCondition(String name, String Val,String opt){
+	MyCondition c = new MyCondition(name, Val,opt); 
 	this.conds.add(c);
 	
 }
@@ -34,8 +36,8 @@ public String getType() {
 public String getParamName() {
 	return this.elementName;
 }
-public String getElementName() {
-	return this.elementName;
+public String getELementName() {
+	return elementName;
 }
 /**
  * @param paramName the paramName to set

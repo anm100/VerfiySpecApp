@@ -16,7 +16,9 @@ public EmptyNEmptyType() {}
 public String getType() {
 	return type;
 }
-
+public String getELementName() {
+	return elementName;
+}
 public String getParamName() {
 	return parameter.getParamName();
 }

@@ -3,6 +3,7 @@ package Model;
 import java.util.List;
 
 public interface Element {
+	public String getELementName();
 	public String getParamName(); 
 	public String getParamVal(); 
 	public void setElementName(String name);
