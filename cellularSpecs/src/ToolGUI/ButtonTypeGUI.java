@@ -146,7 +146,7 @@ public class ButtonTypeGUI extends JFrame {
 					apps_table.setShowVerticalLines(false);
 					apps_table.setRowHeight(20);
 					apps_table.setFont(new Font("Tahoma", Font.PLAIN, 16));
-					
+					apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					apps_scrollPane.setViewportView(apps_table);
 					apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					apps_table.setBackground(Color.WHITE);
@@ -233,7 +233,11 @@ public class ButtonTypeGUI extends JFrame {
 	public void addConditionListener(ActionListener listenForOperation){  
 		butSave.addActionListener(listenForOperation);
 	}
-
+	public static void main(String[] args) {
+		BulidSpec.build();
+		ButtonTypeGUI a=new ButtonTypeGUI("aaa");
+		a.setVisible(true);
+	}
 
 	
 }

@@ -151,7 +151,7 @@ public class WorkSpaceController {
 		for(int i=0;i<size;i++)
 		{
 			String [] st=elementGui.readFromTable(i);
-			l.addCondition(st[0], st[1], st[2]);	
+			l.addCondition(st[0], st[1], st[2]);
 		}
 		l.setTransition(screenGUI.getScreenName(), elementGui.getMoveTo());
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);

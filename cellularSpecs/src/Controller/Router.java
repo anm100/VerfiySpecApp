@@ -273,7 +273,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 				WorkSpace.getLog().debug("do _save_standart_button.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, buttonTypeGUI, new StandartButtonType());
 				break;
-			case"_add_conditions"://open AddActionGui in order to add condition
+			case"_add_conditions":// + open AddActionGui in order to add condition
 				WorkSpace.getLog().debug("+ add  a condition from ButoonTypeGUI  ");
 				  addConditonGui=new AddConditonGui();
 				  addConditonGui.setAddAconditionListener(this);

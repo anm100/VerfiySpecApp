@@ -32,14 +32,12 @@ public class BulidSpec {
 		Param p;
 		StandartButtonType s; 
 		EmptyNEmptyType e1;
+		
 		OnOffType on; 
 		/*
 		 * data for  log in screen 
 		 */
-		s = new StandartButtonType();
-		s.setElementName("log in");
-		s.setTransition("loginScreen","screen2");
-		wk.getScreenByName("loginScreen").addElement(s.getParamName(),s);
+
 		
 		//add user field 
 		e1 = new EmptyNEmptyType();
@@ -57,6 +55,12 @@ public class BulidSpec {
 		wk.addParameterToHash(p.getParamName(), p);
 		wk.getScreenByName("loginScreen").addElement(e1.getParamName(), e1);
 		
+		s = new StandartButtonType();
+		s.setElementName("log in");
+		s.setTransition("loginScreen","screen2");
+		wk.getScreenByName("loginScreen").addElement(s.getParamName(),s);
+		
+
 		/*
 		 *data for screen 2		
 		 */

@@ -17,8 +17,8 @@ private final String optLogic= "&&";
 public StandartButtonType() {
 	
 }
-public void addCondition(String name, String Val,String opt){
-	MyCondition c = new MyCondition(name, Val,opt); 
+public void addCondition(String name, String opt,String Val){
+	MyCondition c = new MyCondition(name,opt,Val); 
 	this.conds.add(c);
 	
 }
@@ -62,6 +62,8 @@ public  String getStringPromela(){
 	conditons=new String(conds.get(0).getParamName()
 			+conds.get(0).getOpt()
 			+conds.get(0).getParamVal());
+			
+			
  for(int i=1;i<conds.size(); i++)
  {
 	 conditons+=""+this.optLogic

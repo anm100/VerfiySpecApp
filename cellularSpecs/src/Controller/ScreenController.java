@@ -40,9 +40,13 @@ public static Element getElementByName(String elementName){
 			 p =(Param)pair.getValue();
 			params.add(p.getParamName());	
 		}
+		if(params.size()>0)
+		{
 		String[] stockArr = new String[params.size()];
 		stockArr = params.toArray(stockArr);	
-	return stockArr;
+		return stockArr;
+		}
+		return null;
 	
 	}
 	public static String [] getdefaultValues(String paramName){//get all the the parameter values

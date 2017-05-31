@@ -29,8 +29,8 @@ import java.awt.event.ItemEvent;
 public class AddConditonGui extends JFrame {
 	private JComboBox comboBox;
 	private JComboBox comboBox_2;
-	private String[] parameterNames ;
-	private String[] parameterValue ;
+	private String[] parameterNames=null ;
+	private String[] parameterValue=null ;
 	private String paramName;
 	private JButton btnSave;
 
@@ -102,13 +102,16 @@ public class AddConditonGui extends JFrame {
 	}
 	private void addToCombo() {
 		parameterNames=ScreenController.getparams();
+		if(parameterNames!=null)
+		{
 		paramName=parameterNames[0];
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
         comboBox.setModel(cbm);
        parameterValue=ScreenController.getdefaultValues(comboBox.getSelectedItem().toString());
-       
+       value=parameterValue[0];
         cbm = new DefaultComboBoxModel(parameterValue);
        comboBox_2.setModel(cbm);
+		}
 		
 	}
 	public String getParamName() {
