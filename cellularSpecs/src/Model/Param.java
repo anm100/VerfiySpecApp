@@ -39,14 +39,14 @@ public class Param implements Serializable{
 	} 
 	public String [] getValues(){
 		if (ElementType.getEmptyNotEmptyType().equals(this.type)){
-			return ElementType.getEmptyNotEmptyType().split(",");
+			return ElementType.getEmptyNotEmptyType().split("/");
 		}
 		else if(ElementType.getOnOffType().equals(this.type)){
-			return ElementType.getOnOffType().split(",");
+			return ElementType.getOnOffType().split("/");
 			}
 		
 		else{ 
-			return ElementType.getStandartBtnType().split(",");
+			return ElementType.getStandartBtnType().split("/");
 			}
 	
 	}

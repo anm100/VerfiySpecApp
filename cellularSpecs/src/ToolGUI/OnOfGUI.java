@@ -49,7 +49,7 @@ public class OnOfGUI extends JFrame {
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
 	private JComboBox parameterName;
-	private String defaultValue=new String("");
+	private String defaultValue=new String("OFF");
 	private JRadioButton rdbtnOff,rdbtnOn ;
 	private  JTable apps_table;
 	private  int colNumber=3;
@@ -170,7 +170,6 @@ public class OnOfGUI extends JFrame {
 		elementName.setText(e.get(0));
 		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,e.get(1)));
 		parameterName.setSelectedItem(e.get(1));
-		setDefaultValue(e.get(2));
 		setOnOff(e.get(2));
 	}
 	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
