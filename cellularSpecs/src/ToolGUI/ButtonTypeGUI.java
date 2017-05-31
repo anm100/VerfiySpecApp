@@ -20,7 +20,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import Controller.ElementController;
 import Controller.ScreenController;
+import Model.ElementType;
+import Model.WorkSpace;
 import our.Utils.BulidSpec;
 import ui.utils.MyTableModel;
 
@@ -63,7 +66,7 @@ public class ButtonTypeGUI extends JFrame {
 	private Object[][] data = {};
 	private   JTable apps_table;
 	
-	public ButtonTypeGUI(String ScreenName)
+	public ButtonTypeGUI(String ScreenName,String eName)
 	{
 		this.ScreenName=ScreenName; 
 		setTitle(ScreenName+"standart button" );
@@ -172,11 +175,20 @@ public class ButtonTypeGUI extends JFrame {
 					 JLabel label_1 = new JLabel("  In order to move to another screen, a list of condition must be  met");
 					 label_1.setBounds(0, 0, 377, 14);
 					 panel_1.add(label_1);
+					 if (ElementController.elementIsExist(ScreenName,eName ))
+						{
+							WorkSpace.getLog().debug(" filling data to ButtonTypegui");
+							loadData(ElementController.getDataOfElement(ScreenName,eName)); 
+						}
+			        DefaultComboBoxModel cbm = new DefaultComboBoxModel(ScreenController.getScreenNameNames());
+			        toScreenComboBox.setModel(cbm);
+				}
+				private void loadData(	ArrayList <String> e) {
+					elementName.setText(e.get(0));
+			        DefaultComboBoxModel cbm = new DefaultComboBoxModel(ScreenController.getScreenNameNames());
+			        toScreenComboBox.setModel(cbm);
 
-
-			
-			
-	}
+				}
 
 	public String  getElementName() {
 		return elementName.getText().toString();
@@ -208,6 +220,13 @@ public class ButtonTypeGUI extends JFrame {
 		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
 		dm.addRow(st);
 	}
+	public  void addToTable(String [][] st)//adding matrix to jtable 
+	{
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		  int row = st.length;
+		  for(int i=0;i<row;i++)
+		dm.addRow(st[i]);
+	}
 	public  void removeToTable(int index)//remove row number index
 	{
 		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
@@ -233,9 +252,11 @@ public class ButtonTypeGUI extends JFrame {
 	public void addConditionListener(ActionListener listenForOperation){  
 		butSave.addActionListener(listenForOperation);
 	}
+	
+	
 	public static void main(String[] args) {
 		BulidSpec.build();
-		ButtonTypeGUI a=new ButtonTypeGUI("aaa");
+		ButtonTypeGUI a=new ButtonTypeGUI("aaa",null);
 		a.setVisible(true);
 	}
 

@@ -155,7 +155,7 @@ public class WorkSpaceController {
 		}
 		l.setTransition(screenGUI.getScreenName(), elementGui.getMoveTo());
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
-		WorkSpace.getLog().debug("do "+l.getElementName());
+		WorkSpace.getLog().debug("do "+l.getELementName());
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().refreshWorkspace();

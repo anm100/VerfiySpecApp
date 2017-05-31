@@ -110,7 +110,17 @@ public static Element getElementByName(String elementName){
 		
 		return sAll; 
 	}
-
-	
-
+	public static String[] getScreenNameNames(){
+	Screen s1 ;
+	int i=0;
+	String[]  st=new String[WorkSpace.getInstance().getScreensMap().size()] ;
+	Iterator<Entry<String, Screen>> it1 = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+	while(it1.hasNext()){
+		Map.Entry pair =(Map.Entry) it1.next(); 
+		s1= (Screen)pair.getValue();	
+		st[i]=s1.getScreenName();
+		 i++; 	
+	} 
+	return st;
+}
 }

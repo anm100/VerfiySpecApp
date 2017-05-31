@@ -245,20 +245,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 				break;
 			case"_menu_button_type":
 				WorkSpace.getLog().debug("this _menu_button_type to create new window");
-				buttonTypeGUI= new ButtonTypeGUI(screenGUI.getScreenName());
+				buttonTypeGUI= new ButtonTypeGUI(screenGUI.getScreenName(),null);
 				buttonTypeGUI.setVisible(true);
 				buttonTypeGUI.setButtonTListener(this);
-					Screen s1 ;
-					int i=0;
-					 st=new String[WorkSpace.getInstance().getScreensMap().size()] ;
-					Iterator<Entry<String, Screen>> it1 = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
-					while(it1.hasNext()){
-						Map.Entry pair =(Map.Entry) it1.next(); 
-						s1= (Screen)pair.getValue();	
-						st[i]=s1.getScreenName();
-						 i++; 	
-					}  
-			        buttonTypeGUI.addTooScreenComboBox(st);
+
 //			        String st1[]=new String[ScreenController.getparams().size()+1];
 //			        st1[0]="";
 //			        for(i=1;i< ScreenController.getparams().size();i++)

@@ -5,6 +5,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import Controller.ElementController;
 import Controller.Router;
 import Model.Element;
 import Model.ElementType;
@@ -185,13 +186,18 @@ public class ScreenGUI extends JScrollPane {
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                 }else if (datalabel[1].equals(ElementType.getOnOffType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
-                	(new OnOfGUI(getScreenName(),datalabel[0])).setVisible(true);
+                    OnOfGUI  onOff= new OnOfGUI(getScreenName(),datalabel[0]);
+                    onOff.setVisible(true);
+                    //.onOff.setOnOffListener(Router.getInstance());// add new case for editing
                 }else if (datalabel[1].equals(ElementType.getListType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                 
                 }else if (datalabel[1].equals(ElementType.getStandartBtnType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
-                	(new ButtonTypeGUI(getScreenName())).setVisible(true);
+                    ButtonTypeGUI  buttonTypeGUI= new ButtonTypeGUI(getScreenName(),datalabel[0]);
+                    buttonTypeGUI.addToTable(ElementController.getConditions(getScreenName(),labelElement.get(i).getText()));
+                    buttonTypeGUI.setVisible(true);
+                    onOff.setVisible(true);
                 }
             }
     }
