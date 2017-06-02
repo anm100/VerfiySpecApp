@@ -9,13 +9,15 @@ private Param parameter;
 private ArrayList<Action> actions=new  ArrayList<Action>(); 
 private final String type=ElementType.getOnOffType();
 private String elementName; 
-//private List <Action> actions= new ArrayList<>(); 
-//private List <MyCondition> conditions= new ArrayList<>(); 
 
 public OnOffType() {}
 
 public String getType() {
 	return type;
+}
+
+public Param getParameter() {
+	return parameter;
 }
 
 public String getParamName() {
@@ -42,7 +44,12 @@ public void loadElement() {
 @Override
 public String getStringPromela() {
 	// TODO Auto-generated method stub
-	return "";
+	if(actions.size() ==0){
+		return "";
+	}
+	String [] arr = new String[actions.size()];
+
+	return "action["+getParameter().getIndex()+"]==";
 }
 
 public void setParam(Param param) {

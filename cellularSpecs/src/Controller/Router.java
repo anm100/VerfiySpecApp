@@ -24,7 +24,7 @@ import Model.OnOffType;
 import Model.RequirementList;
 import ToolGUI.*;
 
-public class Router implements ActionListener,MouseListener,MouseMotionListener, ItemListener {
+public class Router implements ActionListener,MouseListener,MouseMotionListener ,ItemListener{
 	private static Router instance =null ; 
 	private int cordinateX; 
 	private int cordinateY; 
@@ -45,7 +45,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	private Screen screen;
 	private ScreenGUI screenGUI;
 	private int Location=0;
-
+	VerificationController verificationController = new VerificationController();
 
 
 	private AddActionGUI addActionGUI;
@@ -113,7 +113,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			WorkSpace.getLog().debug("verifiy Spec case");
 		 verifySpecGUI=new VerifySpecGUI();
 		VerifySpecGUI.setVerifySpecGUI(this);
-		VerifySpecGUI.setCheckBoxListener(this);
+		VerifySpecGUI.setCheckBoxListener(verificationController);
 		verifySpecGUI.setVisible(true);
 		//	verifySpecGUI.addRootScreen(st);
 			/*try {
@@ -188,7 +188,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			onOfGUI= new OnOfGUI(screenGUI.getScreenName(),null);
 			onOfGUI.setVisible(true);
 			onOfGUI.setOnOffListener(this);
-			onOfGUI.setParamChangeListener(this);
+		 	onOfGUI.setParamChangeListener(this);
 			onOfGUI.setParameterName(ScreenController.getParams(ElementType.getOnOffType(),screenGUI.getScreenName()));
 			break;
 			
@@ -432,6 +432,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	public void setGetNewLocation(Boolean getNewLocation) {
 		GetNewLocation = getNewLocation;
 	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		JComboBox s=(JComboBox)(e.getSource());
+		WorkSpace.getLog().debug("PARAM:"+WorkSpace.getInstance().getParamsMap().get(s.getSelectedItem().toString()));
+	}
 	
 	/*
 	 * \idea for update gui genery , maybe "!!!
@@ -442,76 +448,5 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	}*/
 
 
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-	JComboBox s=(JComboBox)(e.getSource());
-	WorkSpace.getLog().debug("PARAM:"+WorkSpace.getInstance().getParamsMap().get(s.getSelectedItem().toString()));
-	//	onOfGUI.setOnOff(		(WorkSpace.getInstance().getParamsMap().get(s.getSelectedItem().toString()).getParamVal()
-//		JCheckBox s=(JCheckBox)(e.getSource());
-//		WorkSpace.getLog().debug(s.getActionCommand());
-//		switch(s.getActionCommand())
-//		{
-//		case "1":
-//		WorkSpace.getLog().debug(e.getItem().toString());
-//		for(int i=0;i< ScreenController.getparams().size();i++)
-//		if(e.getItem().toString().equals(ScreenController.getparams().get(i).getParamName()))
-//		{
-//			buttonTypeGUI.addParamsValuesToComboBox(ScreenController.getparams().get(i).getValues());
-//		break;	
-//		}
-//		break;
-//		case "req1":
-//			WorkSpace.getLog().debug("req1 is selected");
-//			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,0);
-//			WorkSpace.getLog().debug(requirementList.getReqlist().get(0).getReq());
-//		break;
-//		
-//		case "req2":
-//			WorkSpace.getLog().debug("req2 is selected");
-//			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,1);
-//			WorkSpace.getLog().debug(requirementList.getReqlist().get(1).getReq());
-//		break;
-//		
-//		case "req3":
-//			WorkSpace.getLog().debug("req3 is selected");
-//			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,2);
-//			WorkSpace.getLog().debug(requirementList.getReqlist().get(2).getReq());
-//		break;
-//		
-//		case "req4":
-//			WorkSpace.getLog().debug("req4 is selected");
-//			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,3);
-//			WorkSpace.getLog().debug(requirementList.getReqlist().get(3).getReq());
-//		break;
-//		
-//		case "req5":
-//			WorkSpace.getLog().debug("req5 is selected");
-//			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,4);
-//			WorkSpace.getLog().debug(requirementList.getReqlist().get(4).getReq());
-//		break;
-//		
-//		case "req6":
-//			WorkSpace.getLog().debug("req6 is selected");
-//			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,5);
-//			WorkSpace.getLog().debug(requirementList.getReqlist().get(5).getReq());
-//		break;
-//		
-//		case "req7":
-//			WorkSpace.getLog().debug("req7 is selected");
-//			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,6);
-//			WorkSpace.getLog().debug(requirementList.getReqlist().get(6).getReq());
-//		break;
-//		
-//		case "req8":
-//			WorkSpace.getLog().debug("req8 is selected");
-//			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,7);
-//			WorkSpace.getLog().debug(requirementList.getReqlist().get(7).getReq());
-//		break;
-//		case "req9":
-//			WorkSpace.getLog().debug("req9 is selected");
-//			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,8);
-//			WorkSpace.getLog().debug(requirementList.getReqlist().get(8).getReq());
-//		break;
-//		}
-	}
+	
 }

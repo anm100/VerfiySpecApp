@@ -1,8 +1,6 @@
 package our.Utils;
 
 import Model.Action;
-import Model.Element;
-import Model.ElementActionInterface;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.OnOffType;
@@ -10,19 +8,24 @@ import Model.Param;
 import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
-import ToolGUI.EmptyNotEmptyGUI;
 
 public class BulidSpec {
 	
 	static WorkSpace wk;
 
 	public static void build(){
+		WorkSpace.getLog().debug("start loading spec");
 		WorkSpace.setInstance(null); 
 		wk=WorkSpace.getInstance();
 		wk.setWorkSpaceName("example ");
+		WorkSpace.getLog().debug("SPEC NAME:"+wk.getWorkSpaceName());
 		addParmsOnOff();
+		WorkSpace.getLog().debug("loading params onOFF_i");
+		
 		addScreens();
+		WorkSpace.getLog().debug("adding screens");
 		addelements();
+		WorkSpace.getLog().debug("adding elements for screen ");
 		WorkSpace.setInstance(wk); 
 	}
 	
@@ -85,6 +88,7 @@ public class BulidSpec {
 			OnOffType e; 
 			Param p; 
 			for (int i=0 ; i< fields.length; i++){
+				WorkSpace.getLog().debug("add element: "+fields[i]+" to "+screenName);
 				e = new OnOffType();
 				e.setElementName(fields[i]);
 				p = new Param(fields[i],"off", ElementType.getOnOffType());
@@ -115,7 +119,7 @@ public class BulidSpec {
 		 */
 		}
 		private static void addAction(String screenName,String elementName){
-			
+			WorkSpace.getLog().debug("add action to Airplane MODE");
 			OnOffType e = (OnOffType) wk.getScreenByName(screenName).getElementByName(elementName);
 			Action action =new Action("wifi=OFF");
 			action.addCond("airplane_mode==ON");
@@ -133,6 +137,7 @@ public class BulidSpec {
 			for (int i=0; i<10;i++){
 			Param p = new Param("onOff_"+i, "off", ElementType.getOnOffType());
 				wk.addParameterToHash(p);
+				WorkSpace.getLog().debug("add to hash params"+p.getParamName());
 
 				
 			}

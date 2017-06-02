@@ -17,6 +17,10 @@ public class Param implements Serializable{
 		this.type = type;
 	}
 
+	public int getIndex() {
+		return index;
+	}
+
 	public String getParamName() {
 		return paramName;
 	}
