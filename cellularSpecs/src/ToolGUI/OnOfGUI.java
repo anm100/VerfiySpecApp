@@ -1,6 +1,7 @@
 package ToolGUI;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.TextUI;
 import javax.swing.table.DefaultTableModel;
 
 import org.omg.PortableServer.ServantActivatorOperations;
@@ -38,6 +40,8 @@ import Model.WorkSpace;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class OnOfGUI extends JFrame {
 	protected JTextField txtUndefined;
@@ -52,6 +56,14 @@ public class OnOfGUI extends JFrame {
 	private  int colNumber=3;
 	private Object[][] data = {};
 	String ScreenName; 
+	private JTextField txtNewParameterName;
+	private String parameterName1;
+	public String getParameterName1() {
+		return parameterName1;
+	}
+	public void setParameterName1(String parameterName1) {
+		this.parameterName1 = parameterName1=txtNewParameterName.getText().toString();;
+	}
 	public OnOfGUI(String ScreenName,String eName)
 	{
 	
@@ -80,6 +92,28 @@ public class OnOfGUI extends JFrame {
 		elementName.setColumns(10);
 
 		parameterName = new JComboBox();
+		parameterName.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if((arg0.getItem().toString().equals("New..")))
+				{
+					txtNewParameterName.setVisible(true);
+					txtNewParameterName.setText("parameter name");
+					getStyle();
+				}
+				else
+				{
+					txtNewParameterName.setVisible(false);
+					getStyle();
+					parameterName1=arg0.getItem().toString();
+				}
+			}
+
+			private void getStyle() {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		parameterName.setModel(new DefaultComboBoxModel(new String[] {"new parameter"}));
 		parameterName.setBounds(118, 89, 152, 22);
 		getContentPane().add(parameterName);
@@ -156,6 +190,33 @@ public class OnOfGUI extends JFrame {
 			apps_scrollPane.setViewportView(apps_table);
 			apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			apps_table.setBackground(Color.WHITE);
+			
+			txtNewParameterName = new JTextField();
+			
+			getContentPane().add(txtNewParameterName);
+			txtNewParameterName.setForeground(Color.GRAY);
+			txtNewParameterName.setText("parameter name");
+			txtNewParameterName.setVisible(false);
+			txtNewParameterName.setBounds(280, 90, 152, 20);
+			txtNewParameterName.setToolTipText("add new Parameter");
+			txtNewParameterName.addFocusListener(new FocusListener() {
+		
+				public void focusGained(FocusEvent arg0) {
+					txtNewParameterName.setForeground(Color.black);
+					txtNewParameterName.setText("");
+				}
+
+				@Override
+				public void focusLost(FocusEvent arg0) {
+					// TODO Auto-generated method stub
+					txtNewParameterName.setText("s");
+					
+				}
+			});
+
+
+
+			
 			if (ElementController.elementIsExist(ScreenName,eName ))
 			{
 				WorkSpace.getLog().debug(" filling data to this gui");
@@ -194,7 +255,7 @@ public class OnOfGUI extends JFrame {
 		this.defaultValue = defaultValue;
 	}
 	public String getParameterName() {
-		return parameterName.getSelectedItem().toString();
+		return parameterName1;
 	}
 	public void setParameterName(String []  parameterNames) {
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);

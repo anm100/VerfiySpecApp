@@ -12,8 +12,12 @@ import org.json.simple.parser.JSONParser;
 
 public class RequirementList {
 	
+	
 	private static List <Requirement> reqlist = new ArrayList<Requirement>();
-
+	public RequirementList()
+	{
+		loadreqs();
+	}
  public void addRequirement(Requirement r){
 	 reqlist.add(r); 
  }

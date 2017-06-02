@@ -140,6 +140,7 @@ public class WorkSpaceController {
 	private static void elementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l) {
 		
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
+		l.setElementName(elementGui.getElementName());	
 		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do "+l.getParamName());
@@ -150,9 +151,10 @@ public class WorkSpaceController {
 		
 	}
 	public static void removelementfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
-		System.out.println(elementGui.getParameterName());
-		System.out.println(elementGui.getDefaultValue());
+
+
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
+		
 		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do "+l.getParamName());

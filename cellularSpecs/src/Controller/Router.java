@@ -194,7 +194,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			
 		case "_save_on_off":
 			WorkSpace.getLog().debug("do _save_on_off.. ");
-
 			WorkSpaceController.addelementToGUI(screenGUI, onOfGUI,new OnOffType());
 			break;
 		case"_edit_on_off":
