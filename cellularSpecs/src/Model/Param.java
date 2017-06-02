@@ -3,20 +3,20 @@ package Model;
 import java.io.Serializable;
 
 public class Param implements Serializable{
-	
+	private int index;
+	private static int counter=0; 
 	private String paramName; 
 	private String paramVal;
 	private String type;
-	private String[] defultValues;
 	
 
 	
 	public Param(String paramName, String paramVal, String type) {
 		super();
+		this.index=counter++;
 		this.paramName = paramName;
-		this.paramVal = paramVal;
+		this.paramVal = paramVal; 
 		this.type = type;
-		this.defultValues=defultValues;
 	}
 
 	public String getParamName() {

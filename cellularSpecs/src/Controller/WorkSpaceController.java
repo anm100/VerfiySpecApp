@@ -21,6 +21,7 @@ import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
 import ToolGUI.AddParamterGUI;
+import ToolGUI.AddScreenGUI;
 import ToolGUI.ButtonTypeGUI;
 import ToolGUI.EmptyNotEmptyGUI;
 import ToolGUI.ListTypeGUI;
@@ -95,10 +96,7 @@ public class WorkSpaceController {
 		}
 
 	}
-	public static void addScreenToGUI(ScreenGUI screenGUI,ListTypeGUI elementGui,ListElementType l)
-	{
-		
-	}
+	
 	public static void addelementToGUI(ScreenGUI screenGUI,ListTypeGUI elementGui,ListElementType l)
 	{
 	
@@ -107,7 +105,7 @@ public class WorkSpaceController {
 		l.setValues(elementGui.getValues());
 		WorkSpace.getLog().debug("values from element :: update"+l.getValues()[0]);
 
-		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("add element to workspace struct");
 
 		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
@@ -122,7 +120,7 @@ public class WorkSpaceController {
 	{
 	
 		l.setElementName(elementGui.getElementName().getText());
-		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
 		
 		WorkSpace.getLog().debug("--show element in GUI");
@@ -135,7 +133,7 @@ public class WorkSpaceController {
 
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		l.setParam(p);
-		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do "+l.getParamName());
 		WorkSpace.getInstance().getParamsMap().put(elementGui.getParameterName(), p);
 		WorkSpace.getLog().debug("--show element in GUI");
@@ -143,6 +141,26 @@ public class WorkSpaceController {
 		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.dispose();
 
+	}
+	
+	public static void addScreenToGUI(AddScreenGUI addScreen,ScreenGUI screenGUI,int cordinateX,int cordinateY){
+		Screen screen = new Screen();
+		screen.setScreenName(addScreen.getScreenName().getText().toString());
+		screen.setDescription(addScreen.getDescription().getText().toString());
+		screen.setCordinateX(cordinateX);
+		screen.setCordinateY(cordinateY);
+		Router.getInstance().setGetNewLocation(true);
+		 screenGUI=new ScreenGUI(screen.getScreenName(),screen.getCordinateX(),screen.getCordinateY());//there is a problem
+		//screenGUI.addScreenListener(a);
+		WorkSpace.getInstance().addScreen(screen.getScreenName(), screen);
+		WorkSpace.getLog().debug("this screen name  added -> "+screen.getScreenName());
+
+		
+		screenGUI.addScreenMouseListener2(Router.getInstance());
+		//mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
+		Router.getInstance().getMainScreenGui().getContentPane().add(screenGUI);
+		Router.getInstance().getMainScreenGui().refreshWorkspace();
+		addScreen.dispose();
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
 		int size;
@@ -154,7 +172,7 @@ public class WorkSpaceController {
 			l.addCondition(st[0], st[1], st[2]);
 		}
 		l.setTransition(screenGUI.getScreenName(), elementGui.getMoveTo());
-		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do "+l.getELementName());
 		WorkSpace.getLog().debug("--show element in GUI");
 		screenGUI.addElementLabel(l);
@@ -167,12 +185,12 @@ public class WorkSpaceController {
 		if(addparamter.getParamType().equals(ElementType.getListType())){
 			ParamList p =new ParamList(addparamter.getParameterName(), addparamter.getDefaultValue(), addparamter.getParamType());
 			p.setValues(addparamter.getValues());
-			WorkSpace.getInstance().getParamsMap().put(p.getParamName(), p);
+			WorkSpace.getInstance().addParameterToHash(p);
 			WorkSpace.getLog().debug("add param list"+p.getParamName());
 		}
 		else {
 			Param p =new Param(addparamter.getParameterName(), addparamter.getDefaultValue(), addparamter.getParamType());
-			WorkSpace.getInstance().getParamsMap().put(p.getParamName(), p);
+			WorkSpace.getInstance().addParameterToHash(p);
 			WorkSpace.getLog().debug("add param on/off - empty/notEmpty"+p.getParamName());
 			WorkSpace.getLog().debug("getfrom hash param the parm"+WorkSpace.getInstance().getParamsMap().get(p.getParamName()));
 

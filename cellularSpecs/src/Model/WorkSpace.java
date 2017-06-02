@@ -56,6 +56,9 @@ public static Logger getLog() {
 public void addScreen(String screenName , Screen s){
 	this.screensMap.put(screenName,s);	
 }
+public void deleteScreen(Screen s){
+	this.screensMap.remove(s);	
+}
 public void updateScreen(String screenName , Screen s){
 	this.screensMap.remove(screenName);
 	this.screensMap.put(screenName,s);	
@@ -112,8 +115,8 @@ public void setIsPressed(boolean isPressed) {
 public HashMap<String, Param> getParamsMap() {
 	return ParamsMap;
 }
-public void addParameterToHash(String ParameterName , Param p){
-	this.ParamsMap.put(ParameterName,p);	
+public void addParameterToHash(Param p){
+	this.ParamsMap.put(p.getParamName(),p);	
 }
 public void updatParameterInHash(String ParameterName , Param p){
 	this.ParamsMap.remove(ParameterName);

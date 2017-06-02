@@ -186,6 +186,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 		case "Delete screen":
 			WorkSpace.getLog().debug("delete screen case");
 			Router.getInstance().screenGUI.setVisible(false);
+			WorkSpace.getInstance().deleteScreen(WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName()));
 			break;
 		case "Move screen":
 			WorkSpace.getLog().debug("Move screen");

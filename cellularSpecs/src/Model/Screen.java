@@ -128,8 +128,8 @@ public class Screen implements Serializable{
 		this.description = description;
 	}
 	
-	public void addElement(String elementName , Element s){
-		this.elementsMap.put(elementName,s);	
+	public void addElement(Element s){
+		this.elementsMap.put(s.getParamName(),s);	
 	}
 	public Element getElementByName(String elementName){
 		return this.elementsMap.get(elementName);
