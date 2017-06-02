@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Container;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.FileInputStream;
@@ -10,6 +11,8 @@ import java.lang.reflect.Parameter;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.swing.JLabel;
 
 import Model.Element;
 import Model.ElementType;
@@ -132,16 +135,24 @@ public class WorkSpaceController {
 
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
+		elementToGUI(screenGUI,elementGui,l);
+		screenGUI.addElementLabel(l);
+	}
+	public static void editEmentfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l) {
+		elementToGUI(screenGUI,elementGui,l);
+		screenGUI.editElementLabel(l);
+	}
+	private static void elementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l) {
+		
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
 		WorkSpace.getLog().debug("do "+l.getParamName());
 		WorkSpace.getInstance().getParamsMap().put(elementGui.getParameterName(), p);
 		WorkSpace.getLog().debug("--show element in GUI");
-		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.dispose();
-
+		
 	}
 	public static void removelementfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
 		System.out.println(elementGui.getParameterName());
@@ -175,6 +186,7 @@ public class WorkSpaceController {
 		elementGui.dispose();
 
 	}
+
 	public static void addNewParam(AddParamterGUI addparamter) {
 		WorkSpace.getLog().debug("check type:"+addparamter.getParamType());
 		if(addparamter.getParamType().equals(ElementType.getListType())){
@@ -193,5 +205,6 @@ public class WorkSpaceController {
 		
 
 	}
+
 
 }

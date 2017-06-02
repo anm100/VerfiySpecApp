@@ -61,6 +61,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	private AddScreenGUI addScreen;
 	private Screen screen;
 	private ScreenGUI screenGUI;
+	private int Location=0;
+
+
+
 	private AddActionGUI addActionGUI;
 	private AddConditonGui addConditonGui;
 	private AddParamterGUI addparamterGUI;
@@ -201,17 +205,19 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			onOfGUI.setVisible(true);
 			onOfGUI.setOnOffListener(this);
 			onOfGUI.setParamChangeListener(this);
-			String [] st ={"aaaaa"};
 			onOfGUI.setParameterName(ScreenController.getParams(ElementType.getOnOffType(),screenGUI.getScreenName()));
 			break;
+			
 		case "_save_on_off":
-			
 			WorkSpace.getLog().debug("do _save_on_off.. ");
+
 			WorkSpaceController.addelementToGUI(screenGUI, onOfGUI,new OnOffType());
-			
+			break;
+		case"_edit_on_off":
+			WorkSpace.getLog().debug("Router>-edit the onOff Type");
+			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI,new OnOffType());
 			break;
 		case "_add_Action_OnOff":
-			
 			 addActionGUI=new AddActionGUI();
 			 addActionGUI.setParameterName(onOfGUI.getParameterName());
 			String [] values= WorkSpace.getInstance().getParamsMap().get(onOfGUI.getParameterName()).getValues();//add attribute to param with defult values ->ask
@@ -219,6 +225,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			// addActionGUI.setParameterName(onOfGUI.getParamName());
 			addActionGUI.setVisible(true);
 		break;
+		
 			
 		case "_menu_list_type": 
 			WorkSpace.getLog().debug("you chosed List type element");
@@ -289,6 +296,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	}
 	public void setOnOfGUI(OnOfGUI onOfGUI) {
 		this.onOfGUI = onOfGUI;
+	}
+	public int getLocation() {
+		return Location;
+	}
+	public void setLocation(int location) {
+		Location = location;
 	}
 	private void chooseFileLocation() {
 		JFileChooser chooser = new JFileChooser();
@@ -423,7 +436,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	public MainScreenGui getMainScreenGui() {
 		return mainScreenGui;
 	}
-
+	public ScreenGUI getScreenGUI() {
+		return screenGUI;
+	}
+	public void setScreenGUI(ScreenGUI screenGUI) {
+		this.screenGUI = screenGUI;
+	}
 	public Boolean getGetNewLocation() {
 		return GetNewLocation;
 	}

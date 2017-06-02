@@ -161,7 +161,6 @@ public class Screen implements Serializable{
 			e= (Element)pair.getValue();
 			states+="Cahnge"+this.getScreenName()+e.getParamName()+",";
 		}
-
 		return states;
 	}
 }
