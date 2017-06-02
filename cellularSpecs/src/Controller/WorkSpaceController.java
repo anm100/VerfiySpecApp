@@ -130,7 +130,20 @@ public class WorkSpaceController {
 
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
+		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
+		l.setParam(p);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l.getParamName(), l);
+		WorkSpace.getLog().debug("do "+l.getParamName());
+		WorkSpace.getInstance().getParamsMap().put(elementGui.getParameterName(), p);
+		WorkSpace.getLog().debug("--show element in GUI");
+		screenGUI.addElementLabel(l);
+		Router.getInstance().getMainScreenGui().refreshWorkspace();
+		elementGui.dispose();
 
+	}
+	public static void removelementfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
+		System.out.println(elementGui.getParameterName());
+		System.out.println(elementGui.getDefaultValue());
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);

@@ -32,13 +32,14 @@ public class VerificationController {
 	public static String translateToPROMELA(){
 		WorkSpace w  =WorkSpace.getInstance();
 		return "mytype={"+ScreenController.getAllScreenName()
-						 +"changeParam};\n"
+						 +WorkSpace.getInstance().getChangeStates()+""
 						 +getLTLReq()
 						 +"active proctype vm()\n{\n"
 						 +"do\n"
 						 +getPG()
 						 +"od\n}";
 	}
+
 	private static String getLTLReq() {
 		String st="";
 		Router.getInstance().getRequirementList().getReqlist().get(0);

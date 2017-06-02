@@ -171,7 +171,7 @@ public class OnOfGUI extends JFrame {
 		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,e.get(1)));
 		parameterName.setSelectedItem(e.get(1));
 		setOnOff(e.get(2));
-		addToTable(ElementController.getActrion(ScreenName,eName));
+		addToTable(ElementController.getActrion(getScreenName(),eName));
 	}
 	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
 	       JLabel lblNewLabel = new JLabel(string);
@@ -230,6 +230,7 @@ public class OnOfGUI extends JFrame {
 	}
 	public  void addToTable(String [][] st)//adding matrix to jtable 
 	{
+		WorkSpace.getLog().debug("add conditions to table");
 		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
 		  int row = st.length;
 		  for(int i=0;i<row;i++)
