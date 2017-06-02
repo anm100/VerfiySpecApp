@@ -35,17 +35,16 @@ public class BulidSpec {
 		
 	}
 	private  static void addelements(){
-		Param p;
 		StandartButtonType s; 
 		/* 
 		 * data for  log in screen 
 		 */
-
+		
 		// login button 
 		s = new StandartButtonType();
 		s.setElementName("log in");
 		s.setTransition("loginScreen","mainScreen");
-		wk.getScreenByName("loginScreen").addElement(s.getParamName(),s);
+		wk.getScreenByName("loginScreen").addElement(s);
 		addElemenEmpty("loginScreen",new String[] {"user","pass"});
 		addConditions("loginScreen","log in", new String [] {"user","pass"}); 
 
@@ -61,7 +60,7 @@ public class BulidSpec {
 		s = new StandartButtonType();
 		s.setElementName("save");
 		s.setTransition("createNewEvent","mainScreen");
-		wk.getScreenByName("createNewEvent").addElement(s.getParamName(),s);
+		wk.getScreenByName("createNewEvent").addElement(s);
 		addElemenEmpty("createNewEvent",new String[] {"title", "description", "date", "time","more details",});
 	addConditions("createNewEvent","save", new String [] {"title", "description", "date", "time"}); 
 
@@ -70,35 +69,29 @@ public class BulidSpec {
 	
 		private static void addElemenEmpty(String screenName, String [] fields){
 			EmptyNEmptyType e; 
-			Screen s; 
 			Param p; 
 			for (int i=0 ; i< fields.length; i++){
 				e = new EmptyNEmptyType();
 				e.setElementName(fields[i]);
 				p = new Param(fields[i],"Empty", ElementType.getEmptyNotEmptyType());
 				e.setParam(p);
-				wk.addParameterToHash(p.getParamName(), p);
-				wk.getScreenByName(screenName).addElement(e.getParamName(), e);
+				wk.addParameterToHash(p);
+				wk.getScreenByName(screenName).addElement(e);
 			}
-			
-			s=wk.getScreenByName(screenName);
 			
 			
 		}
 		private static void addElementONOFF(String screenName, String [] fields){
 			OnOffType e; 
-			Screen s; 
 			Param p; 
 			for (int i=0 ; i< fields.length; i++){
 				e = new OnOffType();
 				e.setElementName(fields[i]);
 				p = new Param(fields[i],"off", ElementType.getOnOffType());
 				e.setParam(p);
-				wk.addParameterToHash(p.getParamName(), p);
-				wk.getScreenByName(screenName).addElement(e.getParamName(), e);
+				wk.addParameterToHash(p);
+				wk.getScreenByName(screenName).addElement(e);
 			}
-			
-			s=wk.getScreenByName(screenName);
 			
 			
 		}
@@ -115,7 +108,7 @@ public class BulidSpec {
 				s.addCondition(e1.getParamName(),"==","NotEmpty");
 			}
 			//update element 
-			wk.getScreenByName(screenName).addElement(s.getELementName(), s);
+			wk.getScreenByName(screenName).addElement(s);
 			
 		/*
 		 * ==== for create new event 
@@ -131,14 +124,15 @@ public class BulidSpec {
 			action =new Action("bluetooth=OFF");
 			action.addCond("airplane_mode==ON");
 			e.addAction(action);
+			
 			//update 
-			wk.getScreenByName(screenName).addElement(e.getELementName(), e);
+			wk.getScreenByName(screenName).addElement(e);
 
 		}
 		private static void addParmsOnOff(){
 			for (int i=0; i<10;i++){
 			Param p = new Param("onOff_"+i, "off", ElementType.getOnOffType());
-				wk.addParameterToHash(p.getParamName(), p);
+				wk.addParameterToHash(p);
 
 				
 			}
