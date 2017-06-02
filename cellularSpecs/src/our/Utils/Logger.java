@@ -2,10 +2,9 @@ package our.Utils;
 
 public class Logger {
 
-	public static boolean isDebug = true;
+	private  boolean isDebug ;
 
-	public Logger(boolean debug) {
-		isDebug = debug;
+	public Logger() {
 	}
 
 	public void log(String message) {
@@ -36,5 +35,10 @@ public class Logger {
 
 		log("-DEBUG: " + message);
 	}
+
+	public  void setDebug(boolean sDebug) {
+		isDebug = sDebug;
+	}
+	
 }
 

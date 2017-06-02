@@ -10,7 +10,7 @@ public class WorkSpace implements Serializable {
 private  String  workSpaceName;
 private String workSpaceLocation;
 private static WorkSpace instance =null ; 
-private static Logger logger;
+private final static Logger logger=new Logger();
 /*
  * number of screens on workspace 
  */public static int numScreen;
@@ -36,11 +36,9 @@ public  static WorkSpace getInstance()
 {
 	if(null==instance ){
 	instance=new WorkSpace();
-	
-	if(logger == null)
-	logger=new Logger(true);
 	}
 	return instance;
+		
 }
 
 
@@ -48,9 +46,6 @@ public static void setInstance(WorkSpace instance) {
 	WorkSpace.instance = instance;
 }
 public static Logger getLog() {
-	if(logger==null){
-		return new Logger(true); 
-	}
 	return logger;
 }
 public void addScreen(String screenName , Screen s){

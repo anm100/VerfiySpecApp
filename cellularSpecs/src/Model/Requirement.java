@@ -10,6 +10,14 @@ public class Requirement implements Serializable{
 	private boolean isSelected;
 	
 	
+	
+	public Requirement(String rID, String req, String formula) {
+		super();
+		this.rID = rID;
+		this.req = req;
+		this.formula = formula;
+		this.isSelected = false;
+	}
 	public String getFormula() {
 		return formula;
 	}

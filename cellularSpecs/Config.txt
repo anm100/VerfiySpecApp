@@ -1,0 +1,53 @@
+{
+  "Application Name": "FORMAL VERIFICATION OF SPEC OF APPLICATION",
+  "Author": "Saeed Namih	&& 	Ahmad Mnasra",
+  "isDebug": true,
+  "Version":"1.0.0"
+  "Reqiuriement_List": [
+    {
+      "ID": "req1",
+      "name": "There is Always an exit from any screen.",
+      "formula": "{[]((state==BoPo_MainSreen) -> (<>(!(state==BoPo_MainSreen))))}"
+    },
+    {
+      "ID": "req2",
+      "name": "There is a screen (root), such that each screen is reached from it.",
+      "formula": " "
+    },
+    {
+      "ID": "req3",
+      "name": "We can't  move from screen_j to screen_i without changing or defining a parameter.",
+      "formula": "{!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParmX)U(state==BoPo_MainSreen))))}"
+    },
+    {
+      "ID": "req4",
+      "name": "Parameter cannot accept value that is not defined in the List of the possible values.",
+      "formula": "{[](((ack==ON) ||(ack==OFF))->(!<>((!(ack==OFF))&&(!(ack==ON)))))}"
+    },
+    {
+      "ID": "req5",
+      "name": "There is no path to a screen that allows Illegal parameters values.",
+      "formula": " "
+    },
+    {
+      "ID": "req6",
+      "name": "Each list of parameters must be defined before entering a screen.",
+      "formula": "{[]((state==BoPo_MainSreen)->((title==NotEmpty)&&(max==NotEmpty)&&(chooseCategory==NotEmpty)))}"
+    },
+    {
+      "ID": "req7",
+      "name": "Parameters values cannot change unless it was intended to do so in its path",
+      "formula": " "
+    },
+    {
+      "ID": "req8",
+      "name": "All parameters always must be consistent.",
+      "formula": " "
+    },
+    {
+      "ID": "req9",
+      "name": "If a Parameter changes  in a specific state the change should be updated wherever the parameter is used.",
+      "formula": " "
+    }
+  ]
+}

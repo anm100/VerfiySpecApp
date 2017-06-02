@@ -7,27 +7,13 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import our.Utils.BulidSpec;
-import Model.Element;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
@@ -35,8 +21,6 @@ import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
 import Model.OnOffType;
-import Model.Param;
-import Model.Requirement;
 import Model.RequirementList;
 import ToolGUI.*;
 
@@ -50,8 +34,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 	private String specName;
 	public Boolean inner =false;
 	private RequirementList requirementList;
-	private String [] st; 
-	private static  Boolean GetNewLocation=false;
+	private  Boolean GetNewLocation=false;
 	private OnOfGUI  onOfGUI; 
 	private ListTypeGUI  listTypeGUI;
 	private EmptyNotEmptyGUI emptyNotEmptyGUI;
@@ -121,7 +104,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			
 		break;
 		case("Verifiy SPEC"):
-			VerificationController.setRequiremens();
+		//	VerificationController.setRequiremens();
 	
 			WorkSpace.getLog().debug("verifiy Spec case");
 		 verifySpecGUI=new VerifySpecGUI();

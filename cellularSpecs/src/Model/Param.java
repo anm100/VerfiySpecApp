@@ -8,9 +8,7 @@ public class Param implements Serializable{
 	private String paramName; 
 	private String paramVal;
 	private String type;
-	
-
-	
+		
 	public Param(String paramName, String paramVal, String type) {
 		super();
 		this.index=counter++;
