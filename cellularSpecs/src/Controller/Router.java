@@ -54,7 +54,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private  Router(NewSpecGUI newSpecGui)
 	{
 		this.newSpecGui=newSpecGui;
-		requirementList=new RequirementList();
+		//requirementList=new RequirementList();
 	}
 	/**
 	 * @wbp.parser.entryPoint
@@ -198,7 +198,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			break;
 		case"_edit_on_off":
 			WorkSpace.getLog().debug("Router>-edit the onOff Type");
-			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI,new OnOffType());
+			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI);
+			
 			break;
 		case "_add_Action_OnOff":
 			 addActionGUI=new AddActionGUI();

@@ -129,7 +129,7 @@ public class Screen implements Serializable{
 	}
 	
 	public void addElement(Element s){
-		this.elementsMap.put(s.getParamName(),s);	
+		this.elementsMap.put(s.getELementName(),s);	
 	}
 	public Element getElementByName(String elementName){
 		return this.elementsMap.get(elementName);
