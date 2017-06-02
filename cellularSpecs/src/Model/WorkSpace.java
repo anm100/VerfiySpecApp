@@ -121,7 +121,6 @@ public String getWorkSpaceLocation() {
 	return workSpaceLocation;
 }
 
-
 public void setWorkSpaceLocation(String workSpaceLocation) {
 	this.workSpaceLocation = workSpaceLocation;
 }

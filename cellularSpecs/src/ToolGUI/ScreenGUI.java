@@ -49,6 +49,7 @@ public class ScreenGUI extends JScrollPane {
 	private JLabel index;
 	private JPanel mainScreenPanel;
 	private ArrayList<JLabel> labelElement = new ArrayList<JLabel>();
+	private MouseEvent eventLabel;
 	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) 
 	{
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -162,7 +163,7 @@ public class ScreenGUI extends JScrollPane {
 	
 	public void addElementLabel (Element elem){
 		
-		JLabel element = new JLabel(elem.getParamName()+":"+elem.getType());
+		JLabel element = new JLabel(elem.getParamName()+","+elem.getType());
 		this.lastCoordinateElem+=25; 
 		element.setBounds(1, lastCoordinateElem, 143, 25);
 		element.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(180, 180, 180)));
@@ -179,7 +180,7 @@ public class ScreenGUI extends JScrollPane {
 	}
 	public void editElementLabel (Element elem){
 		
-		JLabel element = new JLabel(elem.getParamName()+":"+elem.getType());
+		JLabel element = new JLabel(elem.getParamName()+","+elem.getType());
 		element.setBounds(1,editCoordinateElem, 143, 25);
 		element.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(180, 180, 180)));
 
@@ -196,7 +197,7 @@ public class ScreenGUI extends JScrollPane {
 	//=============================================
 	public void removeElementLabel (Element elem){
 		
-		JLabel element = new JLabel(elem.getParamName()+":"+elem.getType());
+		JLabel element = new JLabel(elem.getParamName()+","+elem.getType());
 		this.lastCoordinateElem+=25; 
 		element.setBounds(1, lastCoordinateElem, 143, 25);
 		element.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(180, 180, 180)));
@@ -214,11 +215,12 @@ public class ScreenGUI extends JScrollPane {
 	private void onMouseClicked(MouseEvent e) {
 		int i = 0;
 		String [] datalabel;
+		eventLabel=e;
 		for ( i = 0; i < labelElement.size(); i++)
             if (e.getSource() == labelElement.get(i)) {
-
+            	
             	// search the label is selected
-                datalabel=labelElement.get(i).getText().toString().split(":");
+                datalabel=labelElement.get(i).getText().toString().split(",");
                 WorkSpace.getLog().debug("Label data  " + datalabel[0]+datalabel[1] + "->1");
                 // getText - split by ":" the index 1 = type of element 
                 if(datalabel[1].equals(ElementType.getEmptyNotEmptyType())){
@@ -229,8 +231,9 @@ public class ScreenGUI extends JScrollPane {
                     onOff.setOnOffListener(Router.getInstance());
                     onOff.setVisible(true);
                     editCoordinateElem=labelElement.get(i).getY();
+                    
                     index=(JLabel) e.getComponent();
-                    e.getComponent().getParent().remove(e.getComponent());
+                   // e.getComponent().getParent().remove(e.getComponent());
                     Router.getInstance().setOnOfGUI(onOff);
                     Router.getInstance().setScreenGUI(this);
 
@@ -245,6 +248,11 @@ public class ScreenGUI extends JScrollPane {
                 }
             }
     }
+
+	public MouseEvent getEventLabel() {
+		return eventLabel;
+	}
+	
 }
 	
 

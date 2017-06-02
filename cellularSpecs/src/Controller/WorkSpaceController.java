@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.FileInputStream;
@@ -10,6 +11,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+
+
+
+import javax.swing.JLabel;
 
 import Model.Element;
 import Model.ElementType;
@@ -133,9 +138,17 @@ public class WorkSpaceController {
 		elementToGUI(screenGUI,elementGui,l);
 		screenGUI.addElementLabel(l);
 	}
-	public static void editEmentfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l) {
-		elementToGUI(screenGUI,elementGui,l);
-		screenGUI.editElementLabel(l);
+	public static void editEmentfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui) {
+		String[] data=((JLabel)screenGUI.getEventLabel().getComponent()).getText().split(",");
+		WorkSpace.getLog().debug(data[0]+" "+screenGUI.getScreenName());
+		OnOffType e= (OnOffType) WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName()).getElementByName(data[0]);
+		WorkSpace.getLog().debug(e.getELementName());
+        ((JLabel)screenGUI.getEventLabel().getComponent()).setText(elementGui.getElementName()+","+ElementType.getOnOffType());
+        e.setElementName(elementGui.getElementName());
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(e);
+		((JLabel)screenGUI.getEventLabel().getComponent()).getParent().update(screenGUI.getGraphics());
+		elementGui.setVisible(false);
+	
 	}
 	private static void elementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l) {
 		
