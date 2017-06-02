@@ -7,8 +7,10 @@ import javax.swing.JPanel;
 
 import Controller.ElementController;
 import Controller.Router;
+import Controller.WorkSpaceController;
 import Model.Element;
 import Model.ElementType;
+import Model.OnOffType;
 import Model.WorkSpace;
 
 import java.awt.Color;
@@ -40,8 +42,11 @@ public class ScreenGUI extends JScrollPane {
 	private JMenuItem List;
 	private JMenuItem changeName;
 	private JMenuItem deleteScreen;
+	private JLabel label;
 	private JMenuItem moveScreen;
-	private int lastCoordinateElem=21; 
+	private int lastCoordinateElem=21;
+	private int editCoordinateElem=0;
+	private JLabel index;
 	private JPanel mainScreenPanel;
 	private ArrayList<JLabel> labelElement = new ArrayList<JLabel>();
 	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) 
@@ -172,6 +177,22 @@ public class ScreenGUI extends JScrollPane {
 		this.labelElement.add(element); 
 		mainScreenPanel.add(element);
 	}
+	public void editElementLabel (Element elem){
+		
+		JLabel element = new JLabel(elem.getParamName()+":"+elem.getType());
+		element.setBounds(1,editCoordinateElem, 143, 25);
+		element.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(180, 180, 180)));
+
+		element.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                onMouseClicked(e);
+            }
+        });
+   
+		this.labelElement.add(element); 
+		mainScreenPanel.add(element);
+	}
 	//=============================================
 	public void removeElementLabel (Element elem){
 		
@@ -204,12 +225,15 @@ public class ScreenGUI extends JScrollPane {
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                 }else if (datalabel[1].equals(ElementType.getOnOffType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
-                    e.getComponent().getParent().remove( e.getComponent());
-                  //  e.getComponent().getX();
                     OnOfGUI  onOff= new OnOfGUI(getScreenName(),datalabel[0]);
                     onOff.setOnOffListener(Router.getInstance());
                     onOff.setVisible(true);
+                    editCoordinateElem=labelElement.get(i).getY();
+                    index=(JLabel) e.getComponent();
+                    e.getComponent().getParent().remove(e.getComponent());
                     Router.getInstance().setOnOfGUI(onOff);
+                    Router.getInstance().setScreenGUI(this);
+
                 }else if (datalabel[1].equals(ElementType.getListType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                 

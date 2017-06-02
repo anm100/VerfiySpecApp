@@ -14,10 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-
-
-
-
+import org.omg.PortableServer.ServantActivatorOperations;
 
 import ui.utils.MyTableModel;
 
@@ -172,6 +169,7 @@ public class OnOfGUI extends JFrame {
 		parameterName.setSelectedItem(e.get(1));
 		setOnOff(e.get(2));
 		addToTable(ElementController.getActrion(getScreenName(),eName));
+		btnSave.setActionCommand("_edit_on_off");
 	}
 	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
 	       JLabel lblNewLabel = new JLabel(string);

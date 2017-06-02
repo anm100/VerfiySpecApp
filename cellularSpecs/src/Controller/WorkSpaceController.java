@@ -4,17 +4,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Parameter;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import Model.Element;
 import Model.ElementType;
@@ -22,7 +17,6 @@ import Model.EmptyNEmptyType;
 import Model.ListElementType;
 import Model.OnOffType;
 import Model.ParamList;
-import Model.Requirement;
 import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
@@ -136,16 +130,24 @@ public class WorkSpaceController {
 
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
+		elementToGUI(screenGUI,elementGui,l);
+		screenGUI.addElementLabel(l);
+	}
+	public static void editEmentfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l) {
+		elementToGUI(screenGUI,elementGui,l);
+		screenGUI.editElementLabel(l);
+	}
+	private static void elementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l) {
+		
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do "+l.getParamName());
 		WorkSpace.getInstance().addParameterToHash(p);
 		WorkSpace.getLog().debug("--show element in GUI");
-		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.dispose();
-
+		
 	}
 	public static void removelementfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
 		System.out.println(elementGui.getParameterName());
@@ -199,6 +201,7 @@ public class WorkSpaceController {
 		elementGui.dispose();
 
 	}
+
 	public static void addNewParam(AddParamterGUI addparamter) {
 		WorkSpace.getLog().debug("check type:"+addparamter.getParamType());
 		if(addparamter.getParamType().equals(ElementType.getListType())){
