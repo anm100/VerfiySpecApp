@@ -172,12 +172,30 @@ public class ScreenGUI extends JScrollPane {
 		this.labelElement.add(element); 
 		mainScreenPanel.add(element);
 	}
+	//=============================================
+	public void removeElementLabel (Element elem){
+		
+		JLabel element = new JLabel(elem.getParamName()+":"+elem.getType());
+		this.lastCoordinateElem+=25; 
+		element.setBounds(1, lastCoordinateElem, 143, 25);
+		element.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(180, 180, 180)));
+
+		element.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                onMouseClicked(e);
+            }
+        });
+   //================================================
+		this.labelElement.add(element); 
+		mainScreenPanel.add(element);
+	}
 	private void onMouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		// to know what the label we are clicked 
+		int i = 0;
 		String [] datalabel;
-		for (int i = 0; i < labelElement.size(); i++)
+		for ( i = 0; i < labelElement.size(); i++)
             if (e.getSource() == labelElement.get(i)) {
+
             	// search the label is selected
                 datalabel=labelElement.get(i).getText().toString().split(":");
                 WorkSpace.getLog().debug("Label data  " + datalabel[0]+datalabel[1] + "->1");
@@ -186,11 +204,12 @@ public class ScreenGUI extends JScrollPane {
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                 }else if (datalabel[1].equals(ElementType.getOnOffType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
+                    e.getComponent().getParent().remove( e.getComponent());
+                  //  e.getComponent().getX();
                     OnOfGUI  onOff= new OnOfGUI(getScreenName(),datalabel[0]);
+                    onOff.setOnOffListener(Router.getInstance());
                     onOff.setVisible(true);
-                    onOff.addToTable(ElementController.getActrion(getScreenName(),datalabel[0]));
-
-                    //.onOff.setOnOffListener(Router.getInstance());// add new case for editing
+                    Router.getInstance().setOnOfGUI(onOff);
                 }else if (datalabel[1].equals(ElementType.getListType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                 

@@ -152,4 +152,16 @@ public class Screen implements Serializable{
 				+elemets
 				+"fi"; 
 	}
+	public  String getChangeStates(){
+		Element e ;
+		String states=new String("");
+		Iterator it = this.elementsMap.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			e= (Element)pair.getValue();
+			states+="Cahnge"+this.getScreenName()+e.getParamName()+",";
+		}
+
+		return states;
+	}
 }

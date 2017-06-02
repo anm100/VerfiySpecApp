@@ -159,7 +159,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 			} catch (IOException eb) {
 			   // do something
 			}
-
 		break;
 
 		case("ShowResults"):
@@ -284,6 +283,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener,
 				break;
 		}
 
+	}
+	public OnOfGUI getOnOfGUI() {
+		return onOfGUI;
+	}
+	public void setOnOfGUI(OnOfGUI onOfGUI) {
+		this.onOfGUI = onOfGUI;
 	}
 	private void chooseFileLocation() {
 		JFileChooser chooser = new JFileChooser();
