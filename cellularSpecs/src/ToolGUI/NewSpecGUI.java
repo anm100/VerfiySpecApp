@@ -140,6 +140,7 @@ public class NewSpecGUI extends JFrame{
 				 		
 				 	}
 				 });
+			 setLocationRelativeTo(null);
 			 
 	} 
 	public String getSpecName() {

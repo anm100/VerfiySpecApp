@@ -34,32 +34,32 @@ public class VerificationController implements ItemListener {
 						 +getLTLReq()
 						 +"active proctype vm()\n{\n"
 						 +"do\n"
-						 +getPG()
+//						 +getPG()
 						 +"od\n}";
 	}
 
 	private static String getLTLReq() {
-		String st="";
-		Router.getInstance().getRequirementList().getReqlist().get(0);
-		for(int i=0;i<Router.getInstance().getRequirementList().getReqlist().size();i++)
-		{
-			if(Router.getInstance().getRequirementList().getReqlist().get(i).isSelected())
-			st+=Router.getInstance().getRequirementList().getReqlist().get(i).getFormula()+"\n";
-		}
-		return st;
-	}
-	private static String getPG() {
-		// TODO Auto-generated method stub
-		String sAll = new String("");
-		Screen s = new Screen(); 
-		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
-		while(it.hasNext()){
-			Map.Entry pair =(Map.Entry) it.next(); 
-			s= (Screen)pair.getValue();	
-			sAll+=s.getStringPromela()+"\n";
-			
-		}
-		return sAll;
+//		String st="";
+//		Router.getInstance().getRequirementList().getReqlist().get(0);
+//		for(int i=0;i<Router.getInstance().getRequirementList().getReqlist().size();i++)
+//		{
+//			if(Router.getInstance().getRequirementList().getReqlist().get(i).isSelected())
+//			st+=Router.getInstance().getRequirementList().getReqlist().get(i).getFormula()+"\n";
+//		}
+//		return st;
+//	}
+//	private static String getPG() {
+//		// TODO Auto-generated method stub
+//		String sAll = new String("");
+//		Screen s = new Screen(); 
+//		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+//		while(it.hasNext()){
+//			Map.Entry pair =(Map.Entry) it.next(); 
+//			s= (Screen)pair.getValue();	
+//			sAll+=s.getStringPromela()+"\n";
+//			
+//		}
+		return "";
 	}
 
 

@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
@@ -71,6 +72,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			specName=newSpecGui.getSpecName();
 			setMainScreenGui(specName);
 			newSpecGui.dispose();
+			(new debugingGUI()).setVisible(true);
 //			this.addparamterGUI=new AddParamterGUI();
 //			addparamterGUI.setVisible(true);
 //			addparamterGUI.setAddParamListener(this);

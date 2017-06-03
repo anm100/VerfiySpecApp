@@ -1,0 +1,5 @@
+mytype={mainScreen,loginScreen,createNewEvent,CahngecreateNewEventdate,CahngecreateNewEventsave,CahngecreateNewEventmore details,CahngecreateNewEventdescription,CahngecreateNewEventtime,CahngecreateNewEventtitle,,active proctype vm()
+{
+do
+od
+}
