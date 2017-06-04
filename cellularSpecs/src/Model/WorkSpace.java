@@ -3,6 +3,7 @@ package Model;
 import java.io.Serializable;
 import java.util.*;
 
+import Controller.formulaTranslate;
 import our.Utils.Logger;
 
 public class WorkSpace implements Serializable { 
@@ -124,17 +125,16 @@ public String getWorkSpaceLocation() {
 public void setWorkSpaceLocation(String workSpaceLocation) {
 	this.workSpaceLocation = workSpaceLocation;
 }
-public  String getChangeStates(){
+public  String getAllChangeStates(){
 	Screen e ;
 	String states=new String("");
-	Iterator it = this.screensMap.entrySet().iterator();
+	Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 	while(it.hasNext()){
 		Map.Entry pair =(Map.Entry) it.next(); 
 		e= (Screen)pair.getValue();
 		states=""+e.getChangeStates()+",";
+		formulaTranslate.addtoScreenStates(e.getScreenName());
 	}
-	//states.length()-2;
-
 	return states;
 }
 }

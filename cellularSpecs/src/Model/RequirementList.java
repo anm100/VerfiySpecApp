@@ -25,6 +25,25 @@ public class RequirementList {
  public void removeRequirement(Requirement r){
 	reqlist.remove(r); 
  }
+ public void addRequirement(Requirement r,int index)
+ {
+	 reqlist.add(index,r);
+ }
+ public void removeRequirement(int index)
+ {
+	 reqlist.remove(index);
+ }
+ public Requirement getRequirement(int index)
+ {
+	 return reqlist.get(index);
+ }
+ public void editRequirement(Requirement r,int index)
+ {
+	 removeRequirement(index);
+	 addRequirement(r,index);
+ }
+ 
+ 
 
 public static List<Requirement> getReqlist() {
 	return reqlist;

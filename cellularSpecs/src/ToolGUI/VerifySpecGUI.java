@@ -17,6 +17,8 @@ import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 
 import Controller.Router;
+import Controller.formulaTranslate;
+
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
@@ -56,7 +58,7 @@ public class VerifySpecGUI extends JFrame{
 		 req1 = new JCheckBox("There is Always an exit from any screen.");
 		 req1.setActionCommand("req1");
 		req1.setBackground(Color.WHITE);
-		
+		//Router.getInstance().getRequirementList().getRequirement(2).setFormula(formula);
 		req1.setBounds(23, 162, 243, 23);
 		getContentPane().add(req1);
 		req.add(req1);

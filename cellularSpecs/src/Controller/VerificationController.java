@@ -30,7 +30,7 @@ public class VerificationController implements ItemListener {
 	public static String translateToPROMELA(){
 		WorkSpace w  =WorkSpace.getInstance();
 		return "mytype={"+ScreenController.getAllScreenName()
-						 +WorkSpace.getInstance().getChangeStates()+""
+						 +WorkSpace.getInstance().getAllChangeStates()+""
 						 +getLTLReq()
 						 +"active proctype vm()\n{\n"
 						 +"do\n"
