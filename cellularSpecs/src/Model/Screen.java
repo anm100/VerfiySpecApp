@@ -133,6 +133,10 @@ public class Screen implements Serializable{
 	public void addElement(Element s){
 		this.elementsMap.put(s.getELementName(),s);	
 	}
+	public void remoceElement(String eLementName) {
+		this.elementsMap.remove(eLementName);
+		
+	}
 	public Element getElementByName(String elementName){
 		return this.elementsMap.get(elementName);
 	}
@@ -175,6 +179,7 @@ public class Screen implements Serializable{
 		
 		return states;
 	}
+
 
 
 }
