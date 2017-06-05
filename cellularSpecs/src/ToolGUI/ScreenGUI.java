@@ -231,7 +231,6 @@ public class ScreenGUI extends JScrollPane {
                     onOff.setOnOffListener(Router.getInstance());
                     onOff.setVisible(true);
                     editCoordinateElem=labelElement.get(i).getY();
-                    
                     index=(JLabel) e.getComponent();
                    // e.getComponent().getParent().remove(e.getComponent());
                     Router.getInstance().setOnOfGUI(onOff);

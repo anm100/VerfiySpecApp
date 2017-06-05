@@ -118,6 +118,9 @@ public void updatParameterInHash(String ParameterName , Param p){
 	this.ParamsMap.remove(ParameterName);
 	this.ParamsMap.put(ParameterName,p);	
 }
+public void removeParameterInHash(String ParameterName){
+	this.ParamsMap.remove(ParameterName);
+}
 public String getWorkSpaceLocation() {
 	return workSpaceLocation;
 }

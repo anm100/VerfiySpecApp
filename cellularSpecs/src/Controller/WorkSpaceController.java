@@ -135,11 +135,13 @@ public class WorkSpaceController {
 
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
-		elementToGUI(screenGUI,elementGui,l);
+		addToModels(screenGUI,elementGui,l);
 		screenGUI.addElementLabel(l);
+		Router.getInstance().getMainScreenGui().refreshWorkspace();
+		elementGui.setVisible(false);
 	}
-	public static void editEmentfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui) {
-		WorkSpace.getLog().debug(((JLabel)screenGUI.getEventLabel().getComponent()).getText());
+	public static void editEmentfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui,OnOffType l) {
+
 		String[] data=((JLabel)screenGUI.getEventLabel().getComponent()).getText().split(",");
 		WorkSpace.getLog().debug(data[0]+" "+screenGUI.getScreenName());
 		OnOffType e= (OnOffType) WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName()).getElementByName(data[0]);
@@ -148,11 +150,13 @@ public class WorkSpaceController {
         e.setElementName(elementGui.getElementName());
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(e);
 		((JLabel)screenGUI.getEventLabel().getComponent()).getParent().update(screenGUI.getGraphics());
-		elementGui.setVisible(false);
+		reomveFromModels(elementGui.getScreenName(),e);
+		addToModels(screenGUI,elementGui,l);
 	
 	}
-	private static void elementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l) {
-		
+	public static void addToModels(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l)	
+	{
+		String paramName;
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		l.setElementName(elementGui.getElementName());	
 		l.setParam(p);
@@ -160,9 +164,13 @@ public class WorkSpaceController {
 		WorkSpace.getLog().debug("do "+l.getParamName());
 		WorkSpace.getInstance().addParameterToHash(p);
 		WorkSpace.getLog().debug("--show element in GUI");
-		Router.getInstance().getMainScreenGui().refreshWorkspace();
-		elementGui.setVisible(false);
-		
+	}
+	public static void reomveFromModels(String screenName,OnOffType oldOnOffType)	
+	{
+		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+oldOnOffType.getParamName());
+		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+screenName);
+		WorkSpace.getInstance().getScreenByName(screenName).remoceElement(oldOnOffType.getELementName());
+		WorkSpace.getInstance().removeParameterInHash(oldOnOffType.getParamName());
 	}
 	public static void removelementfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
 

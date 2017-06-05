@@ -50,7 +50,7 @@ public class OnOfGUI extends JFrame {
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
 	private JComboBox parameterName;
-	private String defaultValue=new String("OFF");
+	private String defaultValue;;
 	private JRadioButton rdbtnOff,rdbtnOn ;
 	private  JTable apps_table;
 	private  int colNumber=3;
@@ -128,8 +128,19 @@ public class OnOfGUI extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(192, 312, 116, 23);
 		getContentPane().add(btnCancel);
-		
+		rdbtnOff = new JRadioButton("OFF");
+		rdbtnOff.setSelected(true);
+		setDefaultValue(rdbtnOff.getText());
 		 rdbtnOn = new JRadioButton("ON");
+		rdbtnOn.setSelected(false);
+		rdbtnOn.setBounds(118, 113, 72, 28);
+		getContentPane().add(rdbtnOn);
+		rdbtnOff.setBounds(192, 113, 78, 28);
+		getContentPane().add(rdbtnOff);
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnOn);
+		group.add(rdbtnOff);
+		
 		rdbtnOn.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if(rdbtnOn.isSelected())
@@ -137,25 +148,14 @@ public class OnOfGUI extends JFrame {
 				}
 		});
 
-		rdbtnOn.setSelected(false);
-		rdbtnOn.setBounds(118, 113, 72, 28);
-		getContentPane().add(rdbtnOn);
-		
-		rdbtnOff = new JRadioButton("OFF");
 		rdbtnOff.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 			if(rdbtnOff.isSelected())
 				setDefaultValue(rdbtnOff.getText());
 			}
 		});
-		rdbtnOff.setSelected(true);
-		setDefaultValue(rdbtnOn.getText());
-		rdbtnOff.setBounds(192, 113, 78, 28);
-		getContentPane().add(rdbtnOff);
-		ButtonGroup group = new ButtonGroup();
 
-		group.add(rdbtnOn);
-		group.add(rdbtnOff);
+
 		
 		
 		JSeparator separator = new JSeparator();
@@ -224,13 +224,15 @@ public class OnOfGUI extends JFrame {
 			}
 		
 	}
-	private void loadData(	ArrayList <String> e,String eName) {
-		elementName.setText(e.get(0));
-		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,e.get(1)));
-		parameterName.setSelectedItem(e.get(1));
-		setOnOff(e.get(2));
+	private void loadData(	ArrayList <String> dataOfelement,String eName) {
+	
+		elementName.setText(dataOfelement.get(0));
+		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,dataOfelement.get(1)));
+		parameterName.setSelectedItem(dataOfelement.get(1));
+		setOnOff(dataOfelement.get(2));
 		addToTable(ElementController.getActrion(getScreenName(),eName));
 		btnSave.setActionCommand("_edit_on_off");
+		
 	}
 	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
 	       JLabel lblNewLabel = new JLabel(string);
@@ -261,12 +263,15 @@ public class OnOfGUI extends JFrame {
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
         parameterName.setModel(cbm);
 	}
-	public void setOnOff(String defultvalue) {
-	if(getDefaultValue().equals(defultvalue))
+	public void setOnOff(String defultval) {
+	if(defultval.equals("OFF"))
+	{
 		rdbtnOff.setSelected(true);
+		setDefaultValue(rdbtnOff.getText());
+	}
 	else
 		rdbtnOn.setSelected(true);
-		
+	setDefaultValue(rdbtnOn.getText());
 	}
 	public  void removeToTable(int index)//remove row number index
 	{

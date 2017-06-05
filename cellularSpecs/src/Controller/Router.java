@@ -202,7 +202,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			break;
 		case"_edit_on_off":
 			WorkSpace.getLog().debug("Router>-edit the onOff Type");
-			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI);
+			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI,new OnOffType());
 			
 			break;
 		case "_add_Action_OnOff":
