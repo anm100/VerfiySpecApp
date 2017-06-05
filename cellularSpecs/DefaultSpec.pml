@@ -1,4 +1,4 @@
-mytype={screen1,Cahngescreen1,,active proctype vm()
+mytype={screen2,screen3,screen1,,active proctype vm()
 {
 do
 od

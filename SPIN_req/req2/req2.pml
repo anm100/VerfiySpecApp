@@ -1,3 +1,7 @@
+
+There is always an exit from any screen. 
+
+
 mtype = { BoPo_MainSreen,CreateNewEvent,changeParamUserName}
 ltl r1 {[]((state==BoPo_MainSreen) -> ((!([]<> (state==changeParamUserName)))-> <>(state !=BoPo_MainSreen) && (state!=changeParamUserName)))}
 
