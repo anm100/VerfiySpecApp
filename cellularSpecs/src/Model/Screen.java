@@ -16,6 +16,7 @@ public class Screen implements Serializable{
 	private int height;
 	private int width;
 	private String description;
+	private ArrayList<String> trans= new ArrayList<String>();
 	private HashMap <String,Element> elementsMap;
 	/**
 	 * @return the screenName
@@ -140,12 +141,12 @@ public class Screen implements Serializable{
 	public  String getStringPromela(){
 		Element e ;
 		String elemets=new String("");
-		Iterator it = this.elementsMap.entrySet().iterator();
-		while(it.hasNext()){
-			Map.Entry pair =(Map.Entry) it.next(); 
-			e= (Element)pair.getValue();
-			elemets+=""+e.getStringPromela()+"\n";
-		}
+//		Iterator it = this.elementsMap.entrySet().iterator();
+//		while(it.hasNext()){
+//			Map.Entry pair =(Map.Entry) it.next(); 
+//			e= (Element)pair.getValue();
+//			elemets+=""+e.getStringPromela()+"\n";
+//		}
 
 		return "::(state=="+this.getScreenName()+")->\n"
 				+"if\n"
@@ -159,7 +160,7 @@ public class Screen implements Serializable{
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			e= (Element)pair.getValue();
-			states+="Cahnge"+this.getScreenName()+e.getParamName()+",";
+			states+="Change"+this.getScreenName()+e.getParamName()+",";
 		}
 		return states;
 	}
