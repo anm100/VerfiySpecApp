@@ -57,7 +57,7 @@ public void loadElement() {
 public  String getStringPromela(){
 	String conditons;
 	if(conds.size()== 0){
-		return "::atomic(state="
+		return "atomic(state="
 				+getTrans().getToScreen()
 				+");" ; 
 	}
@@ -68,14 +68,14 @@ public  String getStringPromela(){
 			
  for(int i=1;i<conds.size(); i++)
  {
-	 conditons+=""+this.optLogic
+	 conditons+=" "+this.optLogic+" "
 			 	+conds.get(i).getParamName()
 			 	+conds.get(i).getOpt()
 			 	+conds.get(i).getParamVal();
  }
-	return "::("+conditons+")->atomic(state="
+	return "("+conditons+")->atomic(state="
 				+getTrans().getToScreen()
-				+");" ; 
+				+");"+" /* "+this.elementName+" Button */" ; 
 }
 
 public  Transition getTrans() {

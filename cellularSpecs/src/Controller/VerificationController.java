@@ -9,9 +9,12 @@ import java.util.Map.Entry;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 
+import Model.Element;
+import Model.ElementType;
 import Model.Param;
 import Model.RequirementList;
 import Model.Screen;
+import Model.StandartButtonType;
 import Model.WorkSpace;
 import ToolGUI.VerifySpecGUI;
 
@@ -40,7 +43,7 @@ public class VerificationController implements ItemListener {
 						+defineParamsPromela()
 //						+getLTLReq()
 						+"\nactive proctype vm(){\n"
-						+"do\n"
+						+" do\n"
 						+ getPG()
 						 +"od\n}";
 	}
@@ -60,10 +63,29 @@ public class VerificationController implements ItemListener {
 		// TODO Auto-generated method stub
 		String sAll = new String("");
 		Screen s = new Screen(); 
+		Element e ; 
 		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			s= (Screen)pair.getValue();	
+			Iterator<Entry<String, Element>> it2 = WorkSpace.getInstance()
+					.getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();
+			while(it2.hasNext()){
+				Map.Entry pair2 =(Map.Entry) it2.next(); 
+				e= (Element)pair2.getValue();
+				if (e.getType().equals(ElementType.getStandartBtnType())){
+					s.getTransPromela().add(e.getStringPromela());
+				}else {
+					
+					
+					
+					
+					
+					
+					
+				}
+		
+			}
 			sAll+=s.getStringPromela()+"\n";
 			
 		}
@@ -72,7 +94,7 @@ public class VerificationController implements ItemListener {
 
 	private static String defineParamsPromela(){
 		String out = new String("\n/*define flag for action */\nbyte action["+WorkSpace.getInstance().getParamsMap().size()+"];\n\n"
-				+ "/*define params and default params*/\n");
+				+ "/*define params and default value*/\n");
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		Param p;
 		while(it.hasNext()){

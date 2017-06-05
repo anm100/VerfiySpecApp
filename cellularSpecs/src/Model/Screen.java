@@ -139,23 +139,24 @@ public class Screen implements Serializable{
 	public HashMap<String, Element> getElementsMap() {
 		return elementsMap;
 	}
+	
+	public ArrayList<String> getTransPromela() {
+		return transPromela;
+	}
 	public  String getStringPromela(){
-		String startScreen=new String("::(state=="+this.getScreenName()+")->\n"+"if");
+		String startScreen=new String("	::(state=="+this.getScreenName()+")->\n"+"	  if");
 		String out= new String ("");
-		transPromela.add("");
-		transPromela.add("");
-		transPromela.add("");
 		transPromela.add("");
 		transPromela.add("");
 
 		for(String i : transPromela)
 		{
-			out +="\n"+"	::"+i;
+			out +="\n"+"		::"+i;
 		}
 		
 
 		return 	startScreen+out
-				+"\n"+"fi"; 
+				+"\n"+"	  fi"; 
 	}
 	public  String getChangeStates(){
 		Element e ;

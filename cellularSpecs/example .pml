@@ -8,7 +8,7 @@ mytype={mainScreen,loginScreen,createNewEvent
 /*define flag for action */
 byte action[20];
 
-/*define params and default params*/
+/*define params and default value*/
 byte date=Empty;
 byte wifi=OFF;
 byte pass=Empty;
@@ -31,30 +31,23 @@ byte time=Empty;
 byte user=Empty;
 
 active proctype vm(){
-do
-::(state==mainScreen)->
-if
-	::
-	::
-	::
-	::
-	::
-fi
-::(state==loginScreen)->
-if
-	::
-	::
-	::
-	::
-	::
-fi
-::(state==createNewEvent)->
-if
-	::
-	::
-	::
-	::
-	::
-fi
+ do
+	::(state==mainScreen)->
+	  if
+		::
+		::
+	  fi
+	::(state==loginScreen)->
+	  if
+		::(user==NotEmpty && pass==NotEmpty)->atomic(state=mainScreen); /* log in Button */
+		::
+		::
+	  fi
+	::(state==createNewEvent)->
+	  if
+		::(title==NotEmpty && description==NotEmpty && date==NotEmpty && time==NotEmpty)->atomic(state=mainScreen); /* save Button */
+		::
+		::
+	  fi
 od
 }
