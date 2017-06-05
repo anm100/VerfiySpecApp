@@ -17,7 +17,7 @@ public class Screen implements Serializable{
 	private int height;
 	private int width;
 	private String description;
-	private ArrayList<String> trans= new ArrayList<String>();
+	private ArrayList<String> transPromela= new ArrayList<String>();
 	private HashMap <String,Element> elementsMap;
 	/**
 	 * @return the screenName
@@ -140,29 +140,29 @@ public class Screen implements Serializable{
 		return elementsMap;
 	}
 	public  String getStringPromela(){
-		Element e ;
-		String elemets=new String("");
-//		Iterator it = this.elementsMap.entrySet().iterator();
-//		while(it.hasNext()){
-//			Map.Entry pair =(Map.Entry) it.next(); 
-//			e= (Element)pair.getValue();
-//			elemets+=""+e.getStringPromela()+"\n";
-//		}
+		String startScreen=new String("::(state=="+this.getScreenName()+")->\n"+"if");
+		String out= new String ("");
+		for(String i : transPromela)
+		{
+			out +="\n"+"::"+i;
+		}
+		
 
-		return "::(state=="+this.getScreenName()+")->\n"
-				+"if\n"
-				+elemets
-				+"fi"; 
+		return 	startScreen+out
+				+"\n"+"fi"; 
 	}
 	public  String getChangeStates(){
 		Element e ;
-		String states=new String("");
 		Iterator it = this.elementsMap.entrySet().iterator();
+		Map.Entry pair =(Map.Entry) it.next(); 
+		e= (Element)pair.getValue();
+		String states=new String("Change"+this.getScreenName()+e.getParamName());
+
 		while(it.hasNext()){
-			Map.Entry pair =(Map.Entry) it.next(); 
+			pair =(Map.Entry) it.next(); 
 			e= (Element)pair.getValue();
 
-			states+="Change"+this.getScreenName()+e.getParamName()+",";
+			states+=",Change"+this.getScreenName()+e.getParamName();
 			formulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
 		}
 		

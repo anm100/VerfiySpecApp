@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 
+import Model.Param;
 import Model.RequirementList;
 import Model.Screen;
 import Model.WorkSpace;
@@ -29,11 +30,17 @@ public class VerificationController implements ItemListener {
 	}
 	public static String translateToPROMELA(){
 		WorkSpace w  =WorkSpace.getInstance();
-		return "mytype={"+ScreenController.getAllScreenName()
-						 +WorkSpace.getInstance().getAllChangeStates()+""
-						 +getLTLReq()
-						 +"active proctype vm()\n{\n"
-						 +"do\n"
+		return ""
+				+"#define ON  1 \n"
+				+"#define OFF 0 \n"
+				+"#define Empty 2 \n"
+				+"#define NotEmpty 3 \n"
+						+ "mytype={"+ScreenController.getAllScreenName()
+						+"\n"+WorkSpace.getInstance().getAllChangeStates()+"}\n"
+						+defineParamsPromela()
+						+getLTLReq()
+						+"active proctype vm(){\n"
+						+"do\n"
 //						 +getPG()
 						 +"od\n}";
 	}
@@ -62,7 +69,17 @@ public class VerificationController implements ItemListener {
 		return "";
 	}
 
-
+	private static String defineParamsPromela(){
+		String out = new String("");
+		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
+		Param p;
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			 p =(Param)pair.getValue();
+			 out+="byte "+p.getParamName()+"="+p.getParamVal()+"\n";
+		}
+		return out;
+	}
 	
 
 	public static   void selectReqNum(boolean flag,int reqNum) {

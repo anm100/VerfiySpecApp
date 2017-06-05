@@ -139,6 +139,7 @@ public class WorkSpaceController {
 		screenGUI.addElementLabel(l);
 	}
 	public static void editEmentfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui) {
+		WorkSpace.getLog().debug(((JLabel)screenGUI.getEventLabel().getComponent()).getText());
 		String[] data=((JLabel)screenGUI.getEventLabel().getComponent()).getText().split(",");
 		WorkSpace.getLog().debug(data[0]+" "+screenGUI.getScreenName());
 		OnOffType e= (OnOffType) WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName()).getElementByName(data[0]);
@@ -160,7 +161,7 @@ public class WorkSpaceController {
 		WorkSpace.getInstance().addParameterToHash(p);
 		WorkSpace.getLog().debug("--show element in GUI");
 		Router.getInstance().getMainScreenGui().refreshWorkspace();
-		elementGui.dispose();
+		elementGui.setVisible(false);
 		
 	}
 	public static void removelementfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {

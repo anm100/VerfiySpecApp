@@ -64,7 +64,7 @@ public class BulidSpec {
 		s.setElementName("save");
 		s.setTransition("createNewEvent","mainScreen");
 		wk.getScreenByName("createNewEvent").addElement(s);
-		addElemenEmpty("createNewEvent",new String[] {"title", "description", "date", "time","more details",});
+		addElemenEmpty("createNewEvent",new String[] {"title", "description", "date", "time","more_details",});
 	addConditions("createNewEvent","save", new String [] {"title", "description", "date", "time"}); 
 
 	}
@@ -91,7 +91,7 @@ public class BulidSpec {
 				WorkSpace.getLog().debug("add element: "+fields[i]+" to "+screenName);
 				e = new OnOffType();
 				e.setElementName(fields[i]);
-				p = new Param(fields[i],"off", ElementType.getOnOffType());
+				p = new Param(fields[i],"OFF", ElementType.getOnOffType());
 				e.setParam(p);
 				wk.addParameterToHash(p);
 				wk.getScreenByName(screenName).addElement(e);
@@ -135,7 +135,7 @@ public class BulidSpec {
 		}
 		private static void addParmsOnOff(){
 			for (int i=0; i<10;i++){
-			Param p = new Param("onOff_"+i, "off", ElementType.getOnOffType());
+			Param p = new Param("onOff_"+i, "OFF", ElementType.getOnOffType());
 				wk.addParameterToHash(p);
 				WorkSpace.getLog().debug("add to hash params"+p.getParamName());
 
