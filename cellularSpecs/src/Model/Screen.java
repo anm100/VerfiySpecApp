@@ -155,7 +155,7 @@ public class Screen implements Serializable{
 
 		for(String i : transPromela)
 		{
-			out +="\n"+"		::"+i;
+			out +="\n"+"		 ::"+i;
 		}
 		
 
@@ -164,17 +164,24 @@ public class Screen implements Serializable{
 	}
 	public  String getChangeStates(){
 		Element e ;
+		Map.Entry pair;
+		String states;
 		Iterator it = this.elementsMap.entrySet().iterator();
-		Map.Entry pair =(Map.Entry) it.next(); 
+		if(it.hasNext()){
+		pair =(Map.Entry) it.next(); 
 		e= (Element)pair.getValue();
-		String states=new String("Change"+this.getScreenName()+e.getParamName());
-
+		 states=new String("Change"+this.getScreenName()+e.getParamName());
+		}else {
+			 states=new String("");
+		}
+		
 		while(it.hasNext()){
 			pair =(Map.Entry) it.next(); 
 			e= (Element)pair.getValue();
-
+			if (!(e.getType().equals(ElementType.getStandartBtnType()))){
 			states+=",Change"+this.getScreenName()+e.getParamName();
 			formulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
+			}
 		}
 		
 		return states;

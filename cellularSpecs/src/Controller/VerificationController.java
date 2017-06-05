@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 
 import Model.Element;
 import Model.ElementType;
+import Model.OnOffType;
 import Model.Param;
 import Model.RequirementList;
 import Model.Screen;
@@ -75,9 +76,13 @@ public class VerificationController implements ItemListener {
 				e= (Element)pair2.getValue();
 				if (e.getType().equals(ElementType.getStandartBtnType())){
 					s.getTransPromela().add(e.getStringPromela());
-				}else {
-					
-					
+				}else if (e.getType().equals(ElementType.getOnOffType())){
+					s.getTransPromela().add("("+e.getParamName()+"=="
+							+((OnOffType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
+							+((OnOffType)e).getParameter().getValues()[1]+";state=change"+s.getScreenName()+e.getParamName()+");");
+					s.getTransPromela().add("("+e.getParamName()+"=="
+							+((OnOffType)e).getParameter().getValues()[1]+")->atomic("+e.getParamName()+"="
+							+((OnOffType)e).getParameter().getValues()[0]+";state=change"+s.getScreenName()+e.getParamName()+");");
 					
 					
 					
@@ -87,7 +92,7 @@ public class VerificationController implements ItemListener {
 		
 			}
 			sAll+=s.getStringPromela()+"\n";
-			
+			sAll+=createBlockChangeScreen(s);
 		}
 		return sAll;
 	}
@@ -105,6 +110,15 @@ public class VerificationController implements ItemListener {
 		return out;
 	}
 	
+	private static String createBlockChangeScreen(Screen s){
+		String out = new String (""); 
+		String[] changeScreens= s.getChangeStates().split(",");
+		for (int i=0 ;i<changeScreens.length;i++){
+			out+= (new Screen(changeScreens[i])).getStringPromela()+"\n";
+		}
+		
+		return out ; 
+	}
 
 	public static   void selectReqNum(boolean flag,int reqNum) {
 		 Router.getInstance().getRequirementList().getReqlist().get(reqNum).setSelected(flag);;
