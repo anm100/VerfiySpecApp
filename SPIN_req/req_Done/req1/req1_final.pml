@@ -1,5 +1,4 @@
 mtype = { BoPo_MainSreen,CreateNewEvent,changeParamUserName}
-	mtype state= BoPo_MainSreen ;
 ltl r1 {[]((state==BoPo_MainSreen) -> ((!([]<> (state==changeParamUserName)))-> <>(state !=BoPo_MainSreen) && (state!=changeParamUserName)))}
 
 active proctype vm()

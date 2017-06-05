@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import Controller.formulaTranslate;
 import ToolGUI.ScreenGUI;
 
 public class Screen implements Serializable{
@@ -160,8 +161,13 @@ public class Screen implements Serializable{
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			e= (Element)pair.getValue();
+
 			states+="Change"+this.getScreenName()+e.getParamName()+",";
+			formulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
 		}
+		
 		return states;
 	}
+
+
 }
