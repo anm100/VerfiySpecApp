@@ -142,9 +142,15 @@ public class Screen implements Serializable{
 	public  String getStringPromela(){
 		String startScreen=new String("::(state=="+this.getScreenName()+")->\n"+"if");
 		String out= new String ("");
+		transPromela.add("");
+		transPromela.add("");
+		transPromela.add("");
+		transPromela.add("");
+		transPromela.add("");
+
 		for(String i : transPromela)
 		{
-			out +="\n"+"::"+i;
+			out +="\n"+"	::"+i;
 		}
 		
 

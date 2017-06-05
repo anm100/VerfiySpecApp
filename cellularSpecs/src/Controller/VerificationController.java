@@ -38,45 +38,47 @@ public class VerificationController implements ItemListener {
 						+ "mytype={"+ScreenController.getAllScreenName()
 						+"\n"+WorkSpace.getInstance().getAllChangeStates()+"}\n"
 						+defineParamsPromela()
-						+getLTLReq()
-						+"active proctype vm(){\n"
+//						+getLTLReq()
+						+"\nactive proctype vm(){\n"
 						+"do\n"
-//						 +getPG()
+						+ getPG()
 						 +"od\n}";
 	}
 
-	private static String getLTLReq() {
-//		String st="";
-//		Router.getInstance().getRequirementList().getReqlist().get(0);
-//		for(int i=0;i<Router.getInstance().getRequirementList().getReqlist().size();i++)
-//		{
-//			if(Router.getInstance().getRequirementList().getReqlist().get(i).isSelected())
-//			st+=Router.getInstance().getRequirementList().getReqlist().get(i).getFormula()+"\n";
-//		}
-//		return st;
+//	private static String getLTLReq() 
+//	{
+////		String st="";
+////		Router.getInstance().getRequirementList().getReqlist().get(0);
+////		for(int i=0;i<Router.getInstance().getRequirementList().getReqlist().size();i++)
+////		{
+////			if(Router.getInstance().getRequirementList().getReqlist().get(i).isSelected())
+////			st+=Router.getInstance().getRequirementList().getReqlist().get(i).getFormula()+"\n";
+////		}
+////		return "";
 //	}
-//	private static String getPG() {
-//		// TODO Auto-generated method stub
-//		String sAll = new String("");
-//		Screen s = new Screen(); 
-//		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
-//		while(it.hasNext()){
-//			Map.Entry pair =(Map.Entry) it.next(); 
-//			s= (Screen)pair.getValue();	
-//			sAll+=s.getStringPromela()+"\n";
-//			
-//		}
-		return "";
+	private static String getPG() {
+		// TODO Auto-generated method stub
+		String sAll = new String("");
+		Screen s = new Screen(); 
+		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			s= (Screen)pair.getValue();	
+			sAll+=s.getStringPromela()+"\n";
+			
+		}
+		return sAll;
 	}
 
 	private static String defineParamsPromela(){
-		String out = new String("");
+		String out = new String("\n/*define flag for action */\nbyte action["+WorkSpace.getInstance().getParamsMap().size()+"];\n\n"
+				+ "/*define params and default params*/\n");
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		Param p;
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			 p =(Param)pair.getValue();
-			 out+="byte "+p.getParamName()+"="+p.getParamVal()+"\n";
+			 out+="byte "+p.getParamName()+"="+p.getParamVal()+";\n";
 		}
 		return out;
 	}
