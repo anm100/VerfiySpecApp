@@ -142,6 +142,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpace.getLog().debug("create pml file ");
 			formulaTranslate.translateReq1();
 			formulaTranslate.translateReq2a();
+			formulaTranslate.translateReq2b();
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(VerificationController.translateToPROMELA());

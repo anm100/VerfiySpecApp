@@ -79,10 +79,36 @@ private static String getTranslateReq2a() {
 	str+=")";
 	return str;
 }
+public static  void translateReq2b()
+{
+	String st="";
+	 st="ltl "+" reqid "+"{[]("+getTranslateReq2b()+")}";
+	 System.out.println(st);
+}
+
+private static String getTranslateReq2b() {
+	String str="";
+	if(ScreenStates.size()>=2){
+	 str="(state="+ScreenStates.get(0)+")->(";// ScreenStates.get(0) is the root 
+	for(int i=0;i<ScreenStates.size();i++)
+	{
+		if(0!=i)
+		{
+			str=str+"(<>(State=="+ScreenStates.get(i)+"))&&";
+		}
+	}
+	if(ScreenStates.size()>0)
+		str=str.substring(0, str.length()-2);
+	str+=")";
+	}
+	return str;
+	
+}
 public static void addtoChangeStates(String changeStates) {
 	ChangeStates.add(changeStates);
 }
 public static void addtoScreenStates(String screenName) {
 	ScreenStates.add(screenName);
 }
+
 }
