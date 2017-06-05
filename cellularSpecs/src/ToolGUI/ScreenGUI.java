@@ -163,7 +163,7 @@ public class ScreenGUI extends JScrollPane {
 	
 	public void addElementLabel (Element elem){
 		
-		JLabel element = new JLabel(elem.getParamName()+","+elem.getType());
+		JLabel element = new JLabel(elem.getELementName()+","+elem.getType());
 		this.lastCoordinateElem+=25; 
 		element.setBounds(1, lastCoordinateElem, 143, 25);
 		element.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(180, 180, 180)));
