@@ -68,7 +68,8 @@ public static Element getElementByName(String elementName){
 			 p =(Param)pair.getValue();
 			if(p.getType().equals(type) && s.getElementByName(p.getParamName()) == null)
 			{		
-			params.add(p.getParamName());	
+			params.add(p.getParamName());
+			System.out.println(p.getParamName());
 			}
 		}
 		String[] stockArr = new String[params.size()];

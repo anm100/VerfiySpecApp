@@ -49,20 +49,23 @@ public class OnOfGUI extends JFrame {
 	protected JButton AddAction;
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
-	private JComboBox parameterName;
+	private JComboBox ComboparameterName;
 	private String defaultValue;;
 	private JRadioButton rdbtnOff,rdbtnOn ;
 	private  JTable apps_table;
 	private  int colNumber=3;
 	private Object[][] data = {};
 	String ScreenName; 
-	private JTextField txtNewParameterName;
-	private String parameterName1;
-	public String getParameterName1() {
-		return parameterName1;
+	private JTextField ParameterName;
+	
+	public String getParameterName() {
+		return ParameterName.getText().toString();
 	}
-	public void setParameterName1(String parameterName1) {
-		this.parameterName1 = parameterName1=txtNewParameterName.getText().toString();;
+	public String getNewParameterName() {
+		return ParameterName.getText().toString();
+	}
+	public String getComboParameterName() {
+		return ComboparameterName.getSelectedItem().toString();
 	}
 	public OnOfGUI(String ScreenName,String eName)
 	{
@@ -91,32 +94,25 @@ public class OnOfGUI extends JFrame {
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
 
-		parameterName = new JComboBox();
-		parameterName.addItemListener(new ItemListener() {
+		ComboparameterName = new JComboBox();
+		ComboparameterName.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if((arg0.getItem().toString().equals("New..")))
 				{
-					txtNewParameterName.setVisible(true);
-					txtNewParameterName.setText("parameter name");
-					getStyle();
+					ParameterName.setVisible(true);
+					ParameterName.setText("parameter name");
 				}
 				else
 				{
-					txtNewParameterName.setVisible(false);
-					getStyle();
-					parameterName1=arg0.getItem().toString();
+					ParameterName.setVisible(false);
+					ParameterName.setText(arg0.getItem().toString());
 				}
-			}
-
-			private void getStyle() {
-				// TODO Auto-generated method stub
-				
 			}
 		});
 		
-		parameterName.setModel(new DefaultComboBoxModel(new String[] {"new parameter"}));
-		parameterName.setBounds(118, 89, 152, 22);
-		getContentPane().add(parameterName);
+		ComboparameterName.setModel(new DefaultComboBoxModel(new String[] {"new parameter"}));
+		ComboparameterName.setBounds(118, 89, 152, 22);
+		getContentPane().add(ComboparameterName);
 		setSize(501, 367);
 		
 		 btnSave = new JButton("Save");
@@ -191,25 +187,23 @@ public class OnOfGUI extends JFrame {
 			apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			apps_table.setBackground(Color.WHITE);
 			
-			txtNewParameterName = new JTextField();
+			ParameterName = new JTextField();
 			
-			getContentPane().add(txtNewParameterName);
-			txtNewParameterName.setForeground(Color.GRAY);
-			txtNewParameterName.setText("parameter name");
-			txtNewParameterName.setVisible(false);
-			txtNewParameterName.setBounds(280, 90, 152, 20);
-			txtNewParameterName.setToolTipText("add new Parameter");
-			txtNewParameterName.addFocusListener(new FocusListener() {
+			getContentPane().add(ParameterName);
+			ParameterName.setForeground(Color.GRAY);
+			ParameterName.setText("parameter name");
+			ParameterName.setVisible(false);
+			ParameterName.setBounds(280, 90, 152, 20);
+			ParameterName.setToolTipText("add new Parameter");
+			ParameterName.addFocusListener(new FocusListener() {
 		
 				public void focusGained(FocusEvent arg0) {
-					txtNewParameterName.setForeground(Color.black);
-					txtNewParameterName.setText("");
+					ParameterName.setForeground(Color.black);
+					ParameterName.setText("");
 				}
 
 				@Override
 				public void focusLost(FocusEvent arg0) {
-					// TODO Auto-generated method stub
-					txtNewParameterName.setText("s");
 					
 				}
 			});
@@ -225,10 +219,9 @@ public class OnOfGUI extends JFrame {
 		
 	}
 	private void loadData(	ArrayList <String> dataOfelement,String eName) {
-	
 		elementName.setText(dataOfelement.get(0));
 		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,dataOfelement.get(1)));
-		parameterName.setSelectedItem(dataOfelement.get(1));
+		ComboparameterName.setSelectedItem(dataOfelement.get(1));
 		setOnOff(dataOfelement.get(2));
 		addToTable(ElementController.getActrion(getScreenName(),eName));
 		btnSave.setActionCommand("_edit_on_off");
@@ -256,12 +249,9 @@ public class OnOfGUI extends JFrame {
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
 	}
-	public String getParameterName() {
-		return parameterName1;
-	}
 	public void setParameterName(String []  parameterNames) {
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
-        parameterName.setModel(cbm);
+        ComboparameterName.setModel(cbm);
 	}
 	public void setOnOff(String defultval) {
 	if(defultval.equals("OFF"))
@@ -310,6 +300,6 @@ public class OnOfGUI extends JFrame {
 	}
 	public void setParamChangeListener(ItemListener OnOfTypeListener)
 	{
-	parameterName.addItemListener(OnOfTypeListener);
+	ComboparameterName.addItemListener(OnOfTypeListener);
 	}
 }

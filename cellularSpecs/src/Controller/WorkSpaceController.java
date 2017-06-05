@@ -158,7 +158,7 @@ public class WorkSpaceController {
 	}
 	public static void addToModels(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l)	
 	{
-		String paramName;
+
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		l.setElementName(elementGui.getElementName());	
 		l.setParam(p);
