@@ -54,10 +54,11 @@ public class BulidSpec {
 
 		
 		/*
-		 *data for screen 2		
+		 *data for setting		
 		 */
 		addElementONOFF("setting",new String[] {"wifi","bluetooth","airplane_mode"});
 		addAction("setting","airplane_mode");
+		addElementONOFF("mainScreen",new String[] {"aaaa","bbbb","cccc"});
 		/*
 		 * add data to create event
 		 */

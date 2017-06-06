@@ -93,6 +93,8 @@ public class VerificationController implements ItemListener {
 			}
 			sAll+=s.getStringPromela()+"\n";
 			sAll+=createBlockChangeScreen(s);
+			sAll += "/*"
+					+ "\n*/////////////////////////////////////// End of changeParamScreens for screen "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
 		}
 		return sAll;
 	}

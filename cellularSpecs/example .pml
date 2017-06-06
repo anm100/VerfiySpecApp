@@ -6,7 +6,7 @@ mytype={mainScreen,loginScreen,createNewEvent,setting
 ,Changesettingairplane_mode,Changesettingwifi,Changesettingbluetooth}
 
 /*define flag for action */
-byte action[20];
+byte action[23];
 
 /*define params and default value*/
 byte date=Empty;
@@ -14,6 +14,9 @@ byte wifi=OFF;
 byte pass=Empty;
 byte description=Empty;
 byte title=Empty;
+byte aaaa=OFF;
+byte bbbb=OFF;
+byte cccc=OFF;
 byte onOff_0=OFF;
 byte airplane_mode=OFF;
 byte more_details=Empty;
@@ -34,14 +37,34 @@ active proctype vm(){
  do
 	::(state==mainScreen)->
 	  if
+		 ::(aaaa==ON)->atomic(aaaa=OFF;state=changemainScreenaaaa);
+		 ::(aaaa==OFF)->atomic(aaaa=ON;state=changemainScreenaaaa);
+		 ::(bbbb==ON)->atomic(bbbb=OFF;state=changemainScreenbbbb);
+		 ::(bbbb==OFF)->atomic(bbbb=ON;state=changemainScreenbbbb);
+		 ::(cccc==ON)->atomic(cccc=OFF;state=changemainScreencccc);
+		 ::(cccc==OFF)->atomic(cccc=ON;state=changemainScreencccc);
 		 ::
 		 ::
 	  fi
-	::(state==)->
+	::(state==ChangemainScreenaaaa)->
 	  if
 		 ::
 		 ::
 	  fi
+	::(state==ChangemainScreenbbbb)->
+	  if
+		 ::
+		 ::
+	  fi
+	::(state==ChangemainScreencccc)->
+	  if
+		 ::
+		 ::
+	  fi
+/*
+*/////////////////////////////////////// End of changeParamScreens for screen mainScreen////////////////////////////////////////////////
+*/
+
 	::(state==loginScreen)->
 	  if
 		 ::(user==NotEmpty && pass==NotEmpty)->atomic(state=mainScreen); /* log in Button */
@@ -58,6 +81,10 @@ active proctype vm(){
 		 ::
 		 ::
 	  fi
+/*
+*/////////////////////////////////////// End of changeParamScreens for screen loginScreen////////////////////////////////////////////////
+*/
+
 	::(state==createNewEvent)->
 	  if
 		 ::(title==NotEmpty && description==NotEmpty && date==NotEmpty && time==NotEmpty)->atomic(state=mainScreen); /* save Button */
@@ -89,6 +116,10 @@ active proctype vm(){
 		 ::
 		 ::
 	  fi
+/*
+*/////////////////////////////////////// End of changeParamScreens for screen createNewEvent////////////////////////////////////////////////
+*/
+
 	::(state==setting)->
 	  if
 		 ::(airplane_mode==ON)->atomic(airplane_mode=OFF;state=changesettingairplane_mode);
@@ -115,5 +146,9 @@ active proctype vm(){
 		 ::
 		 ::
 	  fi
+/*
+*/////////////////////////////////////// End of changeParamScreens for screen setting////////////////////////////////////////////////
+*/
+
 od
 }
