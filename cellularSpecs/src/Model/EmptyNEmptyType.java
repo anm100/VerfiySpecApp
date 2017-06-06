@@ -59,6 +59,11 @@ public void setElementName(String name) {
  * now get values only in Param Class 
  */
 
+public Param getParameter() {
+	// TODO Auto-generated method stub
+	return parameter;
+}
+
 
 }
 

@@ -11,6 +11,7 @@ import java.awt.Dimension;
 
 
 
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 
@@ -29,6 +30,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JRadioButton;
 
 import our.Utils.BulidSpec;
+import Controller.Router;
 import Controller.VerificationController;
 import Controller.WorkSpaceController;
 import Model.WorkSpace;
@@ -57,7 +59,7 @@ public class debugingGUI extends JFrame{
 
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
-			    writer.println(VerificationController.translateToPROMELA());
+			    writer.println(Router.getInstance().getVerificationController().translateToPROMELA());
 			    writer.close();
 			} catch (IOException eb) {
 			   // do something
