@@ -57,9 +57,7 @@ public static Element getElementByName(String elementName){
 	@SuppressWarnings("rawtypes")
 	public static String [] getParams(String type, String screenName){
 		ArrayList<String> params = new ArrayList<String>();
-		params.add("");
 		params.add("New..");
-
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		Screen s= WorkSpace.getInstance().getScreenByName(screenName);
 		Param p;
@@ -69,7 +67,6 @@ public static Element getElementByName(String elementName){
 			if(p.getType().equals(type) && s.getElementByName(p.getParamName()) == null)
 			{		
 			params.add(p.getParamName());
-			System.out.println(p.getParamName());
 			}
 		}
 		String[] stockArr = new String[params.size()];
@@ -78,10 +75,7 @@ public static Element getElementByName(String elementName){
 	}
 	public static String [] getParams(String type, String screenName,String paramSelected){
 		ArrayList<String> params = new ArrayList<String>();
-		params.add("");
 		params.add("New..");
-		params.add(paramSelected);
-
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		Screen s= WorkSpace.getInstance().getScreenByName(screenName);
 		Param p;

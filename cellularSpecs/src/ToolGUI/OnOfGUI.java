@@ -109,8 +109,6 @@ public class OnOfGUI extends JFrame {
 				}
 			}
 		});
-		
-		ComboparameterName.setModel(new DefaultComboBoxModel(new String[] {"new parameter"}));
 		ComboparameterName.setBounds(118, 89, 152, 22);
 		getContentPane().add(ComboparameterName);
 		setSize(501, 367);
@@ -192,7 +190,7 @@ public class OnOfGUI extends JFrame {
 			getContentPane().add(ParameterName);
 			ParameterName.setForeground(Color.GRAY);
 			ParameterName.setText("parameter name");
-			ParameterName.setVisible(false);
+			ParameterName.setVisible(true);
 			ParameterName.setBounds(280, 90, 152, 20);
 			ParameterName.setToolTipText("add new Parameter");
 			ParameterName.addFocusListener(new FocusListener() {
@@ -249,7 +247,7 @@ public class OnOfGUI extends JFrame {
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
 	}
-	public void setParameterName(String []  parameterNames) {
+	public void setParameterName(String []  parameterNames) {		
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
         ComboparameterName.setModel(cbm);
 	}
