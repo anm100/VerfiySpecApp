@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,6 +12,7 @@ import javax.swing.JComboBox;
 
 import Model.Element;
 import Model.ElementType;
+import Model.EmptyNEmptyType;
 import Model.OnOffType;
 import Model.Param;
 import Model.RequirementList;
@@ -21,7 +23,7 @@ import ToolGUI.VerifySpecGUI;
 
 public class VerificationController implements ItemListener {
 	static VerifySpecGUI verifySpecGUI;
-	public static void addToRequirmentList(VerifySpecGUI verifySpecGUI) {
+	public  void addToRequirmentList(VerifySpecGUI verifySpecGUI) {
 		String st=verifySpecGUI.getReq().get(1).getText().toString();
 		//r.
 		//Router.getInstance().setRequirementList();
@@ -32,7 +34,7 @@ public class VerificationController implements ItemListener {
 		}
 		*/
 	}
-	public static String translateToPROMELA(){
+	public  String translateToPROMELA(){
 		WorkSpace w  =WorkSpace.getInstance();
 		return ""
 				+"#define ON  1 \n"
@@ -60,8 +62,10 @@ public class VerificationController implements ItemListener {
 ////		}
 ////		return "";
 //	}
-	private static String getPG() {
+	private  String getPG() {
 		// TODO Auto-generated method stub
+	    HashMap <String,Screen> ChangeScreenH ; 
+
 		String sAll = new String("");
 		Screen s = new Screen(); 
 		Element e ; 
@@ -79,27 +83,32 @@ public class VerificationController implements ItemListener {
 				}else if (e.getType().equals(ElementType.getOnOffType())){
 					s.getTransPromela().add("("+e.getParamName()+"=="
 							+((OnOffType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
-							+((OnOffType)e).getParameter().getValues()[1]+";state=change"+s.getScreenName()+e.getParamName()+");");
+							+((OnOffType)e).getParameter().getValues()[1]+";"
+							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
+							+"state=change"+s.getScreenName()+e.getParamName()+");");
 					s.getTransPromela().add("("+e.getParamName()+"=="
 							+((OnOffType)e).getParameter().getValues()[1]+")->atomic("+e.getParamName()+"="
-							+((OnOffType)e).getParameter().getValues()[0]+";state=change"+s.getScreenName()+e.getParamName()+");");
+							+((OnOffType)e).getParameter().getValues()[0]+";"
+							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
+							+"state=change"+s.getScreenName()+e.getParamName()+");");	
 					
-					
-					
-					
-					
+				}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
+					s.getTransPromela().add("("+e.getParamName()+"=="
+							+((EmptyNEmptyType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
+							+((EmptyNEmptyType)e).getParameter().getValues()[1]+";"
+							+"state=change"+s.getScreenName()+e.getParamName()+");");
+
 				}
-		
 			}
 			sAll+=s.getStringPromela()+"\n";
-			sAll+=createBlockChangeScreen(s);
+			sAll+=createBlockChangeScreenFor(s);
 			sAll += "/*"
 					+ "\n*/////////////////////////////////////// End of changeParamScreens for screen "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
 		}
 		return sAll;
 	}
 
-	private static String defineParamsPromela(){
+	private  String defineParamsPromela(){
 		String out = new String("\n/*define flag for action */\nbyte action["+WorkSpace.getInstance().getParamsMap().size()+"];\n\n"
 				+ "/*define params and default value*/\n");
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
@@ -112,7 +121,7 @@ public class VerificationController implements ItemListener {
 		return out;
 	}
 	
-	private static String createBlockChangeScreen(Screen s){
+	private  String createBlockChangeScreenFor(Screen s){
 		String out = new String (""); 
 		String[] changeScreens= s.getChangeStates().split(",");
 		for (int i=0 ;i<changeScreens.length;i++){
@@ -122,7 +131,7 @@ public class VerificationController implements ItemListener {
 		return out ; 
 	}
 
-	public static   void selectReqNum(boolean flag,int reqNum) {
+	public  void selectReqNum(boolean flag,int reqNum) {
 		 Router.getInstance().getRequirementList().getReqlist().get(reqNum).setSelected(flag);;
 	
 	}
@@ -134,54 +143,54 @@ public class VerificationController implements ItemListener {
 		{
 		case "req1":
 			WorkSpace.getLog().debug("req1 is selected");
-			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,0);
+			this.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,0);
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(0).getReq());
 		break;
 		
 		case "req2":
 			WorkSpace.getLog().debug("req2 is selected");
-			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,1);
+			this.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,1);
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(1).getReq());
 		break;
 		
 		case "req3":
 			WorkSpace.getLog().debug("req3 is selected");
-			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,2);
+			this.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,2);
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(2).getReq());
 		break;
 		
 		case "req4":
 			WorkSpace.getLog().debug("req4 is selected");
-			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,3);
+			this.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,3);
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(3).getReq());
 		break;
 		
 		case "req5":
 			WorkSpace.getLog().debug("req5 is selected");
-			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,4);
+			this.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,4);
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(4).getReq());
 		break;
 		
 		case "req6":
 			WorkSpace.getLog().debug("req6 is selected");
-			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,5);
+			this.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,5);
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(5).getReq());
 		break;
 		
 		case "req7":
 			WorkSpace.getLog().debug("req7 is selected");
-			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,6);
+			this.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,6);
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(6).getReq());
 		break;
 		
 		case "req8":
 			WorkSpace.getLog().debug("req8 is selected");
-			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,7);
+			this.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,7);
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(7).getReq());
 		break;
 		case "req9":
 			WorkSpace.getLog().debug("req9 is selected");
-			VerificationController.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,8);
+			this.selectReqNum(e.getStateChange() == ItemEvent.SELECTED,8);
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(8).getReq());
 		break;
 		}

@@ -137,15 +137,15 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		
 		case("Run_verifectaion"):
 			WorkSpace.getLog().debug("Run_verifectaion");
-			VerificationController.addToRequirmentList(verifySpecGUI);
-			WorkSpace.getLog().info(VerificationController.translateToPROMELA());
+			verificationController.addToRequirmentList(verifySpecGUI);
+			WorkSpace.getLog().info(verificationController.translateToPROMELA());
 			WorkSpace.getLog().debug("create pml file ");
 			formulaTranslate.translateReq1();
 			formulaTranslate.translateReq2a();
 			formulaTranslate.translateReq2b();
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
-			    writer.println(VerificationController.translateToPROMELA());
+			    writer.println(verificationController.translateToPROMELA());
 			    writer.close();
 			} catch (IOException eb) {
 			   // do something
@@ -435,6 +435,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	}
 	public void setGetNewLocation(Boolean getNewLocation) {
 		GetNewLocation = getNewLocation;
+	}
+	
+	public VerificationController getVerificationController() {
+		return verificationController;
 	}
 	@Override
 	public void itemStateChanged(ItemEvent e) {
