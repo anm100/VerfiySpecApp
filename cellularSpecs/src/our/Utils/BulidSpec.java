@@ -93,7 +93,7 @@ public class BulidSpec {
 				WorkSpace.getLog().debug("add element: "+fields[i]+" to "+screenName);
 				e = new OnOffType();
 				e.setElementName(fields[i]);
-				p = new Param(fields[i],"OFF", ElementType.getOnOffType());
+				p = new Param(fields[i],"off", ElementType.getOnOffType());
 				e.setParam(p);
 				wk.addParameterToHash(p);
 				wk.getScreenByName(screenName).addElement(e);

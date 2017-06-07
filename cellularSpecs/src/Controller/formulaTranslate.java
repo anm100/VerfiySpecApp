@@ -85,7 +85,6 @@ public static  void translateReq2b()
 	 st="ltl "+" reqid "+"{[]("+getTranslateReq2b()+")}";
 	 System.out.println(st);
 }
-
 private static String getTranslateReq2b() {
 	String str="";
 	if(ScreenStates.size()>=2){
@@ -103,6 +102,50 @@ private static String getTranslateReq2b() {
 	}
 	return str;
 	
+}
+
+public static void translateReq7()
+{
+	String st="";
+	 st="ltl "+" reqid "+"{[]("+getTranslateReq7()+")}";
+	 System.out.println(st);
+}
+private static String getTranslateReq7() {
+	String st1="";
+	String req7="";
+	String[] params=ScreenController.getparams();
+	for(int i=0;i<params.length;i++)
+	{
+		String[] values = WorkSpace.getInstance().getParamsMap().get(params[i]).getValues();
+		for(int j=0;j<values.length;j++)
+		{
+			req7+="(("+params[i]+"=="+values[j]+")->(!(X("+getStatesReq7()+"U("+params[i]+"!="+values[j]+")))))&&";
+		}
+	}
+	if(params.length>0)
+		req7=req7.substring(0, req7.length()-2);
+return req7;
+}
+private static String getStatesReq7() 
+{
+	int i=0;
+	String st1="";
+	String Req7="";
+	String[] params=ScreenController.getparams();
+	for(int j=0;j<params.length;j++)
+	{
+		for(i=0;i<ChangeStates.size();i++)
+		{
+		 if(ChangeStates.get(i).endsWith(params[j]))
+			 st1+="("+ChangeStates.get(i)+")||";
+		}
+	}
+	if(params.length>1)
+	{
+		st1=st1.substring(0, st1.length()-2);
+	}
+	st1="("+st1+")";
+	return st1;
 }
 public static void addtoChangeStates(String changeStates) {
 	ChangeStates.add(changeStates);

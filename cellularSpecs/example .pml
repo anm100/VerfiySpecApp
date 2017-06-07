@@ -45,6 +45,14 @@ active proctype vm(){
 		 ::(cccc==OFF)->atomic(cccc=ON;action[17]=1;state=changemainScreencccc);
 		 ::
 		 ::
+		 ::(aaaa==ON)->atomic(aaaa=OFF;action[15]=1;state=changemainScreenaaaa);
+		 ::(aaaa==OFF)->atomic(aaaa=ON;action[15]=1;state=changemainScreenaaaa);
+		 ::(bbbb==ON)->atomic(bbbb=OFF;action[16]=1;state=changemainScreenbbbb);
+		 ::(bbbb==OFF)->atomic(bbbb=ON;action[16]=1;state=changemainScreenbbbb);
+		 ::(cccc==ON)->atomic(cccc=OFF;action[17]=1;state=changemainScreencccc);
+		 ::(cccc==OFF)->atomic(cccc=ON;action[17]=1;state=changemainScreencccc);
+		 ::
+		 ::
 	  fi
 	::(state==ChangemainScreenaaaa)->
 	  if
@@ -72,6 +80,11 @@ active proctype vm(){
 		 ::(user==Empty)->atomic(user=NotEmpty;state=changeloginScreenuser);
 		 ::
 		 ::
+		 ::(pass==Empty)->atomic(pass=NotEmpty;state=changeloginScreenpass);
+		 ::(user==NotEmpty && pass==NotEmpty)->atomic(state=mainScreen); /* log in Button */
+		 ::(user==Empty)->atomic(user=NotEmpty;state=changeloginScreenuser);
+		 ::
+		 ::
 	  fi
 	::(state==ChangeloginScreenpass)->
 	  if
@@ -89,6 +102,14 @@ active proctype vm(){
 
 	::(state==createNewEvent)->
 	  if
+		 ::(date==Empty)->atomic(date=NotEmpty;state=changecreateNewEventdate);
+		 ::(more_details==Empty)->atomic(more_details=NotEmpty;state=changecreateNewEventmore_details);
+		 ::(title==NotEmpty && description==NotEmpty && date==NotEmpty && time==NotEmpty)->atomic(state=mainScreen); /* save Button */
+		 ::(description==Empty)->atomic(description=NotEmpty;state=changecreateNewEventdescription);
+		 ::(time==Empty)->atomic(time=NotEmpty;state=changecreateNewEventtime);
+		 ::(title==Empty)->atomic(title=NotEmpty;state=changecreateNewEventtitle);
+		 ::
+		 ::
 		 ::(date==Empty)->atomic(date=NotEmpty;state=changecreateNewEventdate);
 		 ::(more_details==Empty)->atomic(more_details=NotEmpty;state=changecreateNewEventmore_details);
 		 ::(title==NotEmpty && description==NotEmpty && date==NotEmpty && time==NotEmpty)->atomic(state=mainScreen); /* save Button */
@@ -129,6 +150,14 @@ active proctype vm(){
 
 	::(state==setting)->
 	  if
+		 ::(airplane_mode==ON)->atomic(airplane_mode=OFF;action[14]=1;state=changesettingairplane_mode);
+		 ::(airplane_mode==OFF)->atomic(airplane_mode=ON;action[14]=1;state=changesettingairplane_mode);
+		 ::(wifi==ON)->atomic(wifi=OFF;action[12]=1;state=changesettingwifi);
+		 ::(wifi==OFF)->atomic(wifi=ON;action[12]=1;state=changesettingwifi);
+		 ::(bluetooth==ON)->atomic(bluetooth=OFF;action[13]=1;state=changesettingbluetooth);
+		 ::(bluetooth==OFF)->atomic(bluetooth=ON;action[13]=1;state=changesettingbluetooth);
+		 ::
+		 ::
 		 ::(airplane_mode==ON)->atomic(airplane_mode=OFF;action[14]=1;state=changesettingairplane_mode);
 		 ::(airplane_mode==OFF)->atomic(airplane_mode=ON;action[14]=1;state=changesettingairplane_mode);
 		 ::(wifi==ON)->atomic(wifi=OFF;action[12]=1;state=changesettingwifi);

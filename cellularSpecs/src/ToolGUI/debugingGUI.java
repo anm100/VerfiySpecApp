@@ -33,6 +33,7 @@ import our.Utils.BulidSpec;
 import Controller.Router;
 import Controller.VerificationController;
 import Controller.WorkSpaceController;
+import Controller.formulaTranslate;
 import Model.WorkSpace;
 
 public class debugingGUI extends JFrame{
@@ -66,14 +67,28 @@ public class debugingGUI extends JFrame{
 			}
 		}
 	});
-	button_1.setBounds(11, 150, 273, 41);
+	button_1.setBounds(11, 115, 273, 41);
 	getContentPane().add(button_1);
+	
+	JButton CreateFormula = new JButton("Create Formula");
+	CreateFormula.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			BulidSpec.build();
+			WorkSpaceController.createSpecGUI();
+			VerificationController verificationController = new VerificationController();
+			verificationController.translateToPROMELA();
+			formulaTranslate.translateReq1();
+			formulaTranslate.translateReq2a();
+			formulaTranslate.translateReq2b();
+			
+		}
+	});
+	CreateFormula.setBounds(11, 188, 273, 41);
+	getContentPane().add(CreateFormula);
 	    setVisible(true);
 		setSize(319, 289);
 		setLocation(800, 50);
 		   
 			 
 	} 
-	
-
 }

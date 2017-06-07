@@ -5,10 +5,10 @@
  
 mtype = {BoPo_MainSreen,ChangeName,CreateNewEvent};
 byte name=Empty;
-mtype state=ChangeName
+mtype state=BoPo_MainSreen
 
 ltl req7 {
-[]((name==Empty)->(!X((!(state==ChangeName))U(name!=Empty))))
+[]((name==Empty)->!(X((state!=ChangeName)U((name!=Empty)&&(state!=ChangeName)))))
 }
 
 active proctype vm()
@@ -16,10 +16,10 @@ active proctype vm()
 do
 :: {state==BoPo_MainSreen}->
 	if 
-	::	name==Empty -> atomic{name=Empty;state=ChangeName}
+	::	name==Empty -> atomic{state=ChangeName;name=NotEmpty}
 	:: 	name==NotEmpty -> atomic{state=CreateNewEvent}
 	fi
-:: {state==ChangeName}->atomic{name=NotEmpty;state=BoPo_MainSreen}
+:: {state==ChangeName}->atomic{state=BoPo_MainSreen}
 :: {state==CreateNewEvent}->
 atomic{state=CreateNewEvent}
 od
