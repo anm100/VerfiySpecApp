@@ -33,7 +33,7 @@ import our.Utils.BulidSpec;
 import Controller.Router;
 import Controller.VerificationController;
 import Controller.WorkSpaceController;
-import Controller.formulaTranslate;
+import Controller.FormulaTranslate;
 import Model.WorkSpace;
 
 public class debugingGUI extends JFrame{
@@ -77,9 +77,9 @@ public class debugingGUI extends JFrame{
 			WorkSpaceController.createSpecGUI();
 			VerificationController verificationController = new VerificationController();
 			verificationController.translateToPROMELA();
-			formulaTranslate.translateReq1();
-			formulaTranslate.translateReq2a();
-			formulaTranslate.translateReq2b();
+			FormulaTranslate.translateReq1();
+			FormulaTranslate.translateReq2a();
+			FormulaTranslate.translateReq2b();
 			
 		}
 	});

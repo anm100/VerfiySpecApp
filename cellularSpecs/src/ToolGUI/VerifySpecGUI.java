@@ -17,7 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 
 import Controller.Router;
-import Controller.formulaTranslate;
+import Controller.FormulaTranslate;
 
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;

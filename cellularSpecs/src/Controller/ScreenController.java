@@ -5,18 +5,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import Model.Element;
-import Model.ElementType;
 import Model.Param;
 import Model.Screen;
 import Model.WorkSpace;
-import ToolGUI.AddConditonGui;
-import ToolGUI.ScreenGUI;
 
 public class ScreenController {
 	
 public static Element getElementByName(String elementName){
 	
-	ArrayList<Element> params = new ArrayList<Element>(); 
 	Screen s ;
 	
 	Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();

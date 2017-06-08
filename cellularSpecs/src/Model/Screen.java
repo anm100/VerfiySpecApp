@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import Controller.formulaTranslate;
+import Controller.FormulaTranslate;
 import ToolGUI.ScreenGUI;
 
 public class Screen implements Serializable{
@@ -180,7 +180,7 @@ public class Screen implements Serializable{
 			e= (Element)pair.getValue();
 			if (!(e.getType().equals(ElementType.getStandartBtnType()))){
 			states+=",Change"+this.getScreenName()+e.getParamName();
-			formulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
+			FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
 			}
 		}
 		

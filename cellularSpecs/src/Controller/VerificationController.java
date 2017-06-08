@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 
 import Model.Element;
 import Model.ElementType;
@@ -17,12 +16,12 @@ import Model.OnOffType;
 import Model.Param;
 import Model.RequirementList;
 import Model.Screen;
-import Model.StandartButtonType;
 import Model.WorkSpace;
 import ToolGUI.VerifySpecGUI;
 
 public class VerificationController implements ItemListener {
 	static VerifySpecGUI verifySpecGUI;
+	FormulaTranslate formulaTranslate = new FormulaTranslate(); 
 	public  void addToRequirmentList(VerifySpecGUI verifySpecGUI) {
 		String st=verifySpecGUI.getReq().get(1).getText().toString();
 		//r.

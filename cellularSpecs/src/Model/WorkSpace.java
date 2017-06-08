@@ -3,7 +3,7 @@ package Model;
 import java.io.Serializable;
 import java.util.*;
 
-import Controller.formulaTranslate;
+import Controller.FormulaTranslate;
 import our.Utils.Logger;
 
 public class WorkSpace implements Serializable { 
@@ -140,7 +140,7 @@ public  String getAllChangeStates(){
 		pair =(Map.Entry) it.next(); 
 		e= (Screen)pair.getValue();
 		states=","+e.getChangeStates()+"";
-		formulaTranslate.addtoScreenStates(e.getScreenName());
+		FormulaTranslate.addtoScreenStates(e.getScreenName());
 	}
 	return states;
 }

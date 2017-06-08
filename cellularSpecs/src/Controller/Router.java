@@ -140,10 +140,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			verificationController.addToRequirmentList(verifySpecGUI);
 			WorkSpace.getLog().info(verificationController.translateToPROMELA());
 			WorkSpace.getLog().debug("create pml file ");
-			formulaTranslate.translateReq1();
-			formulaTranslate.translateReq2a();
-			formulaTranslate.translateReq2b();
-			formulaTranslate.translateReq7();
+			FormulaTranslate.translateReq1();
+			FormulaTranslate.translateReq2a();
+			FormulaTranslate.translateReq2b();
+			FormulaTranslate.translateReq7();
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA());
