@@ -45,8 +45,8 @@ public class RequirementList {
  
  
 
-public static List<Requirement> getReqlist() {
-	return reqlist;
+public static ArrayList<Requirement> getReqlist() {
+	return (ArrayList<Requirement>) reqlist;
 }
 public  void loadreqs() {
 	   JSONParser parser = new JSONParser();

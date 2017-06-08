@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JCheckBox;
 
+import Model.ChangeScreen;
 import Model.Element;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
@@ -17,21 +18,12 @@ import Model.Param;
 import Model.RequirementList;
 import Model.Screen;
 import Model.WorkSpace;
-import ToolGUI.VerifySpecGUI;
 
 public class VerificationController implements ItemListener {
-	static VerifySpecGUI verifySpecGUI;
-	FormulaTranslate formulaTranslate = new FormulaTranslate(); 
-	public  void addToRequirmentList(VerifySpecGUI verifySpecGUI) {
-		String st=verifySpecGUI.getReq().get(1).getText().toString();
-		//r.
-		//Router.getInstance().setRequirementList();
-	/*	int i;
-		for(i=0;i<9;i++)
-		{
-
-		}
-		*/
+	private FormulaTranslate formulaTranslate = new FormulaTranslate(); 
+	
+	public VerificationController(){
+		formulaTranslate = new FormulaTranslate();
 	}
 	public  String translateToPROMELA(){
 		WorkSpace w  =WorkSpace.getInstance();
@@ -62,16 +54,13 @@ public class VerificationController implements ItemListener {
 ////		return "";
 //	}
 	private  String getPG() {
-		// TODO Auto-generated method stub
-	    HashMap <String,Screen> ChangeScreenH ; 
-
-		String sAll = new String("");
-		Screen s = new Screen(); 
-		Element e ; 
+		String sAll = new String("");Screen s = new Screen(); Element e ; 
+		
 		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			s= (Screen)pair.getValue();	
+			
 			Iterator<Entry<String, Element>> it2 = WorkSpace.getInstance()
 					.getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();
 			while(it2.hasNext()){
@@ -85,11 +74,19 @@ public class VerificationController implements ItemListener {
 							+((OnOffType)e).getParameter().getValues()[1]+";"
 							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
 							+"state=change"+s.getScreenName()+e.getParamName()+");");
+					
+				
 					s.getTransPromela().add("("+e.getParamName()+"=="
 							+((OnOffType)e).getParameter().getValues()[1]+")->atomic("+e.getParamName()+"="
 							+((OnOffType)e).getParameter().getValues()[0]+";"
 							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
 							+"state=change"+s.getScreenName()+e.getParamName()+");");	
+					
+					ChangeScreen changeScreen= new  ChangeScreen(s.getScreenName()+e.getParamName());
+					changeScreen.addTransPromela("action["+((OnOffType)e).getParameter().getIndex()+"]==1"
+							, "action["+((OnOffType)e).getParameter().getIndex()+"]=0"
+							, s.getScreenName());
+					s.addChangeScreen(changeScreen);
 					
 				}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
 					s.getTransPromela().add("("+e.getParamName()+"=="
@@ -98,9 +95,11 @@ public class VerificationController implements ItemListener {
 							+"state=change"+s.getScreenName()+e.getParamName()+");");
 
 				}
-			}
+				
+				}
+			
 			sAll+=s.getStringPromela()+"\n";
-			sAll+=createBlockChangeScreenFor(s);
+		//	sAll+=;
 			sAll += "/*"
 					+ "\n*/////////////////////////////////////// End of changeParamScreens for screen "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
 		}
@@ -120,18 +119,19 @@ public class VerificationController implements ItemListener {
 		return out;
 	}
 	
-	private  String createBlockChangeScreenFor(Screen s){
+	private  void createBlockChangeScreenFor(Screen s){
 		String out = new String (""); 
 		String[] changeScreens= s.getChangeStates().split(",");
 		for (int i=0 ;i<changeScreens.length;i++){
+	///		ChangeScreenName.put(changeScreens[i], new Screen(changeScreens[i]));
 			out+= (new Screen(changeScreens[i])).getStringPromela()+"\n";
 		}
 		
-		return out ; 
+		return  ; 
 	}
 
 	public  void selectReqNum(boolean flag,int reqNum) {
-		 Router.getInstance().getRequirementList().getReqlist().get(reqNum).setSelected(flag);;
+		RequirementList.getReqlist().get(reqNum).setSelected(flag);;
 	
 	}
 	@Override

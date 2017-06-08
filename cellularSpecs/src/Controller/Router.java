@@ -137,7 +137,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		
 		case("Run_verifectaion"):
 			WorkSpace.getLog().debug("Run_verifectaion");
-			verificationController.addToRequirmentList(verifySpecGUI);
 			WorkSpace.getLog().info(verificationController.translateToPROMELA());
 			WorkSpace.getLog().debug("create pml file ");
 			FormulaTranslate.translateReq1();
