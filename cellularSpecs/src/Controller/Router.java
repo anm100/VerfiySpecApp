@@ -415,7 +415,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	{
 		return instance;
 	}
-	public  static 	void setInstance(NewSpecGUI newSpecGui)
+	public  static 	void createRouter(NewSpecGUI newSpecGui)
 	{
 		Router.instance=new Router(newSpecGui);
 	}
