@@ -23,7 +23,7 @@ public class appTest {
             //java.util.logging.Logger.getLogger(PC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 		NewSpecGUI newSpecGUI=new NewSpecGUI();
-		Router.setInstance(newSpecGUI);
+		Router.createRouter(newSpecGUI);
 		WorkSpaceController.setup("test");
 		AddParamterGUI gui=	new AddParamterGUI();
 		gui.setVisible(true);

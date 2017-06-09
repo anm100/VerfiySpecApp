@@ -18,7 +18,7 @@ import javax.swing.JSeparator;
 
 import Controller.Router;
 import Controller.ScreenController;
-import Controller.formulaTranslate;
+import Controller.FormulaTranslate;
 
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;

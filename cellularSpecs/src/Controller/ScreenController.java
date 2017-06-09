@@ -5,18 +5,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import Model.Element;
-import Model.ElementType;
 import Model.Param;
 import Model.Screen;
 import Model.WorkSpace;
-import ToolGUI.AddConditonGui;
-import ToolGUI.ScreenGUI;
 
 public class ScreenController {
 	
 public static Element getElementByName(String elementName){
 	
-	ArrayList<Element> params = new ArrayList<Element>(); 
 	Screen s ;
 	
 	Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
@@ -55,6 +51,18 @@ public static Element getElementByName(String elementName){
 		return(p.getValues());	
 	}
 	@SuppressWarnings("rawtypes")
+	private static boolean isParamExistScreen(Screen s ,Param p){
+		Element e ; 
+		Iterator<Entry<String, Element>> it = s.getElementsMap().entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			e =(Element)pair.getValue();
+			if (e.getParamName().equals(p.getParamName())){
+				return false ; 				
+			}
+		}
+		return true; 
+	}
 	public static String [] getParams(String type, String screenName){
 		ArrayList<String> params = new ArrayList<String>();
 		params.add("New..");
@@ -64,7 +72,7 @@ public static Element getElementByName(String elementName){
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			 p =(Param)pair.getValue();
-			if(p.getType().equals(type) && s.getElementByName(p.getParamName()) == null)
+			if(p.getType().equals(type) && isParamExistScreen(s,p))
 			{		
 			params.add(p.getParamName());
 			}
@@ -83,7 +91,8 @@ public static Element getElementByName(String elementName){
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			 p =(Param)pair.getValue();
-			if(p.getType().equals(type) && s.getElementByName(elementName) == null)
+
+			if(p.getType().equals(type) && isParamExistScreen(s,p))
 			{		
 			params.add(p.getParamName());	
 			}

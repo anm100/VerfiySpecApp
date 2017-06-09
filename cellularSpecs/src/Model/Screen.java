@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import Controller.formulaTranslate;
+import Controller.FormulaTranslate;
 import ToolGUI.ScreenGUI;
 
 public class Screen implements Serializable{
@@ -18,6 +18,7 @@ public class Screen implements Serializable{
 	private int width;
 	private String description;
 	private ArrayList<String> transPromela= new ArrayList<String>();
+	private  HashMap <String,ChangeScreen> ChangeScreen = new HashMap <String,ChangeScreen>();
 	private HashMap <String,Element> elementsMap;
 	/**
 	 * @return the screenName
@@ -144,6 +145,16 @@ public class Screen implements Serializable{
 		return elementsMap;
 	}
 	
+	
+	public HashMap<String, ChangeScreen> getChangeScreenMap() {
+		return ChangeScreen;
+	}
+	public void addChangeScreen(ChangeScreen changeScreen) {
+		ChangeScreen.put(changeScreen.getScreenName(), changeScreen);
+	}
+	public void addTransPromela(String cond,String action,String toState) {
+		this.transPromela.add("("+cond+")->atomic("+action+";state="+toState+")");
+	}
 	public ArrayList<String> getTransPromela() {
 		return transPromela;
 	}
@@ -166,7 +177,8 @@ public class Screen implements Serializable{
 		Element e ;
 		Map.Entry pair;
 		String states;
-		Iterator it = this.elementsMap.entrySet().iterator();
+		Iterator it ;
+		it = this.elementsMap.entrySet().iterator();
 		if(it.hasNext()){
 		pair =(Map.Entry) it.next(); 
 		e= (Element)pair.getValue();
@@ -174,16 +186,22 @@ public class Screen implements Serializable{
 		}else {
 			 states=new String("");
 		}
-		
 		while(it.hasNext()){
 			pair =(Map.Entry) it.next(); 
 			e= (Element)pair.getValue();
 			if (!(e.getType().equals(ElementType.getStandartBtnType()))){
 			states+=",Change"+this.getScreenName()+e.getParamName();
-			formulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
+			//FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
 			}
 		}
-		
+		it = this.ChangeScreen.entrySet().iterator();
+		ChangeScreen changeScreen ;
+		while(it.hasNext()){
+			pair =(Map.Entry) it.next(); 
+			changeScreen= (ChangeScreen)pair.getValue();
+			states+=","+changeScreen.getScreenName();
+			//FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
+			}		
 		return states;
 	}
 

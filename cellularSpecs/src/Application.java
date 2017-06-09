@@ -1,17 +1,13 @@
 
 import java.io.FileReader;
-import java.util.Iterator;
 
-import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import Controller.Router;
-import Controller.VerificationController;
-import Model.Requirement;
+
 import Model.WorkSpace;
 import ToolGUI.NewSpecGUI;
 
@@ -32,7 +28,7 @@ public  class Application{
         }
 		
 		NewSpecGUI newSpecGUI=new NewSpecGUI();
-		Router.setInstance(newSpecGUI);
+		Router.createRouter(newSpecGUI);
 		newSpecGUI.addWorkSpaceListener(Router.getInstance());
 		JSONParser parser = new JSONParser();
 	     try {

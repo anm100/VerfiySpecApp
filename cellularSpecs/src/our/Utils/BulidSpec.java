@@ -34,11 +34,17 @@ public class BulidSpec {
 	
 		wk.addScreen("loginScreen", new Screen("loginScreen", 38, 102, "login for app"));
 		wk.addScreen("setting", new Screen("setting", 210, 102, "login for app"));
-		wk.addScreen("createNewEvent", new Screen("createNewEvent", 375, 102, " The user creates new event. Upon creating the event the user becomes the moderator of the event."));
+//		wk.addScreen("createNewEvent", new Screen("createNewEvent", 375, 102, " The user creates new event. Upon creating the event the user becomes the moderator of the event."));
 		wk.addScreen("mainScreen", new Screen("mainScreen", 535, 102, "setting app"));
 
 	}
 	private  static void addelements(){
+		/*
+		 *data for setting		
+		 */
+		addElementONOFF("setting",new String[] {"wifi","bluetooth","airplane_mode"});
+		addAction("setting","airplane_mode");
+		addElementONOFF("mainScreen",new String[] {"aaaa","bbbb","cccc"});
 		StandartButtonType s; 
 		/* 
 		 * data for  log in screen 
@@ -53,21 +59,16 @@ public class BulidSpec {
 		addConditions("loginScreen","log in", new String [] {"user","pass"}); 
 
 		
-		/*
-		 *data for setting		
-		 */
-		addElementONOFF("setting",new String[] {"wifi","bluetooth","airplane_mode"});
-		addAction("setting","airplane_mode");
-		addElementONOFF("mainScreen",new String[] {"aaaa","bbbb","cccc"});
+	
 		/*
 		 * add data to create event
 		 */
-		s = new StandartButtonType();
-		s.setElementName("save");
-		s.setTransition("createNewEvent","mainScreen");
-		wk.getScreenByName("createNewEvent").addElement(s);
-		addElemenEmpty("createNewEvent",new String[] {"title", "description", "date", "time","more_details",});
-	addConditions("createNewEvent","save", new String [] {"title", "description", "date", "time"}); 
+	//	s = new StandartButtonType();
+	//	s.setElementName("save");
+	//	s.setTransition("createNewEvent","mainScreen");
+	//	wk.getScreenByName("createNewEvent").addElement(s);
+		//addElemenEmpty("createNewEvent",new String[] {"title", "description", "date", "time","more_details",});
+//	addConditions("createNewEvent","save", new String [] {"title", "description", "date", "time"}); 
 
 	}
 	
