@@ -73,16 +73,17 @@ public static Element getElementByName(String elementName){
 		stockArr = params.toArray(stockArr);	
 	return stockArr;
 	}
-	public static String [] getParams(String type, String screenName,String paramSelected){
+	public static String [] getParams(String type, String screenName,String paramSelected,String elementName){
 		ArrayList<String> params = new ArrayList<String>();
 		params.add("New..");
+		params.add(paramSelected);
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		Screen s= WorkSpace.getInstance().getScreenByName(screenName);
 		Param p;
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			 p =(Param)pair.getValue();
-			if(p.getType().equals(type) && s.getElementByName(p.getParamName()) == null)
+			if(p.getType().equals(type) && s.getElementByName(elementName) == null)
 			{		
 			params.add(p.getParamName());	
 			}

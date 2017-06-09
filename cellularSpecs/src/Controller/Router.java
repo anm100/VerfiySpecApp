@@ -115,6 +115,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpace.getLog().debug("verifiy Spec case");
 		 verifySpecGUI=new VerifySpecGUI();
 		VerifySpecGUI.setVerifySpecGUI(this);
+		//VerifySpecGUI.setComboBox(WorkSpace.getInstance().getsc);
 		VerifySpecGUI.setCheckBoxListener(verificationController);
 		verifySpecGUI.setVisible(true);
 		//	verifySpecGUI.addRootScreen(st);

@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 
 import Controller.Router;
+import Controller.ScreenController;
 import Controller.formulaTranslate;
 
 import java.awt.event.ActionEvent;
@@ -59,27 +60,27 @@ public class VerifySpecGUI extends JFrame{
 		 req1.setActionCommand("req1");
 		req1.setBackground(Color.WHITE);
 		//Router.getInstance().getRequirementList().getRequirement(2).setFormula(formula);
-		req1.setBounds(23, 162, 243, 23);
+		req1.setBounds(23, 162, 480, 23);
 		getContentPane().add(req1);
 		req.add(req1);
 		
 		 req2 = new JCheckBox("There is a screen (root), such that each screen is reached from it.");
 		req2.setBackground(Color.WHITE);
-		req2.setBounds(23, 188, 371, 23);
+		req2.setBounds(23, 188, 520, 23);
 		getContentPane().add(req2);
 		req.add(req2);
 		 req2.setActionCommand("req2");
 		 
 		 req3 = new JCheckBox("We can't  move from screen_j to screen_i without changing or defining a parameter.");
 		req3.setBackground(Color.WHITE);
-		req3.setBounds(23, 216, 459, 23);
+		req3.setBounds(23, 216, 642, 23);
 		getContentPane().add(req3);
 		req.add(req3);
 		 req3.setActionCommand("req3");
 		
 		 req4 = new JCheckBox("Parameter cannot accept value that is not defined in the List of the possible values.");
 		req4.setBackground(Color.WHITE);
-		req4.setBounds(23, 242, 427, 23);
+		req4.setBounds(23, 242, 605, 23);
 		getContentPane().add(req4);
 		req.add(req4);
 		 req4.setActionCommand("req4");
@@ -148,6 +149,9 @@ public class VerifySpecGUI extends JFrame{
 		getContentPane().add(lblChooseRootScreen);
 		
 		 comboBox = new JComboBox();
+		 String [] st=ScreenController.getScreenNameNames();
+		 comboBox.setModel(new DefaultComboBoxModel(st));
+		 comboBox.setSelectedItem(null);
 		comboBox.setBounds(142, 67, 102, 23);
 		getContentPane().add(comboBox);
 		

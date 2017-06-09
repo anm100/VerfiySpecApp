@@ -218,11 +218,11 @@ public class OnOfGUI extends JFrame {
 	}
 	private void loadData(	ArrayList <String> dataOfelement,String eName) {
 		elementName.setText(dataOfelement.get(0));
-		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,dataOfelement.get(1)));
+		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,dataOfelement.get(1),dataOfelement.get(0)));
 		ComboparameterName.setSelectedItem(dataOfelement.get(1));
 		setOnOff(dataOfelement.get(2));
 		addToTable(ElementController.getActrion(getScreenName(),eName));
-		btnSave.setActionCommand("_edit_on_off");
+		btnSave.setActionCommand("_edit_on_off");	
 		
 	}
 	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
