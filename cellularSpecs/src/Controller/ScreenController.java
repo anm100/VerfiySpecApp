@@ -51,6 +51,18 @@ public static Element getElementByName(String elementName){
 		return(p.getValues());	
 	}
 	@SuppressWarnings("rawtypes")
+	private static boolean isParamExistScreen(Screen s ,Param p){
+		Element e ; 
+		Iterator<Entry<String, Element>> it = s.getElementsMap().entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			e =(Element)pair.getValue();
+			if (e.getParamName().equals(p.getParamName())){
+				return false ; 				
+			}
+		}
+		return true; 
+	}
 	public static String [] getParams(String type, String screenName){
 		ArrayList<String> params = new ArrayList<String>();
 		params.add("New..");
@@ -60,7 +72,7 @@ public static Element getElementByName(String elementName){
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			 p =(Param)pair.getValue();
-			if(p.getType().equals(type) && s.getElementByName(p.getParamName()) == null)
+			if(p.getType().equals(type) && isParamExistScreen(s,p))
 			{		
 			params.add(p.getParamName());
 			}
@@ -72,13 +84,14 @@ public static Element getElementByName(String elementName){
 	public static String [] getParams(String type, String screenName,String paramSelected){
 		ArrayList<String> params = new ArrayList<String>();
 		params.add("New..");
+		params.add(paramSelected);
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		Screen s= WorkSpace.getInstance().getScreenByName(screenName);
 		Param p;
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			 p =(Param)pair.getValue();
-			if(p.getType().equals(type) && s.getElementByName(p.getParamName()) == null)
+			if(p.getType().equals(type) && isParamExistScreen(s,p))
 			{		
 			params.add(p.getParamName());	
 			}
