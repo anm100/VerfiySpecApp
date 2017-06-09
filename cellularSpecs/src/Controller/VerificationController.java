@@ -2,7 +2,6 @@ package Controller;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -99,7 +98,7 @@ public class VerificationController implements ItemListener {
 				}
 			
 			sAll+=s.getStringPromela()+"\n";
-		//	sAll+=;
+			sAll+=getBlockChangeScreenFor(s);
 			sAll += "/*"
 					+ "\n*/////////////////////////////////////// End of changeParamScreens for screen "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
 		}
@@ -119,15 +118,24 @@ public class VerificationController implements ItemListener {
 		return out;
 	}
 	
-	private  void createBlockChangeScreenFor(Screen s){
+	private  String getBlockChangeScreenFor(Screen s){
 		String out = new String (""); 
-		String[] changeScreens= s.getChangeStates().split(",");
-		for (int i=0 ;i<changeScreens.length;i++){
-	///		ChangeScreenName.put(changeScreens[i], new Screen(changeScreens[i]));
-			out+= (new Screen(changeScreens[i])).getStringPromela()+"\n";
-		}
+			
+			Iterator<Entry<String,ChangeScreen>> it =s.getChangeScreenMap().entrySet().iterator();
+		ChangeScreen state;
+			while(it.hasNext()){
+				Map.Entry pair =(Map.Entry) it.next(); 
+				 state =(ChangeScreen)pair.getValue();
+				 out+=state.getStringPromela()+"\n";
+			}
 		
-		return  ; 
+//		String[] changeScreens= s.getChangeStates().split(",");
+//		for (int i=0 ;i<changeScreens.length;i++){
+//		ChangeScreenName.put(changeScreens[i], new Screen(changeScreens[i]));
+//			out+= (new Screen(changeScreens[i])).getStringPromela()+"\n";
+//		}
+		
+		return  out ; 
 	}
 
 	public  void selectReqNum(boolean flag,int reqNum) {

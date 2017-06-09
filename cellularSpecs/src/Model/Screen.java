@@ -146,7 +146,7 @@ public class Screen implements Serializable{
 	}
 	
 	
-	public HashMap<String, ChangeScreen> getChangeScreenName() {
+	public HashMap<String, ChangeScreen> getChangeScreenMap() {
 		return ChangeScreen;
 	}
 	public void addChangeScreen(ChangeScreen changeScreen) {
