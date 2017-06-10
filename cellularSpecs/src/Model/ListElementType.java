@@ -1,11 +1,13 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ListElementType implements Serializable, Element {
 private ParamList parameter ; 
 private final  String type=ElementType.getListType();
-private String elementName; 
+private String elementName;
+private ArrayList<Action> actions; 
 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
@@ -41,11 +43,6 @@ public String getParamVal() {
 }
 
 @Override
-public void loadElement() {
-	// TODO Auto-generated method stub	
-}
-
-@Override
 public String getStringPromela() {
 	// TODO Auto-generated method stub
 	return "";
@@ -63,6 +60,11 @@ public void setElementName(String name) {
 /*
  * now get values only in Param Class 
  */
+@Override
+public ArrayList<Action> getActions() {
+	// TODO Auto-generated method stub
+	return (ArrayList<Action>) actions;
+}
 
 }
 

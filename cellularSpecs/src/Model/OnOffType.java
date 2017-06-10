@@ -37,11 +37,6 @@ public String getParamVal() {
 }
 
 @Override
-public void loadElement() {
-	// TODO Auto-generated method stub	
-}
-
-@Override
 public String getStringPromela() {
 	// TODO Auto-generated method stub
 	if(actions.size() ==0){

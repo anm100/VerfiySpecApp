@@ -34,11 +34,6 @@ public String getParamVal() {
 }
 
 @Override
-public void loadElement() {
-	// TODO Auto-generated method stub	
-}
-
-@Override
 public String getStringPromela() {
 	// TODO Auto-generated method stub
 	return "";
@@ -62,6 +57,12 @@ public void setElementName(String name) {
 public Param getParameter() {
 	// TODO Auto-generated method stub
 	return parameter;
+}
+
+@Override
+public ArrayList<Action> getActions() {
+	// TODO Auto-generated method stub
+	return (ArrayList<Action>) actions;
 }
 
 

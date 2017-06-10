@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ChangeScreen {
 	private String  screenName;
 	private ArrayList<String> transPromela= new ArrayList<String>();
-
+  
 	public ChangeScreen(String s) {
 		this.screenName="change"+s;
 

@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface Element {
 	public String getELementName();
@@ -8,7 +8,7 @@ public interface Element {
 	public String getParamVal(); 
 	public void setElementName(String name);
 	public String getType(); 
-	public void loadElement(); 
+	public ArrayList<Action> getActions();
 	public  String getStringPromela();
 	
 }

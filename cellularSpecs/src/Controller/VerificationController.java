@@ -65,21 +65,34 @@ public class VerificationController implements ItemListener {
 			while(it2.hasNext()){
 				Map.Entry pair2 =(Map.Entry) it2.next(); 
 				e= (Element)pair2.getValue();
+				
+				
 				if (e.getType().equals(ElementType.getStandartBtnType())){
 					s.getTransPromela().add(e.getStringPromela());
-				}else if (e.getType().equals(ElementType.getOnOffType())){
+				}
+				else 
+					if (e.getType().equals(ElementType.getOnOffType())){
+						
+						/*
+		 						 ::(aaaa==OFF)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
+						 */
+						
 					s.getTransPromela().add("("+e.getParamName()+"=="
 							+((OnOffType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
 							+((OnOffType)e).getParameter().getValues()[1]+";"
 							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
 							+"state=change"+s.getScreenName()+e.getParamName()+");");
 					
-				
+					/*
+	 						 ::(aaaa==OFF)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
+					 */
 					s.getTransPromela().add("("+e.getParamName()+"=="
 							+((OnOffType)e).getParameter().getValues()[1]+")->atomic("+e.getParamName()+"="
 							+((OnOffType)e).getParameter().getValues()[0]+";"
 							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
-							+"state=change"+s.getScreenName()+e.getParamName()+");");	
+							+"state=change"+s.getScreenName()+e.getParamName()+");");
+					
+						//if (e.get)
 					
 					ChangeScreen changeScreen= new  ChangeScreen(s.getScreenName()+e.getParamName());
 					changeScreen.addTransPromela("action["+((OnOffType)e).getParameter().getIndex()+"]==1"
