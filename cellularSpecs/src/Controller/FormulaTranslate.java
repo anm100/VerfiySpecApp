@@ -2,6 +2,8 @@ package Controller;
 
 import java.util.ArrayList;
 
+import Model.Action;
+import Model.Param;
 import Model.WorkSpace;
 
 public   class FormulaTranslate  {
@@ -104,7 +106,52 @@ private static String getTranslateReq2b() {
 	return str;
 	
 }
+/*
+ * 
+ltl r8 {[](
+(airplaneMode==1)->((state==ChangeAirplaneMode || state==ChangeWifi || state==changebluParam)U(wifiParam==0)
+ && (state==ChangeAirplaneMode || state==ChangeWifi || state==changebluParam)U(bluParam==0))
+ )}
+ */
+public static  void translateReq8a(String parameterName)
+{
+	String st="";
+	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
+	 ArrayList<Action> actions=ScreenController.getActionByparameterName(p.getParamName());
+	 st="ltl "+" reqid "+"{[]("+getTranslateReq8a(actions,p)+")}";
+	 System.out.println(st);
+}
+public static void translateReq8b
+private static String getTranslateReq8a(ArrayList<Action> actions,Param p) {
+	String st1="";
+	st1="("+p.getParamName()+"=="+p.getParamVal()+")->(";
+	for(int i=0;i<actions.size();i++)
+	{
+		st1+=getChangeState(actions,actions.get(i).getParamName()+"=="+actions.get(i).getParamVal())+"&&";
+	}
+	if(actions.size()>0)
+	st1=st1.substring(0, st1.length()-2);
+	st1+=")";
+	return st1;
+	
+}
 
+private static String getChangeState(ArrayList<Action> actions,String Until) {
+	String str="(";
+	for(int i=0;i<actions.size();i++)
+	{
+		for(int j=0;j<changeStatesList.size();j++)
+		if(changeStatesList.get(j).endsWith(actions.get(i).getParamName()))
+		{
+		str+="(state=="+changeStatesList.get(j)+")||";	
+		break;
+		}
+	}
+	if(screenStatesList.size()>0)
+		str=str.substring(0, str.length()-2);
+	str+="U("+Until+"))";
+	return str;
+}
 public static void translateReq7()
 {
 	String st="";
@@ -135,7 +182,8 @@ private static String getStatesReq7()
 	{
 		for(i=0;i<changeStatesList.size();i++)
 		{
-		 if(changeStatesList.get(i).endsWith(params[j]))
+
+		if(changeStatesList.get(i).endsWith(params[j]))
 			 st1+="("+changeStatesList.get(i)+")||";
 		}
 	}

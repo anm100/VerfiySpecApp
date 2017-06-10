@@ -144,6 +144,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			FormulaTranslate.translateReq2a();
 			FormulaTranslate.translateReq2b();
 			FormulaTranslate.translateReq7();
+			FormulaTranslate.translateReq8a("airplane_mode");
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA());

@@ -4,7 +4,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import Model.Action;
 import Model.Element;
+import Model.ElementActionInterface;
+import Model.ElementType;
 import Model.Param;
 import Model.Screen;
 import Model.WorkSpace;
@@ -21,6 +24,32 @@ public static Element getElementByName(String elementName){
 		s= (Screen)pair.getValue();
 		if (null != s.getElementByName(elementName)){
 			return s.getElementByName(elementName); 
+		}
+	}
+	return null ; 
+		
+	}
+public static ArrayList<Action> getActionByparameterName(String parameterName){
+	/*in req 8 ,we need the action list in order to find all the parameters that
+	 * should be changed if the parent Change 
+	 * 
+	*/
+	Screen s ;
+	
+	Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+	while(it.hasNext()){
+		Map.Entry pair =(Map.Entry) it.next(); 
+		s= (Screen)pair.getValue();
+		Iterator<Entry<String, Element>> it2 = s.getElementsMap().entrySet().iterator();
+		while(it2.hasNext()){
+			Map.Entry pair2 =(Map.Entry) it2.next(); 
+			Element mName= (Element)pair2.getValue();
+			if(!(mName.getType().equals(ElementType.getStandartBtnType())))
+			{
+				ElementActionInterface mAction= (ElementActionInterface)pair2.getValue();
+				if (mName.getParamName().equals(parameterName))
+				 return(mAction.getActions());
+			}
 		}
 	}
 	return null ; 
