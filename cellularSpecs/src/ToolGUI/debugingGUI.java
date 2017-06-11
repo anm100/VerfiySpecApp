@@ -12,6 +12,7 @@ import java.awt.Dimension;
 
 
 
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 
@@ -30,6 +31,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JRadioButton;
 
 import our.Utils.BulidSpec;
+import our.Utils.BulidSpec2;
 import Controller.Router;
 import Controller.VerificationController;
 import Controller.WorkSpaceController;
@@ -67,7 +69,7 @@ public class debugingGUI extends JFrame{
 			}
 		}
 	});
-	button_1.setBounds(11, 115, 273, 41);
+	button_1.setBounds(11, 156, 273, 41);
 	getContentPane().add(button_1);
 	
 	JButton CreateFormula = new JButton("Create Formula");
@@ -83,10 +85,20 @@ public class debugingGUI extends JFrame{
 			
 		}
 	});
-	CreateFormula.setBounds(11, 188, 273, 41);
+	CreateFormula.setBounds(11, 218, 273, 41);
 	getContentPane().add(CreateFormula);
+	
+	JButton button_2 = new JButton("debug open setting");
+	button_2.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			BulidSpec2.build();
+			WorkSpaceController.createSpecGUI();
+		}
+	});
+	button_2.setBounds(11, 104, 273, 41);
+	getContentPane().add(button_2);
 	    setVisible(true);
-		setSize(319, 289);
+		setSize(335, 330);
 		setLocation(800, 50);
 		   
 			 

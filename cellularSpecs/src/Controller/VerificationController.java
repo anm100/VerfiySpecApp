@@ -27,6 +27,8 @@ public class VerificationController implements ItemListener {
 	}
 	public String translateAction(String ScreenName,String changeScreenName,Element e ){
 		ChangeScreen s;
+		Screen 	screen=WorkSpace.getInstance().getScreenByName(ScreenName);
+ ; 
 		Param p; 
 		 if (e.getActions().size()==0){
 			 
@@ -35,7 +37,8 @@ public class VerificationController implements ItemListener {
 				 p=(Param) WorkSpace.getInstance().getParamsByName(e.getParamName());
 				 s= new ChangeScreen(ScreenName+i.getParamName());
 				 s.addTransPromela(i.getCond().toString(),"action["+p.getIndex()+"]=1", changeScreenName);
-				 
+				 screen.addChangeScreen(s);
+				 WorkSpace.getInstance().updateScreen(screen);
 			 }
 			 
 			 
@@ -133,10 +136,24 @@ public class VerificationController implements ItemListener {
 			sAll+=getBlockChangeScreenFor(s);
 			sAll += "/*"
 					+ "\n*/////////////////////////////////////// End of changeParamScreens for screen "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
+			RemoveStructPromela();
 		}
 		return sAll;
 	}
-
+	private void RemoveStructPromela(){
+		Screen s = new Screen(); Element e ; 
+		
+		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			s= (Screen)pair.getValue();
+			s.getTransPromela().clear();
+			WorkSpace.getInstance().addScreen(s);
+			
+		}
+			
+		
+	}
 	private  String defineParamsPromela(){
 		String out = new String("\n/*define flag for action */\nbyte action["+WorkSpace.getInstance().getParamsMap().size()+"];\n\n"
 				+ "/*define params and default value*/\n");
