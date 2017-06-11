@@ -10,6 +10,7 @@ import Model.ElementActionInterface;
 import Model.ElementType;
 import Model.Param;
 import Model.Screen;
+import Model.StandartButtonType;
 import Model.WorkSpace;
 
 public class ScreenController {
@@ -53,6 +54,26 @@ public static ArrayList<Action> getActionByparameterName(String parameterName){
 		}
 	}
 	return null ; 
+		
+	}
+public static ArrayList<StandartButtonType> getElementsByType(String Type){
+	Screen s ;
+	ArrayList<StandartButtonType> arr=new ArrayList<StandartButtonType>();
+	Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+	while(it.hasNext()){
+		Map.Entry pair =(Map.Entry) it.next(); 
+		s= (Screen)pair.getValue();
+		Iterator<Entry<String, Element>> it2 = s.getElementsMap().entrySet().iterator();
+		while(it2.hasNext()){
+			Map.Entry pair2 =(Map.Entry) it2.next(); 
+			Element mName= (Element)pair2.getValue();
+			if((mName.getType().equals(ElementType.getStandartBtnType())))
+			{
+				arr.add((StandartButtonType)mName);
+			}
+		}
+	}
+	return arr ; 
 		
 	}
 	@SuppressWarnings("rawtypes")

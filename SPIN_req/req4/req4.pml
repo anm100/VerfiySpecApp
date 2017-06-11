@@ -1,54 +1,20 @@
-/*
-Parameter cannot accept value that is not defined in the
- list of the possible values.
-*/
-
-#define Empty 0
-#define NotEmpty 1 
-#define ON 2
-#define OFF 3
-
-mtype = { BoPo_MainSreen,SignIn,changeParamUserName,changeParamEmail,enterWuser,enterWemail,CreateNewEvent}
-mtype state=SignIn;
-
-byte username=Empty;
-byte email=Empty;
-byte wifi=ON;
-ltl r4 {[]((username==Empty) ||(username==NotEmpty))->!(<>((username!=Empty) && (username!=NotEmpty)))}
+#define ON 1
+#define OFF 0
+#define d 5;
+mtype = {CreateNewEvent,ChangeAck};
+byte  ack=OFF;
+mtype state=CreateNewEvent;
+ltl r4 {[](((ack==ON) ||(ack==OFF))->(!<>((!(ack==OFF))&&(!(ack==ON)))))}
 active proctype vm()
 {
 do
-:: state== SignIn ->
-	if
-	::atomic{state=enterWuser}	
-	::atomic{ state=enterWemail}
-	fi
-::state == enterWuser->
-	if
-	::atomic{state=changeParamUserName}	
-	fi
-::state == enterWemail->
-	if
-	::atomic{state=changeParamEmail}	
-	fi
-		
-::state == changeParamUserName->
-	if
-	::atomic{ username=NotEmpty;state=BoPo_MainSreen}
-	fi
-	
-::state == changeParamEmail->
-	if
-	::atomic{ email=NotEmpty;state=changeParamUserName}
-	fi
-:: state== BoPo_MainSreen ->
-	if	
-	::atomic{ state=CreateNewEvent}
-	fi
+:: {state==CreateNewEvent}->
+if 
+:: ack==OFF -> atomic{ack=ON; state=ChangeAck};state=CreateNewEvent
+:: ack==ON -> atomic{ack=OFF; state=ChangeAck};state=CreateNewEvent
+fi
 od
 }
 
 
 
-
- 
