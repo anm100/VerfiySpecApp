@@ -198,7 +198,7 @@ public class WorkSpaceController {
 		Router.getInstance().setGetNewLocation(true);
 		 screenGUI=new ScreenGUI(screen.getScreenName(),screen.getCordinateX(),screen.getCordinateY());//there is a problem
 		//screenGUI.addScreenListener(a);
-		WorkSpace.getInstance().addScreen(screen.getScreenName(), screen);
+		WorkSpace.getInstance().addScreen(screen);
 		WorkSpace.getLog().debug("this screen name  added -> "+screen.getScreenName());
 
 		

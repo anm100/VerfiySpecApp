@@ -32,10 +32,10 @@ public class BulidSpec {
 
 	private static void addScreens(){
 	
-		wk.addScreen("loginScreen", new Screen("loginScreen", 38, 102, "login for app"));
-		wk.addScreen("setting", new Screen("setting", 210, 102, "login for app"));
+		wk.addScreen(new Screen("loginScreen", 38, 102, "login for app"));
+		wk.addScreen(new Screen("setting", 210, 102, "login for app"));
 //		wk.addScreen("createNewEvent", new Screen("createNewEvent", 375, 102, " The user creates new event. Upon creating the event the user becomes the moderator of the event."));
-		wk.addScreen("mainScreen", new Screen("mainScreen", 535, 102, "setting app"));
+		wk.addScreen( new Screen("mainScreen", 535, 102, "setting app"));
 
 	}
 	private  static void addelements(){

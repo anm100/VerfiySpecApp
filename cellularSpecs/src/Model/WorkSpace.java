@@ -49,15 +49,15 @@ public static void setInstance(WorkSpace instance) {
 public static Logger getLog() {
 	return logger;
 }
-public void addScreen(String screenName , Screen s){
-	this.screensMap.put(screenName,s);	
+public void addScreen(Screen s){
+	this.screensMap.put(s.getScreenName(),s);	
 }
 public void deleteScreen(Screen s){
 	this.screensMap.remove(s);	
 }
-public void updateScreen(String screenName , Screen s){
-	this.screensMap.remove(screenName);
-	this.screensMap.put(screenName,s);	
+public void updateScreen(Screen s){
+	this.screensMap.remove(s.getScreenName());
+	this.screensMap.put(s.getScreenName(),s);	
 }
 public Screen getScreenByName(String screenName){
 	return this.screensMap.get(screenName);

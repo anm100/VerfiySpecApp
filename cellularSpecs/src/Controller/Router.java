@@ -171,7 +171,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			GetNewLocation=true;
 			 screenGUI=new ScreenGUI(screen.getScreenName(),screen.getCordinateX(),screen.getCordinateY());//there is a problem
 			//screenGUI.addScreenListener(a);
-			WorkSpace.getInstance().addScreen(screen.getScreenName(), screen);
+			WorkSpace.getInstance().addScreen(screen);
 			WorkSpace.getLog().debug("this screen name  added -> "+screen.getScreenName());
 
 			
@@ -369,7 +369,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 
 			stemp.setCordinateX(this.cordinateX);
 			stemp.setCordinateY(this.cordinateY);
-			WorkSpace.getInstance().addScreen(stemp.getScreenName(), stemp);
+			WorkSpace.getInstance().addScreen(stemp);
 			stemp=WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName());
 			WorkSpace.getLog().debug("get from hash "+stemp.getScreenName()+":update is "+"x:"+stemp.getCordinateX()+" Y:"+stemp.getCordinateY());
 			WorkSpace.getLog().debug("screenGUI added successfully ,update coordinate X + Y in workspace hash");
