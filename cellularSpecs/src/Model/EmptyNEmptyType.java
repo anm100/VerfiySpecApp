@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmptyNEmptyType implements Serializable, Element {
+public class EmptyNEmptyType implements Serializable, Element,ElementActionInterface{
 private Param parameter; 
 private String elementName;
 private final String type=ElementType.getEmptyNotEmptyType(); 
@@ -62,7 +62,17 @@ public Param getParameter() {
 @Override
 public ArrayList<Action> getActions() {
 	// TODO Auto-generated method stub
+<<<<<<< HEAD
 	return (ArrayList<Action>) actions;
+=======
+	return null;
+}
+
+@Override
+public void addAction(Action e) {
+	// TODO Auto-generated method stub
+	
+>>>>>>> 5aeba9a81ffe5a2c242b7a6dfff599c1dbf28e89
 }
 
 

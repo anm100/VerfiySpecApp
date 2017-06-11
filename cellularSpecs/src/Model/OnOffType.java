@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnOffType implements Serializable, Element {
+public class OnOffType implements Serializable, Element,ElementActionInterface {
 private Param parameter; 
 private ArrayList<Action> actions=new  ArrayList<Action>(); 
 private final String type=ElementType.getOnOffType();

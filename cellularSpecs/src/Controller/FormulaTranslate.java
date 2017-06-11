@@ -1,7 +1,13 @@
 package Controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import Model.Action;
+import Model.ElementType;
+import Model.MyCondition;
+import Model.Param;
+import Model.StandartButtonType;
 import Model.WorkSpace;
 
 public   class FormulaTranslate  {
@@ -15,7 +21,7 @@ public   class FormulaTranslate  {
 	public static  void translateReq1()
 {
 	String st=new String();
-	 st="ltl "+" reqid "+"{[]("+getTranslateReq1()+")}";
+	 st="ltl "+" req1 "+"{[]("+getTranslateReq1()+")}";
 	 WorkSpace.getLog().debug(st);
 }
 
@@ -47,8 +53,8 @@ private static String getTranslateReq1() {
 public static void translateReq2a()
 {
 	String st="";
-	 st="ltl "+" reqid "+"{[](("+getTranslateReq2a()+")}";
-	 System.out.println(st);
+	 st="ltl "+" req2 "+"{[](("+getTranslateReq2a()+")}";
+	 WorkSpace.getLog().debug(st);
 	 //ltl req2{[]((
 	 //((state==screen2)-><>(state==screen3))
 	 
@@ -83,8 +89,8 @@ private static String getTranslateReq2a() {
 public static  void translateReq2b()
 {
 	String st="";
-	 st="ltl "+" reqid "+"{[]("+getTranslateReq2b()+")}";
-	 System.out.println(st);
+	 st="ltl "+" req2 "+"{[]("+getTranslateReq2b()+")}";
+	 WorkSpace.getLog().debug(st);
 }
 private static String getTranslateReq2b() {
 	String str="";
@@ -104,12 +110,88 @@ private static String getTranslateReq2b() {
 	return str;
 	
 }
+/*
+ * 
+ltl r8 {[](
+(airplaneMode==1)->((state==ChangeAirplaneMode || state==ChangeWifi || state==changebluParam)U(wifiParam==0)
+ && (state==ChangeAirplaneMode || state==ChangeWifi || state==changebluParam)U(bluParam==0))
+ )}
+ */
+public static  void translateReq8a(String parameterName)
+{
+	String st="";
+	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
+	 ArrayList<Action> actions=ScreenController.getActionByparameterName(p.getParamName());
+	 st="ltl "+" req8 "+"{[]("+getTranslateReq8a(actions,p)+")}";
+	 WorkSpace.getLog().debug(st);
+}
+public static void translateReq8b()
+{
+}
+private static String getTranslateReq8a(ArrayList<Action> actions,Param p) {
+	String st1="";
+	st1="("+p.getParamName()+"=="+p.getParamVal()+")->(";
+	for(int i=0;i<actions.size();i++)
+	{
+		st1+=getChangeStateReg8(actions,actions.get(i).getParamName()+"=="+actions.get(i).getParamVal())+"&&";
+	}
+	if(actions.size()>0)
+	st1=st1.substring(0, st1.length()-2);
+	st1+=")";
+	return st1;
+	
+}
 
+private static String getChangeStateReg8(ArrayList<Action> actions,String Until) {
+	String str="(";
+	for(int i=0;i<actions.size();i++)
+	{
+		for(int j=0;j<changeStatesList.size();j++)
+		if(changeStatesList.get(j).endsWith(actions.get(i).getParamName()))
+		{
+		str+="(state=="+changeStatesList.get(j)+")||";	
+		break;
+		}
+	}
+	if(screenStatesList.size()>0)
+		str=str.substring(0, str.length()-2);
+	str+="U("+Until+"))";
+	return str;
+}
+/*
+ * ltl r3 {[]( (state==SignIn)->((state==SignIn)U((state!=SignIn)
+ * &&(
+ * !((state!=changeParamUserName) &&())
+ * U(state==BoPo_MainSreen)))
+ * )) }
+ */
+public static  void translateReq3(String screen1,String screen2,ArrayList<String> parameterName)
+{
+	String st="";
+	 st="ltl "+" req3 "+"{[]((state=="+screen1+")->((state=="+screen1+")U((state!="+screen1+")"+getChangeStateRe3(parameterName,screen2)+")))}";
+	 WorkSpace.getLog().debug(st);
+}
+private static String getChangeStateRe3(ArrayList<String> parameterName,String Until) {
+	String str="&&(!(";
+	for(int i=0;i<parameterName.size();i++)
+	{
+		for(int j=0;j<changeStatesList.size();j++)
+		if(changeStatesList.get(j).endsWith(parameterName.get(i)))
+		{
+		str+="(state!="+changeStatesList.get(j)+")&&";	
+		break;
+		}
+	}
+	if(screenStatesList.size()>0)
+		str=str.substring(0, str.length()-2);
+	str+="U(state=="+Until+")))";
+	return str;
+}
 public static void translateReq7()
 {
 	String st="";
-	 st="ltl "+" reqid "+"{[]("+getTranslateReq7()+")}";
-	 System.out.println(st);
+	 st="ltl "+" req7 "+"{[]("+getTranslateReq7()+")}";
+	 WorkSpace.getLog().debug(st);
 }
 private static String getTranslateReq7() {
 	String req7="";
@@ -135,7 +217,8 @@ private static String getStatesReq7()
 	{
 		for(i=0;i<changeStatesList.size();i++)
 		{
-		 if(changeStatesList.get(i).endsWith(params[j]))
+
+		if(changeStatesList.get(i).endsWith(params[j]))
 			 st1+="("+changeStatesList.get(i)+")||";
 		}
 	}
@@ -145,6 +228,33 @@ private static String getStatesReq7()
 	}
 	st1="("+st1+")";
 	return st1;
+}
+public static void translateReq6()
+{
+	 String st="";
+	 st="ltl "+" req6 "+"{[]("+getTranslateReq6()+")}";
+	 WorkSpace.getLog().debug(st);
+}
+private static String getTranslateReq6() {
+		String st1="";
+	 ArrayList<StandartButtonType> but=ScreenController.getElementsByType(ElementType.getStandartBtnType());
+	 for(int i=0;i<but.size();i++)
+	  if(but.get(i).getConds().size()>0)
+		  st1+="((state=="+but.get(i).getTrans().getToScreen()+")->("+getConditions(but.get(i).getConds())+"))&&";
+		if(but.size()>0)
+		{
+			st1=st1.substring(0, st1.length()-2);
+		}
+	return st1;
+}
+private static String getConditions(List<MyCondition> conds) {
+	String st="(";
+	for(int i=0;i<conds.size();i++)
+		st+="("+conds.get(i).getParamName()+conds.get(i).getOpt()+conds.get(i).getParamVal()+")||";	
+	if(conds.size()>1)
+		st=st.substring(0, st.length()-2);
+	st+=")";
+	return st;
 }
 public static void addtoChangeStates(String changeStates) {
 	changeStatesList.add(changeStates);

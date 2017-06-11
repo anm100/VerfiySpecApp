@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -143,7 +144,13 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			FormulaTranslate.translateReq1();
 			FormulaTranslate.translateReq2a();
 			FormulaTranslate.translateReq2b();
+			ArrayList<String> ar=new ArrayList();
+			ar.add("wifi");
+			ar.add("bluetooth");
+			FormulaTranslate.translateReq3("SignIn","BoPo_MainSreen",ar);
+			FormulaTranslate.translateReq6();
 			FormulaTranslate.translateReq7();
+			FormulaTranslate.translateReq8a("airplane_mode");
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA());

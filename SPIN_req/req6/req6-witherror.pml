@@ -13,7 +13,7 @@ do
 :: {state==LogIn}->
 	if 
 	::	name==Empty -> atomic{name=NotEmpty;state=ChangeName}
-	:: 	name==NotEmpty -> atomic{state=BoPo_MainSreen}
+	:: 	name==Empty -> atomic{state=BoPo_MainSreen}
 	fi
 ::(state==ChangeName)->atomic{state=LogIn}
 :: {state==BoPo_MainSreen}->break;

@@ -4,7 +4,7 @@
 mtype = {CreateNewEvent,ChangeAck};
 byte  ack=OFF;
 mtype state=CreateNewEvent;
-ltl r1 {[](((ack==ON) ||(ack==OFF))->(!<>((!(ack==OFF))&&(!(ack==ON)))))}
+ltl r4 {[](((ack==ON) ||(ack==OFF))->(!<>((!(ack==OFF))&&(!(ack==ON)))))}
 active proctype vm()
 {
 do

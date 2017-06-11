@@ -19,7 +19,7 @@ byte airplane_mode=OFF;
 byte onOff_2=OFF;
 byte onOff_1=OFF;
 byte onOff_4=OFF;
-byte bluetooth=ON;
+byte bluetooth=OFF;
 byte onOff_3=OFF;
 byte onOff_6=OFF;
 byte onOff_5=OFF;
@@ -102,8 +102,8 @@ active proctype vm(){
 		 ::(airplane_mode==OFF)->atomic(airplane_mode=ON;action[12]=1;state=changesettingairplane_mode);
 		 ::(wifi==ON)->atomic(wifi=OFF;action[10]=1;state=changesettingwifi);
 		 ::(wifi==OFF)->atomic(wifi=ON;action[10]=1;state=changesettingwifi);
-		 ::(bluetooth==ON)->atomic(bluetooth=OFF;action[18]=1;state=changesettingbluetooth);
-		 ::(bluetooth==OFF)->atomic(bluetooth=ON;action[18]=1;state=changesettingbluetooth);
+		 ::(bluetooth==ON)->atomic(bluetooth=OFF;action[11]=1;state=changesettingbluetooth);
+		 ::(bluetooth==OFF)->atomic(bluetooth=ON;action[11]=1;state=changesettingbluetooth);
 		 ::
 		 ::
 	  fi
@@ -121,7 +121,7 @@ active proctype vm(){
 	  fi
 	::(state==changesettingbluetooth)->
 	  if
-		 ::(action[18]==1)->atomic(action[18]=0;state=setting)
+		 ::(action[11]==1)->atomic(action[11]=0;state=setting)
 		 ::
 		 ::
 	  fi

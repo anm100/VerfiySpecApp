@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JCheckBox;
 
+import Model.Action;
 import Model.ChangeScreen;
 import Model.Element;
 import Model.ElementType;
@@ -23,6 +24,23 @@ public class VerificationController implements ItemListener {
 	
 	public VerificationController(){
 		formulaTranslate = new FormulaTranslate();
+	}
+	public String translateAction(String ScreenName,String changeScreenName,Element e ){
+		ChangeScreen s;
+		Param p; 
+		 if (e.getActions().size()==0){
+			 
+		 }else {
+			 for (Action i :e.getActions()){
+				 p=(Param) WorkSpace.getInstance().getParamsByName(e.getParamName());
+				 s= new ChangeScreen(ScreenName+i.getParamName());
+				 s.addTransPromela(i.getCond().toString(),"action["+p.getIndex()+"]=1", changeScreenName);
+				 
+			 }
+			 
+			 
+		 }
+		return null ; 
 	}
 	public  String translateToPROMELA(){
 		WorkSpace w  =WorkSpace.getInstance();
@@ -99,6 +117,7 @@ public class VerificationController implements ItemListener {
 							, "action["+((OnOffType)e).getParameter().getIndex()+"]=0"
 							, s.getScreenName());
 					s.addChangeScreen(changeScreen);
+					translateAction(s.getScreenName(),changeScreen.getScreenName(),e);
 					
 				}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
 					s.getTransPromela().add("("+e.getParamName()+"=="
