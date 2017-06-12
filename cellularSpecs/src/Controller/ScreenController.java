@@ -153,13 +153,17 @@ public static ArrayList<StandartButtonType> getElementsByType(String Type){
 	}
 
 	public static String getAllScreenName(){
-		
+		Map.Entry pair;
+		String sAll;
 		Screen s = new Screen(); 
 		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
-		Map.Entry pair =(Map.Entry) it.next(); 
-		s= (Screen)pair.getValue();	
-		String sAll = new String(s.getScreenName());
-
+		if(it.hasNext()){
+		pair =(Map.Entry) it.next(); 
+	
+		s= (Screen)pair.getValue();
+		}
+		sAll = new String(s.getScreenName());
+		
 		while(it.hasNext()){
 		    pair =(Map.Entry) it.next(); 
 			s= (Screen)pair.getValue();	

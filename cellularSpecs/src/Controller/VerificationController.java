@@ -141,7 +141,7 @@ public class VerificationController implements ItemListener {
 		return sAll;
 	}
 	private void RemoveStructPromela(){
-		Screen s = new Screen(); Element e ; 
+		Screen s = new Screen(); 
 		
 		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 		while(it.hasNext()){
