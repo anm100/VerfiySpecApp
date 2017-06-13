@@ -62,17 +62,12 @@ public Param getParameter() {
 @Override
 public ArrayList<Action> getActions() {
 	// TODO Auto-generated method stub
-<<<<<<< HEAD
 	return (ArrayList<Action>) actions;
-=======
-	return null;
 }
 
 @Override
 public void addAction(Action e) {
-	// TODO Auto-generated method stub
-	
->>>>>>> 5aeba9a81ffe5a2c242b7a6dfff599c1dbf28e89
+
 }
 
 

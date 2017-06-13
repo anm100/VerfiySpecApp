@@ -14,7 +14,11 @@ byte airplaneMode=0;
 byte wifiParam=1; 
 byte bluParam=1; 
 
-ltl r8 {[]((airplaneMode==1)->((state==ChangeAirplaneMode || state==ChangeWifi || state==changebluParam)U(wifiParam==0) && (state==ChangeAirplaneMode || state==ChangeWifi || state==changebluParam)U(bluParam==0)))}
+ltl r8 {[]((airplaneMode==1)->
+((state==ChangeAirplaneMode || state==ChangeWifi || state==changebluParam)U(wifiParam==0)
+ && (state==ChangeAirplaneMode || state==ChangeWifi || state==changebluParam || ChangeAirplaneMode )U(bluParam==0)))}
+ltl r8b {[]((!(wifiParam==0)&&((state!=ChangeWifi)&&(state!=changebluParam) && (state!=ChangeAirplaneMode)))||
+(!(bluParam==0)&&((state!=ChangeWifi)&&(state!=changebluParam) && (state!=ChangeAirplaneMode))))->(airplaneMode!=1)
 
 active proctype vm1()
 {

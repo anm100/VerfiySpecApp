@@ -23,6 +23,7 @@ import Controller.FormulaTranslate;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.JToggleButton;
 
 public class VerifySpecGUI extends JFrame{
 	private static   JButton btnRun;
@@ -30,6 +31,7 @@ public class VerifySpecGUI extends JFrame{
 	
 	private static JCheckBox allReq,req1,req2,req3,req4,req5,req6,req7,req8,req9;;
 	private static ArrayList<JCheckBox> req =new ArrayList<JCheckBox>();
+	private String [] st;
 	public ArrayList<JCheckBox> getReq() {
 		return req;
 	}
@@ -64,9 +66,9 @@ public class VerifySpecGUI extends JFrame{
 		getContentPane().add(req1);
 		req.add(req1);
 		
-		 req2 = new JCheckBox("There is a screen (root), such that each screen is reached from it.");
+		 req2 = new JCheckBox("Each screen is reachable from screen:\r\n");
 		req2.setBackground(Color.WHITE);
-		req2.setBounds(23, 188, 520, 23);
+		req2.setBounds(23, 188, 221, 23);
 		getContentPane().add(req2);
 		req.add(req2);
 		 req2.setActionCommand("req2");
@@ -149,7 +151,7 @@ public class VerifySpecGUI extends JFrame{
 		getContentPane().add(lblChooseRootScreen);
 		
 		 comboBox = new JComboBox();
-		 String [] st=ScreenController.getScreenNameNames();
+		  st=ScreenController.getScreenNameNames();
 		 comboBox.setModel(new DefaultComboBoxModel(st));
 		 comboBox.setSelectedItem(null);
 		comboBox.setBounds(142, 67, 102, 23);
@@ -158,6 +160,10 @@ public class VerifySpecGUI extends JFrame{
 		JSeparator separator = new JSeparator();
 		separator.setBounds(65, 108, 586, 23);
 		getContentPane().add(separator);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(260, 188, 107, 22);
+		getContentPane().add(comboBox_1);
 	}
 
 	private void selectall(boolean flag) {
@@ -199,6 +205,4 @@ public class VerifySpecGUI extends JFrame{
 		// TODO Auto-generated method stub
 		
 	}
-
-	
 }
