@@ -19,10 +19,10 @@ import Model.RequirementList;
 import Model.Screen;
 import Model.WorkSpace;
 
-public class VerificationController implements ItemListener {
+public class CopyOfVerificationController implements ItemListener {
 	private FormulaTranslate formulaTranslate = new FormulaTranslate(); 
 	
-	public VerificationController(){
+	public CopyOfVerificationController(){
 		formulaTranslate = new FormulaTranslate();
 	}
 	public String translateAction(String ScreenName,String changeScreenName,Element e ){
@@ -98,11 +98,48 @@ public class VerificationController implements ItemListener {
 						/*
 		 						 ::(aaaa==OFF)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
 						 */
-
+						
+					s.getTransPromela().add("("+e.getParamName()+"=="
+							+((OnOffType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
+							+((OnOffType)e).getParameter().getValues()[1]+";"
+							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
+							+"state=change"+s.getScreenName()+e.getParamName()+");");
+					
+					/*
+	 						 ::(aaaa==OFF)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
+					 */
+					s.getTransPromela().add("("+e.getParamName()+"=="
+							+((OnOffType)e).getParameter().getValues()[1]+")->atomic("+e.getParamName()+"="
+							+((OnOffType)e).getParameter().getValues()[0]+";"
+							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
+							+"state=change"+s.getScreenName()+e.getParamName()+");");
+					
+						//if (e.get)
+					
+					ChangeScreen changeScreen= new  ChangeScreen(s.getScreenName()+e.getParamName());
+					changeScreen.addTransPromela("action["+((OnOffType)e).getParameter().getIndex()+"]==1"
+							, "action["+((OnOffType)e).getParameter().getIndex()+"]=0"
+							, s.getScreenName());
 					/*
 					 * 
 					 */
-										
+					 if (e.getActions().size()==0){
+						 
+					 }else {
+						 for (Action i :e.getActions()){
+							 p=(Param) WorkSpace.getInstance().getParamsByName(e.getParamName());
+						//	 s.addTransPromela(i.getCond().toString(),"action["+p.getIndex()+"]=1", );
+						 }
+						 
+						 
+					 }
+					
+					/*
+					 * 
+					 */
+					
+					s.addChangeScreen(changeScreen);
+					
 				}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
 					s.getTransPromela().add("("+e.getParamName()+"=="
 							+((EmptyNEmptyType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
