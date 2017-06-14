@@ -44,7 +44,7 @@ public class BulidSpec {
 		 */
 		addElementONOFF("setting",new String[] {"wifi","bluetooth","airplane_mode"});
 		addAction("setting","airplane_mode");
-		addElementONOFF("mainScreen",new String[] {"aaaa","bbbb","cccc"});
+		addElementONOFF("mainScreen",new String[] {"ahmad","saeed"});
 		StandartButtonType s; 
 		/* 
 		 * data for  log in screen 
@@ -56,7 +56,7 @@ public class BulidSpec {
 		s.setTransition("loginScreen","mainScreen");
 		wk.getScreenByName("loginScreen").addElement(s);
 		addElemenEmpty("loginScreen",new String[] {"user","pass"});
-		addConditions("loginScreen","log in", new String [] {"user","pass"}); 
+		addConditions("loginScreen","log_in", new String [] {"user","pass"}); 
 
 		
 	

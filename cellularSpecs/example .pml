@@ -3,27 +3,22 @@
 #define Empty 2 
 #define NotEmpty 3 
 mytype={mainScreen,loginScreen,setting
-<<<<<<< HEAD
 ,Changesettingairplane_mode,Changesettingwifi,Changesettingbluetooth}
-=======
-,Changesettingairplane_mode,Changesettingwifi,Changesettingbluetooth,changesettingairplane_mode,changesettingwifi,changesettingbluetooth}
->>>>>>> 40a7f53e5959e04bc93c24ab0b7eb586b97e8a3f
 
 /*define flag for action */
-byte action[18];
+byte action[17];
 
 /*define params and default value*/
 byte wifi=OFF;
 byte pass=Empty;
-byte aaaa=OFF;
-byte bbbb=OFF;
-byte cccc=OFF;
+byte ahmad=OFF;
 byte onOff_0=OFF;
 byte airplane_mode=OFF;
 byte onOff_2=OFF;
 byte onOff_1=OFF;
 byte onOff_4=OFF;
 byte bluetooth=OFF;
+byte saeed=OFF;
 byte onOff_3=OFF;
 byte onOff_6=OFF;
 byte onOff_5=OFF;
@@ -35,36 +30,19 @@ byte user=Empty;
 active proctype vm(){
  do
 	::(state==mainScreen)->
-<<<<<<< HEAD
 	  if
-=======
-	  if
-		 ::(aaaa==ON)->atomic(aaaa=OFF;action[13]=1;state=changemainScreenaaaa);
-		 ::(aaaa==OFF)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
-		 ::(bbbb==ON)->atomic(bbbb=OFF;action[14]=1;state=changemainScreenbbbb);
-		 ::(bbbb==OFF)->atomic(bbbb=ON;action[14]=1;state=changemainScreenbbbb);
-		 ::(cccc==ON)->atomic(cccc=OFF;action[15]=1;state=changemainScreencccc);
-		 ::(cccc==OFF)->atomic(cccc=ON;action[15]=1;state=changemainScreencccc);
-		 ::
-		 ::
+		 ::(saeed==ON)->atomic(saeed=OFF;action[14]=1;state=changemainScreensaeed);
+		 ::(saeed==OFF)->atomic(saeed=ON;action[14]=1;state=changemainScreensaeed);
+		 ::(ahmad==ON)->atomic(ahmad=OFF;action[13]=1;state=changemainScreenahmad);
+		 ::(ahmad==OFF)->atomic(ahmad=ON;action[13]=1;state=changemainScreenahmad);
 	  fi
-	::(state==changemainScreenbbbb)->
+	::(state==changemainScreenahmad)->
 	  if
-		 ::(action[14]==1)->atomic(action[14]=0;state=mainScreen)
-		 ::
-		 ::
+		 ::(cond)->atomic(actions;state=mainScreen)
 	  fi
-	::(state==changemainScreencccc)->
+	::(state==changemainScreensaeed)->
 	  if
-		 ::(action[15]==1)->atomic(action[15]=0;state=mainScreen)
-		 ::
-		 ::
-	  fi
-	::(state==changemainScreenaaaa)->
-	  if
-		 ::(action[13]==1)->atomic(action[13]=0;state=mainScreen)
-		 ::
-		 ::
+		 ::(cond)->atomic(actions;state=mainScreen)
 	  fi
 /*
 */////////////////////////////////////// End of changeParamScreens for screen mainScreen////////////////////////////////////////////////
@@ -72,11 +50,20 @@ active proctype vm(){
 
 	::(state==loginScreen)->
 	  if
-		 ::(pass==Empty)->atomic(pass=NotEmpty;state=changeloginScreenpass);
+		 ::(pass==Empty)->atomic(pass=NotEmpty;action[16]=1;state=changeloginScreenpass);
 		 ::(user==NotEmpty && pass==NotEmpty)->atomic(state=mainScreen); /* log in Button */
-		 ::(user==Empty)->atomic(user=NotEmpty;state=changeloginScreenuser);
-		 ::
-		 ::
+		 ::(user==Empty)->atomic(user=NotEmpty;action[15]=1;state=changeloginScreenuser);
+	  fi
+	::(state==changeloginScreenlog in)->
+	  if
+	  fi
+	::(state==changeloginScreenpass)->
+	  if
+		 ::(action[16]==1)->atomic(action[16]=0;state=loginScreen)
+	  fi
+	::(state==changeloginScreenuser)->
+	  if
+		 ::(action[15]==1)->atomic(action[15]=0;state=loginScreen)
 	  fi
 /*
 */////////////////////////////////////// End of changeParamScreens for screen loginScreen////////////////////////////////////////////////
@@ -90,44 +77,18 @@ active proctype vm(){
 		 ::(wifi==OFF)->atomic(wifi=ON;action[10]=1;state=changesettingwifi);
 		 ::(bluetooth==ON)->atomic(bluetooth=OFF;action[11]=1;state=changesettingbluetooth);
 		 ::(bluetooth==OFF)->atomic(bluetooth=ON;action[11]=1;state=changesettingbluetooth);
-		 ::
-		 ::
 	  fi
 	::(state==changesettingairplane_mode)->
 	  if
-		 ::(action[12]==1)->atomic(action[12]=0;state=setting)
->>>>>>> 40a7f53e5959e04bc93c24ab0b7eb586b97e8a3f
-		 ::
-		 ::
+		 ::(cond)->atomic(actions;state=setting)
 	  fi
-/*
-*/////////////////////////////////////// End of changeParamScreens for screen mainScreen////////////////////////////////////////////////
-*/
-
-	::(state==loginScreen)->
+	::(state==changesettingwifi)->
 	  if
-<<<<<<< HEAD
-		 ::(pass==Empty)->atomic(pass=NotEmpty;state=changeloginScreenpass);
-		 ::(user==NotEmpty && pass==NotEmpty)->atomic(state=mainScreen); /* log in Button */
-		 ::(user==Empty)->atomic(user=NotEmpty;state=changeloginScreenuser);
-=======
-		 ::(action[10]==1)->atomic(action[10]=0;state=setting)
->>>>>>> 40a7f53e5959e04bc93c24ab0b7eb586b97e8a3f
-		 ::
-		 ::
+		 ::(cond)->atomic(actions;state=setting)
 	  fi
-/*
-*/////////////////////////////////////// End of changeParamScreens for screen loginScreen////////////////////////////////////////////////
-*/
-
-	::(state==setting)->
+	::(state==changesettingbluetooth)->
 	  if
-<<<<<<< HEAD
-=======
-		 ::(action[11]==1)->atomic(action[11]=0;state=setting)
->>>>>>> 40a7f53e5959e04bc93c24ab0b7eb586b97e8a3f
-		 ::
-		 ::
+		 ::(cond)->atomic(actions;state=setting)
 	  fi
 /*
 */////////////////////////////////////// End of changeParamScreens for screen setting////////////////////////////////////////////////

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import Controller.FormulaTranslate;
 import ToolGUI.ScreenGUI;
@@ -31,6 +32,7 @@ public class Screen implements Serializable{
 			String description)
 	{
 	this.elementsMap= new HashMap<String,Element>();
+	
 	this.screenName=screenName;
 	this.cordinateX=cordinateX;
 	this.cordinateY=cordinateY;
@@ -158,11 +160,29 @@ public class Screen implements Serializable{
 	public ArrayList<String> getTransPromela() {
 		return transPromela;
 	}
+	public  String getBlockChangeScreen(){
+		String out = new String (""); 
+			
+			Iterator<Entry<String,ChangeScreen>> it =getChangeScreenMap().entrySet().iterator();
+		ChangeScreen state;
+			while(it.hasNext()){
+				Map.Entry pair =(Map.Entry) it.next(); 
+				 state =(ChangeScreen)pair.getValue();
+				 out+=state.getStringPromela()+"\n";
+			}
+		
+//		String[] changeScreens= s.getChangeStates().split(",");
+//		for (int i=0 ;i<changeScreens.length;i++){
+//		ChangeScreenName.put(changeScreens[i], new Screen(changeScreens[i]));
+//			out+= (new Screen(changeScreens[i])).getStringPromela()+"\n";
+//		}
+		
+		return  out ; 
+	}
 	public  String getStringPromela(){
 		String startScreen=new String("	::(state=="+this.getScreenName()+")->\n"+"	  if");
 		String out= new String ("");
-		transPromela.add("");
-		transPromela.add("");
+
 
 		for(String i : transPromela)
 		{
