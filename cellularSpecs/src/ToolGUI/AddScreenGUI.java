@@ -38,7 +38,7 @@ public class AddScreenGUI extends JFrame {
 		lblScreenName.setBounds(10, 53, 84, 14);
 		getContentPane().add(lblScreenName);
 		
-		ScreenName = new JTextField("screen"+WorkSpace.numScreen++);
+		ScreenName = new JTextField("Screen"+WorkSpace.numScreen++);
 		ScreenName.setBounds(91, 50, 309, 20);
 		getContentPane().add(ScreenName);
 		ScreenName.setColumns(10);

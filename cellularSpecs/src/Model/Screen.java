@@ -33,7 +33,7 @@ public class Screen implements Serializable{
 	{
 	this.elementsMap= new HashMap<String,Element>();
 	
-	this.screenName=screenName;
+	setScreenName(screenName); 
 	this.cordinateX=cordinateX;
 	this.cordinateY=cordinateY;
 	this.height=height;
@@ -44,7 +44,7 @@ public class Screen implements Serializable{
 	public Screen(String screenName,int cordinateX,int cordinateY,String description)
 	{
 	this.elementsMap= new HashMap<String,Element>();
-	this.screenName=screenName;
+	setScreenName(screenName); 
 	this.cordinateX=cordinateX;
 	this.cordinateY=cordinateY;
 	this. description= description;
@@ -56,7 +56,7 @@ public class Screen implements Serializable{
 	 */
 	
 	public Screen(String s) {
-		this.screenName=s;
+		setScreenName(s); 
 		this.elementsMap= new HashMap<String,Element>();
 
 	}
@@ -70,7 +70,7 @@ public class Screen implements Serializable{
 	 * @param screenName the screenName to set
 	 */
 	public void setScreenName(String screenName) {
-		this.screenName = screenName;
+		this.screenName = Character.toUpperCase(screenName.charAt(0))+screenName.substring(1);
 	}
 	/**
 	 * @return the cordinateX
