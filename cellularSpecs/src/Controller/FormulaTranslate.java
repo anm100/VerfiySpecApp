@@ -11,8 +11,14 @@ import Model.StandartButtonType;
 import Model.WorkSpace;
 
 public   class FormulaTranslate  {
-	private static ArrayList<String> screenStatesList=new ArrayList<String>();//fill this araylist in WrokSpace
 	private static ArrayList<String> changeStatesList=new ArrayList<String>();//fill this araylist in Screen
+	private static ArrayList<String> screenStatesList=new ArrayList<String>();//fill this araylist in WrokSpace
+	
+	public static ArrayList<String> getScreenStatesList() {
+		return screenStatesList;
+	}
+
+	
 	
 	public FormulaTranslate(){
 		changeStatesList=new ArrayList<String>();
@@ -25,28 +31,17 @@ public   class FormulaTranslate  {
 	 WorkSpace.getLog().debug(st);
 }
 
-private static String getTranslateReq1() {
+public static String getTranslateReq1() {
 	String str="";
-	for(int i=0;i<screenStatesList.size();i++)
+	String stateChanges=getChangeState("==","&&");
+	String stateChanges1=getChangeState("!=","&&");
+	for(int i=0;i<screenStatesList.size() &&changeStatesList.size()>0 ;i++)
 	{
-		str=str+"((State=="+screenStatesList.get(i)+")->(";
-		if(changeStatesList.size()>0)
-		str+="(!([]<>(";
-		for(int j=0;j<changeStatesList.size();j++)
-		{
-		str+="(state=="+changeStatesList.get(j)+ ")||";
-		}
-		if(changeStatesList.size()>0)
-		{
-		str=str.substring(0, str.length()-2);
-		str+=")))->";
-		}
-		str=str+"<>((state!="+screenStatesList.get(i)+")";
-		for(int j=0;j<changeStatesList.size();j++)
-		str+="&&(state!="+changeStatesList.get(j)+")";	
-		str+= ")))&&";
+		str+="((state=="+screenStatesList.get(i)+")->((!([]<>"+stateChanges+"))-><>(";
+		str+="(state !="+screenStatesList.get(i)+")&&"+stateChanges1+")))";
+		str+="&&";
 	}
-	if(screenStatesList.size()>0)
+	if(screenStatesList.size()>0 && changeStatesList.size()>0)
 		str=str.substring(0, str.length()-2);
 	return str;
 }
@@ -125,15 +120,12 @@ public static  void translateReq8a(String parameterName)
 	 st="ltl "+" req8 "+"{[]("+getTranslateReq8a(actions,p)+")}";
 	 WorkSpace.getLog().debug(st);
 }
-public static void translateReq8b()
-{
-}
 private static String getTranslateReq8a(ArrayList<Action> actions,Param p) {
 	String st1="";
 	st1="("+p.getParamName()+"=="+p.getParamVal()+")->(";
 	for(int i=0;i<actions.size();i++)
 	{
-		st1+=getChangeStateReg8(actions,actions.get(i).getParamName()+"=="+actions.get(i).getParamVal())+"&&";
+		st1+=getChangeStateReg8b(actions,actions.get(i).getParamName()+"=="+actions.get(i).getParamVal())+"&&";
 	}
 	if(actions.size()>0)
 	st1=st1.substring(0, st1.length()-2);
@@ -141,19 +133,45 @@ private static String getTranslateReq8a(ArrayList<Action> actions,Param p) {
 	return st1;
 	
 }
+public static  void translateReq8b(String parameterName)
+{
+	String st="";
+	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
+	 ArrayList<Action> actions=ScreenController.getActionByparameterName(p.getParamName());
+	 st="ltl "+" req8 "+"{[]("+getTranslateReq8b(actions,p)+")}";
+	 WorkSpace.getLog().debug(st);
+}
+private static String getTranslateReq8b(ArrayList<Action> actions,Param p) {
+	String st1="";
+	for(int j=0;j<actions.size();j++)
+	{
+		st1+="(("+actions.get(j).getParamName()+"=="+actions.get(j).getParamVal()+")&&";
+	for(int i=0;i<actions.size();i++)
+	{
+		st1+=getChangeStateReg8b(actions,actions.get(i).getParamName()+"=="+actions.get(i).getParamVal())+"&&";
+	}
+	if(actions.size()>0)
+	st1=st1.substring(0, st1.length()-2);
+	st1+=")||";
+	}
+	if(actions.size()>0)
+	st1=st1.substring(0, st1.length()-2);
+	st1+=p.getParamName()!=p.getParamVal();
 
-private static String getChangeStateReg8(ArrayList<Action> actions,String Until) {
+	return st1;
+	
+}
+private static String getChangeStateReg8b(ArrayList<Action> actions,String Until) {
 	String str="(";
 	for(int i=0;i<actions.size();i++)
 	{
 		for(int j=0;j<changeStatesList.size();j++)
-		if(changeStatesList.get(j).endsWith(actions.get(i).getParamName()))
+	//	if(changeStatesList.get(j).endsWith(actions.get(i).getParamName()))
 		{
-		str+="(state=="+changeStatesList.get(j)+")||";	
-		break;
+		str+="(state!="+changeStatesList.get(j)+")&&";	
 		}
 	}
-	if(screenStatesList.size()>0)
+	if(changeStatesList.size()>0)
 		str=str.substring(0, str.length()-2);
 	str+="U("+Until+"))";
 	return str;
@@ -208,6 +226,7 @@ private static String getTranslateReq7() {
 		req7=req7.substring(0, req7.length()-2);
 return req7;
 }
+
 private static String getStatesReq7() 
 {
 	int i=0;
@@ -242,9 +261,7 @@ private static String getTranslateReq6() {
 	  if(but.get(i).getConds().size()>0)
 		  st1+="((state=="+but.get(i).getTrans().getToScreen()+")->("+getConditions(but.get(i).getConds())+"))&&";
 		if(but.size()>0)
-		{
 			st1=st1.substring(0, st1.length()-2);
-		}
 	return st1;
 }
 private static String getConditions(List<MyCondition> conds) {
@@ -256,11 +273,22 @@ private static String getConditions(List<MyCondition> conds) {
 	st+=")";
 	return st;
 }
+
 public static void addtoChangeStates(String changeStates) {
 	changeStatesList.add(changeStates);
 }
 public static void addtoScreenStates(String screenName) {
 	screenStatesList.add(screenName);
+}
+//return String ((state op ChangeScreenParam1)logic(state op ChangeScreenParam2)...)
+private static String getChangeState(String op,String logic) {
+	String str="(";
+		for(int j=0;j<changeStatesList.size();j++)
+		str+="(state"+op+changeStatesList.get(j)+")"+logic;	
+	if(changeStatesList.size()>0)
+		str=str.substring(0, str.length()-2);
+	str+=")";
+	return str;
 }
 
 }

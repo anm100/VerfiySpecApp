@@ -28,7 +28,6 @@ public class VerificationController implements ItemListener {
 	public String translateAction(String ScreenName,String changeScreenName,Element e ){
 		ChangeScreen s;
 		Screen 	screen=WorkSpace.getInstance().getScreenByName(ScreenName);
- ; 
 		Param p; 
 		 if (e.getActions().size()==0){
 			 

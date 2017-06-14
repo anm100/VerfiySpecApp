@@ -89,12 +89,6 @@ public class debugingGUI extends JFrame{
 	getContentPane().add(CreateFormula);
 	
 	JButton button_2 = new JButton("debug open setting");
-	button_2.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
-			BulidSpec2.build();
-			WorkSpaceController.createSpecGUI();
-		}
-	});
 	button_2.setBounds(11, 104, 273, 41);
 	getContentPane().add(button_2);
 	    setVisible(true);

@@ -111,7 +111,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			
 		break;
 		case("Verifiy SPEC"):
-		//	VerificationController.setRequiremens();
+		//	VerificationController.setRuiremens();
 	
 			WorkSpace.getLog().debug("verifiy Spec case");
 		 verifySpecGUI=new VerifySpecGUI();
@@ -151,6 +151,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			FormulaTranslate.translateReq6();
 			FormulaTranslate.translateReq7();
 			FormulaTranslate.translateReq8a("airplane_mode");
+			FormulaTranslate.translateReq8b("airplane_mode");
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA());

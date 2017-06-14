@@ -3,7 +3,11 @@
 #define Empty 2 
 #define NotEmpty 3 
 mytype={mainScreen,loginScreen,setting
+<<<<<<< HEAD
 ,Changesettingairplane_mode,Changesettingwifi,Changesettingbluetooth}
+=======
+,Changesettingairplane_mode,Changesettingwifi,Changesettingbluetooth,changesettingairplane_mode,changesettingwifi,changesettingbluetooth}
+>>>>>>> 40a7f53e5959e04bc93c24ab0b7eb586b97e8a3f
 
 /*define flag for action */
 byte action[18];
@@ -31,7 +35,34 @@ byte user=Empty;
 active proctype vm(){
  do
 	::(state==mainScreen)->
+<<<<<<< HEAD
 	  if
+=======
+	  if
+		 ::(aaaa==ON)->atomic(aaaa=OFF;action[13]=1;state=changemainScreenaaaa);
+		 ::(aaaa==OFF)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
+		 ::(bbbb==ON)->atomic(bbbb=OFF;action[14]=1;state=changemainScreenbbbb);
+		 ::(bbbb==OFF)->atomic(bbbb=ON;action[14]=1;state=changemainScreenbbbb);
+		 ::(cccc==ON)->atomic(cccc=OFF;action[15]=1;state=changemainScreencccc);
+		 ::(cccc==OFF)->atomic(cccc=ON;action[15]=1;state=changemainScreencccc);
+		 ::
+		 ::
+	  fi
+	::(state==changemainScreenbbbb)->
+	  if
+		 ::(action[14]==1)->atomic(action[14]=0;state=mainScreen)
+		 ::
+		 ::
+	  fi
+	::(state==changemainScreencccc)->
+	  if
+		 ::(action[15]==1)->atomic(action[15]=0;state=mainScreen)
+		 ::
+		 ::
+	  fi
+	::(state==changemainScreenaaaa)->
+	  if
+		 ::(action[13]==1)->atomic(action[13]=0;state=mainScreen)
 		 ::
 		 ::
 	  fi
@@ -53,6 +84,48 @@ active proctype vm(){
 
 	::(state==setting)->
 	  if
+		 ::(airplane_mode==ON)->atomic(airplane_mode=OFF;action[12]=1;state=changesettingairplane_mode);
+		 ::(airplane_mode==OFF)->atomic(airplane_mode=ON;action[12]=1;state=changesettingairplane_mode);
+		 ::(wifi==ON)->atomic(wifi=OFF;action[10]=1;state=changesettingwifi);
+		 ::(wifi==OFF)->atomic(wifi=ON;action[10]=1;state=changesettingwifi);
+		 ::(bluetooth==ON)->atomic(bluetooth=OFF;action[11]=1;state=changesettingbluetooth);
+		 ::(bluetooth==OFF)->atomic(bluetooth=ON;action[11]=1;state=changesettingbluetooth);
+		 ::
+		 ::
+	  fi
+	::(state==changesettingairplane_mode)->
+	  if
+		 ::(action[12]==1)->atomic(action[12]=0;state=setting)
+>>>>>>> 40a7f53e5959e04bc93c24ab0b7eb586b97e8a3f
+		 ::
+		 ::
+	  fi
+/*
+*/////////////////////////////////////// End of changeParamScreens for screen mainScreen////////////////////////////////////////////////
+*/
+
+	::(state==loginScreen)->
+	  if
+<<<<<<< HEAD
+		 ::(pass==Empty)->atomic(pass=NotEmpty;state=changeloginScreenpass);
+		 ::(user==NotEmpty && pass==NotEmpty)->atomic(state=mainScreen); /* log in Button */
+		 ::(user==Empty)->atomic(user=NotEmpty;state=changeloginScreenuser);
+=======
+		 ::(action[10]==1)->atomic(action[10]=0;state=setting)
+>>>>>>> 40a7f53e5959e04bc93c24ab0b7eb586b97e8a3f
+		 ::
+		 ::
+	  fi
+/*
+*/////////////////////////////////////// End of changeParamScreens for screen loginScreen////////////////////////////////////////////////
+*/
+
+	::(state==setting)->
+	  if
+<<<<<<< HEAD
+=======
+		 ::(action[11]==1)->atomic(action[11]=0;state=setting)
+>>>>>>> 40a7f53e5959e04bc93c24ab0b7eb586b97e8a3f
 		 ::
 		 ::
 	  fi

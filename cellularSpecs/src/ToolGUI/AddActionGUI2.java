@@ -19,13 +19,11 @@ import javax.swing.SwingConstants;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import javax.swing.Icon;
-import javax.swing.JTextField;
 
-public class AddActionGUI extends JFrame
+public class AddActionGUI2 extends JFrame
 {
-	private JComboBox parameterValue;
+	private JComboBox parameterName,parameterValue;
 	private JButton btnSave;
-	private JTextField txtAirplanemode;
 	public JComboBox getParameterValue() {
 		return parameterValue;
 	}
@@ -43,9 +41,15 @@ public class AddActionGUI extends JFrame
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(st);
         parameterName.setModel(cbm);
 	}
-	public AddActionGUI() {
+	public AddActionGUI2() {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
+		
+		parameterName = new JComboBox();
+		parameterName.setModel(new DefaultComboBoxModel(new String[] {"<dynamic>"}));
+		parameterName.setEnabled(false);
+		parameterName.setBounds(129, 83, 84, 20);
+		getContentPane().add(parameterName);
 		
 		JLabel lblChooseParam = new JLabel("Choose param:\r\n");
 		lblChooseParam.setBounds(42, 152, 84, 14);
@@ -87,6 +91,10 @@ public class AddActionGUI extends JFrame
 		lblAction.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAction.setBounds(10, 121, 63, 20);
 		getContentPane().add(lblAction);
+		
+		JLabel lblChooseParam_1 = new JLabel("Choose param:");
+		lblChooseParam_1.setBounds(35, 86, 84, 14);
+		getContentPane().add(lblChooseParam_1);
 		
 		JLabel lblValue = new JLabel("Value=");
 		lblValue.setBounds(231, 86, 41, 14);
@@ -140,16 +148,6 @@ public class AddActionGUI extends JFrame
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(22, 114, 550, 20);
 		getContentPane().add(separator_1);
-		
-		JLabel lblParametername = new JLabel("parameterName");
-		lblParametername.setBounds(10, 70, 116, 14);
-		getContentPane().add(lblParametername);
-		
-		txtAirplanemode = new JTextField();
-		txtAirplanemode.setText("airPlane");
-		txtAirplanemode.setBounds(90, 67, 86, 20);
-		getContentPane().add(txtAirplanemode);
-		txtAirplanemode.setColumns(10);
 	}
 	public void setAddActionListener (ActionListener AddActionListener ){       
 		btnSave.addActionListener(AddActionListener);
