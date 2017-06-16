@@ -2,157 +2,137 @@ package ToolGUI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JSeparator;
-import javax.swing.Icon;
 import javax.swing.JTextField;
 
-public class AddActionGUI extends JFrame
-{
-	private JComboBox parameterValue;
+import Controller.ScreenController;
+import Model.Param;
+import Model.WorkSpace;
+import our.Utils.BulidSpec;
+
+import java.awt.Color;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+
+import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.swing.JScrollPane;
+import java.awt.event.ItemListener;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+
+public class AddActionGUI extends JFrame {
+	private JComboBox comboBox;
+	private JComboBox comboBox_2;
+	private String[] parameterNames=null ;
+	private String[] parameterValue=null ;
+	private String paramName;
 	private JButton btnSave;
-	private JTextField txtAirplanemode;
-	public JComboBox getParameterValue() {
-		return parameterValue;
-	}
-	public void setParameterValue(String [] parameterValue) {
-        DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterValue);
-        this.parameterValue.setModel(cbm);
-	}
-	public JComboBox getParameterName() {
-		return parameterName;
-	}
-	// set 
-	public void setParameterName(String  parameter) {
-		String st[]=new String[1];
-		st[0]=parameter;
-        DefaultComboBoxModel cbm = new DefaultComboBoxModel(st);
-        parameterName.setModel(cbm);
-	}
+
+	private String value;
 	public AddActionGUI() {
+		setSize(400,150);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
+		JLabel lblAddNewConditons = new JLabel("add a condition");
+		lblAddNewConditons.setBounds(10, 11, 338, 14);
+		getContentPane().add(lblAddNewConditons);
 		
-		JLabel lblChooseParam = new JLabel("Choose param:\r\n");
-		lblChooseParam.setBounds(42, 152, 84, 14);
-		getContentPane().add(lblChooseParam);
-		
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(626, 400);
-	    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-	    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-	    setLocation(x, y);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(118, 149, 79, 20);
-		getContentPane().add(comboBox_1);
-		
-		JLabel label_2 = new JLabel("Change VAL:");
-		label_2.setBounds(207, 152, 69, 14);
-		getContentPane().add(label_2);
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(273, 149, 78, 20);
-		getContentPane().add(comboBox_2);
-		
-		JLabel lblOnoff = new JLabel("<dynamic>- ON/OFF - Add Action");
-		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
-		lblOnoff.setBounds(22, 11, 361, 36);
-		getContentPane().add(lblOnoff);
-		
-		JLabel lblNewLabel = new JLabel("Condition for action: ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setBounds(10, 216, 116, 20);
-		getContentPane().add(lblNewLabel);
-		ImageIcon imageForOne = new ImageIcon(getClass().getResource("../delete.png"));
-		JButton btnAddOtherConditon = new JButton("+");
-		btnAddOtherConditon.setBounds(502, 216, 41, 21);
-		getContentPane().add(btnAddOtherConditon);
-		
-		JLabel lblAction = new JLabel("Action:");
-		lblAction.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAction.setBounds(10, 121, 63, 20);
-		getContentPane().add(lblAction);
-		
-		JLabel lblValue = new JLabel("Value=");
-		lblValue.setBounds(231, 86, 41, 14);
-		getContentPane().add(lblValue);
-		
-		 parameterValue = new JComboBox();
-		parameterValue.setBounds(267, 83, 84, 20);
-		getContentPane().add(parameterValue);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(22, 213, 550, 20);
-		getContentPane().add(separator);
-		
-		JLabel lblChooseParam_2 = new JLabel("Choose param:");
-		lblChooseParam_2.setBounds(42, 247, 84, 14);
-		getContentPane().add(lblChooseParam_2);
-		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(116, 244, 79, 20);
-		getContentPane().add(comboBox_4);
-		
-		JLabel label_3 = new JLabel("Value=");
-		label_3.setBounds(231, 244, 63, 14);
-		getContentPane().add(label_3);
-		
-		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setBounds(267, 244, 84, 20);
-		getContentPane().add(comboBox_5);
-		
-		JButton button = new JButton("+");
-		button.setBounds(502, 121, 41, 21);
-		getContentPane().add(button);
-		
-		 btnSave = new JButton("Save");
-		btnSave.setBounds(119, 320, 112, 23);
-		btnSave.setActionCommand("_save_action");
+		 btnSave = new JButton("save");
+		btnSave.setBounds(66, 80, 91, 23);
 		getContentPane().add(btnSave);
+		btnSave.setActionCommand("_save_new_condition");
 		
-		JButton button_2 = new JButton("cancel");
-		button_2.setBounds(255, 320, 116, 23);
-		getContentPane().add(button_2);
+		JButton btnCancel = new JButton("cancel");
+		btnCancel.setBounds(195, 80, 91, 23);
+		getContentPane().add(btnCancel);
 		
-		JLabel lblNewLabel_1 = new JLabel(imageForOne);
-		lblNewLabel_1.setBounds(22, 247, 25, 14);
-		getContentPane().add(lblNewLabel_1);
+	
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 35, 365, 23);
+		getContentPane().add(panel);
+		panel.setBackground(Color.WHITE);
+		panel.setLayout(null);
 		
-		JLabel label_4 = new JLabel(imageForOne);
-		label_4.setBounds(22, 152, 25, 14);
-		getContentPane().add(label_4);
+		JLabel label_1 = new JLabel("Choose param");
+		label_1.setBounds(0, 0, 69, 23);
+		panel.add(label_1);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(22, 114, 550, 20);
-		getContentPane().add(separator_1);
-		
-		JLabel lblParametername = new JLabel("parameterName");
-		lblParametername.setBounds(10, 70, 116, 14);
-		getContentPane().add(lblParametername);
-		
-		txtAirplanemode = new JTextField();
-		txtAirplanemode.setText("airPlane");
-		txtAirplanemode.setBounds(90, 67, 86, 20);
-		getContentPane().add(txtAirplanemode);
-		txtAirplanemode.setColumns(10);
+		 comboBox = new JComboBox();
+		comboBox.addItemListener(new ItemListener() {
+		 	public void itemStateChanged(ItemEvent arg0) {
+		 		JComboBox s=(JComboBox)(arg0.getSource());
+		 		paramName=s.getSelectedItem().toString();
+		 		parameterValue=ScreenController.getdefaultValues(s.getSelectedItem().toString());
+		        DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterValue);
+		        comboBox_2.setModel(cbm);	 		
+		 	}
+		 });
+		 comboBox.setBounds(72, 1, 80, 20);
+		 panel.add(comboBox);
+		 
+       
+        
+		 
+		 JLabel label_3 = new JLabel("=");
+		 label_3.setBounds(155, 4, 13, 14);
+		 panel.add(label_3);
+		 
+		 JLabel label = new JLabel("value\r\n");
+		 label.setBounds(167, 4, 41, 14);
+		 panel.add(label);
+		 
+		  comboBox_2 = new JComboBox();
+		  comboBox_2.addItemListener(new ItemListener() {
+		  	public void itemStateChanged(ItemEvent arg0) {
+		  		JComboBox s=(JComboBox)(arg0.getSource());
+		  		value=s.getSelectedItem().toString();
+		  	}
+		  });
+		  comboBox_2.setBounds(202, 1, 80, 20);
+		  panel.add(comboBox_2);
+		//panel.add(label_3);
+			addToCombo();
+			
 	}
-	public void setAddActionListener (ActionListener AddActionListener ){       
-		btnSave.addActionListener(AddActionListener);
+	private void addToCombo() {
+		parameterNames=ScreenController.getparams();
+		if(parameterNames!=null)
+		{
+		paramName=parameterNames[0];
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
+        comboBox.setModel(cbm);
+       parameterValue=ScreenController.getdefaultValues(comboBox.getSelectedItem().toString());
+       value=parameterValue[0];
+        cbm = new DefaultComboBoxModel(parameterValue);
+       comboBox_2.setModel(cbm);
+		}
 		
+	}
+	public String getParamName() {
+		return paramName;
+	}
+	public void setParamName(String paramName) {
+		this.paramName = paramName;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	public void setAddAconditionListener(ActionListener addConditionsListener ){    
+		btnSave.addActionListener(addConditionsListener);
+	}
+	public static void main(String[] args) {
+		BulidSpec.build();
+		AddActionGUI a=new AddActionGUI();
+		a.setVisible(true);
 	}
 }
+

@@ -207,7 +207,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			
 		case "_save_on_off":
 			WorkSpace.getLog().debug("do _save_on_off.. ");
+			if(checkInputs.checkTextfields(onOfGUI,ElementType.getOnOffType()))
 			WorkSpaceController.addelementToGUI(screenGUI, onOfGUI,new OnOffType());
+		
 			break;
 		case"_edit_on_off":
 			WorkSpace.getLog().debug("Router>-edit the onOff Type");
@@ -216,9 +218,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			break;
 		case "_add_Action_OnOff":
 			 addActionGUI=new AddActionGUI();
-			 addActionGUI.setParameterName(onOfGUI.getParameterName());
+		//	 addActionGUI.setParameterName(onOfGUI.getParameterName());
 			String [] values= WorkSpace.getInstance().getParamsMap().get(onOfGUI.getParameterName()).getValues();//add attribute to param with defult values ->ask
-			 addActionGUI.setParameterValue(values);
+			// addActionGUI.setParameterValue(values);
 			// addActionGUI.setParameterName(onOfGUI.getParamName());
 			addActionGUI.setVisible(true);
 		break;

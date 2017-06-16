@@ -25,28 +25,34 @@ import javax.swing.JScrollPane;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import javax.swing.SwingConstants;
 
 public class AddConditonGui extends JFrame {
-	private JComboBox comboBox;
-	private JComboBox comboBox_2;
+	private JComboBox parameterNameCombo;
+	private  JLabel equal_lbl;
 	private String[] parameterNames=null ;
 	private String[] parameterValue=null ;
 	private String paramName;
 	private JButton btnSave;
-
+	private JLabel switchlbl;
 	private String value;
+	private JComboBox parameterValueCombo;
 	public AddConditonGui() {
+		setVisible(true);
+		 switchlbl = new JLabel("");
 		setSize(400,150);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
-		JLabel lblAddNewConditons = new JLabel("add a condition");
-		lblAddNewConditons.setBounds(10, 11, 338, 14);
+		JLabel lblAddNewConditons = new JLabel("-add a condition");
+		lblAddNewConditons.setBounds(60, 10, 125, 14);
 		getContentPane().add(lblAddNewConditons);
 		
 		 btnSave = new JButton("save");
+		 btnSave.setActionCommand("_save_Condition");
 		btnSave.setBounds(66, 80, 91, 23);
 		getContentPane().add(btnSave);
-		btnSave.setActionCommand("_save_new_condition");
+		
+		
 		
 		JButton btnCancel = new JButton("cancel");
 		btnCancel.setBounds(195, 80, 91, 23);
@@ -59,43 +65,50 @@ public class AddConditonGui extends JFrame {
 		panel.setBackground(Color.WHITE);
 		panel.setLayout(null);
 		
-		JLabel label_1 = new JLabel("Choose param");
-		label_1.setBounds(0, 0, 69, 23);
-		panel.add(label_1);
+		JLabel chooseparamLbl = new JLabel("Choose param");
+		chooseparamLbl.setHorizontalAlignment(SwingConstants.LEFT);
+		chooseparamLbl.setBounds(10, 0, 86, 23);
+		panel.add(chooseparamLbl);
 		
-		 comboBox = new JComboBox();
-		comboBox.addItemListener(new ItemListener() {
+		 parameterNameCombo = new JComboBox();
+		 parameterNameCombo.setModel(new DefaultComboBoxModel(new String[] {"Wifi", "AirPlane", "blutooth"}));
+		parameterNameCombo.addItemListener(new ItemListener() {
 		 	public void itemStateChanged(ItemEvent arg0) {
 		 		JComboBox s=(JComboBox)(arg0.getSource());
 		 		paramName=s.getSelectedItem().toString();
 		 		parameterValue=ScreenController.getdefaultValues(s.getSelectedItem().toString());
 		        DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterValue);
-		        comboBox_2.setModel(cbm);	 		
+		        parameterValueCombo.setModel(cbm);	 		
 		 	}
 		 });
-		 comboBox.setBounds(72, 1, 80, 20);
-		 panel.add(comboBox);
+		 parameterNameCombo.setBounds(106, 1, 80, 20);
+		 panel.add(parameterNameCombo);
 		 
        
         
 		 
-		 JLabel label_3 = new JLabel("=");
-		 label_3.setBounds(155, 4, 13, 14);
-		 panel.add(label_3);
+		  equal_lbl = new JLabel("==");
+		 equal_lbl.setBounds(196, 4, 24, 14);
+		 panel.add(equal_lbl);
 		 
-		 JLabel label = new JLabel("value\r\n");
-		 label.setBounds(167, 4, 41, 14);
-		 panel.add(label);
+		 JLabel valueLbl = new JLabel("value\r\n");
+		 valueLbl.setBounds(224, 4, 41, 14);
+		 panel.add(valueLbl);
 		 
-		  comboBox_2 = new JComboBox();
-		  comboBox_2.addItemListener(new ItemListener() {
+		  parameterValueCombo = new JComboBox();
+		  parameterValueCombo.setModel(new DefaultComboBoxModel(new String[] {"On", "Off"}));
+		  parameterValueCombo.addItemListener(new ItemListener() {
 		  	public void itemStateChanged(ItemEvent arg0) {
 		  		JComboBox s=(JComboBox)(arg0.getSource());
 		  		value=s.getSelectedItem().toString();
 		  	}
 		  });
-		  comboBox_2.setBounds(202, 1, 80, 20);
-		  panel.add(comboBox_2);
+		  parameterValueCombo.setBounds(275, 1, 80, 20);
+		  panel.add(parameterValueCombo);
+		  
+		 
+		  switchlbl.setBounds(10, 10, 46, 14);
+		  getContentPane().add(switchlbl);
 		//panel.add(label_3);
 			addToCombo();
 			
@@ -106,11 +119,11 @@ public class AddConditonGui extends JFrame {
 		{
 		paramName=parameterNames[0];
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
-        comboBox.setModel(cbm);
-       parameterValue=ScreenController.getdefaultValues(comboBox.getSelectedItem().toString());
+        parameterNameCombo.setModel(cbm);
+       parameterValue=ScreenController.getdefaultValues(parameterNameCombo.getSelectedItem().toString());
        value=parameterValue[0];
         cbm = new DefaultComboBoxModel(parameterValue);
-       comboBox_2.setModel(cbm);
+       parameterValueCombo.setModel(cbm);
 		}
 		
 	}
@@ -126,13 +139,23 @@ public class AddConditonGui extends JFrame {
 	public void setValue(String value) {
 		this.value = value;
 	}
+	public String getLabel_equal() {
+		return equal_lbl.getText().toString();
+	}
+	public String getParameterNameCombo() {
+		return parameterNameCombo.getSelectedItem().toString();
+	}
+	public String getParameterValueCombo() {
+		return parameterValueCombo.getSelectedItem().toString();
+	}
+	public String getSwitchlbl() {
+		return switchlbl.getText().toString();
+	}
+	public void setSwitchlbl(String text) {
+		switchlbl.setText(text);
+	}
 	public void setAddAconditionListener(ActionListener addConditionsListener ){    
 		btnSave.addActionListener(addConditionsListener);
-	}
-	public static void main(String[] args) {
-		BulidSpec.build();
-		AddConditonGui a=new AddConditonGui();
-		a.setVisible(true);
 	}
 }
 

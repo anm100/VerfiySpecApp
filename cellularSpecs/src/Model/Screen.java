@@ -211,7 +211,7 @@ public class Screen implements Serializable{
 			e= (Element)pair.getValue();
 			if (!(e.getType().equals(ElementType.getStandartBtnType()))){
 			states+=",Change"+this.getScreenName()+e.getParamName();
-		FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
+			FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
 			}
 		}
 		it = this.ChangeScreen.entrySet().iterator();
