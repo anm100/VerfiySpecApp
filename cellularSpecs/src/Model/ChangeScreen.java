@@ -15,6 +15,9 @@ public class ChangeScreen {
 	public void addTransPromela(String cond,String action,String toState) {
 		this.transPromela.add("("+cond+")->atomic("+action+";state="+toState+")");
 	}
+	public void addTransPromela(String action,String toState) {
+		this.transPromela.add("atomic("+action+";state="+toState+")");
+	}
 
 
 	public String getScreenName() {
@@ -34,8 +37,6 @@ public class ChangeScreen {
 	public  String getStringPromela(){
 		String startScreen=new String("	::(state=="+this.getScreenName()+")->\n"+"	  if");
 		String out= new String ("");
-		transPromela.add("");
-		transPromela.add("");
 
 		for(String i : transPromela)
 		{

@@ -56,16 +56,21 @@ public class ElementController {
 		{
 			ArrayList<MyCondition> m =s.getActions().get(i).getCond();
 		st[i][0]=(s.getActions().get(i).getParamName()+"="+s.getActions().get(i).getParamVal());//add action to the firstRow
-		String operator="";
-		String st1="";
+	
+		st[i][1]=getCondsForAction(m);
+	}
+		return st;
+}
+	public static String getCondsForAction(ArrayList<MyCondition> m){
+		String operator=new String ("");
+		String st1=new String ("");
 		for(int j=0;j<m.size();j++)
 		{
 			st1=st1+operator+m.get(j).getParamName()+m.get(j).getOpt()+m.get(j).getParamVal();
 			operator="&&";
 		}
-		st[i][1]=st1;
+		return st1; 
 	}
-		return st;
-}
+	
 
 }

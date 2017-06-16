@@ -25,7 +25,7 @@ public class Param implements Serializable{
 		return paramName;
 	}
 	public void setParamName(String paramName) {
-		this.paramName = paramName;
+		this.paramName = Character.toUpperCase(paramName.charAt(0))+paramName.substring(1);;
 	}
 	public String getParamVal() {
 		return paramVal;

@@ -2,7 +2,10 @@ package Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class StandartButtonType implements Serializable, Element {
 private String elementName; 
@@ -76,6 +79,7 @@ public  String getStringPromela(){
 				+getTrans().getToScreen()
 				+");"+" /* "+this.elementName+" Button */" ; 
 }
+
 
 public  Transition getTrans() {
 	return trans;
