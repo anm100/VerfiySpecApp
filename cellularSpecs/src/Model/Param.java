@@ -8,6 +8,7 @@ public class Param implements Serializable{
 	private String paramName; 
 	private String paramVal;
 	private String type;
+	private String ScreenName;
 		
 	public Param(String paramName, String paramVal, String type) {
 		super();
@@ -39,6 +40,15 @@ public class Param implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	} 
+	
+	public String getScreenName() {
+		return ScreenName;
+	}
+
+	public void setScreenName(String screenName) {
+		ScreenName = screenName;
+	}
+
 	public String [] getValues(){										/*how to get values for list type*/
 		if (ElementType.getEmptyNotEmptyType().equals(this.type)){
 			return ElementType.getEmptyNotEmptyType().split("/");

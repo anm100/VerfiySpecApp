@@ -94,6 +94,12 @@ public class debugingGUI extends JFrame{
 	    setVisible(true);
 		setSize(335, 330);
 		setLocation(800, 50);
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BulidSpec.buildsetting();
+				WorkSpaceController.createSpecGUI();
+			}
+		});
 		   
 			 
 	} 
