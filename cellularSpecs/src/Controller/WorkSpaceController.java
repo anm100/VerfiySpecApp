@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -157,7 +158,7 @@ public class WorkSpaceController {
 	}
 	public static void addToModels(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l)	
 	{
-
+		//getConditions from OnOfGui givr me arraylist with the conditions to on->off 
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		l.setElementName(elementGui.getElementName());	
 		l.setParam(p);

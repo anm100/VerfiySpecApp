@@ -1,32 +1,50 @@
 package ToolGUI;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.TextUI;
+import javax.swing.table.DefaultTableModel;
 
+import org.omg.PortableServer.ServantActivatorOperations;
 
+import ui.utils.MyTableModel;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.TextField;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
-
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.UIManager;
+
+import Controller.ElementController;
+import Controller.ScreenController;
+import Model.ElementType;
+import Model.WorkSpace;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.util.ArrayList;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class OnOfGUI2 extends JFrame {
 	protected JTextField txtUndefined;
@@ -34,18 +52,29 @@ public class OnOfGUI2 extends JFrame {
 	protected JButton AddAction;
 	protected  int  x=0,y=0,hight=143,width=30;
 	protected static JButton btnSave;
-	private JComboBox parameterName;
-	private String defaultValue=new String("OFF");
+	private JComboBox ComboparameterNames;
+	private String defaultValue;;
 	private JRadioButton rdbtnOff,rdbtnOn ;
-
+	private  JTable apps_table;
+	private  int colNumber=3;
+	private Object[][] data = {};
 	String ScreenName; 
-	public OnOfGUI2(String ScreenName)
+	private JTextField ParameterName;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	
+
+	public OnOfGUI2(String ScreenName,String eName)
 	{
+	
 		this.ScreenName=ScreenName; 
 		setTitle("ON-OFF");
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
-		
+		lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		 lblNewLabel_2 = new JLabel("New label");
+		 lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		
 		JLabel lblOnoff = new JLabel(ScreenName+"- ONOFF");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
@@ -61,27 +90,57 @@ public class OnOfGUI2 extends JFrame {
 		getContentPane().add(lblDefaulval);
 		
 		elementName = new JTextField();
+		elementName.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent arg0) {
+				lblNewLabel_2.setVisible(false);
+			}
+		});
 		elementName.setBounds(118, 65, 152, 20);
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
 
-		parameterName = new JComboBox();
-		parameterName.setModel(new DefaultComboBoxModel(new String[] {"new parameter"}));
-		parameterName.setBounds(118, 89, 152, 22);
-		getContentPane().add(parameterName);
+		ComboparameterNames = new JComboBox();
+		ComboparameterNames.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if((arg0.getItem().toString().equals("New..")))
+				{
+					ParameterName.setVisible(true);
+					ParameterName.setText("parameter name");
+				}
+				else
+				{
+					ParameterName.setVisible(false);
+					lblNewLabel_3.setVisible(false);
+					ParameterName.setText(arg0.getItem().toString());
+				}
+			}
+		});
+		ComboparameterNames.setBounds(118, 89, 152, 22);
+		getContentPane().add(ComboparameterNames);
 		setSize(501, 367);
 		
 		 btnSave = new JButton("Save");
 		 btnSave.setActionCommand("_save_on_off");
 			
-		btnSave.setBounds(128, 287, 112, 23);
+		btnSave.setBounds(20, 312, 112, 23);
 		getContentPane().add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(250, 287, 116, 23);
+		btnCancel.setBounds(192, 312, 116, 23);
 		getContentPane().add(btnCancel);
-		
+		rdbtnOff = new JRadioButton("OFF");
+		rdbtnOff.setSelected(true);
+		setDefaultValue(rdbtnOff.getText());
 		 rdbtnOn = new JRadioButton("ON");
+		rdbtnOn.setSelected(false);
+		rdbtnOn.setBounds(118, 113, 72, 28);
+		getContentPane().add(rdbtnOn);
+		rdbtnOff.setBounds(192, 113, 78, 28);
+		getContentPane().add(rdbtnOff);
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnOn);
+		group.add(rdbtnOff);
+		
 		rdbtnOn.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if(rdbtnOn.isSelected())
@@ -89,25 +148,14 @@ public class OnOfGUI2 extends JFrame {
 				}
 		});
 
-		rdbtnOn.setSelected(false);
-		rdbtnOn.setBounds(118, 113, 72, 28);
-		getContentPane().add(rdbtnOn);
-		
-		rdbtnOff = new JRadioButton("OFF");
 		rdbtnOff.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 			if(rdbtnOff.isSelected())
 				setDefaultValue(rdbtnOff.getText());
 			}
 		});
-		rdbtnOff.setSelected(true);
-		setDefaultValue(rdbtnOn.getText());
-		rdbtnOff.setBounds(192, 113, 78, 28);
-		getContentPane().add(rdbtnOff);
-		ButtonGroup group = new ButtonGroup();
 
-		group.add(rdbtnOn);
-		group.add(rdbtnOff);
+
 		
 		
 		JSeparator separator = new JSeparator();
@@ -119,13 +167,92 @@ public class OnOfGUI2 extends JFrame {
 		AddAction.setHorizontalAlignment(SwingConstants.LEADING);
 		AddAction.setBackground(UIManager.getColor("Button.highlight"));
 		AddAction.setActionCommand("_add_Action_OnOff");
-		AddAction.setBounds(20, 145, 236, 28);
+		AddAction.setBounds(20, 145, 307, 28);
 		getContentPane().add(AddAction);
 		
 		JLabel lblNewLabel_1 = new JLabel("Parameter name");
 		lblNewLabel_1.setBounds(29, 93, 79, 14);
 		getContentPane().add(lblNewLabel_1);
 		setSize(501, 378);
+		
+		JScrollPane apps_scrollPane = new JScrollPane();
+		apps_scrollPane.setBounds(10, 184, 465, 117);
+		getContentPane().add(apps_scrollPane);
+		String[] doc_columnNames = { "action","condition"};
+		apps_table = new JTable();
+			apps_table.setModel(new MyTableModel(doc_columnNames,data));
+			apps_table.setFillsViewportHeight(false);
+			apps_table.setSurrendersFocusOnKeystroke(true);
+			apps_table.setShowVerticalLines(false);
+			apps_table.setRowHeight(20);
+			apps_table.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			
+			apps_scrollPane.setViewportView(apps_table);
+			apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			apps_table.setBackground(Color.WHITE);
+			
+			ParameterName = new JTextField();
+			ParameterName.addPropertyChangeListener(new PropertyChangeListener() {
+				public void propertyChange(PropertyChangeEvent arg0) {
+					lblNewLabel_3.setVisible(false);
+				}
+			});
+			
+			getContentPane().add(ParameterName);
+			ParameterName.setForeground(Color.GRAY);
+			ParameterName.setText("parameter name");
+			ParameterName.setVisible(true);
+			ParameterName.setBounds(280, 90, 152, 20);
+			ParameterName.setToolTipText("add new Parameter");
+			
+
+			 lblNewLabel_2.setVisible(false);
+			lblNewLabel_2.setForeground(Color.RED);
+			lblNewLabel_2.setBounds(280, 68, 184, 14);
+			getContentPane().add(lblNewLabel_2);
+			
+			 
+			 lblNewLabel_3.setVisible(false);
+			lblNewLabel_3.setForeground(Color.RED);
+			lblNewLabel_3.setBounds(281, 113, 194, 14);
+			getContentPane().add(lblNewLabel_3);
+			ParameterName.addFocusListener(new FocusListener() {
+		
+				public void focusGained(FocusEvent arg0) {
+					ParameterName.setForeground(Color.black);
+					ParameterName.setText("");
+				}
+
+				@Override
+				public void focusLost(FocusEvent arg0) {
+					
+				}
+			});
+
+
+
+			
+			if (ElementController.elementIsExist(ScreenName,eName ))
+			{
+				WorkSpace.getLog().debug(" filling data to this gui");
+				loadData(ElementController.getDataOfElement(ScreenName,eName),eName) ; 
+			}
+		
+	}
+	public JLabel getLblNewLabel_3() {
+		return lblNewLabel_3;
+	}
+	public void setLblNewLabel_3(String hint) {
+		this.lblNewLabel_3.setText(hint);
+		this.lblNewLabel_3.setVisible(true);;
+	}
+	private void loadData(	ArrayList <String> dataOfelement,String eName) {
+		elementName.setText(dataOfelement.get(0));
+		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,dataOfelement.get(1),dataOfelement.get(0)));
+		ComboparameterNames.setSelectedItem(dataOfelement.get(1));
+		setOnOff(dataOfelement.get(2));
+		addToTable(ElementController.getActrion(getScreenName(),eName));
+		btnSave.setActionCommand("_edit_on_off");	
 		
 	}
 	protected JLabel CreateLabel(String string, int x2, int y2, int hight2, int width2) {
@@ -150,19 +277,49 @@ public class OnOfGUI2 extends JFrame {
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
 	}
-	public String getParameterName() {
-		return parameterName.getSelectedItem().toString();
-	}
-	public void setParameterName(String []  parameterNames) {
+	public void setParameterName(String []  parameterNames) {		
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
-        parameterName.setModel(cbm);
+        ComboparameterNames.setModel(cbm);
 	}
-	public void setOnOff(String defultvalue) {
-	if(getDefaultValue().equals(defaultValue))
+	public void setOnOff(String defultval) {
+	if(defultval.equals("OFF"))
+	{
 		rdbtnOff.setSelected(true);
+		setDefaultValue(rdbtnOff.getText());
+	}
 	else
 		rdbtnOn.setSelected(true);
-		
+	setDefaultValue(rdbtnOn.getText());
+	}
+	public  void removeToTable(int index)//remove row number index
+	{
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		dm.removeRow(index);
+	}
+	public  String[] readFromTable(int index)//remove row number index
+	{
+		   String[] result = new String[colNumber];
+		   for (int i = 0; i < colNumber; i++) {
+		result[i]=apps_table.getModel().getValueAt(index, i).toString();
+		   }
+		   return result;
+		  
+	}
+	public  void addToTable(String [] st)//add new row with st value to the table 
+	{
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		dm.addRow(st);
+	}
+	public  void addToTable(String [][] st)//adding matrix to jtable 
+	{
+		WorkSpace.getLog().debug("add conditions to table");
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		  int row = st.length;
+		  for(int i=0;i<row;i++)
+		dm.addRow(st[i]);
+	}
+	public int  getRowsNumber(){  
+		return(apps_table.getRowCount());
 	}
 	public void setOnOffListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);
@@ -171,6 +328,25 @@ public class OnOfGUI2 extends JFrame {
 	}
 	public void setParamChangeListener(ItemListener OnOfTypeListener)
 	{
-	parameterName.addItemListener(OnOfTypeListener);
+	ComboparameterNames.addItemListener(OnOfTypeListener);
+	}
+	public JLabel getLblNewLabel_2() {
+		return lblNewLabel_2;
+	}
+	public void setLblNewLabel_2(String hint) {
+		lblNewLabel_2.setVisible(true);
+		this.lblNewLabel_2.setText(hint);;
+	}
+	public void setParameterName(String parameterName) {
+		JTextField tx=new JTextField();
+		tx.setText(parameterName);
+		ParameterName = tx;
+	}
+	public String getParameterName() {
+		return ParameterName.getText().toString();
+	}
+
+	public String getComboParameterName() {
+		return ComboparameterNames.getSelectedItem().toString();
 	}
 }

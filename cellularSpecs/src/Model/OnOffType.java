@@ -6,11 +6,15 @@ import java.util.List;
 
 public class OnOffType implements Serializable, Element,ElementActionInterface {
 private Param parameter; 
-private ArrayList<Action> actions=new  ArrayList<Action>(); 
+private ArrayList<Action> actions;
+private ArrayList<MyCondition> cond;
 private final String type=ElementType.getOnOffType();
 private String elementName; 
 
-public OnOffType() {}
+public OnOffType() {
+	cond=new ArrayList<MyCondition>();
+	actions=new  ArrayList<Action>(); 
+}
 
 public String getType() {
 	return type;

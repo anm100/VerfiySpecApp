@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.omg.Dynamic.Parameter;
+
 import Model.Action;
 import Model.Element;
 import Model.ElementActionInterface;
@@ -113,7 +115,7 @@ public static ArrayList<StandartButtonType> getElementsByType(String Type){
 		}
 		return true; 
 	}
-	public static String [] getParams(String type, String screenName){
+	public static String [] getParams(String type, String screenName){//return all the parameters from type in screen
 		ArrayList<String> params = new ArrayList<String>();
 		params.add("New..");
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
@@ -131,6 +133,20 @@ public static ArrayList<StandartButtonType> getElementsByType(String Type){
 		stockArr = params.toArray(stockArr);	
 	return stockArr;
 	}
+		/*
+		 * check if a parmaetername is exiting in the Screen
+		 * if the parameter is existed in the screen return true
+		 */
+		public static boolean IsParameterExist(String screenName,String Type,String parmaterName)
+		{
+			String[] st=getParams(Type,screenName);
+			for(int i=0;i<st.length;i++)
+			{
+			if(st[i].equals(parmaterName))
+				return true;
+			}
+			return false;
+		}
 	public static String [] getParams(String type, String screenName,String paramSelected,String elementName){
 		ArrayList<String> params = new ArrayList<String>();
 		params.add("New..");

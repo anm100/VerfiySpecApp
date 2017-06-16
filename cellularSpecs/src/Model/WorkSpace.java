@@ -129,8 +129,7 @@ public void setWorkSpaceLocation(String workSpaceLocation) {
 	this.workSpaceLocation = workSpaceLocation;
 }
 public  String getAllChangeStates(){
-	Screen e ;
-	
+	Screen e ;	
 	Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 	Map.Entry pair =(Map.Entry) it.next(); 
 	e= (Screen)pair.getValue();
