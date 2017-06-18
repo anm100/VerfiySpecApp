@@ -6,7 +6,7 @@ public class MyCondition implements Serializable {
 	private String paramName; 
 	private String paramVal ; 
 	private  String opt="==";
-	
+	private String Switch;
 	public MyCondition(String paramName, String paramVal, String opt2) {
 		super();
 		this.paramName = paramName;

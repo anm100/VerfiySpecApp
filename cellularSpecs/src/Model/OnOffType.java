@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OnOffType implements Serializable, Element,ElementActionInterface {
-private Param parameterOnToOff; 
-private Param parameterOffToON; 
+private Param parameter; 
 private final String type=ElementType.getOnOffType();
 private String elementName; 
 
@@ -18,7 +17,13 @@ public String getType() {
 	return type;
 }
 
+public Param getParameter() {
+	return parameter;
+}
 
+public String getParamName() {
+	return parameter.getParamName();
+}
 public String getELementName() {
 	return elementName;
 }
@@ -26,10 +31,15 @@ public String getELementName() {
  * @param paramName the paramName to set
  */
 
+@Override
+public String getParamVal() {
+	// TODO Auto-generated method stub
+	return this.parameter.getParamVal(); 
+}
 
 @Override
 public String getStringPromela() {
-	/*TODO Auto-generated method stub
+	/*// TODO Auto-generated method stub
 	if(actions.size() ==0){
 		return "";
 	}
@@ -39,6 +49,10 @@ public String getStringPromela() {
 	return null;
 }
 
+public void setParam(Param param) {
+	// TODO Auto-generated method stub
+	 this.parameter=param;
+}
 public void setElementName(String name) {
 	// TODO Auto-generated method stub
 	this.elementName=name;
@@ -61,24 +75,4 @@ public void addAction(Action e ){
 /*
  * now get values only in Param Class 
  */
-
-@Override
-public String getParamName() {
-	// TODO Auto-generated method stub
-	return null;
-}
-public Param getParameterOffToON() {
-	return parameterOffToON;
-}
-
-public void setParameterOffToON(Param parameterOffToON) {
-	this.parameterOffToON = parameterOffToON;
-}
-public Param getParameterOnToOff() {
-	return parameterOnToOff;
-}
-
-public void setParameterOnToOff(Param parameterOnToOff) {
-	this.parameterOnToOff = parameterOnToOff;
-}
 }

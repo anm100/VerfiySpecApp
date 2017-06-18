@@ -78,7 +78,7 @@ public class debugingGUI extends JFrame{
 			BulidSpec.build();
 			WorkSpaceController.createSpecGUI();
 			VerificationController verificationController = new VerificationController();
-			verificationController.translateToPROMELA();
+			//verificationController.translateToPROMELA();
 			FormulaTranslate.translateReq1();
 			FormulaTranslate.translateReq2a();
 			FormulaTranslate.translateReq2b();
