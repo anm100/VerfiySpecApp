@@ -2,7 +2,7 @@ package Model;
 import java.util.ArrayList;
 
 
-public class ChangeScreen {
+public class ChangeScreen implements screenInterface{
 	private String  screenName;
 	private ArrayList<String> transPromela= new ArrayList<String>();
   
@@ -13,10 +13,10 @@ public class ChangeScreen {
 	
 	
 	public void addTransPromela(String cond,String action,String toState) {
-		this.transPromela.add("("+cond+")->atomic("+action+";state="+toState+")");
+		this.transPromela.add("("+cond+")->atomic("+action+"state="+toState+")");
 	}
 	public void addTransPromela(String action,String toState) {
-		this.transPromela.add("atomic("+action+";state="+toState+")");
+		this.transPromela.add("atomic("+action+"state="+toState+")");
 	}
 
 

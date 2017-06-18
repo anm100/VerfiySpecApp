@@ -13,7 +13,7 @@ public class Promela {
 		
 	}
 	public static String getActionCondString(int index ,int value){
-		return "action["+index+"]=="+value+";";
+		return "action["+index+"]=="+value+"";
 		
 	}
 	
@@ -33,13 +33,14 @@ public class Promela {
 	}
 	public static String  getActionCondSonsString(OnOffType ParentNameParam,int value){
 		ArrayList <Action> actions=ParentNameParam.getActions();
+		if (ParentNameParam.getActions().size() == 0)return "";
+		else {
 		String str = new String(getActionCondString(WorkSpace.getInstance().getParamsByName(actions.get(0).getParamName()).getIndex(),value)); 
-		if (ParentNameParam.getActions().size() == 0)return ""; 
 		for (int  i=1;i< actions.size();i++)
 		{
 			str+="&&"+getActionCondString(WorkSpace.getInstance().getParamsByName(actions.get(i).getParamName()).getIndex(),value);
 		}		
 		return str ;
-		
+		}
 	}
 }

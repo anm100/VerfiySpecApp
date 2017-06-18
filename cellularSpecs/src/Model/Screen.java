@@ -3,13 +3,11 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 
 
-public class Screen implements Serializable{
+
+public class Screen implements Serializable,screenInterface{
 	private String  screenName;
 	private int  cordinateX;
 	private int cordinateY;

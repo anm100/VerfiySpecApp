@@ -20,6 +20,7 @@ import Model.Param;
 import Model.RequirementList;
 import Model.Screen;
 import Model.WorkSpace;
+import Model.screenInterface;
 
 public class VerificationController implements ItemListener {
 	private FormulaTranslate formulaTranslate = new FormulaTranslate(); 
@@ -97,8 +98,9 @@ private void initialize(){
 				 */
 						
 					setTransONToOFF(s, (OnOffType)e);
+					setTransOFFToON(s,(OnOffType)e);
 					
-					changeScreen = w.getChangeScreenByname(s.getScreenName()+e.getParamName()+"ON"); 
+					changeScreen = w.getChangeScreenByname(e.getParamName()+"ON"); 
 	/*
 					 ::(aaaa==off)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
 			 */
@@ -140,25 +142,70 @@ private void initialize(){
 
 		return sAll;
 	}
-	private void setTransONToOFF(Screen s ,OnOffType e) {
+//	private void setParamAction(OnOffType parent, OnOffType son ){
+//		
+//		
+//	}
+//	private void parentAction(ChangeScreen parent,OnOffType e){
+//		
+//		if (e.getActions().size() != 0){
+//			
+//			for (Action i:e.getActions()){
+//				setParamAction(e,w.g)
+//				
+//			}
+//			
+//		}
+//		
+//		
+//	}
+	private void setTransONToOFF(screenInterface s ,OnOffType e) {
 		ChangeScreen changeScreen;
 		// TODO Auto-generated method stub
-		
-		
-		changeScreen = w.getChangeScreenByname(s.getScreenName()+e.getParamName()+"OFF"); 
+				
+		changeScreen = w.getChangeScreenByname(e.getParamName()+"OFF"); 
 		s.addTransPromela(e.getParamName()+"=="+(e).getParameter().getValues()[0]
 			,Promela.getActionString(e.getParamName(), e.getParameter().getValues()[1])
 			+Promela.getActionString(e.getParameter().getIndex(),1)
 			+Promela.getActionSonsString(e,1)
 			,changeScreen.getScreenName()+");");
 
-		
-		
 		changeScreen.addTransPromela(Promela.getActionCondString(e.getParameter().getIndex(), 1)
 				+Promela.getActionCondSonsString(e, 0)
 				,Promela.getActionString(e.getParameter().getIndex(),0), s.getScreenName());
 
 	w.addChangeScreen(changeScreen);
+		
+	}
+	private void setTransOFFToON(screenInterface s ,OnOffType e) {
+		ChangeScreen changeScreen;
+		// TODO Auto-generated method stub
+				
+		changeScreen = w.getChangeScreenByname(e.getParamName()+"ON"); 
+		s.addTransPromela(e.getParamName()+"=="+(e).getParameter().getValues()[1]
+			,Promela.getActionString(e.getParamName(), e.getParameter().getValues()[0])
+			+Promela.getActionString(e.getParameter().getIndex(),1)
+			+Promela.getActionSonsString(e,1)
+			,changeScreen.getScreenName()+");");
+
+		changeScreen.addTransPromela(Promela.getActionCondString(e.getParameter().getIndex(), 1)
+				+Promela.getActionCondSonsString(e, 0)
+				,Promela.getActionString(e.getParameter().getIndex(),0), s.getScreenName());
+	w.addChangeScreen(changeScreen);
+	if (e.getActions().size() ==0) return;
+	else {
+		for (Action i:e.getActions()){
+			if(i.getParamVal().equals("ON")){
+			//	setTransOFFToON(changeScreen,w.getParamsByName(i.getParamName()));
+				
+			}else {
+				
+				
+			}
+			
+
+		}
+	}
 		
 	}
 
