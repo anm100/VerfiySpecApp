@@ -27,7 +27,6 @@ public String getParamName() {
  */
 
 
-@Override
 public String getParamVal() {
 	// TODO Auto-generated method stub
 	return this.parameter.getParamVal(); 

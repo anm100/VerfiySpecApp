@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Param implements Serializable{
 	private int index;
@@ -8,6 +9,8 @@ public class Param implements Serializable{
 	private String paramName; 
 	private String paramVal;
 	private String type;
+	private ArrayList<Action> actions;
+	private ArrayList<MyCondition> cond;
 		
 	public Param(String paramName, String paramVal, String type) {
 		super();
@@ -15,6 +18,8 @@ public class Param implements Serializable{
 		this.paramName = paramName;
 		this.paramVal = paramVal; 
 		this.type = type;
+		cond=new ArrayList<MyCondition>();
+		actions=new  ArrayList<Action>(); 
 	}
 
 	public int getIndex() {
