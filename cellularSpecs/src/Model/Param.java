@@ -46,7 +46,9 @@ public class Param implements Serializable{
 	}
 
 	public void setScreenName(String screenName) {
+		if (ScreenName == null){
 		ScreenName = screenName;
+		}
 	}
 
 	public String [] getValues(){										/*how to get values for list type*/

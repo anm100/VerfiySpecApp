@@ -2,8 +2,8 @@
 #define OFF 0 
 #define Empty 2 
 #define NotEmpty 3 
-mytype={Setting
-ChangeSettingAirplane_mode,ChangeSettingBluetooth,ChangeSettingWifi}
+mytype={Setting,
+changeSettingBluetoothON,changeSettingWifiON,changeSettingAirplane_modeON,changeSettingBluetoothOFF,changeSettingWifiOFF,changeSettingAirplane_modeOFF}
 
 /*define flag for action */
 byte action[3];
@@ -17,24 +17,36 @@ active proctype vm(){
  do
 	::(state==Setting)->
 	  if
-		 ::(Airplane_mode==ON)->atomic(Airplane_mode=OFF;action[2]=1;state=changeSettingAirplane_mode);
-		 ::(Airplane_mode==OFF)->atomic(Airplane_mode=ON;action[2]=1;state=changeSettingAirplane_mode);
-		 ::(Bluetooth==ON)->atomic(Bluetooth=OFF;action[1]=1;state=changeSettingBluetooth);
-		 ::(Bluetooth==OFF)->atomic(Bluetooth=ON;action[1]=1;state=changeSettingBluetooth);
-		 ::(Wifi==ON)->atomic(Wifi=OFF;action[0]=1;state=changeSettingWifi);
-		 ::(Wifi==OFF)->atomic(Wifi=ON;action[0]=1;state=changeSettingWifi);
+		 ::(Airplane_mode==ON)->atomic(Airplane_mode=OFF;action[2]=1;state=changeSettingAirplane_modeOFF);
+		 ::(Airplane_mode==OFF)->atomic(Airplane_mode=ON;action[2]=1;state=changeSettingAirplane_modeON);
+		 ::(Bluetooth==ON)->atomic(Bluetooth=OFF;action[1]=1;state=changeSettingBluetoothOFF);
+		 ::(Bluetooth==OFF)->atomic(Bluetooth=ON;action[1]=1;state=changeSettingBluetoothON);
+		 ::(Wifi==ON)->atomic(Wifi=OFF;action[0]=1;state=changeSettingWifiOFF);
+		 ::(Wifi==OFF)->atomic(Wifi=ON;action[0]=1;state=changeSettingWifiON);
 	  fi
-	::(state==changeSettingBluetooth)->
+	::(state==changeSettingBluetoothON)->
 	  if
-		 ::(cond)->atomic(actions;state=Setting)
+		 ::(Myconditon)->atomic(actions;state=Setting)
 	  fi
-	::(state==changeSettingAirplane_mode)->
+	::(state==changeSettingWifiON)->
 	  if
-		 ::(cond)->atomic(actions;state=Setting)
+		 ::(Myconditon)->atomic(actions;state=Setting)
 	  fi
-	::(state==changeSettingWifi)->
+	::(state==changeSettingAirplane_modeON)->
 	  if
-		 ::(cond)->atomic(actions;state=Setting)
+		 ::(Myconditon)->atomic(actions;state=Setting)
+	  fi
+	::(state==changeSettingBluetoothOFF)->
+	  if
+		 ::(Myconditon11)->atomic(I dont have action;state=Setting)
+	  fi
+	::(state==changeSettingWifiOFF)->
+	  if
+		 ::(Myconditon11)->atomic(I dont have action;state=Setting)
+	  fi
+	::(state==changeSettingAirplane_modeOFF)->
+	  if
+		 ::(Myconditon11)->atomic(I have action;state=Setting)
 	  fi
 /*
 */////////////////////////////////////// End of changeParamScreens for screen Setting////////////////////////////////////////////////

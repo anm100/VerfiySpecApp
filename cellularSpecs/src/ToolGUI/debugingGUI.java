@@ -61,8 +61,9 @@ public class debugingGUI extends JFrame{
 			WorkSpace.getLog().debug("create pml file ");
 
 			try{
+				VerificationController	verificationControll = new VerificationController();
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
-			    writer.println(Router.getInstance().getVerificationController().translateToPROMELA());
+			    writer.println(verificationControll.translateToPROMELA());
 			    writer.close();
 			} catch (IOException eb) {
 			   // do something

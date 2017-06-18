@@ -47,7 +47,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private Screen screen;
 	private ScreenGUI screenGUI;
 	private int Location=0;
-	VerificationController verificationController = new VerificationController();
+	private VerificationController verificationController ;
 
 
 	private AddActionGUI addActionGUI;
@@ -138,6 +138,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
         break;
 		
 		case("Run_verifectaion"):
+			verificationController = new VerificationController();
 			WorkSpace.getLog().debug("Run_verifectaion");
 			WorkSpace.getLog().info(verificationController.translateToPROMELA());
 			WorkSpace.getLog().debug("create pml file ");

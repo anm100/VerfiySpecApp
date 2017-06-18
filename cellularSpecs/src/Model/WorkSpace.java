@@ -129,18 +129,28 @@ public void setWorkSpaceLocation(String workSpaceLocation) {
 	this.workSpaceLocation = workSpaceLocation;
 }
 public  String getAllChangeStates(){
-	Screen e ;	
+	Screen s ;	
 	Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 	Map.Entry pair =(Map.Entry) it.next(); 
-	e= (Screen)pair.getValue();
-	String states=new String(e.getChangeStates());
+	s= (Screen)pair.getValue();
+	String states=new String(s.getChangeStates());
 	
 	while(it.hasNext()){
 		pair =(Map.Entry) it.next(); 
-		e= (Screen)pair.getValue();
-		states=","+e.getChangeStates()+"";
-		FormulaTranslate.addtoScreenStates(e.getScreenName());
+		s= (Screen)pair.getValue();
+		states=","+s.getChangeStates()+"";
 	}
 	return states;
+}
+public  void setAllChangeScreen(){
+	Screen s ;	
+	Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+	while(it.hasNext()){
+		Map.Entry pair =(Map.Entry) it.next(); 
+		s= (Screen)pair.getValue();
+		s.setChangeScreens();
+
+	}
+	
 }
 }

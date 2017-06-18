@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import Controller.FormulaTranslate;
-import ToolGUI.ScreenGUI;
+
 
 public class Screen implements Serializable{
 	private String  screenName;
@@ -160,6 +158,10 @@ public class Screen implements Serializable{
 	public ArrayList<String> getTransPromela() {
 		return transPromela;
 	}
+	public ChangeScreen getChangeScreenByname(String ChangeScreenName){
+		
+		return this.ChangeScreen.get("change"+ChangeScreenName);
+	}
 	public  String getBlockChangeScreen(){
 		String out = new String (""); 
 			
@@ -193,35 +195,50 @@ public class Screen implements Serializable{
 		return 	startScreen+out
 				+"\n"+"	  fi"; 
 	}
-	public  String getChangeStates(){
+	public void setChangeScreens(){
 		Element e ;
+		ChangeScreen changeScreen;
+		Iterator<Entry<String, Element>> it2 = getElementsMap().entrySet().iterator();
+		while(it2.hasNext()){
+			Map.Entry pair2 =(Map.Entry) it2.next(); 
+			e= (Element)pair2.getValue();
+			WorkSpace.getLog().debug("set Change State");
+			if (e.getType().equals(ElementType.getOnOffType())){
+			addChangeScreen(new ChangeScreen(getScreenName()+e.getParamName()+"OFF"));
+			addChangeScreen(new ChangeScreen(getScreenName()+e.getParamName()+"ON"));
+
+									
+				}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
+			
+					addChangeScreen(new ChangeScreen(getScreenName()+e.getParamName()));
+
+				}
+	
+		}
+		
+	}
+	public  String getChangeStates(){
 		Map.Entry pair;
 		String states;
+		ChangeScreen changeScreen ;
 		Iterator it ;
-		it = this.elementsMap.entrySet().iterator();
+		it = this.ChangeScreen.entrySet().iterator();
 		if(it.hasNext()){
 		pair =(Map.Entry) it.next(); 
-		e= (Element)pair.getValue();
-		 states=new String("Change"+this.getScreenName()+e.getParamName());
+		changeScreen= (ChangeScreen)pair.getValue();
+		 states=changeScreen.getScreenName();
 		}else {
 			 states=new String("");
 		}
-		while(it.hasNext()){
-			pair =(Map.Entry) it.next(); 
-			e= (Element)pair.getValue();
-			if (!(e.getType().equals(ElementType.getStandartBtnType()))){
-			states+=",Change"+this.getScreenName()+e.getParamName();
-			FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
-			}
-		}
-		it = this.ChangeScreen.entrySet().iterator();
-		ChangeScreen changeScreen ;
+	;
 		while(it.hasNext()){
 			pair =(Map.Entry) it.next(); 
 			changeScreen= (ChangeScreen)pair.getValue();
 			states+=","+changeScreen.getScreenName();
 			//FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
 			}		
+		
+		
 		return states;
 	}
 
