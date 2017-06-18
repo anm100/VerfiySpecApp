@@ -2,6 +2,7 @@ package Model;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.Map.Entry;
 
 import Controller.FormulaTranslate;
 import our.Utils.Logger;
@@ -10,6 +11,7 @@ public class WorkSpace implements Serializable {
 
 private  String  workSpaceName;
 private String workSpaceLocation;
+private  HashMap <String,ChangeScreen> ChangeScreen = new HashMap <String,ChangeScreen>();
 private static WorkSpace instance =null ; 
 private final static Logger logger=new Logger();
 /*
@@ -128,19 +130,83 @@ public String getWorkSpaceLocation() {
 public void setWorkSpaceLocation(String workSpaceLocation) {
 	this.workSpaceLocation = workSpaceLocation;
 }
-public  String getAllChangeStates(){
-	Screen e ;	
-	Iterator it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
-	Map.Entry pair =(Map.Entry) it.next(); 
-	e= (Screen)pair.getValue();
-	String states=new String(e.getChangeStates());
+public void addChangeScreen(ChangeScreen changeScreen) {
+	ChangeScreen.put(changeScreen.getScreenName(), changeScreen);
+}
+public ChangeScreen getChangeScreenByname(String ChangeScreenName){
 	
+	return this.ChangeScreen.get("change"+ChangeScreenName);
+}
+public  String getBlockChangeScreen(){
+	String out = new String (""); 
+		
+		Iterator<Entry<String,ChangeScreen>> it =ChangeScreen.entrySet().iterator();
+	ChangeScreen state;
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			 state =(ChangeScreen)pair.getValue();
+			 out+=state.getStringPromela()+"\n";
+		}
+	
+//	String[] changeScreens= s.getChangeStates().split(",");
+//	for (int i=0 ;i<changeScreens.length;i++){
+//	ChangeScreenName.put(changeScreens[i], new Screen(changeScreens[i]));
+//		out+= (new Screen(changeScreens[i])).getStringPromela()+"\n";
+//	}
+	
+	return  out ; 
+}
+public void setAllChangeScreen(){
+	Element e ;
+	Screen s ; 
+	Iterator<Entry<String, Screen>> it = getScreensMap().entrySet().iterator();
+	while(it.hasNext()){
+		Map.Entry pair =(Map.Entry) it.next(); 
+		s= (Screen)pair.getValue();
+	
+	Iterator<Entry<String, Element>> it2 = s.getElementsMap().entrySet().iterator();
+	while(it2.hasNext()){
+		Map.Entry pair2 =(Map.Entry) it2.next(); 
+		e= (Element)pair2.getValue();
+		WorkSpace.getLog().debug("set Change State");
+		if (e.getType().equals(ElementType.getOnOffType())){
+		addChangeScreen(new ChangeScreen(e.getParamName()+"OFF"));
+		addChangeScreen(new ChangeScreen(e.getParamName()+"ON"));
+
+								
+			}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
+		
+				addChangeScreen(new ChangeScreen(e.getParamName()));
+
+			}
+
+		}
+	}
+	
+}
+public  String getAllChangeStates(){
+	Map.Entry pair;
+	String states;
+	ChangeScreen changeScreen ;
+	Iterator it ;
+	it = this.ChangeScreen.entrySet().iterator();
+	if(it.hasNext()){
+	pair =(Map.Entry) it.next(); 
+	changeScreen= (ChangeScreen)pair.getValue();
+	 states=changeScreen.getScreenName();
+	}else {
+		 states=new String("");
+	}
+;
 	while(it.hasNext()){
 		pair =(Map.Entry) it.next(); 
-		e= (Screen)pair.getValue();
-		states=","+e.getChangeStates()+"";
-		FormulaTranslate.addtoScreenStates(e.getScreenName());
-	}
+		changeScreen= (ChangeScreen)pair.getValue();
+		states+=","+changeScreen.getScreenName();
+		//FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
+		}		
+	
+	
 	return states;
 }
+
 }

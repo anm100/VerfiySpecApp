@@ -5,23 +5,15 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import Controller.ScreenController;
-import Model.Param;
-import Model.WorkSpace;
 import our.Utils.BulidSpec;
 
 import java.awt.Color;
 import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 
-import java.awt.FlowLayout;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-import javax.swing.JScrollPane;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;

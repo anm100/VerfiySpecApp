@@ -2,97 +2,60 @@
 #define OFF 0 
 #define Empty 2 
 #define NotEmpty 3 
+<<<<<<< HEAD
 mytype={Setting,LoginScreen,MainScreen
 ,ChangeMainScreensaeed,ChangeMainScreenahmad,changeMainScreenahmad,changeMainScreensaeed}
+=======
+mytype={Setting,
+changeBluetoothON,changeWifiON,changeBluetoothOFF,changeAirplane_modeOFF,changeAirplane_modeON,changeWifiOFF}
+>>>>>>> a07b838dcb58ed65e82ce0e4f3e1172c51dc8ee9
 
 /*define flag for action */
-byte action[17];
+byte action[3];
 
 /*define params and default value*/
-byte Bluetooth=OFF;
-byte pass=Empty;
-byte ahmad=OFF;
-byte onOff_0=OFF;
 byte Airplane_mode=OFF;
-byte onOff_2=OFF;
-byte onOff_1=OFF;
-byte onOff_4=OFF;
-byte saeed=OFF;
-byte onOff_3=OFF;
-byte onOff_6=OFF;
-byte onOff_5=OFF;
-byte onOff_8=OFF;
-byte onOff_7=OFF;
-byte onOff_9=OFF;
+byte Bluetooth=OFF;
 byte Wifi=OFF;
-byte user=Empty;
 
 active proctype vm(){
  do
 	::(state==Setting)->
 	  if
-		 ::(Airplane_mode==ON)->atomic(Airplane_mode=OFF;action[12]=1;state=changeSettingAirplane_mode);
-		 ::(Airplane_mode==OFF)->atomic(Airplane_mode=ON;action[12]=1;state=changeSettingAirplane_mode);
-		 ::(Bluetooth==ON)->atomic(Bluetooth=OFF;action[11]=1;state=changeSettingBluetooth);
-		 ::(Bluetooth==OFF)->atomic(Bluetooth=ON;action[11]=1;state=changeSettingBluetooth);
-		 ::(Wifi==ON)->atomic(Wifi=OFF;action[10]=1;state=changeSettingWifi);
-		 ::(Wifi==OFF)->atomic(Wifi=ON;action[10]=1;state=changeSettingWifi);
-	  fi
-	::(state==changeSettingBluetooth)->
-	  if
-		 ::(cond)->atomic(actions;state=Setting)
-	  fi
-	::(state==changeSettingAirplane_mode)->
-	  if
-		 ::(cond)->atomic(actions;state=Setting)
-	  fi
-	::(state==changeSettingWifi)->
-	  if
-		 ::(cond)->atomic(actions;state=Setting)
+		 ::(Airplane_mode==ON)->atomic(Airplane_mode=OFF;action[2]=1;action[0]=1;action[1]=1;;state=changeAirplane_modeOFF);)
+		 ::(Airplane_mode==OFF)->atomic(Airplane_mode=ON;action[2]=1;state=changeAirplane_modeON);
+		 ::(Bluetooth==ON)->atomic(Bluetooth=OFF;action[1]=1;;state=changeBluetoothOFF);)
+		 ::(Bluetooth==OFF)->atomic(Bluetooth=ON;action[1]=1;state=changeBluetoothON);
+		 ::(Wifi==ON)->atomic(Wifi=OFF;action[0]=1;;state=changeWifiOFF);)
+		 ::(Wifi==OFF)->atomic(Wifi=ON;action[0]=1;state=changeWifiON);
 	  fi
 /*
 */////////////////////////////////////// End of changeParamScreens for screen Setting////////////////////////////////////////////////
 */
 
-	::(state==LoginScreen)->
+	::(state==changeBluetoothON)->
 	  if
-		 ::(pass==Empty)->atomic(pass=NotEmpty;action[16]=1;state=changeLoginScreenpass);
-		 ::(user==NotEmpty && pass==NotEmpty)->atomic(state=MainScreen); /* Log_in Button */
-		 ::(user==Empty)->atomic(user=NotEmpty;action[15]=1;state=changeLoginScreenuser);
+		 ::(Myconditon)->atomic(actions;state=Setting)
 	  fi
-	::(state==changeLoginScreenuser)->
+	::(state==changeWifiON)->
 	  if
-		 ::(action[15]==1)->atomic(action[15]=0;state=LoginScreen)
+		 ::(Myconditon)->atomic(actions;state=Setting)
 	  fi
-	::(state==changeLoginScreenLog_in)->
+	::(state==changeBluetoothOFF)->
 	  if
+		 ::(action[1]==1)->atomic(action[1]=0;;state=Setting)
 	  fi
-	::(state==changeLoginScreenpass)->
+	::(state==changeAirplane_modeOFF)->
 	  if
-		 ::(action[16]==1)->atomic(action[16]=0;state=LoginScreen)
+		 ::(action[2]==1action[0]==0&&action[1]==0)->atomic(action[2]=0;;state=Setting)
 	  fi
-/*
-*/////////////////////////////////////// End of changeParamScreens for screen LoginScreen////////////////////////////////////////////////
-*/
-
-	::(state==MainScreen)->
+	::(state==changeAirplane_modeON)->
 	  if
-		 ::(saeed==ON)->atomic(saeed=OFF;action[14]=1;state=changeMainScreensaeed);
-		 ::(saeed==OFF)->atomic(saeed=ON;action[14]=1;state=changeMainScreensaeed);
-		 ::(ahmad==ON)->atomic(ahmad=OFF;action[13]=1;state=changeMainScreenahmad);
-		 ::(ahmad==OFF)->atomic(ahmad=ON;action[13]=1;state=changeMainScreenahmad);
+		 ::(Myconditon)->atomic(actions;state=Setting)
 	  fi
-	::(state==changeMainScreenahmad)->
+	::(state==changeWifiOFF)->
 	  if
-		 ::(cond)->atomic(actions;state=MainScreen)
+		 ::(action[0]==1)->atomic(action[0]=0;;state=Setting)
 	  fi
-	::(state==changeMainScreensaeed)->
-	  if
-		 ::(cond)->atomic(actions;state=MainScreen)
-	  fi
-/*
-*/////////////////////////////////////// End of changeParamScreens for screen MainScreen////////////////////////////////////////////////
-*/
-
 od
 }

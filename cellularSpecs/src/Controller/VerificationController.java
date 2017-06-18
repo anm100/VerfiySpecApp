@@ -2,12 +2,14 @@ package Controller;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JCheckBox;
 
+import our.Utils.Promela;
 import Model.Action;
 import Model.ChangeScreen;
 import Model.Element;
@@ -18,41 +20,32 @@ import Model.Param;
 import Model.RequirementList;
 import Model.Screen;
 import Model.WorkSpace;
+import Model.screenInterface;
 
 public class VerificationController implements ItemListener {
 	private FormulaTranslate formulaTranslate = new FormulaTranslate(); 
-	
+	HashMap<String,Param> ParamList ;
+	WorkSpace w  ;
+
 	public VerificationController(){
+		w  =WorkSpace.getInstance();
+
 		formulaTranslate = new FormulaTranslate();
+		ParamList = new HashMap<String,Param>(w.getParamsMap());
+		initialize();
+
 	}
-	public String translateAction(String ScreenName,String changeScreenName,Element e ){
-		ChangeScreen s;
-		Screen 	screen=WorkSpace.getInstance().getScreenByName(ScreenName);
-		Param p; 
-		 if (e.getActions().size()==0){
-			 
-		 }else {
-			 for (Action i :e.getActions()){
-				 p=(Param) WorkSpace.getInstance().getParamsByName(e.getParamName());
-				 s= new ChangeScreen(ScreenName+i.getParamName());
-				 s.addTransPromela(i.getCond().toString(),"action["+p.getIndex()+"]=1", changeScreenName);
-				 screen.addChangeScreen(s);
-				 WorkSpace.getInstance().updateScreen(screen);
-			 }
-			 
-			 
-		 }
-		return null ; 
-	}
+
 	public  String translateToPROMELA(){
-		WorkSpace w  =WorkSpace.getInstance();
+		WorkSpace.getLog().debug("translateToPROMELA");
+
 		return ""
 				+"#define ON  1 \n"
 				+"#define OFF 0 \n"
 				+"#define Empty 2 \n"
 				+"#define NotEmpty 3 \n"
 						+ "mytype={"+ScreenController.getAllScreenName()
-						+"\n"+WorkSpace.getInstance().getAllChangeStates()+"}\n"
+						+",\n"+w.getAllChangeStates()+"}\n"
 						+defineParamsPromela()
 //						+getLTLReq()
 						+"\nactive proctype vm(){\n"
@@ -60,8 +53,17 @@ public class VerificationController implements ItemListener {
 						+ getPG()
 						 +"od\n}";
 	}
+private void initialize(){
+	WorkSpace.getLog().debug("initialize");
+	w.setAllChangeScreen();
+	FormulaTranslate.setChangeStates(w.getAllChangeStates().split(","));
+	FormulaTranslate.setScreenStates(ScreenController.getAllScreenName().split(","));
+	
+	
+}
 
-//	private static String getLTLReq() 
+
+	//	private static String getLTLReq() 
 //	{
 ////		String st="";
 ////		Router.getInstance().getRequirementList().getReqlist().get(0);
@@ -74,7 +76,7 @@ public class VerificationController implements ItemListener {
 //	}
 	private  String getPG() {
 		String sAll = new String("");Screen s = new Screen(); Element e ; 
-		
+		ChangeScreen changeScreen;
 		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
@@ -85,36 +87,35 @@ public class VerificationController implements ItemListener {
 			while(it2.hasNext()){
 				Map.Entry pair2 =(Map.Entry) it2.next(); 
 				e= (Element)pair2.getValue();
-				ChangeScreen changeScreen = new ChangeScreen(s.getScreenName()+e.getParamName()); 
 				if (e.getType().equals(ElementType.getStandartBtnType())){
 					s.getTransPromela().add(e.getStringPromela());
 				}
 				else 
 					if (e.getType().equals(ElementType.getOnOffType())){
 						
-						/*
-						 ::(aaaa==OFF)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
+				/*
+						 ::(aaaa==on)->atomic(aaaa=off;action[13]=1;state=changemainScreenaaaa);
 				 */
-			s.getTransPromela().add("("+e.getParamName()+"=="
-					+((OnOffType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
-					+((OnOffType)e).getParameter().getValues()[1]+";"
-					+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
-					+"state="+changeScreen.getScreenName()+");");
-			
-			/*
-					 ::(aaaa==OFF)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
+						
+					setTransONToOFF(s, (OnOffType)e);
+					setTransOFFToON(s,(OnOffType)e);
+					
+					changeScreen = w.getChangeScreenByname(e.getParamName()+"ON"); 
+	/*
+					 ::(aaaa==off)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
 			 */
-			s.getTransPromela().add("("+e.getParamName()+"=="
-					+((OnOffType)e).getParameter().getValues()[1]+")->atomic("+e.getParamName()+"="
-					+((OnOffType)e).getParameter().getValues()[0]+";"
-					+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
-					+"state="+changeScreen.getScreenName()+");");
+					s.getTransPromela().add("("+e.getParamName()+"=="
+							+((OnOffType)e).getParameter().getValues()[1]+")->atomic("+e.getParamName()+"="
+							+((OnOffType)e).getParameter().getValues()[0]+";"
+							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
+							+"state="+changeScreen.getScreenName()+");");
 			
-			changeScreen.addTransPromela("cond", "actions", s.getScreenName());
+					changeScreen.addTransPromela("Myconditon", "actions", s.getScreenName());
+					w.addChangeScreen(changeScreen);
 
 										
 				}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
-					
+					changeScreen = new ChangeScreen(s.getScreenName()+e.getParamName()); 
 					s.getTransPromela().add("("+e.getParamName()+"=="
 							+((EmptyNEmptyType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
 							+((EmptyNEmptyType)e).getParameter().getValues()[1]+";"
@@ -125,19 +126,89 @@ public class VerificationController implements ItemListener {
 							"action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]=0",
 							s.getScreenName());
 					
+					w.addChangeScreen(changeScreen);
+					
 					}
-				s.addChangeScreen(changeScreen);
 				
 				}
 			
 			sAll+=s.getStringPromela()+"\n";
-			sAll+=s.getBlockChangeScreen();
 			sAll+= "/*"
 					+ "\n*/////////////////////////////////////// End of changeParamScreens for screen "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
 			RemoveStructPromela();
 		}
+		
+		sAll+=w.getBlockChangeScreen();
+
 		return sAll;
 	}
+//	private void setParamAction(OnOffType parent, OnOffType son ){
+//		
+//		
+//	}
+//	private void parentAction(ChangeScreen parent,OnOffType e){
+//		
+//		if (e.getActions().size() != 0){
+//			
+//			for (Action i:e.getActions()){
+//				setParamAction(e,w.g)
+//				
+//			}
+//			
+//		}
+//		
+//		
+//	}
+	private void setTransONToOFF(screenInterface s ,OnOffType e) {
+		ChangeScreen changeScreen;
+		// TODO Auto-generated method stub
+				
+		changeScreen = w.getChangeScreenByname(e.getParamName()+"OFF"); 
+		s.addTransPromela(e.getParamName()+"=="+(e).getParameter().getValues()[0]
+			,Promela.getActionString(e.getParamName(), e.getParameter().getValues()[1])
+			+Promela.getActionString(e.getParameter().getIndex(),1)
+			+Promela.getActionSonsString(e,1)
+			,changeScreen.getScreenName()+");");
+
+		changeScreen.addTransPromela(Promela.getActionCondString(e.getParameter().getIndex(), 1)
+				+Promela.getActionCondSonsString(e, 0)
+				,Promela.getActionString(e.getParameter().getIndex(),0), s.getScreenName());
+
+	w.addChangeScreen(changeScreen);
+		
+	}
+	private void setTransOFFToON(screenInterface s ,OnOffType e) {
+		ChangeScreen changeScreen;
+		// TODO Auto-generated method stub
+				
+		changeScreen = w.getChangeScreenByname(e.getParamName()+"ON"); 
+		s.addTransPromela(e.getParamName()+"=="+(e).getParameter().getValues()[1]
+			,Promela.getActionString(e.getParamName(), e.getParameter().getValues()[0])
+			+Promela.getActionString(e.getParameter().getIndex(),1)
+			+Promela.getActionSonsString(e,1)
+			,changeScreen.getScreenName()+");");
+
+		changeScreen.addTransPromela(Promela.getActionCondString(e.getParameter().getIndex(), 1)
+				+Promela.getActionCondSonsString(e, 0)
+				,Promela.getActionString(e.getParameter().getIndex(),0), s.getScreenName());
+	w.addChangeScreen(changeScreen);
+	if (e.getActions().size() ==0) return;
+	else {
+		for (Action i:e.getActions()){
+			if(i.getParamVal().equals("ON")){
+			//	setTransOFFToON(changeScreen,w.getParamsByName(i.getParamName()));
+				
+			}else {
+				
+				
+			}
+			
+
+		}
+	}
+		
+	}
+
 	private void RemoveStructPromela(){
 		Screen s = new Screen(); 
 		
@@ -146,6 +217,7 @@ public class VerificationController implements ItemListener {
 			Map.Entry pair =(Map.Entry) it.next(); 
 			s= (Screen)pair.getValue();
 			s.getTransPromela().clear();
+			ParamList.clear();
 			WorkSpace.getInstance().addScreen(s);
 			
 		}

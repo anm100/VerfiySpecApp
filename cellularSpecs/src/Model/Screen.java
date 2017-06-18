@@ -3,15 +3,11 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import Controller.FormulaTranslate;
-import ToolGUI.ScreenGUI;
 
-public class Screen implements Serializable{
+
+
+public class Screen implements Serializable,screenInterface{
 	private String  screenName;
 	private int  cordinateX;
 	private int cordinateY;
@@ -19,7 +15,6 @@ public class Screen implements Serializable{
 	private int width;
 	private String description;
 	private ArrayList<String> transPromela= new ArrayList<String>();
-	private  HashMap <String,ChangeScreen> ChangeScreen = new HashMap <String,ChangeScreen>();
 	private HashMap <String,Element> elementsMap;
 	/**
 	 * @return the screenName
@@ -72,6 +67,7 @@ public class Screen implements Serializable{
 	public void setScreenName(String screenName) {
 		this.screenName = Character.toUpperCase(screenName.charAt(0))+screenName.substring(1);
 	}
+
 	/**
 	 * @return the cordinateX
 	 */
@@ -146,39 +142,15 @@ public class Screen implements Serializable{
 	public HashMap<String, Element> getElementsMap() {
 		return elementsMap;
 	}
-	
-	
-	public HashMap<String, ChangeScreen> getChangeScreenMap() {
-		return ChangeScreen;
-	}
-	public void addChangeScreen(ChangeScreen changeScreen) {
-		ChangeScreen.put(changeScreen.getScreenName(), changeScreen);
-	}
+
 	public void addTransPromela(String cond,String action,String toState) {
 		this.transPromela.add("("+cond+")->atomic("+action+";state="+toState+")");
 	}
 	public ArrayList<String> getTransPromela() {
 		return transPromela;
 	}
-	public  String getBlockChangeScreen(){
-		String out = new String (""); 
-			
-			Iterator<Entry<String,ChangeScreen>> it =getChangeScreenMap().entrySet().iterator();
-		ChangeScreen state;
-			while(it.hasNext()){
-				Map.Entry pair =(Map.Entry) it.next(); 
-				 state =(ChangeScreen)pair.getValue();
-				 out+=state.getStringPromela()+"\n";
-			}
-		
-//		String[] changeScreens= s.getChangeStates().split(",");
-//		for (int i=0 ;i<changeScreens.length;i++){
-//		ChangeScreenName.put(changeScreens[i], new Screen(changeScreens[i]));
-//			out+= (new Screen(changeScreens[i])).getStringPromela()+"\n";
-//		}
-		
-		return  out ; 
-	}
+	
+	
 	public  String getStringPromela(){
 		String startScreen=new String("	::(state=="+this.getScreenName()+")->\n"+"	  if");
 		String out= new String ("");
@@ -193,38 +165,7 @@ public class Screen implements Serializable{
 		return 	startScreen+out
 				+"\n"+"	  fi"; 
 	}
-	public  String getChangeStates(){
-		Element e ;
-		Map.Entry pair;
-		String states;
-		Iterator it ;
-		it = this.elementsMap.entrySet().iterator();
-		if(it.hasNext()){
-		pair =(Map.Entry) it.next(); 
-		e= (Element)pair.getValue();
-		 states=new String("Change"+this.getScreenName()+e.getParamName());
-		}else {
-			 states=new String("");
-		}
-		while(it.hasNext()){
-			pair =(Map.Entry) it.next(); 
-			e= (Element)pair.getValue();
-			if (!(e.getType().equals(ElementType.getStandartBtnType()))){
-			states+=",Change"+this.getScreenName()+e.getParamName();
-			FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
-			}
-		}
-		it = this.ChangeScreen.entrySet().iterator();
-		ChangeScreen changeScreen ;
-		while(it.hasNext()){
-			pair =(Map.Entry) it.next(); 
-			changeScreen= (ChangeScreen)pair.getValue();
-			states+=","+changeScreen.getScreenName();
-			//FormulaTranslate.addtoChangeStates("Change"+this.getScreenName()+e.getParamName());
-			}		
-		return states;
-	}
-
+	
 
 
 }

@@ -28,7 +28,18 @@ public class BulidSpec {
 		WorkSpace.getLog().debug("adding elements for screen ");
 		WorkSpace.setInstance(wk); 
 	}
-	
+	public static void buildsetting(){
+		WorkSpace.getLog().debug("start loading spec");
+		WorkSpace.setInstance(null); 
+		wk=WorkSpace.getInstance();
+		wk.setWorkSpaceName("example ");
+		WorkSpace.getLog().debug("SPEC NAME:"+wk.getWorkSpaceName());		
+		wk.addScreen(new Screen("setting", 210, 102, "login for app"));
+		
+		addElementONOFF("Setting",new String[] {"Wifi","Bluetooth","Airplane_mode"});
+		addAction("Setting","Airplane_mode");
+		WorkSpace.setInstance(wk); 
+	}
 
 	private static void addScreens(){
 	

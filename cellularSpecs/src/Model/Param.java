@@ -39,6 +39,7 @@ public class Param implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	} 
+	
 	public String [] getValues(){										/*how to get values for list type*/
 		if (ElementType.getEmptyNotEmptyType().equals(this.type)){
 			return ElementType.getEmptyNotEmptyType().split("/");

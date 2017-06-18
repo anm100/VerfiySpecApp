@@ -274,11 +274,20 @@ private static String getConditions(List<MyCondition> conds) {
 	return st;
 }
 
-public static void addtoChangeStates(String changeStates) {
-	changeStatesList.add(changeStates);
+public static void setChangeStates(String[] changeStates) {
+	
+	for (int i=0 ; i<changeStates.length; i++){
+		
+		changeStatesList.add(changeStates[i]);
+
+	}
 }
-public static void addtoScreenStates(String screenName) {
-	screenStatesList.add(screenName);
+public static void setScreenStates(String [] screensName) {
+	for (int i=0 ; i<screensName.length; i++){
+		
+		screenStatesList.add(screensName[i]);
+
+	}
 }
 //return String ((state op ChangeScreenParam1)logic(state op ChangeScreenParam2)...)
 private static String getChangeState(String op,String logic) {
