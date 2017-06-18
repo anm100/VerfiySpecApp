@@ -149,9 +149,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			ar.add("bluetooth");
 			FormulaTranslate.translateReq3("SignIn","BoPo_MainSreen",ar);
 			FormulaTranslate.translateReq6();
-			FormulaTranslate.translateReq7();
-			FormulaTranslate.translateReq8a("airplane_mode");
-			FormulaTranslate.translateReq8b("airplane_mode");
+		//	FormulaTranslate.translateReq7();
+			FormulaTranslate.translateReq8a("Airplane_mode");
+			//FormulaTranslate.translateReq8b("Airplane_mode");
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA());

@@ -3,7 +3,7 @@
 #define Empty 2 
 #define NotEmpty 3 
 mytype={Setting,LoginScreen,MainScreen
-,ChangeMainScreensaeed,ChangeMainScreenahmad}
+,ChangeMainScreensaeed,ChangeMainScreenahmad,changeMainScreenahmad,changeMainScreensaeed}
 
 /*define flag for action */
 byte action[17];
