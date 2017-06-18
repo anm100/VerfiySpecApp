@@ -54,33 +54,13 @@ public class VerificationController implements ItemListener {
 	}
 private void initialize(){
 	WorkSpace.getLog().debug("initialize");
-	fillChangeScreenToparam();
 	w.setAllChangeScreen();
 	FormulaTranslate.setChangeStates(w.getAllChangeStates().split(","));
 	FormulaTranslate.setScreenStates(ScreenController.getAllScreenName().split(","));
 	
 	
 }
-private void fillChangeScreenToparam() {
-		// TODO Auto-generated method stub
-	Element e; 
-	Screen s ; 
-	Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
-	while(it.hasNext()){
-		Map.Entry pair =(Map.Entry) it.next(); 
-		s= (Screen)pair.getValue();	
-		
-		Iterator<Entry<String, Element>> it2 = WorkSpace.getInstance()
-				.getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();
-		while(it2.hasNext()){
-			Map.Entry pair2 =(Map.Entry) it2.next(); 
-			e= (Element)pair2.getValue();
-			ParamList.get(e.getParamName()).setScreenName(s.getScreenName());
-			WorkSpace.getLog().debug(ParamList.get(e.getParamName()).getScreenName());
-	
-		}
-	}
-}
+
 
 	//	private static String getLTLReq() 
 //	{
@@ -118,7 +98,7 @@ private void fillChangeScreenToparam() {
 						
 					setTransONToOFF(s, (OnOffType)e);
 					
-					changeScreen = s.getChangeScreenByname(s.getScreenName()+e.getParamName()+"ON"); 
+					changeScreen = w.getChangeScreenByname(s.getScreenName()+e.getParamName()+"ON"); 
 	/*
 					 ::(aaaa==off)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
 			 */
@@ -129,7 +109,7 @@ private void fillChangeScreenToparam() {
 							+"state="+changeScreen.getScreenName()+");");
 			
 					changeScreen.addTransPromela("Myconditon", "actions", s.getScreenName());
-					s.addChangeScreen(changeScreen);
+					w.addChangeScreen(changeScreen);
 
 										
 				}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
@@ -144,38 +124,41 @@ private void fillChangeScreenToparam() {
 							"action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]=0",
 							s.getScreenName());
 					
-					s.addChangeScreen(changeScreen);
+					w.addChangeScreen(changeScreen);
 					
 					}
 				
 				}
 			
 			sAll+=s.getStringPromela()+"\n";
-			sAll+=s.getBlockChangeScreen();
 			sAll+= "/*"
 					+ "\n*/////////////////////////////////////// End of changeParamScreens for screen "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
 			RemoveStructPromela();
 		}
+		
+		sAll+=w.getBlockChangeScreen();
+
 		return sAll;
 	}
 	private void setTransONToOFF(Screen s ,OnOffType e) {
 		ChangeScreen changeScreen;
 		// TODO Auto-generated method stub
-		changeScreen = s.getChangeScreenByname(s.getScreenName()+e.getParamName()+"OFF"); 
- 
+		
+		
+		changeScreen = w.getChangeScreenByname(s.getScreenName()+e.getParamName()+"OFF"); 
+		s.addTransPromela(e.getParamName()+"=="+(e).getParameter().getValues()[0]
+			,Promela.getActionString(e.getParamName(), e.getParameter().getValues()[1])
+			+Promela.getActionString(e.getParameter().getIndex(),1)
+			+Promela.getActionSonsString(e,1)
+			,changeScreen.getScreenName()+");");
 
-		s.getTransPromela().add("("+e.getParamName()+"=="
-				+(e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
-				+(e.getParameter().getValues()[1]+";"
-				+Promela.getActionString(e.getParameter().getIndex(),1)
-				+"state="+changeScreen.getScreenName()+");"));
+		
+		
+		changeScreen.addTransPromela(Promela.getActionCondString(e.getParameter().getIndex(), 1)
+				+Promela.getActionCondSonsString(e, 0)
+				,Promela.getActionString(e.getParameter().getIndex(),0), s.getScreenName());
 
-	if (e.getActions().size() == 0){
-	changeScreen.addTransPromela("Myconditon11", "I dont have action", s.getScreenName());
-	}else 
-		changeScreen.addTransPromela("Myconditon11", "I have action", s.getScreenName());
-
-	s.addChangeScreen(changeScreen);
+	w.addChangeScreen(changeScreen);
 		
 	}
 
