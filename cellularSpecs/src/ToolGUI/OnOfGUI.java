@@ -232,25 +232,26 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				panel_1.add(lblActrions);
 				
 				 textAreaOnToOff = new TextArea("",5,100,TextArea.SCROLLBARS_NONE);
-				 textAreaOnToOff.setEnabled(false);
+				 textAreaOnToOff.setEditable(false);
 				 textAreaOnToOff.addMouseListener(new MouseAdapter() {
 				 	@Override
-				 	public void mousePressed(MouseEvent arg0) {
-				 		//edRmCon=new EditReomveConditionGUI();
-				 		edRmCon.setVisible(true);
-				 	}
-				 	@Override
 				 	public void mouseClicked(MouseEvent arg0) {
+				 		
+				 		System.out.println("2");
 				 	//	edRmCon=new EditReomveConditionGUI();
-				 		edRmCon.setVisible(true);
+				 	//	edRmCon.setVisible(true);
 				 	}
 				 });
-				textAreaOnToOff.setEditable(false);
 				textAreaOnToOff.setBounds(73, 31, 190, 50);
 				panel_1.add(textAreaOnToOff);
 				
 				 ActionAreaOnToOff = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
-				ActionAreaOnToOff.setEnabled(false);
+				 ActionAreaOnToOff.addMouseListener(new MouseAdapter() {
+				 	@Override
+				 	public void mouseClicked(MouseEvent arg0) {
+				 		edRmCon=new EditReomveConditionGUI(On_To_Off_Action);
+				 	}
+				 });
 				ActionAreaOnToOff.setEditable(false);
 				ActionAreaOnToOff.setBounds(73, 87, 190, 55);
 				panel_1.add(ActionAreaOnToOff);
