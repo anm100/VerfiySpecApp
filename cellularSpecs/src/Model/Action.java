@@ -4,15 +4,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Action implements Serializable {
-	private String Switch;// action from on to off or from off to on
+	private String SwitchTo;// action from on to off or from off to on
 	private String paramName; 
 	private String paramVal;
 //	private ArrayList<MyCondition> cond;
 	
-	public Action(String paramName, String paramVal, ArrayList<MyCondition> cond) {
+	public Action(String paramName, String paramVal, ArrayList<MyCondition> cond,String SwitchTo) {
 		super();
 		this.paramName = paramName;
 		this.paramVal = paramVal;
+		this.SwitchTo=SwitchTo;
+	//	this.cond = cond;
+	}
+	public Action(String paramName, String paramVal,String SwitchTo) {
+		super();
+		this.paramName = paramName;
+		this.paramVal = paramVal;
+		this.SwitchTo=SwitchTo;
 	//	this.cond = cond;
 	}
 	//action: wifi=on
@@ -45,6 +53,11 @@ public class Action implements Serializable {
 	public void addCond(String cond) {
 //		this.cond.add(new MyCondition( cond));
 	} 
-	
+	public String getSwitchtO() {
+		return SwitchTo;
+	}
+	public void setSwitchtO(String SwitchTo) {
+		SwitchTo = SwitchTo;
+	}
 	
 }

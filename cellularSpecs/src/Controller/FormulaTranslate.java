@@ -1,9 +1,14 @@
 package Controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import Model.Action;
+import Model.Element;
+import Model.ElementActionInterface;
 import Model.ElementType;
 import Model.MyCondition;
 import Model.Param;
@@ -112,32 +117,60 @@ ltl r8 {[](
  && (state==ChangeAirplaneMode || state==ChangeWifi || state==changebluParam)U(bluParam==0))
  )}
  */
-public static  void translateReq8a(String parameterName)
+public static  void translateReq8a(String parameterName,String SwithTO)
 {
 	String st="";
 	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
-	 ArrayList<Action> actions=ScreenController.getActionByparameterName(p.getParamName());
-	 st="ltl "+" req8 "+"{[]("+getTranslateReq8a(actions,p)+")}";
+	 ArrayList<Action> actions=getActionByparameterName(p.getParamName());
+	 if(actions!=null)
+	 {
+	 st="ltl "+" req8 "+"{[]("+getTranslateReq8a(parameterName,SwithTO)+")}";
 	 WorkSpace.getLog().debug(st);
+	 System.out.println(st);
+	 }
 }
-private static String getTranslateReq8a(ArrayList<Action> actions,Param p) {
+private static String getTranslateReq8a(String paramterName,String SwithTO) {
 	String st1="";
-	st1="("+p.getParamName()+"=="+p.getParamVal()+")->(";
-	for(int i=0;i<actions.size();i++)
+	Param p=WorkSpace.getInstance().getParamsByName(paramterName);
+	String parameter1=p.getParamName();
+	ArrayList<Action> action=p.getActions();
+	st1="("+parameter1+"=="+SwithTO+")->(";
+	for(int i=0;i<action.size();i++)
 	{
-		st1+=getChangeStateReg8b(actions,actions.get(i).getParamName()+"=="+actions.get(i).getParamVal())+"&&";
+		if(action.get(i).getSwitchtO().equals(SwithTO))
+		{
+			Action a = action.get(i);
+			st1+="(("+getChangeStateReg8a(action,SwithTO,parameter1)+")U("+a.getParamName()+"=="+a.getParamVal()+"))"+"&&";
+		}
 	}
-	if(actions.size()>0)
+	if(action.size()>0)
 	st1=st1.substring(0, st1.length()-2);
 	st1+=")";
-	return st1;
-	
+	return st1;	
 }
+private static String getChangeStateReg8a(ArrayList<Action> actions,String SwithTO,String parameter1) {
+	String str="";
+	for(int j=0;j<changeStatesList.size();j++){
+		if(changeStatesList.get(j).endsWith(parameter1+SwithTO))
+			str+="(state!="+changeStatesList.get(j)+")";
+	}
+	for(int i=0;i<actions.size();i++)
+	{
+		for(int j=0;j<changeStatesList.size();j++){
+		if(actions.get(i).getSwitchtO().endsWith(SwithTO)
+				&&changeStatesList.get(j).endsWith(actions.get(i).getParamName()+actions.get(i).getParamVal()))
+		{
+		str+="||(state!="+changeStatesList.get(j)+")";	
+		}
+		}
+	}
+	return str;
+} 
 public static  void translateReq8b(String parameterName)
 {
 	String st="";
 	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
-	 ArrayList<Action> actions=ScreenController.getActionByparameterName(p.getParamName());
+	 ArrayList<Action> actions=getActionByparameterName(p.getParamName());
 	 st="ltl "+" req8 "+"{[]("+getTranslateReq8b(actions,p)+")}";
 	 WorkSpace.getLog().debug(st);
 }
@@ -148,7 +181,7 @@ private static String getTranslateReq8b(ArrayList<Action> actions,Param p) {
 		st1+="(("+actions.get(j).getParamName()+"=="+actions.get(j).getParamVal()+")&&";
 	for(int i=0;i<actions.size();i++)
 	{
-		st1+=getChangeStateReg8b(actions,actions.get(i).getParamName()+"=="+actions.get(i).getParamVal())+"&&";
+		//st1+=getChangeStateReg8a(actions,actions.get(i).getParamName()+"=="+actions.get(i).getParamVal())+"&&";
 	}
 	if(actions.size()>0)
 	st1=st1.substring(0, st1.length()-2);
@@ -161,21 +194,7 @@ private static String getTranslateReq8b(ArrayList<Action> actions,Param p) {
 	return st1;
 	
 }
-private static String getChangeStateReg8b(ArrayList<Action> actions,String Until) {
-	String str="(";
-	for(int i=0;i<actions.size();i++)
-	{
-		for(int j=0;j<changeStatesList.size();j++)
-	//	if(changeStatesList.get(j).endsWith(actions.get(i).getParamName()))
-		{
-		str+="(state!="+changeStatesList.get(j)+")&&";	
-		}
-	}
-	if(changeStatesList.size()>0)
-		str=str.substring(0, str.length()-2);
-	str+="U("+Until+"))";
-	return str;
-}
+
 /*
  * ltl r3 {[]( (state==SignIn)->((state==SignIn)U((state!=SignIn)
  * &&(
@@ -300,4 +319,10 @@ private static String getChangeState(String op,String logic) {
 	return str;
 }
 
+public static ArrayList<Action> getActionByparameterName(String parameterName){
+	Param p ;
+	p= WorkSpace.getInstance().getParamsMap().get(parameterName);
+	return p.getActions() ; 
+		
+	}
 }

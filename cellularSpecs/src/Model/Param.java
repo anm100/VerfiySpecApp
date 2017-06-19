@@ -58,5 +58,12 @@ public class Param implements Serializable{
 			}
 	
 	}
+	public ArrayList<Action> getActions() {
+		return actions;
+	}
+
+	public void addAction(Action e ){
+		actions.add(e);
+	}
 
 }

@@ -211,7 +211,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				getContentPane().add(panel_1);
 				panel_1.setLayout(null);
 				
-				JLabel lblOnoff_1 = new JLabel("On->Off");
+				JLabel lblOnoff_1 = new JLabel("ON->OFF");
 				lblOnoff_1.setBounds(10, 11, 57, 14);
 				panel_1.add(lblOnoff_1);
 				
@@ -275,7 +275,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 						label_1.setBounds(289, 36, 253, 14);
 						panel_1.add(label_1);
 						
-						JLabel lblOffon = new JLabel("Off->On");
+						JLabel lblOffon = new JLabel("OFF->ON");
 						lblOffon.setBounds(289, 11, 51, 14);
 						panel_1.add(lblOffon);
 						
