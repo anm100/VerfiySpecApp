@@ -2,7 +2,7 @@ package our.Utils;
 
 import java.util.ArrayList;
 
-import Model.Action;
+import Model.MyAction;
 import Model.OnOffType;
 import Model.WorkSpace;
 
@@ -24,7 +24,7 @@ public class Promela {
 	public static String  getActionSonsString(OnOffType ParentNameParam,int value){
 		String str = new String(""); 
 		if (ParentNameParam.getActions().size() == 0)return ""; 
-		for (Action i : ParentNameParam.getActions())
+		for (MyAction i : ParentNameParam.getActions())
 		{
 			str+=getActionString(WorkSpace.getInstance().getParamsByName(i.getParamName()).getIndex(),value);
 		}
@@ -32,7 +32,7 @@ public class Promela {
 		return str ;
 	}
 	public static String  getActionCondSonsString(OnOffType ParentNameParam,int value){
-		ArrayList <Action> actions=ParentNameParam.getActions();
+		ArrayList <MyAction> actions=ParentNameParam.getActions();
 		if (ParentNameParam.getActions().size() == 0)return "";
 		else {
 		String str = new String(getActionCondString(WorkSpace.getInstance().getParamsByName(actions.get(0).getParamName()).getIndex(),value)); 

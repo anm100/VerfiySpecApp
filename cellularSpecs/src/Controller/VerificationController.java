@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import javax.swing.JCheckBox;
 
 import our.Utils.Promela;
-import Model.Action;
+import Model.MyAction;
 import Model.ChangeScreen;
 import Model.Element;
 import Model.ElementType;
@@ -194,7 +194,7 @@ private void initialize(){
 	w.addChangeScreen(changeScreen);
 	if (e.getActions().size() ==0) return;
 	else {
-		for (Action i:e.getActions()){
+		for (MyAction i:e.getActions()){
 			if(i.getParamVal().equals("ON")){
 			//	setTransOFFToON(changeScreen,w.getParamsByName(i.getParamName()));
 				

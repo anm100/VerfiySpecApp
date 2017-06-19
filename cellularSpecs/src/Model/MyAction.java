@@ -3,33 +3,41 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Action implements Serializable {
+public class MyAction implements Serializable {
 	private String SwitchTo;// action from on to off or from off to on
 	private String paramName; 
 	private String paramVal;
 //	private ArrayList<MyCondition> cond;
 	
-	public Action(String paramName, String paramVal, ArrayList<MyCondition> cond,String SwitchTo) {
+	public MyAction(String paramName, String paramVal, ArrayList<MyCondition> cond,String SwitchTo) {
 		super();
 		this.paramName = paramName;
 		this.paramVal = paramVal;
 		this.SwitchTo=SwitchTo;
 	//	this.cond = cond;
 	}
-	public Action(String paramName, String paramVal,String SwitchTo) {
+	public MyAction(String paramName, String paramVal,String SwitchTo) {
 		super();
 		this.paramName = paramName;
 		this.paramVal = paramVal;
 		this.SwitchTo=SwitchTo;
 	//	this.cond = cond;
 	}
+
 	//action: wifi=on
-	public Action(String action) {
+	public MyAction(String action) {
 		super();
 		String [] s = action.split("=");
 		this.paramName = s[0];
 		this.paramVal = s[1];
 	//	cond=new ArrayList<MyCondition>();
+	}
+	public MyAction(String action,String SwitchTo) {
+		super();
+		String [] s = action.split("=");
+		this.paramName = s[0];
+		this.paramVal = s[1];
+		this.SwitchTo=SwitchTo;
 	}
 	public String getParamName() {
 		return paramName;

@@ -82,7 +82,7 @@ public class debugingGUI extends JFrame{
 			FormulaTranslate.translateReq1();
 			FormulaTranslate.translateReq2a();
 			FormulaTranslate.translateReq2b();
-			FormulaTranslate.translateReq8a("Airplane MODE");
+		//	FormulaTranslate.translateReq8a("Airplane MODE");
 			
 		}
 	});

@@ -6,7 +6,7 @@ public class MyCondition implements Serializable {
 	private String paramName; 
 	private String paramVal ; 
 	private  String opt="==";
-	private String Switch;
+	private String SwitchTo=null;
 	public MyCondition(String paramName, String paramVal, String opt2) {
 		super();
 		this.paramName = paramName;
@@ -18,6 +18,13 @@ public class MyCondition implements Serializable {
 		String [] s=condition.split(opt);
 		this.paramName = s[0];
 		this.paramVal = s[1];
+	}
+	public MyCondition(String condition,String SwitchTo) {
+		super();
+		String [] s=condition.split(opt);
+		this.paramName = s[0];
+		this.paramVal = s[1];
+		this.SwitchTo=SwitchTo;
 	}
 	public String getParamName() {
 		return paramName;

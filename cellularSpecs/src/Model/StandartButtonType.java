@@ -13,7 +13,7 @@ private  Transition trans ;
 private  ArrayList<MyCondition> conds= new ArrayList <MyCondition>(); 
 private final String type=ElementType.getStandartBtnType(); 
 private final String optLogic= "&&"; 
-private ArrayList <Action> actions= new ArrayList<>(); 
+private ArrayList <MyAction> actions= new ArrayList<>(); 
 
 
 public StandartButtonType() {
@@ -52,7 +52,7 @@ public String getParamVal() {
 }
 
 
-public ArrayList<Action> getActions() {
+public ArrayList<MyAction> getActions() {
 	// TODO Auto-generated method stub
 	return actions;
 }

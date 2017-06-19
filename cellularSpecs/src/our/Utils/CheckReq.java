@@ -1,7 +1,7 @@
 package our.Utils;
 
 import Controller.FormulaTranslate;
-import Model.Action;
+import Model.MyAction;
 import Model.ElementType;
 import Model.Param;
 import Model.WorkSpace;
@@ -17,8 +17,8 @@ public class CheckReq {
 		Param p1 =new Param("AirplaneMode","OFF",ElementType.getOnOffType());
 		Param p2=new Param("Wifi","ON",ElementType.getOnOffType());
 		Param p3=new Param("Blu","ON",ElementType.getOnOffType());
-		Action a1=new Action("Wifi", "OFF", "ON");
-		Action a2=new Action("Blu", "OFF", "ON");
+		MyAction a1=new MyAction("Wifi", "OFF", "ON");
+		MyAction a2=new MyAction("Blu", "OFF", "ON");
 		p1.addAction(a1);
 		p1.addAction(a2);
 		WorkSpace.getInstance();

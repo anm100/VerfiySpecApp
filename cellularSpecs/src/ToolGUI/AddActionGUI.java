@@ -19,26 +19,27 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 
 public class AddActionGUI extends JFrame {
-	private JComboBox comboBox;
-	private JComboBox comboBox_2;
+	private JComboBox parameterNameCombo;
+	private JComboBox parameterValueCombo;
 	private String[] parameterNames=null ;
 	private String[] parameterValue=null ;
 	private String paramName;
 	private JButton btnSave;
-
+	private JLabel label_3;
+private JLabel switchlbl;
 	private String value;
 	public AddActionGUI() {
 		setSize(400,150);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
-		JLabel lblAddNewConditons = new JLabel("add a condition");
-		lblAddNewConditons.setBounds(10, 11, 338, 14);
-		getContentPane().add(lblAddNewConditons);
+		JLabel lblAddNewAction = new JLabel("add an action");
+		lblAddNewAction.setBounds(122, 10, 338, 14);
+		getContentPane().add(lblAddNewAction);
 		
 		 btnSave = new JButton("save");
 		btnSave.setBounds(66, 80, 91, 23);
 		getContentPane().add(btnSave);
-		btnSave.setActionCommand("_save_new_condition");
+		btnSave.setActionCommand("_save_Action");
 		
 		JButton btnCancel = new JButton("cancel");
 		btnCancel.setBounds(195, 80, 91, 23);
@@ -55,23 +56,23 @@ public class AddActionGUI extends JFrame {
 		label_1.setBounds(0, 0, 69, 23);
 		panel.add(label_1);
 		
-		 comboBox = new JComboBox();
-		comboBox.addItemListener(new ItemListener() {
+		 parameterNameCombo = new JComboBox();
+		parameterNameCombo.addItemListener(new ItemListener() {
 		 	public void itemStateChanged(ItemEvent arg0) {
 		 		JComboBox s=(JComboBox)(arg0.getSource());
 		 		paramName=s.getSelectedItem().toString();
 		 		parameterValue=ScreenController.getdefaultValues(s.getSelectedItem().toString());
 		        DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterValue);
-		        comboBox_2.setModel(cbm);	 		
+		        parameterValueCombo.setModel(cbm);	 		
 		 	}
 		 });
-		 comboBox.setBounds(72, 1, 80, 20);
-		 panel.add(comboBox);
+		 parameterNameCombo.setBounds(72, 1, 80, 20);
+		 panel.add(parameterNameCombo);
 		 
        
         
 		 
-		 JLabel label_3 = new JLabel("=");
+		  label_3 = new JLabel("=");
 		 label_3.setBounds(155, 4, 13, 14);
 		 panel.add(label_3);
 		 
@@ -79,15 +80,19 @@ public class AddActionGUI extends JFrame {
 		 label.setBounds(167, 4, 41, 14);
 		 panel.add(label);
 		 
-		  comboBox_2 = new JComboBox();
-		  comboBox_2.addItemListener(new ItemListener() {
+		  parameterValueCombo = new JComboBox();
+		  parameterValueCombo.addItemListener(new ItemListener() {
 		  	public void itemStateChanged(ItemEvent arg0) {
 		  		JComboBox s=(JComboBox)(arg0.getSource());
 		  		value=s.getSelectedItem().toString();
 		  	}
 		  });
-		  comboBox_2.setBounds(202, 1, 80, 20);
-		  panel.add(comboBox_2);
+		  parameterValueCombo.setBounds(202, 1, 80, 20);
+		  panel.add(parameterValueCombo);
+		  
+		   switchlbl = new JLabel("");
+		  switchlbl.setBounds(10, 11, 102, 14);
+		  getContentPane().add(switchlbl);
 		//panel.add(label_3);
 			addToCombo();
 			
@@ -98,11 +103,11 @@ public class AddActionGUI extends JFrame {
 		{
 		paramName=parameterNames[0];
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
-        comboBox.setModel(cbm);
-       parameterValue=ScreenController.getdefaultValues(comboBox.getSelectedItem().toString());
+        parameterNameCombo.setModel(cbm);
+       parameterValue=ScreenController.getdefaultValues(parameterNameCombo.getSelectedItem().toString());
        value=parameterValue[0];
         cbm = new DefaultComboBoxModel(parameterValue);
-       comboBox_2.setModel(cbm);
+       parameterValueCombo.setModel(cbm);
 		}
 		
 	}
@@ -121,10 +126,24 @@ public class AddActionGUI extends JFrame {
 	public void setAddAconditionListener(ActionListener addConditionsListener ){    
 		btnSave.addActionListener(addConditionsListener);
 	}
-	public static void main(String[] args) {
-		BulidSpec.build();
-		AddActionGUI a=new AddActionGUI();
-		a.setVisible(true);
+	public String getParameterNameCombo() {
+		return parameterNameCombo.getSelectedItem().toString();
+	}
+	public String getParameterValueCombo() {
+		return parameterValueCombo.getSelectedItem().toString();
+	}
+	public String getSwitchlbl() {
+		return switchlbl.getText().toString();
+		
+	}
+	public void setSwitchlbl(String text) {
+		switchlbl.setText(text);
+	}
+	public String getLabel_3() {
+		return label_3.getText().toString();
+	}
+	public void setLabel_3(JLabel label_3) {
+		this.label_3 = label_3;
 	}
 }
 

@@ -9,6 +9,7 @@ private Param parameter;
 private final String type=ElementType.getOnOffType();
 private String elementName; 
 
+
 public OnOffType() {
 
 }
@@ -59,7 +60,7 @@ public void setElementName(String name) {
 
 }
 
-public ArrayList<Action> getActions() {
+public ArrayList<MyAction> getActions() {
 	/*
 	// TODO Auto-generated method stub
 	return actions;
@@ -67,7 +68,7 @@ public ArrayList<Action> getActions() {
 	return null;
 }
 
-public void addAction(Action e ){
+public void addAction(MyAction e ){
 	/*
 	this.actions.add(e);
 	*/

@@ -8,7 +8,7 @@ public interface Element {
 	public String getParamVal(); 
 	public void setElementName(String name);
 	public String getType(); 
-	public ArrayList<Action> getActions();
+	public ArrayList<MyAction> getActions();
 	public  String getStringPromela();
 	
 }
