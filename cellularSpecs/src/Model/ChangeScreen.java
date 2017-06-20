@@ -13,10 +13,10 @@ public class ChangeScreen implements screenInterface{
 	
 	
 	public void addTransPromela(String cond,String action,String toState) {
-		this.transPromela.add("("+cond+")->atomic("+action+"state="+toState+")");
+		this.transPromela.add("("+cond+")->atomic{"+action+"state="+toState+"};");
 	}
 	public void addTransPromela(String action,String toState) {
-		this.transPromela.add("atomic("+action+"state="+toState+")");
+		this.transPromela.add("atomic{"+action+"state="+toState+"};");
 	}
 
 

@@ -36,12 +36,22 @@ public class Promela {
 		ArrayList <MyAction> actions=ParentNameParam.getActions(valSwicth);
 		if (actions.size() == 0)return "";
 		else {
-		String str = new String(getActionCondString(WorkSpace.getInstance().getParamsByName(actions.get(0).getParamName()).getIndex(),value)); 
-		for (int  i=1;i< actions.size();i++)
+		String str = new String(""); 
+		for (int  i=0;i< actions.size();i++)
 		{
-			str+="&&"+getActionCondString(WorkSpace.getInstance().getParamsByName(actions.get(i).getParamName()).getIndex(),value);
+			str+=" && "+getActionCondString(WorkSpace.getInstance().getParamsByName(actions.get(i).getParamName()).getIndex(),value);
 		}		
 		return str ;
 		}
+	}
+	public static String getActionCondParent(ArrayList<String> indexs,int j) {
+		// TODO Auto-generated method stub
+		if (indexs.size()==0)return "";
+		String str = new String ("");
+		for(String i:indexs){
+			str+="action["+i+"]=="+j+" && ";
+			
+		}
+		return str;
 	}
 }

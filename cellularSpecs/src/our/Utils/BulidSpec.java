@@ -35,7 +35,7 @@ public class BulidSpec {
 		wk.setWorkSpaceName("example ");
 		WorkSpace.getLog().debug("SPEC NAME:"+wk.getWorkSpaceName());		
 		wk.addScreen(new Screen("setting", 210, 102, "login for app"));
-		
+
 		addElementONOFF("Setting",new String[] {"Wifi","Bluetooth","Airplane_mode"});
 		addAction("Setting","Airplane_mode");
 		WorkSpace.setInstance(wk); 
@@ -55,7 +55,6 @@ public class BulidSpec {
 		 */
 		addElementONOFF("Setting",new String[] {"Wifi","Bluetooth","Airplane_mode"});
 		addAction("Setting","Airplane_mode");
-		addElementONOFF("MainScreen",new String[] {"ahmad","saeed"});
 		StandartButtonType s; 
 		/* 
 		 * data for  log in screen 
@@ -135,16 +134,17 @@ public class BulidSpec {
 		private static void addAction(String screenName,String elementName){
 			WorkSpace.getLog().debug("add action to Airplane MODE");
 			OnOffType e = (OnOffType) wk.getScreenByName(screenName).getElementByName(elementName);
-			MyAction action =new MyAction("Wifi=OFF");
-			action.addCond("Airplane_mode==ON");
-			e.addAction(action);
+			MyAction action =new MyAction("Wifi=OFF","ON");
+			Param p = wk.getParamsByName(e.getParamName());
+		//	action.addCond("Airplane_mode==ON");
+			p.addAction(action);
 			
-			action =new MyAction("Bluetooth=OFF");
-			action.addCond("Airplane_mode==ON");
-			e.addAction(action);
+			action =new MyAction("Bluetooth=OFF","ON");
+			//action.addCond("Airplane_mode==ON");
+			p.addAction(action);
 			
 			//update 
-			wk.getScreenByName(screenName).addElement(e);
+			wk.addParameterToHash(p);;
 
 		}
 		private static void addParmsOnOff(){

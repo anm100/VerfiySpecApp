@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import Model.Element;
 import Model.ElementActionInterface;
+import Model.MyAction;
 import Model.MyCondition;
 import Model.OnOffType;
 import Model.Param;
@@ -71,6 +72,22 @@ public class ElementController {
 		}
 		return st1; 
 	}
-
+	public static ArrayList<String>  getIndexesParentForParam(String paramName){
+		ArrayList<String> indexs= new ArrayList<String>(); 
+		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
+		Param p;
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			 p =(Param)pair.getValue();
+			 for (MyAction i :p.getAction()){
+				 if(i.getParamName().equals(paramName)){
+					 indexs.add(p.getIndex()+"");
+					 
+				 }
+				 
+			 }
+		}
+		return indexs;
+	}
 
 }

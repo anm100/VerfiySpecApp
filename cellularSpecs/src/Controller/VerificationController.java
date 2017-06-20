@@ -44,9 +44,11 @@ public class VerificationController implements ItemListener {
 				+"#define OFF 0 \n"
 				+"#define Empty 2 \n"
 				+"#define NotEmpty 3 \n"
-						+ "mytype={"+ScreenController.getAllScreenName()
+						+ "mtype={"+ScreenController.getAllScreenName()
 						+",\n"+w.getAllChangeStates()+"}\n"
+						+"mtype state= Setting;"
 						+defineParamsPromela()
+						+"ltl  req8 {[]((Airplane_mode==ON)->((((state==changeAirplane_modeON)||(state==changeWifiOFF)||(state==changeBluetoothOFF))U(Wifi==OFF))&&(((state==changeAirplane_modeON)||(state==changeWifiOFF)||(state==changeBluetoothOFF))U(Bluetooth==OFF))))}"
 //						+getLTLReq()
 						+"\nactive proctype vm(){\n"
 						+" do\n"
@@ -124,7 +126,7 @@ private void initialize(){
 							"action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]=0",
 							s.getScreenName());
 					
-					w.addChangeScreen(changeScreen);
+					WorkSpace.getInstance().addChangeScreen(changeScreen);
 					
 					}
 				
@@ -161,19 +163,22 @@ private void initialize(){
 	private void setTransONOFF(screenInterface s ,Param e,String SwitchTo) {
 		ChangeScreen changeScreen;
 		// TODO Auto-generated method stub
-				
-		changeScreen = w.getChangeScreenByname(e.getParamName()+SwitchTo); 
-		s.addTransPromela(e.getParamName()+"=="+(e).getValues()[1]
-			,Promela.getActionString(e.getParamName(), e.getValues()[0])
+		int fromVal=0,toVal=1;
+		if(SwitchTo.equals("ON")){
+			fromVal=1;toVal=0;
+		}	
+		changeScreen = WorkSpace.getInstance().getChangeScreenByname(e.getParamName()+SwitchTo); 
+		s.addTransPromela(e.getParamName()+"=="+(e).getValues()[fromVal]
+			,Promela.getActionString(e.getParamName(), e.getValues()[toVal])
 			+Promela.getActionString(e.getIndex(),1)
 			+Promela.getActionSonsString(e,1,SwitchTo)
-			,changeScreen.getScreenName()+");");
+			,changeScreen.getScreenName());
 
-		changeScreen.addTransPromela(Promela.getActionCondString(e.getIndex(), 1)
+		changeScreen.addTransPromela(Promela.getActionCondParent(ElementController.getIndexesParentForParam(e.getParamName()),0)+Promela.getActionCondString(e.getIndex(), 1)
 				+Promela.getActionCondSonsString(e, 0,SwitchTo)
 				,Promela.getActionString(e.getIndex(),0), s.getScreenName());
-	w.addChangeScreen(changeScreen);
-	if (e.getActions("ON").size() ==0) return;
+		WorkSpace.getInstance().addChangeScreen(changeScreen);
+	if (e.getActions(SwitchTo).size() ==0) return;
 	else {
 		for (MyAction i:e.getActions("ON")){
 			
@@ -200,27 +205,27 @@ private void initialize(){
  * 
  */
 	private void setTransSonONOFF(ChangeScreen parent ,Param pParent, Param pson,
-			String val) {
+			String SwitchTo) {
 		// TODO Auto-generated method stub
 		int toVal=1;
-		if(val.equals("ON")){
+		if(SwitchTo.equals("ON")){
 			toVal=0;
-		}
+		}	
 		
 		ChangeScreen changeScreen;
-		changeScreen = w.getChangeScreenByname(pson.getParamName()+val); 
+		changeScreen = WorkSpace.getInstance().getChangeScreenByname(pson.getParamName()+SwitchTo); 
 		parent.addTransPromela(Promela.getActionCondString(pson.getIndex(), 1)
 			,Promela.getActionString(pson.getParamName(), pson.getValues()[toVal])
 			+Promela.getActionString(pson.getIndex(),1)
-			+Promela.getActionSonsString(pson,1,val)
-			,changeScreen.getScreenName()+");");
-		w.addChangeScreen(parent);
+			+Promela.getActionSonsString(pson,1,SwitchTo)
+			,changeScreen.getScreenName());
+		WorkSpace.getInstance().addChangeScreen(parent);
 
 		changeScreen.addTransPromela(Promela.getActionCondString(pParent.getIndex(), 1)
-				+Promela.getActionCondString(pson.getIndex(), 1)
-				+Promela.getActionCondSonsString(pson, 0,val)
+				+" && "+Promela.getActionCondString(pson.getIndex(), 1)
+				+Promela.getActionCondSonsString(pson, 0,SwitchTo)
 				,Promela.getActionString(pson.getIndex(),0), parent.getScreenName());
-		w.addChangeScreen(changeScreen);
+		WorkSpace.getInstance().addChangeScreen(changeScreen);
 		
 	}
 
