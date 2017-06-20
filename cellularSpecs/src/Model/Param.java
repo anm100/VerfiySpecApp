@@ -66,12 +66,14 @@ public class Param implements Serializable{
 			}
 	
 	}
-	public ArrayList<MyAction> getActions() {
+	public ArrayList<MyAction> getActions(String value) {
 		return actions;
 	}
 
 	public void addAction(MyAction e ){
 		actions.add(e);
 	}
+
+
 
 }

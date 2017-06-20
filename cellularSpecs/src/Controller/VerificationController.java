@@ -77,44 +77,42 @@ private void initialize(){
 	private  String getPG() {
 		String sAll = new String("");Screen s = new Screen(); Element e ; 
 		ChangeScreen changeScreen;
-		Iterator<Entry<String, Screen>> it = WorkSpace.getInstance().getScreensMap().entrySet().iterator();
+		Iterator<Entry<String, Screen>> it = w.getScreensMap().entrySet().iterator();
 		while(it.hasNext()){
 			Map.Entry pair =(Map.Entry) it.next(); 
 			s= (Screen)pair.getValue();	
-			
-			Iterator<Entry<String, Element>> it2 = WorkSpace.getInstance()
+			WorkSpace.getLog().debug("screen is "+s.getScreenName());
+			Iterator<Entry<String, Element>> it2 = w
 					.getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();
 			while(it2.hasNext()){
 				Map.Entry pair2 =(Map.Entry) it2.next(); 
 				e= (Element)pair2.getValue();
+				WorkSpace.getLog().debug("--element is "+e.getELementName()+"with param "+e.getParamName());
+				WorkSpace.getLog().debug("---type "+e.getType());
 				if (e.getType().equals(ElementType.getStandartBtnType())){
 					s.getTransPromela().add(e.getStringPromela());
+					WorkSpace.getLog().debug("---get promela standrt button "+e.getType());
+
 				}
 				else 
 					if (e.getType().equals(ElementType.getOnOffType())){
 						
+				WorkSpace.getLog().debug("---start ON OFF condtion action");
+
+						
 				/*
 						 ::(aaaa==on)->atomic(aaaa=off;action[13]=1;state=changemainScreenaaaa);
 				 */
-						
-					setTransONToOFF(s, (OnOffType)e);
-					setTransOFFToON(s,(OnOffType)e);
+				WorkSpace.getLog().debug("---start OFF->ON condtion action ");
+					setTransONOFF(s,w.getParamsByName(e.getParamName()),"ON");
 					
-					changeScreen = w.getChangeScreenByname(e.getParamName()+"ON"); 
-	/*
-					 ::(aaaa==off)->atomic(aaaa=ON;action[13]=1;state=changemainScreenaaaa);
-			 */
-					s.getTransPromela().add("("+e.getParamName()+"=="
-							+((OnOffType)e).getParameter().getValues()[1]+")->atomic("+e.getParamName()+"="
-							+((OnOffType)e).getParameter().getValues()[0]+";"
-							+"action["+((OnOffType)e).getParameter().getIndex()+"]=1;"
-							+"state="+changeScreen.getScreenName()+");");
-			
-					changeScreen.addTransPromela("Myconditon", "actions", s.getScreenName());
-					w.addChangeScreen(changeScreen);
+					WorkSpace.getLog().debug("---start ON->OFF condtion action ");
+					setTransONOFF(s,w.getParamsByName(e.getParamName()),"OFF");
 
 										
 				}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
+					
+					WorkSpace.getLog().debug("---Empty type start action to Empty->notEmpty ");
 					changeScreen = new ChangeScreen(s.getScreenName()+e.getParamName()); 
 					s.getTransPromela().add("("+e.getParamName()+"=="
 							+((EmptyNEmptyType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
@@ -131,13 +129,13 @@ private void initialize(){
 					}
 				
 				}
-			
+			WorkSpace.getLog().debug("---get string promela from screen object ");
 			sAll+=s.getStringPromela()+"\n";
 			sAll+= "/*"
 					+ "\n*/////////////////////////////////////// End of changeParamScreens for screen "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
 			RemoveStructPromela();
 		}
-		
+		WorkSpace.getLog().debug("---get string promela from change screen  ");
 		sAll+=w.getBlockChangeScreen();
 
 		return sAll;
@@ -159,53 +157,70 @@ private void initialize(){
 //		
 //		
 //	}
-	private void setTransONToOFF(screenInterface s ,OnOffType e) {
+	
+	private void setTransONOFF(screenInterface s ,Param e,String SwitchTo) {
 		ChangeScreen changeScreen;
 		// TODO Auto-generated method stub
 				
-		changeScreen = w.getChangeScreenByname(e.getParamName()+"OFF"); 
-		s.addTransPromela(e.getParamName()+"=="+(e).getParameter().getValues()[0]
-			,Promela.getActionString(e.getParamName(), e.getParameter().getValues()[1])
-			+Promela.getActionString(e.getParameter().getIndex(),1)
-			+Promela.getActionSonsString(e,1)
+		changeScreen = w.getChangeScreenByname(e.getParamName()+SwitchTo); 
+		s.addTransPromela(e.getParamName()+"=="+(e).getValues()[1]
+			,Promela.getActionString(e.getParamName(), e.getValues()[0])
+			+Promela.getActionString(e.getIndex(),1)
+			+Promela.getActionSonsString(e,1,SwitchTo)
 			,changeScreen.getScreenName()+");");
 
-		changeScreen.addTransPromela(Promela.getActionCondString(e.getParameter().getIndex(), 1)
-				+Promela.getActionCondSonsString(e, 0)
-				,Promela.getActionString(e.getParameter().getIndex(),0), s.getScreenName());
-
+		changeScreen.addTransPromela(Promela.getActionCondString(e.getIndex(), 1)
+				+Promela.getActionCondSonsString(e, 0,SwitchTo)
+				,Promela.getActionString(e.getIndex(),0), s.getScreenName());
 	w.addChangeScreen(changeScreen);
-		
-	}
-	private void setTransOFFToON(screenInterface s ,OnOffType e) {
-		ChangeScreen changeScreen;
-		// TODO Auto-generated method stub
-				
-		changeScreen = w.getChangeScreenByname(e.getParamName()+"ON"); 
-		s.addTransPromela(e.getParamName()+"=="+(e).getParameter().getValues()[1]
-			,Promela.getActionString(e.getParamName(), e.getParameter().getValues()[0])
-			+Promela.getActionString(e.getParameter().getIndex(),1)
-			+Promela.getActionSonsString(e,1)
-			,changeScreen.getScreenName()+");");
-
-		changeScreen.addTransPromela(Promela.getActionCondString(e.getParameter().getIndex(), 1)
-				+Promela.getActionCondSonsString(e, 0)
-				,Promela.getActionString(e.getParameter().getIndex(),0), s.getScreenName());
-	w.addChangeScreen(changeScreen);
-	if (e.getActions().size() ==0) return;
+	if (e.getActions("ON").size() ==0) return;
 	else {
-		for (MyAction i:e.getActions()){
+		for (MyAction i:e.getActions("ON")){
+			
 			if(i.getParamVal().equals("ON")){
-			//	setTransOFFToON(changeScreen,w.getParamsByName(i.getParamName()));
+				setTransSonONOFF(changeScreen,e,w.getParamsByName(i.getParamName()),"ON");
 				
 			}else {
-				
+				setTransSonONOFF(changeScreen,e,w.getParamsByName(i.getParamName()),"OFF");
 				
 			}
 			
 
 		}
 	}
+		
+	}
+/*	int fromVal=0,toVal=1;
+		if(val.equals("ON")){
+			fromVal=1;toVal=0;
+		}
+ * 
+ * p.getParamName()+"=="+(p).getValues()[fromVal]
+			,Promela.getActionString(p.getParamName(), p.getValues()[toVal])
+ * 
+ */
+	private void setTransSonONOFF(ChangeScreen parent ,Param pParent, Param pson,
+			String val) {
+		// TODO Auto-generated method stub
+		int toVal=1;
+		if(val.equals("ON")){
+			toVal=0;
+		}
+		
+		ChangeScreen changeScreen;
+		changeScreen = w.getChangeScreenByname(pson.getParamName()+val); 
+		parent.addTransPromela(Promela.getActionCondString(pson.getIndex(), 1)
+			,Promela.getActionString(pson.getParamName(), pson.getValues()[toVal])
+			+Promela.getActionString(pson.getIndex(),1)
+			+Promela.getActionSonsString(pson,1,val)
+			,changeScreen.getScreenName()+");");
+		w.addChangeScreen(parent);
+
+		changeScreen.addTransPromela(Promela.getActionCondString(pParent.getIndex(), 1)
+				+Promela.getActionCondString(pson.getIndex(), 1)
+				+Promela.getActionCondSonsString(pson, 0,val)
+				,Promela.getActionString(pson.getIndex(),0), parent.getScreenName());
+		w.addChangeScreen(changeScreen);
 		
 	}
 
