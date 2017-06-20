@@ -133,7 +133,7 @@ private static String getTranslateReq8a(String paramterName,String SwithTO) {
 	String st1="";
 	Param p=WorkSpace.getInstance().getParamsByName(paramterName);
 	String parameter1=p.getParamName();
-	ArrayList<MyAction> action=p.getActions();
+	ArrayList<MyAction> action=p.getActions(SwithTO);
 	st1="("+parameter1+"=="+SwithTO+")->(";
 	for(int i=0;i<action.size();i++)
 	{
