@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import org.omg.Dynamic.Parameter;
 
-import Model.Action;
+import Model.MyAction;
 import Model.Element;
 import Model.ElementActionInterface;
 import Model.ElementType;

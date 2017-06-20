@@ -8,7 +8,7 @@ public class EmptyNEmptyType implements Serializable, Element,ElementActionInter
 private Param parameter; 
 private String elementName;
 private final String type=ElementType.getEmptyNotEmptyType(); 
-private List <Action> actions= new ArrayList<>(); 
+private List <MyAction> actions= new ArrayList<>(); 
 private List <MyCondition> conditions= new ArrayList<>(); 
 
 public EmptyNEmptyType() {}
@@ -60,13 +60,13 @@ public Param getParameter() {
 }
 
 @Override
-public ArrayList<Action> getActions() {
+public ArrayList<MyAction> getActions() {
 	// TODO Auto-generated method stub
-	return (ArrayList<Action>) actions;
+	return (ArrayList<MyAction>) actions;
 }
 
 @Override
-public void addAction(Action e) {
+public void addAction(MyAction e) {
 
 }
 

@@ -11,15 +11,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
-
-
+import javax.swing.Action;
 import javax.swing.JLabel;
 
 import Model.Element;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
+import Model.MyAction;
+import Model.MyCondition;
 import Model.OnOffType;
 import Model.ParamList;
 import Model.Screen;
@@ -160,6 +160,26 @@ public class WorkSpaceController {
 	{
 		//getConditions from OnOfGui givr me arraylist with the conditions to on->off 
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
+		ArrayList<String> con1=elementGui.get_Off_To_On_Condition();
+		ArrayList<String> con2=elementGui.get_On_To_Off_Conditions();
+		ArrayList<String> act1=elementGui.get_On_To_Off_Actions();
+		ArrayList<String> act2=elementGui.get_Off_To_ON_Actions();
+		for(int i=0;i<con1.size();i++)
+		{
+			MyCondition cond;
+			 cond=new MyCondition(con1.get(i),ElementType.getOn());
+			p.addCond(cond);
+			 cond=new MyCondition(con2.get(i),ElementType.getOff());
+			p.addCond(cond);
+		}
+		for(int i=0;i<act1.size();i++)
+		{
+			MyAction act;
+			 act=new MyAction(act1.get(i), ElementType.getOn());
+			p.addAction(act);
+			 act=new MyAction(act2.get(i), ElementType.getOn());
+			p.addAction(act);
+		}
 		l.setElementName(elementGui.getElementName());	
 		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);

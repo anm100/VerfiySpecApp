@@ -9,9 +9,17 @@ public class Param implements Serializable{
 	private String paramName; 
 	private String paramVal;
 	private String type;
-	private ArrayList<Action> actions;
+	private ArrayList<MyAction> actions;
 	private ArrayList<MyCondition> cond;
 		
+	public ArrayList<MyCondition> getCond() {
+		return cond;
+	}
+
+	public void addCond(MyCondition cond) {
+		this.cond.add(cond);
+	}
+
 	public Param(String paramName, String paramVal, String type) {
 		super();
 		this.index=counter++;
@@ -19,7 +27,7 @@ public class Param implements Serializable{
 		this.paramVal = paramVal; 
 		this.type = type;
 		cond=new ArrayList<MyCondition>();
-		actions=new  ArrayList<Action>(); 
+		actions=new  ArrayList<MyAction>(); 
 	}
 
 	public int getIndex() {
@@ -58,11 +66,11 @@ public class Param implements Serializable{
 			}
 	
 	}
-	public ArrayList<Action> getActions() {
+	public ArrayList<MyAction> getActions() {
 		return actions;
 	}
 
-	public void addAction(Action e ){
+	public void addAction(MyAction e ){
 		actions.add(e);
 	}
 

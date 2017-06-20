@@ -151,7 +151,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			FormulaTranslate.translateReq3("SignIn","BoPo_MainSreen",ar);
 			FormulaTranslate.translateReq6();
 		//	FormulaTranslate.translateReq7();
-			FormulaTranslate.translateReq8a("Airplane_mode");
+			//FormulaTranslate.translateReq8a("Airplane_mode");
 			//FormulaTranslate.translateReq8b("Airplane_mode");
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");

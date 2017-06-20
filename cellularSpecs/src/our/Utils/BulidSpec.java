@@ -1,6 +1,6 @@
 package our.Utils;
 
-import Model.Action;
+import Model.MyAction;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.OnOffType;
@@ -135,11 +135,11 @@ public class BulidSpec {
 		private static void addAction(String screenName,String elementName){
 			WorkSpace.getLog().debug("add action to Airplane MODE");
 			OnOffType e = (OnOffType) wk.getScreenByName(screenName).getElementByName(elementName);
-			Action action =new Action("Wifi=OFF");
+			MyAction action =new MyAction("Wifi=OFF");
 			action.addCond("Airplane_mode==ON");
 			e.addAction(action);
 			
-			action =new Action("Bluetooth=OFF");
+			action =new MyAction("Bluetooth=OFF");
 			action.addCond("Airplane_mode==ON");
 			e.addAction(action);
 			

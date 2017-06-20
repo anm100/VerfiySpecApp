@@ -68,17 +68,25 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	private JLabel lblNewLabel_3;
 	private ArrayList<String> On_To_Off_Condition;
 	private ArrayList<String>  Off_To_On_Condition;
+	private ArrayList<String> On_To_Off_Action;
+	private ArrayList<String>  Off_To_On_Action;
 	private TextArea textAreaOnToOff;
 	private TextArea textAreaOffToON;
 	private  AddConditonGui addconditonGui;
-	private String Switch="";
-	private EditReomveConditionGUI edRmCon
-	;
+	private AddActionGUI addactionGui;
+	private String switchTo="";
+	private EditReomveConditionGUI edRmCon;
+	private String on=ElementType.getOn();
+	private String off=ElementType.getOff();
+	private TextArea ActionAreaOnToOff ;
+	private TextArea ActionAreaOffToON;
 	
 	public OnOfGUI(String ScreenName,String eName)
 	{
 		On_To_Off_Condition=new ArrayList<String>();
 		Off_To_On_Condition=new ArrayList<String>();
+		On_To_Off_Action=new ArrayList<String>();
+		Off_To_On_Action=new ArrayList<String>();
 		this.ScreenName=ScreenName; 
 		setTitle("ON-OFF");
 		getContentPane().setBackground(Color.WHITE);
@@ -224,28 +232,29 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				panel_1.add(lblActrions);
 				
 				 textAreaOnToOff = new TextArea("",5,100,TextArea.SCROLLBARS_NONE);
-				 textAreaOnToOff.setEnabled(false);
+				 textAreaOnToOff.setEditable(false);
 				 textAreaOnToOff.addMouseListener(new MouseAdapter() {
 				 	@Override
-				 	public void mousePressed(MouseEvent arg0) {
-				 		//edRmCon=new EditReomveConditionGUI();
-				 		edRmCon.setVisible(true);
-				 	}
-				 	@Override
 				 	public void mouseClicked(MouseEvent arg0) {
+				 		
+				 		System.out.println("2");
 				 	//	edRmCon=new EditReomveConditionGUI();
-				 		edRmCon.setVisible(true);
+				 	//	edRmCon.setVisible(true);
 				 	}
 				 });
-				textAreaOnToOff.setEditable(false);
 				textAreaOnToOff.setBounds(73, 31, 190, 50);
 				panel_1.add(textAreaOnToOff);
 				
-				TextArea textArea_1 = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
-				textArea_1.setEnabled(false);
-				textArea_1.setEditable(false);
-				textArea_1.setBounds(73, 87, 190, 55);
-				panel_1.add(textArea_1);
+				 ActionAreaOnToOff = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
+				 ActionAreaOnToOff.addMouseListener(new MouseAdapter() {
+				 	@Override
+				 	public void mouseClicked(MouseEvent arg0) {
+				 		edRmCon=new EditReomveConditionGUI(On_To_Off_Action);
+				 	}
+				 });
+				ActionAreaOnToOff.setEditable(false);
+				ActionAreaOnToOff.setBounds(73, 87, 190, 55);
+				panel_1.add(ActionAreaOnToOff);
 				
 				
 						
@@ -255,12 +264,12 @@ public class OnOfGUI extends JFrame implements ActionListener {
 						panel_1.add(separator);
 						separator.setOrientation(SwingConstants.VERTICAL);
 						separator.setBackground(Color.RED);
-						
-						TextArea textArea_2 = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
-						textArea_2.setEnabled(false);
-						textArea_2.setEditable(false);
-						textArea_2.setBounds(352, 87, 190, 55);
-						panel_1.add(textArea_2);
+		
+						ActionAreaOffToON = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
+						ActionAreaOffToON.setEnabled(false);
+						ActionAreaOffToON.setEditable(false);
+						ActionAreaOffToON.setBounds(352, 87, 190, 55);
+						panel_1.add(ActionAreaOffToON);
 						
 						 textAreaOffToON = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
 						textAreaOffToON.setEditable(false);
@@ -294,10 +303,14 @@ public class OnOfGUI extends JFrame implements ActionListener {
 						Button button_2 = new Button("Add Action");
 						button_2.setBounds(457, 0, 70, 22);
 						panel_1.add(button_2);
+						button_2.setActionCommand("_add_action_Off_To_On");
+						button_2.addActionListener(this);
 						
 						Button button = new Button("Add Action");
 						button.setBounds(159, 0, 70, 22);
 						panel_1.add(button);
+						button.setActionCommand("_add_action_ON_To_Off");
+						button.addActionListener(this);
 				
 				JPanel panel = new JPanel();
 				panel.setBounds(30, 145, 552, 22);
@@ -345,13 +358,6 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			}
 		
 	}
-	public JLabel getLblNewLabel_3() {
-		return lblNewLabel_3;
-	}
-	public void setLblNewLabel_3(String hint) {
-		this.lblNewLabel_3.setText(hint);
-		this.lblNewLabel_3.setVisible(true);;
-	}
 	private void loadData(	ArrayList <String> dataOfelement,String eName) {
 		elementName.setText(dataOfelement.get(0));
 		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,dataOfelement.get(1),dataOfelement.get(0)));
@@ -369,7 +375,13 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	      return lblNewLabel;
 		// TODO Auto-generated method stub
 	}
-	
+	public JLabel getLblNewLabel_3() {
+		return lblNewLabel_3;
+	}
+	public void setLblNewLabel_3(String hint) {
+		this.lblNewLabel_3.setText(hint);
+		this.lblNewLabel_3.setVisible(true);;
+	}
 	public String getElementName() {
 		return elementName.getText().toString();
 	}
@@ -397,13 +409,6 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		rdbtnOn.setSelected(true);
 	setDefaultValue(rdbtnOn.getText());
 	}
-	public  void removeToTable(int index)//remove row number index
-	{
-	//	DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
-	//	dm.removeRow(index);
-	}
-
-
 
 	public void setOnOffListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);
@@ -431,21 +436,39 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	public String getComboParameterName() {
 		return ComboparameterNames.getSelectedItem().toString();
 	}
-	public TextArea getTextArea() {
-		return textAreaOnToOff;
+	public ArrayList<String> get_Off_To_On_Condition() {
+		return Off_To_On_Condition;
 	}
-	public ArrayList<String> getOnToOffConditions()
+
+	public ArrayList<String> get_On_To_Off_Actions() {
+		return On_To_Off_Action;
+	}
+	public ArrayList<String> get_Off_To_ON_Actions() {
+		return Off_To_On_Action;
+	}
+	public ArrayList<String> get_On_To_Off_Conditions()
 	{
 		return On_To_Off_Condition;
 	}
+	
+
+
 	public void addTotextAreaOnToOf(String textArea) {
 		this.textAreaOnToOff.append(textArea);
 	}
 	public void addTotextAreaOffToOn(String textArea) {
 		this.textAreaOffToON.append(textArea);
 	}
-	public void setTextArea(ArrayList<String> CondionsArray, String switch2) {
-		if(switch2.equals(("On->Off")))
+	public void addToActionAreaOnToOff(String textArea) {
+		this.ActionAreaOnToOff.append(textArea);
+	}
+	public void addToActionAreaOffToOn(String textArea) {
+		this.ActionAreaOffToON.append(textArea);
+	}
+	
+	
+	public void setTextArea(ArrayList<String> CondionsArray, String switchTo) {
+		if(switchTo.equals(ElementType.getOff()))
 		{
 			this.textAreaOnToOff.setText("");
 			this.textAreaOnToOff.setText(CondionsArray.get(0));
@@ -466,45 +489,99 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			}	
 		}
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		switch (e.getActionCommand())
+	public void setActionArea(ArrayList<String> ActionArray, String switchTo) {
+		if(switchTo.equals(ElementType.getOff()))
 		{
-		case ("_save_Condition"):
-			addConditionToTextArea(Switch);
-			break;
-		case ("_add_condition_ON_To_Off"):
-			setaddconditonGui("On->Off");
-			break;
-		case ("_add_condition_Off_To_On"):
-			setaddconditonGui("Off->On");
-			break;
+			this.ActionAreaOnToOff.setText("");
+			this.ActionAreaOnToOff.setText(ActionArray.get(0));
+			for(int i=1;i<ActionArray.size();i++)
+			{
+				addToActionAreaOnToOff("&&");
+				addToActionAreaOnToOff(ActionArray.get(i));
+			}
 		}
-		
+		else
+		{
+			this.ActionAreaOffToON.setText("");
+			this.ActionAreaOffToON.setText(ActionArray.get(0));
+			for(int i=1;i<ActionArray.size();i++)
+			{
+				addToActionAreaOffToOn("&&");
+				addToActionAreaOffToOn(ActionArray.get(i));
+			}	
+		}
 	}
-	private void addConditionToTextArea(String switch2) {
+	private void setaddconditonGui(String st)
+	{
+		switchTo=st;
+		addconditonGui=new AddConditonGui();
+		addconditonGui.setSwitchlbl("switch to"+switchTo);
+		addconditonGui.setVisible(true);
+		addconditonGui.setAddAconditionListener(this);
+		addconditonGui.setAddAconditionListener(null);
+	}
+	private void setaddActionGui(String st)
+	{
+		switchTo=st;
+		addactionGui=new AddActionGUI();
+		addactionGui.setSwitchlbl("switch to"+switchTo);
+		addactionGui.setVisible(true);
+		addactionGui.setAddAconditionListener(this);
+		addactionGui.setAddAconditionListener(null);
+	}
+	private void addConditionToTextArea(String switchTo) {
 		String st=addconditonGui.getParameterNameCombo()+addconditonGui.getLabel_equal()+addconditonGui.getParameterValueCombo();
-		if(switch2.equals("On->Off"))
+		if(switchTo.equals(ElementType.getOff()))
 		{
 			On_To_Off_Condition.add(st);
-			setTextArea(On_To_Off_Condition,switch2);
+			setTextArea(On_To_Off_Condition,switchTo);
 			
 		}
 		else
 		{
 			Off_To_On_Condition.add(st);
-			setTextArea(Off_To_On_Condition,switch2);
+			setTextArea(Off_To_On_Condition,switchTo);
 		}
-		addconditonGui.setVisible(false);
-			
+		addconditonGui.setVisible(false);	
 	}
-	private void setaddconditonGui(String st)
-	{
-		Switch=st;
-		addconditonGui=new AddConditonGui();
-		addconditonGui.setSwitchlbl(Switch);
-		addconditonGui.setVisible(true);
-		addconditonGui.setAddAconditionListener(this);
-		addconditonGui.setAddAconditionListener(null);
+	private void addActionToTextArea(String switchTo) {
+		String st=addactionGui.getParameterNameCombo()+addactionGui.getLabel_3()+addactionGui.getParameterValueCombo();
+		if(switchTo.equals(ElementType.getOff()))
+		{
+			On_To_Off_Action.add(st);
+			setActionArea(On_To_Off_Action,switchTo);
+			
+		}
+		else
+		{
+			Off_To_On_Action.add(st);
+			setActionArea(Off_To_On_Action,switchTo);
+		}
+		addactionGui.setVisible(false);	
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		switch (e.getActionCommand())
+		{
+		case ("_save_Condition"):
+			addConditionToTextArea(switchTo);
+			break;
+		case ("_save_Action"):
+			addActionToTextArea(switchTo);
+			break;
+		case ("_add_condition_ON_To_Off"):
+			setaddconditonGui(ElementType.getOff());
+			break;
+		case ("_add_condition_Off_To_On"):
+			setaddconditonGui(ElementType.getOn());
+			break;
+		case ("_add_action_ON_To_Off"):
+			setaddActionGui(ElementType.getOff());
+		break;
+		case ("_add_action_Off_To_On"):
+		setaddActionGui(ElementType.getOn());
+		break;
+	}
+		
 	}
 }

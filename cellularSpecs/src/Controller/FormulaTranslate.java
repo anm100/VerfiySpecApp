@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import Model.Action;
+import Model.MyAction;
 import Model.Element;
 import Model.ElementActionInterface;
 import Model.ElementType;
@@ -121,7 +121,7 @@ public static  void translateReq8a(String parameterName,String SwithTO)
 {
 	String st="";
 	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
-	 ArrayList<Action> actions=getActionByparameterName(p.getParamName());
+	 ArrayList<MyAction> actions=getActionByparameterName(p.getParamName());
 	 if(actions!=null)
 	 {
 	 st="ltl "+" req8 "+"{[]("+getTranslateReq8a(parameterName,SwithTO)+")}";
@@ -133,13 +133,13 @@ private static String getTranslateReq8a(String paramterName,String SwithTO) {
 	String st1="";
 	Param p=WorkSpace.getInstance().getParamsByName(paramterName);
 	String parameter1=p.getParamName();
-	ArrayList<Action> action=p.getActions();
+	ArrayList<MyAction> action=p.getActions();
 	st1="("+parameter1+"=="+SwithTO+")->(";
 	for(int i=0;i<action.size();i++)
 	{
 		if(action.get(i).getSwitchtO().equals(SwithTO))
 		{
-			Action a = action.get(i);
+			MyAction a = action.get(i);
 			st1+="(("+getChangeStateReg8a(action,SwithTO,parameter1)+")U("+a.getParamName()+"=="+a.getParamVal()+"))"+"&&";
 		}
 	}
@@ -148,7 +148,7 @@ private static String getTranslateReq8a(String paramterName,String SwithTO) {
 	st1+=")";
 	return st1;	
 }
-private static String getChangeStateReg8a(ArrayList<Action> actions,String SwithTO,String parameter1) {
+private static String getChangeStateReg8a(ArrayList<MyAction> actions,String SwithTO,String parameter1) {
 	String str="";
 	for(int j=0;j<changeStatesList.size();j++){
 		if(changeStatesList.get(j).endsWith(parameter1+SwithTO))
@@ -170,11 +170,11 @@ public static  void translateReq8b(String parameterName)
 {
 	String st="";
 	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
-	 ArrayList<Action> actions=getActionByparameterName(p.getParamName());
+	 ArrayList<MyAction> actions=getActionByparameterName(p.getParamName());
 	 st="ltl "+" req8 "+"{[]("+getTranslateReq8b(actions,p)+")}";
 	 WorkSpace.getLog().debug(st);
 }
-private static String getTranslateReq8b(ArrayList<Action> actions,Param p) {
+private static String getTranslateReq8b(ArrayList<MyAction> actions,Param p) {
 	String st1="";
 	for(int j=0;j<actions.size();j++)
 	{
@@ -319,7 +319,7 @@ private static String getChangeState(String op,String logic) {
 	return str;
 }
 
-public static ArrayList<Action> getActionByparameterName(String parameterName){
+public static ArrayList<MyAction> getActionByparameterName(String parameterName){
 	Param p ;
 	p= WorkSpace.getInstance().getParamsMap().get(parameterName);
 	return p.getActions() ; 

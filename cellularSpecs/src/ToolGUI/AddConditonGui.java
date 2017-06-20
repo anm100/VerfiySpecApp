@@ -44,7 +44,7 @@ public class AddConditonGui extends JFrame {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		JLabel lblAddNewConditons = new JLabel("-add a condition");
-		lblAddNewConditons.setBounds(60, 10, 125, 14);
+		lblAddNewConditons.setBounds(116, 10, 125, 14);
 		getContentPane().add(lblAddNewConditons);
 		
 		 btnSave = new JButton("save");
@@ -71,7 +71,6 @@ public class AddConditonGui extends JFrame {
 		panel.add(chooseparamLbl);
 		
 		 parameterNameCombo = new JComboBox();
-		 parameterNameCombo.setModel(new DefaultComboBoxModel(new String[] {"Wifi", "AirPlane", "blutooth"}));
 		parameterNameCombo.addItemListener(new ItemListener() {
 		 	public void itemStateChanged(ItemEvent arg0) {
 		 		JComboBox s=(JComboBox)(arg0.getSource());
@@ -96,7 +95,6 @@ public class AddConditonGui extends JFrame {
 		 panel.add(valueLbl);
 		 
 		  parameterValueCombo = new JComboBox();
-		  parameterValueCombo.setModel(new DefaultComboBoxModel(new String[] {"On", "Off"}));
 		  parameterValueCombo.addItemListener(new ItemListener() {
 		  	public void itemStateChanged(ItemEvent arg0) {
 		  		JComboBox s=(JComboBox)(arg0.getSource());
@@ -107,7 +105,7 @@ public class AddConditonGui extends JFrame {
 		  panel.add(parameterValueCombo);
 		  
 		 
-		  switchlbl.setBounds(10, 10, 46, 14);
+		  switchlbl.setBounds(10, 10, 96, 14);
 		  getContentPane().add(switchlbl);
 		//panel.add(label_3);
 			addToCombo();

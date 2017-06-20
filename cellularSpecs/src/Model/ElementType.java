@@ -10,7 +10,15 @@ public class ElementType implements Serializable {
 	private final static String emptyNotEmpty=new String ("Empty/NotEmpty");
 	private final static String standartBtnType=new String ("reqular Button");
 	private final static String ListType=new String ("List");
+	private final static  String on="ON";
+	public static String getOn() {
+		return on;
+	}
 
+	public static String getOff() {
+		return off;
+	}
+	private final static String off="OFF";
 	
 	
 

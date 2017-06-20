@@ -9,6 +9,7 @@ private Param parameter;
 private final String type=ElementType.getOnOffType();
 private String elementName; 
 
+
 public OnOffType() {
 
 }
@@ -59,12 +60,13 @@ public void setElementName(String name) {
 
 }
 
-public ArrayList<Action> getActions(String value) {
+public ArrayList<MyAction> getActions(String value) {
 	Param p=WorkSpace.getInstance().getParamsByName(this.parameter.getParamName());
+
 	return null;
 }
 
-public void addAction(Action e ){
+public void addAction(MyAction e ){
 	/*
 	this.actions.add(e);
 	*/
