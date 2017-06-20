@@ -121,7 +121,7 @@ public static  void translateReq8a(String parameterName,String SwithTO)
 {
 	String st="";
 	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
-	 ArrayList<MyAction> actions=getActionByparameterName(p.getParamName());
+	 ArrayList<MyAction> actions=getActionByparameterName(p.getParamName(),SwithTO);
 	 if(actions!=null)
 	 {
 	 st="ltl "+" req8 "+"{[]("+getTranslateReq8a(parameterName,SwithTO)+")}";
@@ -170,8 +170,8 @@ public static  void translateReq8b(String parameterName)
 {
 	String st="";
 	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
-	 ArrayList<MyAction> actions=getActionByparameterName(p.getParamName());
-	 st="ltl "+" req8 "+"{[]("+getTranslateReq8b(actions,p)+")}";
+	// ArrayList<MyAction> actions=getActionByparameterName(p.getParamName());
+	// st="ltl "+" req8 "+"{[]("+getTranslateReq8b(actions,p)+")}";
 	 WorkSpace.getLog().debug(st);
 }
 private static String getTranslateReq8b(ArrayList<MyAction> actions,Param p) {
@@ -319,10 +319,10 @@ private static String getChangeState(String op,String logic) {
 	return str;
 }
 
-public static ArrayList<MyAction> getActionByparameterName(String parameterName){
+public static ArrayList<MyAction> getActionByparameterName(String parameterName,String SwithTO){
 	Param p ;
 	p= WorkSpace.getInstance().getParamsMap().get(parameterName);
-	return p.getActions() ; 
+	return p.getActions(SwithTO) ; 
 		
 	}
 }
