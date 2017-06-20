@@ -112,7 +112,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		break;
 		case("Verifiy SPEC"):
 		//	VerificationController.setRuiremens();
-	
+			requirementList=new RequirementList();
+
+	//	String [] s=requirementList.getRequirement(7).getReq().split("X");
+
 			WorkSpace.getLog().debug("verifiy Spec case");
 		 verifySpecGUI=new VerifySpecGUI();
 		VerifySpecGUI.setVerifySpecGUI(this);

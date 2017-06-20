@@ -58,13 +58,6 @@ public class EditReomveConditionGUI extends JFrame {
 			return dm;
 	}
 	  
-	  public static void main(String[] args) {
-		  EditReomveConditionGUI frame = new EditReomveConditionGUI(null);
-	    frame.addWindowListener(new WindowAdapter() {
-	      public void windowClosing(WindowEvent e) {
-	        System.exit(0);
-	      }
-	    });
-	  }
+
 
 	}

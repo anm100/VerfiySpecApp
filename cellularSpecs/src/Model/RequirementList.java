@@ -42,8 +42,6 @@ public class RequirementList {
 	 removeRequirement(index);
 	 addRequirement(r,index);
  }
- 
- 
 
 public static ArrayList<Requirement> getReqlist() {
 	return (ArrayList<Requirement>) reqlist;

@@ -16,7 +16,7 @@
     },
     {
       "ID": "req3",
-      "name": "We can't  move from screen_j to screen_i without changing or defining a parameter.",
+      "name": "We can't  move from X to X without changing or defining a X.",
       "formula": "{!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParmX)U(state==BoPo_MainSreen))))}"
     },
     {
@@ -41,7 +41,7 @@
     },
     {
       "ID": "req8",
-      "name": "All parameters always must be consistent.",
+      "name": "when X is equal to X all parameter always must be consistent.",
       "formula": " "
     },
     {

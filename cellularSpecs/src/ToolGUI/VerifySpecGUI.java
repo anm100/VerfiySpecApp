@@ -2,6 +2,9 @@ package ToolGUI;
 
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.DefaultComboBoxModel;
@@ -10,6 +13,8 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JProgressBar;
@@ -24,14 +29,29 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.JToggleButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
 
 public class VerifySpecGUI extends JFrame{
 	private static   JButton btnRun;
-	private JComboBox comboBox;
+	private JComboBox comboBox,comboBox_2;
 	
 	private static JCheckBox allReq,req1,req2,req3,req4,req5,req6,req7,req8,req9;;
 	private static ArrayList<JCheckBox> req =new ArrayList<JCheckBox>();
+
 	private String [] st;
+	private JPanel panel;
+	private JComboBox comboBox_3;
+	private JComboBox comboBox_4;
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void addToPAnel(Container c) {
+		panel.add(c);
+	}
+
 	public ArrayList<JCheckBox> getReq() {
 		return req;
 	}
@@ -56,7 +76,7 @@ public class VerifySpecGUI extends JFrame{
 		});
 		getContentPane().add(allReq);
 		req.add(allReq);
-		setSize(700,500);
+		setSize(700,573);
 		
 		 req1 = new JCheckBox("There is Always an exit from any screen.");
 		 req1.setActionCommand("req1");
@@ -115,9 +135,9 @@ public class VerifySpecGUI extends JFrame{
 		req.add(req8);
 		 req8.setActionCommand("req8");
 		 
-		 req9 = new JCheckBox("All parameters always must be consistent.");
+		 req9 = new JCheckBox("");
 		req9.setBackground(Color.WHITE);
-		req9.setBounds(23, 399, 270, 23);
+		req9.setBounds(23, 399, 21, 23);
 		getContentPane().add(req9);
 		req.add(req9);
 		 req9.setActionCommand("req9");
@@ -164,6 +184,44 @@ public class VerifySpecGUI extends JFrame{
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(260, 188, 107, 22);
 		getContentPane().add(comboBox_1);
+		
+		panel = new JPanel();
+		panel.setBounds(50, 399, 527, 23);
+		getContentPane().add(panel);
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		
+		 comboBox_2 = new JComboBox();
+
+		
+		comboBox_3 = new JComboBox();
+
+		
+		comboBox_4 = new JComboBox();
+
+	}
+
+	public JComboBox getComboBox_2() {
+		return comboBox_2;
+	}
+
+	public void setComboBox_2(JComboBox comboBox_2) {
+		this.comboBox_2 = comboBox_2;
+	}
+
+	public JComboBox getComboBox_3() {
+		return comboBox_3;
+	}
+
+	public void setComboBox_3(JComboBox comboBox_3) {
+		this.comboBox_3 = comboBox_3;
+	}
+
+	public JComboBox getComboBox_4() {
+		return comboBox_4;
+	}
+
+	public void setComboBox_4(JComboBox comboBox_4) {
+		this.comboBox_4 = comboBox_4;
 	}
 
 	private void selectall(boolean flag) {
@@ -205,4 +263,18 @@ public class VerifySpecGUI extends JFrame{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	  public static void main(String[] args) {
+		  VerifySpecGUI frame = new VerifySpecGUI();
+		  String st="when X is equal to X all parameter always must be consistent.";
+		  String [] s=st.split("X");
+		  for(int i=0;i<s.length;i++)
+		  {
+			  System.out.println(s[i]);
+			  frame.addToPAnel(frame.getComboBox_3());
+			  JLabel Req = new JLabel(s[i]);  
+			  frame.addToPAnel(Req);
+		  }
+		  frame.setVisible(true);
+	  }
 }
