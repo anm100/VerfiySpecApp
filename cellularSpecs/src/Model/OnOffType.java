@@ -59,11 +59,8 @@ public void setElementName(String name) {
 
 }
 
-public ArrayList<Action> getActions() {
-	/*
-	// TODO Auto-generated method stub
-	return actions;
-	*/
+public ArrayList<Action> getActions(String value) {
+	Param p=WorkSpace.getInstance().getParamsByName(this.parameter.getParamName());
 	return null;
 }
 
@@ -75,4 +72,5 @@ public void addAction(Action e ){
 /*
  * now get values only in Param Class 
  */
-}
+
+}	
