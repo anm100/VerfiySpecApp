@@ -48,19 +48,19 @@ public class ElementController {
 		}
 	return st;
 	}
-	public static String[][] getActrion(String sName,String eName ){
-		OnOffType   s=(OnOffType) WorkSpace.getInstance().getScreenByName(sName).getElementByName(eName);
-		int numOfActions=s.getActions().size();
-		String [][] st=new String[numOfActions][2];
-		for(int i=0;i<numOfActions;i++)
-		{
-			ArrayList<MyCondition> m =s.getActions().get(i).getCond();
-		st[i][0]=(s.getActions().get(i).getParamName()+"="+s.getActions().get(i).getParamVal());//add action to the firstRow
-	
-		st[i][1]=getCondsForAction(m);
-	}
-		return st;
-}
+//public static String[][] getActrion(String sName,String eName ){
+//		OnOffType   s=(OnOffType) WorkSpace.getInstance().getScreenByName(sName).getElementByName(eName);
+//		int numOfActions=s.getActions().size();
+//		String [][] st=new String[numOfActions][2];
+//		for(int i=0;i<numOfActions;i++)
+//		{
+//			ArrayList<MyCondition> m =s.getActions().get(i).getCond();
+//		st[i][0]=(s.getActions().get(i).getParamName()+"="+s.getActions().get(i).getParamVal());//add action to the firstRow
+//	
+//		st[i][1]=getCondsForAction(m);
+//	}
+//		return st;
+//}
 	public static String getCondsForAction(ArrayList<MyCondition> m){
 		String operator=new String ("");
 		String st1=new String ("");

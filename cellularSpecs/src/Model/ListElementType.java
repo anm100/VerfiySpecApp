@@ -7,7 +7,6 @@ public class ListElementType implements Serializable, Element {
 private ParamList parameter ; 
 private final  String type=ElementType.getListType();
 private String elementName;
-private ArrayList<MyAction> actions; 
 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
@@ -60,10 +59,9 @@ public void setElementName(String name) {
 /*
  * now get values only in Param Class 
  */
-@Override
-public ArrayList<MyAction> getActions() {
+public ArrayList<MyAction> getActions(String value) {
 	// TODO Auto-generated method stub
-	return (ArrayList<MyAction>) actions;
+	return null;
 }
 
 }

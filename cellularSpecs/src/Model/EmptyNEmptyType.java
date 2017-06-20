@@ -59,15 +59,16 @@ public Param getParameter() {
 	return parameter;
 }
 
-@Override
-public ArrayList<MyAction> getActions() {
-	// TODO Auto-generated method stub
-	return (ArrayList<MyAction>) actions;
-}
 
 @Override
 public void addAction(MyAction e) {
 
+}
+
+@Override
+public ArrayList<MyAction> getActions(String value) {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 

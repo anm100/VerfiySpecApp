@@ -9,13 +9,7 @@ public class MyAction implements Serializable {
 	private String paramVal;
 //	private ArrayList<MyCondition> cond;
 	
-	public MyAction(String paramName, String paramVal, ArrayList<MyCondition> cond,String SwitchTo) {
-		super();
-		this.paramName = paramName;
-		this.paramVal = paramVal;
-		this.SwitchTo=SwitchTo;
-	//	this.cond = cond;
-	}
+
 	public MyAction(String paramName, String paramVal,String SwitchTo) {
 		super();
 		this.paramName = paramName;
