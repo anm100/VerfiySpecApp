@@ -138,8 +138,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		case("Run_verifectaion"):
 			verificationController = new VerificationController();
 			WorkSpace.getLog().debug("Run_verifectaion");
-			WorkSpace.getLog().info(verificationController.translateToPROMELA());
-			WorkSpace.getLog().debug("create pml file ");
+		
 			FormulaTranslate.translateReq1();
 			FormulaTranslate.translateReq2a();
 			FormulaTranslate.translateReq2b();
@@ -151,9 +150,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		//	FormulaTranslate.translateReq7();
 			//FormulaTranslate.translateReq8a("Airplane_mode");
 			//FormulaTranslate.translateReq8b("Airplane_mode");
-			
+			WorkSpace.getLog().info(verificationController.translateToPROMELA());
+			WorkSpace.getLog().debug("create pml file ");
 			try{
-			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
+			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8"));
 			    writer.println(verificationController.translateToPROMELA());
 			    writer.close();
 			} catch (IOException eb) {
@@ -162,7 +162,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			
 			WorkSpace.getLog().debug("start run script in SPIN");
 			try {
-			      Runtime.getRuntime().exec( "wscript excute.vbs" );
+			      Runtime.getRuntime().exec( "wscript exe/excute.vbs" );
 			   }
 			   catch( IOException e1 ) {
 			      System.out.println(e1);

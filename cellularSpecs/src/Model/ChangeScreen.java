@@ -1,8 +1,9 @@
 package Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class ChangeScreen implements screenInterface{
+public class ChangeScreen implements screenInterface, Serializable{
 	private String  screenName;
 	private ArrayList<String> transPromela= new ArrayList<String>();
   
