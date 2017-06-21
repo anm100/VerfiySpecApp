@@ -122,13 +122,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		//VerifySpecGUI.setComboBox(WorkSpace.getInstance().getsc);
 		VerifySpecGUI.setCheckBoxListener(verificationController);
 		verifySpecGUI.setVisible(true);
-		//	verifySpecGUI.addRootScreen(st);
-			/*try {
-				Runtime.getRuntime().exec("cmd /c start b.bat");
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}*/
+			//verifySpecGUI.addRootScreen(st);
+		
 		break;
 		case("AddScreen"):
 			WorkSpace.getLog().debug("do_AddScreen.. ");
@@ -156,6 +151,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		//	FormulaTranslate.translateReq7();
 			//FormulaTranslate.translateReq8a("Airplane_mode");
 			//FormulaTranslate.translateReq8b("Airplane_mode");
+			
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA());
@@ -163,6 +159,15 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			} catch (IOException eb) {
 			   // do something
 			}
+			
+			WorkSpace.getLog().debug("start run script in SPIN");
+			try {
+			      Runtime.getRuntime().exec( "wscript excute.vbs" );
+			   }
+			   catch( IOException e1 ) {
+			      System.out.println(e1);
+			      System.exit(0);
+			   	}
 		break;
 
 		case("ShowResults"):

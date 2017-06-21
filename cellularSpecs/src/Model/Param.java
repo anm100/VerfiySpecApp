@@ -88,6 +88,19 @@ public class Param implements Serializable{
 		return actions; 
 	}
 
+	public ArrayList<MyCondition> getCond(String toSwitch) {
+		// TODO Auto-generated method stub
+		ArrayList<MyCondition> act = new ArrayList<MyCondition>(); 
+		for (MyCondition i: this.cond){
+			if(i.getSwitchTo().equals(toSwitch)){
+				act.add(i);
+				
+			}
+			
+		}
+		return act;
+	}
+
 
 
 }

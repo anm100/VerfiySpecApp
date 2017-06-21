@@ -1,8 +1,11 @@
 package our.Utils;
 
+import java.io.ObjectInputStream.GetField;
+
 import Model.MyAction;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
+import Model.MyCondition;
 import Model.OnOffType;
 import Model.Param;
 import Model.Screen;
@@ -32,12 +35,14 @@ public class BulidSpec {
 		WorkSpace.getLog().debug("start loading spec");
 		WorkSpace.setInstance(null); 
 		wk=WorkSpace.getInstance();
-		wk.setWorkSpaceName("example ");
+		wk.setWorkSpaceName("example");
 		WorkSpace.getLog().debug("SPEC NAME:"+wk.getWorkSpaceName());		
 		wk.addScreen(new Screen("setting", 210, 102, "login for app"));
 
 		addElementONOFF("Setting",new String[] {"Wifi","Bluetooth","Airplane_mode"});
 		addAction("Setting","Airplane_mode");
+		addconditionforParam(new MyCondition("Airplane_mode==OFF", "ON"),"Wifi");
+		addconditionforParam(new MyCondition("Airplane_mode==OFF", "ON"),"Bluetooth");
 		WorkSpace.setInstance(wk); 
 	}
 
@@ -55,6 +60,9 @@ public class BulidSpec {
 		 */
 		addElementONOFF("Setting",new String[] {"Wifi","Bluetooth","Airplane_mode"});
 		addAction("Setting","Airplane_mode");
+		addconditionforParam(new MyCondition("Airplane_mode==OFF", "ON"),"Wifi");
+		addconditionforParam(new MyCondition("Airplane_mode==OFF", "ON"),"Bluetooth");
+
 		StandartButtonType s; 
 		/* 
 		 * data for  log in screen 
@@ -109,9 +117,16 @@ public class BulidSpec {
 				wk.addParameterToHash(p);
 				wk.getScreenByName(screenName).addElement(e);
 			}
-			
-			
 		}
+			
+			private static void addconditionforParam(MyCondition cond, String field){
+				Param p; 
+					p = wk.getParamsByName(field);
+					p.addCond(cond);
+					wk.addParameterToHash(p);	
+					p = wk.getParamsByName(p.getParamName());
+					WorkSpace.getLog().debug("addddd "+p.getParamName()+"   ::: "+p.getCond().get(0).getCondition());
+		}			
 		private static void addConditions(String screenName,String button, String [] fields) {
 			/*
 			 * for log in screen 

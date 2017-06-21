@@ -31,18 +31,23 @@ active proctype vm(){
 	::(state==changeBluetoothON)->
 	  if
 		 ::(action[2]==0 && action[1]==1)->atomic{action[1]=0;state=Setting};
+		 ::(action[2]==0 && action[1]==1)->atomic{action[1]=0;state=Setting};
 	  fi
 	::(state==changeWifiON)->
 	  if
+		 ::(action[2]==0 && action[0]==1)->atomic{action[0]=0;state=Setting};
 		 ::(action[2]==0 && action[0]==1)->atomic{action[0]=0;state=Setting};
 	  fi
 	::(state==changeBluetoothOFF)->
 	  if
 		 ::(action[2]==1 && action[1]==1)->atomic{action[1]=0;state=changeAirplane_modeON};
 		 ::(action[2]==0 && action[1]==1)->atomic{action[1]=0;state=Setting};
+		 ::(action[2]==1 && action[1]==1)->atomic{action[1]=0;state=changeAirplane_modeON};
+		 ::(action[2]==0 && action[1]==1)->atomic{action[1]=0;state=Setting};
 	  fi
 	::(state==changeAirplane_modeOFF)->
 	  if
+		 ::(action[2]==1)->atomic{action[2]=0;state=Setting};
 		 ::(action[2]==1)->atomic{action[2]=0;state=Setting};
 	  fi
 	::(state==changeAirplane_modeON)->
@@ -50,9 +55,14 @@ active proctype vm(){
 		 ::(action[2]==1 && action[0]==0 && action[1]==0)->atomic{action[2]=0;state=Setting};
 		 ::(action[0]==1)->atomic{Wifi=OFF;action[0]=1;state=changeWifiOFF};
 		 ::(action[1]==1)->atomic{Bluetooth=OFF;action[1]=1;state=changeBluetoothOFF};
+		 ::(action[2]==1 && action[0]==0 && action[1]==0)->atomic{action[2]=0;state=Setting};
+		 ::(action[0]==1)->atomic{Wifi=OFF;action[0]=1;state=changeWifiOFF};
+		 ::(action[1]==1)->atomic{Bluetooth=OFF;action[1]=1;state=changeBluetoothOFF};
 	  fi
 	::(state==changeWifiOFF)->
 	  if
+		 ::(action[2]==1 && action[0]==1)->atomic{action[0]=0;state=changeAirplane_modeON};
+		 ::(action[2]==0 && action[0]==1)->atomic{action[0]=0;state=Setting};
 		 ::(action[2]==1 && action[0]==1)->atomic{action[0]=0;state=changeAirplane_modeON};
 		 ::(action[2]==0 && action[0]==1)->atomic{action[0]=0;state=Setting};
 	  fi

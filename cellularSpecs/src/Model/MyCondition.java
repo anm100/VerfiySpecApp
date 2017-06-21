@@ -26,6 +26,9 @@ public class MyCondition implements Serializable {
 		this.paramVal = s[1];
 		this.SwitchTo=SwitchTo;
 	}
+	public String getCondition(){
+		return paramName+opt+paramVal;
+	}
 	public String getParamName() {
 		return paramName;
 	}
@@ -41,6 +44,13 @@ public class MyCondition implements Serializable {
 	public String getOpt() {
 		return opt;
 	}
+	public String getSwitchTo() {
+		return SwitchTo;
+	}
+	public void setSwitchTo(String switchTo) {
+		SwitchTo = switchTo;
+	}
+	
 	
 	
 }

@@ -169,7 +169,7 @@ private void initialize(){
 		}	
 		changeScreen = WorkSpace.getInstance().getChangeScreenByname(e.getParamName()+SwitchTo); 
 		s.addTransPromela(e.getParamName()+"=="+(e).getValues()[fromVal]
-			,Promela.getActionString(e.getParamName(), e.getValues()[toVal])
+			+ElementController.getCondForParam(e,SwitchTo),Promela.getActionString(e.getParamName(), e.getValues()[toVal])
 			+Promela.getActionString(e.getIndex(),1)
 			+Promela.getActionSonsString(e,1,SwitchTo)
 			,changeScreen.getScreenName());
