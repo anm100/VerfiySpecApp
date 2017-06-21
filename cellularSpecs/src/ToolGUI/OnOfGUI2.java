@@ -251,7 +251,7 @@ public class OnOfGUI2 extends JFrame {
 		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,dataOfelement.get(1),dataOfelement.get(0)));
 		ComboparameterNames.setSelectedItem(dataOfelement.get(1));
 		setOnOff(dataOfelement.get(2));
-		addToTable(ElementController.getActrion(getScreenName(),eName));
+	//	addToTable(ElementController.getActrion(getScreenName(),eName));
 		btnSave.setActionCommand("_edit_on_off");	
 		
 	}

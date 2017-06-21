@@ -153,7 +153,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpace.getLog().info(verificationController.translateToPROMELA());
 			WorkSpace.getLog().debug("create pml file ");
 			try{
-			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8"));
+			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA());
 			    writer.close();
 			} catch (IOException eb) {
