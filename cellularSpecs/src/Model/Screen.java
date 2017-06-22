@@ -160,7 +160,10 @@ public class Screen implements Serializable,screenInterface{
 		{
 			out +="\n"+"		 ::"+i;
 		}
-		
+		if(transPromela.size()==0){
+			
+			out ="\n"+"			 ::atomic{state="+this.getScreenName()+"};";
+		}
 
 		return 	startScreen+out
 				+"\n"+"	  fi"; 

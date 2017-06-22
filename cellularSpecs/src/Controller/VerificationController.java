@@ -124,21 +124,11 @@ private void initialize(){
 
 										
 				}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
+					setTransEmptyNotEmpty(s ,w.getParamsByName(e.getParamName()),
+							((EmptyNEmptyType)e).getParameter().getValues()[1]);
 					
 					WorkSpace.getLog().debug("---Empty type start action to Empty->notEmpty ");
-					changeScreen = new ChangeScreen(s.getScreenName()+e.getParamName()); 
-					s.getTransPromela().add("("+e.getParamName()+"=="
-							+((EmptyNEmptyType)e).getParameter().getValues()[0]+")->atomic{"+e.getParamName()+"="
-							+((EmptyNEmptyType)e).getParameter().getValues()[1]+";"
-							+"action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]=1;"
-							+"state="+changeScreen.getScreenName()+"};");
-					
-					changeScreen.addTransPromela("action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]==1",
-							"action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]=0",
-							s.getScreenName());
-					
-					WorkSpace.getInstance().addChangeScreen(changeScreen);
-					
+										
 					}
 				
 				}
@@ -153,23 +143,58 @@ private void initialize(){
 
 		return sAll;
 	}
-//	private void setParamAction(OnOffType parent, OnOffType son ){
-//		
-//		
-//	}
-//	private void parentAction(ChangeScreen parent,OnOffType e){
-//		
-//		if (e.getActions().size() != 0){
-//			
-//			for (Action i:e.getActions()){
-//				setParamAction(e,w.g)
-//				
-//			}
-//			
-//		}
-//		
-//		
-//	}
+	
+	private void setTransEmptyNotEmpty(screenInterface s ,Param e,String SwitchTo) {
+		ChangeScreen changeScreen;
+		// TODO Auto-generated method stub
+		int fromVal=0,toVal=1;
+		if(SwitchTo.equals("Empty")){
+			fromVal=1;toVal=0;
+		}	
+		
+		/*
+		 * s.getTransPromela().add("("+e.getParamName()+"=="
+							+((EmptyNEmptyType)e).getParameter().getValues()[0]+")->atomic{"+e.getParamName()+"="
+							+((EmptyNEmptyType)e).getParameter().getValues()[1]+";"
+							+"action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]=1;"
+							+"state="+changeScreen.getScreenName()+"};");
+					
+					changeScreen.addTransPromela("action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]==1",
+							"action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]=0",
+							s.getScreenName());
+		 */
+		changeScreen = WorkSpace.getInstance().getChangeScreenByname(e.getParamName()+SwitchTo); 
+		s.addTransPromela(e.getParamName()+"=="+(e).getValues()[fromVal]
+			+ElementController.getCondForParam(e,SwitchTo),Promela.getActionString(e.getParamName(), e.getValues()[toVal])
+			+Promela.getActionString(e.getIndex(),1)
+			+Promela.getActionSonsString(e,1,SwitchTo)
+			,changeScreen.getScreenName());
+
+		changeScreen.addTransPromela(Promela.getActionCondParent(ElementController.getIndexesParentForParam(e.getParamName()),0)+Promela.getActionCondString(e.getIndex(), 1)
+				+Promela.getActionCondSonsString(e, 0,SwitchTo)
+				,Promela.getActionString(e.getIndex(),0), s.getScreenName());
+		WorkSpace.getInstance().addChangeScreen(changeScreen);
+	if (e.getActions(SwitchTo).size() ==0) return;
+	else {
+		for (MyAction i:e.getActions("NotEmpty")){
+			
+			if(i.getParamVal().equals("ON")){
+				setTransSon(changeScreen,e,w.getParamsByName(i.getParamName()),"ON",ElementType.getOnOffType());
+				
+			}else if(i.getParamVal().equals("OFF")) {
+				setTransSon(changeScreen,e,w.getParamsByName(i.getParamName()),i.getParamVal(),ElementType.getOnOffType());
+				
+			}else if(i.getParamVal().equals("NotEmpty")){
+				setTransSon(changeScreen,e,w.getParamsByName(i.getParamName()),i.getParamVal(),ElementType.getEmptyNotEmptyType());
+
+				
+			}
+			
+
+		}
+	}
+		
+	}
 	
 	private void setTransONOFF(screenInterface s ,Param e,String SwitchTo) {
 		ChangeScreen changeScreen;
@@ -194,32 +219,27 @@ private void initialize(){
 		for (MyAction i:e.getActions("ON")){
 			
 			if(i.getParamVal().equals("ON")){
-				setTransSonONOFF(changeScreen,e,w.getParamsByName(i.getParamName()),"ON");
+				setTransSon(changeScreen,e,w.getParamsByName(i.getParamName()),"ON",ElementType.getOnOffType());
 				
-			}else {
-				setTransSonONOFF(changeScreen,e,w.getParamsByName(i.getParamName()),"OFF");
+			}else if(i.getParamVal().equals("OFF")) {
+				setTransSon(changeScreen,e,w.getParamsByName(i.getParamName()),i.getParamVal(),ElementType.getOnOffType());
+				
+			}else if(i.getParamVal().equals("NotEmpty")){
+				setTransSon(changeScreen,e,w.getParamsByName(i.getParamName()),i.getParamVal(),ElementType.getEmptyNotEmptyType());
+
 				
 			}
-			
 
 		}
 	}
 		
 	}
-/*	int fromVal=0,toVal=1;
-		if(val.equals("ON")){
-			fromVal=1;toVal=0;
-		}
- * 
- * p.getParamName()+"=="+(p).getValues()[fromVal]
-			,Promela.getActionString(p.getParamName(), p.getValues()[toVal])
- * 
- */
-	private void setTransSonONOFF(ChangeScreen parent ,Param pParent, Param pson,
-			String SwitchTo) {
+
+	private void setTransSon(ChangeScreen parent ,Param pParent, Param pson,
+			String SwitchTo,String type) {
 		// TODO Auto-generated method stub
 		int toVal=1;
-		if(SwitchTo.equals("ON")){
+		if(SwitchTo.equals(type.split("/")[0])){
 			toVal=0;
 		}	
 		
