@@ -59,9 +59,9 @@ public ArrayList<MyAction> getActions() {
 public  String getStringPromela(){
 	String conditons;
 	if(conds.size()== 0){
-		return "atomic(state="
+		return "atomic{state="
 				+getTrans().getToScreen()
-				+");" ; 
+				+"};" ; 
 	}
 	conditons=new String(conds.get(0).getParamName()
 			+conds.get(0).getOpt()
@@ -75,9 +75,9 @@ public  String getStringPromela(){
 			 	+conds.get(i).getOpt()
 			 	+conds.get(i).getParamVal();
  }
-	return "("+conditons+")->atomic(state="
+	return "("+conditons+")->atomic{state="
 				+getTrans().getToScreen()
-				+");"+" /* "+this.elementName+" Button */" ; 
+				+"};"+" /* "+this.elementName+" Button */" ; 
 }
 
 

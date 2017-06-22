@@ -25,9 +25,7 @@ byte onOff_9=OFF;
 byte Wifi=OFF;
 byte user=Empty;
 
-ltl  req1 {[](((state==Setting)->((!([]<>((state==changeBluetoothON)&&(state==changeWifiON)&&(state==changeuser)&&(state==changeBluetoothOFF)&&(state==changepass)&&(state==changeAirplane_modeOFF)&&(state==changeAirplane_modeON)&&(state==changeWifiOFF))))-><>
-((state !=Setting)&&((state!=changeBluetoothON)&&(state!=changeWifiON)&&(state!=changeuser)&&(state!=changeBluetoothOFF)&&(state!=changepass)&&
-(state!=changeAirplane_modeOFF)&&(state!=changeAirplane_modeON)&&(state!=changeWifiOFF))))))}active proctype vm(){
+active proctype vm(){
  do
 	::(state==Setting)->
 	  if
@@ -44,9 +42,9 @@ ltl  req1 {[](((state==Setting)->((!([]<>((state==changeBluetoothON)&&(state==ch
 
 	::(state==LoginScreen)->
 	  if
-		 ::(pass==Empty)->atomic(pass=NotEmpty;action[14]=1;state=changeLoginScreenpass);
-		 ::(user==NotEmpty && pass==NotEmpty)->atomic(state=MainScreen); /* Log_in Button */
-		 ::(user==Empty)->atomic(user=NotEmpty;action[13]=1;state=changeLoginScreenuser);
+		 ::(pass==Empty)->atomic{pass=NotEmpty;action[14]=1;state=changeLoginScreenpass};
+		 ::(user==NotEmpty && pass==NotEmpty)->atomic{state=MainScreen}; /* Log_in Button */
+		 ::(user==Empty)->atomic{user=NotEmpty;action[13]=1;state=changeLoginScreenuser};
 	  fi
 /*
 */////////////////////////////////////// End of changeParamScreens for screen LoginScreen////////////////////////////////////////////////

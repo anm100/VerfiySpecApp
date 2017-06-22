@@ -128,10 +128,10 @@ private void initialize(){
 					WorkSpace.getLog().debug("---Empty type start action to Empty->notEmpty ");
 					changeScreen = new ChangeScreen(s.getScreenName()+e.getParamName()); 
 					s.getTransPromela().add("("+e.getParamName()+"=="
-							+((EmptyNEmptyType)e).getParameter().getValues()[0]+")->atomic("+e.getParamName()+"="
+							+((EmptyNEmptyType)e).getParameter().getValues()[0]+")->atomic{"+e.getParamName()+"="
 							+((EmptyNEmptyType)e).getParameter().getValues()[1]+";"
 							+"action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]=1;"
-							+"state="+changeScreen.getScreenName()+");");
+							+"state="+changeScreen.getScreenName()+"};");
 					
 					changeScreen.addTransPromela("action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]==1",
 							"action["+((EmptyNEmptyType)e).getParameter().getIndex()+"]=0",
