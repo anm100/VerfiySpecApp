@@ -3,7 +3,7 @@
 #define Empty 2 
 #define NotEmpty 3 
 mtype={Setting,LoginScreen,MainScreen,
-changeLoginScreenuser,changeBluetoothON,changeWifiON,changeuser,changeLoginScreenpass,changeBluetoothOFF,changepass,changeAirplane_modeOFF,changeAirplane_modeON,changeWifiOFF}
+changeBluetoothON,changeWifiON,changepassNotEmpty,changeBluetoothOFF,changeuserNotEmpty,changeAirplane_modeOFF,changeAirplane_modeON,changeWifiOFF}
 mtype state= Setting;
 /*define flag for action */
 byte action[15];
@@ -25,6 +25,7 @@ byte onOff_9=OFF;
 byte Wifi=OFF;
 byte user=Empty;
 
+<<<<<<< HEAD
 ltl  req4 {[](((Bluetooth==ON||Bluetooth==OFF)->(!(<>(Bluetooth!=ON&&Bluetooth==OFF))))
 &&((onOff_0==ON||onOff_0==OFF)->(!(<>(onOff_0!=ON&&onOff_0==OFF))))&&
 ((Airplane_mode==ON||Airplane_mode==OFF)->(!(<>(Airplane_mode!=ON&&Airplane_mode==OFF))))
@@ -40,6 +41,15 @@ ltl  req4 {[](((Bluetooth==ON||Bluetooth==OFF)->(!(<>(Bluetooth!=ON&&Bluetooth==
 &&((Wifi==ON||Wifi==OFF)->(!(<>(Wifi!=ON&&Wifi==OFF))))
 ((pass==Empty||pass==NotEmpty)->(!(<>(pass!=Empty&&pass==NotEmpty))))
 &&((user==Empty||user==NotEmpty)->(!(<>(user!=Empty&&user==NotEmpty)))))}
+=======
+
+ltl  req1 {[](((state==Setting)->((!([]<>((state==changeBluetoothON)&&(state==changeWifiON)&&(state==changepassNotEmpty)&&(state==changeBluetoothOFF)&&
+(state==changeuserNotEmpty)&&(state==changeAirplane_modeOFF)&&(state==changeAirplane_modeON)&&(state==changeWifiOFF))))-><>
+((state !=Setting)&&((state!=changeBluetoothON)&&(state!=changeWifiON)&&(state!=changepassNotEmpty)&&(state!=changeBluetoothOFF)&&(state!=changeuserNotEmpty)&&
+(state!=changeAirplane_modeOFF)&&(state!=changeAirplane_modeON)&&(state!=changeWifiOFF))))))}
+
+ltl  req1 {[](((state==Setting)->((!([]<>((state==changeBluetoothON)&&(state==changeWifiON)&&(state==changepassNotEmpty)&&(state==changeBluetoothOFF)&&(state==changeuserNotEmpty)&&(state==changeAirplane_modeOFF)&&(state==changeAirplane_modeON)&&(state==changeWifiOFF))))-><>((state !=Setting)&&((state!=changeBluetoothON)&&(state!=changeWifiON)&&(state!=changepassNotEmpty)&&(state!=changeBluetoothOFF)&&(state!=changeuserNotEmpty)&&(state!=changeAirplane_modeOFF)&&(state!=changeAirplane_modeON)&&(state!=changeWifiOFF)))))&&((state==LoginScreen)->((!([]<>((state==changeBluetoothON)&&(state==changeWifiON)&&(state==changepassNotEmpty)&&(state==changeBluetoothOFF)&&(state==changeuserNotEmpty)&&(state==changeAirplane_modeOFF)&&(state==changeAirplane_modeON)&&(state==changeWifiOFF))))-><>((state !=LoginScreen)&&((state!=changeBluetoothON)&&(state!=changeWifiON)&&(state!=changepassNotEmpty)&&(state!=changeBluetoothOFF)&&(state!=changeuserNotEmpty)&&(state!=changeAirplane_modeOFF)&&(state!=changeAirplane_modeON)&&(state!=changeWifiOFF)))))&&((state==MainScreen)->((!([]<>((state==changeBluetoothON)&&(state==changeWifiON)&&(state==changepassNotEmpty)&&(state==changeBluetoothOFF)&&(state==changeuserNotEmpty)&&(state==changeAirplane_modeOFF)&&(state==changeAirplane_modeON)&&(state==changeWifiOFF))))-><>((state !=MainScreen)&&((state!=changeBluetoothON)&&(state!=changeWifiON)&&(state!=changepassNotEmpty)&&(state!=changeBluetoothOFF)&&(state!=changeuserNotEmpty)&&(state!=changeAirplane_modeOFF)&&(state!=changeAirplane_modeON)&&(state!=changeWifiOFF))))))}
+>>>>>>> 0445d1c0315abcd3dd4b7afe2751ce2087dfe05d
 active proctype vm(){
  do
 	::(state==Setting)->
@@ -50,6 +60,7 @@ active proctype vm(){
 		 ::(Bluetooth==ON)->atomic{Bluetooth=OFF;action[11]=1;state=changeBluetoothOFF};
 		 ::(Wifi==OFF && Airplane_mode==OFF)->atomic{Wifi=ON;action[10]=1;state=changeWifiON};
 		 ::(Wifi==ON)->atomic{Wifi=OFF;action[10]=1;state=changeWifiOFF};
+		 ::atomic{state=LoginScreen};
 	  fi
 /*
 */////////////////////////////////////// End of changeParamScreens for screen Setting////////////////////////////////////////////////
@@ -57,9 +68,9 @@ active proctype vm(){
 
 	::(state==LoginScreen)->
 	  if
-		 ::(pass==Empty)->atomic{pass=NotEmpty;action[14]=1;state=changeLoginScreenpass};
+		 ::(pass==Empty)->atomic{pass=NotEmpty;action[14]=1;state=changepassNotEmpty};
 		 ::(user==NotEmpty && pass==NotEmpty)->atomic{state=MainScreen}; /* Log_in Button */
-		 ::(user==Empty)->atomic{user=NotEmpty;action[13]=1;state=changeLoginScreenuser};
+		 ::(user==Empty)->atomic{user=NotEmpty;action[13]=1;state=changeuserNotEmpty};
 	  fi
 /*
 */////////////////////////////////////// End of changeParamScreens for screen LoginScreen////////////////////////////////////////////////
@@ -67,15 +78,12 @@ active proctype vm(){
 
 	::(state==MainScreen)->
 	  if
+			 ::atomic{state=MainScreen};
 	  fi
 /*
 */////////////////////////////////////// End of changeParamScreens for screen MainScreen////////////////////////////////////////////////
 */
 
-	::(state==changeLoginScreenuser)->
-	  if
-		 ::(action[13]==1)->atomic{action[13]=0state=LoginScreen};
-	  fi
 	::(state==changeBluetoothON)->
 	  if
 		 ::(action[12]==0 && action[11]==1)->atomic{action[11]=0;state=Setting};
@@ -86,12 +94,10 @@ active proctype vm(){
 		 ::(action[12]==0 && action[10]==1)->atomic{action[10]=0;state=Setting};
 		 ::(action[12]==0 && action[10]==1)->atomic{action[10]=0;state=Setting};
 	  fi
-	::(state==changeuser)->
+	::(state==changepassNotEmpty)->
 	  if
-	  fi
-	::(state==changeLoginScreenpass)->
-	  if
-		 ::(action[14]==1)->atomic{action[14]=0state=LoginScreen};
+		 ::(action[14]==1)->atomic{action[14]=0;state=LoginScreen};
+		 ::(action[14]==1)->atomic{action[14]=0;state=LoginScreen};
 	  fi
 	::(state==changeBluetoothOFF)->
 	  if
@@ -100,8 +106,10 @@ active proctype vm(){
 		 ::(action[12]==1 && action[11]==1)->atomic{action[11]=0;state=changeAirplane_modeON};
 		 ::(action[12]==0 && action[11]==1)->atomic{action[11]=0;state=Setting};
 	  fi
-	::(state==changepass)->
+	::(state==changeuserNotEmpty)->
 	  if
+		 ::(action[13]==1)->atomic{action[13]=0;state=LoginScreen};
+		 ::(action[13]==1)->atomic{action[13]=0;state=LoginScreen};
 	  fi
 	::(state==changeAirplane_modeOFF)->
 	  if

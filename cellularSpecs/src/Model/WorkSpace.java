@@ -183,7 +183,7 @@ public void setAllChangeScreen(){
 								
 			}else if (e.getType().equals(ElementType.getEmptyNotEmptyType())){
 		
-				addChangeScreen(new ChangeScreen(e.getParamName()));
+				addChangeScreen(new ChangeScreen(e.getParamName()+"NotEmpty"));
 
 			}
 

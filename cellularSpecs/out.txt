@@ -137,6 +137,7 @@ unreached in claim req8
 	_spin_nvr.tmp:20, state 24, "-end-"
 	(1 of 24 states)
 
+<<<<<<< HEAD
 pan: elapsed time 0 seconds
 warning: for p.o. reduction to be valid the never claim must be stutter-invariant
 (never claims generated from LTL formulae are stutter-invariant)
@@ -453,3 +454,6 @@ unreached in claim req8
 	(1 of 24 states)
 
 pan: elapsed time 0 seconds
+=======
+pan: elapsed time 0.001 seconds
+>>>>>>> 0445d1c0315abcd3dd4b7afe2751ce2087dfe05d
