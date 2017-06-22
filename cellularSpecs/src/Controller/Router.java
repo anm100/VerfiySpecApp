@@ -154,14 +154,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			} catch (IOException eb) {
 			   // do something
 			}
-
-		case("AddScreen"):
-			WorkSpace.getLog().debug("do_AddScreen.. ");
-			addScreen=new AddScreenGUI();
-			addScreen.addScreenListener(this);
-			addScreen.setVisible(true);
-
-			
 			WorkSpace.getLog().debug("start run script in SPIN");
 			try {
 			      Runtime.getRuntime().exec( "wscript exe/excute.vbs" );
@@ -170,9 +162,17 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			      System.out.println(e1);
 			      System.exit(0);
 			   	}
+			break;
+
+		case("AddScreen"):
+			WorkSpace.getLog().debug("do_AddScreen.. ");
+			addScreen=new AddScreenGUI();
+			addScreen.addScreenListener(this);
+			addScreen.setVisible(true);
+			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 		break;
-		mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
-        break;
+
 		case("ShowResults"):
 		break;
 		case("_save_add_screen"):
