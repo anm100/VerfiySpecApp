@@ -11,8 +11,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -23,6 +26,7 @@ import Model.Screen;
 import Model.StandartButtonType;
 import Model.WorkSpace;
 import Model.OnOffType;
+import Model.Requirement;
 import Model.RequirementList;
 import ToolGUI.*;
 
@@ -35,7 +39,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private int y=0;
 	private String specName;
 	public Boolean inner =false;
-	private RequirementList requirementList;
 	private  Boolean GetNewLocation=false;
 	private OnOfGUI  onOfGUI; 
 	private ListTypeGUI  listTypeGUI;
@@ -56,7 +59,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private  Router(NewSpecGUI newSpecGui)
 	{
 		this.newSpecGui=newSpecGui;
-		//requirementList=new RequirementList();
 	}
 	/**
 	 * @wbp.parser.entryPoint
@@ -111,14 +113,27 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			
 		break;
 		case("Verifiy SPEC"):
-		//	VerificationController.setRuiremens();
-			requirementList=new RequirementList();
-
-	//	String [] s=requirementList.getRequirement(7).getReq().split("X");
-
+			String st=new String();;
+				verifySpecGUI=new VerifySpecGUI();
+				 st=WorkSpace.getReqlist().get(0).getReq();
+				verifySpecGUI.setReq_pan(new JLabel(st),0);
+				 st=WorkSpace.getReqlist().get(1).getReq();
+				String [] s=st.split("X");
+				st = s[0];
+				verifySpecGUI.setReq_pan(new JLabel(st),1);
+				verifySpecGUI.setReq_pan(verifySpecGUI.getReq2ScreenCombo(),1);
+				 st=WorkSpace.getReqlist().get(2).getReq();			 
+				 s=st.split("X");
+				 verifySpecGUI.setReq_pan(new JLabel(s[0]),2);
+				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3ScreenICombo(),2);
+				verifySpecGUI.setReq_pan(new JLabel(s[1]),2);
+				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3ScreenJCombo(),2);
+				 verifySpecGUI.setReq_pan(new JLabel(s[2]),2);
+				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3CombboParam(),2);
+				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3CombboValue(),2);
 			WorkSpace.getLog().debug("verifiy Spec case");
-		 verifySpecGUI=new VerifySpecGUI();
-		VerifySpecGUI.setVerifySpecGUI(this);
+	//	verifySpecGUI=new VerifySpecGUI();
+		verifySpecGUI.setVerifySpecGUI(this);
 		//VerifySpecGUI.setComboBox(WorkSpace.getInstance().getsc);
 		VerifySpecGUI.setCheckBoxListener(verificationController);
 		verifySpecGUI.setVisible(true);
@@ -130,6 +145,19 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				e1.printStackTrace();
 			}*/
 		break;
+		case("Run_verifectaion"):
+			verificationController = new VerificationController();
+			WorkSpace.getLog().debug("Router->Run_verifectaion");
+			FormulaTranslate.setFormula(verifySpecGUI);
+			WorkSpace.getLog().info(verificationController.translateToPROMELA());
+			WorkSpace.getLog().debug("Router->create pml file ");
+			try{
+			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
+			    writer.println(verificationController.translateToPROMELA());
+			    writer.close();
+			} catch (IOException eb) {
+			   // do something
+			}
 		case("AddScreen"):
 			WorkSpace.getLog().debug("do_AddScreen.. ");
 			addScreen=new AddScreenGUI();
@@ -139,32 +167,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
         break;
-		
-		case("Run_verifectaion"):
-			verificationController = new VerificationController();
-			WorkSpace.getLog().debug("Run_verifectaion");
-			WorkSpace.getLog().info(verificationController.translateToPROMELA());
-			WorkSpace.getLog().debug("create pml file ");
-			FormulaTranslate.translateReq1();
-			FormulaTranslate.translateReq2a();
-			FormulaTranslate.translateReq2b();
-			ArrayList<String> ar=new ArrayList();
-			ar.add("wifi");
-			ar.add("bluetooth");
-			FormulaTranslate.translateReq3("SignIn","BoPo_MainSreen",ar);
-			FormulaTranslate.translateReq6();
-		//	FormulaTranslate.translateReq7();
-			//FormulaTranslate.translateReq8a("Airplane_mode");
-			//FormulaTranslate.translateReq8b("Airplane_mode");
-			try{
-			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
-			    writer.println(verificationController.translateToPROMELA());
-			    writer.close();
-			} catch (IOException eb) {
-			   // do something
-			}
-		break;
-
 		case("ShowResults"):
 		break;
 		case("_save_add_screen"):
@@ -324,12 +326,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 
 		
 	}
-	public RequirementList getRequirementList() {
-		return requirementList;
-	}
-	public void setRequirementList(RequirementList requirementList) {
-		this.requirementList = requirementList;
-	}
+
 
 	public int getX() {
 		return x;

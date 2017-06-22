@@ -11,7 +11,7 @@
     },
     {
       "ID": "req2",
-      "name": "There is a screen (root), such that each screen is reached from it.",
+      "name": "Each Screen is reachable from X.",
       "formula": " "
     },
     {

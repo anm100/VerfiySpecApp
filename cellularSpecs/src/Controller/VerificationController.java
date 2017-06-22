@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,6 +18,7 @@ import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.OnOffType;
 import Model.Param;
+import Model.Requirement;
 import Model.RequirementList;
 import Model.Screen;
 import Model.WorkSpace;
@@ -38,7 +40,7 @@ public class VerificationController implements ItemListener {
 
 	public  String translateToPROMELA(){
 		WorkSpace.getLog().debug("translateToPROMELA");
-
+		
 		return ""
 				+"#define ON  1 \n"
 				+"#define OFF 0 \n"
@@ -47,12 +49,22 @@ public class VerificationController implements ItemListener {
 						+ "mytype={"+ScreenController.getAllScreenName()
 						+",\n"+w.getAllChangeStates()+"}\n"
 						+defineParamsPromela()
-//						+getLTLReq()
+						+getLTLReq()
 						+"\nactive proctype vm(){\n"
 						+" do\n"
 						+ getPG()
 						 +"od\n}";
 	}
+private String getLTLReq() {
+	String st="";
+	for(int i=0;i<WorkSpace.getReqlist().size();i++)
+	if(WorkSpace.getReqlist().get(i).isSelected())
+	{
+		st+="\n"+WorkSpace.getReqlist().get(i).getFormula();
+	}
+	return st;
+	}
+
 private void initialize(){
 	WorkSpace.getLog().debug("initialize");
 	w.setAllChangeScreen();

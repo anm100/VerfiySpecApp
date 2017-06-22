@@ -12,31 +12,32 @@ import Model.ElementActionInterface;
 import Model.ElementType;
 import Model.MyCondition;
 import Model.Param;
+import Model.Requirement;
+import Model.RequirementList;
 import Model.StandartButtonType;
 import Model.WorkSpace;
+import ToolGUI.VerifySpecGUI;
 
 public   class FormulaTranslate  {
 	private static ArrayList<String> changeStatesList=new ArrayList<String>();//fill this araylist in Screen
 	private static ArrayList<String> screenStatesList=new ArrayList<String>();//fill this araylist in WrokSpace
-	
 	public static ArrayList<String> getScreenStatesList() {
 		return screenStatesList;
 	}
-
-	
-	
 	public FormulaTranslate(){
 		changeStatesList=new ArrayList<String>();
 		screenStatesList=new ArrayList<String>();
 	}
-	public static  void translateReq1()
+	public static  String translateReq1()
 {
 	String st=new String();
 	 st="ltl "+" req1 "+"{[]("+getTranslateReq1()+")}";
-	 WorkSpace.getLog().debug(st);
+	 WorkSpace.getLog().debug("FormulaTranslation->translate Req 1");
+	 return st;
 }
 
-public static String getTranslateReq1() {
+	
+private static String getTranslateReq1() {
 	String str="";
 	String stateChanges=getChangeState("==","&&");
 	String stateChanges1=getChangeState("!=","&&");
@@ -49,6 +50,7 @@ public static String getTranslateReq1() {
 	if(screenStatesList.size()>0 && changeStatesList.size()>0)
 		str=str.substring(0, str.length()-2);
 	return str;
+	
 }
 public static void translateReq2a()
 {
@@ -207,6 +209,7 @@ public static  void translateReq3(String screen1,String screen2,ArrayList<String
 	String st="";
 	 st="ltl "+" req3 "+"{[]((state=="+screen1+")->((state=="+screen1+")U((state!="+screen1+")"+getChangeStateRe3(parameterName,screen2)+")))}";
 	 WorkSpace.getLog().debug(st);
+	 System.out.println(st);
 }
 private static String getChangeStateRe3(ArrayList<String> parameterName,String Until) {
 	String str="&&(!(";
@@ -325,4 +328,19 @@ public static ArrayList<MyAction> getActionByparameterName(String parameterName,
 	return p.getActions(SwithTO) ; 
 		
 	}
+public static void setFormula(VerifySpecGUI verifySpecGUI) {
+	 Boolean[] cb=verifySpecGUI.getReq();
+	 for(int i=0;i<cb.length;i++)
+	 {
+		 WorkSpace.getReqlist().get(i).setSelected(cb[i]);
+		 if(cb[i].equals(true))
+		 {
+			 switch (WorkSpace.getReqlist().get(i).getrID())
+			 {
+			 case "req1":
+				 WorkSpace.getReqlist().get(i).setFormula(translateReq1());
+			 }
+		 }
+	 }
+}
 }
