@@ -11,6 +11,9 @@ public class ElementType implements Serializable {
 	private final static String standartBtnType=new String ("reqular Button");
 	private final static String ListType=new String ("List");
 	private final static  String on="ON";
+	private final static String off="OFF";
+	private final static String empty="Empty";
+	private final static String notEmpty="NotEmpty";
 	public static String getOn() {
 		return on;
 	}
@@ -18,7 +21,14 @@ public class ElementType implements Serializable {
 	public static String getOff() {
 		return off;
 	}
-	private final static String off="OFF";
+	public static String getEmpty() {
+		return empty;
+	}
+
+	public static String getNotEmpty() {
+		return notEmpty;
+	}
+
 	
 	
 

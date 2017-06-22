@@ -33,6 +33,7 @@ public static Element getElementByName(String elementName){
 		
 	}
 
+
 public static ArrayList<StandartButtonType> getElementsByType(String Type){
 	Screen s ;
 	ArrayList<StandartButtonType> arr=new ArrayList<StandartButtonType>();
@@ -108,6 +109,22 @@ public static ArrayList<StandartButtonType> getElementsByType(String Type){
 		stockArr = params.toArray(stockArr);	
 	return stockArr;
 	}
+	public static String [] getParams(String type){//return all the paramet name we using this array in Formulatranslate
+		ArrayList<String> params = new ArrayList<String>();
+		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
+		Param p;
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			 p =(Param)pair.getValue();
+			if(p.getType().equals(type))
+			{		
+			params.add(p.getParamName());
+			}
+		}
+		String[] stockArr = new String[params.size()];
+		stockArr = params.toArray(stockArr);	
+	return stockArr;
+	}
 		/*
 		 * check if a parmaetername is exiting in the Screen
 		 * if the parameter is existed in the screen return true
@@ -142,6 +159,7 @@ public static ArrayList<StandartButtonType> getElementsByType(String Type){
 		stockArr = params.toArray(stockArr);	
 	return stockArr;
 	}
+	
 
 	public static String getAllScreenName(){
 		Map.Entry pair;

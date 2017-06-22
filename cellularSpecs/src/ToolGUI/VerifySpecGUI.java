@@ -45,6 +45,9 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 	private JPanel[] req_pan=new JPanel[reqNum];;
 	private JComboBox root;
 
+	public String getRoot() {
+		return root.getSelectedItem().toString();
+	}
 	public VerifySpecGUI() {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
