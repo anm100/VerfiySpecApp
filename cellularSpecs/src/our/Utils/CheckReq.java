@@ -1,5 +1,7 @@
 package our.Utils;
 
+import java.util.ArrayList;
+
 import Controller.FormulaTranslate;
 import Model.MyAction;
 import Model.ElementType;
@@ -9,6 +11,7 @@ import Model.WorkSpace;
 public class CheckReq {
 
 	public static void main(String[] args) {
+
 		// TODO Auto-generated method stub
 		String[] Screen={"Setting"};
 		String[] ChangeState={"changeBluetoothON","changeWifiON","changeBluetoothOFF","changeAirplane_modeOFF","changeAirplane_modeON","changeWifiOFF"};
@@ -23,10 +26,14 @@ public class CheckReq {
 		p1.addAction(a2);
 		WorkSpace.getInstance();
 		WorkSpace.getInstance().addParameterToHash(p1);
-		WorkSpace.getInstance().addParameterToHash(p2);
-		WorkSpace.getInstance().addParameterToHash(p3);
-		FormulaTranslate.translateReq8a("Airplane_mode","ON");
-		
+		//WorkSpace.getInstance().addParameterToHash(p2);
+		//WorkSpace.getInstance().addParameterToHash(p3);
+		//FormulaTranslate.translateReq8a("Airplane_mode","ON");
+		FormulaTranslate.translateReq1();
+		ArrayList<String> a= new ArrayList();
+		a.add("aaaa");
+		FormulaTranslate.translateReq3("screen1","screen4",a);
+
 	}
 
 }

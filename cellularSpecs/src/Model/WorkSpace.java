@@ -13,6 +13,7 @@ private  String  workSpaceName;
 private String workSpaceLocation;
 private  HashMap <String,ChangeScreen> ChangeScreen = new HashMap <String,ChangeScreen>();
 private static WorkSpace instance =null ; 
+private static ArrayList<Requirement> reqlist;
 private final static Logger logger=new Logger();
 /*
  * number of screens on workspace 
@@ -32,6 +33,7 @@ private  WorkSpace()
 		ParamsMap=new HashMap<String,Param>();
 		this.IsClicked=false;
 		numScreen=1; 
+		reqlist=(new RequirementList()).getReqlist();
 }
 
 
@@ -102,7 +104,12 @@ public HashMap<String,Screen> getScreensMap() {
 public boolean getisIsClicked() {
 	return IsClicked;
 }
-
+public static ArrayList<Requirement> getReqlist() {
+	return reqlist;
+}
+public static void setReqlist(ArrayList<Requirement> reqlist) {
+	WorkSpace.reqlist = reqlist;
+}
 public void setIsClicked(boolean isClicked) {
 	IsClicked = isClicked;
 }
