@@ -11,10 +11,10 @@ import Model.WorkSpace;
 public class CheckReq {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub"LoginScreen"
+
+		// TODO Auto-generated method stub
 		String[] Screen={"Setting"};
 		String[] ChangeState={"changeBluetoothON","changeWifiON","changeBluetoothOFF","changeAirplane_modeOFF","changeAirplane_modeON","changeWifiOFF"};
-		//String[] ChangeState={"changeBluetoothON"};
 		FormulaTranslate.setScreenStates(Screen);
 		FormulaTranslate.setChangeStates(ChangeState);
 		Param p1 =new Param("Airplane_mode","OFF",ElementType.getOnOffType());

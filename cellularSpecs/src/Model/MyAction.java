@@ -19,13 +19,7 @@ public class MyAction implements Serializable {
 	}
 
 	//action: wifi=on
-	public MyAction(String action) {
-		super();
-		String [] s = action.split("=");
-		this.paramName = s[0];
-		this.paramVal = s[1];
-	//	cond=new ArrayList<MyCondition>();
-	}
+
 	public MyAction(String action,String SwitchTo) {
 		super();
 		String [] s = action.split("=");

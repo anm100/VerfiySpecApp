@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import Model.Element;
 import Model.ElementActionInterface;
+import Model.MyAction;
 import Model.MyCondition;
 import Model.OnOffType;
 import Model.Param;
@@ -71,6 +72,49 @@ public class ElementController {
 		}
 		return st1; 
 	}
-
+	public static ArrayList<String>  getIndexesParentForParam(String paramName){
+		ArrayList<String> indexs= new ArrayList<String>(); 
+		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
+		Param p;
+		while(it.hasNext()){
+			Map.Entry pair =(Map.Entry) it.next(); 
+			 p =(Param)pair.getValue();
+			 for (MyAction i :p.getAction()){
+				 if(i.getParamName().equals(paramName)){
+					 indexs.add(p.getIndex()+"");
+					 
+				 }
+				 
+			 }
+		}
+		return indexs;
+	}
+	public static String getCondForParam(Param e,String toSwitch) {
+		// TODO Auto-generated method stub
+		ArrayList<MyCondition> cond = e.getCond(toSwitch);
+		String st=new String ("");
+		if(cond !=null){
+		
+		for (MyCondition i:cond){
+		st+=" && "+i.getCondition();
+			}
+		}
+		return st;
+	}
+	public static String getCondForParamWithson(Param parent ,String toVal ){
+		
+		String str=new String (""); 
+		str = getCondForParam(parent,""+toVal);
+		Param p ; 
+		if(parent.getActions(""+toVal).size()== 0) return str; 
+		
+		for (MyAction i : parent.getActions(""+toVal)){
+			p= WorkSpace.getInstance().getParamsByName(i.getParamName());
+			str+=getCondForParam(p,i.getParamVal());
+			
+		}
+		return str; 
+		
+	}
 
 }

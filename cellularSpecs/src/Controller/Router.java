@@ -137,13 +137,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		//VerifySpecGUI.setComboBox(WorkSpace.getInstance().getsc);
 		VerifySpecGUI.setCheckBoxListener(verificationController);
 		verifySpecGUI.setVisible(true);
-		//	verifySpecGUI.addRootScreen(st);
-			/*try {
-				Runtime.getRuntime().exec("cmd /c start b.bat");
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}*/
+			//verifySpecGUI.addRootScreen(st);
+		
 		break;
 		case("Run_verifectaion"):
 			verificationController = new VerificationController();
@@ -151,6 +146,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			FormulaTranslate.setFormula(verifySpecGUI);
 			WorkSpace.getLog().info(verificationController.translateToPROMELA());
 			WorkSpace.getLog().debug("Router->create pml file ");
+
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA());
@@ -158,14 +154,24 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			} catch (IOException eb) {
 			   // do something
 			}
+
 		case("AddScreen"):
 			WorkSpace.getLog().debug("do_AddScreen.. ");
 			addScreen=new AddScreenGUI();
 			addScreen.addScreenListener(this);
 			addScreen.setVisible(true);
 
-			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
-			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
+			
+			WorkSpace.getLog().debug("start run script in SPIN");
+			try {
+			      Runtime.getRuntime().exec( "wscript exe/excute.vbs" );
+			   }
+			   catch( IOException e1 ) {
+			      System.out.println(e1);
+			      System.exit(0);
+			   	}
+		break;
+		mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);		
         break;
 		case("ShowResults"):
 		break;

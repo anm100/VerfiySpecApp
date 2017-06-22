@@ -154,7 +154,7 @@ private static String getChangeStateReg8a(ArrayList<MyAction> actions,String Swi
 	String str="";
 	for(int j=0;j<changeStatesList.size();j++){
 		if(changeStatesList.get(j).endsWith(parameter1+SwithTO))
-			str+="(state!="+changeStatesList.get(j)+")";
+			str+="(state=="+changeStatesList.get(j)+")";
 	}
 	for(int i=0;i<actions.size();i++)
 	{
@@ -162,7 +162,7 @@ private static String getChangeStateReg8a(ArrayList<MyAction> actions,String Swi
 		if(actions.get(i).getSwitchtO().endsWith(SwithTO)
 				&&changeStatesList.get(j).endsWith(actions.get(i).getParamName()+actions.get(i).getParamVal()))
 		{
-		str+="||(state!="+changeStatesList.get(j)+")";	
+		str+="||(state=="+changeStatesList.get(j)+")";	
 		}
 		}
 	}

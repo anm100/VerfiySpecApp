@@ -1,0 +1,21 @@
+never req8 {    /* !([] ((! ((Airplane_mode==1))) || ((((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF))) U ((Wifi==0))) && (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF))) U ((Bluetooth==0)))))) */
+T0_init:
+	if
+	:: (! ((! ((Airplane_mode==1)))) && ! (((Wifi==0)))) -> goto accept_S5
+	:: (((! ((! ((Airplane_mode==1)))) && ! (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF)))) && ! (((Bluetooth==0)))) || (! ((! ((Airplane_mode==1)))) && ! (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF)))) && ! (((Wifi==0)))))) -> goto accept_all
+	:: (! ((! ((Airplane_mode==1)))) && ! (((Bluetooth==0)))) -> goto accept_S10
+	:: (1) -> goto T0_init
+	fi;
+accept_S5:
+	if
+	:: (! (((Wifi==0)))) -> goto accept_S5
+	:: (! (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF)))) && ! (((Wifi==0)))) -> goto accept_all
+	fi;
+accept_S10:
+	if
+	:: (! (((Bluetooth==0)))) -> goto accept_S10
+	:: (! (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF)))) && ! (((Bluetooth==0)))) -> goto accept_all
+	fi;
+accept_all:
+	skip
+}
