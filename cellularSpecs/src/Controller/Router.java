@@ -115,8 +115,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		case("Verifiy SPEC"):
 			String st=new String();;
 				verifySpecGUI=new VerifySpecGUI();
+				
 				 st=WorkSpace.getReqlist().get(0).getReq();
 				verifySpecGUI.setReq_pan(new JLabel(st),0);
+				
 				 st=WorkSpace.getReqlist().get(1).getReq();
 				String [] s=st.split("X");
 				st = s[0];
@@ -131,6 +133,11 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				 verifySpecGUI.setReq_pan(new JLabel(s[2]),2);
 				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3CombboParam(),2);
 				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3CombboValue(),2);
+				 
+				 st=WorkSpace.getReqlist().get(3).getReq();			 
+				 verifySpecGUI.setReq_pan(new JLabel(st),3);
+				 
+	
 			WorkSpace.getLog().debug("verifiy Spec case");
 	//	verifySpecGUI=new VerifySpecGUI();
 		verifySpecGUI.setVerifySpecGUI(this);

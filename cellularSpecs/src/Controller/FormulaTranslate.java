@@ -88,16 +88,17 @@ private static String getTranslateReq2a() {
 	str+=")";
 	return str;
 }
-public static  void translateReq2b()
+public static  String translateReq2b(String root)
 {
 	String st="";
-	 st="ltl "+" req2 "+"{[]("+getTranslateReq2b()+")}";
+	 st="ltl "+" req2 "+"{[]("+getTranslateReq2b(root)+")}";
 	 WorkSpace.getLog().debug(st);
+	 return st;
 }
-private static String getTranslateReq2b() {
+private static String getTranslateReq2b(String root) {
 	String str="";
 	if(screenStatesList.size()>=2){
-	 str="(state="+screenStatesList.get(0)+")->(";// ScreenStates.get(0) is the root 
+	 str="(state="+root+")->(";// ScreenStates.get(0) is the root 
 	for(int i=0;i<screenStatesList.size();i++)
 	{
 		if(0!=i)
@@ -227,6 +228,37 @@ private static String getChangeStateRe3(ArrayList<String> parameterName,String U
 	str+="U(state=="+Until+")))";
 	return str;
 }
+public static  String translateReq4()
+{
+	String st="";
+	 st="ltl "+" req4 "+"{[]("+getTranslateReq4()+")}";
+	 WorkSpace.getLog().debug(st);
+return st;
+}
+private static String getTranslateReq4() {
+	String st="";
+	String [] OnOffParams=ScreenController.getParams(ElementType.getOnOffType());
+	String [] EmptyNotEmptyParams=ScreenController.getParams(ElementType.getEmptyNotEmptyType());
+	for(int i=0;i<OnOffParams.length;i++)
+		st+="("+getForReq4(OnOffParams[i],ElementType.getOn(),ElementType.getOff())+")&&";
+	if(OnOffParams.length>0)
+		st=st.substring(0, st.length()-2);
+	for(int i=0;i<EmptyNotEmptyParams.length;i++)
+		st+="("+getForReq4(EmptyNotEmptyParams[i],ElementType.getEmpty(),ElementType.getNotEmpty())+")&&";
+	if(EmptyNotEmptyParams.length>0)
+		st=st.substring(0, st.length()-2);
+	return st;
+}
+private static String getForReq4(String param,String elType1,String elType2) {
+	String st="";
+	
+	st="("+param+"=="+elType1+"||"+
+		param+"=="+elType2+")->(!(<>"+
+		"("+param+"!="+elType1+"&&"+
+		param+"=="+elType2+")))";
+	
+	return st;
+}
 public static void translateReq7()
 {
 	String st="";
@@ -338,7 +370,18 @@ public static void setFormula(VerifySpecGUI verifySpecGUI) {
 			 switch (WorkSpace.getReqlist().get(i).getrID())
 			 {
 			 case "req1":
+				 WorkSpace.getLog().debug("FormulaTranslate->req1");
 				 WorkSpace.getReqlist().get(i).setFormula(translateReq1());
+				break;
+			 case "req2":
+				 WorkSpace.getReqlist().get(i).setFormula(translateReq2b(verifySpecGUI.getRoot()));
+				 WorkSpace.getLog().debug("FormulaTranslate->req2");
+				 break;
+			 case "req4":
+				 WorkSpace.getReqlist().get(i).setFormula(translateReq4());
+				 WorkSpace.getLog().debug("FormulaTranslate->req4");
+				 break;
+				
 			 }
 		 }
 	 }
