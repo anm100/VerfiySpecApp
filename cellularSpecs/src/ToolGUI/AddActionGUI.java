@@ -39,7 +39,7 @@ private JLabel switchlbl;
 		 btnSave = new JButton("save");
 		btnSave.setBounds(66, 80, 91, 23);
 		getContentPane().add(btnSave);
-		btnSave.setActionCommand("_save_Action");
+		btnSave.setActionCommand("_save_Action_param");
 		
 		JButton btnCancel = new JButton("cancel");
 		btnCancel.setBounds(195, 80, 91, 23);
@@ -123,7 +123,7 @@ private JLabel switchlbl;
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public void setAddAconditionListener(ActionListener addConditionsListener ){    
+	public void setAddActionListener(ActionListener addConditionsListener ){    
 		btnSave.addActionListener(addConditionsListener);
 	}
 	public String getParameterNameCombo() {

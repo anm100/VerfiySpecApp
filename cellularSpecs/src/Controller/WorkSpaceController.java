@@ -162,29 +162,36 @@ public class WorkSpaceController {
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		ArrayList<String> con1=elementGui.get_Off_To_On_Condition();
 		ArrayList<String> con2=elementGui.get_On_To_Off_Conditions();
-		ArrayList<String> act1=elementGui.get_On_To_Off_Actions();
-		ArrayList<String> act2=elementGui.get_Off_To_ON_Actions();
-		for(int i=0;i<con1.size();i++)
-		{
-			MyCondition cond;
-			 cond=new MyCondition(con1.get(i),ElementType.getOn());
-			p.addCond(cond);
-			 cond=new MyCondition(con2.get(i),ElementType.getOff());
-			p.addCond(cond);
+		ArrayList<String> act1=elementGui.get_Off_To_ON_Actions();
+		ArrayList<String> act2=elementGui.get_On_To_Off_Actions();
+		for(String i : con1){
+			p.addCond(new MyCondition(i,ElementType.getOn()));
+			
 		}
-		for(int i=0;i<act1.size();i++)
-		{
-			MyAction act;
-			 act=new MyAction(act1.get(i), ElementType.getOn());
-			p.addAction(act);
-			 act=new MyAction(act2.get(i), ElementType.getOn());
-			p.addAction(act);
+		for(String i : con2){
+			p.addCond(new MyCondition(i, ElementType.getOff()));
+			
 		}
-		l.setElementName(elementGui.getElementName());	
+		for(String i : act1){
+			p.addAction(new MyAction(i, ElementType.getOn()));
+			
+		}
+		for(String i : act2){
+			p.addAction(new MyAction(i, ElementType.getOff()));
+			
+		}
+		l.setElementName(elementGui.getElementName());
 		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
-		WorkSpace.getLog().debug("do "+l.getParamName());
+		WorkSpace.getLog().debug("do  edit -->  "+l.getParamName());
 		WorkSpace.getInstance().addParameterToHash(p);
+		
+		WorkSpace.getLog().debug("actions after update ");
+
+		for (MyAction i : WorkSpace.getInstance().getParamsByName(p.getParamName()).getActions("ON")){
+			WorkSpace.getLog().debug("\n"+i.getActionString());
+
+		}
 		WorkSpace.getLog().debug("--show element in GUI");
 	}
 	public static void reomveFromModels(String screenName,OnOffType oldOnOffType)	
