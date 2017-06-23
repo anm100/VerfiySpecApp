@@ -92,13 +92,19 @@ public class debugingGUI extends JFrame{
 	JButton button_2 = new JButton("debug open setting");
 	button_2.setBounds(11, 104, 273, 41);
 	getContentPane().add(button_2);
+	
+	JButton button_3 = new JButton("debug action gui");
+	button_3.setBounds(11, 287, 273, 41);
+	getContentPane().add(button_3);
 	    setVisible(true);
-		setSize(335, 330);
+		setSize(383, 458);
 		setLocation(800, 50);
-		button_2.addActionListener(new ActionListener() {
+		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				BulidSpec.buildsetting();
 				WorkSpaceController.createSpecGUI();
+				Appointments app = new Appointments(WorkSpace.getInstance().getParamsByName("Airplane_mode"),"ON");
+				app.getFrame().setVisible(true);
 			}
 		});
 		   

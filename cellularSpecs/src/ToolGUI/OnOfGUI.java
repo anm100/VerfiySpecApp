@@ -511,15 +511,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			}	
 		}
 	}
-	private void setaddconditonGui(String st)
-	{
-		switchTo=st;
-		addconditonGui=new AddConditonGui();
-		addconditonGui.setSwitchlbl("switch to"+switchTo);
-		addconditonGui.setVisible(true);
-		addconditonGui.setAddAconditionListener(this);
-		addconditonGui.setAddAconditionListener(null);
-	}
+	
 	private void setaddActionGui(String st)
 	{
 		switchTo=st;

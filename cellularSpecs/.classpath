@@ -5,7 +5,7 @@
 	<classpathentry kind="lib" path="src/our/Utils/JTattoo-1.6.11.jar"/>
 	<classpathentry kind="lib" path="Library/json-simple.jar"/>
 	<classpathentry kind="lib" path="Library/miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="Library/jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="Library/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="Library/jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
