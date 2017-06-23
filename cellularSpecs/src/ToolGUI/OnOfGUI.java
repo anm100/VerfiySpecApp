@@ -101,7 +101,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		 lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		JLabel lblOnoff = new JLabel(ScreenName+"- ONOFF");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
-		lblOnoff.setBounds(30, 11, 361, 36);
+		lblOnoff.setBounds(30, 18, 361, 36);
 		getContentPane().add(lblOnoff);
 		
 		JLabel lblName = new JLabel("Element name:");
@@ -146,7 +146,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		 
 		 btnSave.setActionCommand("_save_on_off");
 			
-		btnSave.setBounds(118, 366, 112, 23);
+		btnSave.setBounds(118, 512, 112, 23);
 		getContentPane().add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -156,7 +156,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		 		edRmCon.setVisible(true);
 			}
 		});
-		btnCancel.setBounds(316, 366, 116, 23);
+		btnCancel.setBounds(348, 512, 116, 23);
 		getContentPane().add(btnCancel);
 		rdbtnOff = new JRadioButton("OFF");
 		rdbtnOff.setSelected(true);
@@ -189,7 +189,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		JLabel lblNewLabel_1 = new JLabel("Parameter name");
 		lblNewLabel_1.setBounds(29, 93, 79, 14);
 		getContentPane().add(lblNewLabel_1);
-		setSize(696, 505);
+		setSize(606, 585);
 			
 			ParameterName = new JTextField();
 			ParameterName.addPropertyChangeListener(new PropertyChangeListener() {
@@ -219,20 +219,21 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			String[] doc_columnNames = { "ON->OFF","OFF->ON"};
 				
 				JPanel panel_1 = new JPanel();
-				panel_1.setBounds(30, 169, 552, 186);
+				panel_1.setBounds(30, 169, 552, 314);
 				getContentPane().add(panel_1);
 				panel_1.setLayout(null);
 				
 				JLabel lblOnoff_1 = new JLabel("ON->OFF");
-				lblOnoff_1.setBounds(10, 11, 57, 14);
+				lblOnoff_1.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 14));
+				lblOnoff_1.setBounds(80, 11, 90, 14);
 				panel_1.add(lblOnoff_1);
 				
-				JLabel lblConditions = new JLabel("Conditions:");
-				lblConditions.setBounds(10, 36, 62, 14);
+				JLabel lblConditions = new JLabel("Conditions for transiton");
+				lblConditions.setBounds(30, 36, 190, 14);
 				panel_1.add(lblConditions);
 				
-				JLabel lblActrions = new JLabel("Actions :");
-				lblActrions.setBounds(10, 87, 57, 14);
+				JLabel lblActrions = new JLabel("Parameters will be changed");
+				lblActrions.setBounds(30, 164, 190, 14);
 				panel_1.add(lblActrions);
 				
 				 textAreaOnToOff = new TextArea("",5,100,TextArea.SCROLLBARS_NONE);
@@ -247,12 +248,12 @@ public class OnOfGUI extends JFrame implements ActionListener {
 //						actions.setListener(thisref);
 				 	}
 				 });
-				textAreaOnToOff.setBounds(73, 31, 190, 50);
+				textAreaOnToOff.setBounds(30, 54, 190, 50);
 				panel_1.add(textAreaOnToOff);
 				
 				 ActionAreaOnToOff = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
 				ActionAreaOnToOff.setEditable(false);
-				ActionAreaOnToOff.setBounds(73, 87, 190, 55);
+				ActionAreaOnToOff.setBounds(29, 184, 190, 95);
 				ActionAreaOnToOff.addMouseListener(new MouseAdapter() {
 				 	@Override
 				 	public void mouseClicked(MouseEvent arg0) {
@@ -269,20 +270,20 @@ public class OnOfGUI extends JFrame implements ActionListener {
 						
 						
 						JSeparator separator = new JSeparator();
-						separator.setBounds(281, 0, 2, 159);
+						separator.setBounds(267, 21, 2, 222);
 						panel_1.add(separator);
 						separator.setOrientation(SwingConstants.VERTICAL);
-						separator.setBackground(Color.RED);
+						separator.setBackground(Color.DARK_GRAY);
 		
 						ActionAreaOffToON = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
 						ActionAreaOffToON.setEditable(false);
-						ActionAreaOffToON.setBounds(352, 87, 190, 55);
+						ActionAreaOffToON.setBounds(313, 184, 190, 95);
 						ActionAreaOffToON.addMouseListener(new MouseAdapter() {
 						 	@Override
 						 	public void mouseClicked(MouseEvent arg0) {
 						 		
 						 		System.out.println("edit textarea");
-							    actions = new Appointments(getParameterName(),Off_To_On_Action,"OFF");
+							    actions = new Appointments(getParameterName(),Off_To_On_Action,ElementType.getOn());
 								actions.getFrame().setVisible(true);
 								actions.setListener(thisref);
 						 	}
@@ -292,43 +293,45 @@ public class OnOfGUI extends JFrame implements ActionListener {
 						
 						 textAreaOffToON = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
 						textAreaOffToON.setEditable(false);
-						textAreaOffToON.setBounds(352, 31, 190, 50);
+						textAreaOffToON.setBounds(314, 54, 190, 50);
 						panel_1.add(textAreaOffToON);
 						
-						JLabel label = new JLabel("Actions :");
-						label.setBounds(289, 87, 253, 14);
-						panel_1.add(label);
+						JLabel lblActions = new JLabel("Parameters will be changed");
+						lblActions.setBounds(313, 164, 190, 14);
+						panel_1.add(lblActions);
 						
-						JLabel label_1 = new JLabel("Conditions:");
-						label_1.setBounds(289, 36, 253, 14);
-						panel_1.add(label_1);
+						JLabel lblConditionsForTransiton = new JLabel("Conditions for transiton");
+						lblConditionsForTransiton.setBounds(314, 36, 190, 14);
+						panel_1.add(lblConditionsForTransiton);
 						
-						JLabel lblOffon = new JLabel("OFF->ON");
-						lblOffon.setBounds(289, 11, 51, 14);
-						panel_1.add(lblOffon);
-						
-						Button button_1 = new Button("Add Condition");
+						Button button_1 = new Button("Add /Edit Conditions");
 						button_1.setActionCommand("_add_condition_ON_To_Off");
 						button_1.addActionListener(this);
-						button_1.setBounds(72, 0, 81, 22);
+						button_1.setBounds(30, 102, 190, 22);
 						panel_1.add(button_1);
 						
-						Button button_3 = new Button("Add Condition");
+						Button button_3 = new Button("Add /Edit Conditions");
 						button_3.setActionCommand("_add_condition_Off_To_On");
 						button_3.addActionListener(this);
-						button_3.setBounds(350, 0, 81, 22);
+						button_3.setBounds(314, 100, 190, 22);
 						panel_1.add(button_3);
 						
-						Button button_2 = new Button("Add /edit Action");
-						button_2.setBounds(350, 137, 192, 22);
+						Button button_2 = new Button("Add /edit Actions");
+						button_2.setBackground(Color.LIGHT_GRAY);
+						button_2.setBounds(313, 282, 192, 22);
 						panel_1.add(button_2);
 						button_2.setActionCommand("_add_action_Off_To_On");
 						button_2.addActionListener(this);
 						
-						Button button = new Button("Add /edit Action");
-						button.setBounds(73, 136, 190, 22);
+						Button button = new Button("Add /edit Actions");
+						button.setBounds(29, 282, 190, 22);
 						panel_1.add(button);
 						button.setActionCommand("_add_action_ON_To_Off");
+						
+						JLabel lblOffon = new JLabel("OFF->ON");
+						lblOffon.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 14));
+						lblOffon.setBounds(364, 11, 90, 14);
+						panel_1.add(lblOffon);
 						button.addActionListener(this);
 				
 				JPanel panel = new JPanel();
@@ -337,14 +340,21 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				panel.setLayout(null);
 				
 				JMenuBar menuBar = new JMenuBar();
+				menuBar.setBackground(Color.ORANGE);
 				menuBar.setBounds(0, 0, 551, 21);
 				panel.add(menuBar);
 				
 				JButton btnNewButton = new JButton("transition");
+				btnNewButton.setForeground(Color.WHITE);
 				menuBar.add(btnNewButton);
 				btnNewButton.setBackground(Color.WHITE);
 				
 				JButton btnNewButton_1 = new JButton("Exception");
+				btnNewButton_1.setForeground(Color.WHITE);
+				btnNewButton_1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
 				menuBar.add(btnNewButton_1);
 				btnNewButton_1.setBackground(Color.WHITE);
 				
@@ -609,12 +619,12 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			setaddconditonGui(ElementType.getOn());
 			break;
 		case ("_add_action_ON_To_Off"):
-			 actions = new Appointments(getParameterName(),On_To_Off_Action,"OFF");
+			 actions = new Appointments(getParameterName(),On_To_Off_Action,ElementType.getOff());
 			 actions.getFrame().setVisible(true);
 			 actions.setListener(thisref);
 		break;
 		case ("_add_action_Off_To_On"):
-		    actions = new Appointments(getParameterName(),Off_To_On_Action,"ON");
+		    actions = new Appointments(getParameterName(),Off_To_On_Action,ElementType.getOn());
 			actions.getFrame().setVisible(true);
 			actions.setListener(thisref);
 
