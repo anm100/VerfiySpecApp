@@ -44,6 +44,9 @@ import java.awt.TextArea;
 import java.awt.Button;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTabbedPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class OnOfGUI extends JFrame implements ActionListener {
 	protected JTextField txtUndefined;
@@ -209,9 +212,19 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			getContentPane().add(lblNewLabel_3);
 			String[] doc_columnNames = { "ON->OFF","OFF->ON"};
 				
+				JSeparator separator_1 = new JSeparator();
+				separator_1.setBackground(Color.RED);
+				separator_1.setForeground(Color.RED);
+				separator_1.setOrientation(SwingConstants.VERTICAL);
+				separator_1.setBounds(50, 58, 445, 2);
+				getContentPane().add(separator_1);
+				
+				JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+				tabbedPane.setBounds(30, 137, 552, 364);
+				getContentPane().add(tabbedPane);
+				
 				JPanel panel_1 = new JPanel();
-				panel_1.setBounds(30, 169, 552, 314);
-				getContentPane().add(panel_1);
+				tabbedPane.addTab("Reqular Transation", null, panel_1, null);
 				panel_1.setLayout(null);
 				
 				JLabel lblOnoff_1 = new JLabel("ON->OFF");
@@ -240,133 +253,122 @@ public class OnOfGUI extends JFrame implements ActionListener {
 
 				 	}
 				 });
-				textAreaOnToOff.setBounds(30, 54, 190, 50);
-				panel_1.add(textAreaOnToOff);
-				
-				 ActionAreaOnToOff = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
-				ActionAreaOnToOff.setEditable(false);
-				ActionAreaOnToOff.setBounds(29, 184, 190, 95);
-				ActionAreaOnToOff.addMouseListener(new MouseAdapter() {
-				 	@Override
-				 	public void mouseClicked(MouseEvent arg0) {
-				 		
-				 		System.out.println("edit textarea");
-					    actions = new ActionManagment(getParameterName(),On_To_Off_Action,"OFF");
-						actions.getFrame().setVisible(true);
-						actions.setListener(thisref);
-				 	}
-				 });
-				panel_1.add(ActionAreaOnToOff);
-				
-				
-						
-						
-						JSeparator separator = new JSeparator();
-						separator.setBounds(267, 21, 2, 222);
-						panel_1.add(separator);
-						separator.setOrientation(SwingConstants.VERTICAL);
-						separator.setBackground(Color.DARK_GRAY);
-		
-						ActionAreaOffToON = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
-						ActionAreaOffToON.setEditable(false);
-						ActionAreaOffToON.setBounds(313, 184, 190, 95);
-						ActionAreaOffToON.addMouseListener(new MouseAdapter() {
-						 	@Override
-						 	public void mouseClicked(MouseEvent arg0) {
-						 		
-						 		System.out.println("edit textarea");
-							    actions = new ActionManagment(getParameterName(),Off_To_On_Action,ElementType.getOn());
-								actions.getFrame().setVisible(true);
-								actions.setListener(thisref);
-						 	}
-						 });
-						panel_1.add(ActionAreaOffToON);
-						
-						
-						 textAreaOffToON = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
-						textAreaOffToON.setEditable(false);
-						textAreaOffToON.setBounds(314, 54, 190, 50);
-						textAreaOffToON.addMouseListener(new MouseAdapter() {
-						 	@Override
-						 	public void mouseClicked(MouseEvent arg0) {
-						 		
-								condition= new conditionManagment(getParameterName(),Off_To_On_Condition,ElementType.getOn());
-								condition.getFrame().setVisible(true);
-								condition.setListener(thisref);
-								WorkSpace.getLog().debug("I do add cond for ON ");
+				 textAreaOnToOff.setBounds(30, 54, 190, 50);
+				 panel_1.add(textAreaOnToOff);
+				 
+				  ActionAreaOnToOff = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
+				  ActionAreaOnToOff.setEditable(false);
+				  ActionAreaOnToOff.setBounds(29, 184, 190, 95);
+				  ActionAreaOnToOff.addMouseListener(new MouseAdapter() {
+				   	@Override
+				   	public void mouseClicked(MouseEvent arg0) {
+				   		
+				   		System.out.println("edit textarea");
+				  	    actions = new ActionManagment(getParameterName(),On_To_Off_Action,"OFF");
+				  		actions.getFrame().setVisible(true);
+				  		actions.setListener(thisref);
+				   	}
+				   });
+				  panel_1.add(ActionAreaOnToOff);
+				  
+				  
+				  		
+				  		
+				  		JSeparator separator = new JSeparator();
+				  		separator.setBounds(267, 21, 2, 222);
+				  		panel_1.add(separator);
+				  		separator.setOrientation(SwingConstants.VERTICAL);
+				  		separator.setBackground(Color.DARK_GRAY);
+				  		
+				  						ActionAreaOffToON = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
+				  						ActionAreaOffToON.setEditable(false);
+				  						ActionAreaOffToON.setBounds(313, 184, 190, 95);
+				  						ActionAreaOffToON.addMouseListener(new MouseAdapter() {
+				  						 	@Override
+				  						 	public void mouseClicked(MouseEvent arg0) {
+				  						 		
+				  						 		System.out.println("edit textarea");
+				  							    actions = new ActionManagment(getParameterName(),Off_To_On_Action,ElementType.getOn());
+				  								actions.getFrame().setVisible(true);
+				  								actions.setListener(thisref);
+				  						 	}
+				  						 });
+				  						panel_1.add(ActionAreaOffToON);
+				  						
+				  						
+				  						 textAreaOffToON = new TextArea("", 5, 100, TextArea.SCROLLBARS_NONE);
+				  						 textAreaOffToON.setEditable(false);
+				  						 textAreaOffToON.setBounds(314, 54, 190, 50);
+				  						 textAreaOffToON.addMouseListener(new MouseAdapter() {
+				  						  	@Override
+				  						  	public void mouseClicked(MouseEvent arg0) {
+				  						  		
+				  						 		condition= new conditionManagment(getParameterName(),Off_To_On_Condition,ElementType.getOn());
+				  						 		condition.getFrame().setVisible(true);
+				  						 		condition.setListener(thisref);
+				  						 		WorkSpace.getLog().debug("I do add cond for ON ");
 
-						 	}
-						 });
-						panel_1.add(textAreaOffToON);
-						
-						JLabel lblActions = new JLabel("Parameters will be changed");
-						lblActions.setBounds(313, 164, 190, 14);
-						panel_1.add(lblActions);
-						
-						JLabel lblConditionsForTransiton = new JLabel("Conditions for transiton");
-						lblConditionsForTransiton.setBounds(314, 36, 190, 14);
-						panel_1.add(lblConditionsForTransiton);
-						
-						Button button_1 = new Button("Add /Edit Conditions");
-						button_1.setActionCommand("_add_condition_ON_To_Off");
-						button_1.addActionListener(this);
-						button_1.setBounds(30, 102, 190, 22);
-						panel_1.add(button_1);
-						
-						Button button_3 = new Button("Add /Edit Conditions");
-						button_3.setActionCommand("_add_condition_Off_To_On");
-						button_3.addActionListener(this);
-						button_3.setBounds(314, 100, 190, 22);
-						panel_1.add(button_3);
-						
-						Button button_2 = new Button("Add /edit Actions");
-						button_2.setBackground(Color.LIGHT_GRAY);
-						button_2.setBounds(313, 282, 192, 22);
-						panel_1.add(button_2);
-						button_2.setActionCommand("_add_action_Off_To_On");
-						button_2.addActionListener(this);
-						
-						Button button = new Button("Add /edit Actions");
-						button.setBounds(29, 282, 190, 22);
-						panel_1.add(button);
-						button.setActionCommand("_add_action_ON_To_Off");
-						
-						JLabel lblOffon = new JLabel("OFF->ON");
-						lblOffon.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 14));
-						lblOffon.setBounds(364, 11, 90, 14);
-						panel_1.add(lblOffon);
-						button.addActionListener(this);
-				
-				JPanel panel = new JPanel();
-				panel.setBounds(30, 145, 552, 22);
-				getContentPane().add(panel);
-				panel.setLayout(null);
-				
-				JMenuBar menuBar = new JMenuBar();
-				menuBar.setBackground(Color.ORANGE);
-				menuBar.setBounds(0, 0, 551, 21);
-				panel.add(menuBar);
-				
-				JButton btnNewButton = new JButton("transition");
-				btnNewButton.setForeground(Color.WHITE);
-				menuBar.add(btnNewButton);
-				btnNewButton.setBackground(Color.WHITE);
-				
-				JButton btnNewButton_1 = new JButton("Exception");
-				btnNewButton_1.setForeground(Color.WHITE);
-				btnNewButton_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-					}
-				});
-				menuBar.add(btnNewButton_1);
-				btnNewButton_1.setBackground(Color.WHITE);
-				
-				JSeparator separator_1 = new JSeparator();
-				separator_1.setBackground(Color.RED);
-				separator_1.setForeground(Color.RED);
-				separator_1.setOrientation(SwingConstants.VERTICAL);
-				separator_1.setBounds(50, 58, 445, 2);
-				getContentPane().add(separator_1);
+				  						  	}
+				  						  });
+				  						 panel_1.add(textAreaOffToON);
+				  						 
+				  						 JLabel lblActions = new JLabel("Parameters will be changed");
+				  						 lblActions.setBounds(313, 164, 190, 14);
+				  						 panel_1.add(lblActions);
+				  						 
+				  						 JLabel lblConditionsForTransiton = new JLabel("Conditions for transiton");
+				  						 lblConditionsForTransiton.setBounds(314, 36, 190, 14);
+				  						 panel_1.add(lblConditionsForTransiton);
+				  						 
+				  						 Button button_1 = new Button("Add /Edit Conditions");
+				  						 button_1.setActionCommand("_add_condition_ON_To_Off");
+				  						 button_1.addActionListener(this);
+				  						 button_1.setBounds(30, 102, 190, 22);
+				  						 panel_1.add(button_1);
+				  						 
+				  						 Button button_3 = new Button("Add /Edit Conditions");
+				  						 button_3.setActionCommand("_add_condition_Off_To_On");
+				  						 button_3.addActionListener(this);
+				  						 button_3.setBounds(314, 100, 190, 22);
+				  						 panel_1.add(button_3);
+				  						 
+				  						 Button button_2 = new Button("Add /edit Actions");
+				  						 button_2.setBackground(Color.LIGHT_GRAY);
+				  						 button_2.setBounds(313, 282, 192, 22);
+				  						 panel_1.add(button_2);
+				  						 button_2.setActionCommand("_add_action_Off_To_On");
+				  						 button_2.addActionListener(this);
+				  						 
+				  						 Button button = new Button("Add /edit Actions");
+				  						 button.setBounds(29, 282, 190, 22);
+				  						 panel_1.add(button);
+				  						 button.setActionCommand("_add_action_ON_To_Off");
+				  						 
+				  						 JLabel lblOffon = new JLabel("OFF->ON");
+				  						 lblOffon.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 14));
+				  						 lblOffon.setBounds(364, 11, 90, 14);
+				  						 panel_1.add(lblOffon);
+				  						 
+				  						 JPanel panel = new JPanel();
+				  						 panel.setLayout(null);
+				  						 tabbedPane.addTab("Exception", null, panel, null);
+				  						 
+				  						 JLabel lblExceptionForParamter = new JLabel("Exception for paramter (optional)");
+				  						 lblExceptionForParamter.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 14));
+				  						 lblExceptionForParamter.setBounds(21, 11, 284, 14);
+				  						 panel.add(lblExceptionForParamter);
+				  						 
+				  						 JLabel lblWriteExceptionFor = new JLabel("Write exception for this param");
+				  						 lblWriteExceptionFor.setBounds(20, 268, 190, 14);
+				  						 panel.add(lblWriteExceptionFor);
+				  						 
+				  						 JScrollPane scrollPane = new JScrollPane();
+				  						 scrollPane.setBounds(10, 65, 527, 202);
+				  						 panel.add(scrollPane);
+				  						 
+				  						 JTextArea textArea = new JTextArea();
+				  						 scrollPane.setViewportView(textArea);
+				  						 button.addActionListener(this);
 			ParameterName.addFocusListener(new FocusListener() {
 		
 				public void focusGained(FocusEvent arg0) {
