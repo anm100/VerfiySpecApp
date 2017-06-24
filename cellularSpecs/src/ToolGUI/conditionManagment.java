@@ -268,6 +268,8 @@ public class conditionManagment implements ActionListener  {
 		dm.addRow(new Object[] {conditionGui.getParameterNameCombo()+"=="+conditionGui.getParameterValueCombo()});
 //
 			apps_list.add(conditionGui.getParameterNameCombo()+"=="+conditionGui.getParameterValueCombo());
+			conditionGui.dispose();
+
 			break;
 		
 		}

@@ -30,10 +30,12 @@ private JLabel switchlbl;
 		setSize(400,150);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
+
 		JLabel lblAddNewAction = new JLabel("add an action");
 		lblAddNewAction.setBounds(122, 10, 338, 14);
 		getContentPane().add(lblAddNewAction);
-		
+
 		 btnSave = new JButton("save");
 		btnSave.setBounds(66, 80, 91, 23);
 		getContentPane().add(btnSave);

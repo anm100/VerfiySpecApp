@@ -289,6 +289,7 @@ public class ActionManagment implements ActionListener  {
 		dm.addRow(new Object[] {actionGui.getParameterNameCombo(),actionGui.getParameterValueCombo()});
 //
 			apps_list.add(actionGui.getParameterNameCombo()+"="+actionGui.getParameterValueCombo());
+			actionGui.dispose();
 			break;
 		
 		}

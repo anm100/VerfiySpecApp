@@ -37,7 +37,8 @@ public class AddConditonGui extends JFrame {
 		JLabel lblAddNewConditons = new JLabel("-add a condition");
 		lblAddNewConditons.setBounds(116, 10, 125, 14);
 		getContentPane().add(lblAddNewConditons);
-		
+		setLocationRelativeTo(null);
+
 		 btnSave = new JButton("save");
 		 btnSave.setActionCommand("_save_Condition_param");
 		btnSave.setBounds(66, 80, 91, 23);

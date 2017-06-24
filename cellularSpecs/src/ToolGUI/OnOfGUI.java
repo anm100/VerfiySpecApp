@@ -69,8 +69,6 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	private AddActionGUI addactionGui;
 	private String switchTo="";
 	private EditReomveConditionGUI edRmCon;
-	private String on=ElementType.getOn();
-	private String off=ElementType.getOff();
 	private TextArea ActionAreaOnToOff ;
 	private TextArea ActionAreaOffToON;
 	private ActionManagment actions;
@@ -86,6 +84,8 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		setTitle("ON-OFF");
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
+
 		lblNewLabel_3 = new JLabel("New label");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		 lblNewLabel_2 = new JLabel("New label");
@@ -103,7 +103,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		lblDefaulval.setBounds(30, 120, 64, 14);
 		getContentPane().add(lblDefaulval);
 		
-		elementName = new JTextField();
+		elementName = new JTextField("");
 		elementName.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent arg0) {
 				lblNewLabel_2.setVisible(false);
@@ -495,13 +495,13 @@ public class OnOfGUI extends JFrame implements ActionListener {
 
 
 	public void addTotextAreaOnToOf(String textArea) {
-		this.textAreaOnToOff.append(textArea);
+		this.textAreaOnToOff.setText(textArea);
 	}
 	public void addTotextAreaOffToOn(String textArea) {
-		this.textAreaOffToON.append(textArea);
+		this.textAreaOffToON.setText(textArea);
 	}
 	public void setActionAreaOnToOff(String textArea) {
-		this.ActionAreaOnToOff.append(textArea);
+		this.ActionAreaOnToOff.setText(textArea);
 	}
 	public void setActionAreaOffToOn(String textArea) {
 		this.ActionAreaOffToON.setText(textArea);
@@ -509,7 +509,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	
 
 	public void setTextArea(ArrayList<String> ActionArray, String switchTo) {
-		String data =new String(""); 
+		String data=new String(); 
 		this.textAreaOnToOff.setText("");
 		this.textAreaOffToON.setText("");
 		if(switchTo.equals(ElementType.getOff()))
@@ -518,9 +518,12 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				this.textAreaOnToOff.setText("cond not defined yet!");
 
 			}
-			for(String i:ActionArray)
+			if (ActionArray.size()>0){
+				data=ActionArray.get(0);
+			}
+			for(int i=1;i<ActionArray.size();i++)
 			{
-				data += i+" && ";	
+				data += " && "+ActionArray.get(i);	
 		
 			}
 			addTotextAreaOnToOf(data);
@@ -530,9 +533,12 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			if(null ==ActionArray){
 			this.textAreaOffToON.setText("cond not defined yet!");
 			}
-			for(String i:ActionArray)
+			if (ActionArray.size()>0){
+				data=ActionArray.get(0);
+			}
+			for(int i=1;i<ActionArray.size();i++)
 			{
-				data += i+" && ";	
+				data += " && "+ActionArray.get(i);	
 		
 			}
 			addTotextAreaOffToOn(data);
@@ -640,11 +646,14 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			Off_To_On_Condition=condition.getdata();
 			setTextArea(Off_To_On_Condition,ElementType.getOn());
 			WorkSpace.getLog().debug("I do save_cond for ON ");
+			condition.getFrame().dispose();
 			break;
 		case ("_save_cond_OFF"):
 			On_To_Off_Condition=condition.getdata();
 			setTextArea(On_To_Off_Condition,ElementType.getOff());
 			WorkSpace.getLog().debug("I do save_cond for OFF ");
+			condition.getFrame().dispose();
+
 			break;
 		case ("_add_action_ON_To_Off"):
 			 actions = new ActionManagment(getParameterName(),On_To_Off_Action,ElementType.getOff());
@@ -663,13 +672,13 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			WorkSpace.getLog().debug("I do save_actions for ON ");
 //			WorkSpace.getLog().debug(actions.getdata().get(0)+actions.getdata().get(1)+actions.getdata().get(2));
 //			WorkSpace.getLog().debug(Off_To_On_Action.get(0)+Off_To_On_Action.get(1)+Off_To_On_Action.get(2));
-
-			
+			actions.getFrame().dispose();		
 			break;
 	case ("_save_actions_OFF"):
 			On_To_Off_Action=actions.getdata();
 			setActionArea(On_To_Off_Action,ElementType.getOff());
 			WorkSpace.getLog().debug("I do save_actions for OFF ");
+			actions.getFrame().dispose();
 			break;
 
 	}

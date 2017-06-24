@@ -4,11 +4,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import Controller.ElementController;
 import Controller.Router;
-import Controller.WorkSpaceController;
 import Model.Element;
 import Model.ElementType;
 import Model.Screen;

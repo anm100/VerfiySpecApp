@@ -1,0 +1,53 @@
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+
+(Spin Version 6.1.0 -- 4 May 2011)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (r31)
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness disabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 24 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.279	actual memory usage for states (unsuccessful compression: 732210.00%)
+         	state-vector as stored = 292868 byte + 16 byte overhead
+    2.000	memory used for hash table (-w19)
+    0.343	memory used for DFS stack (-m10000)
+    2.539	total actual memory usage
+
+unreached in proctype vm
+	req3_error.pml:40, state 38, "-end-"
+	(1 of 38 states)
+unreached in claim r31
+	_spin_nvr.tmp:31, state 19, "((!((state==SignIn))||(state==BoPo_MainSreen)))"
+	_spin_nvr.tmp:31, state 19, "((state==changeParamUserName))"
+	_spin_nvr.tmp:31, state 19, "((!(!((state==SignIn)))&&(state==BoPo_MainSreen)))"
+	_spin_nvr.tmp:31, state 19, "((!(!((state==SignIn)))&&(state==changeParamUserName)))"
+	_spin_nvr.tmp:38, state 29, "((state==BoPo_MainSreen))"
+	_spin_nvr.tmp:38, state 29, "((state==changeParamUserName))"
+	_spin_nvr.tmp:38, state 29, "((!(!((state==SignIn)))&&(state==BoPo_MainSreen)))"
+	_spin_nvr.tmp:38, state 29, "((!(!((state==SignIn)))&&(state==changeParamUserName)))"
+	_spin_nvr.tmp:45, state 35, "((state==BoPo_MainSreen))"
+	_spin_nvr.tmp:45, state 35, "((state==changeParamUserName))"
+	_spin_nvr.tmp:50, state 49, "((state==BoPo_MainSreen))"
+	_spin_nvr.tmp:50, state 49, "((state==changeParamUserName))"
+	_spin_nvr.tmp:50, state 49, "(((state==BoPo_MainSreen)&&(state==changeParamUserName)))"
+	_spin_nvr.tmp:50, state 49, "((!(!((state==SignIn)))&&(state==BoPo_MainSreen)))"
+	_spin_nvr.tmp:50, state 49, "(((!(!((state==SignIn)))&&(state==BoPo_MainSreen))&&(state==changeParamUserName)))"
+	_spin_nvr.tmp:50, state 49, "((!(!((state==SignIn)))&&(state==changeParamUserName)))"
+	_spin_nvr.tmp:59, state 55, "((state==BoPo_MainSreen))"
+	_spin_nvr.tmp:59, state 55, "((state==changeParamUserName))"
+	_spin_nvr.tmp:64, state 58, "-end-"
+	(6 of 58 states)
+
+pan: elapsed time 0 seconds

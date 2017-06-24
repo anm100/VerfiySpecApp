@@ -226,15 +226,18 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			break;
 			
 		case "_save_on_off":
+			if(checkInputs.checkTextfieldsAdd(onOfGUI,ElementType.getOnOffType())){
 			WorkSpace.getLog().debug("do _save_on_off.. ");
-			if(checkInputs.checkTextfields(onOfGUI,ElementType.getOnOffType()))
 			WorkSpaceController.addelementToGUI(screenGUI, onOfGUI,new OnOffType());
-		
+			onOfGUI.setVisible(false);
+			}
 			break;
 		case"_edit_on_off":
+			if(checkInputs.checkTextfieldsEdit(onOfGUI,ElementType.getOnOffType())){
 			WorkSpace.getLog().debug("Router>-edit the onOff Type");
-			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI,new OnOffType());
-			
+			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI,new OnOffType());}
+			onOfGUI.setVisible(false);
+
 			break;
 		case "_add_Action_OnOff":
 			 addActionGUI=new AddActionGUI();
