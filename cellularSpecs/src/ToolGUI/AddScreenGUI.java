@@ -81,21 +81,24 @@ public class AddScreenGUI extends JFrame {
 		return ScreenName;
 	}
 
-	public void setScreenName(JTextField screenName) {
-		ScreenName = screenName;
-	}
+	public void setScreenName(String screenName) {
+		ScreenName.setText(screenName); }
 
 	public JTextPane getDescription() {
 		return description;
 	}
 
-	public void setDescription(JTextPane description) {
-		this.description = description;
+	public void setDescription(String description) {
+		this.description.setText(description); 
 	}
 
 	public void addScreenListener(ActionListener listenForOperation){       
 		bnSave.addActionListener(listenForOperation);
 		bnSave.setActionCommand("_save_add_screen");
+}
+	public void editScreenListener(ActionListener listenForOperation){       
+		bnSave.addActionListener(listenForOperation);
+		bnSave.setActionCommand("_save_edit_screen");
 }
 
 }

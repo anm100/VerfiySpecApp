@@ -4,13 +4,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import Controller.ElementController;
 import Controller.Router;
 import Controller.WorkSpaceController;
 import Model.Element;
 import Model.ElementType;
-import Model.OnOffType;
+import Model.Screen;
 import Model.WorkSpace;
 
 import java.awt.Color;
@@ -18,6 +19,7 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JScrollPane;
@@ -32,7 +34,7 @@ import java.util.ArrayList;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
 
-public class ScreenGUI extends JScrollPane {
+public class ScreenGUI extends JScrollPane implements ActionListener {
 	private int x=0,y=0,width=143,hight=40;
 	
 	protected String screenName;
@@ -50,6 +52,10 @@ public class ScreenGUI extends JScrollPane {
 	private JPanel mainScreenPanel;
 	private ArrayList<JLabel> labelElement = new ArrayList<JLabel>();
 	private MouseEvent eventLabel;
+	private Screen screen;
+	private ScreenGUI thisRef=this; 
+	private AddScreenGUI AddScreen  ; 
+	JLabel screenLabel;
 	public ScreenGUI(String screenName,int getCordinateX,int getCordinateY) 
 	{
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -66,7 +72,21 @@ public class ScreenGUI extends JScrollPane {
 		
 		
 
-		JLabel screenLabel = new JLabel(screenName);
+		screenLabel = new JLabel(this.screenName);
+		screenLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				WorkSpace.getLog().debug("took screen from model  ");
+				screen = WorkSpace.getInstance().getScreenByName(thisRef.screenName);
+				AddScreen = new AddScreenGUI(); 
+				AddScreen.setScreenName(screen.getScreenName());
+				AddScreen.setDescription(screen.getScreenName());
+				AddScreen.editScreenListener(thisRef);
+				AddScreen.setVisible(true);
+				WorkSpace.getLog().debug("start edit screen  ");
+				
+			}
+		});
 
 		screenLabel.setBounds(1, 0, 119, 22);
 		mainScreenPanel.add(screenLabel);
@@ -250,6 +270,27 @@ public class ScreenGUI extends JScrollPane {
 
 	public MouseEvent getEventLabel() {
 		return eventLabel;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		switch(e.getActionCommand()){
+		
+		case "_save_edit_screen":
+		WorkSpace.getInstance().deleteScreen(screen);
+		screen.setDescription(AddScreen.getDescription().getText());
+		this.screenName=AddScreen.getScreenName().getText();
+		screen.setScreenName(AddScreen.getScreenName().getText());
+		WorkSpace.getInstance().addScreen(screen);
+		WorkSpace.getLog().debug("update screen successfuly ");
+		screenLabel.getParent().update(thisRef.getGraphics());
+			break; 
+	
+		
+		}
+		
 	}
 	
 }

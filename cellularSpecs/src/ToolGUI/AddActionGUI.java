@@ -2,10 +2,8 @@ package ToolGUI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import Controller.ScreenController;
-import our.Utils.BulidSpec;
 
 import java.awt.Color;
 import javax.swing.JComboBox;

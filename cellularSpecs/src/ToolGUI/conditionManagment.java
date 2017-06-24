@@ -31,31 +31,14 @@ import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import java.awt.Insets;
-import java.awt.Point;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.awt.Frame;
 
-/**
- * Appointments window , shows all needed information about specific patient :
- * shows all patient's future appointments sorted in table by appointment time
- * Ascending. option for add new appointment for this patient option to cancel
- * specific appointment.
- * 
- * @author Muhamad Igbaria
- *
- */
-public class Appointments implements ActionListener  {
+public class conditionManagment implements ActionListener  {
 
 	/**
 	 * appointments frame
@@ -73,9 +56,8 @@ public class Appointments implements ActionListener  {
 	 */
 	private Param patient;
 	private String toSwitch;
-	AddConditonGui addConditonGui;
-	AddActionGUI actionGui;
-	private Appointments thisref=this;
+	AddConditonGui conditionGui;
+	private conditionManagment thisref=this;
 	private ArrayList<String> apps_list=new ArrayList<String>();
 	private ArrayList<String> data;
 	private String paramName;
@@ -85,7 +67,7 @@ public class Appointments implements ActionListener  {
 	 * @param patient
 	 *            : Models Patient instance
 	 */
-	public Appointments(String paramName,ArrayList<String> data,String toSwitch) {
+	public conditionManagment(String paramName,ArrayList<String> data,String toSwitch) {
 		this.toSwitch=toSwitch;
 		this.data=data;
 		this.paramName=paramName;
@@ -100,7 +82,7 @@ public class Appointments implements ActionListener  {
 
 	private void initialize() {
 		app = new JFrame();
-		app.setTitle("Action management - "+WorkSpace.getInstance().getWorkSpaceName());
+		app.setTitle("conditions management - "+WorkSpace.getInstance().getWorkSpaceName());
 		app.setResizable(false);
 		//Image icon = new ImageIcon(this.getClass().getResource("/img/" + "icon.png")).getImage();
 		//app.setIconImage(icon);
@@ -110,7 +92,7 @@ public class Appointments implements ActionListener  {
 		app.getContentPane().setBackground(Color.WHITE);
 		app.getContentPane().setLayout(null);
 
-		JLabel logo = new JLabel("Action management - "+WorkSpace.getInstance().getWorkSpaceName());
+		JLabel logo = new JLabel("conditions management - "+WorkSpace.getInstance().getWorkSpaceName());
 		logo.setBounds(0, 0, 495, 59);
 		logo.setForeground(Color.DARK_GRAY);
 		logo.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 17));
@@ -155,12 +137,12 @@ public class Appointments implements ActionListener  {
 
 	
 
-		cancel_btn = new JButton("Delete Selected Action");
+		cancel_btn = new JButton("Delete Selected condition");
 		cancel_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = apps_table.getSelectedRow();
 				if(row<0){
-					Messages.errorMessage("Please select an action from the table below", "No action selected", null);
+					Messages.errorMessage("Please select an condition from the table below", "No action selected", null);
 					return;
 				}
 			
@@ -186,7 +168,7 @@ public class Appointments implements ActionListener  {
 		apps_scrollPane.setBounds(10, 147, 403, 208);
 		app.getContentPane().add(apps_scrollPane);
 
-		String[] doc_columnNames = { "Paramter name","Paramter value"};
+		String[] doc_columnNames = { "conditions"};
 		Object[][] doc_data = {};
 		apps_table = new JTable();
 		apps_table.setModel(new MyTableModel(doc_columnNames, doc_data));
@@ -200,7 +182,7 @@ public class Appointments implements ActionListener  {
 		apps_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		apps_table.setBackground(Color.WHITE);
 		
-		TableColumn action = apps_table.getColumn("Paramter name");
+		TableColumn action = apps_table.getColumn("conditions");
 		action.setPreferredWidth(100);
 		
 		
@@ -211,17 +193,17 @@ public class Appointments implements ActionListener  {
 			}
 		});
 		btnSave = new JButton("Save");
-		btnSave.setActionCommand("_save_actions_"+toSwitch);
+		btnSave.setActionCommand("_save_cond_"+toSwitch);
 		btnSave.setBounds(85, 366, 112, 23);
 		app.getContentPane().add(btnSave);
 
-		JButton newApp_btn = new JButton("Add New Action");
+		JButton newApp_btn = new JButton("Add New Condition");
 		newApp_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionGui=	new AddActionGUI();
-				actionGui.setAddActionListener(thisref);
-				actionGui.setVisible(true);
-			WorkSpace.getLog().debug("add new action button");
+				conditionGui=	new AddConditonGui();
+				conditionGui.setAddAconditionListener(thisref);
+				conditionGui.setVisible(true);
+			WorkSpace.getLog().debug("add new Condition button");
 			}
 
 			
@@ -264,7 +246,7 @@ public class Appointments implements ActionListener  {
 			if (apps_list != null && apps_list.size() > 0)
 				apps_list.clear();
 			for (String a : apps) {
-				dm.addRow(new Object[] { a.split("=")[0],a.split("=")[1]});
+				dm.addRow(new Object[] { a});
 
 				apps_list.add(a);
 			}
@@ -278,17 +260,14 @@ public class Appointments implements ActionListener  {
 		// TODO Auto-generated method stub
 		switch (arg0.getActionCommand())
 		{
-		case ("_save_Condition"):
-			//addConditionToTextArea(switchTo);
-			break;
-		case ("_save_Action_param"):
+		case ("_save_Condition_param"):
 			WorkSpace.getLog().debug("doing add to tables");
 
 			//addActionArrayList(switchTo);
 		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
-		dm.addRow(new Object[] {actionGui.getParameterNameCombo(),actionGui.getParameterValueCombo()});
+		dm.addRow(new Object[] {conditionGui.getParameterNameCombo()+"=="+conditionGui.getParameterValueCombo()});
 //
-			apps_list.add(actionGui.getParameterNameCombo()+"="+actionGui.getParameterValueCombo());
+			apps_list.add(conditionGui.getParameterNameCombo()+"=="+conditionGui.getParameterValueCombo());
 			break;
 		
 		}
