@@ -9,5 +9,6 @@ public interface Element {
 	public void setElementName(String name);
 	public String getType(); 
 	public  String getStringPromela();
+	public String getException();
 	
 }

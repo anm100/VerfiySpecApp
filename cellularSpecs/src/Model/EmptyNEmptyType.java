@@ -9,7 +9,8 @@ private Param parameter;
 private String elementName;
 private final String type=ElementType.getEmptyNotEmptyType(); 
 private List <MyAction> actions= new ArrayList<>(); 
-private List <MyCondition> conditions= new ArrayList<>(); 
+private List <MyCondition> conditions= new ArrayList<>();
+private String exception; 
 
 public EmptyNEmptyType() {}
 
@@ -69,6 +70,17 @@ public void addAction(MyAction e) {
 public ArrayList<MyAction> getActions(String value) {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+@Override
+public String getException() {
+	// TODO Auto-generated method stub
+	return exception;
+}
+
+public void setException(String text) {
+	// TODO Auto-generated method stub
+	this.exception=text;
 }
 
 

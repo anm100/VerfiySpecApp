@@ -241,6 +241,14 @@ public class ScreenGUI extends JScrollPane implements ActionListener {
                 // getText - split by ":" the index 1 = type of element 
                 if(datalabel[1].equals(ElementType.getEmptyNotEmptyType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
+                    EmptyNotEmptyGUI emptyNempty = new EmptyNotEmptyGUI(getScreenName(),datalabel[0]);
+                    emptyNempty.setOnOffListener(Router.getInstance());
+                    emptyNempty.setVisible(true);
+                    editCoordinateElem=labelElement.get(i).getY();
+                    index=(JLabel) e.getComponent();
+                   // e.getComponent().getParent().remove(e.getComponent());
+                    Router.getInstance().setEmptyGUI(emptyNempty);
+                    Router.getInstance().setScreenGUI(thisRef);
                 }else if (datalabel[1].equals(ElementType.getOnOffType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                     OnOfGUI  onOff= new OnOfGUI(getScreenName(),datalabel[0]);
@@ -250,7 +258,7 @@ public class ScreenGUI extends JScrollPane implements ActionListener {
                     index=(JLabel) e.getComponent();
                    // e.getComponent().getParent().remove(e.getComponent());
                     Router.getInstance().setOnOfGUI(onOff);
-                    Router.getInstance().setScreenGUI(this);
+                    Router.getInstance().setScreenGUI(thisRef);
 
                 }else if (datalabel[1].equals(ElementType.getListType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");

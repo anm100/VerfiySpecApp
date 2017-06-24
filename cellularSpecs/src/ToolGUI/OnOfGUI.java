@@ -62,6 +62,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	private JTextField ParameterName;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
+	private JTextArea exception;
 	private ArrayList<String> On_To_Off_Condition;
 	private ArrayList<String>  Off_To_On_Condition;
 	private ArrayList<String> On_To_Off_Action;
@@ -366,8 +367,8 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				  						 scrollPane.setBounds(10, 65, 527, 202);
 				  						 panel.add(scrollPane);
 				  						 
-				  						 JTextArea textArea = new JTextArea();
-				  						 scrollPane.setViewportView(textArea);
+				  						 exception = new JTextArea();
+				  						 scrollPane.setViewportView(exception);
 				  						 button.addActionListener(this);
 			ParameterName.addFocusListener(new FocusListener() {
 		
@@ -396,7 +397,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		setOnOff(dataOfelement.get(2));
 		//addToTable(ElementController.getActrion(getScreenName(),eName));
 		WorkSpace.getLog().debug("I do setActionArrayList");
-
+		setException(dataOfelement.get(3));
 		setActionArrayList(WorkSpace.getInstance().getParamsByName(dataOfelement.get(1))
 				.getActions(ElementType.getOn()),ElementType.getOn());
 		setActionArrayList(WorkSpace.getInstance().getParamsByName(dataOfelement.get(1))
@@ -418,6 +419,14 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	      return lblNewLabel;
 		// TODO Auto-generated method stub
 	}
+	
+	public JTextArea getException() {
+		return exception;
+	}
+	public void setException(String t) {
+		 this.exception.setText(t);;
+	}
+	
 	public JLabel getLblNewLabel_3() {
 		return lblNewLabel_3;
 	}

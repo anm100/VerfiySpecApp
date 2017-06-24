@@ -263,13 +263,24 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			
 			case("_menu_emptyNotEmpty_type"):
 				WorkSpace.getLog().debug("this _menu_emptyNotEmpty_type to create new window");
-				emptyNotEmptyGUI= new EmptyNotEmptyGUI(screenGUI.getScreenName());
+				emptyNotEmptyGUI= new EmptyNotEmptyGUI(screenGUI.getScreenName(),null);
+				emptyNotEmptyGUI.setOnOffListener(this);
+				emptyNotEmptyGUI.setParamChangeListener(this);
+				emptyNotEmptyGUI.setParameterName(ScreenController.getParams(ElementType.getEmptyNotEmptyType(),screenGUI.getScreenName()));
 				emptyNotEmptyGUI.setVisible(true);
-				emptyNotEmptyGUI.setEmptyNEmptyListener(this);
+
 				break;
 			case "_save_EmptyNEmpty":
+				if(checkInputs.checkTextfieldsAdd(emptyNotEmptyGUI,ElementType.getEmptyNotEmptyType())){
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
+				}
+				break;
+			case "_edit_EmptyNEmpty":
+				if(checkInputs.checkTextfieldsEdit(emptyNotEmptyGUI,ElementType.getEmptyNotEmptyType())){
+				WorkSpace.getLog().debug("do _save_on_off.. ");
+				WorkSpaceController.editEmentfromGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
+				}
 				break;
 			case"_menu_button_type":
 				WorkSpace.getLog().debug("this _menu_button_type to create new window");
@@ -474,6 +485,11 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		// TODO Auto-generated method stub
 		JComboBox s=(JComboBox)(e.getSource());
 		WorkSpace.getLog().debug("PARAM:"+WorkSpace.getInstance().getParamsMap().get(s.getSelectedItem().toString()));
+	}
+	public void setEmptyGUI(EmptyNotEmptyGUI emptyNempty) {
+		// TODO Auto-generated method stub
+		this.emptyNotEmptyGUI =emptyNempty;
+		
 	}
 	
 	/*
