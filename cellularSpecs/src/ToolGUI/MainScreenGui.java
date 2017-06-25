@@ -80,6 +80,13 @@ public class MainScreenGui extends JFrame  {
 		{
 			this.addMouseMotionListener(WorkSpaceController);
 		}
+		public void removeMainScreenMouseListener(MouseListener mouseListener){
+			this.removeMouseListener(mouseListener);
+		}
+		public void removeMainScreenMouseListener(MouseMotionListener WorkSpaceController)
+		{
+			this.removeMouseMotionListener(WorkSpaceController);
+		}
 		public void refreshWorkspace(){
 			getContentPane().repaint();
 			getContentPane().revalidate();

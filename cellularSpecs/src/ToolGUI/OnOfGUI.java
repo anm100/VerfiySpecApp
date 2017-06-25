@@ -6,17 +6,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.border.LineBorder;
-
-
 
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -265,7 +260,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				   	public void mouseClicked(MouseEvent arg0) {
 				   		
 				   		System.out.println("edit textarea");
-				  	    actions = new ActionManagment(getParameterName(),On_To_Off_Action,"OFF");
+				  	    actions = new ActionManagment(getParameterName(),On_To_Off_Action,ElementType.getOff());
 				  		actions.getFrame().setVisible(true);
 				  		actions.setListener(thisref);
 				   	}

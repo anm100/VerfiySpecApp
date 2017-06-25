@@ -242,13 +242,14 @@ public class ScreenGUI extends JScrollPane implements ActionListener {
                 if(datalabel[1].equals(ElementType.getEmptyNotEmptyType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                     EmptyNotEmptyGUI emptyNempty = new EmptyNotEmptyGUI(getScreenName(),datalabel[0]);
-                    emptyNempty.setOnOffListener(Router.getInstance());
+                    emptyNempty.setEmptyListener((Router.getInstance()));
                     emptyNempty.setVisible(true);
                     editCoordinateElem=labelElement.get(i).getY();
                     index=(JLabel) e.getComponent();
                    // e.getComponent().getParent().remove(e.getComponent());
                     Router.getInstance().setEmptyGUI(emptyNempty);
                     Router.getInstance().setScreenGUI(thisRef);
+                    Router.getInstance().removelistenerMainScreen();
                 }else if (datalabel[1].equals(ElementType.getOnOffType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                     OnOfGUI  onOff= new OnOfGUI(getScreenName(),datalabel[0]);
@@ -259,15 +260,18 @@ public class ScreenGUI extends JScrollPane implements ActionListener {
                    // e.getComponent().getParent().remove(e.getComponent());
                     Router.getInstance().setOnOfGUI(onOff);
                     Router.getInstance().setScreenGUI(thisRef);
+                    Router.getInstance().removelistenerMainScreen();
 
                 }else if (datalabel[1].equals(ElementType.getListType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
+                    Router.getInstance().removelistenerMainScreen();
                 
                 }else if (datalabel[1].equals(ElementType.getStandartBtnType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                     ButtonTypeGUI  buttonTypeGUI= new ButtonTypeGUI(getScreenName(),datalabel[0]);
                     buttonTypeGUI.setVisible(true);
                     onOff.setVisible(true);
+                   Router.getInstance().removelistenerMainScreen();
                 }
             }
     }

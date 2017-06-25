@@ -248,7 +248,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				 	@Override
 				 	public void mouseClicked(MouseEvent arg0) {
 				 		
-						condition= new conditionManagment(getParameterName(),On_To_Off_Condition,ElementType.getNotEmpty());
+						condition= new conditionManagment(getParameterName(),On_To_Off_Condition,ElementType.getEmpty());
 						condition.getFrame().setVisible(true);
 						condition.setListener(thisref);
 						WorkSpace.getLog().debug("I do add cond for OFF ");
@@ -266,7 +266,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				   	public void mouseClicked(MouseEvent arg0) {
 				   		
 				   		System.out.println("edit textarea");
-				  	    actions = new ActionManagment(getParameterName(),On_To_Off_Action,"OFF");
+				  	    actions = new ActionManagment(getParameterName(),On_To_Off_Action,ElementType.getEmpty());
 				  		actions.getFrame().setVisible(true);
 				  		actions.setListener(thisref);
 				   	}
@@ -400,7 +400,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 	}
 	private void loadData(	ArrayList <String> dataOfelement,String eName) {
 		elementName.setText(dataOfelement.get(0));
-		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,dataOfelement.get(1),dataOfelement.get(0)));
+		setParameterName(ScreenController.getParams(ElementType.getEmptyNotEmptyType(), ScreenName,dataOfelement.get(1),dataOfelement.get(0)));
 		ComboparameterNames.setSelectedItem(dataOfelement.get(1));
 		setOnOff(dataOfelement.get(2));
 		//addToTable(ElementController.getActrion(getScreenName(),eName));
@@ -470,7 +470,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 	setDefaultValue(rdbtnOn.getText());
 	}
 
-	public void setOnOffListener(ActionListener OnOfTypeListener ){       
+	public void setEmptyListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);
 	}
 	public void setParamChangeListener(ItemListener OnOfTypeListener)
@@ -661,17 +661,17 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 			WorkSpace.getLog().debug("I do add cond for ON ");
 
 			break;
-		case ("_save_cond_ON"):
+		case ("_save_cond_NotEmpty"):
 			Off_To_On_Condition=condition.getdata();
-			setTextArea(Off_To_On_Condition,ElementType.getEmpty());
+			setTextArea(Off_To_On_Condition,ElementType.getNotEmpty());
 			WorkSpace.getLog().debug("I do save_cond for ON ");
-			condition.getFrame().dispose();
+			condition.getFrame().setVisible(false);
 			break;
-		case ("_save_cond_OFF"):
+		case ("_save_cond_Empty"):
 			On_To_Off_Condition=condition.getdata();
-			setTextArea(On_To_Off_Condition,ElementType.getNotEmpty());
+			setTextArea(On_To_Off_Condition,ElementType.getEmpty());
 			WorkSpace.getLog().debug("I do save_cond for OFF ");
-			condition.getFrame().dispose();
+			condition.getFrame().setVisible(false);
 
 			break;
 		case ("_add_action_ON_To_Off"):
@@ -680,12 +680,12 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 			 actions.setListener(thisref);
 		break;
 		case ("_add_action_Off_To_On"):
-		    actions = new ActionManagment(getParameterName(),Off_To_On_Action,ElementType.getEmpty());
+		    actions = new ActionManagment(getParameterName(),Off_To_On_Action,ElementType.getNotEmpty());
 			actions.getFrame().setVisible(true);
 			actions.setListener(thisref);
 
 		break;
-		case ("_save_actions_ON"):
+		case ("_save_actions_NotEmpty"):
 			Off_To_On_Action=actions.getdata();
 			setActionArea(Off_To_On_Action,ElementType.getEmpty());
 			WorkSpace.getLog().debug("I do save_actions for ON ");
@@ -693,7 +693,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 //			WorkSpace.getLog().debug(Off_To_On_Action.get(0)+Off_To_On_Action.get(1)+Off_To_On_Action.get(2));
 			actions.getFrame().dispose();		
 			break;
-	case ("_save_actions_OFF"):
+	case ("_save_actions_Empty"):
 			On_To_Off_Action=actions.getdata();
 			setActionArea(On_To_Off_Action,ElementType.getNotEmpty());
 			WorkSpace.getLog().debug("I do save_actions for OFF ");
