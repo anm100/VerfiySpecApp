@@ -22,8 +22,8 @@ public class ResultGui extends JFrame {
 		lblNewLabel.setBounds(28, 11, 291, 14);
 		getContentPane().add(lblNewLabel);
 	}
-	public void addToResult(String st)
+	public void addToResult(String reqid, String req, String result)
 	{
-		txtResult.append(st+"\n");
+		txtResult.append(reqid+"\n"+req+"\n"+result+"\n");
 	}
 }

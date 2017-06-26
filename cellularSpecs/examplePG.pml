@@ -4,7 +4,7 @@
 #define NotEmpty 3 
 mtype={Setting,LoginScreen,MainScreen,
 changeBluetoothON,changeWifiON,changepassNotEmpty,changeBluetoothOFF,changeuserNotEmpty,changeAirplane_modeOFF,changeAirplane_modeON,changeWifiOFF}
-mtype state= Setting;
+mtype state=Setting;
 /*define flag for action */
 byte action[15];
 

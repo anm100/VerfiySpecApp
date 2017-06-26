@@ -62,7 +62,7 @@ public class debugingGUI extends JFrame{
 			try{
 				VerificationController	verificationControll = new VerificationController();
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
-			    writer.println(verificationControll.translateToPROMELA());
+			    writer.println(verificationControll.translateToPROMELA("Setting"));
 			    writer.close();
 			} catch (IOException eb) {
 			   // do something
@@ -79,7 +79,7 @@ public class debugingGUI extends JFrame{
 			WorkSpaceController.createSpecGUI();
 			VerificationController verificationController = new VerificationController();
 			//verificationController.translateToPROMELA();
-			FormulaTranslate.translateReq1();
+		//	FormulaTranslate.translateReq1();
 			FormulaTranslate.translateReq2a();
 		//	FormulaTranslate.translateReq2b();
 		//	FormulaTranslate.translateReq8a("Airplane MODE");

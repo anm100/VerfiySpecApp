@@ -15,6 +15,10 @@ public class Requirement implements Serializable{
 	public void addltlCount() {
 		this.ltlCount++;
 	}
+	public void setltlCount()
+	{
+		ltlCount=1;
+	}
 	public String getResult() {
 		if(result)
 		return "true";
