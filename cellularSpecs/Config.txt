@@ -11,12 +11,12 @@
     },
     {
       "ID": "req2",
-      "name": "Each Screen is reachable from X.",
+      "name": "Reachability : Each Screen is reachable from X.",
       "formula": " "
     },
     {
       "ID": "req3",
-      "name": "We can't  move from X to X without changing or defining a X.",
+      "name": "We can't  move from X to X without changing or defining a set of parameter X.",
       "formula": "{!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParmX)U(state==BoPo_MainSreen))))}"
     },
     {
@@ -26,12 +26,12 @@
     },
     {
       "ID": "req5",
-      "name": "There is no path to a screen that allows Illegal parameters values.",
+      "name": "There is no path to a screen that allows Illegal parameters values,(“Illegal” means value that does not defined in the list of the parameter values)",
       "formula": " "
     },
     {
       "ID": "req6",
-      "name": "Each list of parameters must be defined before entering a screen.",
+      "name": "Each list of X must be defined before entering a X screen.",
       "formula": "{[]((state==BoPo_MainSreen)->((title==NotEmpty)&&(max==NotEmpty)&&(chooseCategory==NotEmpty)))}"
     },
     {
@@ -41,13 +41,8 @@
     },
     {
       "ID": "req8",
-      "name": "when X is equal to X all parameter always must be consistent.",
+      "name": "All parameters always must be consistent-Check Dependency between value of X and a set of params",
       "formula": " "
     },
-    {
-      "ID": "req9",
-      "name": "If a Parameter changes  in a specific state the change should be updated wherever the parameter is used.",
-      "formula": " "
-    }
   ]
 }

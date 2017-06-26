@@ -42,6 +42,9 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 	private JCheckBox reqAll;
 	private String [] st;
 	private JComboBox req3ComboScreenI,req3ComboScreenJ,req3CombboParam,req3CombboValue,req8parameterName,req8parameterValue,req2ScreenCombo;
+	private JComboBox req6ComboScreen;
+	private JButton req6ChoosParams;
+	private JButton req2ChoosParams;
 	private JPanel[] req_pan=new JPanel[reqNum];;
 	private JComboBox root;
 
@@ -55,7 +58,7 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 		prepareScreenCombo();
 		createCheckBox();
 		createJPanel();
-		setSize(900,573);
+		setSize(900,650);
 		
 		 btnRun = new JButton("Run");
 		btnRun.setActionCommand("Run_verifectaion");
@@ -131,6 +134,10 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 		req2ScreenCombo= new  JComboBox();
 		req3CombboValue=new JComboBox();
 		req3CombboParam=new JComboBox();
+		req6ComboScreen=new JComboBox();
+		req6ChoosParams=new JButton();
+		req2ChoosParams=new JButton();
+		req2ChoosParams.setText("Choose");
 		root=new JComboBox();
 		
 	}
@@ -144,6 +151,8 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 		req3ComboScreenJ.setModel(cbm);
 		 cbm=new DefaultComboBoxModel(st);
 		root.setModel(cbm);
+		 cbm=new DefaultComboBoxModel(st);
+		 req6ComboScreen.setModel(cbm);
 		String st1 [] =ScreenController.getparams();
 		cbm=new DefaultComboBoxModel(st1);
 		req3CombboParam.setModel(cbm);
@@ -169,6 +178,15 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 
 	public JComboBox getReq3CombboValue() {
 		return req3CombboValue;
+	}
+	public JComboBox getReq6ScreenJComb() {
+		return req6ComboScreen;
+	}
+	public JButton getreq6ChoosParams() {
+		return req6ChoosParams;
+	}
+	public JButton getreq2ChoosParams() {
+		return req2ChoosParams;
 	}
 	//=========================================
 	//=========================================

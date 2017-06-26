@@ -20,7 +20,7 @@ public class BulidSpec {
 		WorkSpace.getLog().debug("start loading spec");
 		WorkSpace.setInstance(null); 
 		wk=WorkSpace.getInstance();
-		wk.setWorkSpaceName("example ");
+		wk.setWorkSpaceName("examplePG");
 		WorkSpace.getLog().debug("SPEC NAME:"+wk.getWorkSpaceName());
 		addParmsOnOff();
 		WorkSpace.getLog().debug("loading params onOFF_i");

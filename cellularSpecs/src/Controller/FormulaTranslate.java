@@ -28,28 +28,23 @@ public   class FormulaTranslate  {
 		changeStatesList=new ArrayList<String>();
 		screenStatesList=new ArrayList<String>();
 	}
-	public static  String translateReq1()
-{
-	String st=new String();
-	 st="ltl "+" req1 "+"{[]("+getTranslateReq1()+")}";
-	 WorkSpace.getLog().debug("FormulaTranslation->translate Req 1");
-	 return st;
-}
-
 	
-private static String getTranslateReq1() {
+private static String translateReq1() {
 	String str="";
-	String stateChanges=getChangeState("==","&&");
+	String st="";
+	 WorkSpace.getLog().debug("FormulaTranslation->translate Req 1");
+	String stateChanges=getChangeState("==","||");
 	String stateChanges1=getChangeState("!=","&&");
 	for(int i=0;i<screenStatesList.size() &&changeStatesList.size()>0 ;i++)
 	{
+		str="";
 		str+="((state=="+screenStatesList.get(i)+")->((!([]<>"+stateChanges+"))-><>(";
-		str+="(state !="+screenStatesList.get(i)+")&&"+stateChanges1+")))";
-		str+="&&";
+		str+="(state !="+screenStatesList.get(i)+"))))";
+		st+="ltl "+" req1-"+WorkSpace.getReqlist().get(0).getLtlCount()+"{[]("+(str)+")}\n";
+		WorkSpace.getReqlist().get(0).addltlCount();
 	}
-	if(screenStatesList.size()>0 && changeStatesList.size()>0)
-		str=str.substring(0, str.length()-2);
-	return str;
+	WorkSpace.getLog().debug(st);
+	return st;
 	
 }
 public static void translateReq2a()

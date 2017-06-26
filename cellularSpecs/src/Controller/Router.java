@@ -7,9 +7,13 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -126,13 +130,34 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				verifySpecGUI.setReq_pan(new JLabel(s[1]),2);
 				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3ScreenJCombo(),2);
 				 verifySpecGUI.setReq_pan(new JLabel(s[2]),2);
-				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3CombboParam(),2);
-				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3CombboValue(),2);
+				 verifySpecGUI.setReq_pan(verifySpecGUI.getreq2ChoosParams(),2);
+
 				 
 				 st=WorkSpace.getReqlist().get(3).getReq();			 
 				 verifySpecGUI.setReq_pan(new JLabel(st),3);
 				 
-	
+				 st=WorkSpace.getReqlist().get(4).getReq();	
+				 verifySpecGUI.setReq_pan(new JLabel(st),4);
+				 
+				 st=WorkSpace.getReqlist().get(5).getReq();	
+				 s=st.split("X");
+				 verifySpecGUI.setReq_pan(new JLabel(s[0]),5);
+				 verifySpecGUI.setReq_pan(verifySpecGUI.getreq6ChoosParams(),5);
+				 verifySpecGUI.setReq_pan(new JLabel(s[1]),5);
+				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq6ScreenJComb(),5);
+				 verifySpecGUI.setReq_pan(new JLabel(s[2]),5);
+				
+				 st=WorkSpace.getReqlist().get(6).getReq();	
+				 verifySpecGUI.setReq_pan(new JLabel(st),6);
+				 
+				 st=WorkSpace.getReqlist().get(7).getReq();	
+				 verifySpecGUI.setReq_pan(new JLabel(st),7);
+			// st=WorkSpace.getReqlist().get(6).getReq();	
+				
+			
+
+				 
+				 
 			WorkSpace.getLog().debug("verifiy Spec case");
 	//	verifySpecGUI=new VerifySpecGUI();
 		verifySpecGUI.setVerifySpecGUI(this);
@@ -164,6 +189,18 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			      System.out.println(e1);
 			      System.exit(0);
 			   	}
+			try {
+				Scanner scan=new Scanner(new File("outreq1.txt"));
+				while(scan.hasNext()){
+				String line=scan.nextLine().toLowerCase().toString();
+				if(line.contains("errors: 0"))
+				WorkSpace.getReqlist().get(0).setResult(true);
+				}
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				
 			break;
 
 		case("AddScreen"):
@@ -177,6 +214,13 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		
 
 		case("ShowResults"):
+			System.out.println("aaaa");
+			ResultGui rs=new ResultGui();
+		rs.setVisible(true);
+		if(WorkSpace.getReqlist().get(0).isSelected())
+		{
+			rs.addToResult(WorkSpace.getReqlist().get(0).getResult());
+		}
 		break;
 		case("_save_add_screen"):
 			screen = new Screen();
