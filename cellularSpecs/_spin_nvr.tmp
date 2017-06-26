@@ -1,21 +1,51 @@
-never req8 {    /* !([] ((! ((Airplane_mode==1))) || ((((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF))) U ((Wifi==0))) && (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF))) U ((Bluetooth==0)))))) */
+never req1_1 {    /* !([] ((! ((state==Setting))) || ((! (! ([] (<> (((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF))))))) || (<> ((state!=Setting)))))) */
 T0_init:
 	if
-	:: (! ((! ((Airplane_mode==1)))) && ! (((Wifi==0)))) -> goto accept_S5
-	:: (((! ((! ((Airplane_mode==1)))) && ! (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF)))) && ! (((Bluetooth==0)))) || (! ((! ((Airplane_mode==1)))) && ! (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF)))) && ! (((Wifi==0)))))) -> goto accept_all
-	:: (! ((! ((Airplane_mode==1)))) && ! (((Bluetooth==0)))) -> goto accept_S10
+	:: (! ((! ((state==Setting)))) && ! ((((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF)))) && ! (((state!=Setting)))) -> goto accept_S19
+	:: (! ((! ((state==Setting)))) && ! (((state!=Setting)))) -> goto T0_S23
 	:: (1) -> goto T0_init
 	fi;
-accept_S5:
+accept_S19:
 	if
-	:: (! (((Wifi==0)))) -> goto accept_S5
-	:: (! (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF)))) && ! (((Wifi==0)))) -> goto accept_all
+	:: (! ((((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF)))) && ! (((state!=Setting)))) -> goto accept_S19
 	fi;
-accept_S10:
+T0_S23:
 	if
-	:: (! (((Bluetooth==0)))) -> goto accept_S10
-	:: (! (((((state==changeAirplane_modeON)) || ((state==changeWifiOFF))) || ((state==changeBluetoothOFF)))) && ! (((Bluetooth==0)))) -> goto accept_all
+	:: (! ((((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF)))) && ! (((state!=Setting)))) -> goto accept_S19
+	:: (! (((state!=Setting)))) -> goto T0_S23
 	fi;
-accept_all:
-	skip
+}
+never req1_2 {    /* !([] ((! ((state==LoginScreen))) || ((! (! ([] (<> (((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF))))))) || (<> ((state!=LoginScreen)))))) */
+T0_init:
+	if
+	:: (! ((! ((state==LoginScreen)))) && ! ((((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF)))) && ! (((state!=LoginScreen)))) -> goto accept_S19
+	:: (! ((! ((state==LoginScreen)))) && ! (((state!=LoginScreen)))) -> goto T0_S23
+	:: (1) -> goto T0_init
+	fi;
+accept_S19:
+	if
+	:: (! ((((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF)))) && ! (((state!=LoginScreen)))) -> goto accept_S19
+	fi;
+T0_S23:
+	if
+	:: (! ((((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF)))) && ! (((state!=LoginScreen)))) -> goto accept_S19
+	:: (! (((state!=LoginScreen)))) -> goto T0_S23
+	fi;
+}
+never req1_3 {    /* !([] ((! ((state==MainScreen))) || ((! (! ([] (<> (((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF))))))) || (<> ((state!=MainScreen)))))) */
+T0_init:
+	if
+	:: (! ((! ((state==MainScreen)))) && ! ((((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF)))) && ! (((state!=MainScreen)))) -> goto accept_S19
+	:: (! ((! ((state==MainScreen)))) && ! (((state!=MainScreen)))) -> goto T0_S23
+	:: (1) -> goto T0_init
+	fi;
+accept_S19:
+	if
+	:: (! ((((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF)))) && ! (((state!=MainScreen)))) -> goto accept_S19
+	fi;
+T0_S23:
+	if
+	:: (! ((((((((((state==changeBluetoothON)) || ((state==changeWifiON))) || ((state==changepassNotEmpty))) || ((state==changeBluetoothOFF))) || ((state==changeuserNotEmpty))) || ((state==changeAirplane_modeOFF))) || ((state==changeAirplane_modeON))) || ((state==changeWifiOFF)))) && ! (((state!=MainScreen)))) -> goto accept_S19
+	:: (! (((state!=MainScreen)))) -> goto T0_S23
+	fi;
 }

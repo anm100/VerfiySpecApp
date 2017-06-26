@@ -6,6 +6,10 @@ public class Logger {
 
 	public Logger() {
 	}
+	
+	public boolean isDebug() {
+		return isDebug;
+	}
 
 	public void log(String message) {
 		System.out.println(message);

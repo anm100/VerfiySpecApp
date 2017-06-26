@@ -1,5 +1,5 @@
 #define SpinVersion	"Spin Version 6.1.0 -- 4 May 2011"
-#define PanSource	"example.pml"
+#define PanSource	"examplePG.pml"
 
 #define G_long	4
 #define G_int	4
@@ -62,92 +62,140 @@ char *trailfilename;
 #endif
 #ifdef NP
 	#define HAS_NP	2
-	#define VERI	2	/* np_ */
+	#define VERI	4	/* np_ */
 #endif
 #ifndef NOCLAIM
-	#define NCLAIMS	1
+	#define NCLAIMS	3
 	#ifndef NP
-		#define VERI	1
+		#define VERI	3
 	#endif
 #endif
 typedef struct S_F_MAP {
 	char *fnm; int from; int upto;
 } S_F_MAP;
 
-#define nstates1	25	/* req8 */
-#define endstate1	24
-short src_ln1 [] = {
-	  0,   3,   3,   4,   4,   5,   5,   6, 
-	  6,   2,   8,  10,  10,  11,  11,   9, 
-	 13,  15,  15,  16,  16,  14,  18,  19, 
-	 20,   0, };
-S_F_MAP src_file1 [] = {
+#define nstates3	20	/* req1_3 */
+#define endstate3	19
+short src_ln3 [] = {
+	  0,  37,  37,  38,  38,  39,  39,  36, 
+	 41,  43,  43,  42,  45,  47,  47,  48, 
+	 48,  46,  50,  50,   0, };
+S_F_MAP src_file3 [] = {
 	{ "-", 0, 0 },
-	{ "_spin_nvr.tmp", 1, 24 },
-	{ "-", 25, 26 }
+	{ "_spin_nvr.tmp", 1, 19 },
+	{ "-", 20, 21 }
 };
 short *src_claim;
+uchar reached3 [] = {
+	  0,   1,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   0,   0, };
+uchar *loopstate3;
+
+#define nstates2	20	/* req1_2 */
+#define endstate2	19
+short src_ln2 [] = {
+	  0,  20,  20,  21,  21,  22,  22,  19, 
+	 24,  26,  26,  25,  28,  30,  30,  31, 
+	 31,  29,  33,  33,   0, };
+S_F_MAP src_file2 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 19 },
+	{ "-", 20, 21 }
+};
+uchar reached2 [] = {
+	  0,   1,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   0,   0, };
+uchar *loopstate2;
+
+#define nstates1	20	/* req1_1 */
+#define endstate1	19
+short src_ln1 [] = {
+	  0,   3,   3,   4,   4,   5,   5,   2, 
+	  7,   9,   9,   8,  11,  13,  13,  14, 
+	 14,  12,  16,  16,   0, };
+S_F_MAP src_file1 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 19 },
+	{ "-", 20, 21 }
+};
 uchar reached1 [] = {
-	  0,   1,   1,   1,   1,   1,   1,   1, 
-	  1,   0,   1,   1,   1,   1,   1,   0, 
-	  1,   1,   1,   1,   1,   0,   1,   1, 
-	  0,   0, };
+	  0,   1,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   0,   0, };
 uchar *loopstate1;
 
-#define nstates0	142	/* vm */
-#define endstate0	141
+#define nstates0	187	/* vm */
+#define endstate0	186
 short src_ln0 [] = {
-	  0,  18,  20,  20,  20,  20,  20,  20, 
-	 20,  21,  21,  21,  21,  21,  22,  22, 
-	 22,  22,  22,  23,  23,  23,  23,  23, 
-	 24,  24,  24,  24,  24,  25,  25,  25, 
-	 25,  25,  19,  31,  31,  33,  33,  33, 
-	 33,  34,  34,  34,  34,  32,  36,  36, 
-	 38,  38,  38,  38,  39,  39,  39,  39, 
-	 37,  41,  41,  43,  43,  43,  43,  44, 
-	 44,  44,  44,  45,  45,  45,  45,  46, 
-	 46,  46,  46,  42,  48,  48,  50,  50, 
-	 50,  50,  51,  51,  51,  51,  49,  53, 
-	 53,  55,  55,  55,  55,  56,  56,  56, 
-	 56,  56,  57,  57,  57,  57,  57,  58, 
-	 58,  58,  58,  59,  59,  59,  59,  59, 
-	 60,  60,  60,  60,  60,  54,  62,  62, 
-	 64,  64,  64,  64,  65,  65,  65,  65, 
-	 66,  66,  66,  66,  67,  67,  67,  67, 
-	 63,  69,  17,  70,  17,  70,   0, };
+	  0,  38,  40,  40,  40,  40,  40,  40, 
+	 40,  41,  41,  41,  41,  41,  42,  42, 
+	 42,  42,  42,  43,  43,  43,  43,  43, 
+	 44,  44,  44,  44,  44,  45,  45,  45, 
+	 45,  45,  46,  46,  39,  52,  52,  54, 
+	 54,  54,  54,  54,  55,  55,  55,  56, 
+	 56,  56,  56,  56,  53,  62,  62,  64, 
+	 64,  63,  66,  66,  68,  68,  68,  68, 
+	 69,  69,  69,  69,  67,  71,  71,  73, 
+	 73,  73,  73,  74,  74,  74,  74,  72, 
+	 76,  76,  78,  78,  78,  78,  79,  79, 
+	 79,  79,  77,  81,  81,  83,  83,  83, 
+	 83,  84,  84,  84,  84,  85,  85,  85, 
+	 85,  86,  86,  86,  86,  82,  88,  88, 
+	 90,  90,  90,  90,  91,  91,  91,  91, 
+	 89,  93,  93,  95,  95,  95,  95,  96, 
+	 96,  96,  96,  94,  98,  98, 100, 100, 
+	100, 100, 101, 101, 101, 101, 101, 102, 
+	102, 102, 102, 102, 103, 103, 103, 103, 
+	104, 104, 104, 104, 104, 105, 105, 105, 
+	105, 105,  99, 107, 107, 109, 109, 109, 
+	109, 110, 110, 110, 110, 111, 111, 111, 
+	111, 112, 112, 112, 112, 108, 114,  33, 
+	115,  33, 115,   0, };
 S_F_MAP src_file0 [] = {
 	{ "-", 0, 0 },
-	{ "example.pml", 1, 141 },
-	{ "-", 142, 143 }
+	{ "examplePG.pml", 1, 186 },
+	{ "-", 187, 188 }
 };
 uchar reached0 [] = {
 	  0,   1,   1,   1,   0,   0,   0,   0, 
 	  0,   1,   1,   0,   0,   0,   1,   1, 
 	  0,   0,   0,   1,   1,   0,   0,   0, 
 	  1,   1,   0,   0,   0,   1,   1,   0, 
+	  0,   0,   1,   1,   0,   1,   1,   1, 
+	  1,   0,   0,   0,   1,   1,   0,   1, 
+	  1,   0,   0,   0,   0,   1,   1,   1, 
+	  1,   0,   1,   1,   1,   1,   0,   0, 
+	  1,   1,   0,   0,   0,   1,   1,   1, 
+	  1,   0,   0,   1,   1,   0,   0,   0, 
+	  1,   1,   1,   1,   0,   0,   1,   1, 
 	  0,   0,   0,   1,   1,   1,   1,   0, 
+	  0,   1,   1,   0,   0,   1,   1,   0, 
 	  0,   1,   1,   0,   0,   0,   1,   1, 
 	  1,   1,   0,   0,   1,   1,   0,   0, 
 	  0,   1,   1,   1,   1,   0,   0,   1, 
-	  1,   0,   0,   1,   1,   0,   0,   1, 
 	  1,   0,   0,   0,   1,   1,   1,   1, 
 	  0,   0,   1,   1,   0,   0,   0,   1, 
-	  1,   1,   1,   0,   0,   1,   1,   0, 
-	  0,   0,   1,   1,   0,   0,   0,   1, 
-	  1,   0,   0,   1,   1,   0,   0,   0, 
-	  1,   1,   0,   0,   0,   0,   1,   1, 
-	  1,   1,   0,   0,   1,   1,   0,   0, 
-	  1,   1,   0,   0,   1,   1,   0,   0, 
-	  0,   1,   0,   1,   1,   0,   0, };
+	  1,   0,   0,   0,   1,   1,   0,   0, 
+	  1,   1,   0,   0,   0,   1,   1,   0, 
+	  0,   0,   0,   1,   1,   1,   1,   0, 
+	  0,   1,   1,   0,   0,   1,   1,   0, 
+	  0,   1,   1,   0,   0,   0,   1,   0, 
+	  1,   1,   0,   0, };
 uchar *loopstate0;
 struct {
 	int tp; short *src;
 } src_all[] = {
+	{ 3, &src_ln3[0] },
+	{ 2, &src_ln2[0] },
 	{ 1, &src_ln1[0] },
 	{ 0, &src_ln0[0] },
 	{ 0, (short *) 0 }
 };
 S_F_MAP *flref[] = {
+	src_file3,
+	src_file2,
 	src_file1,
 	src_file0 
 };
@@ -156,8 +204,8 @@ struct {
 } code_lookup[] = {
 	{ (char *) 0, "" }
 };
-#define _T5	71
-#define _T2	72
+#define _T5	101
+#define _T2	102
 #define T_ID	unsigned char
 #define WS		4 /* word size in bytes */
 #define SYNC	0
@@ -174,42 +222,69 @@ struct {
 #endif
 char *procname[] = {
    "vm",
-   "req8",
+   "req1_1",
+   "req1_2",
+   "req1_3",
    ":np_:",
 };
 
 enum btypes { NONE=0, N_CLAIM=1, I_PROC=2, A_PROC=3, P_PROC=4, E_TRACE=5, N_TRACE=6 };
 int Btypes[] = {
    3,	/* vm */
-   1,	/* req8 */
+   1,	/* req1_1 */
+   1,	/* req1_2 */
+   1,	/* req1_3 */
    0	/* :np_: */
 };
 
-typedef struct P1 { /* req8 */
+typedef struct P3 { /* req1_3 */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 3; /* proctype */
+	unsigned _t   : 4; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P3;
+#define Air3	(sizeof(P3) - 3)
+typedef struct P2 { /* req1_2 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 4; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P2;
+#define Air2	(sizeof(P2) - 3)
+typedef struct P1 { /* req1_1 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 9; /* state    */
 } P1;
 #define Air1	(sizeof(P1) - 3)
 #define Pvm	((P0 *)this)
 typedef struct P0 { /* vm */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 3; /* proctype */
+	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 9; /* state    */
 } P0;
 #define Air0	(sizeof(P0) - 3)
-typedef struct P2 { /* np_ */
+typedef struct P4 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 3; /* proctype */
+	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 9; /* state    */
-} P2;
-#define Air2	(sizeof(P2) - 3)
+} P4;
+#define Air4	(sizeof(P4) - 3)
 
-#define Pclaim	P0
-#ifndef NCLAIMS
-	#define NCLAIMS 1
-#endif
+#ifndef NOCLAIM
+	#undef VERI
+	#define VERI	5
+	#define Pclaim	P5
+
+typedef struct P5 {
+	unsigned _pid : 8; /* always zero */
+	unsigned _t   : 4; /* active-claim type  */
+	unsigned _p   : 9; /* active-claim state */
+	unsigned _n   : 3; /* active-claim index */
+	uchar c_cur[NCLAIMS]; /* claim-states */
+} P5;
 uchar spin_c_typ[NCLAIMS]; /* claim-types */
+	#define Air5	(0)
+
+#endif
 #if defined(BFS) && defined(REACH)
 	#undef REACH
 #endif
@@ -431,10 +506,12 @@ typedef struct State {
 		unsigned short _event;
 	#endif
 #endif
-	uchar action[3];
-	uchar Airplane_mode;
+	uchar action[15];
 	uchar Bluetooth;
+	uchar pass;
+	uchar Airplane_mode;
 	uchar Wifi;
+	uchar user;
 	uchar state;
 #ifdef TRIX
 	/* room for 512 proc+chan ptrs, + safety margin */
@@ -462,20 +539,32 @@ long _c_count[MAXPROC];
 #endif
 
 #define HAS_TRACK	0
+/* hidden variable: */	uchar onOff_0;
+/* hidden variable: */	uchar onOff_2;
+/* hidden variable: */	uchar onOff_1;
+/* hidden variable: */	uchar onOff_4;
+/* hidden variable: */	uchar onOff_3;
+/* hidden variable: */	uchar onOff_6;
+/* hidden variable: */	uchar onOff_5;
+/* hidden variable: */	uchar onOff_8;
+/* hidden variable: */	uchar onOff_7;
+/* hidden variable: */	uchar onOff_9;
 int _; /* a predefined write-only variable */
 
 #define FORWARD_MOVES	"pan.m"
 #define REVERSE_MOVES	"pan.b"
 #define TRANSITIONS	"pan.t"
-#define _NP_	2
-uchar reached2[3];  /* np_ */
-uchar *loopstate2;  /* np_ */
-#define nstates2	3 /* np_ */
-#define endstate2	2 /* np_ */
+#define _NP_	4
+uchar reached4[3];  /* np_ */
+uchar *loopstate4;  /* np_ */
+#define nstates4	3 /* np_ */
+#define endstate4	2 /* np_ */
 
-#define start2	0 /* np_ */
-#define start1	9
-#define start0	138
+#define start4	0 /* np_ */
+#define start3	7
+#define start2	7
+#define start1	7
+#define start0	183
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
@@ -508,15 +597,15 @@ uchar *loopstate2;  /* np_ */
 	#define MEMLIM	(2048)	/* need a default, using 2 GB */
 #endif
 #define PROG_LAB	0 /* progress labels */
-uchar *accpstate[3];
-uchar *progstate[3];
-uchar *loopstate[3];
-uchar *reached[3];
-uchar *stopstate[3];
-uchar *visstate[3];
-short *mapstate[3];
+uchar *accpstate[5];
+uchar *progstate[5];
+uchar *loopstate[5];
+uchar *reached[5];
+uchar *stopstate[5];
+uchar *visstate[5];
+short *mapstate[5];
 #ifdef HAS_CODE
-	int NrStates[3];
+	int NrStates[5];
 #endif
 #define NQS	0
 short q_flds[1];
@@ -606,7 +695,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	73
+#define NTRANS	103
 #ifdef PEG
 	long peg[NTRANS];
 #endif

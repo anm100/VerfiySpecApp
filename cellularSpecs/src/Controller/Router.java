@@ -181,6 +181,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			} catch (IOException eb) {
 			   // do something
 			}
+			if (WorkSpace.getLog().isDebug()==false){
 			WorkSpace.getLog().debug("start run script in SPIN");
 			try {
 			      Runtime.getRuntime().exec( "wscript exe/excute.vbs" );
@@ -189,6 +190,16 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			      System.out.println(e1);
 			      System.exit(0);
 			   	}
+			}
+			if (WorkSpace.getLog().isDebug()==true){
+
+			try {
+			Runtime.getRuntime().exec("cmd /c start excuteDebug.bat");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+			}
 			try {
 				Scanner scan=new Scanner(new File("outreq1.txt"));
 				while(scan.hasNext()){
@@ -215,12 +226,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 
 		case("ShowResults"):
 			System.out.println("aaaa");
-			ResultGui rs=new ResultGui();
+			/*ResultGui rs=new ResultGui();
 		rs.setVisible(true);
 		if(WorkSpace.getReqlist().get(0).isSelected())
 		{
 			rs.addToResult(WorkSpace.getReqlist().get(0).getResult());
-		}
+		}*/
 		break;
 		case("_save_add_screen"):
 			screen = new Screen();
