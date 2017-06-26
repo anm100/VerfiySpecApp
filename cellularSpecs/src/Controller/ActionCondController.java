@@ -20,7 +20,7 @@ import Model.WorkSpace;
  * @author Muhamad Igbaria
  *
  */
-public class AppointmentsController {
+public class ActionCondController {
 
 	/**
 	 * send request to the database to delete (Cancel) an appointment

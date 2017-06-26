@@ -29,7 +29,7 @@ public class CheckReq {
 		//WorkSpace.getInstance().addParameterToHash(p2);
 		//WorkSpace.getInstance().addParameterToHash(p3);
 		//FormulaTranslate.translateReq8a("Airplane_mode","ON");
-		FormulaTranslate.translateReq1();
+		//FormulaTranslate.translateReq1();
 		ArrayList<String> a= new ArrayList();
 		a.add("aaaa");
 		FormulaTranslate.translateReq3("screen1","screen4",a);

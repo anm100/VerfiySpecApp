@@ -17,7 +17,7 @@ import ui.utils.MyTableModel;
 
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import Controller.AppointmentsController;
+import Controller.ActionCondController;
 import Model.ElementType;
 import Model.MyAction;
 import Model.Param;
@@ -146,7 +146,7 @@ public class conditionManagment implements ActionListener  {
 					return;
 				}
 			
-					if (AppointmentsController.deleteAppointment(patient,apps_list.get(row)) == false) {
+					if (ActionCondController.deleteAppointment(patient,apps_list.get(row)) == false) {
 						JOptionPane.showMessageDialog(cancel_btn, "Cannot complete the request", "Cancel Action",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
