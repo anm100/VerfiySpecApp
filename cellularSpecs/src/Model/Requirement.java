@@ -7,6 +7,23 @@ public class Requirement implements Serializable{
 	private String  rID; 
 	private String  req; 
 	private String formula;
+	private boolean  result;
+	private int ltlCount=1;
+	public int getLtlCount() {
+		return ltlCount;
+	}
+	public void addltlCount() {
+		this.ltlCount++;
+	}
+	public String getResult() {
+		if(result)
+		return "true";
+		else
+			return "false";
+	}
+	public void setResult(boolean result) {
+		this.result = result;
+	}
 	private boolean isSelected;
 	
 	
@@ -17,6 +34,7 @@ public class Requirement implements Serializable{
 		this.req = req;
 		this.formula = formula;
 		this.isSelected = false;
+		this.result=true;
 	}
 	public String getFormula() {
 		return formula;
