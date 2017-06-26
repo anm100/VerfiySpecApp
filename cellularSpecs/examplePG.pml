@@ -4,7 +4,7 @@
 #define NotEmpty 3 
 mtype={Setting,LoginScreen,MainScreen,
 changeBluetoothON,changeWifiON,changepassNotEmpty,changeBluetoothOFF,changeuserNotEmpty,changeAirplane_modeOFF,changeAirplane_modeON,changeWifiOFF}
-mtype state= Setting;
+mtype state=Setting;
 /*define flag for action */
 byte action[15];
 
@@ -25,9 +25,9 @@ byte onOff_9=OFF;
 byte Wifi=OFF;
 byte user=Empty;
 
-ltl  req1-4{[](((state==Setting)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state !=Setting)))))}
-ltl  req1-5{[](((state==LoginScreen)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state !=LoginScreen)))))}
-ltl  req1-6{[](((state==MainScreen)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state !=MainScreen)))))}
+ltl  req1_1{[](((state==Setting)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state !=Setting)))))}
+ltl  req1_2{[](((state==LoginScreen)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state !=LoginScreen)))))}
+ltl  req1_3{[](((state==MainScreen)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state !=MainScreen)))))}
 
 active proctype vm(){
  do

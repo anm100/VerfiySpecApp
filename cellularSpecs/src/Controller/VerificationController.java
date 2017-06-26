@@ -38,7 +38,7 @@ public class VerificationController implements ItemListener {
 
 	}
 
-	public  String translateToPROMELA(){
+	public  String translateToPROMELA(String root){
 		WorkSpace.getLog().debug("translateToPROMELA");
 		
 		return ""
@@ -48,7 +48,7 @@ public class VerificationController implements ItemListener {
 				+"#define NotEmpty 3 \n"
 						+ "mtype={"+ScreenController.getAllScreenName()
 						+",\n"+w.getAllChangeStates()+"}\n"
-						+"mtype state= Setting;"
+						+"mtype state="+root+";"
 						+defineParamsPromela()
 						+getLTLReq()
 						+"\nactive proctype vm(){\n"

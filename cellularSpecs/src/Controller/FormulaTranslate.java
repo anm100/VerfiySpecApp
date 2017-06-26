@@ -35,12 +35,13 @@ private static String translateReq1() {
 	 WorkSpace.getLog().debug("FormulaTranslation->translate Req 1");
 	String stateChanges=getChangeState("==","||");
 	String stateChanges1=getChangeState("!=","&&");
+	WorkSpace.getReqlist().get(0).setltlCount();
 	for(int i=0;i<screenStatesList.size() &&changeStatesList.size()>0 ;i++)
 	{
 		str="";
 		str+="((state=="+screenStatesList.get(i)+")->((!([]<>"+stateChanges+"))-><>(";
 		str+="(state !="+screenStatesList.get(i)+"))))";
-		st+="ltl "+" req1-"+WorkSpace.getReqlist().get(0).getLtlCount()+"{[]("+(str)+")}\n";
+		st+="ltl "+" req1_"+WorkSpace.getReqlist().get(0).getLtlCount()+"{[]("+(str)+")}\n";
 		WorkSpace.getReqlist().get(0).addltlCount();
 	}
 	WorkSpace.getLog().debug(st);

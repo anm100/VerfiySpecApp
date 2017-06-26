@@ -171,12 +171,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			verificationController = new VerificationController();
 			WorkSpace.getLog().debug("Router->Run_verifectaion");
 			FormulaTranslate.setFormula(verifySpecGUI);
-			WorkSpace.getLog().info(verificationController.translateToPROMELA());
+			WorkSpace.getLog().info(verificationController.translateToPROMELA(verifySpecGUI.getRoot()));
 			WorkSpace.getLog().debug("Router->create pml file ");
 
 			try{
 			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
-			    writer.println(verificationController.translateToPROMELA());
+			    writer.println(verificationController.translateToPROMELA(verifySpecGUI.getRoot()));
 			    writer.close();
 			} catch (IOException eb) {
 			   // do something
@@ -191,12 +191,17 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			   	}
 			try {
 				Scanner scan=new Scanner(new File("outreq1.txt"));
+				Boolean flag=false;
 				while(scan.hasNext()){
 				String line=scan.nextLine().toLowerCase().toString();
 				if(line.contains("errors: 0"))
-				WorkSpace.getReqlist().get(0).setResult(true);
+				{
+					WorkSpace.getReqlist().get(0).setResult(true);
+					break;
 				}
-			} catch (FileNotFoundException e1) {
+				}
+			}
+ catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -214,12 +219,14 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		
 
 		case("ShowResults"):
-			System.out.println("aaaa");
 			ResultGui rs=new ResultGui();
 		rs.setVisible(true);
-		if(WorkSpace.getReqlist().get(0).isSelected())
+		for(int i=0;i<WorkSpace.getReqlist().size();i++){
+		if(WorkSpace.getReqlist().get(i).isSelected())
 		{
-			rs.addToResult(WorkSpace.getReqlist().get(0).getResult());
+			rs.addToResult(WorkSpace.getReqlist().get(i).getrID(),WorkSpace.getReqlist().get(i).getReq(),
+					WorkSpace.getReqlist().get(i).getResult());
+		}
 		}
 		break;
 		case("_save_add_screen"):
