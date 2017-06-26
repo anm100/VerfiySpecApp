@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -173,15 +174,23 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			FormulaTranslate.setFormula(verifySpecGUI);
 			WorkSpace.getLog().info(verificationController.translateToPROMELA(verifySpecGUI.getRoot()));
 			WorkSpace.getLog().debug("Router->create pml file ");
-
-			try{
-			    PrintWriter writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
+			try {
+				PrintWriter writer;
+				writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA(verifySpecGUI.getRoot()));
 			    writer.close();
-			} catch (IOException eb) {
-			   // do something
+			} catch (FileNotFoundException | UnsupportedEncodingException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
 			}
-			if (WorkSpace.getLog().isDebug()==false){
+			try {
+				RunSpin.verifyUsingSpin();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		
+			/*if (WorkSpace.getLog().isDebug()==false){
 			WorkSpace.getLog().debug("start run script in SPIN");
 			try {
 			      Runtime.getRuntime().exec( "wscript exe/excute.vbs" );
@@ -199,7 +208,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-			}
+			}*/
 			try {
 				Scanner scan=new Scanner(new File("outreq1.txt"));
 				Boolean flag=false;
@@ -212,7 +221,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				}
 				}
 			}
- catch (FileNotFoundException e1) {
+			catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -230,25 +239,16 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		
 
 		case("ShowResults"):
-<<<<<<< HEAD
-			System.out.println("aaaa");
-			/*ResultGui rs=new ResultGui();
-=======
 			ResultGui rs=new ResultGui();
->>>>>>> 69486e8911ddfe2e4e7d5c2e25ed24ecfcb186b0
 		rs.setVisible(true);
 		for(int i=0;i<WorkSpace.getReqlist().size();i++){
 		if(WorkSpace.getReqlist().get(i).isSelected())
 		{
-<<<<<<< HEAD
-			rs.addToResult(WorkSpace.getReqlist().get(0).getResult());
-		}*/
-=======
+	
 			rs.addToResult(WorkSpace.getReqlist().get(i).getrID(),WorkSpace.getReqlist().get(i).getReq(),
 					WorkSpace.getReqlist().get(i).getResult());
+			}
 		}
-		}
->>>>>>> 69486e8911ddfe2e4e7d5c2e25ed24ecfcb186b0
 		break;
 		case("_save_add_screen"):
 			screen = new Screen();
