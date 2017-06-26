@@ -9,20 +9,10 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-import javax.swing.JList;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-
 import Controller.ElementController;
 import Controller.ScreenController;
-import Model.ElementType;
 import Model.WorkSpace;
 import our.Utils.BulidSpec;
 import ui.utils.MyTableModel;
@@ -30,32 +20,20 @@ import ui.utils.MyTableModel;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 import java.util.ArrayList;
 
 import javax.swing.JMenuBar;
-import javax.swing.DropMode;
-import java.awt.TextArea;
+
 import java.awt.Button;
-import java.awt.Panel;
-import javax.swing.JScrollBar;
-import javax.swing.ScrollPaneConstants;
+
 
 public class ButtonTypeGUI extends JFrame {
-	private JTextField txtUndefined;
 	private JTextField elementName;
 	private int i ; 
 	private  int colNumber=3;
@@ -71,6 +49,8 @@ public class ButtonTypeGUI extends JFrame {
 		setTitle(ScreenName+"standart button" );
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
+
 		
 		JLabel lblOnoff = new JLabel(ScreenName+"-standart button ");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));

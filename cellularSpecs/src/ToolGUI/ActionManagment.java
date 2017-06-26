@@ -55,7 +55,7 @@ import java.awt.Frame;
  * @author Muhamad Igbaria
  *
  */
-public class Appointments {
+public class ActionManagment implements ActionListener  {
 
 	/**
 	 * appointments frame
@@ -66,6 +66,7 @@ public class Appointments {
 	 */
 	private JTable apps_table;
 	JButton cancel_btn;
+	JButton btnSave;
 
 	/**
 	 * the patient to show his information
@@ -73,20 +74,25 @@ public class Appointments {
 	private Param patient;
 	private String toSwitch;
 	AddConditonGui addConditonGui;
-	private ArrayList<MyAction> apps_list = new ArrayList<MyAction>();
-
-	private Appointments thisRef = this;
-
+	AddActionGUI actionGui;
+	private ActionManagment thisref=this;
+	private ArrayList<String> apps_list=new ArrayList<String>();
+	private ArrayList<String> data;
+	private String paramName;
+	private String status;
 	/**
 	 * 
 	 * @param patient
 	 *            : Models Patient instance
 	 */
-	public Appointments(Param patient,String toSwitch) {
-		this.patient = patient;
+	public ActionManagment(String paramName,ArrayList<String> data,String toSwitch) {
 		this.toSwitch=toSwitch;
+		this.data=data;
+		this.paramName=paramName;
 		initialize();
 	}
+
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -94,7 +100,7 @@ public class Appointments {
 
 	private void initialize() {
 		app = new JFrame();
-		app.setTitle("Client Appointments - GHealth");
+		app.setTitle("Action management - "+WorkSpace.getInstance().getWorkSpaceName());
 		app.setResizable(false);
 		//Image icon = new ImageIcon(this.getClass().getResource("/img/" + "icon.png")).getImage();
 		//app.setIconImage(icon);
@@ -104,50 +110,52 @@ public class Appointments {
 		app.getContentPane().setBackground(Color.WHITE);
 		app.getContentPane().setLayout(null);
 
-		JLabel logo = new JLabel("GHealth - Appointments");
-		logo.setBounds(0, 0, 495, 80);
-		logo.setForeground(SystemColor.textHighlight);
+		JLabel logo = new JLabel("Action management - "+WorkSpace.getInstance().getWorkSpaceName());
+		logo.setBounds(0, 0, 495, 59);
+		logo.setForeground(Color.DARK_GRAY);
 		logo.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 17));
 		logo.setBackground(Color.WHITE);
 		//logo.setIcon(Resources.getIcon("logo.png"));
 		app.getContentPane().add(logo);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 91, 621, 45);
+		panel.setBounds(0, 56, 621, 45);
 		app.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Name:");
+		JLabel lblNewLabel = new JLabel("Parameter Name:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(10, 11, 46, 21);
+		lblNewLabel.setBounds(10, 11, 126, 21);
 		panel.add(lblNewLabel);
 
-		JLabel name_lbl = new JLabel(patient.getParamName());
+		JLabel name_lbl = new JLabel(""+paramName);
 		name_lbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		name_lbl.setBounds(61, 11, 140, 21);
+		name_lbl.setBounds(146, 11, 140, 21);
 		panel.add(name_lbl);
 
-		JLabel lblPhone = new JLabel("status ");
+		JLabel lblPhone = new JLabel("state");
 		lblPhone.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPhone.setBounds(211, 11, 67, 21);
+		lblPhone.setBounds(298, 11, 49, 21);
 		panel.add(lblPhone);
 
-		JLabel phone_lbl = new JLabel("OFF-> ON");
-		phone_lbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		phone_lbl.setBounds(264, 11, 85, 21);
-		panel.add(phone_lbl);
+		JLabel status_lbl = new JLabel(""+this.status);
+		status_lbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		status_lbl.setBounds(339, 11, 85, 21);
+		if(toSwitch.equals(ElementType.getOn())){
+			status=new String("OFF-> ON");
+			status_lbl.setText(new String("OFF-> ON")); 
 
-		JLabel lblEmail = new JLabel("test");
-		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblEmail.setBounds(387, 11, 46, 21);
-		panel.add(lblEmail);
+		}else if (toSwitch.equals(ElementType.getOff())){
+			status_lbl.setText(new String("ON-> OFF")); 
+		}else {
+			status_lbl.setText(new String("Empty-> NotEmpty")); 
 
-		JLabel mail_lbl = new JLabel();
-		mail_lbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		mail_lbl.setBounds(445, 8, 194, 27);
-		panel.add(mail_lbl);
+		}
+		panel.add(status_lbl);
 
-		cancel_btn = new JButton("Cancel Selected Action");
+	
+
+		cancel_btn = new JButton("Delete Selected Action");
 		cancel_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = apps_table.getSelectedRow();
@@ -171,11 +179,11 @@ public class Appointments {
 		});
 		cancel_btn.setEnabled(false);
 
-		cancel_btn.setBounds(183, 140, 230, 30);
+		cancel_btn.setBounds(190, 112, 223, 30);
 		app.getContentPane().add(cancel_btn);
 
 		JScrollPane apps_scrollPane = new JScrollPane();
-		apps_scrollPane.setBounds(10, 170, 600, 208);
+		apps_scrollPane.setBounds(10, 147, 403, 208);
 		app.getContentPane().add(apps_scrollPane);
 
 		String[] doc_columnNames = { "Paramter name","Paramter value"};
@@ -202,40 +210,32 @@ public class Appointments {
 				cancel_btn.setEnabled(true);
 			}
 		});
-		JButton btnBack = new JButton("Exit Account");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				app.setVisible(false);
-				//new Identification().getFrame().setVisible(true);
-			}
-		});
-		btnBack.setBounds(501, 389, 112, 23);
-		app.getContentPane().add(btnBack);
+		btnSave = new JButton("Save");
+		btnSave.setActionCommand("_save_actions_"+toSwitch);
+		btnSave.setBounds(85, 366, 112, 23);
+		app.getContentPane().add(btnSave);
 
 		JButton newApp_btn = new JButton("Add New Action");
 		newApp_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//	new AddApointment(patient, thisRef).getFrame().setVisible(true);
-			setaddconditonGui(ElementType.getOn());	
+				actionGui=	new AddActionGUI();
+				actionGui.setAddActionListener(thisref);
+				actionGui.setVisible(true);
 			WorkSpace.getLog().debug("add new action button");
 			}
 
-			private void setaddconditonGui(String st)
-			{
-				toSwitch=st;
-				addConditonGui=new AddConditonGui();
-				addConditonGui.setSwitchlbl("switch to"+toSwitch);
-				addConditonGui.setVisible(true);
-				addConditonGui.setAddAconditionListener(this);
-				addConditonGui.setAddAconditionListener(null);
-			}
+			
 		});
-		newApp_btn.setBounds(10, 140, 174, 30);
+		newApp_btn.setBounds(10, 112, 174, 30);
 		app.getContentPane().add(newApp_btn);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(222, 366, 112, 23);
+		app.getContentPane().add(btnCancel);
 
 		// ---------------------------------
 	//	app.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { logo }));
-		app.setBounds(100, 100, 629, 448);
+		app.setBounds(100, 100, 433, 440);
 		app.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		app.setLocationRelativeTo(null);
 	}
@@ -248,23 +248,50 @@ public class Appointments {
 		return app;
 	}
 
-	/**
-	 * add all patient future appointments to appointments table this method get
-	 * the appointments from getPatientAppointments in Appointment controller
-	 */
+	public void setListener(ActionListener listener ){    
+		btnSave.addActionListener(listener);
+	}
+	public ArrayList<String>  getdata(){
+		
+		return this.apps_list;
+	}
 	public void getAppointments() {
 		cancel_btn.setEnabled(false);
-		ArrayList<MyAction> apps = patient.getActions(toSwitch);
+		ArrayList<String> apps = data;
 		if (apps != null) {
 			DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
 			dm.setRowCount(0);
 			if (apps_list != null && apps_list.size() > 0)
 				apps_list.clear();
-			for (MyAction a : apps) {
-				dm.addRow(new Object[] { a.getParamName(),a.getParamVal()});
+			for (String a : apps) {
+				dm.addRow(new Object[] { a.split("=")[0],a.split("=")[1]});
 
 				apps_list.add(a);
 			}
+		}
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		switch (arg0.getActionCommand())
+		{
+		case ("_save_Condition"):
+			//addConditionToTextArea(switchTo);
+			break;
+		case ("_save_Action_param"):
+			WorkSpace.getLog().debug("doing add to tables");
+
+			//addActionArrayList(switchTo);
+		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+		dm.addRow(new Object[] {actionGui.getParameterNameCombo(),actionGui.getParameterValueCombo()});
+//
+			apps_list.add(actionGui.getParameterNameCombo()+"="+actionGui.getParameterValueCombo());
+			actionGui.dispose();
+			break;
+		
 		}
 	}
 }

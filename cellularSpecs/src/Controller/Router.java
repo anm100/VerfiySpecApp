@@ -107,11 +107,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		case("Save SPEC"):
 			chooseFileLocation();//chose the folder and save the file 
 		//WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
-		case("Save "):
-			
-		//WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
-			
-		break;
 		case("Verifiy SPEC"):
 			String st=new String();;
 				verifySpecGUI=new VerifySpecGUI();
@@ -179,6 +174,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 		break;
+		
 
 		case("ShowResults"):
 		break;
@@ -222,34 +218,35 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			onOfGUI.setOnOffListener(this);
 		 	onOfGUI.setParamChangeListener(this);
 			onOfGUI.setParameterName(ScreenController.getParams(ElementType.getOnOffType(),screenGUI.getScreenName()));
+			removelistenerMainScreen();
 			break;
 			
 		case "_save_on_off":
+			if(checkInputs.checkTextfieldsAdd(onOfGUI,ElementType.getOnOffType())){
 			WorkSpace.getLog().debug("do _save_on_off.. ");
-			if(checkInputs.checkTextfields(onOfGUI,ElementType.getOnOffType()))
 			WorkSpaceController.addelementToGUI(screenGUI, onOfGUI,new OnOffType());
-		
+			onOfGUI.setVisible(false);
+			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
+			}
 			break;
 		case"_edit_on_off":
+			if(checkInputs.checkTextfieldsEdit(onOfGUI,ElementType.getOnOffType())){
 			WorkSpace.getLog().debug("Router>-edit the onOff Type");
-			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI,new OnOffType());
-			
+			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI,new OnOffType());}
+			onOfGUI.setVisible(false);
+			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
+
 			break;
-		case "_add_Action_OnOff":
-			 addActionGUI=new AddActionGUI();
-		//	 addActionGUI.setParameterName(onOfGUI.getParameterName());
-			String [] values= WorkSpace.getInstance().getParamsMap().get(onOfGUI.getParameterName()).getValues();//add attribute to param with defult values ->ask
-			// addActionGUI.setParameterValue(values);
-			// addActionGUI.setParameterName(onOfGUI.getParamName());
-			addActionGUI.setVisible(true);
-		break;
-		
 			
 		case "_menu_list_type": 
 			WorkSpace.getLog().debug("you chosed List type element");
 		    listTypeGUI=new ListTypeGUI(screenGUI.getScreenName());
 			listTypeGUI.setVisible(true);
 			listTypeGUI.setListTypeListener(this);
+			removelistenerMainScreen();
+
 			
 			break; 
 		case "_save_List":
@@ -259,13 +256,28 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			
 			case("_menu_emptyNotEmpty_type"):
 				WorkSpace.getLog().debug("this _menu_emptyNotEmpty_type to create new window");
-				emptyNotEmptyGUI= new EmptyNotEmptyGUI(screenGUI.getScreenName());
+				emptyNotEmptyGUI= new EmptyNotEmptyGUI(screenGUI.getScreenName(),null);
+				emptyNotEmptyGUI.setEmptyListener(this);
+				emptyNotEmptyGUI.setParamChangeListener(this);
+				emptyNotEmptyGUI.setParameterName(ScreenController.getParams(ElementType.getEmptyNotEmptyType(),screenGUI.getScreenName()));
 				emptyNotEmptyGUI.setVisible(true);
-				emptyNotEmptyGUI.setEmptyNEmptyListener(this);
+				removelistenerMainScreen();
 				break;
 			case "_save_EmptyNEmpty":
+				if(checkInputs.checkTextfieldsAdd(emptyNotEmptyGUI,ElementType.getEmptyNotEmptyType())){
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
+				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
+				}
+				break;
+			case "_edit_EmptyNEmpty":
+				if(checkInputs.checkTextfieldsEdit(emptyNotEmptyGUI,ElementType.getEmptyNotEmptyType())){
+				WorkSpace.getLog().debug("do _save_on_off.. ");
+				WorkSpaceController.editEmentfromGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
+				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
+				}
 				break;
 			case"_menu_button_type":
 				WorkSpace.getLog().debug("this _menu_button_type to create new window");
@@ -286,16 +298,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			case"_save_standart_button": 
 				WorkSpace.getLog().debug("do _save_standart_button.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, buttonTypeGUI, new StandartButtonType());
-				break;
-			case"_add_conditions":// + open AddActionGui in order to add condition
-				WorkSpace.getLog().debug("+ add  a condition from ButoonTypeGUI  ");
-				  addConditonGui=new AddConditonGui();
-				  addConditonGui.setAddAconditionListener(this);
-				  addConditonGui.setVisible(true);
-				break; 
-			case"_save_new_condition":
-				WorkSpace.getLog().debug("Save  a condition from AddConditionGUI");
-				buttonTypeGUI.addToTable(addConditonGui.getParamName(),"=",addConditonGui.getValue());
+				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
+				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 				break;
 			case "_save_new_param_ex":
 				if (addparamterGUI.getParamType() !=null){
@@ -471,7 +475,17 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		JComboBox s=(JComboBox)(e.getSource());
 		WorkSpace.getLog().debug("PARAM:"+WorkSpace.getInstance().getParamsMap().get(s.getSelectedItem().toString()));
 	}
-	
+	public void setEmptyGUI(EmptyNotEmptyGUI emptyNempty) {
+		// TODO Auto-generated method stub
+		this.emptyNotEmptyGUI =emptyNempty;
+		
+	}
+	public void removelistenerMainScreen(){
+		
+		 mainScreenGui.removeMainScreenMouseListener((MouseListener) this);
+		 mainScreenGui.removeMainScreenMouseListener((MouseMotionListener)this);
+		
+	}
 	/*
 	 * \idea for update gui genery , maybe "!!!
 	

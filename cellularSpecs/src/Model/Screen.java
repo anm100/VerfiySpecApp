@@ -146,6 +146,9 @@ public class Screen implements Serializable,screenInterface{
 	public void addTransPromela(String cond,String action,String toState) {
 		this.transPromela.add("("+cond+")->atomic{"+action+"state="+toState+"};");
 	}
+	public void addTransPromela(String toState) {
+		this.transPromela.add("atomic{state="+toState+"};");
+	}
 	public ArrayList<String> getTransPromela() {
 		return transPromela;
 	}

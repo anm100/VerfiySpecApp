@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import java.awt.Dimension;
-import java.awt.TextArea;
 import java.awt.Button;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -17,7 +16,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.text.JTextComponent;
 
 import Model.WorkSpace;
 
@@ -28,7 +26,7 @@ public class AddScreenGUI extends JFrame {
 	public AddScreenGUI() {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
-		
+		setLocationRelativeTo(null);
 		JLabel lblAddScreenDetails = new JLabel("Screen details");
 		lblAddScreenDetails.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblAddScreenDetails.setBounds(10, 11, 159, 20);
@@ -81,21 +79,24 @@ public class AddScreenGUI extends JFrame {
 		return ScreenName;
 	}
 
-	public void setScreenName(JTextField screenName) {
-		ScreenName = screenName;
-	}
+	public void setScreenName(String screenName) {
+		ScreenName.setText(screenName); }
 
 	public JTextPane getDescription() {
 		return description;
 	}
 
-	public void setDescription(JTextPane description) {
-		this.description = description;
+	public void setDescription(String description) {
+		this.description.setText(description); 
 	}
 
 	public void addScreenListener(ActionListener listenForOperation){       
 		bnSave.addActionListener(listenForOperation);
 		bnSave.setActionCommand("_save_add_screen");
+}
+	public void editScreenListener(ActionListener listenForOperation){       
+		bnSave.addActionListener(listenForOperation);
+		bnSave.setActionCommand("_save_edit_screen");
 }
 
 }

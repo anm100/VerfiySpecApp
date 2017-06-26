@@ -30,6 +30,7 @@ import ToolGUI.AddScreenGUI;
 import ToolGUI.ButtonTypeGUI;
 import ToolGUI.EmptyNotEmptyGUI;
 import ToolGUI.ListTypeGUI;
+import ToolGUI.EmptyNotEmptyGUI;
 import ToolGUI.OnOfGUI;
 import ToolGUI.ScreenGUI;
 import Model.Param;
@@ -124,14 +125,10 @@ public class WorkSpaceController {
 	public static void addelementToGUI(ScreenGUI screenGUI,EmptyNotEmptyGUI elementGui,EmptyNEmptyType l)
 	{
 	
-		l.setElementName(elementGui.getElementName().getText());
-		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
-		WorkSpace.getLog().debug("do "+l.getParamName()+l.toString());
-		
-		WorkSpace.getLog().debug("--show element in GUI");
+		addToModels(screenGUI,elementGui,l);
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().refreshWorkspace();
-		elementGui.dispose();
+		elementGui.setVisible(false);
 
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
@@ -156,35 +153,97 @@ public class WorkSpaceController {
 		addToModels(screenGUI,elementGui,l);
 	
 	}
-	public static void addToModels(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType l)	
+	public static void editEmentfromGUI(ScreenGUI screenGUI, EmptyNotEmptyGUI elementGui,EmptyNEmptyType l) {
+		WorkSpace.getLog().debug(" "+screenGUI.getScreenName());
+
+		//	WorkSpace.getLog().debug(((JLabel)screenGUI.getEventLabel().getComponent()).getText());
+		String[] data=((JLabel)screenGUI.getEventLabel().getComponent()).getText().split(",");
+		EmptyNEmptyType e= (EmptyNEmptyType) WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName()).getElementByName(data[0]);
+		WorkSpace.getLog().debug(e.getELementName());
+        ((JLabel)screenGUI.getEventLabel().getComponent()).setText(elementGui.getElementName()+","+ElementType.getEmptyNotEmptyType());
+        e.setElementName(elementGui.getElementName());
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(e);
+		((JLabel)screenGUI.getEventLabel().getComponent()).getParent().update(screenGUI.getGraphics());
+		reomveFromModels(elementGui.getScreenName(),e);
+		addToModels(screenGUI,elementGui,l);
+	
+	}
+	public static void addToModels(ScreenGUI screenGUI, EmptyNotEmptyGUI elementGui, EmptyNEmptyType l)	
 	{
 		//getConditions from OnOfGui givr me arraylist with the conditions to on->off 
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
 		ArrayList<String> con1=elementGui.get_Off_To_On_Condition();
 		ArrayList<String> con2=elementGui.get_On_To_Off_Conditions();
-		ArrayList<String> act1=elementGui.get_On_To_Off_Actions();
-		ArrayList<String> act2=elementGui.get_Off_To_ON_Actions();
-		for(int i=0;i<con1.size();i++)
-		{
-			MyCondition cond;
-			 cond=new MyCondition(con1.get(i),ElementType.getOn());
-			p.addCond(cond);
-			 cond=new MyCondition(con2.get(i),ElementType.getOff());
-			p.addCond(cond);
+		ArrayList<String> act1=elementGui.get_Off_To_ON_Actions();
+		ArrayList<String> act2=elementGui.get_On_To_Off_Actions();
+		for(String i : con1){
+			p.addCond(new MyCondition(i,ElementType.getOn()));
+			
 		}
-		for(int i=0;i<act1.size();i++)
-		{
-			MyAction act;
-			 act=new MyAction(act1.get(i), ElementType.getOn());
-			p.addAction(act);
-			 act=new MyAction(act2.get(i), ElementType.getOn());
-			p.addAction(act);
+		for(String i : con2){
+			p.addCond(new MyCondition(i, ElementType.getOff()));
+			
 		}
-		l.setElementName(elementGui.getElementName());	
+		for(String i : act1){
+			p.addAction(new MyAction(i, ElementType.getOn()));
+			
+		}
+		for(String i : act2){
+			p.addAction(new MyAction(i, ElementType.getOff()));
+			
+		}
+		l.setElementName(elementGui.getElementName());
+		l.setException(elementGui.getException().getText());
 		l.setParam(p);
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
-		WorkSpace.getLog().debug("do "+l.getParamName());
+		WorkSpace.getLog().debug("do  edit -->  "+l.getParamName());
 		WorkSpace.getInstance().addParameterToHash(p);
+		
+		WorkSpace.getLog().debug("actions after update ");
+
+		for (MyAction i : WorkSpace.getInstance().getParamsByName(p.getParamName()).getActions("ON")){
+			WorkSpace.getLog().debug("\n"+i.getActionString());
+
+		}
+		WorkSpace.getLog().debug("--show element in GUI");
+	}
+	public static void addToModels(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType  l)	
+	{
+		//getConditions from OnOfGui givr me arraylist with the conditions to on->off 
+		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());
+		ArrayList<String> con1=elementGui.get_Off_To_On_Condition();
+		ArrayList<String> con2=elementGui.get_On_To_Off_Conditions();
+		ArrayList<String> act1=elementGui.get_Off_To_ON_Actions();
+		ArrayList<String> act2=elementGui.get_On_To_Off_Actions();
+		for(String i : con1){
+			p.addCond(new MyCondition(i,ElementType.getOn()));
+			
+		}
+		for(String i : con2){
+			p.addCond(new MyCondition(i, ElementType.getOff()));
+			
+		}
+		for(String i : act1){
+			p.addAction(new MyAction(i, ElementType.getOn()));
+			
+		}
+		for(String i : act2){
+			p.addAction(new MyAction(i, ElementType.getOff()));
+			
+		}
+		l.setElementName(elementGui.getElementName());
+		l.setException(elementGui.getException().getText());
+		l.setParam(p);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
+		WorkSpace.getLog().debug("do  edit -->  "+l.getParamName());
+		WorkSpace.getInstance().addParameterToHash(p);
+		
+		WorkSpace.getLog().debug("actions after update ");
+
+		for (MyAction i : WorkSpace.getInstance().getParamsByName(p.getParamName()).getActions("ON")){
+			WorkSpace.getLog().debug("\n"+i.getActionString());
+
+		}
 		WorkSpace.getLog().debug("--show element in GUI");
 	}
 	public static void reomveFromModels(String screenName,OnOffType oldOnOffType)	
@@ -194,7 +253,14 @@ public class WorkSpaceController {
 		WorkSpace.getInstance().getScreenByName(screenName).remoceElement(oldOnOffType.getELementName());
 		WorkSpace.getInstance().removeParameterInHash(oldOnOffType.getParamName());
 	}
-	public static void removelementfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
+	public static void reomveFromModels(String screenName,EmptyNEmptyType oldOnOffType)	
+	{
+		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+oldOnOffType.getParamName());
+		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+screenName);
+		WorkSpace.getInstance().getScreenByName(screenName).remoceElement(oldOnOffType.getELementName());
+		WorkSpace.getInstance().removeParameterInHash(oldOnOffType.getParamName());
+	}
+	public static void removelementfromGUI(ScreenGUI screenGUI, EmptyNotEmptyGUI elementGui,	OnOffType l) {
 
 
 		Param p=new Param(elementGui.getParameterName(),elementGui.getDefaultValue(),l.getType());

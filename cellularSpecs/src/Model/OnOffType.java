@@ -8,6 +8,7 @@ public class OnOffType implements Serializable, Element,ElementActionInterface {
 private Param parameter; 
 private final String type=ElementType.getOnOffType();
 private String elementName; 
+private String exception;
 
 
 public OnOffType() {
@@ -58,6 +59,15 @@ public void setElementName(String name) {
 	// TODO Auto-generated method stub
 	this.elementName=name;
 
+}
+
+
+public String getException() {
+	return exception;
+}
+
+public void setException(String exception) {
+	this.exception = exception;
 }
 
 public ArrayList<MyAction> getActions(String value) {

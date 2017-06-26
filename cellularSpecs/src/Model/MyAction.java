@@ -55,5 +55,9 @@ public class MyAction implements Serializable {
 	public void setSwitchtO(String SwitchTo) {
 		SwitchTo = SwitchTo;
 	}
+	public String getActionString (){
+		return this.paramName+"="+this.paramVal;
+		
+	}
 	
 }

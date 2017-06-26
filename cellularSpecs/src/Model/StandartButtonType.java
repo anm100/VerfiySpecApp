@@ -13,7 +13,8 @@ private  Transition trans ;
 private  ArrayList<MyCondition> conds= new ArrayList <MyCondition>(); 
 private final String type=ElementType.getStandartBtnType(); 
 private final String optLogic= "&&"; 
-private ArrayList <MyAction> actions= new ArrayList<>(); 
+private ArrayList <MyAction> actions= new ArrayList<>();
+private String exception; 
 
 
 public StandartButtonType() {
@@ -91,6 +92,11 @@ public void setElementName(String name) {
 	// TODO Auto-generated method stub
 	this.elementName= name;
 	}
+@Override
+public String getException() {
+	// TODO Auto-generated method stub
+	return exception;
+}
 }
 /*
  * now get values only in Param Class 

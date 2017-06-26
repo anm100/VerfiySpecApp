@@ -81,7 +81,7 @@ public class debugingGUI extends JFrame{
 			//verificationController.translateToPROMELA();
 			FormulaTranslate.translateReq1();
 			FormulaTranslate.translateReq2a();
-			FormulaTranslate.translateReq2b();
+		//	FormulaTranslate.translateReq2b();
 		//	FormulaTranslate.translateReq8a("Airplane MODE");
 			
 		}
@@ -103,8 +103,8 @@ public class debugingGUI extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				BulidSpec.buildsetting();
 				WorkSpaceController.createSpecGUI();
-				Appointments app = new Appointments(WorkSpace.getInstance().getParamsByName("Airplane_mode"),"ON");
-				app.getFrame().setVisible(true);
+			//	Appointments app = new Appointments(WorkSpace.getInstance().getParamsByName("Airplane_mode"),"ON");
+				//app.getFrame().setVisible(true);
 			}
 		});
 		   

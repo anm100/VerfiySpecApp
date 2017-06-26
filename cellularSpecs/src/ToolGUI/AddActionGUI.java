@@ -2,10 +2,8 @@ package ToolGUI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import Controller.ScreenController;
-import our.Utils.BulidSpec;
 
 import java.awt.Color;
 import javax.swing.JComboBox;
@@ -32,14 +30,16 @@ private JLabel switchlbl;
 		setSize(400,150);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
+
 		JLabel lblAddNewAction = new JLabel("add an action");
 		lblAddNewAction.setBounds(122, 10, 338, 14);
 		getContentPane().add(lblAddNewAction);
-		
+
 		 btnSave = new JButton("save");
 		btnSave.setBounds(66, 80, 91, 23);
 		getContentPane().add(btnSave);
-		btnSave.setActionCommand("_save_Action");
+		btnSave.setActionCommand("_save_Action_param");
 		
 		JButton btnCancel = new JButton("cancel");
 		btnCancel.setBounds(195, 80, 91, 23);
@@ -123,7 +123,7 @@ private JLabel switchlbl;
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public void setAddAconditionListener(ActionListener addConditionsListener ){    
+	public void setAddActionListener(ActionListener addConditionsListener ){    
 		btnSave.addActionListener(addConditionsListener);
 	}
 	public String getParameterNameCombo() {

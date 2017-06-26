@@ -6,17 +6,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
-
-
-
 import javax.swing.JLabel;
-
-import our.Utils.BulidSpec;
-import Controller.WorkSpaceController;
-
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 
 public class MainScreenGui extends JFrame  {
 	private JLabel specNameLabel;
@@ -32,7 +23,7 @@ public class MainScreenGui extends JFrame  {
 	
 		setSize(750,600);
 		getContentPane().setLayout(null);
-		
+		setLocationRelativeTo(null);
 		 btnAddscreen = new JButton("AddScreen");
 		btnAddscreen.setBounds(25, 55, 99, 23);
 		getContentPane().add(btnAddscreen);
@@ -88,6 +79,13 @@ public class MainScreenGui extends JFrame  {
 		public void addMainScreenMouseListener(MouseMotionListener WorkSpaceController)
 		{
 			this.addMouseMotionListener(WorkSpaceController);
+		}
+		public void removeMainScreenMouseListener(MouseListener mouseListener){
+			this.removeMouseListener(mouseListener);
+		}
+		public void removeMainScreenMouseListener(MouseMotionListener WorkSpaceController)
+		{
+			this.removeMouseMotionListener(WorkSpaceController);
 		}
 		public void refreshWorkspace(){
 			getContentPane().repaint();

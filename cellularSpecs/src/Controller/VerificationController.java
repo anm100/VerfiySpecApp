@@ -88,6 +88,7 @@ private void initialize(){
 ////		return "";
 //	}
 	private  String getPG() {
+		int flagbtn=0;
 		String sAll = new String("");Screen s = new Screen(); Element e ; 
 		ChangeScreen changeScreen;
 		Iterator<Entry<String, Screen>> it = w.getScreensMap().entrySet().iterator();
@@ -104,6 +105,7 @@ private void initialize(){
 				WorkSpace.getLog().debug("---type "+e.getType());
 				if (e.getType().equals(ElementType.getStandartBtnType())){
 					s.getTransPromela().add(e.getStringPromela());
+					flagbtn=1;
 					WorkSpace.getLog().debug("---get promela standrt button "+e.getType());
 
 				}
@@ -131,13 +133,17 @@ private void initialize(){
 										
 					}
 				
-				}
+				}//finish elements
 			WorkSpace.getLog().debug("---get string promela from screen object ");
-			sAll+=s.getStringPromela()+"\n";
 			sAll+= "/*"
-					+ "\n*/////////////////////////////////////// End of changeParamScreens for screen "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
+					+ "\n*/////////////////////////////////////// ---screen: "+s.getScreenName()+"////////////////////////////////////////////////\n*/\n\n";
+			if(flagbtn==0){
+				s.addTransPromela(s.getScreenName());
+			}
+			sAll+=s.getStringPromela()+"\n";
 			RemoveStructPromela();
-		}
+			flagbtn=0;
+		}//finish screeens
 		WorkSpace.getLog().debug("---get string promela from change screen  ");
 		sAll+=w.getBlockChangeScreen();
 

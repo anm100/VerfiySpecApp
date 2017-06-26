@@ -2,7 +2,6 @@ package ToolGUI;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -39,6 +38,7 @@ public class ListTypeGUI extends JFrame {
 		setTitle("List Element");
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JLabel lblOnoff = new JLabel(screenName+"-List Element");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));

@@ -29,7 +29,7 @@ public class AppointmentsController {
 	 *            : Appointment instance to delete
 	 * @return true if the cancel success , false else.
 	 */
-	public static boolean deleteAppointment(Param p,MyAction myAction) {
+	public static boolean deleteAppointment(Param p,String myAction) {
 		
 		WorkSpace.getLog().debug("action deleted");
 		return true;
