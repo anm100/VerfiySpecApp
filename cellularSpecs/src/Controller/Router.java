@@ -184,7 +184,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				e2.printStackTrace();
 			}
 			try {
-				RunSpin.verifyUsingSpin();
+			RunSpin.verifyUsingSpin();
 			} catch (IOException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();

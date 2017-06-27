@@ -237,3 +237,24 @@ pan: error: cannot find claim 'req2_2'
 warning: for p.o. reduction to be valid the never claim must be stutter-invariant
 (never claims generated from LTL formulae are stutter-invariant)
 pan: error: cannot find claim 'req1_4'
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+pan: error: cannot find claim 'req'
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+pan: error: cannot find claim 'req1_4'
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+pan: error: cannot find claim 'req1_4'
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+pan: error: cannot find claim 'req1_4'
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+pan: error: cannot find claim 'req1_4'
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+pan: error: cannot find claim 'req1_4'
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+pan: error: cannot find claim 'req1_4'

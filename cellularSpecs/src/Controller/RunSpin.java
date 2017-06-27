@@ -23,9 +23,9 @@ public class RunSpin {
 	public static void verifyUsingSpin() throws IOException {
 		int count=0;
 		creterVBSfile();
-		//for(int i=0;i<WorkSpace.getReqlist().size();i++)
+		for(int i=0;i<WorkSpace.getReqlist().size();i++)
 			count+=WorkSpace.getReqlist().get(0).getLtlCount();	
-		//for(int i=0;i<count;i++)
+		for(int i=0;i<count;i++)
 		{
 			for(int j=1;j<=WorkSpace.getReqlist().get(0).getLtlCount();j++)
 			{

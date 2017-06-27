@@ -16,6 +16,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JProgressBar;
 import javax.swing.JComboBox;
@@ -33,7 +34,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 
-public class VerifySpecGUI extends JFrame implements ItemListener {
+public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListener {
 	private    JButton btnRun,btnCancel;
 	private static int reqNum=9;
 	private int inti=162,add=28;
@@ -47,11 +48,14 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 	private JButton req2ChoosParams;
 	private JPanel[] req_pan=new JPanel[reqNum];;
 	private JComboBox root;
-
+	private ArrayList<String> ChoosenParam;
+	private ArrayList<String> req6ChoosenParam;
+	private	ChoosenParamtersGUI choosparamGui = new ChoosenParamtersGUI();
+	private	ChoosenParamtersGUI req6choosparamGui = new ChoosenParamtersGUI();
 	public String getRoot() {
 		return root.getSelectedItem().toString();
 	}
-	public VerifySpecGUI() {
+	public VerifySpecGUI()  {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		intitCombo();
@@ -91,7 +95,23 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 		
 		root.setBounds(138, 67, 148, 23);
 		getContentPane().add(root);
-	
+		
+		choosparamGui.setOklistner(this);
+		req2ChoosParams = new JButton("Choose Parameter");
+		req2ChoosParams.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				choosparamGui.setVisible(true);
+				choosparamGui.setActionCommand("_set_params_ok");
+			}
+		});
+		req6choosparamGui.setOklistner(this);
+		req6ChoosParams = new JButton("Parameters");
+		req6ChoosParams.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				req6choosparamGui.setVisible(true);
+				req6choosparamGui.setActionCommand("_set_params_req6_ok");
+			}
+		});
 	}
 	private void createJPanel() {
 		
@@ -135,9 +155,6 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 		req3CombboValue=new JComboBox();
 		req3CombboParam=new JComboBox();
 		req6ComboScreen=new JComboBox();
-		req6ChoosParams=new JButton();
-		req2ChoosParams=new JButton();
-		req2ChoosParams.setText("Choose");
 		root=new JComboBox();
 		
 	}
@@ -247,6 +264,30 @@ public class VerifySpecGUI extends JFrame implements ItemListener {
 			b[i]=false;
 		}
 		return b;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		switch (e.getActionCommand())
+		{
+		case ("_set_params_ok"):
+			//addConditionToTextArea(switchTo);
+			choosparamGui.setVisible(false);
+		 ChoosenParam=(ArrayList<String>) (choosparamGui.getparams());	
+			break;
+		case ("_set_params_req6_ok"):
+			//addConditionToTextArea(switchTo);
+			req6choosparamGui.setVisible(false);
+		 req6ChoosenParam=(ArrayList<String>) (req6choosparamGui.getparams());	
+			break;
+
+		}
+	}
+	public ArrayList<String> getChoosenParam() {
+		return ChoosenParam;
+	}
+	public ArrayList<String> getChoosenParamreq6() {
+		return req6ChoosenParam;
 	}
 }
 /* allReq = new JCheckBox("All");

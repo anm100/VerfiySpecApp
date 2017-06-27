@@ -22,7 +22,7 @@ public class BulidSpec {
 		wk=WorkSpace.getInstance();
 		wk.setWorkSpaceName("examplePG");
 		WorkSpace.getLog().debug("SPEC NAME:"+wk.getWorkSpaceName());
-		addParmsOnOff();
+		//addParmsOnOff();
 		WorkSpace.getLog().debug("loading params onOFF_i");
 		
 		addScreens();
