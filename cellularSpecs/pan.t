@@ -22,7 +22,485 @@ settable(void)
 {	Trans *T;
 	Trans *settr(int, int, int, int, int, char *, int, int, int);
 
-	trans = (Trans ***) emalloc(5*sizeof(Trans **));
+	trans = (Trans ***) emalloc(20*sizeof(Trans **));
+
+	/* proctype 18: req7_8 */
+
+	trans[18] = (Trans **) emalloc(21*sizeof(Trans *));
+
+	T = trans[18][5] = settr(533,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(533,0,1,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(533,0,3,0,0,"IF", 0, 2, 0);
+	trans[18][1]	= settr(529,0,11,3,0,"(!(!((user==2))))", 1, 2, 0);
+	trans[18][2]	= settr(530,0,11,1,0,"goto accept_S3", 0, 2, 0);
+	trans[18][6]	= settr(534,0,11,1,0,".(goto)", 0, 2, 0);
+	trans[18][3]	= settr(531,0,5,1,0,"(1)", 0, 2, 0);
+	trans[18][4]	= settr(532,0,5,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[18][11] = settr(539,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(539,0,7,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(539,0,9,0,0,"IF", 0, 2, 0);
+	trans[18][7]	= settr(535,0,19,4,0,"(((user==3)&&(state!=changeuserNotEmpty)))", 1, 2, 0);
+	trans[18][8]	= settr(536,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[18][12]	= settr(540,0,17,1,0,".(goto)", 0, 2, 0);
+	trans[18][9]	= settr(537,0,17,5,0,"((state!=changeuserNotEmpty))", 1, 2, 0);
+	trans[18][10]	= settr(538,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	T = trans[18][17] = settr(545,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(545,0,13,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(545,0,15,0,0,"IF", 0, 2, 0);
+	trans[18][13]	= settr(541,0,19,6,0,"(((user==3)&&(state!=changeuserNotEmpty)))", 1, 2, 0);
+	trans[18][14]	= settr(542,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[18][18]	= settr(546,0,19,1,0,".(goto)", 0, 2, 0);
+	trans[18][15]	= settr(543,0,17,7,0,"((state!=changeuserNotEmpty))", 1, 2, 0);
+	trans[18][16]	= settr(544,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	trans[18][19]	= settr(547,0,20,1,0,"(1)", 0, 2, 0);
+	trans[18][20]	= settr(548,0,0,8,8,"-end-", 0, 3500, 0);
+
+	/* proctype 17: req7_7 */
+
+	trans[17] = (Trans **) emalloc(21*sizeof(Trans *));
+
+	T = trans[17][5] = settr(513,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(513,0,1,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(513,0,3,0,0,"IF", 0, 2, 0);
+	trans[17][1]	= settr(509,0,11,9,0,"(!(!((pass==2))))", 1, 2, 0);
+	trans[17][2]	= settr(510,0,11,1,0,"goto accept_S3", 0, 2, 0);
+	trans[17][6]	= settr(514,0,11,1,0,".(goto)", 0, 2, 0);
+	trans[17][3]	= settr(511,0,5,1,0,"(1)", 0, 2, 0);
+	trans[17][4]	= settr(512,0,5,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[17][11] = settr(519,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(519,0,7,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(519,0,9,0,0,"IF", 0, 2, 0);
+	trans[17][7]	= settr(515,0,19,10,0,"(((pass==3)&&(state!=changepassNotEmpty)))", 1, 2, 0);
+	trans[17][8]	= settr(516,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[17][12]	= settr(520,0,17,1,0,".(goto)", 0, 2, 0);
+	trans[17][9]	= settr(517,0,17,11,0,"((state!=changepassNotEmpty))", 1, 2, 0);
+	trans[17][10]	= settr(518,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	T = trans[17][17] = settr(525,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(525,0,13,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(525,0,15,0,0,"IF", 0, 2, 0);
+	trans[17][13]	= settr(521,0,19,12,0,"(((pass==3)&&(state!=changepassNotEmpty)))", 1, 2, 0);
+	trans[17][14]	= settr(522,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[17][18]	= settr(526,0,19,1,0,".(goto)", 0, 2, 0);
+	trans[17][15]	= settr(523,0,17,13,0,"((state!=changepassNotEmpty))", 1, 2, 0);
+	trans[17][16]	= settr(524,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	trans[17][19]	= settr(527,0,20,1,0,"(1)", 0, 2, 0);
+	trans[17][20]	= settr(528,0,0,14,14,"-end-", 0, 3500, 0);
+
+	/* proctype 16: req7_6 */
+
+	trans[16] = (Trans **) emalloc(21*sizeof(Trans *));
+
+	T = trans[16][5] = settr(493,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(493,0,1,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(493,0,3,0,0,"IF", 0, 2, 0);
+	trans[16][1]	= settr(489,0,11,15,0,"(!(!((Wifi==0))))", 1, 2, 0);
+	trans[16][2]	= settr(490,0,11,1,0,"goto accept_S3", 0, 2, 0);
+	trans[16][6]	= settr(494,0,11,1,0,".(goto)", 0, 2, 0);
+	trans[16][3]	= settr(491,0,5,1,0,"(1)", 0, 2, 0);
+	trans[16][4]	= settr(492,0,5,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[16][11] = settr(499,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(499,0,7,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(499,0,9,0,0,"IF", 0, 2, 0);
+	trans[16][7]	= settr(495,0,19,16,0,"(((Wifi==1)&&(state!=changeWifiON)))", 1, 2, 0);
+	trans[16][8]	= settr(496,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[16][12]	= settr(500,0,17,1,0,".(goto)", 0, 2, 0);
+	trans[16][9]	= settr(497,0,17,17,0,"((state!=changeWifiON))", 1, 2, 0);
+	trans[16][10]	= settr(498,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	T = trans[16][17] = settr(505,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(505,0,13,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(505,0,15,0,0,"IF", 0, 2, 0);
+	trans[16][13]	= settr(501,0,19,18,0,"(((Wifi==1)&&(state!=changeWifiON)))", 1, 2, 0);
+	trans[16][14]	= settr(502,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[16][18]	= settr(506,0,19,1,0,".(goto)", 0, 2, 0);
+	trans[16][15]	= settr(503,0,17,19,0,"((state!=changeWifiON))", 1, 2, 0);
+	trans[16][16]	= settr(504,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	trans[16][19]	= settr(507,0,20,1,0,"(1)", 0, 2, 0);
+	trans[16][20]	= settr(508,0,0,20,20,"-end-", 0, 3500, 0);
+
+	/* proctype 15: req7_5 */
+
+	trans[15] = (Trans **) emalloc(21*sizeof(Trans *));
+
+	T = trans[15][5] = settr(473,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(473,0,1,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(473,0,3,0,0,"IF", 0, 2, 0);
+	trans[15][1]	= settr(469,0,11,21,0,"(!(!((Wifi==1))))", 1, 2, 0);
+	trans[15][2]	= settr(470,0,11,1,0,"goto accept_S3", 0, 2, 0);
+	trans[15][6]	= settr(474,0,11,1,0,".(goto)", 0, 2, 0);
+	trans[15][3]	= settr(471,0,5,1,0,"(1)", 0, 2, 0);
+	trans[15][4]	= settr(472,0,5,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[15][11] = settr(479,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(479,0,7,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(479,0,9,0,0,"IF", 0, 2, 0);
+	trans[15][7]	= settr(475,0,19,22,0,"(((Wifi==0)&&(state!=changeWifiOFF)))", 1, 2, 0);
+	trans[15][8]	= settr(476,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[15][12]	= settr(480,0,17,1,0,".(goto)", 0, 2, 0);
+	trans[15][9]	= settr(477,0,17,23,0,"((state!=changeWifiOFF))", 1, 2, 0);
+	trans[15][10]	= settr(478,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	T = trans[15][17] = settr(485,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(485,0,13,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(485,0,15,0,0,"IF", 0, 2, 0);
+	trans[15][13]	= settr(481,0,19,24,0,"(((Wifi==0)&&(state!=changeWifiOFF)))", 1, 2, 0);
+	trans[15][14]	= settr(482,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[15][18]	= settr(486,0,19,1,0,".(goto)", 0, 2, 0);
+	trans[15][15]	= settr(483,0,17,25,0,"((state!=changeWifiOFF))", 1, 2, 0);
+	trans[15][16]	= settr(484,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	trans[15][19]	= settr(487,0,20,1,0,"(1)", 0, 2, 0);
+	trans[15][20]	= settr(488,0,0,26,26,"-end-", 0, 3500, 0);
+
+	/* proctype 14: req7_4 */
+
+	trans[14] = (Trans **) emalloc(21*sizeof(Trans *));
+
+	T = trans[14][5] = settr(453,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(453,0,1,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(453,0,3,0,0,"IF", 0, 2, 0);
+	trans[14][1]	= settr(449,0,11,27,0,"(!(!((Bluetooth==0))))", 1, 2, 0);
+	trans[14][2]	= settr(450,0,11,1,0,"goto accept_S3", 0, 2, 0);
+	trans[14][6]	= settr(454,0,11,1,0,".(goto)", 0, 2, 0);
+	trans[14][3]	= settr(451,0,5,1,0,"(1)", 0, 2, 0);
+	trans[14][4]	= settr(452,0,5,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[14][11] = settr(459,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(459,0,7,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(459,0,9,0,0,"IF", 0, 2, 0);
+	trans[14][7]	= settr(455,0,19,28,0,"(((Bluetooth==1)&&(state!=changeBluetoothON)))", 1, 2, 0);
+	trans[14][8]	= settr(456,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[14][12]	= settr(460,0,17,1,0,".(goto)", 0, 2, 0);
+	trans[14][9]	= settr(457,0,17,29,0,"((state!=changeBluetoothON))", 1, 2, 0);
+	trans[14][10]	= settr(458,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	T = trans[14][17] = settr(465,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(465,0,13,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(465,0,15,0,0,"IF", 0, 2, 0);
+	trans[14][13]	= settr(461,0,19,30,0,"(((Bluetooth==1)&&(state!=changeBluetoothON)))", 1, 2, 0);
+	trans[14][14]	= settr(462,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[14][18]	= settr(466,0,19,1,0,".(goto)", 0, 2, 0);
+	trans[14][15]	= settr(463,0,17,31,0,"((state!=changeBluetoothON))", 1, 2, 0);
+	trans[14][16]	= settr(464,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	trans[14][19]	= settr(467,0,20,1,0,"(1)", 0, 2, 0);
+	trans[14][20]	= settr(468,0,0,32,32,"-end-", 0, 3500, 0);
+
+	/* proctype 13: req7_3 */
+
+	trans[13] = (Trans **) emalloc(21*sizeof(Trans *));
+
+	T = trans[13][5] = settr(433,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(433,0,1,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(433,0,3,0,0,"IF", 0, 2, 0);
+	trans[13][1]	= settr(429,0,11,33,0,"(!(!((Bluetooth==1))))", 1, 2, 0);
+	trans[13][2]	= settr(430,0,11,1,0,"goto accept_S3", 0, 2, 0);
+	trans[13][6]	= settr(434,0,11,1,0,".(goto)", 0, 2, 0);
+	trans[13][3]	= settr(431,0,5,1,0,"(1)", 0, 2, 0);
+	trans[13][4]	= settr(432,0,5,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[13][11] = settr(439,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(439,0,7,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(439,0,9,0,0,"IF", 0, 2, 0);
+	trans[13][7]	= settr(435,0,19,34,0,"(((Bluetooth==0)&&(state!=changeBluetoothOFF)))", 1, 2, 0);
+	trans[13][8]	= settr(436,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[13][12]	= settr(440,0,17,1,0,".(goto)", 0, 2, 0);
+	trans[13][9]	= settr(437,0,17,35,0,"((state!=changeBluetoothOFF))", 1, 2, 0);
+	trans[13][10]	= settr(438,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	T = trans[13][17] = settr(445,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(445,0,13,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(445,0,15,0,0,"IF", 0, 2, 0);
+	trans[13][13]	= settr(441,0,19,36,0,"(((Bluetooth==0)&&(state!=changeBluetoothOFF)))", 1, 2, 0);
+	trans[13][14]	= settr(442,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[13][18]	= settr(446,0,19,1,0,".(goto)", 0, 2, 0);
+	trans[13][15]	= settr(443,0,17,37,0,"((state!=changeBluetoothOFF))", 1, 2, 0);
+	trans[13][16]	= settr(444,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	trans[13][19]	= settr(447,0,20,1,0,"(1)", 0, 2, 0);
+	trans[13][20]	= settr(448,0,0,38,38,"-end-", 0, 3500, 0);
+
+	/* proctype 12: req7_2 */
+
+	trans[12] = (Trans **) emalloc(21*sizeof(Trans *));
+
+	T = trans[12][5] = settr(413,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(413,0,1,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(413,0,3,0,0,"IF", 0, 2, 0);
+	trans[12][1]	= settr(409,0,11,39,0,"(!(!((Airplane_mode==0))))", 1, 2, 0);
+	trans[12][2]	= settr(410,0,11,1,0,"goto accept_S3", 0, 2, 0);
+	trans[12][6]	= settr(414,0,11,1,0,".(goto)", 0, 2, 0);
+	trans[12][3]	= settr(411,0,5,1,0,"(1)", 0, 2, 0);
+	trans[12][4]	= settr(412,0,5,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[12][11] = settr(419,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(419,0,7,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(419,0,9,0,0,"IF", 0, 2, 0);
+	trans[12][7]	= settr(415,0,19,40,0,"(((Airplane_mode==1)&&(state!=changeAirplane_modeON)))", 1, 2, 0);
+	trans[12][8]	= settr(416,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[12][12]	= settr(420,0,17,1,0,".(goto)", 0, 2, 0);
+	trans[12][9]	= settr(417,0,17,41,0,"((state!=changeAirplane_modeON))", 1, 2, 0);
+	trans[12][10]	= settr(418,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	T = trans[12][17] = settr(425,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(425,0,13,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(425,0,15,0,0,"IF", 0, 2, 0);
+	trans[12][13]	= settr(421,0,19,42,0,"(((Airplane_mode==1)&&(state!=changeAirplane_modeON)))", 1, 2, 0);
+	trans[12][14]	= settr(422,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[12][18]	= settr(426,0,19,1,0,".(goto)", 0, 2, 0);
+	trans[12][15]	= settr(423,0,17,43,0,"((state!=changeAirplane_modeON))", 1, 2, 0);
+	trans[12][16]	= settr(424,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	trans[12][19]	= settr(427,0,20,1,0,"(1)", 0, 2, 0);
+	trans[12][20]	= settr(428,0,0,44,44,"-end-", 0, 3500, 0);
+
+	/* proctype 11: req7_1 */
+
+	trans[11] = (Trans **) emalloc(21*sizeof(Trans *));
+
+	T = trans[11][5] = settr(393,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(393,0,1,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(393,0,3,0,0,"IF", 0, 2, 0);
+	trans[11][1]	= settr(389,0,11,45,0,"(!(!((Airplane_mode==1))))", 1, 2, 0);
+	trans[11][2]	= settr(390,0,11,1,0,"goto accept_S3", 0, 2, 0);
+	trans[11][6]	= settr(394,0,11,1,0,".(goto)", 0, 2, 0);
+	trans[11][3]	= settr(391,0,5,1,0,"(1)", 0, 2, 0);
+	trans[11][4]	= settr(392,0,5,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[11][11] = settr(399,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(399,0,7,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(399,0,9,0,0,"IF", 0, 2, 0);
+	trans[11][7]	= settr(395,0,19,46,0,"(((Airplane_mode==0)&&(state!=changeAirplane_modeOFF)))", 1, 2, 0);
+	trans[11][8]	= settr(396,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[11][12]	= settr(400,0,17,1,0,".(goto)", 0, 2, 0);
+	trans[11][9]	= settr(397,0,17,47,0,"((state!=changeAirplane_modeOFF))", 1, 2, 0);
+	trans[11][10]	= settr(398,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	T = trans[11][17] = settr(405,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(405,0,13,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(405,0,15,0,0,"IF", 0, 2, 0);
+	trans[11][13]	= settr(401,0,19,48,0,"(((Airplane_mode==0)&&(state!=changeAirplane_modeOFF)))", 1, 2, 0);
+	trans[11][14]	= settr(402,0,19,1,0,"goto accept_all", 0, 2, 0);
+	trans[11][18]	= settr(406,0,19,1,0,".(goto)", 0, 2, 0);
+	trans[11][15]	= settr(403,0,17,49,0,"((state!=changeAirplane_modeOFF))", 1, 2, 0);
+	trans[11][16]	= settr(404,0,17,1,0,"goto T0_S3", 0, 2, 0);
+	trans[11][19]	= settr(407,0,20,1,0,"(1)", 0, 2, 0);
+	trans[11][20]	= settr(408,0,0,50,50,"-end-", 0, 3500, 0);
+
+	/* proctype 10: req6 */
+
+	trans[10] = (Trans **) emalloc(9*sizeof(Trans *));
+
+	T = trans[10][5] = settr(385,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(385,0,1,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(385,0,3,0,0,"IF", 0, 2, 0);
+	trans[10][1]	= settr(381,0,7,51,0,"(!((!((state==MainScreen))||((pass==3)&&(user==3)))))", 1, 2, 0);
+	trans[10][2]	= settr(382,0,7,1,0,"goto accept_all", 0, 2, 0);
+	trans[10][6]	= settr(386,0,7,1,0,".(goto)", 0, 2, 0);
+	trans[10][3]	= settr(383,0,5,1,0,"(1)", 0, 2, 0);
+	trans[10][4]	= settr(384,0,5,1,0,"goto T0_init", 0, 2, 0);
+	trans[10][7]	= settr(387,0,8,1,0,"(1)", 0, 2, 0);
+	trans[10][8]	= settr(388,0,0,52,52,"-end-", 0, 3500, 0);
+
+	/* proctype 9: req4_5 */
+
+	trans[9] = (Trans **) emalloc(17*sizeof(Trans *));
+
+	T = trans[9][7] = settr(371,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(371,0,1,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(371,0,3,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(371,0,5,0,0,"IF", 0, 2, 0);
+	trans[9][1]	= settr(365,0,15,53,0,"((!(!(((user==2)||(user==3))))&&((user!=2)&&(user!=3))))", 1, 2, 0);
+	trans[9][2]	= settr(366,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[9][8]	= settr(372,0,13,1,0,".(goto)", 0, 2, 0);
+	trans[9][3]	= settr(367,0,13,54,0,"(!(!(((user==2)||(user==3)))))", 1, 2, 0);
+	trans[9][4]	= settr(368,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[9][5]	= settr(369,0,7,1,0,"(1)", 0, 2, 0);
+	trans[9][6]	= settr(370,0,7,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[9][13] = settr(377,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(377,0,9,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(377,0,11,0,0,"IF", 0, 2, 0);
+	trans[9][9]	= settr(373,0,15,55,0,"(((user!=2)&&(user!=3)))", 1, 2, 0);
+	trans[9][10]	= settr(374,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[9][14]	= settr(378,0,15,1,0,".(goto)", 0, 2, 0);
+	trans[9][11]	= settr(375,0,13,1,0,"(1)", 0, 2, 0);
+	trans[9][12]	= settr(376,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[9][15]	= settr(379,0,16,1,0,"(1)", 0, 2, 0);
+	trans[9][16]	= settr(380,0,0,56,56,"-end-", 0, 3500, 0);
+
+	/* proctype 8: req4_4 */
+
+	trans[8] = (Trans **) emalloc(17*sizeof(Trans *));
+
+	T = trans[8][7] = settr(355,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(355,0,1,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(355,0,3,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(355,0,5,0,0,"IF", 0, 2, 0);
+	trans[8][1]	= settr(349,0,15,57,0,"((!(!(((pass==2)||(pass==3))))&&((pass!=2)&&(pass!=3))))", 1, 2, 0);
+	trans[8][2]	= settr(350,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[8][8]	= settr(356,0,13,1,0,".(goto)", 0, 2, 0);
+	trans[8][3]	= settr(351,0,13,58,0,"(!(!(((pass==2)||(pass==3)))))", 1, 2, 0);
+	trans[8][4]	= settr(352,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[8][5]	= settr(353,0,7,1,0,"(1)", 0, 2, 0);
+	trans[8][6]	= settr(354,0,7,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[8][13] = settr(361,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(361,0,9,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(361,0,11,0,0,"IF", 0, 2, 0);
+	trans[8][9]	= settr(357,0,15,59,0,"(((pass!=2)&&(pass!=3)))", 1, 2, 0);
+	trans[8][10]	= settr(358,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[8][14]	= settr(362,0,15,1,0,".(goto)", 0, 2, 0);
+	trans[8][11]	= settr(359,0,13,1,0,"(1)", 0, 2, 0);
+	trans[8][12]	= settr(360,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[8][15]	= settr(363,0,16,1,0,"(1)", 0, 2, 0);
+	trans[8][16]	= settr(364,0,0,60,60,"-end-", 0, 3500, 0);
+
+	/* proctype 7: req4_3 */
+
+	trans[7] = (Trans **) emalloc(17*sizeof(Trans *));
+
+	T = trans[7][7] = settr(339,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(339,0,1,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(339,0,3,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(339,0,5,0,0,"IF", 0, 2, 0);
+	trans[7][1]	= settr(333,0,15,61,0,"((!(!(((Wifi==1)||(Wifi==0))))&&((Wifi!=1)&&(Wifi!=0))))", 1, 2, 0);
+	trans[7][2]	= settr(334,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[7][8]	= settr(340,0,13,1,0,".(goto)", 0, 2, 0);
+	trans[7][3]	= settr(335,0,13,62,0,"(!(!(((Wifi==1)||(Wifi==0)))))", 1, 2, 0);
+	trans[7][4]	= settr(336,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[7][5]	= settr(337,0,7,1,0,"(1)", 0, 2, 0);
+	trans[7][6]	= settr(338,0,7,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[7][13] = settr(345,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(345,0,9,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(345,0,11,0,0,"IF", 0, 2, 0);
+	trans[7][9]	= settr(341,0,15,63,0,"(((Wifi!=1)&&(Wifi!=0)))", 1, 2, 0);
+	trans[7][10]	= settr(342,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[7][14]	= settr(346,0,15,1,0,".(goto)", 0, 2, 0);
+	trans[7][11]	= settr(343,0,13,1,0,"(1)", 0, 2, 0);
+	trans[7][12]	= settr(344,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[7][15]	= settr(347,0,16,1,0,"(1)", 0, 2, 0);
+	trans[7][16]	= settr(348,0,0,64,64,"-end-", 0, 3500, 0);
+
+	/* proctype 6: req4_2 */
+
+	trans[6] = (Trans **) emalloc(17*sizeof(Trans *));
+
+	T = trans[6][7] = settr(323,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(323,0,1,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(323,0,3,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(323,0,5,0,0,"IF", 0, 2, 0);
+	trans[6][1]	= settr(317,0,15,65,0,"((!(!(((Bluetooth==1)||(Bluetooth==0))))&&((Bluetooth!=1)&&(Bluetooth!=0))))", 1, 2, 0);
+	trans[6][2]	= settr(318,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[6][8]	= settr(324,0,13,1,0,".(goto)", 0, 2, 0);
+	trans[6][3]	= settr(319,0,13,66,0,"(!(!(((Bluetooth==1)||(Bluetooth==0)))))", 1, 2, 0);
+	trans[6][4]	= settr(320,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[6][5]	= settr(321,0,7,1,0,"(1)", 0, 2, 0);
+	trans[6][6]	= settr(322,0,7,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[6][13] = settr(329,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(329,0,9,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(329,0,11,0,0,"IF", 0, 2, 0);
+	trans[6][9]	= settr(325,0,15,67,0,"(((Bluetooth!=1)&&(Bluetooth!=0)))", 1, 2, 0);
+	trans[6][10]	= settr(326,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[6][14]	= settr(330,0,15,1,0,".(goto)", 0, 2, 0);
+	trans[6][11]	= settr(327,0,13,1,0,"(1)", 0, 2, 0);
+	trans[6][12]	= settr(328,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[6][15]	= settr(331,0,16,1,0,"(1)", 0, 2, 0);
+	trans[6][16]	= settr(332,0,0,68,68,"-end-", 0, 3500, 0);
+
+	/* proctype 5: req4_1 */
+
+	trans[5] = (Trans **) emalloc(17*sizeof(Trans *));
+
+	T = trans[5][7] = settr(307,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(307,0,1,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(307,0,3,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(307,0,5,0,0,"IF", 0, 2, 0);
+	trans[5][1]	= settr(301,0,15,69,0,"((!(!(((Airplane_mode==1)||(Airplane_mode==0))))&&((Airplane_mode!=1)&&(Airplane_mode!=0))))", 1, 2, 0);
+	trans[5][2]	= settr(302,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[5][8]	= settr(308,0,13,1,0,".(goto)", 0, 2, 0);
+	trans[5][3]	= settr(303,0,13,70,0,"(!(!(((Airplane_mode==1)||(Airplane_mode==0)))))", 1, 2, 0);
+	trans[5][4]	= settr(304,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[5][5]	= settr(305,0,7,1,0,"(1)", 0, 2, 0);
+	trans[5][6]	= settr(306,0,7,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[5][13] = settr(313,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(313,0,9,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(313,0,11,0,0,"IF", 0, 2, 0);
+	trans[5][9]	= settr(309,0,15,71,0,"(((Airplane_mode!=1)&&(Airplane_mode!=0)))", 1, 2, 0);
+	trans[5][10]	= settr(310,0,15,1,0,"goto accept_all", 0, 2, 0);
+	trans[5][14]	= settr(314,0,15,1,0,".(goto)", 0, 2, 0);
+	trans[5][11]	= settr(311,0,13,1,0,"(1)", 0, 2, 0);
+	trans[5][12]	= settr(312,0,13,1,0,"goto T0_S4", 0, 2, 0);
+	trans[5][15]	= settr(315,0,16,1,0,"(1)", 0, 2, 0);
+	trans[5][16]	= settr(316,0,0,72,72,"-end-", 0, 3500, 0);
+
+	/* proctype 4: req3 */
+
+	trans[4] = (Trans **) emalloc(59*sizeof(Trans *));
+
+	T = trans[4][11] = settr(253,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(253,0,1,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(253,0,3,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(253,0,5,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(253,0,7,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(253,0,9,0,0,"IF", 0, 2, 0);
+	trans[4][1]	= settr(243,0,29,73,0,"(((!(!((state==LoginScreen)))&&!((state!=LoginScreen)))||((!(!((state==LoginScreen)))&&(state!=changepassNotEmpty))&&(state==LoginScreen))))", 1, 2, 0);
+	trans[4][2]	= settr(244,0,29,1,0,"goto accept_S3", 0, 2, 0);
+	trans[4][12]	= settr(254,0,19,1,0,".(goto)", 0, 2, 0);
+	trans[4][3]	= settr(245,0,39,74,0,"(((!(!((state==LoginScreen)))&&(state!=changepassNotEmpty))&&(state!=changeuserNotEmpty)))", 1, 2, 0);
+	trans[4][4]	= settr(246,0,39,1,0,"goto T0_S4", 0, 2, 0);
+	trans[4][5]	= settr(247,0,55,75,0,"((((!(!((state==LoginScreen)))&&!((state==LoginScreen)))&&(state!=changepassNotEmpty))&&(state!=changeuserNotEmpty)))", 1, 2, 0);
+	trans[4][6]	= settr(248,0,55,1,0,"goto T0_S92", 0, 2, 0);
+	trans[4][7]	= settr(249,0,57,76,0,"(((!(!((state==LoginScreen)))&&!((state!=LoginScreen)))&&!((state==LoginScreen))))", 1, 2, 0);
+	trans[4][8]	= settr(250,0,57,1,0,"goto accept_all", 0, 2, 0);
+	trans[4][9]	= settr(251,0,11,1,0,"(1)", 0, 2, 0);
+	trans[4][10]	= settr(252,0,11,1,0,"goto T0_init", 0, 2, 0);
+	T = trans[4][19] = settr(261,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(261,0,13,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(261,0,15,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(261,0,17,0,0,"IF", 0, 2, 0);
+	trans[4][13]	= settr(255,0,49,77,0,"(((!((state!=LoginScreen))&&(state==LoginScreen))||((state!=changepassNotEmpty)&&(state==LoginScreen))))", 1, 2, 0);
+	trans[4][14]	= settr(256,0,49,1,0,"goto T0_S3", 0, 2, 0);
+	trans[4][20]	= settr(262,0,29,1,0,".(goto)", 0, 2, 0);
+	trans[4][15]	= settr(257,0,39,78,0,"(((!((state!=LoginScreen))&&(state!=changeuserNotEmpty))||((state!=changepassNotEmpty)&&(state!=changeuserNotEmpty))))", 1, 2, 0);
+	trans[4][16]	= settr(258,0,39,1,0,"goto T0_S4", 0, 2, 0);
+	trans[4][17]	= settr(259,0,55,79,0,"((((!((state!=LoginScreen))&&!((state==LoginScreen)))&&(state!=changeuserNotEmpty))||((!((state==LoginScreen))&&(state!=changepassNotEmpty))&&(state!=changeuserNotEmpty))))", 1, 2, 0);
+	trans[4][18]	= settr(260,0,55,1,0,"goto T0_S92", 0, 2, 0);
+	T = trans[4][29] = settr(271,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(271,0,21,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(271,0,23,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(271,0,25,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(271,0,27,0,0,"IF", 0, 2, 0);
+	trans[4][21]	= settr(263,0,49,80,0,"((!((state!=LoginScreen))||((state!=changepassNotEmpty)&&(state==LoginScreen))))", 1, 2, 0);
+	trans[4][22]	= settr(264,0,49,1,0,"goto T0_S3", 0, 2, 0);
+	trans[4][30]	= settr(272,0,39,1,0,".(goto)", 0, 2, 0);
+	trans[4][23]	= settr(265,0,39,81,0,"(((state!=changepassNotEmpty)&&(state!=changeuserNotEmpty)))", 1, 2, 0);
+	trans[4][24]	= settr(266,0,39,1,0,"goto T0_S4", 0, 2, 0);
+	trans[4][25]	= settr(267,0,55,82,0,"(((!((state==LoginScreen))&&(state!=changepassNotEmpty))&&(state!=changeuserNotEmpty)))", 1, 2, 0);
+	trans[4][26]	= settr(268,0,55,1,0,"goto T0_S92", 0, 2, 0);
+	trans[4][27]	= settr(269,0,57,83,0,"((!((state!=LoginScreen))&&!((state==LoginScreen))))", 1, 2, 0);
+	trans[4][28]	= settr(270,0,57,1,0,"goto accept_all", 0, 2, 0);
+	T = trans[4][39] = settr(281,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(281,0,31,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(281,0,33,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(281,0,35,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(281,0,37,0,0,"IF", 0, 2, 0);
+	trans[4][31]	= settr(273,0,29,84,0,"(((!((state!=LoginScreen))&&(state==LoginScreen))||((state!=changepassNotEmpty)&&(state==LoginScreen))))", 1, 2, 0);
+	trans[4][32]	= settr(274,0,29,1,0,"goto accept_S3", 0, 2, 0);
+	trans[4][40]	= settr(282,0,49,1,0,".(goto)", 0, 2, 0);
+	trans[4][33]	= settr(275,0,39,85,0,"(((!((state!=LoginScreen))&&(state!=changeuserNotEmpty))||((state!=changepassNotEmpty)&&(state!=changeuserNotEmpty))))", 1, 2, 0);
+	trans[4][34]	= settr(276,0,39,1,0,"goto T0_S4", 0, 2, 0);
+	trans[4][35]	= settr(277,0,19,86,0,"((((state!=changepassNotEmpty)&&(state!=changeuserNotEmpty))&&(state==LoginScreen)))", 1, 2, 0);
+	trans[4][36]	= settr(278,0,19,1,0,"goto accept_S4", 0, 2, 0);
+	trans[4][37]	= settr(279,0,55,87,0,"((((!((state!=LoginScreen))&&!((state==LoginScreen)))&&(state!=changeuserNotEmpty))||((!((state==LoginScreen))&&(state!=changepassNotEmpty))&&(state!=changeuserNotEmpty))))", 1, 2, 0);
+	trans[4][38]	= settr(280,0,55,1,0,"goto T0_S92", 0, 2, 0);
+	T = trans[4][49] = settr(291,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(291,0,41,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(291,0,43,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(291,0,45,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(291,0,47,0,0,"IF", 0, 2, 0);
+	trans[4][41]	= settr(283,0,29,88,0,"((!((state!=LoginScreen))||((state!=changepassNotEmpty)&&(state==LoginScreen))))", 1, 2, 0);
+	trans[4][42]	= settr(284,0,29,1,0,"goto accept_S3", 0, 2, 0);
+	trans[4][50]	= settr(292,0,55,1,0,".(goto)", 0, 2, 0);
+	trans[4][43]	= settr(285,0,39,89,0,"(((state!=changepassNotEmpty)&&(state!=changeuserNotEmpty)))", 1, 2, 0);
+	trans[4][44]	= settr(286,0,39,1,0,"goto T0_S4", 0, 2, 0);
+	trans[4][45]	= settr(287,0,55,90,0,"(((!((state==LoginScreen))&&(state!=changepassNotEmpty))&&(state!=changeuserNotEmpty)))", 1, 2, 0);
+	trans[4][46]	= settr(288,0,55,1,0,"goto T0_S92", 0, 2, 0);
+	trans[4][47]	= settr(289,0,57,91,0,"((!((state!=LoginScreen))&&!((state==LoginScreen))))", 1, 2, 0);
+	trans[4][48]	= settr(290,0,57,1,0,"goto accept_all", 0, 2, 0);
+	T = trans[4][55] = settr(297,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(297,0,51,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(297,0,53,0,0,"IF", 0, 2, 0);
+	trans[4][51]	= settr(293,0,57,92,0,"((state==LoginScreen))", 1, 2, 0);
+	trans[4][52]	= settr(294,0,57,1,0,"goto accept_all", 0, 2, 0);
+	trans[4][56]	= settr(298,0,57,1,0,".(goto)", 0, 2, 0);
+	trans[4][53]	= settr(295,0,55,93,0,"((state!=changeuserNotEmpty))", 1, 2, 0);
+	trans[4][54]	= settr(296,0,55,1,0,"goto T0_S92", 0, 2, 0);
+	trans[4][57]	= settr(299,0,58,1,0,"(1)", 0, 2, 0);
+	trans[4][58]	= settr(300,0,0,94,94,"-end-", 0, 3500, 0);
 
 	/* proctype 3: req1_3 */
 
@@ -32,27 +510,27 @@ settable(void)
 	T = T->nxt	= settr(230,0,1,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(230,0,3,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(230,0,5,0,0,"IF", 0, 2, 0);
-	trans[3][1]	= settr(224,0,11,3,0,"(((!(!((state==MainScreen)))&&!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF))))&&!((state!=MainScreen))))", 1, 2, 0);
+	trans[3][1]	= settr(224,0,11,95,0,"(((!(!((state==MainScreen)))&&!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF))))&&!((state!=MainScreen))))", 1, 2, 0);
 	trans[3][2]	= settr(225,0,11,1,0,"goto accept_S19", 0, 2, 0);
 	trans[3][8]	= settr(231,0,11,1,0,".(goto)", 0, 2, 0);
-	trans[3][3]	= settr(226,0,17,4,0,"((!(!((state==MainScreen)))&&!((state!=MainScreen))))", 1, 2, 0);
+	trans[3][3]	= settr(226,0,17,96,0,"((!(!((state==MainScreen)))&&!((state!=MainScreen))))", 1, 2, 0);
 	trans[3][4]	= settr(227,0,17,1,0,"goto T0_S23", 0, 2, 0);
 	trans[3][5]	= settr(228,0,7,1,0,"(1)", 0, 2, 0);
 	trans[3][6]	= settr(229,0,7,1,0,"goto T0_init", 0, 2, 0);
 	T = trans[3][11] = settr(234,0,0,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(234,0,9,0,0,"IF", 0, 2, 0);
-	trans[3][9]	= settr(232,0,11,5,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=MainScreen))))", 1, 2, 0);
+	trans[3][9]	= settr(232,0,11,97,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=MainScreen))))", 1, 2, 0);
 	trans[3][10]	= settr(233,0,11,1,0,"goto accept_S19", 0, 2, 0);
 	trans[3][12]	= settr(235,0,17,1,0,".(goto)", 0, 2, 0);
 	T = trans[3][17] = settr(240,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(240,0,13,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(240,0,15,0,0,"IF", 0, 2, 0);
-	trans[3][13]	= settr(236,0,11,6,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=MainScreen))))", 1, 2, 0);
+	trans[3][13]	= settr(236,0,11,98,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=MainScreen))))", 1, 2, 0);
 	trans[3][14]	= settr(237,0,11,1,0,"goto accept_S19", 0, 2, 0);
 	trans[3][18]	= settr(241,0,19,1,0,".(goto)", 0, 2, 0);
-	trans[3][15]	= settr(238,0,17,7,0,"(!((state!=MainScreen)))", 1, 2, 0);
+	trans[3][15]	= settr(238,0,17,99,0,"(!((state!=MainScreen)))", 1, 2, 0);
 	trans[3][16]	= settr(239,0,17,1,0,"goto T0_S23", 0, 2, 0);
-	trans[3][19]	= settr(242,0,0,8,8,"-end-", 0, 3500, 0);
+	trans[3][19]	= settr(242,0,0,100,100,"-end-", 0, 3500, 0);
 
 	/* proctype 2: req1_2 */
 
@@ -62,27 +540,27 @@ settable(void)
 	T = T->nxt	= settr(211,0,1,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(211,0,3,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(211,0,5,0,0,"IF", 0, 2, 0);
-	trans[2][1]	= settr(205,0,11,9,0,"(((!(!((state==LoginScreen)))&&!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF))))&&!((state!=LoginScreen))))", 1, 2, 0);
+	trans[2][1]	= settr(205,0,11,101,0,"(((!(!((state==LoginScreen)))&&!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF))))&&!((state!=LoginScreen))))", 1, 2, 0);
 	trans[2][2]	= settr(206,0,11,1,0,"goto accept_S19", 0, 2, 0);
 	trans[2][8]	= settr(212,0,11,1,0,".(goto)", 0, 2, 0);
-	trans[2][3]	= settr(207,0,17,10,0,"((!(!((state==LoginScreen)))&&!((state!=LoginScreen))))", 1, 2, 0);
+	trans[2][3]	= settr(207,0,17,102,0,"((!(!((state==LoginScreen)))&&!((state!=LoginScreen))))", 1, 2, 0);
 	trans[2][4]	= settr(208,0,17,1,0,"goto T0_S23", 0, 2, 0);
 	trans[2][5]	= settr(209,0,7,1,0,"(1)", 0, 2, 0);
 	trans[2][6]	= settr(210,0,7,1,0,"goto T0_init", 0, 2, 0);
 	T = trans[2][11] = settr(215,0,0,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(215,0,9,0,0,"IF", 0, 2, 0);
-	trans[2][9]	= settr(213,0,11,11,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=LoginScreen))))", 1, 2, 0);
+	trans[2][9]	= settr(213,0,11,103,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=LoginScreen))))", 1, 2, 0);
 	trans[2][10]	= settr(214,0,11,1,0,"goto accept_S19", 0, 2, 0);
 	trans[2][12]	= settr(216,0,17,1,0,".(goto)", 0, 2, 0);
 	T = trans[2][17] = settr(221,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(221,0,13,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(221,0,15,0,0,"IF", 0, 2, 0);
-	trans[2][13]	= settr(217,0,11,12,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=LoginScreen))))", 1, 2, 0);
+	trans[2][13]	= settr(217,0,11,104,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=LoginScreen))))", 1, 2, 0);
 	trans[2][14]	= settr(218,0,11,1,0,"goto accept_S19", 0, 2, 0);
 	trans[2][18]	= settr(222,0,19,1,0,".(goto)", 0, 2, 0);
-	trans[2][15]	= settr(219,0,17,13,0,"(!((state!=LoginScreen)))", 1, 2, 0);
+	trans[2][15]	= settr(219,0,17,105,0,"(!((state!=LoginScreen)))", 1, 2, 0);
 	trans[2][16]	= settr(220,0,17,1,0,"goto T0_S23", 0, 2, 0);
-	trans[2][19]	= settr(223,0,0,14,14,"-end-", 0, 3500, 0);
+	trans[2][19]	= settr(223,0,0,106,106,"-end-", 0, 3500, 0);
 
 	/* proctype 1: req1_1 */
 
@@ -92,27 +570,27 @@ settable(void)
 	T = T->nxt	= settr(192,0,1,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(192,0,3,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(192,0,5,0,0,"IF", 0, 2, 0);
-	trans[1][1]	= settr(186,0,11,15,0,"(((!(!((state==Setting)))&&!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF))))&&!((state!=Setting))))", 1, 2, 0);
+	trans[1][1]	= settr(186,0,11,107,0,"(((!(!((state==Setting)))&&!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF))))&&!((state!=Setting))))", 1, 2, 0);
 	trans[1][2]	= settr(187,0,11,1,0,"goto accept_S19", 0, 2, 0);
 	trans[1][8]	= settr(193,0,11,1,0,".(goto)", 0, 2, 0);
-	trans[1][3]	= settr(188,0,17,16,0,"((!(!((state==Setting)))&&!((state!=Setting))))", 1, 2, 0);
+	trans[1][3]	= settr(188,0,17,108,0,"((!(!((state==Setting)))&&!((state!=Setting))))", 1, 2, 0);
 	trans[1][4]	= settr(189,0,17,1,0,"goto T0_S23", 0, 2, 0);
 	trans[1][5]	= settr(190,0,7,1,0,"(1)", 0, 2, 0);
 	trans[1][6]	= settr(191,0,7,1,0,"goto T0_init", 0, 2, 0);
 	T = trans[1][11] = settr(196,0,0,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(196,0,9,0,0,"IF", 0, 2, 0);
-	trans[1][9]	= settr(194,0,11,17,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=Setting))))", 1, 2, 0);
+	trans[1][9]	= settr(194,0,11,109,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=Setting))))", 1, 2, 0);
 	trans[1][10]	= settr(195,0,11,1,0,"goto accept_S19", 0, 2, 0);
 	trans[1][12]	= settr(197,0,17,1,0,".(goto)", 0, 2, 0);
 	T = trans[1][17] = settr(202,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(202,0,13,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(202,0,15,0,0,"IF", 0, 2, 0);
-	trans[1][13]	= settr(198,0,11,18,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=Setting))))", 1, 2, 0);
+	trans[1][13]	= settr(198,0,11,110,0,"((!(((((((((state==changeBluetoothON)||(state==changeWifiON))||(state==changepassNotEmpty))||(state==changeBluetoothOFF))||(state==changeuserNotEmpty))||(state==changeAirplane_modeOFF))||(state==changeAirplane_modeON))||(state==changeWifiOFF)))&&!((state!=Setting))))", 1, 2, 0);
 	trans[1][14]	= settr(199,0,11,1,0,"goto accept_S19", 0, 2, 0);
 	trans[1][18]	= settr(203,0,19,1,0,".(goto)", 0, 2, 0);
-	trans[1][15]	= settr(200,0,17,19,0,"(!((state!=Setting)))", 1, 2, 0);
+	trans[1][15]	= settr(200,0,17,111,0,"(!((state!=Setting)))", 1, 2, 0);
 	trans[1][16]	= settr(201,0,17,1,0,"goto T0_S23", 0, 2, 0);
-	trans[1][19]	= settr(204,0,0,20,20,"-end-", 0, 3500, 0);
+	trans[1][19]	= settr(204,0,0,112,112,"-end-", 0, 3500, 0);
 
 	/* proctype 0: vm */
 
@@ -131,7 +609,7 @@ settable(void)
 	T = T->nxt	= settr(182,0,122,0,0,"DO", 0, 2, 0);
 	T = T->nxt	= settr(182,0,133,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(182,0,164,0,0,"DO", 0, 2, 0);
-	trans[0][1]	= settr(0,0,36,21,0,"((state==Setting))", 1, 2, 0);
+	trans[0][1]	= settr(0,0,36,113,0,"((state==Setting))", 1, 2, 0);
 	T = trans[0][36] = settr(35,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(35,0,2,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(35,0,9,0,0,"IF", 0, 2, 0);
@@ -140,202 +618,202 @@ settable(void)
 	T = T->nxt	= settr(35,0,24,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(35,0,29,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(35,0,35,0,0,"IF", 0, 2, 0);
-	trans[0][2]	= settr(1,0,8,22,0,"((Airplane_mode==0))", 1, 2, 0);
+	trans[0][2]	= settr(1,0,8,114,0,"((Airplane_mode==0))", 1, 2, 0);
 	T = trans[ 0][8] = settr(7,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(7,2,3,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][3]	= settr(2,0,183,23,23,"Airplane_mode = 1", 1, 2, 0); /* m: 4 -> 0,183 */
+	trans[0][3]	= settr(2,0,183,115,115,"Airplane_mode = 1", 1, 2, 0); /* m: 4 -> 0,183 */
 	reached0[4] = 1;
-	trans[0][4]	= settr(0,0,0,0,0,"action[12] = 1",0,0,0);
-	trans[0][5]	= settr(0,0,0,0,0,"action[10] = 1",0,0,0);
-	trans[0][6]	= settr(0,0,0,0,0,"action[11] = 1",0,0,0);
+	trans[0][4]	= settr(0,0,0,0,0,"action[2] = 1",0,0,0);
+	trans[0][5]	= settr(0,0,0,0,0,"action[0] = 1",0,0,0);
+	trans[0][6]	= settr(0,0,0,0,0,"action[1] = 1",0,0,0);
 	trans[0][7]	= settr(0,0,0,0,0,"state = changeAirplane_modeON",0,0,0);
 	trans[0][37]	= settr(36,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][9]	= settr(8,0,13,24,0,"((Airplane_mode==1))", 1, 2, 0);
+	trans[0][9]	= settr(8,0,13,116,0,"((Airplane_mode==1))", 1, 2, 0);
 	T = trans[ 0][13] = settr(12,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(12,2,10,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][10]	= settr(9,0,183,25,25,"Airplane_mode = 0", 1, 2, 0); /* m: 11 -> 0,183 */
+	trans[0][10]	= settr(9,0,183,117,117,"Airplane_mode = 0", 1, 2, 0); /* m: 11 -> 0,183 */
 	reached0[11] = 1;
-	trans[0][11]	= settr(0,0,0,0,0,"action[12] = 1",0,0,0);
+	trans[0][11]	= settr(0,0,0,0,0,"action[2] = 1",0,0,0);
 	trans[0][12]	= settr(0,0,0,0,0,"state = changeAirplane_modeOFF",0,0,0);
-	trans[0][14]	= settr(13,0,18,26,0,"(((Bluetooth==0)&&(Airplane_mode==0)))", 1, 2, 0);
+	trans[0][14]	= settr(13,0,18,118,0,"(((Bluetooth==0)&&(Airplane_mode==0)))", 1, 2, 0);
 	T = trans[ 0][18] = settr(17,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(17,2,15,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][15]	= settr(14,0,183,27,27,"Bluetooth = 1", 1, 2, 0); /* m: 16 -> 0,183 */
+	trans[0][15]	= settr(14,0,183,119,119,"Bluetooth = 1", 1, 2, 0); /* m: 16 -> 0,183 */
 	reached0[16] = 1;
-	trans[0][16]	= settr(0,0,0,0,0,"action[11] = 1",0,0,0);
+	trans[0][16]	= settr(0,0,0,0,0,"action[1] = 1",0,0,0);
 	trans[0][17]	= settr(0,0,0,0,0,"state = changeBluetoothON",0,0,0);
-	trans[0][19]	= settr(18,0,23,28,0,"((Bluetooth==1))", 1, 2, 0);
+	trans[0][19]	= settr(18,0,23,120,0,"((Bluetooth==1))", 1, 2, 0);
 	T = trans[ 0][23] = settr(22,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(22,2,20,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][20]	= settr(19,0,183,29,29,"Bluetooth = 0", 1, 2, 0); /* m: 21 -> 0,183 */
+	trans[0][20]	= settr(19,0,183,121,121,"Bluetooth = 0", 1, 2, 0); /* m: 21 -> 0,183 */
 	reached0[21] = 1;
-	trans[0][21]	= settr(0,0,0,0,0,"action[11] = 1",0,0,0);
+	trans[0][21]	= settr(0,0,0,0,0,"action[1] = 1",0,0,0);
 	trans[0][22]	= settr(0,0,0,0,0,"state = changeBluetoothOFF",0,0,0);
-	trans[0][24]	= settr(23,0,28,30,0,"(((Wifi==0)&&(Airplane_mode==0)))", 1, 2, 0);
+	trans[0][24]	= settr(23,0,28,122,0,"(((Wifi==0)&&(Airplane_mode==0)))", 1, 2, 0);
 	T = trans[ 0][28] = settr(27,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(27,2,25,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][25]	= settr(24,0,183,31,31,"Wifi = 1", 1, 2, 0); /* m: 26 -> 0,183 */
+	trans[0][25]	= settr(24,0,183,123,123,"Wifi = 1", 1, 2, 0); /* m: 26 -> 0,183 */
 	reached0[26] = 1;
-	trans[0][26]	= settr(0,0,0,0,0,"action[10] = 1",0,0,0);
+	trans[0][26]	= settr(0,0,0,0,0,"action[0] = 1",0,0,0);
 	trans[0][27]	= settr(0,0,0,0,0,"state = changeWifiON",0,0,0);
-	trans[0][29]	= settr(28,0,33,32,0,"((Wifi==1))", 1, 2, 0);
+	trans[0][29]	= settr(28,0,33,124,0,"((Wifi==1))", 1, 2, 0);
 	T = trans[ 0][33] = settr(32,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(32,2,30,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][30]	= settr(29,0,183,33,33,"Wifi = 0", 1, 2, 0); /* m: 31 -> 0,183 */
+	trans[0][30]	= settr(29,0,183,125,125,"Wifi = 0", 1, 2, 0); /* m: 31 -> 0,183 */
 	reached0[31] = 1;
-	trans[0][31]	= settr(0,0,0,0,0,"action[10] = 1",0,0,0);
+	trans[0][31]	= settr(0,0,0,0,0,"action[0] = 1",0,0,0);
 	trans[0][32]	= settr(0,0,0,0,0,"state = changeWifiOFF",0,0,0);
 	T = trans[ 0][35] = settr(34,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(34,2,34,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][34]	= settr(33,0,183,34,34,"state = Setting", 1, 2, 0);
-	trans[0][38]	= settr(37,0,52,35,0,"((state==LoginScreen))", 1, 2, 0);
+	trans[0][34]	= settr(33,0,183,126,126,"state = Setting", 1, 2, 0);
+	trans[0][38]	= settr(37,0,52,127,0,"((state==LoginScreen))", 1, 2, 0);
 	T = trans[0][52] = settr(51,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(51,0,39,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(51,0,44,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(51,0,47,0,0,"IF", 0, 2, 0);
-	trans[0][39]	= settr(38,0,43,36,0,"((pass==2))", 1, 2, 0);
+	trans[0][39]	= settr(38,0,43,128,0,"((pass==2))", 1, 2, 0);
 	T = trans[ 0][43] = settr(42,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(42,2,40,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][40]	= settr(39,0,183,37,37,"pass = 3", 1, 2, 0); /* m: 41 -> 0,183 */
+	trans[0][40]	= settr(39,0,183,129,129,"pass = 3", 1, 2, 0); /* m: 41 -> 0,183 */
 	reached0[41] = 1;
-	trans[0][41]	= settr(0,0,0,0,0,"action[14] = 1",0,0,0);
+	trans[0][41]	= settr(0,0,0,0,0,"action[4] = 1",0,0,0);
 	trans[0][42]	= settr(0,0,0,0,0,"state = changepassNotEmpty",0,0,0);
 	trans[0][53]	= settr(52,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][44]	= settr(43,0,46,38,0,"(((user==3)&&(pass==3)))", 1, 2, 0);
+	trans[0][44]	= settr(43,0,46,130,0,"(((user==3)&&(pass==3)))", 1, 2, 0);
 	T = trans[ 0][46] = settr(45,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(45,2,45,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][45]	= settr(44,0,183,39,39,"state = MainScreen", 1, 2, 0);
-	trans[0][47]	= settr(46,0,51,40,0,"((user==2))", 1, 2, 0);
+	trans[0][45]	= settr(44,0,183,131,131,"state = MainScreen", 1, 2, 0);
+	trans[0][47]	= settr(46,0,51,132,0,"((user==2))", 1, 2, 0);
 	T = trans[ 0][51] = settr(50,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(50,2,48,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][48]	= settr(47,0,183,41,41,"user = 3", 1, 2, 0); /* m: 49 -> 0,183 */
+	trans[0][48]	= settr(47,0,183,133,133,"user = 3", 1, 2, 0); /* m: 49 -> 0,183 */
 	reached0[49] = 1;
-	trans[0][49]	= settr(0,0,0,0,0,"action[13] = 1",0,0,0);
+	trans[0][49]	= settr(0,0,0,0,0,"action[3] = 1",0,0,0);
 	trans[0][50]	= settr(0,0,0,0,0,"state = changeuserNotEmpty",0,0,0);
-	trans[0][54]	= settr(53,0,57,42,0,"((state==MainScreen))", 1, 2, 0);
+	trans[0][54]	= settr(53,0,57,134,0,"((state==MainScreen))", 1, 2, 0);
 	T = trans[0][57] = settr(56,0,0,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(56,0,56,0,0,"IF", 0, 2, 0);
 	T = trans[ 0][56] = settr(55,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(55,2,55,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][55]	= settr(54,0,183,43,43,"state = MainScreen", 1, 2, 0);
+	trans[0][55]	= settr(54,0,183,135,135,"state = MainScreen", 1, 2, 0);
 	trans[0][58]	= settr(57,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][59]	= settr(58,0,68,44,0,"((state==changeBluetoothON))", 1, 2, 0);
+	trans[0][59]	= settr(58,0,68,136,0,"((state==changeBluetoothON))", 1, 2, 0);
 	T = trans[0][68] = settr(67,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(67,0,60,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(67,0,64,0,0,"IF", 0, 2, 0);
-	trans[0][60]	= settr(59,0,63,45,0,"(((action[12]==0)&&(action[11]==1)))", 1, 2, 0);
+	trans[0][60]	= settr(59,0,63,137,0,"(((action[2]==0)&&(action[1]==1)))", 1, 2, 0);
 	T = trans[ 0][63] = settr(62,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(62,2,61,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][61]	= settr(60,0,183,46,46,"action[11] = 0", 1, 2, 0); /* m: 62 -> 0,183 */
+	trans[0][61]	= settr(60,0,183,138,138,"action[1] = 0", 1, 2, 0); /* m: 62 -> 0,183 */
 	reached0[62] = 1;
 	trans[0][62]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
 	trans[0][69]	= settr(68,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][64]	= settr(63,0,67,47,0,"(((action[12]==0)&&(action[11]==1)))", 1, 2, 0);
+	trans[0][64]	= settr(63,0,67,139,0,"(((action[2]==0)&&(action[1]==1)))", 1, 2, 0);
 	T = trans[ 0][67] = settr(66,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(66,2,65,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][65]	= settr(64,0,183,48,48,"action[11] = 0", 1, 2, 0); /* m: 66 -> 0,183 */
+	trans[0][65]	= settr(64,0,183,140,140,"action[1] = 0", 1, 2, 0); /* m: 66 -> 0,183 */
 	reached0[66] = 1;
 	trans[0][66]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
-	trans[0][70]	= settr(69,0,79,49,0,"((state==changeWifiON))", 1, 2, 0);
+	trans[0][70]	= settr(69,0,79,141,0,"((state==changeWifiON))", 1, 2, 0);
 	T = trans[0][79] = settr(78,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(78,0,71,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(78,0,75,0,0,"IF", 0, 2, 0);
-	trans[0][71]	= settr(70,0,74,50,0,"(((action[12]==0)&&(action[10]==1)))", 1, 2, 0);
+	trans[0][71]	= settr(70,0,74,142,0,"(((action[2]==0)&&(action[0]==1)))", 1, 2, 0);
 	T = trans[ 0][74] = settr(73,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(73,2,72,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][72]	= settr(71,0,183,51,51,"action[10] = 0", 1, 2, 0); /* m: 73 -> 0,183 */
+	trans[0][72]	= settr(71,0,183,143,143,"action[0] = 0", 1, 2, 0); /* m: 73 -> 0,183 */
 	reached0[73] = 1;
 	trans[0][73]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
 	trans[0][80]	= settr(79,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][75]	= settr(74,0,78,52,0,"(((action[12]==0)&&(action[10]==1)))", 1, 2, 0);
+	trans[0][75]	= settr(74,0,78,144,0,"(((action[2]==0)&&(action[0]==1)))", 1, 2, 0);
 	T = trans[ 0][78] = settr(77,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(77,2,76,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][76]	= settr(75,0,183,53,53,"action[10] = 0", 1, 2, 0); /* m: 77 -> 0,183 */
+	trans[0][76]	= settr(75,0,183,145,145,"action[0] = 0", 1, 2, 0); /* m: 77 -> 0,183 */
 	reached0[77] = 1;
 	trans[0][77]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
-	trans[0][81]	= settr(80,0,90,54,0,"((state==changepassNotEmpty))", 1, 2, 0);
+	trans[0][81]	= settr(80,0,90,146,0,"((state==changepassNotEmpty))", 1, 2, 0);
 	T = trans[0][90] = settr(89,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(89,0,82,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(89,0,86,0,0,"IF", 0, 2, 0);
-	trans[0][82]	= settr(81,0,85,55,0,"((action[14]==1))", 1, 2, 0);
+	trans[0][82]	= settr(81,0,85,147,0,"((action[4]==1))", 1, 2, 0);
 	T = trans[ 0][85] = settr(84,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(84,2,83,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][83]	= settr(82,0,183,56,56,"action[14] = 0", 1, 2, 0); /* m: 84 -> 0,183 */
+	trans[0][83]	= settr(82,0,183,148,148,"action[4] = 0", 1, 2, 0); /* m: 84 -> 0,183 */
 	reached0[84] = 1;
 	trans[0][84]	= settr(0,0,0,0,0,"state = LoginScreen",0,0,0);
 	trans[0][91]	= settr(90,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][86]	= settr(85,0,89,57,0,"((action[14]==1))", 1, 2, 0);
+	trans[0][86]	= settr(85,0,89,149,0,"((action[4]==1))", 1, 2, 0);
 	T = trans[ 0][89] = settr(88,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(88,2,87,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][87]	= settr(86,0,183,58,58,"action[14] = 0", 1, 2, 0); /* m: 88 -> 0,183 */
+	trans[0][87]	= settr(86,0,183,150,150,"action[4] = 0", 1, 2, 0); /* m: 88 -> 0,183 */
 	reached0[88] = 1;
 	trans[0][88]	= settr(0,0,0,0,0,"state = LoginScreen",0,0,0);
-	trans[0][92]	= settr(91,0,109,59,0,"((state==changeBluetoothOFF))", 1, 2, 0);
+	trans[0][92]	= settr(91,0,109,151,0,"((state==changeBluetoothOFF))", 1, 2, 0);
 	T = trans[0][109] = settr(108,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(108,0,93,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(108,0,97,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(108,0,101,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(108,0,105,0,0,"IF", 0, 2, 0);
-	trans[0][93]	= settr(92,0,96,60,0,"(((action[12]==1)&&(action[11]==1)))", 1, 2, 0);
+	trans[0][93]	= settr(92,0,96,152,0,"(((action[2]==1)&&(action[1]==1)))", 1, 2, 0);
 	T = trans[ 0][96] = settr(95,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(95,2,94,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][94]	= settr(93,0,183,61,61,"action[11] = 0", 1, 2, 0); /* m: 95 -> 0,183 */
+	trans[0][94]	= settr(93,0,183,153,153,"action[1] = 0", 1, 2, 0); /* m: 95 -> 0,183 */
 	reached0[95] = 1;
 	trans[0][95]	= settr(0,0,0,0,0,"state = changeAirplane_modeON",0,0,0);
 	trans[0][110]	= settr(109,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][97]	= settr(96,0,100,62,0,"(((action[12]==0)&&(action[11]==1)))", 1, 2, 0);
+	trans[0][97]	= settr(96,0,100,154,0,"(((action[2]==0)&&(action[1]==1)))", 1, 2, 0);
 	T = trans[ 0][100] = settr(99,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(99,2,98,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][98]	= settr(97,0,183,63,63,"action[11] = 0", 1, 2, 0); /* m: 99 -> 0,183 */
+	trans[0][98]	= settr(97,0,183,155,155,"action[1] = 0", 1, 2, 0); /* m: 99 -> 0,183 */
 	reached0[99] = 1;
 	trans[0][99]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
-	trans[0][101]	= settr(100,0,104,64,0,"(((action[12]==1)&&(action[11]==1)))", 1, 2, 0);
+	trans[0][101]	= settr(100,0,104,156,0,"(((action[2]==1)&&(action[1]==1)))", 1, 2, 0);
 	T = trans[ 0][104] = settr(103,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(103,2,102,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][102]	= settr(101,0,183,65,65,"action[11] = 0", 1, 2, 0); /* m: 103 -> 0,183 */
+	trans[0][102]	= settr(101,0,183,157,157,"action[1] = 0", 1, 2, 0); /* m: 103 -> 0,183 */
 	reached0[103] = 1;
 	trans[0][103]	= settr(0,0,0,0,0,"state = changeAirplane_modeON",0,0,0);
-	trans[0][105]	= settr(104,0,108,66,0,"(((action[12]==0)&&(action[11]==1)))", 1, 2, 0);
+	trans[0][105]	= settr(104,0,108,158,0,"(((action[2]==0)&&(action[1]==1)))", 1, 2, 0);
 	T = trans[ 0][108] = settr(107,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(107,2,106,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][106]	= settr(105,0,183,67,67,"action[11] = 0", 1, 2, 0); /* m: 107 -> 0,183 */
+	trans[0][106]	= settr(105,0,183,159,159,"action[1] = 0", 1, 2, 0); /* m: 107 -> 0,183 */
 	reached0[107] = 1;
 	trans[0][107]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
-	trans[0][111]	= settr(110,0,120,68,0,"((state==changeuserNotEmpty))", 1, 2, 0);
+	trans[0][111]	= settr(110,0,120,160,0,"((state==changeuserNotEmpty))", 1, 2, 0);
 	T = trans[0][120] = settr(119,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(119,0,112,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(119,0,116,0,0,"IF", 0, 2, 0);
-	trans[0][112]	= settr(111,0,115,69,0,"((action[13]==1))", 1, 2, 0);
+	trans[0][112]	= settr(111,0,115,161,0,"((action[3]==1))", 1, 2, 0);
 	T = trans[ 0][115] = settr(114,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(114,2,113,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][113]	= settr(112,0,183,70,70,"action[13] = 0", 1, 2, 0); /* m: 114 -> 0,183 */
+	trans[0][113]	= settr(112,0,183,162,162,"action[3] = 0", 1, 2, 0); /* m: 114 -> 0,183 */
 	reached0[114] = 1;
 	trans[0][114]	= settr(0,0,0,0,0,"state = LoginScreen",0,0,0);
 	trans[0][121]	= settr(120,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][116]	= settr(115,0,119,71,0,"((action[13]==1))", 1, 2, 0);
+	trans[0][116]	= settr(115,0,119,163,0,"((action[3]==1))", 1, 2, 0);
 	T = trans[ 0][119] = settr(118,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(118,2,117,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][117]	= settr(116,0,183,72,72,"action[13] = 0", 1, 2, 0); /* m: 118 -> 0,183 */
+	trans[0][117]	= settr(116,0,183,164,164,"action[3] = 0", 1, 2, 0); /* m: 118 -> 0,183 */
 	reached0[118] = 1;
 	trans[0][118]	= settr(0,0,0,0,0,"state = LoginScreen",0,0,0);
-	trans[0][122]	= settr(121,0,131,73,0,"((state==changeAirplane_modeOFF))", 1, 2, 0);
+	trans[0][122]	= settr(121,0,131,165,0,"((state==changeAirplane_modeOFF))", 1, 2, 0);
 	T = trans[0][131] = settr(130,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(130,0,123,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(130,0,127,0,0,"IF", 0, 2, 0);
-	trans[0][123]	= settr(122,0,126,74,0,"((action[12]==1))", 1, 2, 0);
+	trans[0][123]	= settr(122,0,126,166,0,"((action[2]==1))", 1, 2, 0);
 	T = trans[ 0][126] = settr(125,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(125,2,124,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][124]	= settr(123,0,183,75,75,"action[12] = 0", 1, 2, 0); /* m: 125 -> 0,183 */
+	trans[0][124]	= settr(123,0,183,167,167,"action[2] = 0", 1, 2, 0); /* m: 125 -> 0,183 */
 	reached0[125] = 1;
 	trans[0][125]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
 	trans[0][132]	= settr(131,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][127]	= settr(126,0,130,76,0,"((action[12]==1))", 1, 2, 0);
+	trans[0][127]	= settr(126,0,130,168,0,"((action[2]==1))", 1, 2, 0);
 	T = trans[ 0][130] = settr(129,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(129,2,128,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][128]	= settr(127,0,183,77,77,"action[12] = 0", 1, 2, 0); /* m: 129 -> 0,183 */
+	trans[0][128]	= settr(127,0,183,169,169,"action[2] = 0", 1, 2, 0); /* m: 129 -> 0,183 */
 	reached0[129] = 1;
 	trans[0][129]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
-	trans[0][133]	= settr(132,0,162,78,0,"((state==changeAirplane_modeON))", 1, 2, 0);
+	trans[0][133]	= settr(132,0,162,170,0,"((state==changeAirplane_modeON))", 1, 2, 0);
 	T = trans[0][162] = settr(161,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(161,0,134,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(161,0,138,0,0,"IF", 0, 2, 0);
@@ -343,80 +821,80 @@ settable(void)
 	T = T->nxt	= settr(161,0,148,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(161,0,152,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(161,0,157,0,0,"IF", 0, 2, 0);
-	trans[0][134]	= settr(133,0,137,79,0,"((((action[12]==1)&&(action[10]==0))&&(action[11]==0)))", 1, 2, 0);
+	trans[0][134]	= settr(133,0,137,171,0,"((((action[2]==1)&&(action[0]==0))&&(action[1]==0)))", 1, 2, 0);
 	T = trans[ 0][137] = settr(136,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(136,2,135,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][135]	= settr(134,0,183,80,80,"action[12] = 0", 1, 2, 0); /* m: 136 -> 0,183 */
+	trans[0][135]	= settr(134,0,183,172,172,"action[2] = 0", 1, 2, 0); /* m: 136 -> 0,183 */
 	reached0[136] = 1;
 	trans[0][136]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
 	trans[0][163]	= settr(162,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][138]	= settr(137,0,142,81,0,"((action[10]==1))", 1, 2, 0);
+	trans[0][138]	= settr(137,0,142,173,0,"((action[0]==1))", 1, 2, 0);
 	T = trans[ 0][142] = settr(141,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(141,2,139,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][139]	= settr(138,0,183,82,82,"Wifi = 0", 1, 2, 0); /* m: 140 -> 0,183 */
+	trans[0][139]	= settr(138,0,183,174,174,"Wifi = 0", 1, 2, 0); /* m: 140 -> 0,183 */
 	reached0[140] = 1;
-	trans[0][140]	= settr(0,0,0,0,0,"action[10] = 1",0,0,0);
+	trans[0][140]	= settr(0,0,0,0,0,"action[0] = 1",0,0,0);
 	trans[0][141]	= settr(0,0,0,0,0,"state = changeWifiOFF",0,0,0);
-	trans[0][143]	= settr(142,0,147,83,0,"((action[11]==1))", 1, 2, 0);
+	trans[0][143]	= settr(142,0,147,175,0,"((action[1]==1))", 1, 2, 0);
 	T = trans[ 0][147] = settr(146,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(146,2,144,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][144]	= settr(143,0,183,84,84,"Bluetooth = 0", 1, 2, 0); /* m: 145 -> 0,183 */
+	trans[0][144]	= settr(143,0,183,176,176,"Bluetooth = 0", 1, 2, 0); /* m: 145 -> 0,183 */
 	reached0[145] = 1;
-	trans[0][145]	= settr(0,0,0,0,0,"action[11] = 1",0,0,0);
+	trans[0][145]	= settr(0,0,0,0,0,"action[1] = 1",0,0,0);
 	trans[0][146]	= settr(0,0,0,0,0,"state = changeBluetoothOFF",0,0,0);
-	trans[0][148]	= settr(147,0,151,85,0,"((((action[12]==1)&&(action[10]==0))&&(action[11]==0)))", 1, 2, 0);
+	trans[0][148]	= settr(147,0,151,177,0,"((((action[2]==1)&&(action[0]==0))&&(action[1]==0)))", 1, 2, 0);
 	T = trans[ 0][151] = settr(150,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(150,2,149,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][149]	= settr(148,0,183,86,86,"action[12] = 0", 1, 2, 0); /* m: 150 -> 0,183 */
+	trans[0][149]	= settr(148,0,183,178,178,"action[2] = 0", 1, 2, 0); /* m: 150 -> 0,183 */
 	reached0[150] = 1;
 	trans[0][150]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
-	trans[0][152]	= settr(151,0,156,87,0,"((action[10]==1))", 1, 2, 0);
+	trans[0][152]	= settr(151,0,156,179,0,"((action[0]==1))", 1, 2, 0);
 	T = trans[ 0][156] = settr(155,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(155,2,153,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][153]	= settr(152,0,183,88,88,"Wifi = 0", 1, 2, 0); /* m: 154 -> 0,183 */
+	trans[0][153]	= settr(152,0,183,180,180,"Wifi = 0", 1, 2, 0); /* m: 154 -> 0,183 */
 	reached0[154] = 1;
-	trans[0][154]	= settr(0,0,0,0,0,"action[10] = 1",0,0,0);
+	trans[0][154]	= settr(0,0,0,0,0,"action[0] = 1",0,0,0);
 	trans[0][155]	= settr(0,0,0,0,0,"state = changeWifiOFF",0,0,0);
-	trans[0][157]	= settr(156,0,161,89,0,"((action[11]==1))", 1, 2, 0);
+	trans[0][157]	= settr(156,0,161,181,0,"((action[1]==1))", 1, 2, 0);
 	T = trans[ 0][161] = settr(160,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(160,2,158,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][158]	= settr(157,0,183,90,90,"Bluetooth = 0", 1, 2, 0); /* m: 159 -> 0,183 */
+	trans[0][158]	= settr(157,0,183,182,182,"Bluetooth = 0", 1, 2, 0); /* m: 159 -> 0,183 */
 	reached0[159] = 1;
-	trans[0][159]	= settr(0,0,0,0,0,"action[11] = 1",0,0,0);
+	trans[0][159]	= settr(0,0,0,0,0,"action[1] = 1",0,0,0);
 	trans[0][160]	= settr(0,0,0,0,0,"state = changeBluetoothOFF",0,0,0);
-	trans[0][164]	= settr(163,0,181,91,0,"((state==changeWifiOFF))", 1, 2, 0);
+	trans[0][164]	= settr(163,0,181,183,0,"((state==changeWifiOFF))", 1, 2, 0);
 	T = trans[0][181] = settr(180,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(180,0,165,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(180,0,169,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(180,0,173,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(180,0,177,0,0,"IF", 0, 2, 0);
-	trans[0][165]	= settr(164,0,168,92,0,"(((action[12]==1)&&(action[10]==1)))", 1, 2, 0);
+	trans[0][165]	= settr(164,0,168,184,0,"(((action[2]==1)&&(action[0]==1)))", 1, 2, 0);
 	T = trans[ 0][168] = settr(167,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(167,2,166,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][166]	= settr(165,0,183,93,93,"action[10] = 0", 1, 2, 0); /* m: 167 -> 0,183 */
+	trans[0][166]	= settr(165,0,183,185,185,"action[0] = 0", 1, 2, 0); /* m: 167 -> 0,183 */
 	reached0[167] = 1;
 	trans[0][167]	= settr(0,0,0,0,0,"state = changeAirplane_modeON",0,0,0);
 	trans[0][182]	= settr(181,0,183,1,0,".(goto)", 0, 2, 0);
-	trans[0][169]	= settr(168,0,172,94,0,"(((action[12]==0)&&(action[10]==1)))", 1, 2, 0);
+	trans[0][169]	= settr(168,0,172,186,0,"(((action[2]==0)&&(action[0]==1)))", 1, 2, 0);
 	T = trans[ 0][172] = settr(171,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(171,2,170,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][170]	= settr(169,0,183,95,95,"action[10] = 0", 1, 2, 0); /* m: 171 -> 0,183 */
+	trans[0][170]	= settr(169,0,183,187,187,"action[0] = 0", 1, 2, 0); /* m: 171 -> 0,183 */
 	reached0[171] = 1;
 	trans[0][171]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
-	trans[0][173]	= settr(172,0,176,96,0,"(((action[12]==1)&&(action[10]==1)))", 1, 2, 0);
+	trans[0][173]	= settr(172,0,176,188,0,"(((action[2]==1)&&(action[0]==1)))", 1, 2, 0);
 	T = trans[ 0][176] = settr(175,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(175,2,174,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][174]	= settr(173,0,183,97,97,"action[10] = 0", 1, 2, 0); /* m: 175 -> 0,183 */
+	trans[0][174]	= settr(173,0,183,189,189,"action[0] = 0", 1, 2, 0); /* m: 175 -> 0,183 */
 	reached0[175] = 1;
 	trans[0][175]	= settr(0,0,0,0,0,"state = changeAirplane_modeON",0,0,0);
-	trans[0][177]	= settr(176,0,180,98,0,"(((action[12]==0)&&(action[10]==1)))", 1, 2, 0);
+	trans[0][177]	= settr(176,0,180,190,0,"(((action[2]==0)&&(action[0]==1)))", 1, 2, 0);
 	T = trans[ 0][180] = settr(179,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(179,2,178,0,0,"ATOMIC", 1, 2, 0);
-	trans[0][178]	= settr(177,0,183,99,99,"action[10] = 0", 1, 2, 0); /* m: 179 -> 0,183 */
+	trans[0][178]	= settr(177,0,183,191,191,"action[0] = 0", 1, 2, 0); /* m: 179 -> 0,183 */
 	reached0[179] = 1;
 	trans[0][179]	= settr(0,0,0,0,0,"state = Setting",0,0,0);
 	trans[0][185]	= settr(184,0,186,1,0,"break", 0, 2, 0);
-	trans[0][186]	= settr(185,0,0,100,100,"-end-", 0, 3500, 0);
+	trans[0][186]	= settr(185,0,0,192,192,"-end-", 0, 3500, 0);
 	/* np_ demon: */
 	trans[_NP_] = (Trans **) emalloc(2*sizeof(Trans *));
 	T = trans[_NP_][0] = settr(9997,0,1,_T5,0,"(np_)", 1,2,0);

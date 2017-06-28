@@ -19,6 +19,9 @@ public class Requirement implements Serializable{
 	{
 		ltlCount=1;
 	}
+	public void decltlCount() {
+		this.ltlCount--;
+	}
 	public String getResult() {
 		if(result)
 		return "true";

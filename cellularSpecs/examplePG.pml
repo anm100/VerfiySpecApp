@@ -4,7 +4,7 @@
 #define NotEmpty 3 
 mtype={Setting,LoginScreen,MainScreen,
 changeBluetoothON,changeWifiON,changepassNotEmpty,changeBluetoothOFF,changeuserNotEmpty,changeAirplane_modeOFF,changeAirplane_modeON,changeWifiOFF}
-mtype state=Setting;
+mtype state=MainScreen;
 /*define flag for action */
 byte action[5];
 
@@ -19,10 +19,7 @@ ltl  req1_1{[](((state==Setting)->((!([]<>((state==changeBluetoothON)||(state==c
 ltl  req1_2{[](((state==LoginScreen)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state !=LoginScreen)))))}
 ltl  req1_3{[](((state==MainScreen)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state !=MainScreen)))))}
 
-ltl  req2_1{[](((state==Setting)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state ==LoginScreen)))))}
-ltl  req2_2{[](((state==Setting)->((!([]<>((state==changeBluetoothON)||(state==changeWifiON)||(state==changepassNotEmpty)||(state==changeBluetoothOFF)||(state==changeuserNotEmpty)||(state==changeAirplane_modeOFF)||(state==changeAirplane_modeON)||(state==changeWifiOFF))))-><>((state ==MainScreen)))))}
-
-ltl  req3 {[]((state==Setting)->((state==Setting)U((state!=Setting)&&(!((state!=changepassNotEmpty)&&(state!=changeuserNotEmpty)U(state==Setting))))))}
+ltl  req3 {[]((state==LoginScreen)->((state==LoginScreen)U((state!=LoginScreen)&&(!((state!=changepassNotEmpty)&&(state!=changeuserNotEmpty)U(state==LoginScreen))))))}
 ltl  req4_1{[]((Airplane_mode==ON||Airplane_mode==OFF)->(!(<>(Airplane_mode!=ON&&Airplane_mode!=OFF))))}
 ltl  req4_2{[]((Bluetooth==ON||Bluetooth==OFF)->(!(<>(Bluetooth!=ON&&Bluetooth!=OFF))))}
 ltl  req4_3{[]((Wifi==ON||Wifi==OFF)->(!(<>(Wifi!=ON&&Wifi!=OFF))))}
@@ -30,7 +27,7 @@ ltl  req4_4{[]((pass==Empty||pass==NotEmpty)->(!(<>(pass!=Empty&&pass!=NotEmpty)
 ltl  req4_5{[]((user==Empty||user==NotEmpty)->(!(<>(user!=Empty&&user!=NotEmpty))))}
 
  
-ltl  req6 {[]((state==LoginScreen)->((pass==NotEmpty)&&(user==NotEmpty)))}
+ltl  req6 {[]((state==MainScreen)->((pass==NotEmpty)&&(user==NotEmpty)))}
 ltl  req7_1{[](((Airplane_mode==ON)->(!(X((state!=changeAirplane_modeOFF)U((Airplane_mode==OFF) &&(state!=changeAirplane_modeOFF)))))))}
 ltl  req7_2{[](((Airplane_mode==OFF)->(!(X((state!=changeAirplane_modeON)U((Airplane_mode==ON) &&(state!=changeAirplane_modeON)))))))}
 ltl  req7_3{[](((Bluetooth==ON)->(!(X((state!=changeBluetoothOFF)U((Bluetooth==OFF) &&(state!=changeBluetoothOFF)))))))}

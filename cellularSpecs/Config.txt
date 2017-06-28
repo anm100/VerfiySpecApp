@@ -11,12 +11,12 @@
     },
     {
       "ID": "req2",
-      "name": "Reachability : Each Screen is reachable from X.",
+      "name": "Reachability : Each Screen is reachable from X screen.",
       "formula": " "
     },
     {
       "ID": "req3",
-      "name": "We can't  move from X to X without changing or defining a set of parameter X.",
+      "name": "We can't  move from X screen to X screen without  defining a X.",
       "formula": "{!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParmX)U(state==BoPo_MainSreen))))}"
     },
     {
@@ -31,7 +31,7 @@
     },
     {
       "ID": "req6",
-      "name": "Each list of X must be defined before entering a X screen.",
+      "name": "Each X must be defined before entering a X screen.",
       "formula": "{[]((state==BoPo_MainSreen)->((title==NotEmpty)&&(max==NotEmpty)&&(chooseCategory==NotEmpty)))}"
     },
     {

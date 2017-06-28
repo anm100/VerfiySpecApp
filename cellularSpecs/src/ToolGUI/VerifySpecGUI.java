@@ -52,9 +52,6 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 	private ArrayList<String> req6ChoosenParam;
 	private	ChoosenParamtersGUI choosparamGui = new ChoosenParamtersGUI();
 	private	ChoosenParamtersGUI req6choosparamGui = new ChoosenParamtersGUI();
-	public String getRoot() {
-		return root.getSelectedItem().toString();
-	}
 	public VerifySpecGUI()  {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -97,7 +94,7 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		getContentPane().add(root);
 		
 		choosparamGui.setOklistner(this);
-		req2ChoosParams = new JButton("Choose Parameter");
+		req2ChoosParams = new JButton("set of parameters");
 		req2ChoosParams.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				choosparamGui.setVisible(true);
@@ -105,7 +102,7 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 			}
 		});
 		req6choosparamGui.setOklistner(this);
-		req6ChoosParams = new JButton("Parameters");
+		req6ChoosParams = new JButton(" list of parameters");
 		req6ChoosParams.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				req6choosparamGui.setVisible(true);
@@ -162,17 +159,23 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		String st [] =ScreenController.getScreenNameNames();
 		DefaultComboBoxModel cbm=new DefaultComboBoxModel(st);
 		req2ScreenCombo.setModel(cbm);
+		req2ScreenCombo.setSelectedItem(null);
 		 cbm=new DefaultComboBoxModel(st);
 		req3ComboScreenI.setModel(cbm);
+		req3ComboScreenI.setSelectedItem(null);
 		 cbm=new DefaultComboBoxModel(st);
 		req3ComboScreenJ.setModel(cbm);
+		req3ComboScreenJ.setSelectedItem(null);
 		 cbm=new DefaultComboBoxModel(st);
 		root.setModel(cbm);
+		root.setSelectedItem(null);
 		 cbm=new DefaultComboBoxModel(st);
 		 req6ComboScreen.setModel(cbm);
+		 req6ComboScreen.setSelectedItem(null);
 		String st1 [] =ScreenController.getparams();
 		cbm=new DefaultComboBoxModel(st1);
 		req3CombboParam.setModel(cbm);
+		req3CombboParam.setSelectedItem(null);
 		
 	}
 
@@ -239,21 +242,6 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
     else 
     	return false;
 	}
-	public   void setVerifySpecGUI(ActionListener verifySpecGUIListener) {
-		btnRun.addActionListener(verifySpecGUIListener);
-
-	}
-	public static  void setCheckBoxListener(ItemListener checkBoxListenr) {
-
-		/*for(int i=0;i<req.size();i++)
-			req.get(i).addItemListener(checkBoxListenr);*/
-
-	}
-	@Override
-	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 	public  Boolean[] getReq() {
 		Boolean[] b=new Boolean[reqNum];
 		for(int i=0;i<req.length;i++)
@@ -264,6 +252,33 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 			b[i]=false;
 		}
 		return b;
+	}
+	public ArrayList<String> getChoosenParam() {
+		return ChoosenParam;
+	}
+	public ArrayList<String> getChoosenParamreq6() {
+		return req6ChoosenParam;
+	}
+	public String getRoot() {
+		return root.getSelectedItem().toString();
+	}
+	@Override
+	public void itemStateChanged(ItemEvent arg0) {
+	if(((JCheckBox)(arg0.getItemSelectable())).getActionCommand().equals(reqAll.getActionCommand()))
+	{
+		if(ItemEvent.SELECTED==arg0.getStateChange())
+		{
+		for(int i=0;i<req.length;i++)
+			 if(!req[i].isSelected())
+				 req[i].setSelected(true);
+		}
+		else
+		{
+		for(int i=0;i<req.length;i++)
+			if(req[i].isSelected())
+				req[i].setSelected(false);	
+		}
+	}
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -283,30 +298,10 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 
 		}
 	}
-	public ArrayList<String> getChoosenParam() {
-		return ChoosenParam;
-	}
-	public ArrayList<String> getChoosenParamreq6() {
-		return req6ChoosenParam;
+	public   void setVerifySpecGUI(ActionListener verifySpecGUIListener) {
+		btnRun.addActionListener(verifySpecGUIListener);
+
 	}
 }
-/* allReq = new JCheckBox("All");
-allReq.setBackground(Color.WHITE);
-allReq.setBounds(23, 138, 37, 23);
-(new () {
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-    	selectall(IsSelect(e));
-    }
-});*/
 
-/*private void selectall(boolean flag) {
-int i;
-for(i=1;i<10;i++)
-{
-	JCheckBox  temp=req.get(i);
-	temp.setSelected(flag);
-	req.remove(i);
-	req.add(i,temp);
-}*/
 

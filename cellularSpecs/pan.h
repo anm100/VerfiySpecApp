@@ -62,17 +62,281 @@ char *trailfilename;
 #endif
 #ifdef NP
 	#define HAS_NP	2
-	#define VERI	4	/* np_ */
+	#define VERI	19	/* np_ */
 #endif
 #ifndef NOCLAIM
-	#define NCLAIMS	3
+	#define NCLAIMS	18
 	#ifndef NP
-		#define VERI	3
+		#define VERI	18
 	#endif
 #endif
 typedef struct S_F_MAP {
 	char *fnm; int from; int upto;
 } S_F_MAP;
+
+#define nstates18	21	/* req7_8 */
+#define endstate18	20
+short src_ln18 [] = {
+	  0, 315, 315, 316, 316, 314, 318, 320, 
+	320, 321, 321, 319, 323, 325, 325, 326, 
+	326, 324, 328, 329, 330,   0, };
+S_F_MAP src_file18 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 20 },
+	{ "-", 21, 22 }
+};
+short *src_claim;
+uchar reached18 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   0,   0, };
+uchar *loopstate18;
+
+#define nstates17	21	/* req7_7 */
+#define endstate17	20
+short src_ln17 [] = {
+	  0, 296, 296, 297, 297, 295, 299, 301, 
+	301, 302, 302, 300, 304, 306, 306, 307, 
+	307, 305, 309, 310, 311,   0, };
+S_F_MAP src_file17 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 20 },
+	{ "-", 21, 22 }
+};
+uchar reached17 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   0,   0, };
+uchar *loopstate17;
+
+#define nstates16	21	/* req7_6 */
+#define endstate16	20
+short src_ln16 [] = {
+	  0, 277, 277, 278, 278, 276, 280, 282, 
+	282, 283, 283, 281, 285, 287, 287, 288, 
+	288, 286, 290, 291, 292,   0, };
+S_F_MAP src_file16 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 20 },
+	{ "-", 21, 22 }
+};
+uchar reached16 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   0,   0, };
+uchar *loopstate16;
+
+#define nstates15	21	/* req7_5 */
+#define endstate15	20
+short src_ln15 [] = {
+	  0, 258, 258, 259, 259, 257, 261, 263, 
+	263, 264, 264, 262, 266, 268, 268, 269, 
+	269, 267, 271, 272, 273,   0, };
+S_F_MAP src_file15 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 20 },
+	{ "-", 21, 22 }
+};
+uchar reached15 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   0,   0, };
+uchar *loopstate15;
+
+#define nstates14	21	/* req7_4 */
+#define endstate14	20
+short src_ln14 [] = {
+	  0, 239, 239, 240, 240, 238, 242, 244, 
+	244, 245, 245, 243, 247, 249, 249, 250, 
+	250, 248, 252, 253, 254,   0, };
+S_F_MAP src_file14 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 20 },
+	{ "-", 21, 22 }
+};
+uchar reached14 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   0,   0, };
+uchar *loopstate14;
+
+#define nstates13	21	/* req7_3 */
+#define endstate13	20
+short src_ln13 [] = {
+	  0, 220, 220, 221, 221, 219, 223, 225, 
+	225, 226, 226, 224, 228, 230, 230, 231, 
+	231, 229, 233, 234, 235,   0, };
+S_F_MAP src_file13 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 20 },
+	{ "-", 21, 22 }
+};
+uchar reached13 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   0,   0, };
+uchar *loopstate13;
+
+#define nstates12	21	/* req7_2 */
+#define endstate12	20
+short src_ln12 [] = {
+	  0, 201, 201, 202, 202, 200, 204, 206, 
+	206, 207, 207, 205, 209, 211, 211, 212, 
+	212, 210, 214, 215, 216,   0, };
+S_F_MAP src_file12 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 20 },
+	{ "-", 21, 22 }
+};
+uchar reached12 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   0,   0, };
+uchar *loopstate12;
+
+#define nstates11	21	/* req7_1 */
+#define endstate11	20
+short src_ln11 [] = {
+	  0, 182, 182, 183, 183, 181, 185, 187, 
+	187, 188, 188, 186, 190, 192, 192, 193, 
+	193, 191, 195, 196, 197,   0, };
+S_F_MAP src_file11 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 20 },
+	{ "-", 21, 22 }
+};
+uchar reached11 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   0,   0, };
+uchar *loopstate11;
+
+#define nstates10	9	/* req6 */
+#define endstate10	8
+short src_ln10 [] = {
+	  0, 173, 173, 174, 174, 172, 176, 177, 
+	178,   0, };
+S_F_MAP src_file10 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 8 },
+	{ "-", 9, 10 }
+};
+uchar reached10 [] = {
+	  0,   1,   1,   1,   1,   0,   1,   1, 
+	  0,   0, };
+uchar *loopstate10;
+
+#define nstates9	17	/* req4_5 */
+#define endstate9	16
+short src_ln9 [] = {
+	  0, 158, 158, 159, 159, 160, 160, 157, 
+	162, 164, 164, 165, 165, 163, 167, 168, 
+	169,   0, };
+S_F_MAP src_file9 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 16 },
+	{ "-", 17, 18 }
+};
+uchar reached9 [] = {
+	  0,   1,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   1,   1,   1,   0,   1,   1, 
+	  0,   0, };
+uchar *loopstate9;
+
+#define nstates8	17	/* req4_4 */
+#define endstate8	16
+short src_ln8 [] = {
+	  0, 143, 143, 144, 144, 145, 145, 142, 
+	147, 149, 149, 150, 150, 148, 152, 153, 
+	154,   0, };
+S_F_MAP src_file8 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 16 },
+	{ "-", 17, 18 }
+};
+uchar reached8 [] = {
+	  0,   1,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   1,   1,   1,   0,   1,   1, 
+	  0,   0, };
+uchar *loopstate8;
+
+#define nstates7	17	/* req4_3 */
+#define endstate7	16
+short src_ln7 [] = {
+	  0, 128, 128, 129, 129, 130, 130, 127, 
+	132, 134, 134, 135, 135, 133, 137, 138, 
+	139,   0, };
+S_F_MAP src_file7 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 16 },
+	{ "-", 17, 18 }
+};
+uchar reached7 [] = {
+	  0,   1,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   1,   1,   1,   0,   1,   1, 
+	  0,   0, };
+uchar *loopstate7;
+
+#define nstates6	17	/* req4_2 */
+#define endstate6	16
+short src_ln6 [] = {
+	  0, 113, 113, 114, 114, 115, 115, 112, 
+	117, 119, 119, 120, 120, 118, 122, 123, 
+	124,   0, };
+S_F_MAP src_file6 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 16 },
+	{ "-", 17, 18 }
+};
+uchar reached6 [] = {
+	  0,   1,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   1,   1,   1,   0,   1,   1, 
+	  0,   0, };
+uchar *loopstate6;
+
+#define nstates5	17	/* req4_1 */
+#define endstate5	16
+short src_ln5 [] = {
+	  0,  98,  98,  99,  99, 100, 100,  97, 
+	102, 104, 104, 105, 105, 103, 107, 108, 
+	109,   0, };
+S_F_MAP src_file5 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 16 },
+	{ "-", 17, 18 }
+};
+uchar reached5 [] = {
+	  0,   1,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   1,   1,   1,   0,   1,   1, 
+	  0,   0, };
+uchar *loopstate5;
+
+#define nstates4	59	/* req3 */
+#define endstate4	58
+short src_ln4 [] = {
+	  0,  54,  54,  55,  55,  56,  56,  57, 
+	 57,  58,  58,  53,  60,  62,  62,  63, 
+	 63,  64,  64,  61,  66,  68,  68,  69, 
+	 69,  70,  70,  71,  71,  67,  73,  75, 
+	 75,  76,  76,  77,  77,  78,  78,  74, 
+	 80,  82,  82,  83,  83,  84,  84,  85, 
+	 85,  81,  87,  89,  89,  90,  90,  88, 
+	 92,  93,  94,   0, };
+S_F_MAP src_file4 [] = {
+	{ "-", 0, 0 },
+	{ "_spin_nvr.tmp", 1, 58 },
+	{ "-", 59, 60 }
+};
+uchar reached4 [] = {
+	  0,   1,   1,   1,   1,   1,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   1,   1,   0,   1,   1,   1,   1, 
+	  1,   1,   1,   1,   1,   0,   1,   1, 
+	  1,   1,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   1,   1,   1,   1,   1,   1, 
+	  1,   0,   1,   1,   1,   1,   1,   0, 
+	  1,   1,   0,   0, };
+uchar *loopstate4;
 
 #define nstates3	20	/* req1_3 */
 #define endstate3	19
@@ -85,7 +349,6 @@ S_F_MAP src_file3 [] = {
 	{ "_spin_nvr.tmp", 1, 19 },
 	{ "-", 20, 21 }
 };
-short *src_claim;
 uchar reached3 [] = {
 	  0,   1,   1,   1,   1,   1,   1,   0, 
 	  1,   1,   1,   0,   1,   1,   1,   1, 
@@ -129,30 +392,30 @@ uchar *loopstate1;
 #define nstates0	187	/* vm */
 #define endstate0	186
 short src_ln0 [] = {
-	  0,  38,  40,  40,  40,  40,  40,  40, 
-	 40,  41,  41,  41,  41,  41,  42,  42, 
-	 42,  42,  42,  43,  43,  43,  43,  43, 
-	 44,  44,  44,  44,  44,  45,  45,  45, 
-	 45,  45,  46,  46,  39,  52,  52,  54, 
-	 54,  54,  54,  54,  55,  55,  55,  56, 
-	 56,  56,  56,  56,  53,  62,  62,  64, 
-	 64,  63,  66,  66,  68,  68,  68,  68, 
-	 69,  69,  69,  69,  67,  71,  71,  73, 
-	 73,  73,  73,  74,  74,  74,  74,  72, 
-	 76,  76,  78,  78,  78,  78,  79,  79, 
-	 79,  79,  77,  81,  81,  83,  83,  83, 
-	 83,  84,  84,  84,  84,  85,  85,  85, 
-	 85,  86,  86,  86,  86,  82,  88,  88, 
-	 90,  90,  90,  90,  91,  91,  91,  91, 
-	 89,  93,  93,  95,  95,  95,  95,  96, 
-	 96,  96,  96,  94,  98,  98, 100, 100, 
-	100, 100, 101, 101, 101, 101, 101, 102, 
-	102, 102, 102, 102, 103, 103, 103, 103, 
-	104, 104, 104, 104, 104, 105, 105, 105, 
-	105, 105,  99, 107, 107, 109, 109, 109, 
-	109, 110, 110, 110, 110, 111, 111, 111, 
-	111, 112, 112, 112, 112, 108, 114,  33, 
-	115,  33, 115,   0, };
+	  0,  46,  48,  48,  48,  48,  48,  48, 
+	 48,  49,  49,  49,  49,  49,  50,  50, 
+	 50,  50,  50,  51,  51,  51,  51,  51, 
+	 52,  52,  52,  52,  52,  53,  53,  53, 
+	 53,  53,  54,  54,  47,  60,  60,  62, 
+	 62,  62,  62,  62,  63,  63,  63,  64, 
+	 64,  64,  64,  64,  61,  70,  70,  72, 
+	 72,  71,  74,  74,  76,  76,  76,  76, 
+	 77,  77,  77,  77,  75,  79,  79,  81, 
+	 81,  81,  81,  82,  82,  82,  82,  80, 
+	 84,  84,  86,  86,  86,  86,  87,  87, 
+	 87,  87,  85,  89,  89,  91,  91,  91, 
+	 91,  92,  92,  92,  92,  93,  93,  93, 
+	 93,  94,  94,  94,  94,  90,  96,  96, 
+	 98,  98,  98,  98,  99,  99,  99,  99, 
+	 97, 101, 101, 103, 103, 103, 103, 104, 
+	104, 104, 104, 102, 106, 106, 108, 108, 
+	108, 108, 109, 109, 109, 109, 109, 110, 
+	110, 110, 110, 110, 111, 111, 111, 111, 
+	112, 112, 112, 112, 112, 113, 113, 113, 
+	113, 113, 107, 115, 115, 117, 117, 117, 
+	117, 118, 118, 118, 118, 119, 119, 119, 
+	119, 120, 120, 120, 120, 116, 122,  41, 
+	123,  41, 123,   0, };
 S_F_MAP src_file0 [] = {
 	{ "-", 0, 0 },
 	{ "examplePG.pml", 1, 186 },
@@ -187,6 +450,21 @@ uchar *loopstate0;
 struct {
 	int tp; short *src;
 } src_all[] = {
+	{ 18, &src_ln18[0] },
+	{ 17, &src_ln17[0] },
+	{ 16, &src_ln16[0] },
+	{ 15, &src_ln15[0] },
+	{ 14, &src_ln14[0] },
+	{ 13, &src_ln13[0] },
+	{ 12, &src_ln12[0] },
+	{ 11, &src_ln11[0] },
+	{ 10, &src_ln10[0] },
+	{ 9, &src_ln9[0] },
+	{ 8, &src_ln8[0] },
+	{ 7, &src_ln7[0] },
+	{ 6, &src_ln6[0] },
+	{ 5, &src_ln5[0] },
+	{ 4, &src_ln4[0] },
 	{ 3, &src_ln3[0] },
 	{ 2, &src_ln2[0] },
 	{ 1, &src_ln1[0] },
@@ -194,6 +472,21 @@ struct {
 	{ 0, (short *) 0 }
 };
 S_F_MAP *flref[] = {
+	src_file18,
+	src_file17,
+	src_file16,
+	src_file15,
+	src_file14,
+	src_file13,
+	src_file12,
+	src_file11,
+	src_file10,
+	src_file9,
+	src_file8,
+	src_file7,
+	src_file6,
+	src_file5,
+	src_file4,
 	src_file3,
 	src_file2,
 	src_file1,
@@ -204,9 +497,9 @@ struct {
 } code_lookup[] = {
 	{ (char *) 0, "" }
 };
-#define _T5	101
-#define _T2	102
-#define T_ID	unsigned char
+#define _T5	193
+#define _T2	194
+#define T_ID	unsigned short
 #define WS		4 /* word size in bytes */
 #define SYNC	0
 #define ASYNC	0
@@ -225,6 +518,21 @@ char *procname[] = {
    "req1_1",
    "req1_2",
    "req1_3",
+   "req3",
+   "req4_1",
+   "req4_2",
+   "req4_3",
+   "req4_4",
+   "req4_5",
+   "req6",
+   "req7_1",
+   "req7_2",
+   "req7_3",
+   "req7_4",
+   "req7_5",
+   "req7_6",
+   "req7_7",
+   "req7_8",
    ":np_:",
 };
 
@@ -234,55 +542,160 @@ int Btypes[] = {
    1,	/* req1_1 */
    1,	/* req1_2 */
    1,	/* req1_3 */
+   1,	/* req3 */
+   1,	/* req4_1 */
+   1,	/* req4_2 */
+   1,	/* req4_3 */
+   1,	/* req4_4 */
+   1,	/* req4_5 */
+   1,	/* req6 */
+   1,	/* req7_1 */
+   1,	/* req7_2 */
+   1,	/* req7_3 */
+   1,	/* req7_4 */
+   1,	/* req7_5 */
+   1,	/* req7_6 */
+   1,	/* req7_7 */
+   1,	/* req7_8 */
    0	/* :np_: */
 };
 
+typedef struct P18 { /* req7_8 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P18;
+#define Air18	(sizeof(P18) - 3)
+typedef struct P17 { /* req7_7 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P17;
+#define Air17	(sizeof(P17) - 3)
+typedef struct P16 { /* req7_6 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P16;
+#define Air16	(sizeof(P16) - 3)
+typedef struct P15 { /* req7_5 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P15;
+#define Air15	(sizeof(P15) - 3)
+typedef struct P14 { /* req7_4 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P14;
+#define Air14	(sizeof(P14) - 3)
+typedef struct P13 { /* req7_3 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P13;
+#define Air13	(sizeof(P13) - 3)
+typedef struct P12 { /* req7_2 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P12;
+#define Air12	(sizeof(P12) - 3)
+typedef struct P11 { /* req7_1 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P11;
+#define Air11	(sizeof(P11) - 3)
+typedef struct P10 { /* req6 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P10;
+#define Air10	(sizeof(P10) - 3)
+typedef struct P9 { /* req4_5 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P9;
+#define Air9	(sizeof(P9) - 3)
+typedef struct P8 { /* req4_4 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P8;
+#define Air8	(sizeof(P8) - 3)
+typedef struct P7 { /* req4_3 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P7;
+#define Air7	(sizeof(P7) - 3)
+typedef struct P6 { /* req4_2 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P6;
+#define Air6	(sizeof(P6) - 3)
+typedef struct P5 { /* req4_1 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P5;
+#define Air5	(sizeof(P5) - 3)
+typedef struct P4 { /* req3 */
+	unsigned _pid : 8;  /* 0..255 */
+	unsigned _t   : 6; /* proctype */
+	unsigned _p   : 9; /* state    */
+} P4;
+#define Air4	(sizeof(P4) - 3)
 typedef struct P3 { /* req1_3 */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 4; /* proctype */
+	unsigned _t   : 6; /* proctype */
 	unsigned _p   : 9; /* state    */
 } P3;
 #define Air3	(sizeof(P3) - 3)
 typedef struct P2 { /* req1_2 */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 4; /* proctype */
+	unsigned _t   : 6; /* proctype */
 	unsigned _p   : 9; /* state    */
 } P2;
 #define Air2	(sizeof(P2) - 3)
 typedef struct P1 { /* req1_1 */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 4; /* proctype */
+	unsigned _t   : 6; /* proctype */
 	unsigned _p   : 9; /* state    */
 } P1;
 #define Air1	(sizeof(P1) - 3)
 #define Pvm	((P0 *)this)
 typedef struct P0 { /* vm */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 4; /* proctype */
+	unsigned _t   : 6; /* proctype */
 	unsigned _p   : 9; /* state    */
 } P0;
 #define Air0	(sizeof(P0) - 3)
-typedef struct P4 { /* np_ */
+typedef struct P19 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 4; /* proctype */
+	unsigned _t   : 6; /* proctype */
 	unsigned _p   : 9; /* state    */
-} P4;
-#define Air4	(sizeof(P4) - 3)
+} P19;
+#define Air19	(sizeof(P19) - 3)
 
 #ifndef NOCLAIM
 	#undef VERI
-	#define VERI	5
-	#define Pclaim	P5
+	#define VERI	20
+	#define Pclaim	P20
 
-typedef struct P5 {
+typedef struct P20 {
 	unsigned _pid : 8; /* always zero */
-	unsigned _t   : 4; /* active-claim type  */
+	unsigned _t   : 6; /* active-claim type  */
 	unsigned _p   : 9; /* active-claim state */
-	unsigned _n   : 3; /* active-claim index */
+	unsigned _n   : 6; /* active-claim index */
 	uchar c_cur[NCLAIMS]; /* claim-states */
-} P5;
+} P20;
 uchar spin_c_typ[NCLAIMS]; /* claim-types */
-	#define Air5	(0)
+	#define Air20	(0)
 
 #endif
 #if defined(BFS) && defined(REACH)
@@ -506,10 +919,10 @@ typedef struct State {
 		unsigned short _event;
 	#endif
 #endif
-	uchar action[15];
+	uchar action[5];
+	uchar Airplane_mode;
 	uchar Bluetooth;
 	uchar pass;
-	uchar Airplane_mode;
 	uchar Wifi;
 	uchar user;
 	uchar state;
@@ -539,28 +952,33 @@ long _c_count[MAXPROC];
 #endif
 
 #define HAS_TRACK	0
-/* hidden variable: */	uchar onOff_0;
-/* hidden variable: */	uchar onOff_2;
-/* hidden variable: */	uchar onOff_1;
-/* hidden variable: */	uchar onOff_4;
-/* hidden variable: */	uchar onOff_3;
-/* hidden variable: */	uchar onOff_6;
-/* hidden variable: */	uchar onOff_5;
-/* hidden variable: */	uchar onOff_8;
-/* hidden variable: */	uchar onOff_7;
-/* hidden variable: */	uchar onOff_9;
 int _; /* a predefined write-only variable */
 
 #define FORWARD_MOVES	"pan.m"
 #define REVERSE_MOVES	"pan.b"
 #define TRANSITIONS	"pan.t"
-#define _NP_	4
-uchar reached4[3];  /* np_ */
-uchar *loopstate4;  /* np_ */
-#define nstates4	3 /* np_ */
-#define endstate4	2 /* np_ */
+#define _NP_	19
+uchar reached19[3];  /* np_ */
+uchar *loopstate19;  /* np_ */
+#define nstates19	3 /* np_ */
+#define endstate19	2 /* np_ */
 
-#define start4	0 /* np_ */
+#define start19	0 /* np_ */
+#define start18	5
+#define start17	5
+#define start16	5
+#define start15	5
+#define start14	5
+#define start13	5
+#define start12	5
+#define start11	5
+#define start10	5
+#define start9	7
+#define start8	7
+#define start7	7
+#define start6	7
+#define start5	7
+#define start4	11
 #define start3	7
 #define start2	7
 #define start1	7
@@ -568,7 +986,7 @@ uchar *loopstate4;  /* np_ */
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
-	#define ACCEPT_LAB	3 /* user-defined accept labels */
+	#define ACCEPT_LAB	28 /* user-defined accept labels */
 #endif
 #ifdef MEMCNT
 	#ifdef MEMLIM
@@ -597,15 +1015,15 @@ uchar *loopstate4;  /* np_ */
 	#define MEMLIM	(2048)	/* need a default, using 2 GB */
 #endif
 #define PROG_LAB	0 /* progress labels */
-uchar *accpstate[5];
-uchar *progstate[5];
-uchar *loopstate[5];
-uchar *reached[5];
-uchar *stopstate[5];
-uchar *visstate[5];
-short *mapstate[5];
+uchar *accpstate[20];
+uchar *progstate[20];
+uchar *loopstate[20];
+uchar *reached[20];
+uchar *stopstate[20];
+uchar *visstate[20];
+short *mapstate[20];
 #ifdef HAS_CODE
-	int NrStates[5];
+	int NrStates[20];
 #endif
 #define NQS	0
 short q_flds[1];
@@ -695,7 +1113,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	103
+#define NTRANS	195
 #ifdef PEG
 	long peg[NTRANS];
 #endif

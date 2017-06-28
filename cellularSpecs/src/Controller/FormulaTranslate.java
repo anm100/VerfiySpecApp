@@ -44,6 +44,7 @@ private static String translateReq1() {
 		st+="ltl "+" req1_"+WorkSpace.getReqlist().get(0).getLtlCount()+"{[]("+(str)+")}\n";
 		WorkSpace.getReqlist().get(0).addltlCount();
 	}
+	WorkSpace.getReqlist().get(0).decltlCount();
 	WorkSpace.getLog().debug(st);
 	return st;
 	
@@ -65,6 +66,7 @@ private static String translateReq2(String root) {
 		WorkSpace.getReqlist().get(1).addltlCount();
 		}
 	}
+	WorkSpace.getReqlist().get(1).decltlCount();
 	WorkSpace.getLog().debug(st);
 	return st;
 	
@@ -256,16 +258,18 @@ private static String getTranslateReq4() {
 	String st="";
 	String [] OnOffParams=ScreenController.getParams(ElementType.getOnOffType());
 	String [] EmptyNotEmptyParams=ScreenController.getParams(ElementType.getEmptyNotEmptyType());
-	WorkSpace.getReqlist().get(1).setltlCount();
+	WorkSpace.getReqlist().get(3).setltlCount();
 	for(int i=0;i<OnOffParams.length;i++)
 	{
 		st+="ltl "+" req4_"+WorkSpace.getReqlist().get(3).getLtlCount()+"{[]("+getForReq4(OnOffParams[i],ElementType.getOn(),ElementType.getOff())+")}\n";
 		WorkSpace.getReqlist().get(3).addltlCount();
 	}
+	WorkSpace.getReqlist().get(3).decltlCount();
 	for(int i=0;i<EmptyNotEmptyParams.length;i++)
 	{
-		st+="ltl "+" req4_"+WorkSpace.getReqlist().get(3).getLtlCount()+"{[]("+getForReq4(EmptyNotEmptyParams[i],ElementType.getEmpty(),ElementType.getNotEmpty())+")}\n";
 		WorkSpace.getReqlist().get(3).addltlCount();
+		st+="ltl "+" req4_"+WorkSpace.getReqlist().get(3).getLtlCount()+"{[]("+getForReq4(EmptyNotEmptyParams[i],ElementType.getEmpty(),ElementType.getNotEmpty())+")}\n";
+	
 	}
 	return st;
 }
@@ -302,6 +306,7 @@ private static String getTranslateReq7() {
 	req7+=getEmpNoLTL(params[i],WorkSpace.getReqlist().get(6).getLtlCount())+"\n";
 	WorkSpace.getReqlist().get(6).addltlCount();
 	}
+	WorkSpace.getReqlist().get(6).decltlCount();
 	return req7;
 	/*String[] params=ScreenController.getParams(ElementType.getOnOffType());
 	req7+=getEmNotLTL(params);

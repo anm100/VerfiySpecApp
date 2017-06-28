@@ -57,6 +57,7 @@ public static ArrayList<StandartButtonType> getElementsByType(String Type){
 	@SuppressWarnings("rawtypes")
 	public static String[] getparams(){//get all the parameters arraylist
 		ArrayList<String> params = new ArrayList<String>();
+		String[] stockArr = new String[params.size()];
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		Param p;
 		while(it.hasNext()){
@@ -66,11 +67,11 @@ public static ArrayList<StandartButtonType> getElementsByType(String Type){
 		}
 		if(params.size()>0)
 		{
-		String[] stockArr = new String[params.size()];
+		
 		stockArr = params.toArray(stockArr);	
 		return stockArr;
 		}
-		return null;
+		return stockArr;
 	
 	}
 	public static String [] getdefaultValues(String paramName){//get all the the parameter values
