@@ -55,6 +55,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private Screen screen;
 	private ScreenGUI screenGUI;
 	private int Location=0;
+	private String path ; 
 	private VerificationController verificationController ;
 
 
@@ -86,8 +87,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 //			addparamterGUI.setAddParamListener(this);
 		break;
 		case("_open_Spec"): 
-			WorkSpace.getLog().debug("open spec"+newSpecGui.getSpecLocation());
-			WorkSpaceController.OpenSpecFromFile(newSpecGui.getSpecLocation());
+			WorkSpace.getLog().debug("open spec"+getPath());
+			WorkSpaceController.OpenSpecFromFile(getPath());
 			WorkSpaceController.createSpecGUI();
 		break;
 		
@@ -111,7 +112,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		
 		case("Save SPEC"):
 			chooseFileLocation();//chose the folder and save the file 
-		//WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
+		break;
 		case("Verifiy SPEC"):
 			String st=new String();;
 				verifySpecGUI=new VerifySpecGUI();
@@ -513,6 +514,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	}
 	
 	
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
 	public MainScreenGui getMainScreenGui() {
 		return mainScreenGui;
 	}
