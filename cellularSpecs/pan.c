@@ -55,6 +55,66 @@ globinit(void)
 {
 }
 void
+locinit18(int h)
+{
+}
+void
+locinit17(int h)
+{
+}
+void
+locinit16(int h)
+{
+}
+void
+locinit15(int h)
+{
+}
+void
+locinit14(int h)
+{
+}
+void
+locinit13(int h)
+{
+}
+void
+locinit12(int h)
+{
+}
+void
+locinit11(int h)
+{
+}
+void
+locinit10(int h)
+{
+}
+void
+locinit9(int h)
+{
+}
+void
+locinit8(int h)
+{
+}
+void
+locinit7(int h)
+{
+}
+void
+locinit6(int h)
+{
+}
+void
+locinit5(int h)
+{
+}
+void
+locinit4(int h)
+{
+}
+void
 locinit3(int h)
 {
 }
@@ -448,9 +508,9 @@ void ungrab_ints(int *, int);
 #else
 	#define Index(x, y)	x
 #endif
-short Air[] = {  (short) Air0, (short) Air1, (short) Air2, (short) Air3, (short) Air4
+short Air[] = {  (short) Air0, (short) Air1, (short) Air2, (short) Air3, (short) Air4, (short) Air5, (short) Air6, (short) Air7, (short) Air8, (short) Air9, (short) Air10, (short) Air11, (short) Air12, (short) Air13, (short) Air14, (short) Air15, (short) Air16, (short) Air17, (short) Air18, (short) Air19
 #ifndef NOCLAIM
-	, (short) Air5
+	, (short) Air20
 #endif
 	 };
 
@@ -507,8 +567,23 @@ addproc(int calling_pid, int n)
 	case 2: j = sizeof(P2); break;
 	case 3: j = sizeof(P3); break;
 	case 4: j = sizeof(P4); break;
-#ifndef NOCLAIM
 	case 5: j = sizeof(P5); break;
+	case 6: j = sizeof(P6); break;
+	case 7: j = sizeof(P7); break;
+	case 8: j = sizeof(P8); break;
+	case 9: j = sizeof(P9); break;
+	case 10: j = sizeof(P10); break;
+	case 11: j = sizeof(P11); break;
+	case 12: j = sizeof(P12); break;
+	case 13: j = sizeof(P13); break;
+	case 14: j = sizeof(P14); break;
+	case 15: j = sizeof(P15); break;
+	case 16: j = sizeof(P16); break;
+	case 17: j = sizeof(P17); break;
+	case 18: j = sizeof(P18); break;
+	case 19: j = sizeof(P19); break;
+#ifndef NOCLAIM
+	case 20: j = sizeof(P20); break;
 #endif
 	default: Uerror("bad proc - addproc");
 	}
@@ -596,19 +671,64 @@ addproc(int calling_pid, int n)
 		((P0 *)this)->_pid = h;
 	switch (n) {
 #ifndef NOCLAIM
-	case 5:	/* claim select */
-		spin_c_typ[0] = 3; /* req1_3 */
-		((P5 *)pptr(h))->c_cur[0] = 7;
+	case 20:	/* claim select */
+		spin_c_typ[0] = 18; /* req7_8 */
+		((P20 *)pptr(h))->c_cur[0] = 5;
+		reached18[5]=1;
+		spin_c_typ[1] = 17; /* req7_7 */
+		((P20 *)pptr(h))->c_cur[1] = 5;
+		reached17[5]=1;
+		spin_c_typ[2] = 16; /* req7_6 */
+		((P20 *)pptr(h))->c_cur[2] = 5;
+		reached16[5]=1;
+		spin_c_typ[3] = 15; /* req7_5 */
+		((P20 *)pptr(h))->c_cur[3] = 5;
+		reached15[5]=1;
+		spin_c_typ[4] = 14; /* req7_4 */
+		((P20 *)pptr(h))->c_cur[4] = 5;
+		reached14[5]=1;
+		spin_c_typ[5] = 13; /* req7_3 */
+		((P20 *)pptr(h))->c_cur[5] = 5;
+		reached13[5]=1;
+		spin_c_typ[6] = 12; /* req7_2 */
+		((P20 *)pptr(h))->c_cur[6] = 5;
+		reached12[5]=1;
+		spin_c_typ[7] = 11; /* req7_1 */
+		((P20 *)pptr(h))->c_cur[7] = 5;
+		reached11[5]=1;
+		spin_c_typ[8] = 10; /* req6 */
+		((P20 *)pptr(h))->c_cur[8] = 5;
+		reached10[5]=1;
+		spin_c_typ[9] = 9; /* req4_5 */
+		((P20 *)pptr(h))->c_cur[9] = 7;
+		reached9[7]=1;
+		spin_c_typ[10] = 8; /* req4_4 */
+		((P20 *)pptr(h))->c_cur[10] = 7;
+		reached8[7]=1;
+		spin_c_typ[11] = 7; /* req4_3 */
+		((P20 *)pptr(h))->c_cur[11] = 7;
+		reached7[7]=1;
+		spin_c_typ[12] = 6; /* req4_2 */
+		((P20 *)pptr(h))->c_cur[12] = 7;
+		reached6[7]=1;
+		spin_c_typ[13] = 5; /* req4_1 */
+		((P20 *)pptr(h))->c_cur[13] = 7;
+		reached5[7]=1;
+		spin_c_typ[14] = 4; /* req3 */
+		((P20 *)pptr(h))->c_cur[14] = 11;
+		reached4[11]=1;
+		spin_c_typ[15] = 3; /* req1_3 */
+		((P20 *)pptr(h))->c_cur[15] = 7;
 		reached3[7]=1;
-		spin_c_typ[1] = 2; /* req1_2 */
-		((P5 *)pptr(h))->c_cur[1] = 7;
+		spin_c_typ[16] = 2; /* req1_2 */
+		((P20 *)pptr(h))->c_cur[16] = 7;
 		reached2[7]=1;
-		spin_c_typ[2] = 1; /* req1_1 */
-		((P5 *)pptr(h))->c_cur[2] = 7;
+		spin_c_typ[17] = 1; /* req1_1 */
+		((P20 *)pptr(h))->c_cur[17] = 7;
 		reached1[7]=1;
-		((P5 *)pptr(h))->_t = 1;
-		((P5 *)pptr(h))->_p = 7;
-		((P5 *)pptr(h))->_n = 2; /* req1_1 */
+		((P20 *)pptr(h))->_t = 1;
+		((P20 *)pptr(h))->_p = 7;
+		((P20 *)pptr(h))->_n = 17; /* req1_1 */
 		src_claim = src_ln1;
 #ifndef BFS
 		if (whichclaim == -1 && claimname == NULL)
@@ -620,11 +740,206 @@ addproc(int calling_pid, int n)
 		break;
 
 #endif
-	case 4:	/* np_ */
+	case 19:	/* np_ */
+		((P19 *)pptr(h))->_t = 19;
+		((P19 *)pptr(h))->_p = 0;
+		reached19[0] = 1;
+		accpstate[19][1] = 1;
+		break;
+	case 18:	/* req7_8 */
+		((P18 *)pptr(h))->_t = 18;
+		((P18 *)pptr(h))->_p = 5;
+		reached18[5]=1;
+		src_claim = src_ln18;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit18(h);
+#endif
+		break;
+	case 17:	/* req7_7 */
+		((P17 *)pptr(h))->_t = 17;
+		((P17 *)pptr(h))->_p = 5;
+		reached17[5]=1;
+		src_claim = src_ln17;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit17(h);
+#endif
+		break;
+	case 16:	/* req7_6 */
+		((P16 *)pptr(h))->_t = 16;
+		((P16 *)pptr(h))->_p = 5;
+		reached16[5]=1;
+		src_claim = src_ln16;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit16(h);
+#endif
+		break;
+	case 15:	/* req7_5 */
+		((P15 *)pptr(h))->_t = 15;
+		((P15 *)pptr(h))->_p = 5;
+		reached15[5]=1;
+		src_claim = src_ln15;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit15(h);
+#endif
+		break;
+	case 14:	/* req7_4 */
+		((P14 *)pptr(h))->_t = 14;
+		((P14 *)pptr(h))->_p = 5;
+		reached14[5]=1;
+		src_claim = src_ln14;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit14(h);
+#endif
+		break;
+	case 13:	/* req7_3 */
+		((P13 *)pptr(h))->_t = 13;
+		((P13 *)pptr(h))->_p = 5;
+		reached13[5]=1;
+		src_claim = src_ln13;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit13(h);
+#endif
+		break;
+	case 12:	/* req7_2 */
+		((P12 *)pptr(h))->_t = 12;
+		((P12 *)pptr(h))->_p = 5;
+		reached12[5]=1;
+		src_claim = src_ln12;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit12(h);
+#endif
+		break;
+	case 11:	/* req7_1 */
+		((P11 *)pptr(h))->_t = 11;
+		((P11 *)pptr(h))->_p = 5;
+		reached11[5]=1;
+		src_claim = src_ln11;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit11(h);
+#endif
+		break;
+	case 10:	/* req6 */
+		((P10 *)pptr(h))->_t = 10;
+		((P10 *)pptr(h))->_p = 5;
+		reached10[5]=1;
+		src_claim = src_ln10;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit10(h);
+#endif
+		break;
+	case 9:	/* req4_5 */
+		((P9 *)pptr(h))->_t = 9;
+		((P9 *)pptr(h))->_p = 7;
+		reached9[7]=1;
+		src_claim = src_ln9;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit9(h);
+#endif
+		break;
+	case 8:	/* req4_4 */
+		((P8 *)pptr(h))->_t = 8;
+		((P8 *)pptr(h))->_p = 7;
+		reached8[7]=1;
+		src_claim = src_ln8;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit8(h);
+#endif
+		break;
+	case 7:	/* req4_3 */
+		((P7 *)pptr(h))->_t = 7;
+		((P7 *)pptr(h))->_p = 7;
+		reached7[7]=1;
+		src_claim = src_ln7;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit7(h);
+#endif
+		break;
+	case 6:	/* req4_2 */
+		((P6 *)pptr(h))->_t = 6;
+		((P6 *)pptr(h))->_p = 7;
+		reached6[7]=1;
+		src_claim = src_ln6;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit6(h);
+#endif
+		break;
+	case 5:	/* req4_1 */
+		((P5 *)pptr(h))->_t = 5;
+		((P5 *)pptr(h))->_p = 7;
+		reached5[7]=1;
+		src_claim = src_ln5;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit5(h);
+#endif
+		break;
+	case 4:	/* req3 */
 		((P4 *)pptr(h))->_t = 4;
-		((P4 *)pptr(h))->_p = 0;
-		reached4[0] = 1;
-		accpstate[4][1] = 1;
+		((P4 *)pptr(h))->_p = 11;
+		reached4[11]=1;
+		src_claim = src_ln4;
+		/* params: */
+		/* locals: */
+#ifdef VAR_RANGES
+#endif
+#ifdef HAS_CODE
+		locinit4(h);
+#endif
 		break;
 	case 3:	/* req1_3 */
 		((P3 *)pptr(h))->_t = 3;
@@ -707,6 +1022,21 @@ col_p(int i, char *z)
 	case 2: j = sizeof(P2); break;
 	case 3: j = sizeof(P3); break;
 	case 4: j = sizeof(P4); break;
+	case 5: j = sizeof(P5); break;
+	case 6: j = sizeof(P6); break;
+	case 7: j = sizeof(P7); break;
+	case 8: j = sizeof(P8); break;
+	case 9: j = sizeof(P9); break;
+	case 10: j = sizeof(P10); break;
+	case 11: j = sizeof(P11); break;
+	case 12: j = sizeof(P12); break;
+	case 13: j = sizeof(P13); break;
+	case 14: j = sizeof(P14); break;
+	case 15: j = sizeof(P15); break;
+	case 16: j = sizeof(P16); break;
+	case 17: j = sizeof(P17); break;
+	case 18: j = sizeof(P18); break;
+	case 19: j = sizeof(P19); break;
 	default: Uerror("bad proctype - collapse");
 	}
 	if (z) x = z; else x = scratch;
@@ -747,41 +1077,176 @@ run(void)
 	Maxbody = max(Maxbody, ((int) sizeof(P2)));
 	Maxbody = max(Maxbody, ((int) sizeof(P3)));
 	Maxbody = max(Maxbody, ((int) sizeof(P4)));
+	Maxbody = max(Maxbody, ((int) sizeof(P5)));
+	Maxbody = max(Maxbody, ((int) sizeof(P6)));
+	Maxbody = max(Maxbody, ((int) sizeof(P7)));
+	Maxbody = max(Maxbody, ((int) sizeof(P8)));
+	Maxbody = max(Maxbody, ((int) sizeof(P9)));
+	Maxbody = max(Maxbody, ((int) sizeof(P10)));
+	Maxbody = max(Maxbody, ((int) sizeof(P11)));
+	Maxbody = max(Maxbody, ((int) sizeof(P12)));
+	Maxbody = max(Maxbody, ((int) sizeof(P13)));
+	Maxbody = max(Maxbody, ((int) sizeof(P14)));
+	Maxbody = max(Maxbody, ((int) sizeof(P15)));
+	Maxbody = max(Maxbody, ((int) sizeof(P16)));
+	Maxbody = max(Maxbody, ((int) sizeof(P17)));
+	Maxbody = max(Maxbody, ((int) sizeof(P18)));
+	Maxbody = max(Maxbody, ((int) sizeof(P19)));
 	reached[0] = reached0;
 	reached[1] = reached1;
 	reached[2] = reached2;
 	reached[3] = reached3;
 	reached[4] = reached4;
+	reached[5] = reached5;
+	reached[6] = reached6;
+	reached[7] = reached7;
+	reached[8] = reached8;
+	reached[9] = reached9;
+	reached[10] = reached10;
+	reached[11] = reached11;
+	reached[12] = reached12;
+	reached[13] = reached13;
+	reached[14] = reached14;
+	reached[15] = reached15;
+	reached[16] = reached16;
+	reached[17] = reached17;
+	reached[18] = reached18;
+	reached[19] = reached19;
 	accpstate[0] = (uchar *) emalloc(nstates0);
 	accpstate[1] = (uchar *) emalloc(nstates1);
 	accpstate[2] = (uchar *) emalloc(nstates2);
 	accpstate[3] = (uchar *) emalloc(nstates3);
 	accpstate[4] = (uchar *) emalloc(nstates4);
+	accpstate[5] = (uchar *) emalloc(nstates5);
+	accpstate[6] = (uchar *) emalloc(nstates6);
+	accpstate[7] = (uchar *) emalloc(nstates7);
+	accpstate[8] = (uchar *) emalloc(nstates8);
+	accpstate[9] = (uchar *) emalloc(nstates9);
+	accpstate[10] = (uchar *) emalloc(nstates10);
+	accpstate[11] = (uchar *) emalloc(nstates11);
+	accpstate[12] = (uchar *) emalloc(nstates12);
+	accpstate[13] = (uchar *) emalloc(nstates13);
+	accpstate[14] = (uchar *) emalloc(nstates14);
+	accpstate[15] = (uchar *) emalloc(nstates15);
+	accpstate[16] = (uchar *) emalloc(nstates16);
+	accpstate[17] = (uchar *) emalloc(nstates17);
+	accpstate[18] = (uchar *) emalloc(nstates18);
+	accpstate[19] = (uchar *) emalloc(nstates19);
 	progstate[0] = (uchar *) emalloc(nstates0);
 	progstate[1] = (uchar *) emalloc(nstates1);
 	progstate[2] = (uchar *) emalloc(nstates2);
 	progstate[3] = (uchar *) emalloc(nstates3);
 	progstate[4] = (uchar *) emalloc(nstates4);
+	progstate[5] = (uchar *) emalloc(nstates5);
+	progstate[6] = (uchar *) emalloc(nstates6);
+	progstate[7] = (uchar *) emalloc(nstates7);
+	progstate[8] = (uchar *) emalloc(nstates8);
+	progstate[9] = (uchar *) emalloc(nstates9);
+	progstate[10] = (uchar *) emalloc(nstates10);
+	progstate[11] = (uchar *) emalloc(nstates11);
+	progstate[12] = (uchar *) emalloc(nstates12);
+	progstate[13] = (uchar *) emalloc(nstates13);
+	progstate[14] = (uchar *) emalloc(nstates14);
+	progstate[15] = (uchar *) emalloc(nstates15);
+	progstate[16] = (uchar *) emalloc(nstates16);
+	progstate[17] = (uchar *) emalloc(nstates17);
+	progstate[18] = (uchar *) emalloc(nstates18);
+	progstate[19] = (uchar *) emalloc(nstates19);
 	loopstate0 = loopstate[0] = (uchar *) emalloc(nstates0);
 	loopstate1 = loopstate[1] = (uchar *) emalloc(nstates1);
 	loopstate2 = loopstate[2] = (uchar *) emalloc(nstates2);
 	loopstate3 = loopstate[3] = (uchar *) emalloc(nstates3);
 	loopstate4 = loopstate[4] = (uchar *) emalloc(nstates4);
+	loopstate5 = loopstate[5] = (uchar *) emalloc(nstates5);
+	loopstate6 = loopstate[6] = (uchar *) emalloc(nstates6);
+	loopstate7 = loopstate[7] = (uchar *) emalloc(nstates7);
+	loopstate8 = loopstate[8] = (uchar *) emalloc(nstates8);
+	loopstate9 = loopstate[9] = (uchar *) emalloc(nstates9);
+	loopstate10 = loopstate[10] = (uchar *) emalloc(nstates10);
+	loopstate11 = loopstate[11] = (uchar *) emalloc(nstates11);
+	loopstate12 = loopstate[12] = (uchar *) emalloc(nstates12);
+	loopstate13 = loopstate[13] = (uchar *) emalloc(nstates13);
+	loopstate14 = loopstate[14] = (uchar *) emalloc(nstates14);
+	loopstate15 = loopstate[15] = (uchar *) emalloc(nstates15);
+	loopstate16 = loopstate[16] = (uchar *) emalloc(nstates16);
+	loopstate17 = loopstate[17] = (uchar *) emalloc(nstates17);
+	loopstate18 = loopstate[18] = (uchar *) emalloc(nstates18);
+	loopstate19 = loopstate[19] = (uchar *) emalloc(nstates19);
 	stopstate[0] = (uchar *) emalloc(nstates0);
 	stopstate[1] = (uchar *) emalloc(nstates1);
 	stopstate[2] = (uchar *) emalloc(nstates2);
 	stopstate[3] = (uchar *) emalloc(nstates3);
 	stopstate[4] = (uchar *) emalloc(nstates4);
+	stopstate[5] = (uchar *) emalloc(nstates5);
+	stopstate[6] = (uchar *) emalloc(nstates6);
+	stopstate[7] = (uchar *) emalloc(nstates7);
+	stopstate[8] = (uchar *) emalloc(nstates8);
+	stopstate[9] = (uchar *) emalloc(nstates9);
+	stopstate[10] = (uchar *) emalloc(nstates10);
+	stopstate[11] = (uchar *) emalloc(nstates11);
+	stopstate[12] = (uchar *) emalloc(nstates12);
+	stopstate[13] = (uchar *) emalloc(nstates13);
+	stopstate[14] = (uchar *) emalloc(nstates14);
+	stopstate[15] = (uchar *) emalloc(nstates15);
+	stopstate[16] = (uchar *) emalloc(nstates16);
+	stopstate[17] = (uchar *) emalloc(nstates17);
+	stopstate[18] = (uchar *) emalloc(nstates18);
+	stopstate[19] = (uchar *) emalloc(nstates19);
 	visstate[0] = (uchar *) emalloc(nstates0);
 	visstate[1] = (uchar *) emalloc(nstates1);
 	visstate[2] = (uchar *) emalloc(nstates2);
 	visstate[3] = (uchar *) emalloc(nstates3);
 	visstate[4] = (uchar *) emalloc(nstates4);
+	visstate[5] = (uchar *) emalloc(nstates5);
+	visstate[6] = (uchar *) emalloc(nstates6);
+	visstate[7] = (uchar *) emalloc(nstates7);
+	visstate[8] = (uchar *) emalloc(nstates8);
+	visstate[9] = (uchar *) emalloc(nstates9);
+	visstate[10] = (uchar *) emalloc(nstates10);
+	visstate[11] = (uchar *) emalloc(nstates11);
+	visstate[12] = (uchar *) emalloc(nstates12);
+	visstate[13] = (uchar *) emalloc(nstates13);
+	visstate[14] = (uchar *) emalloc(nstates14);
+	visstate[15] = (uchar *) emalloc(nstates15);
+	visstate[16] = (uchar *) emalloc(nstates16);
+	visstate[17] = (uchar *) emalloc(nstates17);
+	visstate[18] = (uchar *) emalloc(nstates18);
+	visstate[19] = (uchar *) emalloc(nstates19);
 	mapstate[0] = (short *) emalloc(nstates0 * sizeof(short));
 	mapstate[1] = (short *) emalloc(nstates1 * sizeof(short));
 	mapstate[2] = (short *) emalloc(nstates2 * sizeof(short));
 	mapstate[3] = (short *) emalloc(nstates3 * sizeof(short));
 	mapstate[4] = (short *) emalloc(nstates4 * sizeof(short));
+	mapstate[5] = (short *) emalloc(nstates5 * sizeof(short));
+	mapstate[6] = (short *) emalloc(nstates6 * sizeof(short));
+	mapstate[7] = (short *) emalloc(nstates7 * sizeof(short));
+	mapstate[8] = (short *) emalloc(nstates8 * sizeof(short));
+	mapstate[9] = (short *) emalloc(nstates9 * sizeof(short));
+	mapstate[10] = (short *) emalloc(nstates10 * sizeof(short));
+	mapstate[11] = (short *) emalloc(nstates11 * sizeof(short));
+	mapstate[12] = (short *) emalloc(nstates12 * sizeof(short));
+	mapstate[13] = (short *) emalloc(nstates13 * sizeof(short));
+	mapstate[14] = (short *) emalloc(nstates14 * sizeof(short));
+	mapstate[15] = (short *) emalloc(nstates15 * sizeof(short));
+	mapstate[16] = (short *) emalloc(nstates16 * sizeof(short));
+	mapstate[17] = (short *) emalloc(nstates17 * sizeof(short));
+	mapstate[18] = (short *) emalloc(nstates18 * sizeof(short));
+	mapstate[19] = (short *) emalloc(nstates19 * sizeof(short));
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
+#ifdef HAS_CODE
 #ifdef HAS_CODE
 #ifdef HAS_CODE
 #ifdef HAS_CODE
@@ -792,6 +1257,36 @@ run(void)
 	NrStates[2] = nstates2;
 	NrStates[3] = nstates3;
 	NrStates[4] = nstates4;
+	NrStates[5] = nstates5;
+	NrStates[6] = nstates6;
+	NrStates[7] = nstates7;
+	NrStates[8] = nstates8;
+	NrStates[9] = nstates9;
+	NrStates[10] = nstates10;
+	NrStates[11] = nstates11;
+	NrStates[12] = nstates12;
+	NrStates[13] = nstates13;
+	NrStates[14] = nstates14;
+	NrStates[15] = nstates15;
+	NrStates[16] = nstates16;
+	NrStates[17] = nstates17;
+	NrStates[18] = nstates18;
+	NrStates[19] = nstates19;
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
 #endif
 #endif
 #endif
@@ -802,6 +1297,46 @@ run(void)
 	stopstate[2][endstate2] = 1;
 	stopstate[3][endstate3] = 1;
 	stopstate[4][endstate4] = 1;
+	stopstate[5][endstate5] = 1;
+	stopstate[6][endstate6] = 1;
+	stopstate[7][endstate7] = 1;
+	stopstate[8][endstate8] = 1;
+	stopstate[9][endstate9] = 1;
+	stopstate[10][endstate10] = 1;
+	stopstate[11][endstate11] = 1;
+	stopstate[12][endstate12] = 1;
+	stopstate[13][endstate13] = 1;
+	stopstate[14][endstate14] = 1;
+	stopstate[15][endstate15] = 1;
+	stopstate[16][endstate16] = 1;
+	stopstate[17][endstate17] = 1;
+	stopstate[18][endstate18] = 1;
+	stopstate[19][endstate19] = 1;
+	accpstate[18][19] = 1;
+	accpstate[18][11] = 1;
+	accpstate[17][19] = 1;
+	accpstate[17][11] = 1;
+	accpstate[16][19] = 1;
+	accpstate[16][11] = 1;
+	accpstate[15][19] = 1;
+	accpstate[15][11] = 1;
+	accpstate[14][19] = 1;
+	accpstate[14][11] = 1;
+	accpstate[13][19] = 1;
+	accpstate[13][11] = 1;
+	accpstate[12][19] = 1;
+	accpstate[12][11] = 1;
+	accpstate[11][19] = 1;
+	accpstate[11][11] = 1;
+	accpstate[10][7] = 1;
+	accpstate[9][15] = 1;
+	accpstate[8][15] = 1;
+	accpstate[7][15] = 1;
+	accpstate[6][15] = 1;
+	accpstate[5][15] = 1;
+	accpstate[4][57] = 1;
+	accpstate[4][29] = 1;
+	accpstate[4][19] = 1;
 	accpstate[3][11] = 1;
 	accpstate[2][11] = 1;
 	accpstate[1][11] = 1;
@@ -809,6 +1344,21 @@ run(void)
 	retrans(1, nstates1, start1, src_ln1, reached1, loopstate1);
 	retrans(2, nstates2, start2, src_ln2, reached2, loopstate2);
 	retrans(3, nstates3, start3, src_ln3, reached3, loopstate3);
+	retrans(4, nstates4, start4, src_ln4, reached4, loopstate4);
+	retrans(5, nstates5, start5, src_ln5, reached5, loopstate5);
+	retrans(6, nstates6, start6, src_ln6, reached6, loopstate6);
+	retrans(7, nstates7, start7, src_ln7, reached7, loopstate7);
+	retrans(8, nstates8, start8, src_ln8, reached8, loopstate8);
+	retrans(9, nstates9, start9, src_ln9, reached9, loopstate9);
+	retrans(10, nstates10, start10, src_ln10, reached10, loopstate10);
+	retrans(11, nstates11, start11, src_ln11, reached11, loopstate11);
+	retrans(12, nstates12, start12, src_ln12, reached12, loopstate12);
+	retrans(13, nstates13, start13, src_ln13, reached13, loopstate13);
+	retrans(14, nstates14, start14, src_ln14, reached14, loopstate14);
+	retrans(15, nstates15, start15, src_ln15, reached15, loopstate15);
+	retrans(16, nstates16, start16, src_ln16, reached16, loopstate16);
+	retrans(17, nstates17, start17, src_ln17, reached17, loopstate17);
+	retrans(18, nstates18, start18, src_ln18, reached18, loopstate18);
 	if (state_tables)
 	{ if (dodot) exit(0);
 	  printf("\nTransition Type: ");
@@ -10707,6 +11257,21 @@ do_reach(void)
 	r_ck(reached1, nstates1, 1, src_ln1, src_file1);
 	r_ck(reached2, nstates2, 2, src_ln2, src_file2);
 	r_ck(reached3, nstates3, 3, src_ln3, src_file3);
+	r_ck(reached4, nstates4, 4, src_ln4, src_file4);
+	r_ck(reached5, nstates5, 5, src_ln5, src_file5);
+	r_ck(reached6, nstates6, 6, src_ln6, src_file6);
+	r_ck(reached7, nstates7, 7, src_ln7, src_file7);
+	r_ck(reached8, nstates8, 8, src_ln8, src_file8);
+	r_ck(reached9, nstates9, 9, src_ln9, src_file9);
+	r_ck(reached10, nstates10, 10, src_ln10, src_file10);
+	r_ck(reached11, nstates11, 11, src_ln11, src_file11);
+	r_ck(reached12, nstates12, 12, src_ln12, src_file12);
+	r_ck(reached13, nstates13, 13, src_ln13, src_file13);
+	r_ck(reached14, nstates14, 14, src_ln14, src_file14);
+	r_ck(reached15, nstates15, 15, src_ln15, src_file15);
+	r_ck(reached16, nstates16, 16, src_ln16, src_file16);
+	r_ck(reached17, nstates17, 17, src_ln17, src_file17);
+	r_ck(reached18, nstates18, 18, src_ln18, src_file18);
 }
 
 void
@@ -10717,37 +11282,27 @@ iniglobals(int calling_pid)
 		Maxbody += WS - (Maxbody % WS);
 
 	{	int l_in;
-		for (l_in = 0; l_in < 15; l_in++)
+		for (l_in = 0; l_in < 5; l_in++)
 		{
 			now.action[l_in] = 0;
 		}
 	}
+		now.Airplane_mode = 0;
 		now.Bluetooth = 0;
 		now.pass = 2;
-		onOff_0 = 0;
-		now.Airplane_mode = 0;
-		onOff_2 = 0;
-		onOff_1 = 0;
-		onOff_4 = 0;
-		onOff_3 = 0;
-		onOff_6 = 0;
-		onOff_5 = 0;
-		onOff_8 = 0;
-		onOff_7 = 0;
-		onOff_9 = 0;
 		now.Wifi = 0;
 		now.user = 2;
-		now.state = 11;
+		now.state = 9;
 #ifdef VAR_RANGES
 	{	int l_in;
-		for (l_in = 0; l_in < 15; l_in++)
+		for (l_in = 0; l_in < 5; l_in++)
 		{
 			logval("action[l_in]", now.action[l_in]);
 		}
 	}
+		logval("Airplane_mode", now.Airplane_mode);
 		logval("Bluetooth", now.Bluetooth);
 		logval("pass", now.pass);
-		logval("Airplane_mode", now.Airplane_mode);
 		logval("Wifi", now.Wifi);
 		logval("user", now.user);
 		logval("state", now.state);
@@ -10827,6 +11382,21 @@ what_p_size(int t)
 	case 2: j = sizeof(P2); break;
 	case 3: j = sizeof(P3); break;
 	case 4: j = sizeof(P4); break;
+	case 5: j = sizeof(P5); break;
+	case 6: j = sizeof(P6); break;
+	case 7: j = sizeof(P7); break;
+	case 8: j = sizeof(P8); break;
+	case 9: j = sizeof(P9); break;
+	case 10: j = sizeof(P10); break;
+	case 11: j = sizeof(P11); break;
+	case 12: j = sizeof(P12); break;
+	case 13: j = sizeof(P13); break;
+	case 14: j = sizeof(P14); break;
+	case 15: j = sizeof(P15); break;
+	case 16: j = sizeof(P16); break;
+	case 17: j = sizeof(P17); break;
+	case 18: j = sizeof(P18); break;
+	case 19: j = sizeof(P19); break;
 	default: Uerror("bad proctype");
 	}
 	return j;
@@ -12447,14 +13017,14 @@ c_globals(void)
 {	/* int i; */
 	printf("global vars:\n");
 	{	int l_in;
-		for (l_in = 0; l_in < 15; l_in++)
+		for (l_in = 0; l_in < 5; l_in++)
 		{
 			printf("	byte   action[%d]:	%d\n", l_in, now.action[l_in]);
 		}
 	}
+	printf("	byte   Airplane_mode:	%d\n", now.Airplane_mode);
 	printf("	byte   Bluetooth:	%d\n", now.Bluetooth);
 	printf("	byte   pass:	%d\n", now.pass);
-	printf("	byte   Airplane_mode:	%d\n", now.Airplane_mode);
 	printf("	byte   Wifi:	%d\n", now.Wifi);
 	printf("	byte   user:	%d\n", now.user);
 }
@@ -12462,6 +13032,51 @@ void
 c_locals(int pid, int tp)
 {	/* int i; */
 	switch(tp) {
+	case 18:
+		/* none */
+		break;
+	case 17:
+		/* none */
+		break;
+	case 16:
+		/* none */
+		break;
+	case 15:
+		/* none */
+		break;
+	case 14:
+		/* none */
+		break;
+	case 13:
+		/* none */
+		break;
+	case 12:
+		/* none */
+		break;
+	case 11:
+		/* none */
+		break;
+	case 10:
+		/* none */
+		break;
+	case 9:
+		/* none */
+		break;
+	case 8:
+		/* none */
+		break;
+	case 7:
+		/* none */
+		break;
+	case 6:
+		/* none */
+		break;
+	case 5:
+		/* none */
+		break;
+	case 4:
+		/* none */
+		break;
 	case 3:
 		/* none */
 		break;

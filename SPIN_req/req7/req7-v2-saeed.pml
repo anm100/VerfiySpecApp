@@ -7,9 +7,7 @@ mtype = {BoPo_MainSreen,ChangeName,CreateNewEvent};
 byte name=Empty;
 mtype state=BoPo_MainSreen
 
-ltl req7 {
-[]((name==Empty)->!(X((state!=ChangeName)U((name!=Empty)&&(state!=ChangeName)))))
-}
+ltl req7 {[]((name==Empty)->!(X((state!=ChangeName)U((name!=Empty)&&(state!=ChangeName)))))}
 
 active proctype vm()
 {

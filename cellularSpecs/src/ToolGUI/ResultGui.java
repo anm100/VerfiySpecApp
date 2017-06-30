@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 public class ResultGui extends JFrame {
 
@@ -12,18 +13,21 @@ public class ResultGui extends JFrame {
 	{
 		getContentPane().setLayout(null);
 		setSize(650,380);
-		 txtResult = new JTextArea();
-		txtResult.setBounds(28, 43, 569, 243);
-		txtResult.setLineWrap(true);
-		txtResult.setWrapStyleWord(true);
-		getContentPane().add(txtResult);
 		
 		JLabel lblNewLabel = new JLabel("Verifcation Results:");
 		lblNewLabel.setBounds(28, 11, 291, 14);
 		getContentPane().add(lblNewLabel);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(28, 43, 569, 243);
+		getContentPane().add(scrollPane);
+		txtResult = new JTextArea();
+		scrollPane.setViewportView(txtResult);
+		txtResult.setLineWrap(true);
+		txtResult.setWrapStyleWord(true);
 	}
 	public void addToResult(String reqid, String req, String result)
 	{
-		txtResult.append(reqid+"\n"+req+"\n"+result+"\n");
+		txtResult.append(reqid+"\n"+req+"\n"+result+"\n\n");
 	}
 }

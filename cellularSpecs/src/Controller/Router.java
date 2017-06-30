@@ -115,15 +115,17 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		case("Verifiy SPEC"):
 			String st=new String();;
 				verifySpecGUI=new VerifySpecGUI();
-				
+				//req 1
 				 st=WorkSpace.getReqlist().get(0).getReq();
 				verifySpecGUI.setReq_pan(new JLabel(st),0);
-				
+				//req 2
 				 st=WorkSpace.getReqlist().get(1).getReq();
 				String [] s=st.split("X");
 				st = s[0];
-				verifySpecGUI.setReq_pan(new JLabel(st),1);
+				verifySpecGUI.setReq_pan(new JLabel(s[0]),1);
 				verifySpecGUI.setReq_pan(verifySpecGUI.getReq2ScreenCombo(),1);
+				verifySpecGUI.setReq_pan(new JLabel(s[1]),1);
+				//req 3
 				 st=WorkSpace.getReqlist().get(2).getReq();			 
 				 s=st.split("X");
 				 verifySpecGUI.setReq_pan(new JLabel(s[0]),2);
@@ -163,7 +165,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	//	verifySpecGUI=new VerifySpecGUI();
 		verifySpecGUI.setVerifySpecGUI(this);
 		//VerifySpecGUI.setComboBox(WorkSpace.getInstance().getsc);
-		VerifySpecGUI.setCheckBoxListener(verificationController);
+	//	VerifySpecGUI.setCheckBoxListener(verificationController);
 		verifySpecGUI.setVisible(true);
 			//verifySpecGUI.addRootScreen(st);
 		
@@ -176,7 +178,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpace.getLog().debug("Router->create pml file ");
 			try {
 				PrintWriter writer;
-				writer = new PrintWriter(WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
+				writer = new PrintWriter(RunSpin.fileslocation+WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
 			    writer.println(verificationController.translateToPROMELA(verifySpecGUI.getRoot()));
 			    writer.close();
 			} catch (FileNotFoundException | UnsupportedEncodingException e2) {
@@ -184,7 +186,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				e2.printStackTrace();
 			}
 			try {
+			try {
 				RunSpin.verifyUsingSpin();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			} catch (IOException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -209,22 +216,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			e1.printStackTrace();
 		}
 			}*/
-			try {
-				Scanner scan=new Scanner(new File("outreq1.txt"));
-				Boolean flag=false;
-				while(scan.hasNext()){
-				String line=scan.nextLine().toLowerCase().toString();
-				if(line.contains("errors: 0"))
-				{
-					WorkSpace.getReqlist().get(0).setResult(true);
-					break;
-				}
-				}
-			}
-			catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+
 				
 			break;
 
@@ -244,7 +236,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		for(int i=0;i<WorkSpace.getReqlist().size();i++){
 		if(WorkSpace.getReqlist().get(i).isSelected())
 		{
-	
 			rs.addToResult(WorkSpace.getReqlist().get(i).getrID(),WorkSpace.getReqlist().get(i).getReq(),
 					WorkSpace.getReqlist().get(i).getResult());
 			}

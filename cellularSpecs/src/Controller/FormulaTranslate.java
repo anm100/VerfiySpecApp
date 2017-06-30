@@ -44,6 +44,29 @@ private static String translateReq1() {
 		st+="ltl "+" req1_"+WorkSpace.getReqlist().get(0).getLtlCount()+"{[]("+(str)+")}\n";
 		WorkSpace.getReqlist().get(0).addltlCount();
 	}
+	WorkSpace.getReqlist().get(0).decltlCount();
+	WorkSpace.getLog().debug(st);
+	return st;
+	
+}
+private static String translateReq2(String root) {
+	String str="";
+	String st="";
+	 WorkSpace.getLog().debug("FormulaTranslation->translate Req 2");
+	String stateChanges=getChangeState("==","||");
+	String stateChanges1=getChangeState("!=","&&");
+	WorkSpace.getReqlist().get(1).setltlCount();
+	for(int i=0;i<screenStatesList.size() &&changeStatesList.size()>0 ;i++)
+	{
+		if(!(screenStatesList.get(i).equals(root))){
+		str="";
+		str+="((state=="+root+")->((!([]<>"+stateChanges+"))-><>(";
+		str+="(state =="+screenStatesList.get(i)+"))))";
+		st+="ltl "+" req2_"+WorkSpace.getReqlist().get(1).getLtlCount()+"{[]("+(str)+")}\n";
+		WorkSpace.getReqlist().get(1).addltlCount();
+		}
+	}
+	WorkSpace.getReqlist().get(1).decltlCount();
 	WorkSpace.getLog().debug(st);
 	return st;
 	
@@ -99,7 +122,7 @@ private static String getTranslateReq2b(String root) {
 	{
 		if(0!=i)
 		{
-			str=str+"(<>(State=="+screenStatesList.get(i)+"))&&";
+			str=str+"(<>(state=="+screenStatesList.get(i)+"))&&";
 		}
 	}
 	if(screenStatesList.size()>0)
@@ -201,19 +224,19 @@ private static String getTranslateReq8b(ArrayList<MyAction> actions,Param p) {
  * U(state==BoPo_MainSreen)))
  * )) }
  */
-public static  void translateReq3(String screen1,String screen2,ArrayList<String> parameterName)
+public static  String translateReq3(String screen1,String screen2,ArrayList<String> parameterName)
 {
 	String st="";
 	 st="ltl "+" req3 "+"{[]((state=="+screen1+")->((state=="+screen1+")U((state!="+screen1+")"+getChangeStateRe3(parameterName,screen2)+")))}";
 	 WorkSpace.getLog().debug(st);
-	 System.out.println(st);
+	return st;
 }
 private static String getChangeStateRe3(ArrayList<String> parameterName,String Until) {
 	String str="&&(!(";
 	for(int i=0;i<parameterName.size();i++)
 	{
 		for(int j=0;j<changeStatesList.size();j++)
-		if(changeStatesList.get(j).endsWith(parameterName.get(i)))
+		if(changeStatesList.get(j).endsWith(parameterName.get(i)+ElementType.getNotEmpty()))
 		{
 		str+="(state!="+changeStatesList.get(j)+")&&";	
 		break;
@@ -227,7 +250,7 @@ private static String getChangeStateRe3(ArrayList<String> parameterName,String U
 public static  String translateReq4()
 {
 	String st="";
-	 st="ltl "+" req4 "+"{[]("+getTranslateReq4()+")}";
+	 st=getTranslateReq4();
 	 WorkSpace.getLog().debug(st);
 return st;
 }
@@ -235,14 +258,19 @@ private static String getTranslateReq4() {
 	String st="";
 	String [] OnOffParams=ScreenController.getParams(ElementType.getOnOffType());
 	String [] EmptyNotEmptyParams=ScreenController.getParams(ElementType.getEmptyNotEmptyType());
+	WorkSpace.getReqlist().get(3).setltlCount();
 	for(int i=0;i<OnOffParams.length;i++)
-		st+="("+getForReq4(OnOffParams[i],ElementType.getOn(),ElementType.getOff())+")&&";
-	if(OnOffParams.length>0)
-		st=st.substring(0, st.length()-2);
+	{
+		st+="ltl "+" req4_"+WorkSpace.getReqlist().get(3).getLtlCount()+"{[]("+getForReq4(OnOffParams[i],ElementType.getOn(),ElementType.getOff())+")}\n";
+		WorkSpace.getReqlist().get(3).addltlCount();
+	}
+	WorkSpace.getReqlist().get(3).decltlCount();
 	for(int i=0;i<EmptyNotEmptyParams.length;i++)
-		st+="("+getForReq4(EmptyNotEmptyParams[i],ElementType.getEmpty(),ElementType.getNotEmpty())+")&&";
-	if(EmptyNotEmptyParams.length>0)
-		st=st.substring(0, st.length()-2);
+	{
+		WorkSpace.getReqlist().get(3).addltlCount();
+		st+="ltl "+" req4_"+WorkSpace.getReqlist().get(3).getLtlCount()+"{[]("+getForReq4(EmptyNotEmptyParams[i],ElementType.getEmpty(),ElementType.getNotEmpty())+")}\n";
+	
+	}
 	return st;
 }
 private static String getForReq4(String param,String elType1,String elType2) {
@@ -251,68 +279,103 @@ private static String getForReq4(String param,String elType1,String elType2) {
 	st="("+param+"=="+elType1+"||"+
 		param+"=="+elType2+")->(!(<>"+
 		"("+param+"!="+elType1+"&&"+
-		param+"=="+elType2+")))";
+		param+"!="+elType2+")))";
 	
 	return st;
 }
-public static void translateReq7()
+public static String translateReq7()
 {
 	String st="";
-	 st="ltl "+" req7 "+"{[]("+getTranslateReq7()+")}";
+	 st=getTranslateReq7();
 	 WorkSpace.getLog().debug(st);
+	 return st;
 }
 private static String getTranslateReq7() {
 	String req7="";
-	String[] params=ScreenController.getparams();
+	WorkSpace.getReqlist().get(6).setltlCount();
+	String[] params=ScreenController.getParams(ElementType.getOnOffType());
+	for(int i=0;i<params.length;i++)
+	{
+	req7+=getOnOffLtL(params[i],WorkSpace.getReqlist().get(6).getLtlCount())+"\n";
+	WorkSpace.getReqlist().get(6).addltlCount();
+	WorkSpace.getReqlist().get(6).addltlCount();
+	}
+	params=ScreenController.getParams(ElementType.getEmptyNotEmptyType());
+	for(int i=0;i<params.length;i++)
+	{
+	req7+=getEmpNoLTL(params[i],WorkSpace.getReqlist().get(6).getLtlCount())+"\n";
+	WorkSpace.getReqlist().get(6).addltlCount();
+	}
+	WorkSpace.getReqlist().get(6).decltlCount();
+	return req7;
+	/*String[] params=ScreenController.getParams(ElementType.getOnOffType());
+	req7+=getEmNotLTL(params);
 	for(int i=0;i<params.length;i++)
 	{
 		String[] values = WorkSpace.getInstance().getParamsMap().get(params[i]).getValues();
 		for(int j=0;j<values.length;j++)
 		{
-			req7+="(("+params[i]+"=="+values[j]+")->(!(X("+getStatesReq7()+"U("+params[i]+"!="+values[j]+")))))&&";
+			req7+="(("+params[i]+"=="+values[j]+")->(!(X("+getStatesReq7(params[i],values[j])+"U("+params[i]+"!="+values[j]+")))))&&";
 		}
 	}
 	if(params.length>0)
-		req7=req7.substring(0, req7.length()-2);
-return req7;
+		req7=req7.substring(0, req7.length()-2);*/
 }
 
-private static String getStatesReq7() 
+private static String getEmpNoLTL(String parametername, int index) {
+	
+	String st="ltl "+" req7_"+index+"{[](";
+	st+="(("+parametername+"=="+ElementType.getEmpty()+")->";
+	st+="(!(X("+getStatesReq7(parametername,ElementType.getNotEmpty());
+	st+="U(("+parametername+"=="+ElementType.getNotEmpty()+") &&"+getStatesReq7(parametername,ElementType.getNotEmpty())+"))))))}";
+return st;
+}
+private static String getOnOffLtL(String param,int inedx) {
+	String st="ltl "+" req7_"+inedx+"{[](";
+		st+="(("+param+"=="+ElementType.getOn()+")->";
+		st+="(!(X("+getStatesReq7(param,ElementType.getOff());
+		st+="U(("+param+"=="+ElementType.getOff()+") &&"+getStatesReq7(param,ElementType.getOff())+"))))))}\n";
+		
+		 st+="ltl "+" req7_"+(inedx+1)+"{[](";
+		st+="(("+param+"=="+ElementType.getOff()+")->";
+		st+="(!(X("+getStatesReq7(param,ElementType.getOn());
+		st+="U(("+param+"=="+ElementType.getOn()+") &&"+getStatesReq7(param,ElementType.getOn())+"))))))}";
+	return st;
+}
+private static String getStatesReq7(String paramName, String value) 
 {
 	int i=0;
 	String st1=new String("");
-	String[] params=ScreenController.getparams();
-	for(int j=0;j<params.length;j++)
-	{
 		for(i=0;i<changeStatesList.size();i++)
 		{
 
-		if(changeStatesList.get(i).endsWith(params[j]))
-			 st1+="("+changeStatesList.get(i)+")||";
+			if(changeStatesList.get(i).endsWith(paramName+value))
+			{
+			st1+="(state!="+changeStatesList.get(i)+")";
+			break;
+
+			}
 		}
-	}
-	if(params.length>1)
-	{
-		st1=st1.substring(0, st1.length()-2);
-	}
-	st1="("+st1+")";
 	return st1;
 }
-public static void translateReq6()
+public static String translateReq6(String screen,ArrayList<String> parameterName)
 {
 	 String st="";
-	 st="ltl "+" req6 "+"{[]("+getTranslateReq6()+")}";
+	 st="ltl "+" req6 "+"{[]((state=="+screen+")->("+getTranslateReq6(parameterName)+"))}";
 	 WorkSpace.getLog().debug(st);
+	 return st;
 }
-private static String getTranslateReq6() {
-		String st1="";
-	 ArrayList<StandartButtonType> but=ScreenController.getElementsByType(ElementType.getStandartBtnType());
-	 for(int i=0;i<but.size();i++)
-	  if(but.get(i).getConds().size()>0)
-		  st1+="((state=="+but.get(i).getTrans().getToScreen()+")->("+getConditions(but.get(i).getConds())+"))&&";
-		if(but.size()>0)
-			st1=st1.substring(0, st1.length()-2);
-	return st1;
+private static String getTranslateReq6(ArrayList<String> parameterName) {
+		String st="";
+	 for(int i=0;i<parameterName.size();i++){
+
+		 st+="("+parameterName.get(i)+"=="+ElementType.getNotEmpty()+")&&";
+	 }
+		if(parameterName.size()>0)
+		{
+			st=st.substring(0, st.length()-2);
+		}
+	return st;
 }
 private static String getConditions(List<MyCondition> conds) {
 	String st="(";
@@ -370,14 +433,37 @@ public static void setFormula(VerifySpecGUI verifySpecGUI) {
 				 WorkSpace.getReqlist().get(i).setFormula(translateReq1());
 				break;
 			 case "req2":
-				 WorkSpace.getReqlist().get(i).setFormula(translateReq2b(verifySpecGUI.getRoot()));
+				 WorkSpace.getReqlist().get(i).setFormula(translateReq2(verifySpecGUI.getRoot()));
 				 WorkSpace.getLog().debug("FormulaTranslate->req2");
 				 break;
+			 case "req3":
+				 WorkSpace.getReqlist().get(i).setFormula(translateReq3(
+			verifySpecGUI.getReq3ScreenICombo().getSelectedItem().toString(), verifySpecGUI.getReq3ScreenICombo().getSelectedItem().toString()
+				 , verifySpecGUI.getChoosenParam()));
+				 WorkSpace.getLog().debug("FormulaTranslate->req3");
+				 break;
+				 
 			 case "req4":
 				 WorkSpace.getReqlist().get(i).setFormula(translateReq4());
 				 WorkSpace.getLog().debug("FormulaTranslate->req4");
 				 break;
-				
+			 case "req5":
+				 //WorkSpace.getReqlist().get(i).setFormula(translateReq4());
+				 WorkSpace.getLog().debug("FormulaTranslate->req5");
+				 break;
+			 case "req6":
+				 WorkSpace.getReqlist().get(i).setFormula(translateReq6(verifySpecGUI.getReq6ScreenJComb().getSelectedItem().toString()
+						 ,verifySpecGUI.getChoosenParamreq6()));
+				 WorkSpace.getLog().debug("FormulaTranslate->req6");
+				 break;
+			 case "req7":
+				 WorkSpace.getReqlist().get(i).setFormula(translateReq7());
+				 WorkSpace.getLog().debug("FormulaTranslate->req7");
+				 break;
+			 case "req8":
+				// WorkSpace.getReqlist().get(i).setFormula(translateReq8(verifySpecGUI.getreq));
+				 WorkSpace.getLog().debug("FormulaTranslate->req8");
+				 break;
 			 }
 		 }
 	 }

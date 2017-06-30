@@ -5,8 +5,10 @@ import javax.swing.DefaultComboBoxModel;
 import Model.ElementType;
 import ToolGUI.EmptyNotEmptyGUI;
 import ToolGUI.OnOfGUI;
+import ToolGUI.VerifySpecGUI;
 
 public class checkInputs {
+	//On OFF GUI
 	public static boolean checkTextfieldsAdd(OnOfGUI frame, String type) {
 		boolean flag=true;
 	if(frame.getElementName().isEmpty())
@@ -56,6 +58,7 @@ public class checkInputs {
 	}
 	return flag;
 }
+	//Empty  NotEmpty GUI
 	public static boolean checkTextfieldsAdd(EmptyNotEmptyGUI frame, String type) {
 		boolean flag=true;
 	if(frame.getElementName().isEmpty())
@@ -105,4 +108,10 @@ public class checkInputs {
 	}
 	return flag;
 }
+	
+	
+	public static boolean CheckSelectedScreens(VerifySpecGUI frame) {
+		return false;
+	}
 }
+
