@@ -5,6 +5,7 @@ import Controller.Router;
 import Controller.WorkSpaceController;
 import ToolGUI.AddParamterGUI;
 import ToolGUI.NewSpecGUI;
+import ToolGUI.ParamManagment;
 
 
 public class appTest {
@@ -28,6 +29,8 @@ public class appTest {
 		WorkSpaceController.setup("test");
 		AddParamterGUI gui=	new AddParamterGUI();
 		gui.setVisible(true);
+		ParamManagment p = new ParamManagment();
+		p.getFrame().setVisible(true);
 	//	gui.setAddParamListener(Router.getInstance());
 			
 	}

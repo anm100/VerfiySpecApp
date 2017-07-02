@@ -55,6 +55,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private Screen screen;
 	private ScreenGUI screenGUI;
 	private int Location=0;
+	private String path ; 
 	private VerificationController verificationController ;
 
 
@@ -86,8 +87,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 //			addparamterGUI.setAddParamListener(this);
 		break;
 		case("_open_Spec"): 
-			WorkSpace.getLog().debug("open spec"+newSpecGui.getSpecLocation());
-			WorkSpaceController.OpenSpecFromFile(newSpecGui.getSpecLocation());
+			WorkSpace.getLog().debug("open spec"+getPath());
+			WorkSpaceController.OpenSpecFromFile(getPath());
 			WorkSpaceController.createSpecGUI();
 		break;
 		
@@ -111,7 +112,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		
 		case("Save SPEC"):
 			chooseFileLocation();//chose the folder and save the file 
-		//WorkSpaceController.SaveSpecToFile(WorkSpace.getInstance().getWorkSpaceName()); 
+		break;
 		case("Verifiy SPEC"):
 			if(verifySpecGUI==null)
 			{
@@ -182,6 +183,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			addScreen=new AddScreenGUI();
 			addScreen.addScreenListener(this);
 			addScreen.setVisible(true);
+			mainScreenGui.setEnabled(false);
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 		break;
@@ -204,6 +206,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 
 			
 			screenGUI.addScreenMouseListener2(this);
+			mainScreenGui.setEnabled(true);
+
 			//mainScreenGui.setSpecNameLabel(WorkSpace.getInstance().getWorkSpaceName());
 			mainScreenGui.getContentPane().add(screenGUI);
 			mainScreenGui.refreshWorkspace();
@@ -230,7 +234,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			onOfGUI.setOnOffListener(this);
 		 	onOfGUI.setParamChangeListener(this);
 			onOfGUI.setParameterName(ScreenController.getParams(ElementType.getOnOffType(),screenGUI.getScreenName()));
-			removelistenerMainScreen();
+			mainScreenGui.setEnabled(false);
 			break;
 			
 		case "_save_on_off":
@@ -238,6 +242,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpace.getLog().debug("do _save_on_off.. ");
 			WorkSpaceController.addelementToGUI(screenGUI, onOfGUI,new OnOffType());
 			onOfGUI.setVisible(false);
+			mainScreenGui.setEnabled(true);
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 			}
@@ -247,6 +252,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpace.getLog().debug("Router>-edit the onOff Type");
 			WorkSpaceController.editEmentfromGUI(screenGUI, onOfGUI,new OnOffType());}
 			onOfGUI.setVisible(false);
+			mainScreenGui.setEnabled(true);
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 
@@ -257,6 +263,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		    listTypeGUI=new ListTypeGUI(screenGUI.getScreenName());
 			listTypeGUI.setVisible(true);
 			listTypeGUI.setListTypeListener(this);
+			mainScreenGui.setEnabled(false);
+
 			removelistenerMainScreen();
 
 			
@@ -264,6 +272,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		case "_save_List":
 			WorkSpace.getLog().debug("do _save_list.. ");
 			WorkSpaceController.addelementToGUI(screenGUI, listTypeGUI,new ListElementType());
+			mainScreenGui.setEnabled(true);
+
 			break; 	
 			
 			case("_menu_emptyNotEmpty_type"):
@@ -274,11 +284,16 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				emptyNotEmptyGUI.setParameterName(ScreenController.getParams(ElementType.getEmptyNotEmptyType(),screenGUI.getScreenName()));
 				emptyNotEmptyGUI.setVisible(true);
 				removelistenerMainScreen();
+				mainScreenGui.setEnabled(false);
+
 				break;
 			case "_save_EmptyNEmpty":
 				if(checkInputs.checkTextfieldsAdd(emptyNotEmptyGUI,ElementType.getEmptyNotEmptyType())){
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
+				emptyNotEmptyGUI.setVisible(false);
+				emptyNotEmptyGUI.dispose();
+				mainScreenGui.setEnabled(true);
 				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 				}
@@ -287,6 +302,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				if(checkInputs.checkTextfieldsEdit(emptyNotEmptyGUI,ElementType.getEmptyNotEmptyType())){
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.editEmentfromGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
+				mainScreenGui.setEnabled(true);
 				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 				}
@@ -296,6 +312,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				buttonTypeGUI= new ButtonTypeGUI(screenGUI.getScreenName(),null);
 				buttonTypeGUI.setVisible(true);
 				buttonTypeGUI.setButtonTListener(this);
+				mainScreenGui.setEnabled(false);
+
 
 //			        String st1[]=new String[ScreenController.getparams().size()+1];
 //			        st1[0]="";
@@ -310,6 +328,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			case"_save_standart_button": 
 				WorkSpace.getLog().debug("do _save_standart_button.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, buttonTypeGUI, new StandartButtonType());
+				mainScreenGui.setEnabled(true);
 				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 				break;
@@ -321,6 +340,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 					addparamterGUI.expectionbtnSave();
 
 				}
+				mainScreenGui.setEnabled(true);
+
 				break;
 		}
 
@@ -471,6 +492,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	}
 	
 	
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
 	public MainScreenGui getMainScreenGui() {
 		return mainScreenGui;
 	}

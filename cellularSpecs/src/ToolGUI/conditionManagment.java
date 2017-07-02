@@ -129,7 +129,7 @@ public class conditionManagment implements ActionListener  {
 
 		}else if (toSwitch.equals(ElementType.getOff())){
 			status_lbl.setText(new String("ON-> OFF")); 
-		}else {
+		}else if (toSwitch.equals(ElementType.getNotEmpty())){
 			status_lbl.setText(new String("Empty-> NotEmpty")); 
 
 		}

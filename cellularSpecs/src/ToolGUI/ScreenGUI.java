@@ -234,7 +234,8 @@ public class ScreenGUI extends JScrollPane implements ActionListener {
 		eventLabel=e;
 		for ( i = 0; i < labelElement.size(); i++)
             if (e.getSource() == labelElement.get(i)) {
-            	
+				Router.getInstance().getMainScreenGui().setEnabled(false);
+
             	// search the label is selected
                 datalabel=labelElement.get(i).getText().toString().split(",");
                 WorkSpace.getLog().debug("Label data  " + datalabel[0]+datalabel[1] + "->1");

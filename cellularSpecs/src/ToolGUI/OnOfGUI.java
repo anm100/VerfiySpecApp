@@ -6,12 +6,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,6 +25,7 @@ import Controller.ElementController;
 import Controller.ScreenController;
 import Model.ElementType;
 import Model.MyAction;
+import Model.MyCondition;
 import Model.WorkSpace;
 
 import java.awt.event.ItemListener;
@@ -39,6 +43,7 @@ import java.awt.TextArea;
 import java.awt.Button;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -397,9 +402,18 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				.getActions(ElementType.getOn()),ElementType.getOn());
 		setActionArrayList(WorkSpace.getInstance().getParamsByName(dataOfelement.get(1))
 				.getActions(ElementType.getOff()),ElementType.getOff());
+		setCondArrayList(WorkSpace.getInstance().getParamsByName(dataOfelement.get(1))
+				.getCond(ElementType.getOn()),ElementType.getOn());
+		setCondArrayList(WorkSpace.getInstance().getParamsByName(dataOfelement.get(1))
+				.getCond(ElementType.getOff()),ElementType.getOff());
 		
 		setActionArea(On_To_Off_Action,ElementType.getOff());
 		setActionArea(Off_To_On_Action,ElementType.getOn());
+		
+		setTextArea(On_To_Off_Condition,ElementType.getOff());
+		setTextArea(Off_To_On_Condition,ElementType.getOn());
+
+		
 
 		
 		
@@ -486,6 +500,10 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	public ArrayList<String> get_Off_To_On_Condition() {
 		return Off_To_On_Condition;
 	}
+	public ArrayList<String> get_On_To_Off_Conditions()
+	{
+		return On_To_Off_Condition;
+	}
 
 	public ArrayList<String> get_On_To_Off_Actions() {
 		return On_To_Off_Action;
@@ -493,10 +511,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	public ArrayList<String> get_Off_To_ON_Actions() {
 		return Off_To_On_Action;
 	}
-	public ArrayList<String> get_On_To_Off_Conditions()
-	{
-		return On_To_Off_Condition;
-	}
+	
 	
 
 
@@ -516,8 +531,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 
 	public void setTextArea(ArrayList<String> ActionArray, String switchTo) {
 		String data=new String(); 
-		this.textAreaOnToOff.setText("");
-		this.textAreaOffToON.setText("");
+
 		if(switchTo.equals(ElementType.getOff()))
 		{
 			if(null ==ActionArray){
@@ -552,8 +566,6 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	}
 	public void setActionArea(ArrayList<String> ActionArray, String switchTo) {
 		String data =new String(""); 
-		this.ActionAreaOffToON.setText("");
-		this.ActionAreaOnToOff.setText("");
 		if(switchTo.equals(ElementType.getOff()))
 		{
 			if(null ==ActionArray){
@@ -624,6 +636,20 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		{
 			for (MyAction i : actions ){
 				Off_To_On_Action.add(i.getActionString());			
+			}
+		}
+	}
+	private void setCondArrayList(ArrayList<MyCondition> cond,String switchTo) {
+		if(switchTo.equals(ElementType.getOff()))
+		{
+			for (MyCondition i : cond ){
+				On_To_Off_Condition.add(i.getCondition());			
+			}
+		}
+		else
+		{
+			for (MyCondition i : cond ){
+				Off_To_On_Condition.add(i.getCondition());			
 			}
 		}
 	}

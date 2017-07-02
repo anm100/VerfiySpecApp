@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Param implements Serializable{
 	private int index;
-	private static int counter=0; 
+	static int counter=0; 
 	private String paramName; 
 	private String paramVal;
 	private String type;

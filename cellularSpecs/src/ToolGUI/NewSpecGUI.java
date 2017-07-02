@@ -9,20 +9,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 
 
+
 import javax.swing.JFileChooser;
-
 import javax.swing.JTextField;
-
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import javax.swing.JRadioButton;
+
+import Controller.Router;
 
 public class NewSpecGUI extends JFrame{
 	private JTextField specLocation;
@@ -92,6 +94,9 @@ public class NewSpecGUI extends JFrame{
 	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 	    	System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
 	    	specLocation.setText(chooser.getSelectedFile().getPath());
+	    	Router.getInstance().setPath(chooser.getSelectedFile().getPath());		   
+	    	//btnBrowse.setActionCommand("_open_Spec");
+
 	    } else {
 	      System.out.println("No Selection ");
 	    }

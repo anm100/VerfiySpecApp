@@ -32,7 +32,8 @@ private  WorkSpace()
 		screensMap=new HashMap<String,Screen>();
 		ParamsMap=new HashMap<String,Param>();
 		this.IsClicked=false;
-		numScreen=1; 
+		numScreen=1;
+		Param.counter=0;
 		reqlist=(new RequirementList()).getReqlist();
 }
 

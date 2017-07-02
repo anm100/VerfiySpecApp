@@ -1,12 +1,22 @@
 package ToolGUI;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import javax.swing.JLabel;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import Controller.Router;
+import Controller.WorkSpaceController;
+import Model.WorkSpace;
+
 import java.awt.Font;
 
 public class MainScreenGui extends JFrame  {
@@ -17,6 +27,8 @@ public class MainScreenGui extends JFrame  {
 	private JButton btnExport;
 	private JButton btnRunVerification;
 	private JButton btnShowresults;
+	private JFileChooser chooser; 
+
 	
 	public  MainScreenGui() {
 		
@@ -33,9 +45,32 @@ public class MainScreenGui extends JFrame  {
 		specNameLabel.setBounds(34, 11, 356, 35);
 		getContentPane().add(specNameLabel);
 		
-		 btnOpen = new JButton("Open..");
+		 btnOpen = new JButton("Open");
+		 btnOpen.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {   		
+					 chooser = new JFileChooser();
+					chooser.setAcceptAllFileFilterUsed(false);
+					
+					FileFilter filter = new FileNameExtensionFilter("SPEC file", new String[] {"ser"});
+					chooser.addChoosableFileFilter(filter);
+
+					String workingDir = System.getProperty("user.dir");
+					chooser.setCurrentDirectory(new java.io.File("."));
+					chooser.getCurrentDirectory();
+					chooser.setDialogTitle("select a directory as workspace ");
+			    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			    	System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+			    	Router.getInstance().setPath(chooser.getSelectedFile().getPath());
+					WorkSpace.getLog().debug("open spec"+chooser.getSelectedFile().getPath());
+					WorkSpaceController.OpenSpecFromFile(chooser.getSelectedFile().getPath());
+					WorkSpaceController.createSpecGUI();
+			    } else {
+			      System.out.println("No Selection ");
+			    }
+				   	}
+				   });			    	
 		 
-		btnOpen.setActionCommand("_open_Spec");
+
 		btnOpen.setBounds(511, 17, 89, 23);
 		getContentPane().add(btnOpen);
 		
