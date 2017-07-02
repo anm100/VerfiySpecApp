@@ -247,5 +247,9 @@ public class AddParamterGUI extends JFrame {
 	public void setAddParamListener(ActionListener OnOfTypeListener ){       
 		btnSave.addActionListener(OnOfTypeListener);
 	}
+	public static void main(String[] args) 	{
+		AddParamterGUI a=new AddParamterGUI();
+		a.setVisible(true);
+	}
 	
 }

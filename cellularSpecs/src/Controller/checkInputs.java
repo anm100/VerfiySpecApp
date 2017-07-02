@@ -108,10 +108,17 @@ public class checkInputs {
 	}
 	return flag;
 }
-	
-	
-	public static boolean CheckSelectedScreens(VerifySpecGUI frame) {
-		return false;
+	public static boolean CheckSelectedScreen(VerifySpecGUI verifySpecGUI) {
+		
+		if(verifySpecGUI.getRoot().getSelectedItem()==null)
+		{
+		//	verifySpecGUI.expectionbtnInroot();
+			return false;
+		}
+		return true;
 	}
+	
+	
+	
 }
 
