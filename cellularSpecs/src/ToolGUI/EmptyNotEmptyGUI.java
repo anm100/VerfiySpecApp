@@ -529,8 +529,6 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 
 	public void setTextArea(ArrayList<String> ActionArray, String switchTo) {
 		String data=new String(); 
-		this.textAreaOnToOff.setText("");
-		this.textAreaOffToON.setText("");
 		if(switchTo.equals(ElementType.getNotEmpty()))
 		{
 			if(null ==ActionArray){
@@ -565,8 +563,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 	}
 	public void setActionArea(ArrayList<String> ActionArray, String switchTo) {
 		String data =new String(""); 
-		this.ActionAreaOffToON.setText("");
-		this.ActionAreaOnToOff.setText("");
+
 		if(switchTo.equals(ElementType.getNotEmpty()))
 		{
 			if(null ==ActionArray){
