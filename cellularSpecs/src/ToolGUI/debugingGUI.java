@@ -83,7 +83,7 @@ public class debugingGUI extends JFrame{
 			VerificationController verificationController = new VerificationController();
 			//verificationController.translateToPROMELA();
 		//	FormulaTranslate.translateReq1();
-			FormulaTranslate.translateReq2a();
+		//FormulaTranslate.translateReq2a();
 		//	FormulaTranslate.translateReq2b();
 		//	FormulaTranslate.translateReq8a("Airplane MODE");
 			
