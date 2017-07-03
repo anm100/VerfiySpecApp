@@ -433,7 +433,7 @@ public static void setFormula(VerifySpecGUI verifySpecGUI) {
 				 WorkSpace.getReqlist().get(i).setFormula(translateReq1());
 				break;
 			 case "req2":
-				 WorkSpace.getReqlist().get(i).setFormula(translateReq2(verifySpecGUI.getRoot()));
+				 WorkSpace.getReqlist().get(i).setFormula(translateReq2(verifySpecGUI.getRoot().getSelectedItem().toString()));
 				 WorkSpace.getLog().debug("FormulaTranslate->req2");
 				 break;
 			 case "req3":

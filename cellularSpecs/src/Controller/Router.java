@@ -39,7 +39,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private static Router instance =null ; 
 	private int cordinateX; 
 	private int cordinateY; 
-	private VerifySpecGUI verifySpecGUI;
+	private VerifySpecGUI verifySpecGUI=null;
 	private int x=0;
 	private int y=0;
 	private String specName;
@@ -114,73 +114,28 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			chooseFileLocation();//chose the folder and save the file 
 		break;
 		case("Verifiy SPEC"):
-			String st=new String();;
+			if(verifySpecGUI==null)
+			{
 				verifySpecGUI=new VerifySpecGUI();
-				//req 1
-				 st=WorkSpace.getReqlist().get(0).getReq();
-				verifySpecGUI.setReq_pan(new JLabel(st),0);
-				//req 2
-				 st=WorkSpace.getReqlist().get(1).getReq();
-				String [] s=st.split("X");
-				st = s[0];
-				verifySpecGUI.setReq_pan(new JLabel(s[0]),1);
-				verifySpecGUI.setReq_pan(verifySpecGUI.getReq2ScreenCombo(),1);
-				verifySpecGUI.setReq_pan(new JLabel(s[1]),1);
-				//req 3
-				 st=WorkSpace.getReqlist().get(2).getReq();			 
-				 s=st.split("X");
-				 verifySpecGUI.setReq_pan(new JLabel(s[0]),2);
-				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3ScreenICombo(),2);
-				verifySpecGUI.setReq_pan(new JLabel(s[1]),2);
-				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3ScreenJCombo(),2);
-				 verifySpecGUI.setReq_pan(new JLabel(s[2]),2);
-				 verifySpecGUI.setReq_pan(verifySpecGUI.getreq2ChoosParams(),2);
-
-				 
-				 st=WorkSpace.getReqlist().get(3).getReq();			 
-				 verifySpecGUI.setReq_pan(new JLabel(st),3);
-				 
-				 st=WorkSpace.getReqlist().get(4).getReq();	
-				 verifySpecGUI.setReq_pan(new JLabel(st),4);
-				 
-				 st=WorkSpace.getReqlist().get(5).getReq();	
-				 s=st.split("X");
-				 verifySpecGUI.setReq_pan(new JLabel(s[0]),5);
-				 verifySpecGUI.setReq_pan(verifySpecGUI.getreq6ChoosParams(),5);
-				 verifySpecGUI.setReq_pan(new JLabel(s[1]),5);
-				 verifySpecGUI.setReq_pan(verifySpecGUI.getReq6ScreenJComb(),5);
-				 verifySpecGUI.setReq_pan(new JLabel(s[2]),5);
-				
-				 st=WorkSpace.getReqlist().get(6).getReq();	
-				 verifySpecGUI.setReq_pan(new JLabel(st),6);
-				 
-				 st=WorkSpace.getReqlist().get(7).getReq();	
-				 verifySpecGUI.setReq_pan(new JLabel(st),7);
-			// st=WorkSpace.getReqlist().get(6).getReq();	
-				
-			
-
-				 
-				 
-			WorkSpace.getLog().debug("verifiy Spec case");
-	//	verifySpecGUI=new VerifySpecGUI();
-		verifySpecGUI.setVerifySpecGUI(this);
-		//VerifySpecGUI.setComboBox(WorkSpace.getInstance().getsc);
-	//	VerifySpecGUI.setCheckBoxListener(verificationController);
-		verifySpecGUI.setVisible(true);
-			//verifySpecGUI.addRootScreen(st);
-		
+				VerificationController.buildVerifySpecGUI(verifySpecGUI);		
+				verifySpecGUI.setVerifySpecGUI(this);
+			}
+				verifySpecGUI.setVisible(true);
 		break;
 		case("Run_verifectaion"):
 			verificationController = new VerificationController();
 			WorkSpace.getLog().debug("Router->Run_verifectaion");
+			if(checkInputs.CheckSelectedScreen(verifySpecGUI))
+			{
+				verifySpecGUI.setVisible(false);
 			FormulaTranslate.setFormula(verifySpecGUI);
-			WorkSpace.getLog().info(verificationController.translateToPROMELA(verifySpecGUI.getRoot()));
+			WorkSpace.getLog().info(verificationController.translateToPROMELA(verifySpecGUI.getRoot().getSelectedItem().toString()));
 			WorkSpace.getLog().debug("Router->create pml file ");
+			
 			try {
 				PrintWriter writer;
 				writer = new PrintWriter(RunSpin.fileslocation+WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
-			    writer.println(verificationController.translateToPROMELA(verifySpecGUI.getRoot()));
+			    writer.println(verificationController.translateToPROMELA(verifySpecGUI.getRoot().getSelectedItem().toString()));
 			    writer.close();
 			} catch (FileNotFoundException | UnsupportedEncodingException e2) {
 				// TODO Auto-generated catch block
@@ -197,7 +152,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
-		
+			ResultGui rs=new ResultGui();
+			rs.setVisible(true);
+			VerificationController.showResults(rs);
+			showResults(rs);	
 			/*if (WorkSpace.getLog().isDebug()==false){
 			WorkSpace.getLog().debug("start run script in SPIN");
 			try {
@@ -217,8 +175,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			e1.printStackTrace();
 		}
 			}*/
-
-				
+			}
 			break;
 
 		case("AddScreen"):
@@ -230,18 +187,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 		break;
-		
-
 		case("ShowResults"):
-			ResultGui rs=new ResultGui();
-		rs.setVisible(true);
-		for(int i=0;i<WorkSpace.getReqlist().size();i++){
-		if(WorkSpace.getReqlist().get(i).isSelected())
-		{
-			rs.addToResult(WorkSpace.getReqlist().get(i).getrID(),WorkSpace.getReqlist().get(i).getReq(),
-					WorkSpace.getReqlist().get(i).getResult());
-			}
-		}
+			ResultGui rs1=new ResultGui();
+			rs1.setVisible(true);
+			VerificationController.showResults(rs1);
 		break;
 		case("_save_add_screen"):
 			screen = new Screen();
@@ -396,6 +345,15 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				break;
 		}
 
+	}
+
+	private void showResults(ResultGui rs) {
+		// TODO Auto-generated method stub
+		
+	}
+	private void loadVerifySpecGUI() {
+		// TODO Auto-generated method stub
+		
 	}
 	public OnOfGUI getOnOfGUI() {
 		return onOfGUI;

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 
 import our.Utils.Promela;
 import Model.MyAction;
@@ -23,6 +24,8 @@ import Model.RequirementList;
 import Model.Screen;
 import Model.WorkSpace;
 import Model.screenInterface;
+import ToolGUI.ResultGui;
+import ToolGUI.VerifySpecGUI;
 
 public class VerificationController implements ItemListener {
 	private FormulaTranslate formulaTranslate = new FormulaTranslate(); 
@@ -359,6 +362,72 @@ private void initialize(){
 			WorkSpace.getLog().debug(RequirementList.getReqlist().get(8).getReq());
 		break;
 		}
+	}
+	public static void buildVerifySpecGUI(VerifySpecGUI verifySpecGUI) {
+		String st="";
+		//req 1
+		 st=WorkSpace.getReqlist().get(0).getReq();
+		verifySpecGUI.setReq_pan(new JLabel(st),0);
+		//req 2
+		 st=WorkSpace.getReqlist().get(1).getReq();
+		String [] s=st.split("X");
+		st = s[0];
+		verifySpecGUI.setReq_pan(new JLabel(s[0]),1);
+		verifySpecGUI.setReq_pan(verifySpecGUI.getReq2ScreenCombo(),1);
+		verifySpecGUI.setReq_pan(new JLabel(s[1]),1);
+		//req 3
+		 st=WorkSpace.getReqlist().get(2).getReq();			 
+		 s=st.split("X");
+		 verifySpecGUI.setReq_pan(new JLabel(s[0]),2);
+		 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3ScreenICombo(),2);
+		verifySpecGUI.setReq_pan(new JLabel(s[1]),2);
+		 verifySpecGUI.setReq_pan(verifySpecGUI.getReq3ScreenJCombo(),2);
+		 verifySpecGUI.setReq_pan(new JLabel(s[2]),2);
+		 verifySpecGUI.setReq_pan(verifySpecGUI.getreq2ChoosParams(),2);
 
-}
+		 
+		 st=WorkSpace.getReqlist().get(3).getReq();			 
+		 verifySpecGUI.setReq_pan(new JLabel(st),3);
+		 
+		 st=WorkSpace.getReqlist().get(4).getReq();	
+		 verifySpecGUI.setReq_pan(new JLabel(st),4);
+		 
+		 st=WorkSpace.getReqlist().get(5).getReq();	
+		 s=st.split("X");
+		 verifySpecGUI.setReq_pan(new JLabel(s[0]),5);
+		 verifySpecGUI.setReq_pan(verifySpecGUI.getreq6ChoosParams(),5);
+		 verifySpecGUI.setReq_pan(new JLabel(s[1]),5);
+		 verifySpecGUI.setReq_pan(verifySpecGUI.getReq6ScreenJComb(),5);
+		 verifySpecGUI.setReq_pan(new JLabel(s[2]),5);
+		
+		 st=WorkSpace.getReqlist().get(6).getReq();	
+		 verifySpecGUI.setReq_pan(new JLabel(st),6);
+		 
+		 st=WorkSpace.getReqlist().get(7).getReq();	
+		 verifySpecGUI.setReq_pan(new JLabel(st),7);
+	// st=WorkSpace.getReqlist().get(6).getReq();	
+
+	WorkSpace.getLog().debug("Router->verifiy Spec case");
+	}
+	public static boolean[] getSelectedReq() 
+	{
+		int size=WorkSpace.getReqlist().size();
+		boolean [] arr=new boolean[size];
+		for(int i=0;i<size;i++)
+		{
+		arr[i]=WorkSpace.getReqlist().get(i).isSelected();
+		}
+		return arr;
+	}
+
+	public static void showResults(ResultGui rs) {
+		for(int i=0;i<WorkSpace.getReqlist().size();i++){
+		if(WorkSpace.getReqlist().get(i).isSelected())
+		{
+			rs.addToResult(WorkSpace.getReqlist().get(i).getrID(),WorkSpace.getReqlist().get(i).getReq(),
+					WorkSpace.getReqlist().get(i).getResult());
+			}
+		}
+		
+	}
 }

@@ -4,6 +4,7 @@ mtype = { BoPo_MainSreen,SignIn,changeParamUserName,changeParamEmail,enterWuser,
 mtype state=SignIn;
 byte username=Empty;
 byte email=Empty;
+ltl r3 {!(state==SignIn)  U (!((state==SignIn) -> ((state==changeParmX)U(state==BoPo_MainSreen))))}
 ltl r3 {[]((state==SignIn)->((state==SignIn)U(state!=SignIn)&&(!(state!=changeParamUserName U(state==BoPo_MainSreen)))))}
 active proctype vm()
 {

@@ -18,10 +18,27 @@ import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 
 import Controller.ScreenController;
+<<<<<<< HEAD
+import Controller.VerificationController;
+import Controller.FormulaTranslate;
+
+import java.awt.event.ActionEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.JToggleButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
+=======
 import java.awt.event.ActionEvent;
 
+>>>>>>> 15fce5d45081af423929ea7f0cdb2f12c114588f
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListener {
 	private    JButton btnRun,btnCancel;
@@ -41,6 +58,8 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 	private ArrayList<String> req6ChoosenParam;
 	private	ChoosenParamtersGUI choosparamGui = new ChoosenParamtersGUI();
 	private	ChoosenParamtersGUI req6choosparamGui = new ChoosenParamtersGUI();
+	private JLabel[]  exception=new JLabel[reqNum];
+	private Border temp;
 	public VerifySpecGUI()  {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -52,11 +71,11 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		
 		 btnRun = new JButton("Run");
 		btnRun.setActionCommand("Run_verifectaion");
-		btnRun.setBounds(66, 459, 113, 23);
+		btnRun.setBounds(67, 571, 113, 23);
 		getContentPane().add(btnRun);
 		
 		 btnCancel = new JButton("cancel");
-		btnCancel.setBounds(209, 459, 107, 23);
+		btnCancel.setBounds(224, 571, 107, 23);
 		getContentPane().add(btnCancel);
 		
 		JLabel lblVerifySpec = new JLabel("<Spec name> - Verify spec");
@@ -82,6 +101,46 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		root.setBounds(138, 67, 148, 23);
 		getContentPane().add(root);
 		
+		JLabel label_1 = new JLabel("New label \\n fssdfsexception");
+		label_1.setForeground(Color.RED);
+		label_1.setBounds(23, 546, 541, 14);
+		getContentPane().add(label_1);
+		
+		JLabel label = new JLabel("New label \\n fssdfsexception");
+		label.setForeground(Color.RED);
+		label.setBounds(23, 531, 541, 14);
+		getContentPane().add(label);
+		
+		JLabel label_2 = new JLabel("New label \\n fssdfsexception");
+		label_2.setForeground(Color.RED);
+		label_2.setBounds(23, 517, 541, 14);
+		getContentPane().add(label_2);
+		
+		JLabel label_3 = new JLabel("New label \\n fssdfsexception");
+		label_3.setForeground(Color.RED);
+		label_3.setBounds(23, 506, 541, 14);
+		getContentPane().add(label_3);
+		
+		JLabel label_4 = new JLabel("New label \\n fssdfsexception");
+		label_4.setForeground(Color.RED);
+		label_4.setBounds(23, 492, 541, 14);
+		getContentPane().add(label_4);
+		
+		JLabel label_5 = new JLabel("New label \\n fssdfsexception");
+		label_5.setForeground(Color.RED);
+		label_5.setBounds(23, 481, 541, 14);
+		getContentPane().add(label_5);
+		
+		JLabel label_6 = new JLabel("New label \\n fssdfsexception");
+		label_6.setForeground(Color.RED);
+		label_6.setBounds(23, 467, 541, 14);
+		getContentPane().add(label_6);
+		
+		JLabel lblreqscreenIsEmpty = new JLabel("*req2-screen is Empty");
+		lblreqscreenIsEmpty.setForeground(Color.RED);
+		lblreqscreenIsEmpty.setBounds(23, 456, 541, 14);
+		getContentPane().add(lblreqscreenIsEmpty);
+		
 		choosparamGui.setOklistner(this);
 		req2ChoosParams = new JButton("set of parameters");
 		req2ChoosParams.addActionListener(new ActionListener() {
@@ -99,6 +158,7 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 			}
 		});
 	}
+
 	private void createJPanel() {
 		
 		for(int i=0;i<reqNum;i++)
@@ -142,7 +202,7 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		req3CombboParam=new JComboBox();
 		req6ComboScreen=new JComboBox();
 		root=new JComboBox();
-		
+
 	}
 	private void prepareScreenCombo() {
 		String st [] =ScreenController.getScreenNameNames();
@@ -165,7 +225,6 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		cbm=new DefaultComboBoxModel(st1);
 		req3CombboParam.setModel(cbm);
 		req3CombboParam.setSelectedItem(null);
-		
 	}
 
 	public void setReq_pan(Container req_con,int index ) {
@@ -248,8 +307,8 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 	public ArrayList<String> getChoosenParamreq6() {
 		return req6ChoosenParam;
 	}
-	public String getRoot() {
-		return root.getSelectedItem().toString();
+	public JComboBox getRoot() {
+			return root;
 	}
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {

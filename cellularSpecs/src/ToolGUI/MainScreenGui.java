@@ -105,7 +105,6 @@ public class MainScreenGui extends JFrame  {
 			btnOpen.addActionListener(listenForOperation);
 			btnRunVerification.addActionListener(listenForOperation);
 			btnShowresults.addActionListener(listenForOperation);
-			btnRunVerification.addActionListener(listenForOperation);
 	}
 		public void addMainScreenMouseListener(MouseListener WorkSpaceController){       
 		
