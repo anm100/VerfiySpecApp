@@ -96,8 +96,8 @@ public static  String translateReq8a(String parameterName,ArrayList<String> acti
 {
 	String st="";
 	WorkSpace.getReqlist().get(7).setltlCount();
-	 st="ltl "+" req8"+WorkSpace.getReqlist().get(7).getLtlCount()+"{[]("+getTranslateReq8a(parameterName,action)+")}\n";
-	 System.out.println("------------"+st);
+	 st="ltl "+" req8_"+WorkSpace.getReqlist().get(7).getLtlCount()+"{[]("+getTranslateReq8a(parameterName,action)+")}\n";
+	 System.out.print(st);
 	 st+=translateReq8b(parameterName,action);
 	 WorkSpace.getLog().debug(st);
 	 return st;
@@ -149,7 +149,7 @@ public static  String translateReq8b(String paramterName,ArrayList<String> actio
 	 return st;
 }
 private static String getTranslateReq8b(String paramterNam,ArrayList<String> action) {
-	String st1="";
+	String st1="";	
 	for(int j=0;j<action.size();j++)
 	{
 		String[] st=action.get(j).split("=");
@@ -171,7 +171,7 @@ private   static String trans8b(ArrayList<String> action)
 	for(int i=0;i<action.size();i++)
 	{
 	String[] st=action.get(i).split("=");
-	for(int j=0;j<changeStatesList.size();i++)
+	for(int j=0;j<changeStatesList.size();j++)
 	{
 		if((changeStatesList.get(j).endsWith(st[0]+ElementType.getOff()))
 			||(changeStatesList.get(j).endsWith(st[0]+ElementType.getOn())))
