@@ -39,25 +39,31 @@ import java.awt.event.FocusEvent;
 
 public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListener {
 	private    JButton btnRun,btnCancel;
-	private static int reqNum=9;
+	private static int reqNum=8;
 	private int inti=162,add=28;
 	private int inti2=189,add2=28;
 	private  JCheckBox[] req =new JCheckBox[reqNum];
 	private JCheckBox reqAll;
 	private String [] st;
-	private JComboBox req3ComboScreenI,req3ComboScreenJ,req3CombboParam,req3CombboValue,req8parameterName,req8parameterValue,req2ScreenCombo;
-	private JComboBox req6ComboScreen;
+	private JComboBox req3ComboScreenI,req3ComboScreenJ,req2ScreenCombo;
+	private JComboBox req6ComboScreen,req8ComboParams;
 	private JButton req6ChoosParams;
-	private JButton req2ChoosParams;
+	private JButton req3ChoosParams;
+	private JButton req8ChoosParams;
 	private JPanel[] req_pan=new JPanel[reqNum];;
 	private JComboBox root;
-	private ArrayList<String> ChoosenParam;
-	private ArrayList<String> req6ChoosenParam;
+	private ArrayList<String> ChoosenParam=null;
+	private ArrayList<String> req6ChoosenParam=null;
+	private ArrayList<String> req8ChoosenParam=null;
 	private	ChoosenParamtersGUI choosparamGui = new ChoosenParamtersGUI();
 	private	ChoosenParamtersGUI req6choosparamGui = new ChoosenParamtersGUI();
+	private ParamManagment req8choosparamGui=new ParamManagment();
+	private 	Border b,but;
+//	private ActionManagment req8actionMangement=new ActionManagment(paramName, data, toSwitch);
 	private JLabel[]  exception=new JLabel[reqNum];
 	private Border temp;
 	public VerifySpecGUI()  {
+	
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		intitCombo();
@@ -65,12 +71,14 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		createCheckBox();
 		createJPanel();
 		setSize(900,650);
+		disableAll();
+		 b=root.getBorder();
 		
 		 btnRun = new JButton("Run");
 		btnRun.setActionCommand("Run_verifectaion");
 		btnRun.setBounds(67, 571, 113, 23);
 		getContentPane().add(btnRun);
-		
+		 but=btnRun.getBorder();
 		 btnCancel = new JButton("cancel");
 		btnCancel.setBounds(224, 571, 107, 23);
 		getContentPane().add(btnCancel);
@@ -139,21 +147,34 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		getContentPane().add(lblreqscreenIsEmpty);
 		
 		choosparamGui.setOklistner(this);
-		req2ChoosParams = new JButton("set of parameters");
-		req2ChoosParams.addActionListener(new ActionListener() {
+	
+		req3ChoosParams.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				choosparamGui.setVisible(true);
 				choosparamGui.setActionCommand("_set_params_ok");
 			}
 		});
 		req6choosparamGui.setOklistner(this);
-		req6ChoosParams = new JButton(" list of parameters");
+		req8choosparamGui.setOKlistenert(this);
 		req6ChoosParams.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				req6choosparamGui.setVisible(true);
 				req6choosparamGui.setActionCommand("_set_params_req6_ok");
 			}
 		});
+		req8ChoosParams.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+		
+				req8choosparamGui.getFrame().setVisible(true);
+				req8choosparamGui.setActionCommand("_set_params_req8_ok");
+			}
+		});
+		
+	}
+
+	private void disableAll() {
+
 	}
 
 	private void createJPanel() {
@@ -173,32 +194,62 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		
 		reqAll=new JCheckBox("check all");
 		reqAll.setBackground(Color.WHITE);
-		reqAll.addItemListener(this);
+	//	reqAll.addItemListener(this);
 		reqAll.setBounds(5, 162,122, 23);
 		reqAll.setActionCommand("reqAll");
 		getContentPane().add(reqAll);
-		inti=inti+add;
-		
-	
+		inti=inti+add;	
 		for(int i=0;i<reqNum;i++)
 		{
 			req[i]=new JCheckBox("");
 			req[i].setBackground(Color.WHITE);
 			req[i].addItemListener(this);
 			req[i].setBounds(5, inti,25, 23);
+			req[i].setEnabled(false);
 			req[i].setActionCommand("req"+(i+1));
+			req[i].addItemListener(this);
 			getContentPane().add(req[i]);
 			inti=inti+add;
 		}
+		req[0].setEnabled(true);
+		req[1].setEnabled(true);
+		if(ScreenController.getScreenNameNames().length>=2
+			&&ScreenController.getparams().length>0 )
+		{
+		req[2].setEnabled(true);
+		req[5].setEnabled(true);
+		}
+		if(ScreenController.getparams().length>0 )
+		{
+		req[3].setEnabled(true);
+		req[4].setEnabled(true);
+		req[6].setEnabled(true);
+		req[7].setEnabled(true);
+		}
+
+		
+		
 	}
 	private void intitCombo() {
 		req3ComboScreenJ=new  JComboBox();
+		req3ComboScreenJ.setEnabled(false);
 		req3ComboScreenI=new  JComboBox();
+		req3ComboScreenI.setEnabled(false);
 		req2ScreenCombo= new  JComboBox();
-		req3CombboValue=new JComboBox();
-		req3CombboParam=new JComboBox();
+		req2ScreenCombo.setEnabled(false);
+
 		req6ComboScreen=new JComboBox();
+		req6ComboScreen.setEnabled(false);
+		req8ComboParams=new  JComboBox();
+		req8ComboParams.setEnabled(false);
+		
 		root=new JComboBox();
+		req3ChoosParams = new JButton("set of parameters");
+		req6ChoosParams = new JButton("list of parameters");
+		req8ChoosParams = new JButton("a set of params");
+		req3ChoosParams.setEnabled(false);
+		req6ChoosParams.setEnabled(false);
+		req8ChoosParams.setEnabled(false);
 
 	}
 	private void prepareScreenCombo() {
@@ -209,9 +260,11 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		 cbm=new DefaultComboBoxModel(st);
 		req3ComboScreenI.setModel(cbm);
 		req3ComboScreenI.setSelectedItem(null);
+		
 		 cbm=new DefaultComboBoxModel(st);
 		req3ComboScreenJ.setModel(cbm);
 		req3ComboScreenJ.setSelectedItem(null);
+		req3ComboScreenJ.setEnabled(false);
 		 cbm=new DefaultComboBoxModel(st);
 		root.setModel(cbm);
 		root.setSelectedItem(null);
@@ -220,8 +273,10 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		 req6ComboScreen.setSelectedItem(null);
 		String st1 [] =ScreenController.getparams();
 		cbm=new DefaultComboBoxModel(st1);
-		req3CombboParam.setModel(cbm);
-		req3CombboParam.setSelectedItem(null);
+		 cbm=new DefaultComboBoxModel(st);
+		 req8ComboParams.setModel(cbm);
+		 req8ComboParams.setSelectedItem(null);
+
 	}
 
 	public void setReq_pan(Container req_con,int index ) {
@@ -237,24 +292,88 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 	public JComboBox getReq3ScreenJCombo() {
 		return req3ComboScreenJ;
 	}
-	public JComboBox getReq3CombboParam() {
-		return req3CombboParam;
-	}
-
-	public JComboBox getReq3CombboValue() {
-		return req3CombboValue;
-	}
 	public JComboBox getReq6ScreenJComb() {
-		return req6ComboScreen;
+		return this.req6ComboScreen;
 	}
 	public JButton getreq6ChoosParams() {
 		return req6ChoosParams;
 	}
+	public  JButton getreq8ChoosParams()
+	{
+		return req8ChoosParams;
+	}
+	public  JComboBox getreq8ScreenCombo()
+	{
+		return req8ComboParams;
+	}
 	public JButton getreq2ChoosParams() {
-		return req2ChoosParams;
+		return req3ChoosParams;
 	}
 	//=========================================
+	public void setReq3ComboScreenIBoredr(Boolean b) {
+		if(b)
+		this.req3ComboScreenI.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));	
+		else
+			this.req3ComboScreenI.setBorder(this.b);
+	}
+	public void setReq3ComboScreenJBoredr(Boolean b) {
+		if(b)
+		this.req3ComboScreenJ.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));	
+		else
+			this.req3ComboScreenJ.setBorder(this.b);
+	}
+	public void setReq2ComboScreenIBoredr(boolean c) {
+		if(c)
+		this.req2ScreenCombo.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));	
+		else
+			this.req2ScreenCombo.setBorder(this.b);
+		
+	}
+	public void setReq6ComboScreenIBoredr(boolean c) {
+		if(c)
+		this.req6ComboScreen.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));	
+		else
+			this.req6ComboScreen.setBorder(this.b);
+		
+	}
+	
+	public void setRootComboScreenBoreder(boolean c) {
+		if(c)
+		this.root.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));	
+		else
+			this.root.setBorder(this.b);
+		
+	}
 	//=========================================
+	public void setReq2button(boolean c) {
+		if(c)
+		this.req3ChoosParams.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));	
+		else
+			this.req3ChoosParams.setBorder(this.b);
+		
+	}
+	public void setReq6button(boolean c) {
+		if(c)
+		this.req6ChoosParams.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));	
+		else
+			this.req6ChoosParams.setBorder(this.b);
+		
+	}
+	public void setReq8button(boolean c) {
+		if(c)
+		this.req8ChoosParams.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));	
+		else
+			this.req8ChoosParams.setBorder(this.b);
+		
+	}
+	public void setReq8ComboParams(boolean c) {
+		if(c)
+		this.req8ComboParams.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));	
+		else
+			this.req8ComboParams.setBorder(this.b);
+		
+	}
+	//============================================
 	public void setReq2ScreenCombo(String [] req2ScreenCombo) {
 		
 		DefaultComboBoxModel cbm=new DefaultComboBoxModel(req2ScreenCombo);
@@ -270,17 +389,29 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		DefaultComboBoxModel cbm =new DefaultComboBoxModel(req3ComboScreenJ);
 		this.req3ComboScreenJ.setModel(cbm);
 	}
-	public void setReq3CombboParam(String [] req3CombboParam) {
-		DefaultComboBoxModel cbm=new DefaultComboBoxModel();
-		this.req3CombboParam.setModel(cbm);
+	//=======================================
+	public void enableComboScreenJ()
+	{
+	req3ComboScreenJ.setEnabled(true);
 	}
-	public void setReq3CombboValue(String[] req3CombboValue) {
-		DefaultComboBoxModel cbm=new DefaultComboBoxModel();
-		this.req3CombboValue.setModel(cbm);
+	public void enableComboScreenI()
+	{
+	req3ComboScreenI.setEnabled(true);
 	}
 	//=======================================
-	//=======================================
-
+	public void enableReq3()
+	{
+	req[2].setEnabled(true);
+	req[5].setEnabled(true);
+	}
+	public void enableReq()
+	{
+	req[3].setEnabled(true);
+	req[4].setEnabled(true);
+	req[6].setEnabled(true);
+	req[7].setEnabled(true);
+	}
+	
 	private boolean IsSelect(ItemEvent e) {
         if(e.getStateChange() == ItemEvent.SELECTED)
     		return true;
@@ -298,33 +429,143 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		}
 		return b;
 	}
+	public  int gerselectedNum() {
+		int count=0;
+		for(int i=0;i<req.length;i++)
+		{
+			if(req[i].isSelected())
+				count++;
+		}
+		return count;
+	}
 	public ArrayList<String> getChoosenParam() {
 		return ChoosenParam;
 	}
 	public ArrayList<String> getChoosenParamreq6() {
 		return req6ChoosenParam;
 	}
+	public ArrayList<String> getChoosenParamreq8() {
+		return req8ChoosenParam;
+	}
 	public JComboBox getRoot() {
 			return root;
 	}
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
-	if(((JCheckBox)(arg0.getItemSelectable())).getActionCommand().equals(reqAll.getActionCommand()))
-	{
-		if(ItemEvent.SELECTED==arg0.getStateChange())
+		JCheckBox bo=(JCheckBox)(arg0.getItemSelectable());
+		String st=bo.getActionCommand();
+		switch(st)
 		{
-		for(int i=0;i<req.length;i++)
-			 if(!req[i].isSelected())
-				 req[i].setSelected(true);
+		case "reqAll":
+
+			break;
+		case "req1":
+			if(bo.isSelected())
+			{
+				//req[0].setSelected(true);
+			}
+			else
+			{
+				//req[0].setSelected(false);
+			}
+			break;
+		case "req2":
+			if(ItemEvent.SELECTED==arg0.getStateChange())
+			{
+				req2ScreenCombo.setEnabled(true);
+				
+			}
+			else
+			{
+				req2ScreenCombo.setEnabled(false);
+				req2ScreenCombo.setBorder(b);
+			}
+			break;
+		case "req3":
+			if(ItemEvent.SELECTED==arg0.getStateChange())
+			{
+					req3ComboScreenI.setEnabled(true);
+					req3ComboScreenJ.setEnabled(true);
+					req3ChoosParams.setEnabled(true);
+			}
+			else
+			{
+					req3ComboScreenI.setEnabled(false);
+					req3ComboScreenJ.setEnabled(false);
+					req3ChoosParams.setEnabled(false);
+			}
+			break;
+		case "req4":
+			if(ItemEvent.SELECTED==arg0.getStateChange())
+			{
+				
+			}
+			else
+			{
+				//req[3].setSelected(false);
+			}
+			break;
+		case "req5":
+			if(ItemEvent.SELECTED==arg0.getStateChange())
+			{
+				//req[4].setSelected(true);
+			}
+			else
+			{
+				//req[4].setSelected(false);
+			}
+			break;
+		case "req6":
+			if(ItemEvent.SELECTED==arg0.getStateChange())
+			{
+				req6ComboScreen.setEnabled(true);
+				req6ChoosParams.setEnabled(true);
+			}
+			else
+			{
+				req6ComboScreen.setEnabled(false);
+				req6ChoosParams.setEnabled(false);
+			}
+			break;
+		case "req7":
+			if(ItemEvent.SELECTED==arg0.getStateChange())
+			{
+				//req[6].setSelected(true);
+			}
+			else
+			{
+				//req[6].setSelected(false);
+			}
+			break;
+		case "req8":
+			if(ItemEvent.SELECTED==arg0.getStateChange())
+			{
+				req8ChoosParams.setEnabled(true);
+				req8ComboParams.setEnabled(true);
+			}
+			else
+			{
+				req8ChoosParams.setEnabled(false);
+				req8ComboParams.setEnabled(false);
+			}
+			break;
 		}
+	if(gerselectedNum()==reqNum)
+			reqAll.setSelected(true);
 		else
-		{
+			reqAll.setSelected(false);
+		
+	}
+	private void checkAll(boolean b) {
+		if(reqAll.isSelected()!=b)
+		reqAll.setSelected(b);
 		for(int i=0;i<req.length;i++)
-			if(req[i].isSelected())
-				req[i].setSelected(false);	
+		{
+			if(req[i].isSelected()!=b)
+				req[i].setSelected(b);
 		}
 	}
-	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -340,6 +581,12 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 			req6choosparamGui.setVisible(false);
 		 req6ChoosenParam=(ArrayList<String>) (req6choosparamGui.getparams());	
 			break;
+		case ("_set_params_req8_ok"):
+			//addConditionToTextArea(switchTo);
+			System.out.println("aaa");
+			req8choosparamGui.getFrame().setVisible(true);
+		 req8ChoosenParam=(ArrayList<String>) (req6choosparamGui.getparams());	
+			break;
 
 		}
 	}
@@ -347,6 +594,7 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		btnRun.addActionListener(verifySpecGUIListener);
 
 	}
+
 }
 
 

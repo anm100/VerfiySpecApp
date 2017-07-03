@@ -29,8 +29,8 @@ public class appTest {
 		WorkSpaceController.setup("test");
 		AddParamterGUI gui=	new AddParamterGUI();
 		gui.setVisible(true);
-		ParamManagment p = new ParamManagment();
-		p.getFrame().setVisible(true);
+		//ParamManagment p = new ParamManagment();
+		//p.getFrame().setVisible(true);
 	//	gui.setAddParamListener(Router.getInstance());
 			
 	}

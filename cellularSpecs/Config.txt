@@ -41,7 +41,7 @@
     },
     {
       "ID": "req8",
-      "name": "All parameters always must be consistent-Check Dependency between value of X and a set of params",
+      "name": "All parameters always must be consistent-Check Dependency between value of X and a X",
       "formula": " "
     },
   ]

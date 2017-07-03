@@ -50,8 +50,8 @@ public class debugingGUI extends JFrame{
 		public void actionPerformed(ActionEvent arg0) {
 			BulidSpec.build();
 			WorkSpaceController.createSpecGUI();
-			ParamManagment p = new ParamManagment();
-			p.getFrame().setVisible(true);
+			//ParamManagment p = new ParamManagment();
+			//p.getFrame().setVisible(true);
 		}
 	});
 	button.setBounds(11, 49, 273, 41);

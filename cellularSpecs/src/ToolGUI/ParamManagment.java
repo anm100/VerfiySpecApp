@@ -55,7 +55,7 @@ import java.awt.Frame;
  * @author Muhamad Igbaria
  *
  */
-public class ParamManagment implements ActionListener  {
+public class ParamManagment extends JFrame implements ActionListener  {
 
 	/**
 	 * appointments frame
@@ -85,7 +85,7 @@ public class ParamManagment implements ActionListener  {
 	 *            : Models Patient instance
 	 */
 	public ParamManagment() {
-
+		setVisible(true);
 		initialize();
 	}
 
@@ -145,6 +145,7 @@ public class ParamManagment implements ActionListener  {
 		apps_scrollPane.setBounds(10, 87, 403, 268);
 		app.getContentPane().add(apps_scrollPane);
 
+		
 		String[] doc_columnNames = { "Paramter name","Paramter value"};
 		Object[][] doc_data = {};
 		apps_table = new JTable();
@@ -253,4 +254,12 @@ public class ParamManagment implements ActionListener  {
 		
 		}
 	}
+
+	public void setActionCommand(String btnNewButton) {
+		this.btnSave.setActionCommand(btnNewButton);
+	}
+
+	public void setOKlistenert(VerifySpecGUI verifySpecGUI) {
+		btnSave.addActionListener((ActionListener) verifySpecGUI);
+	    }	
 }
