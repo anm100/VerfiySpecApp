@@ -42,7 +42,7 @@ public class ListTypeGUI extends JFrame {
 		
 		JLabel lblOnoff = new JLabel(screenName+"-List Element");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
-		lblOnoff.setBounds(20, 11, 361, 36);
+		lblOnoff.setBounds(0, -6, 361, 36);
 		getContentPane().add(lblOnoff);
 		
 		JLabel lblName = new JLabel("Element Name:");
@@ -122,6 +122,10 @@ public class ListTypeGUI extends JFrame {
 		JLabel lblParameterName = new JLabel("Parameter name");
 		lblParameterName.setBounds(20, 67, 89, 14);
 		getContentPane().add(lblParameterName);
+		
+		JButton button_1 = new JButton("Delete Element");
+		button_1.setBounds(261, -5, 120, 25);
+		getContentPane().add(button_1);
 		setSize(501, 378);
 		
 		comboBox.addPopupMenuListener(new PopupMenuListener() {
@@ -155,6 +159,4 @@ public class ListTypeGUI extends JFrame {
 	public String getScreenName() {
 		return ScreenName;
 	}
-	
-
 }

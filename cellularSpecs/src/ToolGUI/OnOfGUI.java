@@ -102,7 +102,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		getContentPane().add(lblOnoff);
 		
 		JLabel lblName = new JLabel("Element name:");
-		lblName.setBounds(30, 68, 78, 14);
+		lblName.setBounds(30, 68, 110, 14);
 		getContentPane().add(lblName);
 		
 		JLabel lblDefaulval = new JLabel("DefaultVal:");
@@ -115,7 +115,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				lblNewLabel_2.setVisible(false);
 			}
 		});
-		elementName.setBounds(118, 65, 152, 20);
+		elementName.setBounds(138, 60, 152, 20);
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
 
@@ -135,7 +135,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				}
 			}
 		});
-		ComboparameterNames.setBounds(118, 89, 152, 22);
+		ComboparameterNames.setBounds(138, 84, 152, 22);
 		getContentPane().add(ComboparameterNames);
 	
 		
@@ -187,8 +187,8 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		});
 		ImageIcon imageForOne = new ImageIcon(getClass().getResource("../add.png"));
 		
-		JLabel lblNewLabel_1 = new JLabel("Parameter name");
-		lblNewLabel_1.setBounds(29, 93, 79, 14);
+		JLabel lblNewLabel_1 = new JLabel("Parameter name:");
+		lblNewLabel_1.setBounds(29, 93, 110, 14);
 		getContentPane().add(lblNewLabel_1);
 		setSize(606, 585);
 			
@@ -203,19 +203,19 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			ParameterName.setForeground(Color.GRAY);
 			ParameterName.setText("parameter name");
 			ParameterName.setVisible(true);
-			ParameterName.setBounds(280, 90, 152, 20);
+			ParameterName.setBounds(300, 86, 152, 20);
 			ParameterName.setToolTipText("add new Parameter");
 			
 
 			 lblNewLabel_2.setVisible(false);
 			lblNewLabel_2.setForeground(Color.RED);
-			lblNewLabel_2.setBounds(280, 68, 184, 14);
+			lblNewLabel_2.setBounds(300, 64, 184, 14);
 			getContentPane().add(lblNewLabel_2);
 			
 			 
 			 lblNewLabel_3.setVisible(false);
 			lblNewLabel_3.setForeground(Color.RED);
-			lblNewLabel_3.setBounds(281, 113, 194, 14);
+			lblNewLabel_3.setBounds(310, 112, 194, 14);
 			getContentPane().add(lblNewLabel_3);
 			String[] doc_columnNames = { "ON->OFF","OFF->ON"};
 				
@@ -375,6 +375,14 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				  						 
 				  						 exception = new JTextArea();
 				  						 scrollPane.setViewportView(exception);
+				  						 
+				  						 JButton button_4 = new JButton("Delete Element");
+				  						 button_4.addActionListener(new ActionListener() {
+				  						 	public void actionPerformed(ActionEvent arg0) {
+				  						 	}
+				  						 });
+				  						 button_4.setBounds(412, 18, 159, 25);
+				  						 getContentPane().add(button_4);
 				  						 button.addActionListener(this);
 			ParameterName.addFocusListener(new FocusListener() {
 		

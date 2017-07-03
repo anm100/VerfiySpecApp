@@ -12,14 +12,14 @@ public class ResultGui extends JFrame {
 	public ResultGui()
 	{
 		getContentPane().setLayout(null);
-		setSize(650,380);
+		setSize(1062,602);
 		
 		JLabel lblNewLabel = new JLabel("Verifcation Results:");
 		lblNewLabel.setBounds(28, 11, 291, 14);
 		getContentPane().add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(28, 43, 569, 243);
+		scrollPane.setBounds(28, 43, 1002, 456);
 		getContentPane().add(scrollPane);
 		txtResult = new JTextArea();
 		scrollPane.setViewportView(txtResult);

@@ -1,6 +1,7 @@
 package ToolGUI;
 
 import javax.swing.JFrame;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -9,29 +10,35 @@ import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+
 import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 
 import Controller.ScreenController;
 import Controller.VerificationController;
 import Model.ElementType;
+import Model.WorkSpace;
 import Controller.FormulaTranslate;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
+
 import java.awt.event.ActionEvent;
 
 import javax.swing.JPanel;
+
 import java.awt.FlowLayout;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
@@ -63,6 +70,7 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 //	private ActionManagment req8actionMangement=new ActionManagment(paramName, data, toSwitch);
 	private Border temp;
 	public VerifySpecGUI()  {
+		setTitle(WorkSpace.getInstance().getWorkSpaceName()+"- Verify spec");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -70,13 +78,13 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		prepareScreenCombo();
 		createCheckBox();
 		createJPanel();
-		setSize(900,650);
+		setSize(900,553);
 		disableAll();
 		 b=root.getBorder();
 		
 		 btnRun = new JButton("Run");
 		btnRun.setActionCommand("Run_verifectaion");
-		btnRun.setBounds(67, 571, 113, 23);
+		btnRun.setBounds(299, 429, 113, 23);
 		getContentPane().add(btnRun);
 		 but=btnRun.getBorder();
 		 btnCancel = new JButton("cancel");
@@ -93,10 +101,10 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 			root.setBorder(b);
 		 	}
 		 });
-		btnCancel.setBounds(224, 571, 107, 23);
+		btnCancel.setBounds(456, 429, 107, 23);
 		getContentPane().add(btnCancel);
 		
-		JLabel lblVerifySpec = new JLabel("<Spec name> - Verify spec");
+		JLabel lblVerifySpec = new JLabel(WorkSpace.getInstance().getWorkSpaceName()+"Verify spec");
 		lblVerifySpec.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblVerifySpec.setBounds(23, 0, 263, 45);
 		getContentPane().add(lblVerifySpec);

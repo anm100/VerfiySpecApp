@@ -88,7 +88,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		NotEmpty_To_Empty_Action=new ArrayList<String>();
 		Empty_To_NotEmpty_Action=new ArrayList<String>();
 		this.ScreenName=ScreenName; 
-		setTitle("ON-OFF");
+		setTitle(ScreenName+"- Empty/NotEmpty");
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
@@ -99,15 +99,15 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		 lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		JLabel lblOnoff = new JLabel(ScreenName+"- Empty/NotEmpty");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
-		lblOnoff.setBounds(30, 18, 361, 36);
+		lblOnoff.setBounds(34, 14, 361, 36);
 		getContentPane().add(lblOnoff);
 		
 		JLabel lblName = new JLabel("Element name:");
-		lblName.setBounds(30, 68, 78, 14);
+		lblName.setBounds(61, 61, 78, 14);
 		getContentPane().add(lblName);
 		
 		JLabel lblDefaulval = new JLabel("DefaultVal:");
-		lblDefaulval.setBounds(30, 120, 64, 14);
+		lblDefaulval.setBounds(61, 113, 64, 14);
 		getContentPane().add(lblDefaulval);
 		
 		elementName = new JTextField("");
@@ -116,7 +116,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				lblNewLabel_2.setVisible(false);
 			}
 		});
-		elementName.setBounds(118, 65, 152, 20);
+		elementName.setBounds(149, 58, 168, 20);
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
 
@@ -136,7 +136,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				}
 			}
 		});
-		ComboparameterNames.setBounds(118, 89, 152, 22);
+		ComboparameterNames.setBounds(147, 82, 170, 22);
 		getContentPane().add(ComboparameterNames);
 	
 		
@@ -144,7 +144,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		 
 		 btnSave.setActionCommand("_save_EmptyNEmpty");
 			
-		btnSave.setBounds(118, 512, 112, 23);
+		btnSave.setBounds(106, 530, 112, 23);
 		getContentPane().add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -154,16 +154,16 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		 		edRmCon.setVisible(true);
 			}
 		});
-		btnCancel.setBounds(280, 512, 116, 23);
+		btnCancel.setBounds(268, 530, 116, 23);
 		getContentPane().add(btnCancel);
 		rdbtnOff = new JRadioButton(ElementType.getEmpty());
 		rdbtnOff.setSelected(true);
 		setDefaultValue(rdbtnOff.getText());
 		 rdbtnOn = new JRadioButton(ElementType.getNotEmpty());
 		rdbtnOn.setSelected(false);
-		rdbtnOn.setBounds(118, 113, 72, 28);
+		rdbtnOn.setBounds(147, 106, 92, 28);
 		getContentPane().add(rdbtnOn);
-		rdbtnOff.setBounds(192, 113, 78, 28);
+		rdbtnOff.setBounds(238, 106, 79, 28);
 		getContentPane().add(rdbtnOff);
 		ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnOn);
@@ -185,9 +185,9 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		ImageIcon imageForOne = new ImageIcon(getClass().getResource("../add.png"));
 		
 		JLabel lblNewLabel_1 = new JLabel("Parameter name");
-		lblNewLabel_1.setBounds(29, 93, 79, 14);
+		lblNewLabel_1.setBounds(60, 86, 79, 14);
 		getContentPane().add(lblNewLabel_1);
-		setSize(448, 624);
+		setSize(496, 595);
 			
 			ParameterName = new JTextField();
 			ParameterName.addPropertyChangeListener(new PropertyChangeListener() {
@@ -200,19 +200,19 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 			ParameterName.setForeground(Color.GRAY);
 			ParameterName.setText("parameter name");
 			ParameterName.setVisible(true);
-			ParameterName.setBounds(280, 90, 152, 20);
+			ParameterName.setBounds(320, 83, 152, 20);
 			ParameterName.setToolTipText("add new Parameter");
 			
 
 			 lblNewLabel_2.setVisible(false);
 			lblNewLabel_2.setForeground(Color.RED);
-			lblNewLabel_2.setBounds(280, 68, 184, 14);
+			lblNewLabel_2.setBounds(320, 61, 184, 14);
 			getContentPane().add(lblNewLabel_2);
 			
 			 
 			 lblNewLabel_3.setVisible(false);
 			lblNewLabel_3.setForeground(Color.RED);
-			lblNewLabel_3.setBounds(281, 113, 194, 14);
+			lblNewLabel_3.setBounds(321, 106, 194, 14);
 			getContentPane().add(lblNewLabel_3);
 			String[] doc_columnNames = { "Empty->NotEmpty","NotEmpty->Empty"};
 				
@@ -360,6 +360,10 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				  						   textAreaOnToOff.setBounds(349, 443, 190, 50);
 				  						   getContentPane().add(textAreaOnToOff);
 				  						   textAreaOnToOff.setEditable(false);
+				  						   
+				  						   JButton button_4 = new JButton("Delete Element");
+				  						   button_4.setBounds(349, 14, 120, 25);
+				  						   getContentPane().add(button_4);
 				  						   textAreaOnToOff.setVisible(false);
 				  						   textAreaOnToOff.addMouseListener(new MouseAdapter() {
 				  						   	@Override
