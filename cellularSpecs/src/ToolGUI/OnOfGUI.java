@@ -5,6 +5,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
@@ -146,9 +147,13 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
-		 	//	edRmCon=new EditReomveConditionGUI();
-		 		edRmCon.setVisible(true);
+				int choise = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to cancel this appointment setting", "Cancel", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (choise == JOptionPane.YES_OPTION)
+					thisRef.setVisible(false);
 			}
 		});
 		btnCancel.setBounds(348, 512, 116, 23);

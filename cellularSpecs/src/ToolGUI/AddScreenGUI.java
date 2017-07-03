@@ -11,8 +11,11 @@ import java.awt.Dimension;
 import java.awt.Button;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -23,6 +26,8 @@ public class AddScreenGUI extends JFrame {
 	private JTextField ScreenName;
 	private JButton bnSave;
 	private JTextPane description;
+	private AddScreenGUI thisRef=this;
+
 	public AddScreenGUI() {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -61,6 +66,16 @@ public class AddScreenGUI extends JFrame {
 		scrollPane.setViewportView(description);
 		
 		JButton button_2 = new JButton("cancel");
+		button_2.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				int choise = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to cancel this appointment setting", "Cancel", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (choise == JOptionPane.YES_OPTION)
+					thisRef.setVisible(false);
+			}
+		});
 		button_2.setBounds(237, 206, 116, 23);
 		getContentPane().add(button_2);
 		
