@@ -428,7 +428,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	}
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
@@ -438,6 +438,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		{
 			//screenGUI.removeMouseListener(this);
 			//screenGUI.removeMouseMotionListener(this);
+			
 			screenGUI.addScreenListener(this);
 			GetNewLocation=false;
 			WorkSpace.getLog().debug("mouse pressed method -screenGUI name is "+screenGUI.getScreenName());
@@ -474,11 +475,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		//System.out.println(arg0.getSource().getClass().getSimpleName().toString());
 		if(arg0.getSource().getClass().getSimpleName().toString().equals("MainScreenGui") && GetNewLocation==true)
 		{
+			
 			this.cordinateX	=arg0.getX()-4;
 			this.cordinateY	=arg0.getY()-22;
 			screenGUI.setLocation(arg0.getX()-4,arg0.getY()-22);
 		}
-		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI") && GetNewLocation==true)
+		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI") && GetNewLocation==true )
 		{
 			this.cordinateX=cordinateX+arg0.getX();
 			this.cordinateY=cordinateY+arg0.getX();

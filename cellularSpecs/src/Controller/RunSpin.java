@@ -109,7 +109,7 @@ public class RunSpin {
 	private static void createbat(String req) throws IOException {
 
 				String str="cd "+fileslocation+"\n"
-						+"spin -a examplePG.pml\n"
+						+"spin -a "+WorkSpace.getInstance().getWorkSpaceName()+".pml\n"
 						+"gcc -DMEMLIM=1024 -O2 -DXUSAFE -w -o pan pan.c \n"
 						+"pan -m10000  -a -N "+req +">> OutReq.txt \n"
 						+"exit \n";

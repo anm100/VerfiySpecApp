@@ -19,6 +19,7 @@ import javax.swing.JSeparator;
 
 import Controller.ScreenController;
 import Controller.VerificationController;
+import Model.ElementType;
 import Controller.FormulaTranslate;
 
 import java.awt.event.ActionEvent;
@@ -271,9 +272,17 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		 cbm=new DefaultComboBoxModel(st);
 		 req6ComboScreen.setModel(cbm);
 		 req6ComboScreen.setSelectedItem(null);
-		String st1 [] =ScreenController.getparams();
-		cbm=new DefaultComboBoxModel(st1);
-		 cbm=new DefaultComboBoxModel(st);
+		String st1 [] =ScreenController.getParams(ElementType.getOnOffType());
+		String st2[]=new String[2*st1.length];
+		int j=0;
+		for(int i=0;i<st1.length;i++)
+		{
+			st2[j]=st1[i]+"="+ElementType.getOn();
+			st2[j+1]=st1[i]+"="+ElementType.getOff();
+			System.out.println(st1[i]);
+			j+=2;
+		}
+		cbm=new DefaultComboBoxModel(st2);
 		 req8ComboParams.setModel(cbm);
 		 req8ComboParams.setSelectedItem(null);
 
@@ -583,13 +592,16 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 			break;
 		case ("_set_params_req8_ok"):
 			//addConditionToTextArea(switchTo);
-			System.out.println("aaa");
-			req8choosparamGui.getFrame().setVisible(true);
-		 req8ChoosenParam=(ArrayList<String>) (req6choosparamGui.getparams());	
+			req8choosparamGui.getFrame().setVisible(false);
+		 req8ChoosenParam=(ArrayList<String>) (req8choosparamGui.getAppointments());	
 			break;
 
 		}
 	}
+	public ArrayList<String> getReq8ChoosenParam() {
+		return req8ChoosenParam;
+	}
+
 	public   void setVerifySpecGUI(ActionListener verifySpecGUIListener) {
 		btnRun.addActionListener(verifySpecGUIListener);
 

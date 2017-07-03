@@ -215,7 +215,7 @@ public class ParamManagment extends JFrame implements ActionListener  {
 		
 		return this.apps_list;
 	}
-	public void getAppointments() {
+	public ArrayList<String> getAppointments() {
 		cancel_btn.setEnabled(false);
 		ArrayList<String> apps = data;
 		if (apps != null) {
@@ -229,6 +229,7 @@ public class ParamManagment extends JFrame implements ActionListener  {
 				apps_list.add(a);
 			}
 		}
+		return apps_list;
 	}
 
 
