@@ -3,6 +3,8 @@ package ToolGUI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
@@ -11,6 +13,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 
 import javax.swing.table.DefaultTableModel;
+
 import Controller.ElementController;
 import Controller.ScreenController;
 import Model.WorkSpace;
@@ -31,6 +34,7 @@ import java.util.ArrayList;
 import javax.swing.JMenuBar;
 
 import java.awt.Button;
+import java.awt.event.ActionEvent;
 
 
 public class ButtonTypeGUI extends JFrame {
@@ -43,25 +47,26 @@ public class ButtonTypeGUI extends JFrame {
 	private Button addNewCond;
 	private Object[][] data = {};
 	private   JTable apps_table;
+	JTextArea exception;
 	public ButtonTypeGUI(String ScreenName,String eName)
 	{
 		this.ScreenName=ScreenName; 
-		setTitle(ScreenName+"standart button" );
+		setTitle(ScreenName+"-Standard Button" );
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
 
 		
-		JLabel lblOnoff = new JLabel(ScreenName+"-standart button ");
+		JLabel lblOnoff = new JLabel(ScreenName+"- Standard Button ");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
-		lblOnoff.setBounds(20, 11, 361, 36);
+		lblOnoff.setBounds(11, 21, 348, 36);
 		getContentPane().add(lblOnoff);
 		
 		JLabel lblName = new JLabel("Name:");
 		lblName.setBounds(37, 68, 46, 14);
 		getContentPane().add(lblName);
 		
-		JLabel lblMoveTo = new JLabel("Move To : ");
+		JLabel lblMoveTo = new JLabel("Move To: ");
 		lblMoveTo.setBounds(37, 95, 57, 14);
 		getContentPane().add(lblMoveTo);
 		
@@ -79,48 +84,33 @@ public class ButtonTypeGUI extends JFrame {
 		separator.setBounds(10, 123, 418, 5);
 		getContentPane().add(separator);
 		
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(20, 133, 435, 282);
+		getContentPane().add(tabbedPane);
+
+		
 		i=0;
-		setSize(464, 390);
+		setSize(472, 488);
 		
 		JButton button = new JButton("cancel");
-		button.setBounds(226, 329, 116, 23);
+		button.setBounds(236, 426, 116, 23);
 		getContentPane().add(button);
 		
 		 butSave = new JButton("Save");
-		butSave.setBounds(104, 329, 112, 23);
+		butSave.setBounds(114, 426, 112, 23);
 		getContentPane().add(butSave);
-		
-		JButton btnException = new JButton("Exception");
-		btnException.setBounds(10, 171, 91, 23);
-		//getContentPane().add(btnException);
-		
-		JButton btnCondition = new JButton("condition");
-		btnCondition.setBackground(Color.WHITE);
-		btnCondition.setBounds(107, 171, 91, 23);
-		//getContentPane().add(btnCondition);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(10, 136, 311, 23);
-		getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		JMenuBar bar = new JMenuBar();
-		bar.setBounds(0, 0, 456, 21);
-		panel.add(bar);
-		bar.add(btnCondition);
-		bar.add(btnException);
 
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBounds(10, 156, 436, 172);
-			getContentPane().add(panel_1);
+			tabbedPane.addTab("Reqular Transation", null, panel_1, null);
 			panel_1.setLayout(null);
 				
 				JScrollPane apps_scrollPane = new JScrollPane();
-				apps_scrollPane.setBounds(0, 45, 292, 117);
+				apps_scrollPane.setBounds(0, 45, 344, 224);
 				panel_1.add(apps_scrollPane);
-				String[] doc_columnNames = { "parameter Name", "=", "Value"};
+				String[] doc_columnNames = { "Parameter Name", "Opt", "Value"};
 				apps_table = new JTable();
 					apps_table.setModel(new MyTableModel(doc_columnNames,data));
 					apps_table.setFillsViewportHeight(false);
@@ -135,25 +125,48 @@ public class ButtonTypeGUI extends JFrame {
 					
 					
 					JRadioButton radioButton = new JRadioButton("AND");
-					radioButton.setBounds(298, 38, 46, 36);
+					radioButton.setBounds(346, 90, 78, 36);
 					panel_1.add(radioButton);
 					
 					JRadioButton radioButton_1 = new JRadioButton("OR");
-					radioButton_1.setBounds(346, 38, 46, 36);
+					radioButton_1.setBounds(346, 62, 78, 36);
 					panel_1.add(radioButton_1);
 					
-					JLabel label = new JLabel("operator:");
-					label.setBounds(312, 21, 46, 14);
-					panel_1.add(label);
+					JLabel lblChooseOperator = new JLabel("Operator:");
+					lblChooseOperator.setBounds(346, 45, 78, 14);
+					panel_1.add(lblChooseOperator);
 					
-					 addNewCond = new Button("+");
-					 addNewCond.setBounds(0, 21, 33, 27);
+					 addNewCond = new Button("Add Condition");
+					 addNewCond.addActionListener(new ActionListener() {
+					 	public void actionPerformed(ActionEvent e) {
+					 	}
+					 });
+					 addNewCond.setBounds(10, 4, 95, 22);
 					 panel_1.add(addNewCond);
 					 addNewCond.setActionCommand("_add_conditions");
 					 
-					 JLabel label_1 = new JLabel("  In order to move to another screen, a list of condition must be  met");
-					 label_1.setBounds(0, 0, 377, 14);
-					 panel_1.add(label_1);
+					 JLabel lblSetAList = new JLabel("Set a list of condtions to move to another screen ");
+					 lblSetAList.setBounds(4, 32, 420, 14);
+					 panel_1.add(lblSetAList);
+					 JPanel panel = new JPanel();
+					 panel.setLayout(null);
+					 tabbedPane.addTab("Exception", null, panel, null);
+					 
+					 JLabel lblExceptionForParamter = new JLabel("Exception for paramter (optional)");
+					 lblExceptionForParamter.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 14));
+					 lblExceptionForParamter.setBounds(21, 11, 284, 14);
+					 panel.add(lblExceptionForParamter);
+					 
+					 JLabel lblWriteExceptionFor = new JLabel("Write exception for this param");
+					 lblWriteExceptionFor.setBounds(20, 268, 190, 14);
+					 panel.add(lblWriteExceptionFor);
+					 
+					 JScrollPane scrollPane = new JScrollPane();
+					 scrollPane.setBounds(10, 36, 410, 192);
+					 panel.add(scrollPane);
+					 
+					 exception = new JTextArea();
+					 scrollPane.setViewportView(exception);
 					 if (ElementController.elementIsExist(ScreenName,eName ))
 						{
 							WorkSpace.getLog().debug(" filling data to ButtonTypegui");
@@ -161,6 +174,10 @@ public class ButtonTypeGUI extends JFrame {
 						}
 			        DefaultComboBoxModel cbm = new DefaultComboBoxModel(ScreenController.getScreenNameNames());
 			        toScreenComboBox.setModel(cbm);
+			        
+			        JButton btnNewButton = new JButton("Delete Element");
+			        btnNewButton.setBounds(334, 11, 112, 23);
+			        getContentPane().add(btnNewButton);
 				}
 				private void loadData(ArrayList <String> e,String eName) {
 					elementName.setText(e.get(0));
@@ -239,6 +256,4 @@ public class ButtonTypeGUI extends JFrame {
 		ButtonTypeGUI a=new ButtonTypeGUI("aaa",null);
 		a.setVisible(true);
 	}
-
-	
 }
