@@ -32,7 +32,15 @@ import javax.swing.border.MatteBorder;
 
 public class ScreenGUI extends JScrollPane implements ActionListener {
 	private int x=0,y=0,width=143,hight=40;
-	
+	private String status="";
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	protected String screenName;
 	private JMenuItem onOff;
 	private JMenuItem button;

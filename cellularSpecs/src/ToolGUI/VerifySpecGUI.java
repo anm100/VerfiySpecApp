@@ -61,10 +61,9 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 	private ParamManagment req8choosparamGui=new ParamManagment();
 	private 	Border b,but;
 //	private ActionManagment req8actionMangement=new ActionManagment(paramName, data, toSwitch);
-	private JLabel[]  exception=new JLabel[reqNum];
 	private Border temp;
 	public VerifySpecGUI()  {
-	
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		intitCombo();
@@ -81,6 +80,19 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		getContentPane().add(btnRun);
 		 but=btnRun.getBorder();
 		 btnCancel = new JButton("cancel");
+		 btnCancel.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent arg0) {
+		 	setVisible(false);
+			req3ComboScreenI.setBorder(b);
+			req3ComboScreenJ.setBorder(b);
+			req2ScreenCombo.setBorder(b);
+			req6ComboScreen.setBorder(b);
+			req6ChoosParams.setBorder(b);
+			req3ChoosParams.setBorder(b);
+			req8ChoosParams.setBorder(b);
+			root.setBorder(b);
+		 	}
+		 });
 		btnCancel.setBounds(224, 571, 107, 23);
 		getContentPane().add(btnCancel);
 		
@@ -107,45 +119,9 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		root.setBounds(138, 67, 148, 23);
 		getContentPane().add(root);
 		
-		JLabel label_1 = new JLabel("New label \\n fssdfsexception");
-		label_1.setForeground(Color.RED);
-		label_1.setBounds(23, 546, 541, 14);
-		getContentPane().add(label_1);
 		
-		JLabel label = new JLabel("New label \\n fssdfsexception");
-		label.setForeground(Color.RED);
-		label.setBounds(23, 531, 541, 14);
-		getContentPane().add(label);
 		
-		JLabel label_2 = new JLabel("New label \\n fssdfsexception");
-		label_2.setForeground(Color.RED);
-		label_2.setBounds(23, 517, 541, 14);
-		getContentPane().add(label_2);
 		
-		JLabel label_3 = new JLabel("New label \\n fssdfsexception");
-		label_3.setForeground(Color.RED);
-		label_3.setBounds(23, 506, 541, 14);
-		getContentPane().add(label_3);
-		
-		JLabel label_4 = new JLabel("New label \\n fssdfsexception");
-		label_4.setForeground(Color.RED);
-		label_4.setBounds(23, 492, 541, 14);
-		getContentPane().add(label_4);
-		
-		JLabel label_5 = new JLabel("New label \\n fssdfsexception");
-		label_5.setForeground(Color.RED);
-		label_5.setBounds(23, 481, 541, 14);
-		getContentPane().add(label_5);
-		
-		JLabel label_6 = new JLabel("New label \\n fssdfsexception");
-		label_6.setForeground(Color.RED);
-		label_6.setBounds(23, 467, 541, 14);
-		getContentPane().add(label_6);
-		
-		JLabel lblreqscreenIsEmpty = new JLabel("*req2-screen is Empty");
-		lblreqscreenIsEmpty.setForeground(Color.RED);
-		lblreqscreenIsEmpty.setBounds(23, 456, 541, 14);
-		getContentPane().add(lblreqscreenIsEmpty);
 		
 		choosparamGui.setOklistner(this);
 	

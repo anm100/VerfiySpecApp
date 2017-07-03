@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import Model.MyAction;
+import Model.ChangeScreen;
 import Model.Element;
 import Model.ElementActionInterface;
 import Model.ElementType;
@@ -94,7 +95,10 @@ private static String translateReq2(String root) {
 public static  String translateReq8a(String parameterName,ArrayList<String> action)
 {
 	String st="";
-	 st="ltl "+" req8 "+"{[]("+getTranslateReq8a(parameterName,action)+")}";
+	WorkSpace.getReqlist().get(7).setltlCount();
+	 st="ltl "+" req8"+WorkSpace.getReqlist().get(7).getLtlCount()+"{[]("+getTranslateReq8a(parameterName,action)+")}\n";
+	 System.out.println("------------"+st);
+	 st+=translateReq8b(parameterName,action);
 	 WorkSpace.getLog().debug(st);
 	 return st;
 }
@@ -118,7 +122,7 @@ private static String getChangeStateReg8a(String parameterName,String siwtchTo,A
 	{
 	if(changeStatesList.get(i).endsWith(parameterName+siwtchTo))
 	{
-		System.out.println(parameterName);
+		
 		str+="(state=="+changeStatesList.get(i)+")";
 		break;
 	}
@@ -136,32 +140,51 @@ private static String getChangeStateReg8a(String parameterName,String siwtchTo,A
 	}
 	return str;
 } 
-public static  void translateReq8b(String parameterName)
+public static  String translateReq8b(String paramterName,ArrayList<String> action)
 {
+	WorkSpace.getReqlist().get(7).addltlCount();
+	int i=	WorkSpace.getReqlist().get(7).getLtlCount();
 	String st="";
-	Param p=WorkSpace.getInstance().getParamsMap().get(parameterName);
-	// ArrayList<MyAction> actions=getActionByparameterName(p.getParamName());
-	// st="ltl "+" req8 "+"{[]("+getTranslateReq8b(actions,p)+")}";
-	 WorkSpace.getLog().debug(st);
+	 st="ltl "+" req8_"+i+"{[]("+getTranslateReq8b(paramterName,action)+")}";
+	 return st;
 }
-private static String getTranslateReq8b(ArrayList<MyAction> actions,Param p) {
+private static String getTranslateReq8b(String paramterNam,ArrayList<String> action) {
 	String st1="";
-	for(int j=0;j<actions.size();j++)
+	for(int j=0;j<action.size();j++)
 	{
-		st1+="(("+actions.get(j).getParamName()+"=="+actions.get(j).getParamVal()+")&&";
-	for(int i=0;i<actions.size();i++)
-	{
-		//st1+=getChangeStateReg8a(actions,actions.get(i).getParamName()+"=="+actions.get(i).getParamVal())+"&&";
+		String[] st=action.get(j).split("=");
+		st1+="(("+st[0]+"!="+st[1]+")&&";
+		st1+=trans8b(action);
+		st1+=")";
+		st1+="||";
 	}
-	if(actions.size()>0)
-	st1=st1.substring(0, st1.length()-2);
-	st1+=")||";
-	}
-	if(actions.size()>0)
-	st1=st1.substring(0, st1.length()-2);
-	st1+=p.getParamName()!=p.getParamVal();
-
+	if(screenStatesList.size()>0)
+		st1=st1.substring(0, st1.length()-2);
+	String[] st=paramterNam.split("=");
+	st1+="->("+st[0]+"!="+st[1]+")";
 	return st1;
+	
+}
+private   static String trans8b(ArrayList<String> action)
+{
+	String str="(";
+	for(int i=0;i<action.size();i++)
+	{
+	String[] st=action.get(i).split("=");
+	for(int j=0;j<changeStatesList.size();i++)
+	{
+		if((changeStatesList.get(j).endsWith(st[0]+ElementType.getOff()))
+			||(changeStatesList.get(j).endsWith(st[0]+ElementType.getOn())))
+			{
+			str+="(state!="+changeStatesList.get(j)+")&&";
+			}
+	
+	}
+	if(screenStatesList.size()>0)
+		str=str.substring(0, str.length()-2);
+	}
+	str+=")";
+	return str;
 	
 }
 
@@ -410,7 +433,7 @@ public static void setFormula(VerifySpecGUI verifySpecGUI) {
 				 break;
 			 case "req8":
 				 WorkSpace.getReqlist().get(i).setFormula(translateReq8a(verifySpecGUI.getreq8ScreenCombo().getSelectedItem().toString(),
-						 verifySpecGUI.getReq8ChoosenParam()));
+				verifySpecGUI.getReq8ChoosenParam()));
 				 WorkSpace.getLog().debug("FormulaTranslate->req8");
 				 break;
 			 }
