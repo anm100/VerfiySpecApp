@@ -192,7 +192,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			addScreen=new AddScreenGUI();
 			addScreen.addScreenListener(this);
 			addScreen.setVisible(true);
-			 
+			mainScreenGui.setEnabled(false);
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 		break;
@@ -233,6 +233,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			}
 			break;
 		case "Move screen":
+
 			WorkSpace.getLog().debug("Move screen");
 			Router.getInstance().setGetNewLocation(true);
 			break;
@@ -248,7 +249,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			onOfGUI.setOnOffListener(this);
 		 	onOfGUI.setParamChangeListener(this);
 			onOfGUI.setParameterName(ScreenController.getParams(ElementType.getOnOffType(),screenGUI.getScreenName()));
-			 
+			mainScreenGui.setEnabled(false);
 			break;
 			
 		case "_save_on_off":
@@ -277,7 +278,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		    listTypeGUI=new ListTypeGUI(screenGUI.getScreenName());
 			listTypeGUI.setVisible(true);
 			listTypeGUI.setListTypeListener(this);
-			 
+			mainScreenGui.setEnabled(false);
 
 			removelistenerMainScreen();
 
@@ -298,7 +299,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				emptyNotEmptyGUI.setParameterName(ScreenController.getParams(ElementType.getEmptyNotEmptyType(),screenGUI.getScreenName()));
 				emptyNotEmptyGUI.setVisible(true);
 				removelistenerMainScreen();
-				 
+				mainScreenGui.setEnabled(false);
 
 				break;
 			case "_save_EmptyNEmpty":
@@ -326,7 +327,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				buttonTypeGUI= new ButtonTypeGUI(screenGUI.getScreenName(),null);
 				buttonTypeGUI.setVisible(true);
 				buttonTypeGUI.setButtonTListener(this);
-				 
+				mainScreenGui.setEnabled(false);
 
 
 //			        String st1[]=new String[ScreenController.getparams().size()+1];
@@ -428,7 +429,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	}
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
@@ -438,6 +439,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		{
 			//screenGUI.removeMouseListener(this);
 			//screenGUI.removeMouseMotionListener(this);
+			
 			screenGUI.addScreenListener(this);
 			GetNewLocation=false;
 			WorkSpace.getLog().debug("mouse pressed method -screenGUI name is "+screenGUI.getScreenName());
@@ -474,11 +476,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		//System.out.println(arg0.getSource().getClass().getSimpleName().toString());
 		if(arg0.getSource().getClass().getSimpleName().toString().equals("MainScreenGui") && GetNewLocation==true)
 		{
+			
 			this.cordinateX	=arg0.getX()-4;
 			this.cordinateY	=arg0.getY()-22;
 			screenGUI.setLocation(arg0.getX()-4,arg0.getY()-22);
 		}
-		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI") && GetNewLocation==true)
+		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI") && GetNewLocation==true )
 		{
 			this.cordinateX=cordinateX+arg0.getX();
 			this.cordinateY=cordinateY+arg0.getX();
