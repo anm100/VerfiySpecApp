@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Window;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
