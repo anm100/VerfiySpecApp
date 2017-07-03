@@ -18,7 +18,6 @@ import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 
 import Controller.ScreenController;
-<<<<<<< HEAD
 import Controller.VerificationController;
 import Controller.FormulaTranslate;
 
@@ -29,10 +28,8 @@ import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
-=======
 import java.awt.event.ActionEvent;
 
->>>>>>> 15fce5d45081af423929ea7f0cdb2f12c114588f
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.beans.PropertyChangeListener;
