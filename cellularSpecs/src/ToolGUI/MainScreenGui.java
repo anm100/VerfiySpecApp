@@ -28,11 +28,11 @@ public class MainScreenGui extends JFrame  {
 	private JButton btnRunVerification;
 	private JButton btnShowresults;
 	private JFileChooser chooser; 
-
+	
 	
 	public  MainScreenGui() {
 		
-	
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setSize(750,600);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);

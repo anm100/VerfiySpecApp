@@ -305,7 +305,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				if(checkInputs.checkTextfieldsAdd(emptyNotEmptyGUI,ElementType.getEmptyNotEmptyType())){
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
-				emptyNotEmptyGUI.setVisible(false);
 				emptyNotEmptyGUI.dispose();
 				mainScreenGui.setEnabled(true);
 				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
@@ -317,6 +316,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.editEmentfromGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
 				mainScreenGui.setEnabled(true);
+				emptyNotEmptyGUI.dispose();
 				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 				}
