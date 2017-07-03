@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Window;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -153,7 +154,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 						"Are you sure you want to cancel this appointment setting", "Cancel", JOptionPane.YES_NO_OPTION,
 						JOptionPane.WARNING_MESSAGE);
 				if (choise == JOptionPane.YES_OPTION)
-					thisRef.setVisible(false);
+					thisref.setVisible(false);
 			}
 		});
 		btnCancel.setBounds(348, 512, 116, 23);
