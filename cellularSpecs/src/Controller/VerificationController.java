@@ -404,7 +404,11 @@ private void initialize(){
 		 verifySpecGUI.setReq_pan(new JLabel(st),6);
 		 
 		 st=WorkSpace.getReqlist().get(7).getReq();	
-		 verifySpecGUI.setReq_pan(new JLabel(st),7);
+		 s=st.split("X");
+		 verifySpecGUI.setReq_pan(new JLabel(s[0]),7);
+		 verifySpecGUI.setReq_pan(verifySpecGUI.getreq8ScreenCombo(),7);
+		 verifySpecGUI.setReq_pan(new JLabel(s[1]),7);
+		 verifySpecGUI.setReq_pan(verifySpecGUI.getreq8ChoosParams(),7);
 	// st=WorkSpace.getReqlist().get(6).getReq();	
 
 	WorkSpace.getLog().debug("Router->verifiy Spec case");

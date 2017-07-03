@@ -114,6 +114,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			chooseFileLocation();//chose the folder and save the file 
 		break;
 		case("Verifiy SPEC"):
+			if(ScreenController.getScreenNameNames().length>0)
+			{
+			mainScreenGui.setBtnRunVerification(true);
 			if(verifySpecGUI==null)
 			{
 				verifySpecGUI=new VerifySpecGUI();
@@ -121,6 +124,12 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				verifySpecGUI.setVerifySpecGUI(this);
 			}
 				verifySpecGUI.setVisible(true);
+			}
+			if(ScreenController.getScreenNameNames().length>=2
+				&&ScreenController.getparams().length>0)
+			{
+				verifySpecGUI.enableReq3();
+			}
 		break;
 		case("Run_verifectaion"):
 			verificationController = new VerificationController();
@@ -131,7 +140,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			FormulaTranslate.setFormula(verifySpecGUI);
 			WorkSpace.getLog().info(verificationController.translateToPROMELA(verifySpecGUI.getRoot().getSelectedItem().toString()));
 			WorkSpace.getLog().debug("Router->create pml file ");
-			
+			mainScreenGui.setBtnShowresults(true);
 			try {
 				PrintWriter writer;
 				writer = new PrintWriter(RunSpin.fileslocation+WorkSpace.getInstance().getWorkSpaceName()+".pml", "UTF-8");
@@ -217,6 +226,11 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			WorkSpace.getLog().debug("delete screen case");
 			Router.getInstance().screenGUI.setVisible(false);
 			WorkSpace.getInstance().deleteScreen(WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName()));
+			if(ScreenController.getScreenNameNames().length==0)
+			{
+			mainScreenGui.setBtnRunVerification(false);
+			mainScreenGui.setBtnShowresults(false);
+			}
 			break;
 		case "Move screen":
 			WorkSpace.getLog().debug("Move screen");
@@ -436,6 +450,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			stemp=WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName());
 			WorkSpace.getLog().debug("get from hash "+stemp.getScreenName()+":update is "+"x:"+stemp.getCordinateX()+" Y:"+stemp.getCordinateY());
 			WorkSpace.getLog().debug("screenGUI added successfully ,update coordinate X + Y in workspace hash");
+			if(ScreenController.getScreenNameNames().length>0)
+			{
+			mainScreenGui.setBtnRunVerification(true);
+			}
 		}
 	
 	
