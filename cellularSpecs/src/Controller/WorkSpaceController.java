@@ -153,6 +153,40 @@ public class WorkSpaceController {
 		addToModels(screenGUI,elementGui,l);
 	
 	}
+	public static void editEmentfromGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
+
+		//	WorkSpace.getLog().debug(((JLabel)screenGUI.getEventLabel().getComponent()).getText());
+		String[] data=((JLabel)screenGUI.getEventLabel().getComponent()).getText().split(",");
+		WorkSpace.getLog().debug(data[0]+" "+screenGUI.getScreenName());
+		StandartButtonType e= (StandartButtonType) WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName()).getElementByName(data[0]);
+		WorkSpace.getLog().debug(e.getELementName());
+        ((JLabel)screenGUI.getEventLabel().getComponent()).setText(elementGui.getElementName()+","+ElementType.getStandartBtnType());
+        e.setElementName(elementGui.getElementName());
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(e);
+		((JLabel)screenGUI.getEventLabel().getComponent()).getParent().update(screenGUI.getGraphics());
+		removeFromModels(elementGui.getScreenName(),e);
+		addelementModel(screenGUI,elementGui,l);
+	
+	}
+	
+	private static void addelementModel(ScreenGUI screenGUI,
+			ButtonTypeGUI elementGui, StandartButtonType l) {
+		// TODO Auto-generated method stub
+		int size;
+		l.setElementName(elementGui.getElementName());
+		size=elementGui.getRowsNumber();
+		for(int i=0;i<size;i++)
+		{
+			String [] st=elementGui.readFromTable(i);
+			l.addCondition(st[0], st[1], st[2]);
+		}
+		l.setTransition(screenGUI.getScreenName(), elementGui.getMoveTo());
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
+		WorkSpace.getLog().debug("do "+l.getELementName());
+		WorkSpace.getLog().debug("--show element in GUI");
+		Router.getInstance().getMainScreenGui().refreshWorkspace();
+		elementGui.dispose();
+	}
 	public static void editEmentfromGUI(ScreenGUI screenGUI, EmptyNotEmptyGUI elementGui,EmptyNEmptyType l) {
 		WorkSpace.getLog().debug(" "+screenGUI.getScreenName());
 
@@ -247,6 +281,13 @@ public class WorkSpaceController {
 		WorkSpace.getLog().debug("--show element in GUI");
 	}
 	public static void reomveFromModels(String screenName,OnOffType oldOnOffType)	
+	{
+		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+oldOnOffType.getParamName());
+		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+screenName);
+		WorkSpace.getInstance().getScreenByName(screenName).remoceElement(oldOnOffType.getELementName());
+		WorkSpace.getInstance().removeParameterInHash(oldOnOffType.getParamName());
+	}
+	public static void removeFromModels(String screenName,StandartButtonType oldOnOffType)	
 	{
 		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+oldOnOffType.getParamName());
 		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+screenName);

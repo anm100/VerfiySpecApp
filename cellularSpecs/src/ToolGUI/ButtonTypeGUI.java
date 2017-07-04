@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.ElementController;
+import Controller.Router;
 import Controller.ScreenController;
 import Model.WorkSpace;
 import our.Utils.BulidSpec;
@@ -176,7 +177,7 @@ public class ButtonTypeGUI extends JFrame {
 			        toScreenComboBox.setModel(cbm);
 			        
 			        JButton btnNewButton = new JButton("Delete Element");
-			        btnNewButton.setBounds(334, 11, 112, 23);
+			        btnNewButton.setBounds(10, 4, 95, 22);
 			        getContentPane().add(btnNewButton);
 				}
 				private void loadData(ArrayList <String> e,String eName) {
@@ -255,5 +256,10 @@ public class ButtonTypeGUI extends JFrame {
 		BulidSpec.build();
 		ButtonTypeGUI a=new ButtonTypeGUI("aaa",null);
 		a.setVisible(true);
+	}
+	public void setEditButtonTListener(ActionListener ButtonTypeListener ){       
+		butSave.addActionListener(ButtonTypeListener);
+		butSave.setActionCommand("_Edit_standart_button");
+		addNewCond.addActionListener(ButtonTypeListener);
 	}
 }

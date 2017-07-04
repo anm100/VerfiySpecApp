@@ -306,7 +306,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				if(checkInputs.checkTextfieldsAdd(emptyNotEmptyGUI,ElementType.getEmptyNotEmptyType())){
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
-				emptyNotEmptyGUI.dispose();
+				emptyNotEmptyGUI.setVisible(false);
 				mainScreenGui.setEnabled(true);
 				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
@@ -317,7 +317,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				WorkSpace.getLog().debug("do _save_on_off.. ");
 				WorkSpaceController.editEmentfromGUI(screenGUI, emptyNotEmptyGUI,new EmptyNEmptyType());
 				mainScreenGui.setEnabled(true);
-				emptyNotEmptyGUI.dispose();
+				emptyNotEmptyGUI.setVisible(false);
 				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 				}
@@ -327,7 +327,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				buttonTypeGUI= new ButtonTypeGUI(screenGUI.getScreenName(),null);
 				buttonTypeGUI.setVisible(true);
 				buttonTypeGUI.setButtonTListener(this);
-				mainScreenGui.setEnabled(false);
 
 
 //			        String st1[]=new String[ScreenController.getparams().size()+1];
@@ -339,13 +338,29 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 //			        buttonTypeGUI.addParamsNameToComboBox(st1);
 //			        buttonTypeGUI.setParamChangeListener(this);
 				break;
-				
+			case"_add_conditions":// + open AddActionGui in order to add condition
+				WorkSpace.getLog().debug("add  a condition from ButoonTypeGUI  ");
+				  addConditonGui=new AddConditonGui();
+				  addConditonGui.setAddAconditionListener(this);
+				  addConditonGui.setVisible(true);
+				break; 
+			case"_save_Condition_param":
+				WorkSpace.getLog().debug("Save  a condition from AddConditionGUI");
+				buttonTypeGUI.addToTable(addConditonGui.getParamName(),"==",addConditonGui.getValue());
+				addConditonGui.dispose();
+				break;
 			case"_save_standart_button": 
 				WorkSpace.getLog().debug("do _save_standart_button.. ");
 				WorkSpaceController.addelementToGUI(screenGUI, buttonTypeGUI, new StandartButtonType());
 				mainScreenGui.setEnabled(true);
 				mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 				mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
+				break;
+			case"_Edit_standart_button":
+				WorkSpace.getLog().debug("edit _save_standart_button.. ");
+				mainScreenGui.setEnabled(true);
+
+				WorkSpaceController.editEmentfromGUI(screenGUI, buttonTypeGUI, new StandartButtonType());
 				break;
 			case "_save_new_param_ex":
 				if (addparamterGUI.getParamType() !=null){
@@ -376,6 +391,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	public void setOnOfGUI(OnOfGUI onOfGUI) {
 		this.onOfGUI = onOfGUI;
 	}
+	
+
 	public int getLocation() {
 		return Location;
 	}
@@ -562,6 +579,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private void updateGui (JFrame gui){
 		
 	}*/
+	public void setButtonTypeGUI(ButtonTypeGUI buttonTypeGUI) {
+		this.buttonTypeGUI = buttonTypeGUI;
+	}
 
 
 	

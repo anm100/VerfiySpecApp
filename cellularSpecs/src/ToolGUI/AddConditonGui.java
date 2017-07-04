@@ -6,16 +6,20 @@ import javax.swing.JLabel;
 import Controller.ScreenController;
 
 
+
 import java.awt.Color;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import javax.swing.DefaultComboBoxModel;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+
 import javax.swing.SwingConstants;
 
 public class AddConditonGui extends JFrame {
@@ -28,6 +32,7 @@ public class AddConditonGui extends JFrame {
 	private JLabel switchlbl;
 	private String value;
 	private JComboBox parameterValueCombo;
+	private AddConditonGui thisref = this ;
 	public AddConditonGui() {
 		setVisible(true);
 		 switchlbl = new JLabel("");
@@ -49,6 +54,15 @@ public class AddConditonGui extends JFrame {
 		JButton btnCancel = new JButton("cancel");
 		btnCancel.setBounds(195, 80, 91, 23);
 		getContentPane().add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int choise = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to cancel", "Cancel", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (choise == JOptionPane.YES_OPTION)
+					thisref.setVisible(false);
+			}
+		});
 		
 	
 		JPanel panel = new JPanel();
