@@ -5,12 +5,14 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.border.LineBorder;
+
 
 
 
@@ -25,6 +27,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 
 import Controller.ElementController;
+import Controller.Router;
 import Controller.ScreenController;
 import Model.ElementType;
 import Model.MyAction;
@@ -149,9 +152,14 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
-		 	//	edRmCon=new EditReomveConditionGUI();
-		 		edRmCon.setVisible(true);
+				int choise = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to cancel this appointment setting", "Cancel", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (choise == JOptionPane.YES_OPTION)
+					thisref.setVisible(false);
+					Router.getInstance().getMainScreenGui().setEnabled(true);
 			}
 		});
 		btnCancel.setBounds(268, 530, 116, 23);

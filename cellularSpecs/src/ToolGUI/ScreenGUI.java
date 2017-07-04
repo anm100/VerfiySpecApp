@@ -279,7 +279,6 @@ public class ScreenGUI extends JScrollPane implements ActionListener {
                     buttonTypeGUI.setVisible(true);
                     Router.getInstance().setButtonTypeGUI(buttonTypeGUI);
                 }
-                Router.getInstance().getMainScreenGui().setEnabled(false);
 
             }
     }

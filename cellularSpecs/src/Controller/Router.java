@@ -192,7 +192,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			addScreen=new AddScreenGUI();
 			addScreen.addScreenListener(this);
 			addScreen.setVisible(true);
-			mainScreenGui.setEnabled(false);
 			mainScreenGui.addMainScreenMouseListener((MouseListener)this);
 			mainScreenGui.addMainScreenMouseListener((MouseMotionListener)this);
 		break;
@@ -249,7 +248,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			onOfGUI.setOnOffListener(this);
 		 	onOfGUI.setParamChangeListener(this);
 			onOfGUI.setParameterName(ScreenController.getParams(ElementType.getOnOffType(),screenGUI.getScreenName()));
-			mainScreenGui.setEnabled(false);
 			break;
 			
 		case "_save_on_off":
@@ -278,7 +276,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		    listTypeGUI=new ListTypeGUI(screenGUI.getScreenName());
 			listTypeGUI.setVisible(true);
 			listTypeGUI.setListTypeListener(this);
-			mainScreenGui.setEnabled(false);
 
 			removelistenerMainScreen();
 
@@ -299,7 +296,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				emptyNotEmptyGUI.setParameterName(ScreenController.getParams(ElementType.getEmptyNotEmptyType(),screenGUI.getScreenName()));
 				emptyNotEmptyGUI.setVisible(true);
 				removelistenerMainScreen();
-				mainScreenGui.setEnabled(false);
 
 				break;
 			case "_save_EmptyNEmpty":
@@ -452,6 +448,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI") && GetNewLocation==false)
+		{
+			screenGUI=((ScreenGUI)arg0.getComponent());
+		}
 		if(this.GetNewLocation==true)
 		{
 			//screenGUI.removeMouseListener(this);
@@ -504,10 +504,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			this.cordinateY=cordinateY+arg0.getX();
 			screenGUI.setLocation(cordinateX,cordinateY);
 		}
-		if(arg0.getSource().getClass().getSimpleName().toString().equals("ScreenGUI") && GetNewLocation==false)
-		{
-			screenGUI=((ScreenGUI)arg0.getComponent());
-		}
+
 		
 	}
 	void setMainScreenGui(String specName) {
