@@ -35,7 +35,7 @@ public class MainScreenGui extends JFrame  {
 	public  MainScreenGui() {
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setSize(750,600);
+		setSize(1133,785);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
 		 btnAddscreen = new JButton("AddScreen");
@@ -73,27 +73,27 @@ public class MainScreenGui extends JFrame  {
 				   });			    	
 		 
 
-		btnOpen.setBounds(511, 17, 89, 23);
+		btnOpen.setBounds(872, 33, 89, 23);
 		getContentPane().add(btnOpen);
 		
 		 btnNew = new JButton("New");
-		btnNew.setBounds(412, 17, 89, 23);
+		btnNew.setBounds(773, 33, 89, 23);
 		btnNew.setActionCommand("_create_NewSpec");
 		getContentPane().add(btnNew);
 
 		 btnExport = new JButton("Save SPEC");
-		btnExport.setBounds(610, 17, 99, 23);
+		btnExport.setBounds(971, 33, 99, 23);
 		getContentPane().add(btnExport);
 		
 		btnRunVerification= new JButton("Verifiy SPEC");
 		btnRunVerification.setEnabled(false);
 
-		btnRunVerification.setBounds(442, 513, 136, 23);
+		btnRunVerification.setBounds(785, 674, 136, 23);
 		getContentPane().add(btnRunVerification);
 		
 		 btnShowresults = new JButton("ShowResults");
 		 btnShowresults.setEnabled(false);
-		btnShowresults.setBounds(588, 513, 136, 23);
+		btnShowresults.setBounds(934, 674, 136, 23);
 		getContentPane().add(btnShowresults);
 	 }
 		public void setBtnRunVerification(Boolean b) {

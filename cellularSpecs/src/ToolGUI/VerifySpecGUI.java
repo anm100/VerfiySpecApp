@@ -77,6 +77,8 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
+
 		intitCombo();
 		prepareScreenCombo();
 		createCheckBox();
@@ -93,7 +95,6 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 		 btnCancel = new JButton("cancel");
 		 btnCancel.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent arg0) {
-		 	setVisible(false);
 			req3ComboScreenI.setBorder(b);
 			req3ComboScreenJ.setBorder(b);
 			req2ScreenCombo.setBorder(b);

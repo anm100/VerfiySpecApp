@@ -222,7 +222,7 @@ public class ButtonTypeGUI extends JFrame {
 			     
 			        
 			        JButton btnNewButton = new JButton("Delete Element");
-			        btnNewButton.setBounds(10, 4, 95, 22);
+			        btnNewButton.setBounds(331, 23, 95, 22);
 			        getContentPane().add(btnNewButton);
 				}
 				private void loadData(ArrayList <String> e,String eName) {
