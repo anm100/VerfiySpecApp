@@ -21,7 +21,9 @@ public StandartButtonType() {
 	
 }
 
-
+public String getMoveTo(){
+	return trans.getToScreen();
+}
 public void addCondition(String name,String opt ,String Val){
 	MyCondition c = new MyCondition(name, Val,opt); 
 	this.conds.add(c);

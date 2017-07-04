@@ -37,6 +37,15 @@ public class ElementController {
 		
 	return s ; 
 	}
+	public static ArrayList<String> getDataOfregularElement(String screenName,String elementName){//get all the parameters arraylist
+		ArrayList<String> s = new ArrayList<>(); 
+		StandartButtonType e = (StandartButtonType) WorkSpace.getInstance().getScreenByName(screenName).getElementByName(elementName);
+		s.add(e.getELementName());
+		s.add(e.getMoveTo());
+		s.add(e.getException());
+		
+	return s ; 
+	}
 	public static String[][] getConditions(String sName,String eName ){
 		
 		StandartButtonType   s=(StandartButtonType) WorkSpace.getInstance().getScreenByName(sName).getElementByName(eName);

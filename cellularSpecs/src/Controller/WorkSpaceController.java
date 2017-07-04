@@ -180,6 +180,7 @@ public class WorkSpaceController {
 			String [] st=elementGui.readFromTable(i);
 			l.addCondition(st[0], st[1], st[2]);
 		}
+		WorkSpace.getLog().debug(screenGUI.getScreenName()+" update trans move to"+ elementGui.getMoveTo());
 		l.setTransition(screenGUI.getScreenName(), elementGui.getMoveTo());
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do "+l.getELementName());

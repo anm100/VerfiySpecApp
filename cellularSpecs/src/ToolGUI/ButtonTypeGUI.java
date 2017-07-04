@@ -1,6 +1,7 @@
 package ToolGUI;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
@@ -12,13 +13,17 @@ import javax.swing.DefaultComboBoxModel;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.ActionCondController;
 import Controller.ElementController;
 import Controller.Router;
 import Controller.ScreenController;
 import Model.WorkSpace;
 import our.Utils.BulidSpec;
+import ui.utils.Messages;
 import ui.utils.MyTableModel;
 
 import java.awt.Color;
@@ -125,12 +130,13 @@ public class ButtonTypeGUI extends JFrame {
 					apps_table.setBackground(Color.WHITE);
 					
 					
-					JRadioButton radioButton = new JRadioButton("AND");
+					JRadioButton radioButton = new JRadioButton("OR");
 					radioButton.setBounds(346, 90, 78, 36);
 					panel_1.add(radioButton);
 					
-					JRadioButton radioButton_1 = new JRadioButton("OR");
+					JRadioButton radioButton_1 = new JRadioButton("AND");
 					radioButton_1.setBounds(346, 62, 78, 36);
+					radioButton_1.setSelected(true);
 					panel_1.add(radioButton_1);
 					
 					JLabel lblChooseOperator = new JLabel("Operator:");
@@ -149,6 +155,33 @@ public class ButtonTypeGUI extends JFrame {
 					 JLabel lblSetAList = new JLabel("Set a list of condtions to move to another screen ");
 					 lblSetAList.setBounds(4, 32, 420, 14);
 					 panel_1.add(lblSetAList);
+					 
+					 Button button_1 = new Button("Delete Condition");
+					 button_1.addActionListener(new ActionListener() {
+					 	public void actionPerformed(ActionEvent arg0) {
+							int row = apps_table.getSelectedRow();
+							if(row<0){
+								Messages.errorMessage("Please select an action from the table below", "No action selected", null);
+								return;
+							}
+						
+									DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+									dm.removeRow(row);							
+
+									Messages.successMessage("Action Canceled", "Action Appointment", null);
+							
+									button_1.setEnabled(false);
+						}
+					});
+					 button_1.setEnabled(false);
+						apps_table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+							public void valueChanged(ListSelectionEvent event) {
+								button_1.setEnabled(true);
+							}
+						}); 
+					 button_1.setActionCommand("_add_conditions");
+					 button_1.setBounds(111, 4, 95, 22);
+					 panel_1.add(button_1);
 					 JPanel panel = new JPanel();
 					 panel.setLayout(null);
 					 tabbedPane.addTab("Exception", null, panel, null);
@@ -165,16 +198,16 @@ public class ButtonTypeGUI extends JFrame {
 					 JScrollPane scrollPane = new JScrollPane();
 					 scrollPane.setBounds(10, 36, 410, 192);
 					 panel.add(scrollPane);
-					 
+					   DefaultComboBoxModel cbm = new DefaultComboBoxModel(ScreenController.getScreenNameNames());
+				        toScreenComboBox.setModel(cbm);
 					 exception = new JTextArea();
 					 scrollPane.setViewportView(exception);
 					 if (ElementController.elementIsExist(ScreenName,eName ))
 						{
 							WorkSpace.getLog().debug(" filling data to ButtonTypegui");
-							loadData(ElementController.getDataOfElement(ScreenName,eName), eName); 
+							loadData(ElementController.getDataOfregularElement(ScreenName,eName), eName); 
 						}
-			        DefaultComboBoxModel cbm = new DefaultComboBoxModel(ScreenController.getScreenNameNames());
-			        toScreenComboBox.setModel(cbm);
+			     
 			        
 			        JButton btnNewButton = new JButton("Delete Element");
 			        btnNewButton.setBounds(10, 4, 95, 22);
@@ -182,12 +215,17 @@ public class ButtonTypeGUI extends JFrame {
 				}
 				private void loadData(ArrayList <String> e,String eName) {
 					elementName.setText(e.get(0));
-			        DefaultComboBoxModel cbm = new DefaultComboBoxModel(ScreenController.getScreenNameNames());
-			        toScreenComboBox.setModel(cbm);
+			      
+			        toScreenComboBox.setSelectedItem(e.get(1));
+					setException(e.get(2));
+
 			        addToTable(ElementController.getConditions(ScreenName,eName));
 
 				}
 
+	private void setException(String string) {
+		exception.setText(string);					
+				}
 	public String  getElementName() {
 		return elementName.getText().toString();
 	}
