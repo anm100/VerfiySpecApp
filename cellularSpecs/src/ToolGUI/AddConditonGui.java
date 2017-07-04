@@ -119,7 +119,7 @@ public class AddConditonGui extends JFrame {
 	}
 	private void addToCombo() {
 		parameterNames=ScreenController.getparams();
-		if(parameterNames!=null)
+		if(parameterNames.length!=0)
 		{
 		paramName=parameterNames[0];
         DefaultComboBoxModel cbm = new DefaultComboBoxModel(parameterNames);
@@ -129,7 +129,6 @@ public class AddConditonGui extends JFrame {
         cbm = new DefaultComboBoxModel(parameterValue);
        parameterValueCombo.setModel(cbm);
 		}
-		
 	}
 	public String getParamName() {
 		return paramName;

@@ -18,6 +18,7 @@ import ui.utils.MyTableModel;
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import Controller.ActionCondController;
+import Controller.ScreenController;
 import Model.ElementType;
 import Model.MyAction;
 import Model.Param;
@@ -218,9 +219,15 @@ public class ActionManagment implements ActionListener  {
 		JButton newApp_btn = new JButton("Add New Action");
 		newApp_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actionGui=	new AddActionGUI();
-				actionGui.setAddActionListener(thisref);
-				actionGui.setVisible(true);
+				if(ScreenController.getparams().length ==0){
+					JOptionPane.showMessageDialog(cancel_btn, "no parameters in Spec yet!", newApp_btn.getText(),
+							JOptionPane.ERROR_MESSAGE);
+				}else{
+					actionGui=	new AddActionGUI();
+					actionGui.setAddActionListener(thisref);
+					actionGui.setVisible(true);
+				}
+			
 			WorkSpace.getLog().debug("add new action button");
 			}
 

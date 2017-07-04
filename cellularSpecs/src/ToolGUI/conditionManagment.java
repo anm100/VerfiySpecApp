@@ -18,6 +18,7 @@ import ui.utils.MyTableModel;
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import Controller.ActionCondController;
+import Controller.ScreenController;
 import Model.ElementType;
 import Model.MyAction;
 import Model.Param;
@@ -196,13 +197,21 @@ public class conditionManagment implements ActionListener  {
 		btnSave.setActionCommand("_save_cond_"+toSwitch);
 		btnSave.setBounds(85, 366, 112, 23);
 		app.getContentPane().add(btnSave);
-
+		
 		JButton newApp_btn = new JButton("Add New Condition");
+		
+		
 		newApp_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				conditionGui=	new AddConditonGui();
-				conditionGui.setAddAconditionListener(thisref);
-				conditionGui.setVisible(true);
+		
+				if(ScreenController.getparams().length ==0){
+					JOptionPane.showMessageDialog(cancel_btn, "no parameters in Spec yet!", newApp_btn.getText(),
+							JOptionPane.ERROR_MESSAGE);
+				}else{
+					conditionGui=	new AddConditonGui();
+					conditionGui.setAddAconditionListener(thisref);
+					conditionGui.setVisible(true);
+				}
 			WorkSpace.getLog().debug("add new Condition button");
 			}
 
