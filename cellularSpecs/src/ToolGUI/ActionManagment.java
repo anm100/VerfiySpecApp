@@ -18,6 +18,7 @@ import ui.utils.MyTableModel;
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import Controller.ActionCondController;
+import Controller.Router;
 import Controller.ScreenController;
 import Model.ElementType;
 import Model.MyAction;
@@ -237,6 +238,17 @@ public class ActionManagment implements ActionListener  {
 		app.getContentPane().add(newApp_btn);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				int choise = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to cancel this appointment setting", "Cancel", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (choise == JOptionPane.YES_OPTION)
+					thisref.getFrame().setVisible(false);
+					Router.getInstance().getMainScreenGui().setEnabled(true);
+			}
+		});
 		btnCancel.setBounds(222, 366, 112, 23);
 		app.getContentPane().add(btnCancel);
 

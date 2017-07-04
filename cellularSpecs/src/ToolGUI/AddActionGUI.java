@@ -3,15 +3,20 @@ package ToolGUI;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import Controller.Router;
 import Controller.ScreenController;
 
 import java.awt.Color;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.DefaultComboBoxModel;
 
 
+
+import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -24,6 +29,7 @@ public class AddActionGUI extends JFrame {
 	private String paramName;
 	private JButton btnSave;
 	private JLabel label_3;
+	private AddActionGUI thisref= this;
 private JLabel switchlbl;
 	private String value;
 	public AddActionGUI() {
@@ -42,6 +48,17 @@ private JLabel switchlbl;
 		btnSave.setActionCommand("_save_Action_param");
 		
 		JButton btnCancel = new JButton("cancel");
+		btnCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				int choise = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to cancel this appointment setting", "Cancel", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (choise == JOptionPane.YES_OPTION)
+					thisref.setVisible(false);
+					Router.getInstance().getMainScreenGui().setEnabled(true);
+			}
+		});
 		btnCancel.setBounds(195, 80, 91, 23);
 		getContentPane().add(btnCancel);
 		

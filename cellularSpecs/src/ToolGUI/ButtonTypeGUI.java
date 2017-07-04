@@ -53,6 +53,7 @@ public class ButtonTypeGUI extends JFrame {
 	private Button addNewCond;
 	private Object[][] data = {};
 	private   JTable apps_table;
+	private ButtonTypeGUI thisref=this; 
 	JTextArea exception;
 	public ButtonTypeGUI(String ScreenName,String eName)
 	{
@@ -102,6 +103,17 @@ public class ButtonTypeGUI extends JFrame {
 		JButton button = new JButton("cancel");
 		button.setBounds(236, 426, 116, 23);
 		getContentPane().add(button);
+		button.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				int choise = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to cancel this appointment setting", "Cancel", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (choise == JOptionPane.YES_OPTION)
+					thisref.setVisible(false);
+					Router.getInstance().getMainScreenGui().setEnabled(true);
+			}
+		});
 		
 		 butSave = new JButton("Save");
 		butSave.setBounds(114, 426, 112, 23);

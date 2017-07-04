@@ -24,6 +24,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 
 import Controller.ElementController;
+import Controller.Router;
 import Controller.ScreenController;
 import Model.ElementType;
 import Model.MyAction;
@@ -155,6 +156,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 						JOptionPane.WARNING_MESSAGE);
 				if (choise == JOptionPane.YES_OPTION)
 					thisref.setVisible(false);
+					Router.getInstance().getMainScreenGui().setEnabled(true);
 			}
 		});
 		btnCancel.setBounds(348, 512, 116, 23);

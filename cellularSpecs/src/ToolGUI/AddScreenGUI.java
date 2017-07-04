@@ -20,6 +20,7 @@ import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
+import Controller.Router;
 import Model.WorkSpace;
 
 public class AddScreenGUI extends JFrame {
@@ -74,6 +75,8 @@ public class AddScreenGUI extends JFrame {
 						JOptionPane.WARNING_MESSAGE);
 				if (choise == JOptionPane.YES_OPTION)
 					thisRef.setVisible(false);
+					Router.getInstance().getMainScreenGui().setEnabled(true);
+
 			}
 		});
 		button_2.setBounds(237, 206, 116, 23);

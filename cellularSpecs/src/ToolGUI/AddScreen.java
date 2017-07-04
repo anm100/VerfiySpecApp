@@ -1,18 +1,28 @@
 package ToolGUI;
 
 import javax.swing.JFrame;
+
 import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import java.awt.TextArea;
 import java.awt.Button;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
+import Controller.Router;
+
 public class AddScreen extends JFrame {
 	private JTextField textField;
+	private AddScreen thisref=this;
 	public AddScreen() {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
@@ -40,6 +50,17 @@ public class AddScreen extends JFrame {
 		getContentPane().add(button);
 		
 		Button button_1 = new Button("Cancel");
+		button_1.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				int choise = JOptionPane.showConfirmDialog(null,
+						"Are you sure you want to cancel this appointment setting", "Cancel", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (choise == JOptionPane.YES_OPTION)
+					thisref.setVisible(false);
+					Router.getInstance().getMainScreenGui().setEnabled(true);
+			}
+		});
 		button_1.setBounds(99, 285, 70, 22);
 		getContentPane().add(button_1);
 		

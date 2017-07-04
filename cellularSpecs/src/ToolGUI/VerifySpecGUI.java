@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 
+import Controller.Router;
 import Controller.ScreenController;
 import Controller.VerificationController;
 import Model.ElementType;
@@ -66,6 +68,7 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 	private	ChoosenParamtersGUI choosparamGui = new ChoosenParamtersGUI();
 	private	ChoosenParamtersGUI req6choosparamGui = new ChoosenParamtersGUI();
 	private ParamManagment req8choosparamGui=new ParamManagment();
+	private VerifySpecGUI thisref=this;
 	private 	Border b,but;
 //	private ActionManagment req8actionMangement=new ActionManagment(paramName, data, toSwitch);
 	private Border temp;
@@ -99,7 +102,14 @@ public class VerifySpecGUI extends  JFrame implements ActionListener,ItemListene
 			req3ChoosParams.setBorder(b);
 			req8ChoosParams.setBorder(b);
 			root.setBorder(b);
-		 	}
+			int choise = JOptionPane.showConfirmDialog(null,
+					"Are you sure you want to cancel this appointment setting", "Cancel", JOptionPane.YES_NO_OPTION,
+					JOptionPane.WARNING_MESSAGE);
+			if (choise == JOptionPane.YES_OPTION)
+				thisref.setVisible(false);
+				Router.getInstance().getMainScreenGui().setEnabled(true);
+		}
+		 	
 		 });
 		btnCancel.setBounds(456, 429, 107, 23);
 		getContentPane().add(btnCancel);

@@ -3,7 +3,9 @@ package ToolGUI;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import Controller.Router;
 import Controller.ScreenController;
+
 
 
 
@@ -61,6 +63,8 @@ public class AddConditonGui extends JFrame {
 						JOptionPane.WARNING_MESSAGE);
 				if (choise == JOptionPane.YES_OPTION)
 					thisref.setVisible(false);
+					Router.getInstance().getMainScreenGui().setEnabled(true);
+
 			}
 		});
 		
