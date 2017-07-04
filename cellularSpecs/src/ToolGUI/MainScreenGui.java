@@ -34,6 +34,7 @@ public class MainScreenGui extends JFrame  {
 	public  MainScreenGui() {
 		
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(750,600);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
