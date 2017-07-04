@@ -212,19 +212,19 @@ public class WorkSpaceController {
 		ArrayList<String> act1=elementGui.get_Off_To_ON_Actions();
 		ArrayList<String> act2=elementGui.get_On_To_Off_Actions();
 		for(String i : con1){
-			p.addCond(new MyCondition(i,ElementType.getOn()));
+			p.addCond(new MyCondition(i,ElementType.getNotEmpty()));
 			
 		}
 		for(String i : con2){
-			p.addCond(new MyCondition(i, ElementType.getOff()));
+			p.addCond(new MyCondition(i, ElementType.getEmpty()));
 			
 		}
 		for(String i : act1){
-			p.addAction(new MyAction(i, ElementType.getOn()));
+			p.addAction(new MyAction(i, ElementType.getNotEmpty()));
 			
 		}
 		for(String i : act2){
-			p.addAction(new MyAction(i, ElementType.getOff()));
+			p.addAction(new MyAction(i, ElementType.getEmpty()));
 			
 		}
 		l.setElementName(elementGui.getElementName());

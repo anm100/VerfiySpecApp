@@ -3,6 +3,7 @@ package ToolGUI;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.UIManager;
 
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
@@ -33,7 +34,6 @@ public class MainScreenGui extends JFrame  {
 	
 	public  MainScreenGui() {
 		
-		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(750,600);
 		getContentPane().setLayout(null);

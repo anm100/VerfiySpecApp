@@ -257,7 +257,6 @@ public class ScreenGUI extends JScrollPane implements ActionListener {
                    // e.getComponent().getParent().remove(e.getComponent());
                     Router.getInstance().setEmptyGUI(emptyNempty);
                     Router.getInstance().setScreenGUI(thisRef);
-                    Router.getInstance().removelistenerMainScreen();
                 }else if (datalabel[1].equals(ElementType.getOnOffType())){
                     WorkSpace.getLog().debug("Label  " + labelElement.get(i).getText() + " was clicked");
                     OnOfGUI  onOff= new OnOfGUI(getScreenName(),datalabel[0]);
@@ -278,9 +277,10 @@ public class ScreenGUI extends JScrollPane implements ActionListener {
                     ButtonTypeGUI  buttonTypeGUI= new ButtonTypeGUI(getScreenName(),datalabel[0]);
                     buttonTypeGUI.setEditButtonTListener(Router.getInstance());
                     buttonTypeGUI.setVisible(true);
-                    Router.getInstance().getMainScreenGui().setEnabled(false);
                     Router.getInstance().setButtonTypeGUI(buttonTypeGUI);
                 }
+                Router.getInstance().getMainScreenGui().setEnabled(false);
+
             }
     }
 
