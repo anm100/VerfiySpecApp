@@ -2,7 +2,6 @@ package ToolGUI;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -187,7 +186,6 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				setDefaultValue(rdbtnOff.getText());
 			}
 		});
-		ImageIcon imageForOne = new ImageIcon(getClass().getResource("../add.png"));
 		
 		JLabel lblNewLabel_1 = new JLabel("Parameter name:");
 		lblNewLabel_1.setBounds(29, 93, 110, 14);

@@ -17,12 +17,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.ActionCondController;
 import Controller.ElementController;
 import Controller.Router;
 import Controller.ScreenController;
 import Model.WorkSpace;
-import our.Utils.BulidSpec;
 import ui.utils.Messages;
 import ui.utils.MyTableModel;
 
@@ -302,11 +300,7 @@ public class ButtonTypeGUI extends JFrame {
 	}
 	
 	
-	public static void main(String[] args) {
-		BulidSpec.build();
-		ButtonTypeGUI a=new ButtonTypeGUI("aaa",null);
-		a.setVisible(true);
-	}
+
 	public void setEditButtonTListener(ActionListener ButtonTypeListener ){       
 		butSave.addActionListener(ButtonTypeListener);
 		butSave.setActionCommand("_Edit_standart_button");

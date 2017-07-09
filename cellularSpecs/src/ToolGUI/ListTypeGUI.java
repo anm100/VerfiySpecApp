@@ -1,6 +1,5 @@
 package ToolGUI;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
@@ -95,20 +94,6 @@ public class ListTypeGUI extends JFrame {
 		btnCancel.setBounds(201, 365, 89, 23);
 		getContentPane().add(btnCancel);
 		System.out.println(values.toString());
-		JSeparator separator = new JSeparator();
-		separator.setBounds(40, 243, 445, 2);
-		getContentPane().add(separator);
-		ImageIcon imageForOne = new ImageIcon(getClass().getResource("../add.png"));
-		JButton button = new JButton("Add action",imageForOne);
-		button.setFont(new Font("Tahoma", Font.BOLD, 11));
-		button.setHorizontalAlignment(SwingConstants.LEADING);
-		button.setBackground(UIManager.getColor("Button.highlight"));
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button.setBounds(20, 243, 236, 28);
-		getContentPane().add(button);
 		
 		 butListSave = new JButton("Save");
 		 butListSave.setToolTipText("");

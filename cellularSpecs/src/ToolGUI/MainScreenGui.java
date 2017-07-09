@@ -34,7 +34,6 @@ public class MainScreenGui extends JFrame  {
 	
 	public  MainScreenGui() {
 		
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(1133,785);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
@@ -86,7 +85,6 @@ public class MainScreenGui extends JFrame  {
 		getContentPane().add(btnExport);
 		
 		btnRunVerification= new JButton("Verifiy SPEC");
-		btnRunVerification.setEnabled(false);
 
 		btnRunVerification.setBounds(785, 674, 136, 23);
 		getContentPane().add(btnRunVerification);
