@@ -1,0 +1,2 @@
+spin -a  ..\examplePG.pml
+gcc -DMEMLIM=1024 -O2 -DXUSAFE -w -o pan pan.cpan -m10000  -a -N req>> outreq11.txt

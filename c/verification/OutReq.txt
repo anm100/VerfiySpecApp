@@ -1,0 +1,67 @@
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+
+(Spin Version 6.1.0 -- 4 May 2011)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (req8_1)
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness disabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 28 byte, depth reached 33, errors: 0
+       31 states, stored
+        6 states, matched
+       37 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.001	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.270	actual memory usage for states (unsuccessful compression: 20755.43%)
+         	state-vector as stored = 9116 byte + 16 byte overhead
+    2.000	memory used for hash table (-w19)
+    0.343	memory used for DFS stack (-m10000)
+    2.539	total actual memory usage
+
+unreached in proctype vm
+	examplePG.pml:28, state 5, "action[0] = 1"
+	examplePG.pml:28, state 6, "action[1] = 1"
+	examplePG.pml:28, state 7, "state = changeAirplane_modeON"
+	examplePG.pml:29, state 12, "state = changeAirplane_modeOFF"
+	examplePG.pml:30, state 17, "state = changeBluetoothON"
+	examplePG.pml:31, state 22, "state = changeBluetoothOFF"
+	examplePG.pml:32, state 27, "state = changeWifiON"
+	examplePG.pml:33, state 32, "state = changeWifiOFF"
+	examplePG.pml:56, state 68, "(((action[2]==0)&&(action[1]==1)))"
+	examplePG.pml:56, state 68, "(((action[2]==0)&&(action[1]==1)))"
+	examplePG.pml:61, state 79, "(((action[2]==0)&&(action[0]==1)))"
+	examplePG.pml:61, state 79, "(((action[2]==0)&&(action[0]==1)))"
+	examplePG.pml:71, state 109, "(((action[2]==1)&&(action[1]==1)))"
+	examplePG.pml:71, state 109, "(((action[2]==0)&&(action[1]==1)))"
+	examplePG.pml:71, state 109, "(((action[2]==1)&&(action[1]==1)))"
+	examplePG.pml:71, state 109, "(((action[2]==0)&&(action[1]==1)))"
+	examplePG.pml:83, state 131, "((action[2]==1))"
+	examplePG.pml:83, state 131, "((action[2]==1))"
+	examplePG.pml:89, state 141, "state = changeWifiOFF"
+	examplePG.pml:90, state 146, "state = changeBluetoothOFF"
+	examplePG.pml:92, state 155, "state = changeWifiOFF"
+	examplePG.pml:93, state 160, "state = changeBluetoothOFF"
+	examplePG.pml:88, state 162, "((((action[2]==1)&&(action[0]==0))&&(action[1]==0)))"
+	examplePG.pml:88, state 162, "((action[0]==1))"
+	examplePG.pml:88, state 162, "((action[1]==1))"
+	examplePG.pml:88, state 162, "((((action[2]==1)&&(action[0]==0))&&(action[1]==0)))"
+	examplePG.pml:88, state 162, "((action[0]==1))"
+	examplePG.pml:88, state 162, "((action[1]==1))"
+	examplePG.pml:97, state 181, "(((action[2]==1)&&(action[0]==1)))"
+	examplePG.pml:97, state 181, "(((action[2]==0)&&(action[0]==1)))"
+	examplePG.pml:97, state 181, "(((action[2]==1)&&(action[0]==1)))"
+	examplePG.pml:97, state 181, "(((action[2]==0)&&(action[0]==1)))"
+	examplePG.pml:103, state 186, "-end-"
+	(19 of 186 states)
+unreached in claim req8_1
+	_spin_nvr.tmp:20, state 24, "-end-"
+	(1 of 24 states)
+
+pan: elapsed time 0 seconds
