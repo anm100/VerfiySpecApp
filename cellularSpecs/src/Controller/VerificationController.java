@@ -285,7 +285,7 @@ private void initialize(){
 		
 	}
 	private  String defineParamsPromela(){
-		String out = new String("\n/*define flag for action */\nbyte action["+WorkSpace.getInstance().getParamsMap().size()+"];\n\n"
+		String out = new String("\n/*define flag for action */\nbyte action["+WorkSpace.getInstance().getParamsMap().size()+70+"];\n\n"
 				+ "/*define params and default value*/\n");
 		Iterator<Entry<String, Param>> it = WorkSpace.getInstance().getParamsMap().entrySet().iterator();
 		Param p;

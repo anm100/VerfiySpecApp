@@ -44,6 +44,7 @@ public class RequirementList {
  }
 
 public static ArrayList<Requirement> getReqlist() {
+	
 	return (ArrayList<Requirement>) reqlist;
 }
 public  void loadreqs() {

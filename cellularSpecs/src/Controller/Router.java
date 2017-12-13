@@ -120,6 +120,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 			if(verifySpecGUI==null)
 			{
 				verifySpecGUI=new VerifySpecGUI();
+				
 				VerificationController.buildVerifySpecGUI(verifySpecGUI);		
 				verifySpecGUI.setVerifySpecGUI(this);
 			}
