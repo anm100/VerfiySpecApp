@@ -86,13 +86,21 @@ public class MainScreenGui extends JFrame  {
 		
 		btnRunVerification= new JButton("Verifiy SPEC");
 
-		btnRunVerification.setBounds(785, 674, 136, 23);
+		btnRunVerification.setBounds(647, 674, 136, 23);
 		getContentPane().add(btnRunVerification);
 		
 		 btnShowresults = new JButton("ShowResults");
 		 btnShowresults.setEnabled(false);
 		btnShowresults.setBounds(934, 674, 136, 23);
 		getContentPane().add(btnShowresults);
+		
+		JButton button = new JButton("generate code");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button.setBounds(788, 674, 136, 23);
+		getContentPane().add(button);
 	 }
 		public void setBtnRunVerification(Boolean b) {
 		this.btnRunVerification.setEnabled(b);;
