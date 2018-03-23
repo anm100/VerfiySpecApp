@@ -80,7 +80,9 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	private ActionManagment actions;
 	private conditionManagment condition ;
 	private OnOfGUI thisref = this;
+	private String comment=" ";
 	public OnOfGUI(String ScreenName,String eName)
+	
 	{
 		On_To_Off_Condition=new ArrayList<String>();
 		Off_To_On_Condition=new ArrayList<String>();
@@ -383,6 +385,19 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				  						 });
 				  						 button_4.setBounds(412, 18, 159, 25);
 				  						 getContentPane().add(button_4);
+				  						 
+				  						 JButton btnAddComment = new JButton("Add comment");
+				  						 btnAddComment.addActionListener(new ActionListener() {
+				  						 	public void actionPerformed(ActionEvent e) {
+				  						 		AddCommentGUI addComGUI = new AddCommentGUI();
+				  				        		addComGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				  				        		addComGUI.setLocation(300, 300);
+				  				        		addComGUI.setVisible(true);
+				  				        		comment = addComGUI.getComment();
+				  						 	}
+				  						 });
+				  						 btnAddComment.setBounds(412, 54, 159, 23);
+				  						 getContentPane().add(btnAddComment);
 				  						 button.addActionListener(this);
 			ParameterName.addFocusListener(new FocusListener() {
 		
@@ -403,6 +418,9 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				loadData(ElementController.getDataOfElement(ScreenName,eName),eName) ; 
 			}
 		
+	}
+	public String getComment() {
+		return comment;
 	}
 	private void loadData(	ArrayList <String> dataOfelement,String eName) {
 		elementName.setText(dataOfelement.get(0));

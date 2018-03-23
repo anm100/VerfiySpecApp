@@ -15,6 +15,8 @@ private final String type=ElementType.getStandartBtnType();
 private final String optLogic= "&&"; 
 private ArrayList <MyAction> actions= new ArrayList<>();
 private String exception; 
+///////////////
+private String comment;
 
 
 public StandartButtonType() {
@@ -98,6 +100,10 @@ public void setElementName(String name) {
 public String getException() {
 	// TODO Auto-generated method stub
 	return exception;
+}
+
+public String getComment() {
+	return comment;
 }
 }
 /*

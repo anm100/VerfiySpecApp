@@ -242,6 +242,7 @@ public class WorkSpaceController {
 		}
 		WorkSpace.getLog().debug("--show element in GUI");
 	}
+	// add ONOFF update comment  23 3 2018
 	public static void addToModels(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType  l)	
 	{
 		//getConditions from OnOfGui givr me arraylist with the conditions to on->off 
@@ -269,6 +270,10 @@ public class WorkSpaceController {
 		l.setElementName(elementGui.getElementName());
 		l.setException(elementGui.getException().getText());
 		l.setParam(p);
+		
+		// override function add comment to onff model 
+		l.setComment(elementGui.getComment());
+		
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do  edit -->  "+l.getParamName());
 		WorkSpace.getInstance().addParameterToHash(p);

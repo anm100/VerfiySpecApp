@@ -8,6 +8,7 @@ private ParamList parameter ;
 private final  String type=ElementType.getListType();
 private String elementName;
 private String exception;
+private String comment;
 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
@@ -69,6 +70,10 @@ public ArrayList<MyAction> getActions(String value) {
 public String getException() {
 	// TODO Auto-generated method stub
 	return exception;
+}
+
+public String getComment() {
+	return comment;
 }
 
 }

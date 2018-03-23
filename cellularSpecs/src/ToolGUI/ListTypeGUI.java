@@ -31,6 +31,7 @@ public class ListTypeGUI extends JFrame {
 	private String values[]={""} ; 
 	JButton butListSave;
 	String ScreenName; 
+	private String comment=" ";
 	public ListTypeGUI(String screenName)
 	{
 		this.ScreenName=screenName; 
@@ -41,25 +42,25 @@ public class ListTypeGUI extends JFrame {
 		
 		JLabel lblOnoff = new JLabel(screenName+"-List Element");
 		lblOnoff.setFont(new Font("Arial", Font.BOLD, 22));
-		lblOnoff.setBounds(0, -6, 361, 36);
+		lblOnoff.setBounds(10, 9, 361, 36);
 		getContentPane().add(lblOnoff);
 		
 		JLabel lblName = new JLabel("Element Name:");
-		lblName.setBounds(20, 44, 74, 14);
+		lblName.setBounds(20, 56, 74, 14);
 		getContentPane().add(lblName);
 		
 		JLabel lblDefaulval = new JLabel("DefaultVal:");
-		lblDefaulval.setBounds(21, 218, 64, 14);
+		lblDefaulval.setBounds(20, 242, 64, 14);
 		getContentPane().add(lblDefaulval);
 		
 		elementName = new JTextField();
-		elementName.setBounds(104, 41, 152, 20);
+		elementName.setBounds(104, 53, 152, 20);
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
 		
 		JComboBox parameterNAme = new JComboBox();
 		parameterNAme.setModel(new DefaultComboBoxModel(new String[] {"new parameter", "1", "2", "3", "4", "5"}));
-		parameterNAme.setBounds(104, 63, 152, 22);
+		parameterNAme.setBounds(104, 84, 152, 22);
 		getContentPane().add(parameterNAme);
 		setSize(501, 367);
 		
@@ -67,20 +68,20 @@ public class ListTypeGUI extends JFrame {
 
 
 		comboBox.setModel(new DefaultComboBoxModel(values));
-		comboBox.setBounds(104, 215, 152, 20);
+		comboBox.setBounds(104, 239, 152, 20);
 		getContentPane().add(comboBox);
 		
 		
 		JLabel lblValues = new JLabel("Values:");
-		lblValues.setBounds(21, 93, 64, 14);
+		lblValues.setBounds(20, 116, 64, 14);
 		getContentPane().add(lblValues);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(104, 96, 149, 108);
+		scrollPane.setBounds(104, 117, 149, 108);
 		getContentPane().add(scrollPane);
 		
 		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
+		scrollPane.setRowHeaderView(textArea);
 		setSize(501, 405);
 		
 		values=textArea.getText().split("\n");
@@ -105,12 +106,25 @@ public class ListTypeGUI extends JFrame {
 		getContentPane().add(button_2);
 		
 		JLabel lblParameterName = new JLabel("Parameter name");
-		lblParameterName.setBounds(20, 67, 89, 14);
+		lblParameterName.setBounds(20, 88, 89, 14);
 		getContentPane().add(lblParameterName);
 		
 		JButton button_1 = new JButton("Delete Element");
-		button_1.setBounds(261, -5, 120, 25);
+		button_1.setBounds(329, 51, 120, 25);
 		getContentPane().add(button_1);
+		
+		JButton btnAddComment = new JButton("Add comment");
+		btnAddComment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddCommentGUI addComGUI = new AddCommentGUI();
+        		addComGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        		addComGUI.setLocation(300, 300);
+        		addComGUI.setVisible(true);
+        		comment = addComGUI.getComment();
+			}
+		});
+		btnAddComment.setBounds(329, 84, 120, 23);
+		getContentPane().add(btnAddComment);
 		setSize(501, 378);
 		
 		comboBox.addPopupMenuListener(new PopupMenuListener() {

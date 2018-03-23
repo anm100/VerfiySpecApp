@@ -83,6 +83,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 	private ActionManagment actions;
 	private conditionManagment condition ;
 	private EmptyNotEmptyGUI thisref = this;
+	private String comment=new String("");
 	public EmptyNotEmptyGUI(String ScreenName,String eName)
 	{
 		NotEmpty_To_Empty_Condition=new ArrayList<String>();
@@ -105,11 +106,11 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		getContentPane().add(lblOnoff);
 		
 		JLabel lblName = new JLabel("Element name:");
-		lblName.setBounds(61, 61, 78, 14);
+		lblName.setBounds(61, 80, 78, 14);
 		getContentPane().add(lblName);
 		
 		JLabel lblDefaulval = new JLabel("DefaultVal:");
-		lblDefaulval.setBounds(61, 113, 64, 14);
+		lblDefaulval.setBounds(61, 132, 64, 14);
 		getContentPane().add(lblDefaulval);
 		
 		elementName = new JTextField("");
@@ -118,7 +119,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				lblNewLabel_2.setVisible(false);
 			}
 		});
-		elementName.setBounds(149, 58, 168, 20);
+		elementName.setBounds(149, 77, 168, 20);
 		getContentPane().add(elementName);
 		elementName.setColumns(10);
 
@@ -138,7 +139,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				}
 			}
 		});
-		ComboparameterNames.setBounds(147, 82, 170, 22);
+		ComboparameterNames.setBounds(147, 101, 170, 22);
 		getContentPane().add(ComboparameterNames);
 	
 		
@@ -168,9 +169,9 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		setDefaultValue(rdbtnOff.getText());
 		 rdbtnOn = new JRadioButton(ElementType.getNotEmpty());
 		rdbtnOn.setSelected(false);
-		rdbtnOn.setBounds(147, 106, 92, 28);
+		rdbtnOn.setBounds(147, 125, 92, 28);
 		getContentPane().add(rdbtnOn);
-		rdbtnOff.setBounds(238, 106, 79, 28);
+		rdbtnOff.setBounds(238, 125, 79, 28);
 		getContentPane().add(rdbtnOff);
 		ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnOn);
@@ -191,7 +192,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		});
 		
 		JLabel lblNewLabel_1 = new JLabel("Parameter name");
-		lblNewLabel_1.setBounds(60, 86, 79, 14);
+		lblNewLabel_1.setBounds(60, 105, 79, 14);
 		getContentPane().add(lblNewLabel_1);
 		setSize(496, 595);
 			
@@ -206,19 +207,19 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 			ParameterName.setForeground(Color.GRAY);
 			ParameterName.setText("parameter name");
 			ParameterName.setVisible(true);
-			ParameterName.setBounds(320, 83, 152, 20);
+			ParameterName.setBounds(320, 102, 152, 20);
 			ParameterName.setToolTipText("add new Parameter");
 			
 
 			 lblNewLabel_2.setVisible(false);
 			lblNewLabel_2.setForeground(Color.RED);
-			lblNewLabel_2.setBounds(320, 61, 184, 14);
+			lblNewLabel_2.setBounds(320, 80, 184, 14);
 			getContentPane().add(lblNewLabel_2);
 			
 			 
 			 lblNewLabel_3.setVisible(false);
 			lblNewLabel_3.setForeground(Color.RED);
-			lblNewLabel_3.setBounds(321, 106, 194, 14);
+			lblNewLabel_3.setBounds(321, 125, 194, 14);
 			getContentPane().add(lblNewLabel_3);
 			String[] doc_columnNames = { "Empty->NotEmpty","NotEmpty->Empty"};
 				
@@ -226,7 +227,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				separator_1.setBackground(Color.RED);
 				separator_1.setForeground(Color.RED);
 				separator_1.setOrientation(SwingConstants.VERTICAL);
-				separator_1.setBounds(50, 58, 445, 2);
+				separator_1.setBounds(27, 67, 445, 2);
 				getContentPane().add(separator_1);
 				
 				JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -370,6 +371,19 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				  						   JButton button_4 = new JButton("Delete Element");
 				  						   button_4.setBounds(349, 14, 120, 25);
 				  						   getContentPane().add(button_4);
+				  						   
+				  						   JButton btnAddComment = new JButton("Add comment");
+				  						   btnAddComment.addActionListener(new ActionListener() {
+				  						   	public void actionPerformed(ActionEvent e) {
+				  						   		AddCommentGUI addComGUI = new AddCommentGUI();
+				  						   		addComGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				  						   		addComGUI.setLocation(300, 300);
+				  						   		addComGUI.setVisible(true);
+				  						   		comment = addComGUI.getComment();
+				  						   	}
+				  						   });
+				  						   btnAddComment.setBounds(349, 50, 120, 23);
+				  						   getContentPane().add(btnAddComment);
 				  						   textAreaOnToOff.setVisible(false);
 				  						   textAreaOnToOff.addMouseListener(new MouseAdapter() {
 				  						   	@Override

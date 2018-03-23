@@ -9,6 +9,8 @@ private Param parameter;
 private final String type=ElementType.getOnOffType();
 private String elementName; 
 private String exception;
+private String comment;
+
 
 
 public OnOffType() {
@@ -81,6 +83,14 @@ public void addAction(MyAction e ){
 	this.actions.add(e);
 	*/
 }
+
+public String getComment() {
+	return comment;
+}
+public void setComment(String comment) {
+	this.comment = comment;
+}
+
 /*
  * now get values only in Param Class 
  */

@@ -11,6 +11,7 @@ private final String type=ElementType.getEmptyNotEmptyType();
 private List <MyAction> actions= new ArrayList<>(); 
 private List <MyCondition> conditions= new ArrayList<>();
 private String exception; 
+private String comment;
 
 public EmptyNEmptyType() {}
 
@@ -81,6 +82,10 @@ public String getException() {
 public void setException(String text) {
 	// TODO Auto-generated method stub
 	this.exception=text;
+}
+
+public String getComment() {
+	return comment;
 }
 
 

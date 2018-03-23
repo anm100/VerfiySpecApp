@@ -52,6 +52,7 @@ public class ButtonTypeGUI extends JFrame {
 	private Object[][] data = {};
 	private   JTable apps_table;
 	private ButtonTypeGUI thisref=this; 
+	private String comment=" ";
 	JTextArea exception;
 	public ButtonTypeGUI(String ScreenName,String eName)
 	{
@@ -220,8 +221,21 @@ public class ButtonTypeGUI extends JFrame {
 			     
 			        
 			        JButton btnNewButton = new JButton("Delete Element");
-			        btnNewButton.setBounds(331, 23, 95, 22);
+			        btnNewButton.setBounds(331, 23, 115, 22);
 			        getContentPane().add(btnNewButton);
+			        
+			        JButton btnAddComment = new JButton("Add comment");
+			        btnAddComment.addActionListener(new ActionListener() {
+			        	public void actionPerformed(ActionEvent arg0) {
+			        		AddCommentGUI addComGUI = new AddCommentGUI();
+			        		addComGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+			        		addComGUI.setLocation(300, 300);
+			        		addComGUI.setVisible(true);
+			        		comment = addComGUI.getComment();
+			        	}
+			        });
+			        btnAddComment.setBounds(331, 64, 115, 23);
+			        getContentPane().add(btnAddComment);
 				}
 				private void loadData(ArrayList <String> e,String eName) {
 					elementName.setText(e.get(0));
