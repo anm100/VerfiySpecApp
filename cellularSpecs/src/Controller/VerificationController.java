@@ -90,6 +90,8 @@ private void initialize(){
 ////		}
 ////		return "";
 //	}
+
+// while for screens , per screen while for element
 	private  String getPG() {
 		int flagbtn=0;
 		String sAll = new String("");Screen s = new Screen(); Element e ; 
