@@ -111,7 +111,8 @@ public class WorkSpaceController {
 		l.setValues(elementGui.getValues());
 		WorkSpace.getLog().debug("values from element :: update"+l.getValues()[0]);
 		
-		l.setComment(elementGui.getComment());
+		// green until exception of LIST is fixed
+	//	l.setComment(elementGui.getComment());
 
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("add element to workspace struct");

@@ -118,13 +118,16 @@ public class ListTypeGUI extends JFrame {
 		getContentPane().add(button_1);
 		
 		JButton btnAddComment = new JButton("Add comment");
-		btnAddComment.addActionListener(Router.getInstance());
+		// green until exception of LIST is fixed
+	//	btnAddComment.addActionListener(Router.getInstance());
 		btnAddComment.setBounds(329, 84, 120, 23);
 		getContentPane().add(btnAddComment);
 		setSize(501, 378);
-		btnAddComment.setActionCommand("_add_comment_pressed");
 		
-		Router.getInstance().setElemWeCameFrom(4);	// for COMMENT. we need to know what type of element we came from (in the router)
+		// green until exception of LIST is fixed
+	//	btnAddComment.setActionCommand("_add_comment_pressed");
+		
+	//	Router.getInstance().setElemWeCameFrom(4);	// for COMMENT. we need to know what type of element we came from (in the router)
 		
 		comboBox.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent arg0) {
