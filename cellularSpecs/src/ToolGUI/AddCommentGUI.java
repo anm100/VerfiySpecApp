@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controller.Router;
+import Model.WorkSpace;
+
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -20,6 +24,7 @@ public class AddCommentGUI extends JFrame {
 
 	private JPanel contentPane;
 	private String comment;
+	JTextArea textArea;
 
 
 	public AddCommentGUI() {
@@ -37,19 +42,16 @@ public class AddCommentGUI extends JFrame {
 		lblComment.setBounds(24, 11, 82, 23);
 		contentPane.add(lblComment);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setBounds(34, 45, 310, 114);
 		contentPane.add(textArea);
 		
+		///////////////////////////////////////////////////////////////
 		JButton btnSave = new JButton("Save");
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setComment(textArea.getText());
-				setVisible(false);
-			}
-		});
+		btnSave.setActionCommand("_save_comment");
 		btnSave.setBounds(66, 179, 89, 23);
 		contentPane.add(btnSave);
+		btnSave.addActionListener(Router.getInstance());
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
@@ -67,7 +69,15 @@ public class AddCommentGUI extends JFrame {
 		return comment;
 	}
 	
-	private void setComment(String commentToSet){
+	public void setComment(String commentToSet){
 		comment = commentToSet;
+	}
+	
+	public String getTextFromArea(){
+		return textArea.getText();
+	}
+	
+	public void setTextInArea(String text){
+		textArea.setText(text);
 	}
 }

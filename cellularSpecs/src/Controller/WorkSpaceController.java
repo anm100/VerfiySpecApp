@@ -110,6 +110,8 @@ public class WorkSpaceController {
 		WorkSpace.getLog().debug("--show values for element :"+elementGui.getValues());
 		l.setValues(elementGui.getValues());
 		WorkSpace.getLog().debug("values from element :: update"+l.getValues()[0]);
+		
+		l.setComment(elementGui.getComment());
 
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("add element to workspace struct");
@@ -171,9 +173,10 @@ public class WorkSpaceController {
 	
 	private static void addelementModel(ScreenGUI screenGUI,
 			ButtonTypeGUI elementGui, StandartButtonType l) {
-		// TODO Auto-generated method stub
 		int size;
 		l.setElementName(elementGui.getElementName());
+		l.setComment(elementGui.getComment());	// setting button comment
+
 		size=elementGui.getRowsNumber();
 		for(int i=0;i<size;i++)
 		{
@@ -230,6 +233,8 @@ public class WorkSpaceController {
 		l.setElementName(elementGui.getElementName());
 		l.setException(elementGui.getException().getText());
 		l.setParam(p);
+		l.setComment(elementGui.getComment());
+		
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do  edit -->  "+l.getParamName());
 		WorkSpace.getInstance().addParameterToHash(p);
@@ -270,9 +275,7 @@ public class WorkSpaceController {
 		l.setElementName(elementGui.getElementName());
 		l.setException(elementGui.getException().getText());
 		l.setParam(p);
-		
-		// override function add comment to onff model 
-		l.setComment(elementGui.getComment());
+		l.setComment(elementGui.getComment()); // setting comment for onoff
 		
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do  edit -->  "+l.getParamName());
@@ -345,6 +348,8 @@ public class WorkSpaceController {
 	public static void addelementToGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
 		int size;
 		l.setElementName(elementGui.getElementName());
+		l.setComment(elementGui.getComment()); // setting comment of button
+		
 		size=elementGui.getRowsNumber();
 		for(int i=0;i<size;i++)
 		{

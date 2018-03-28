@@ -34,6 +34,7 @@ public class ElementController {
 		s.add(e.getParamName());
 		s.add(e.getParamVal());
 		s.add(e.getException());
+		s.add(e.getComment());
 		
 	return s ; 
 	}
@@ -43,6 +44,7 @@ public class ElementController {
 		s.add(e.getELementName());
 		s.add(e.getMoveTo());
 		s.add(e.getException());
+		s.add(e.getComment());
 		
 	return s ; 
 	}

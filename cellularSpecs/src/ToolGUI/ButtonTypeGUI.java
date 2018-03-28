@@ -225,23 +225,21 @@ public class ButtonTypeGUI extends JFrame {
 			        getContentPane().add(btnNewButton);
 			        
 			        JButton btnAddComment = new JButton("Add comment");
-			        btnAddComment.addActionListener(new ActionListener() {
-			        	public void actionPerformed(ActionEvent arg0) {
-			        		AddCommentGUI addComGUI = new AddCommentGUI();
-			        		addComGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-			        		addComGUI.setLocation(300, 300);
-			        		addComGUI.setVisible(true);
-			        		comment = addComGUI.getComment();
-			        	}
-			        });
+			        btnAddComment.addActionListener(Router.getInstance());
 			        btnAddComment.setBounds(331, 64, 115, 23);
 			        getContentPane().add(btnAddComment);
+			        btnAddComment.setActionCommand("_add_comment_pressed");
+			        
+			        
+			        Router.getInstance().setElemWeCameFrom(1);	// for COMMENT. we need to know what element we came from (in the router)
+			        
 				}
 				private void loadData(ArrayList <String> e,String eName) {
 					elementName.setText(e.get(0));
 			      
 			        toScreenComboBox.setSelectedItem(e.get(1));
 					setException(e.get(2));
+					setComment(e.get(3));
 
 			        addToTable(ElementController.getConditions(ScreenName,eName));
 
@@ -319,5 +317,15 @@ public class ButtonTypeGUI extends JFrame {
 		butSave.addActionListener(ButtonTypeListener);
 		butSave.setActionCommand("_Edit_standart_button");
 		addNewCond.addActionListener(ButtonTypeListener);
+	}
+	
+	
+	
+	public String getComment() {
+		return comment;
+	}
+	
+	public void setComment(String comment) {
+		this.comment = comment;	
 	}
 }

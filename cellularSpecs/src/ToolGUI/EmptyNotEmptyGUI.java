@@ -83,7 +83,8 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 	private ActionManagment actions;
 	private conditionManagment condition ;
 	private EmptyNotEmptyGUI thisref = this;
-	private String comment=new String("");
+	private String comment=new String(" ");
+	
 	public EmptyNotEmptyGUI(String ScreenName,String eName)
 	{
 		NotEmpty_To_Empty_Condition=new ArrayList<String>();
@@ -371,19 +372,16 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				  						   JButton button_4 = new JButton("Delete Element");
 				  						   button_4.setBounds(349, 14, 120, 25);
 				  						   getContentPane().add(button_4);
-				  						   
+				  						   	
 				  						   JButton btnAddComment = new JButton("Add comment");
-				  						   btnAddComment.addActionListener(new ActionListener() {
-				  						   	public void actionPerformed(ActionEvent e) {
-				  						   		AddCommentGUI addComGUI = new AddCommentGUI();
-				  						   		addComGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				  						   		addComGUI.setLocation(300, 300);
-				  						   		addComGUI.setVisible(true);
-				  						   		comment = addComGUI.getComment();
-				  						   	}
-				  						   });
+				  						   btnAddComment.addActionListener(Router.getInstance());
 				  						   btnAddComment.setBounds(349, 50, 120, 23);
 				  						   getContentPane().add(btnAddComment);
+				  						   btnAddComment.setActionCommand("_add_comment_pressed");
+				  						   
+				  						   Router.getInstance().setElemWeCameFrom(3);
+				  						   
+				  						   
 				  						   textAreaOnToOff.setVisible(false);
 				  						   textAreaOnToOff.addMouseListener(new MouseAdapter() {
 				  						   	@Override
@@ -450,7 +448,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		setTextArea(NotEmpty_To_Empty_Condition,ElementType.getEmpty());
 		setTextArea(Empty_To_NotEmpty_Condition,ElementType.getNotEmpty());
 
-		
+		setComment(dataOfelement.get(4));	// setting the comment to empty ot empty
 		
 		btnSave.setActionCommand("_edit_EmptyNEmpty");	
 		
@@ -719,5 +717,13 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 	}
 		
 		
+	}
+	
+	public String getComment() {
+		return comment;
+	}
+	
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }

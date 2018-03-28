@@ -19,6 +19,7 @@ import java.util.Scanner;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
@@ -57,6 +58,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private int Location=0;
 	private String path ; 
 	private VerificationController verificationController ;
+	private AddCommentGUI addCommentGUI;
+	private int elemWeCameFrom; // for COMMENT. we need to know what element we came from. 1-button, 2-onOff, 3-empNotEmp, 4-List
 
 
 	private AddActionGUI addActionGUI;
@@ -368,7 +371,34 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 
 				}
 				mainScreenGui.setEnabled(true);
-
+				break;
+			// Comment listeners. (Code Generation Project)
+			case "_add_comment_pressed":
+				WorkSpace.getLog().debug("Router> Add comment pressed...");
+				addCommentGUI = new AddCommentGUI();
+				addCommentGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				addCommentGUI.setLocation(300, 300);
+				if (getElemWeCameFrom() == 1)	// need to know where we came from, to TAKE from right GUI
+					addCommentGUI.setTextInArea(buttonTypeGUI.getComment());
+				if (getElemWeCameFrom() == 2)
+					addCommentGUI.setTextInArea(onOfGUI.getComment());
+				if (getElemWeCameFrom() == 3)
+					addCommentGUI.setTextInArea(emptyNotEmptyGUI.getComment());
+				if (getElemWeCameFrom() == 4)
+					addCommentGUI.setTextInArea(onOfGUI.getComment());
+				addCommentGUI.setVisible(true);
+				break;
+			case "_save_comment":
+				WorkSpace.getLog().debug("Router> Save comment pressed...");
+				if (getElemWeCameFrom() == 1)	// need to know where we came from, to SAVE in the right GUI
+					buttonTypeGUI.setComment(addCommentGUI.getTextFromArea());
+				if (getElemWeCameFrom() == 2)
+					onOfGUI.setComment(addCommentGUI.getTextFromArea());
+				if (getElemWeCameFrom() == 3)
+					emptyNotEmptyGUI.setComment(addCommentGUI.getTextFromArea());
+				if (getElemWeCameFrom() == 4)
+					addCommentGUI.setComment(addCommentGUI.getTextFromArea());
+				addCommentGUI.setVisible(false);		
 				break;
 		}
 
@@ -580,6 +610,15 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	
 	public void setButtonTypeGUI(ButtonTypeGUI buttonTypeGUI) {
 		this.buttonTypeGUI = buttonTypeGUI;
+	}
+	
+	
+	
+	public int getElemWeCameFrom() {
+		return elemWeCameFrom;
+	}
+	public void setElemWeCameFrom(int elemWeCameFrom) {
+		this.elemWeCameFrom = elemWeCameFrom;
 	}
 
 

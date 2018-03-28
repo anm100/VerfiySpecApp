@@ -15,7 +15,6 @@ private final String type=ElementType.getStandartBtnType();
 private final String optLogic= "&&"; 
 private ArrayList <MyAction> actions= new ArrayList<>();
 private String exception; 
-///////////////
 private String comment;
 
 
@@ -105,6 +104,11 @@ public String getException() {
 public String getComment() {
 	return comment;
 }
+
+public void setComment(String comment) {
+	this.comment = comment;
+}
+
 }
 /*
  * now get values only in Param Class 

@@ -23,6 +23,9 @@ import javax.swing.JTextArea;
 
 
 import javax.swing.event.PopupMenuListener;
+
+import Controller.Router;
+
 import javax.swing.event.PopupMenuEvent;
 
 public class ListTypeGUI extends JFrame {
@@ -32,6 +35,7 @@ public class ListTypeGUI extends JFrame {
 	JButton butListSave;
 	String ScreenName; 
 	private String comment=" ";
+
 	public ListTypeGUI(String screenName)
 	{
 		this.ScreenName=screenName; 
@@ -114,18 +118,13 @@ public class ListTypeGUI extends JFrame {
 		getContentPane().add(button_1);
 		
 		JButton btnAddComment = new JButton("Add comment");
-		btnAddComment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AddCommentGUI addComGUI = new AddCommentGUI();
-        		addComGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        		addComGUI.setLocation(300, 300);
-        		addComGUI.setVisible(true);
-        		comment = addComGUI.getComment();
-			}
-		});
+		btnAddComment.addActionListener(Router.getInstance());
 		btnAddComment.setBounds(329, 84, 120, 23);
 		getContentPane().add(btnAddComment);
 		setSize(501, 378);
+		btnAddComment.setActionCommand("_add_comment_pressed");
+		
+		Router.getInstance().setElemWeCameFrom(4);	// for COMMENT. we need to know what type of element we came from (in the router)
 		
 		comboBox.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent arg0) {
@@ -157,5 +156,13 @@ public class ListTypeGUI extends JFrame {
 	}
 	public String getScreenName() {
 		return ScreenName;
+	}
+	
+	public String getComment() {
+		return comment;
+	}
+	
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }

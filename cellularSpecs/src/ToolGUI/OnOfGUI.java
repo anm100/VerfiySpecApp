@@ -386,19 +386,21 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				  						 button_4.setBounds(412, 18, 159, 25);
 				  						 getContentPane().add(button_4);
 				  						 
+				  						 ///////////////////////////////////////////////////////
 				  						 JButton btnAddComment = new JButton("Add comment");
-				  						 btnAddComment.addActionListener(new ActionListener() {
-				  						 	public void actionPerformed(ActionEvent e) {
-				  						 		AddCommentGUI addComGUI = new AddCommentGUI();
-				  				        		addComGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				  				        		addComGUI.setLocation(300, 300);
-				  				        		addComGUI.setVisible(true);
-				  				        		comment = addComGUI.getComment();
-				  						 	}
-				  						 });
+				  						btnAddComment.setActionCommand("_add_comment_pressed");
 				  						 btnAddComment.setBounds(412, 54, 159, 23);
 				  						 getContentPane().add(btnAddComment);
+				  						btnAddComment.addActionListener(Router.getInstance());
+				  						 
+				  						 
+				  						Router.getInstance().setElemWeCameFrom(2); // for COMMENT. we need to know what element we came from (in the router)
+				  						
+				  						
+				  						 
 				  						 button.addActionListener(this);
+				  						 
+				  						 
 			ParameterName.addFocusListener(new FocusListener() {
 		
 				public void focusGained(FocusEvent arg0) {
@@ -419,9 +421,15 @@ public class OnOfGUI extends JFrame implements ActionListener {
 			}
 		
 	}
+	
 	public String getComment() {
 		return comment;
 	}
+	
+	public void setComment(String comment) {
+		this.comment = comment;	
+	}
+	
 	private void loadData(	ArrayList <String> dataOfelement,String eName) {
 		elementName.setText(dataOfelement.get(0));
 		setParameterName(ScreenController.getParams(ElementType.getOnOffType(), ScreenName,dataOfelement.get(1),dataOfelement.get(0)));
@@ -445,7 +453,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 		setTextArea(On_To_Off_Condition,ElementType.getOff());
 		setTextArea(Off_To_On_Condition,ElementType.getOn());
 
-		
+		setComment(dataOfelement.get(4));
 
 		
 		
