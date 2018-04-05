@@ -23,7 +23,7 @@ public class AndroidStudioProjectController {
 		path = p;
 	}
 	
-	public void GenerateAutomaticFiles() {}
+	public void GenerateAutomaticFiles() {} // Here will be generated all directories and files
 	
 	public void GenerateJavaFiles() {			 // for all screens: java.generateScreen
 		String screenJavaName;
@@ -36,8 +36,8 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating JAVA file of screen: "+screen.getScreenName());
 			File javaFile;
 			if (screen.getScreenName() != rootScreen)
-				javaFile = new File("D:/FINAL _PROJECT/Generated_Files/"+screenJavaName+".java"); // CHANGE!!! path according to user
-			else javaFile = new File("D:/FINAL _PROJECT/Generated_Files/MainActivity.java"); // CHANGE!!! path according to user
+				javaFile = new File(path.toString()+"/"+screenJavaName+".java"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
+			else javaFile = new File(path.toString()+"/MainActivity.java"); // CHANGE!!! path is android project location, but java files should be in src..res..layout... something
 			java.GenerateScreen(javaFile, screen,  rootScreen);
 		}	
 	} 
@@ -53,13 +53,13 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating XML file of screen: "+screen.getScreenName());
 			File xmlFile;
 			if (screen.getScreenName() != rootScreen)
-				xmlFile = new File("D:/FINAL _PROJECT/Generated_Files/"+screenXmlName+".xml"); // CHANGE!!! path according to user
-			else xmlFile = new File("D:/FINAL _PROJECT/Generated_Files/activity_main.xml"); // CHANGE!!! path according to user
+				xmlFile = new File(path.toString()+"/"+screenXmlName+".xml"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
+			else xmlFile = new File(path.toString()+"/activity_main.xml"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
 			xml.GenerateScreen(xmlFile, screen, rootScreen);
 		}
 	}
 	
-	private String getXmlFileName(String screenName){
+	private String getXmlFileName(String screenName){	
 		String xmlFileName=null;
 		String[] r = screenName.split("(?=\\p{Upper})");
 		xmlFileName="activity"+"_";

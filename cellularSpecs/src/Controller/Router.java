@@ -64,8 +64,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private int elemWeCameFrom; // for COMMENT. we need to know what element we came from. 1-button, 2-onOff, 3-empNotEmp, 4-List
 	private AndroidStudioProjectController androidStudioProjectController; // code generation controller
 	private GenerateCodeGUI generateCodeGUI; // code generation GUI
-	private Path pathOfCode = null; // path - where the generated code will be saved
-
 
 	private AddActionGUI addActionGUI;
 	private AddConditonGui addConditonGui;
@@ -414,21 +412,10 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				generateCodeGUI.setVisible(true);
 				break;
 			case "_begin_generation": // 'generate code' in small screen pressed
-				androidStudioProjectController = new AndroidStudioProjectController(generateCodeGUI.getRootScreen(), pathOfCode);
+				androidStudioProjectController = new AndroidStudioProjectController(generateCodeGUI.getRootScreen(), generateCodeGUI.getPath());
 				androidStudioProjectController.GenerateJavaFiles();
 				androidStudioProjectController.GenerateXmlFiles();
 				break;
-	//		case "_browse_code_location": // 'browse' in code generation screen pressed
-	//			browseCodeLocationGUI = new BrowseCodeLocationGUI();
-	//			browseCodeLocationGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-	//			browseCodeLocationGUI.setLocation(300, 300);
-	//			browseCodeLocationGUI.setVisible(true);
-	//			break;
-	//		case "_save_code_location": // 'save' in browse window pressed
-	//			pathOfCode = browseCodeLocationGUI.getPath();
-	//			generateCodeGUI.setCheckPath(true);
-	//			browseCodeLocationGUI.setVisible(false);
-	//			break;
 		}
 
 	}
