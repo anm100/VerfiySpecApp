@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import CodeGeneration.AndroidStudioProjectController;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
@@ -60,6 +62,9 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private VerificationController verificationController ;
 	private AddCommentGUI addCommentGUI;
 	private int elemWeCameFrom; // for COMMENT. we need to know what element we came from. 1-button, 2-onOff, 3-empNotEmp, 4-List
+	private AndroidStudioProjectController androidStudioProjectController; // code generation controller
+	private GenerateCodeGUI generateCodeGUI; // code generation GUI
+	private Path pathOfCode = null; // path - where the generated code will be saved
 
 
 	private AddActionGUI addActionGUI;
@@ -400,6 +405,30 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 					addCommentGUI.setComment(addCommentGUI.getTextFromArea());
 				addCommentGUI.setVisible(false);		
 				break;
+			// code generation button listener
+			case "_generate_code": // 'generate code' in main screen pressed
+				WorkSpace.getLog().debug("Router> Generate code pressed...");
+				generateCodeGUI = new GenerateCodeGUI();
+				generateCodeGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				generateCodeGUI.setLocation(300, 300);
+				generateCodeGUI.setVisible(true);
+				break;
+			case "_begin_generation": // 'generate code' in small screen pressed
+				androidStudioProjectController = new AndroidStudioProjectController(generateCodeGUI.getRootScreen(), pathOfCode);
+				androidStudioProjectController.GenerateJavaFiles();
+				androidStudioProjectController.GenerateXmlFiles();
+				break;
+	//		case "_browse_code_location": // 'browse' in code generation screen pressed
+	//			browseCodeLocationGUI = new BrowseCodeLocationGUI();
+	//			browseCodeLocationGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+	//			browseCodeLocationGUI.setLocation(300, 300);
+	//			browseCodeLocationGUI.setVisible(true);
+	//			break;
+	//		case "_save_code_location": // 'save' in browse window pressed
+	//			pathOfCode = browseCodeLocationGUI.getPath();
+	//			generateCodeGUI.setCheckPath(true);
+	//			browseCodeLocationGUI.setVisible(false);
+	//			break;
 		}
 
 	}

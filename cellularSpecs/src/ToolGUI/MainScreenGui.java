@@ -94,13 +94,11 @@ public class MainScreenGui extends JFrame  {
 		btnShowresults.setBounds(934, 674, 136, 23);
 		getContentPane().add(btnShowresults);
 		
-		JButton button = new JButton("generate code");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		button.setBounds(788, 674, 136, 23);
-		getContentPane().add(button);
+		JButton generateCode = new JButton("generate code");
+		generateCode.setActionCommand("_generate_code");
+		generateCode.addActionListener(Router.getInstance());
+		generateCode.setBounds(788, 674, 136, 23);
+		getContentPane().add(generateCode);
 	 }
 		public void setBtnRunVerification(Boolean b) {
 		this.btnRunVerification.setEnabled(b);;
