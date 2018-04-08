@@ -68,7 +68,9 @@ public class JavaController {
 	
 	private void GenerateOnOff (OnOffType e) {}
 	
-	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {}
+	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {
+		code+="";
+	}
 	
 	private void GenerateList (ListElementType e) {}
 	
