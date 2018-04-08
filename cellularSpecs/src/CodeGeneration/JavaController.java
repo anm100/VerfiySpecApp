@@ -24,17 +24,14 @@ public class JavaController {
 					  " 	protected void onCreate(Bundle savedInstanceState) {\n"+
 					  " 		super.onCreate(savedInstanceState);\n"+
 					  " 		setContentView(R.layout."+xmlFileName+");\n"+
-					  "    	}\n"+
-					  "}\n";
+					  "    	}\n\n";
 		else
 			code += "MainActivity extends AppCompatActivity {\n"+
 					  " 	protected void onCreate(Bundle savedInstanceState) {\n"+
 					  " 		super.onCreate(savedInstanceState);\n"+
 					  " 		setContentView(R.layout.activity_main);\n"+
-					  "    	}\n"+
-					  "}\n";
-		
-		
+					  "    	}\n\n";
+				
 		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
 		while(it.hasNext()){	// going through all the elements in the screen
 			Map.Entry pair2 =(Map.Entry) it.next(); 
@@ -45,6 +42,7 @@ public class JavaController {
 				GenerateOnOff((OnOffType) e);
 			if (e.getType() == ElementType.getListType()) 
 				GenerateList((ListElementType) e);	
+		code += "}\n";;
 		}
 		
 		try {		// writing all code to java screen file
@@ -63,13 +61,11 @@ public class JavaController {
 		String nameOfListenerOfButton = e.getELementName() + "_Listener";
 		String nextScreen = ((StandartButtonType) e).getMoveTo();
 		code += "";
-		WorkSpace.getLog().debug("CHECK GIT");
 	}
 	
 	private void GenerateOnOff (OnOffType e) {}
 	
 	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {
-		code+="";
 	}
 	
 	private void GenerateList (ListElementType e) {}
