@@ -24,17 +24,14 @@ public class JavaController {
 					  " 	protected void onCreate(Bundle savedInstanceState) {\n"+
 					  " 		super.onCreate(savedInstanceState);\n"+
 					  " 		setContentView(R.layout."+xmlFileName+");\n"+
-					  "    	}\n"+
-					  "}\n";
+					  "    	}\n\n";
 		else
 			code += "MainActivity extends AppCompatActivity {\n"+
 					  " 	protected void onCreate(Bundle savedInstanceState) {\n"+
 					  " 		super.onCreate(savedInstanceState);\n"+
 					  " 		setContentView(R.layout.activity_main);\n"+
-					  "    	}\n"+
-					  "}\n";
-		
-		
+					  "    	}\n\n";
+				
 		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
 		while(it.hasNext()){	// going through all the elements in the screen
 			Map.Entry pair2 =(Map.Entry) it.next(); 
@@ -46,6 +43,7 @@ public class JavaController {
 			if (e.getType() == ElementType.getListType()) 
 				GenerateList((ListElementType) e);	
 		}
+		code += "}\n";;
 		
 		try {		// writing all code to java screen file
 			FileWriter fw = new FileWriter(file, true);
@@ -62,13 +60,20 @@ public class JavaController {
 	private void GenerateButton (StandartButtonType e) { // writing into "code" only. when finished, "code" is written to the file
 		String nameOfListenerOfButton = e.getELementName() + "_Listener";
 		String nextScreen = ((StandartButtonType) e).getMoveTo();
+<<<<<<< HEAD
 		
+=======
+		code += "";
+>>>>>>> 4e66d9bd3c0b102588c4013a4fbf094cb58c3bf0
 	}
 	
 	private void GenerateOnOff (OnOffType e) {}
 	
 	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 4e66d9bd3c0b102588c4013a4fbf094cb58c3bf0
 	}
 	
 	private void GenerateList (ListElementType e) {}
