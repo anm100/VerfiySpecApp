@@ -63,6 +63,7 @@ public class JavaController {
 		String nameOfListenerOfButton = e.getELementName() + "_Listener";
 		String nextScreen = ((StandartButtonType) e).getMoveTo();
 		code += "";
+		WorkSpace.getLog().debug("CHECK GIT");
 	}
 	
 	private void GenerateOnOff (OnOffType e) {}
