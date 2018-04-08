@@ -28,7 +28,6 @@ public class XmlController {
 			code += "  	tools:context=\"com.example."+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"."+s.getScreenName()+"\"> \n";
 		else
 			code += "  	tools:context=\"com.example."+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+".MainActivity\"> \n";
-		code += "  </android.support.constraint.ConstraintLayout>\n";
 		
 		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
 		while(it.hasNext()){	// going through all the elements in the screen
@@ -41,8 +40,9 @@ public class XmlController {
 			if (e.getType() == ElementType.getEmptyNotEmptyType())
 					GenerateEmptyNotEmpty((EmptyNEmptyType) e);
 			if (e.getType() == ElementType.getListType()) 
-				GenerateList((ListElementType) e);	
+				GenerateList((ListElementType) e);
 		}
+		code += "  </android.support.constraint.ConstraintLayout>\n";
 		
 		try {		// writing all code to java screen file
 			FileWriter fw = new FileWriter(file, true);

@@ -42,8 +42,8 @@ public class JavaController {
 				GenerateOnOff((OnOffType) e);
 			if (e.getType() == ElementType.getListType()) 
 				GenerateList((ListElementType) e);	
-		code += "}\n";;
 		}
+		code += "}\n";;
 		
 		try {		// writing all code to java screen file
 			FileWriter fw = new FileWriter(file, true);
