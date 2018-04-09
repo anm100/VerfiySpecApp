@@ -61,7 +61,7 @@ public class JavaController {
 	}
 	
 	private void GenerateButton (StandartButtonType e) { // writing into "code" only. when finished, "code" is written to the file
-	
+
 	}
 	
 	private void GenerateOnOff (OnOffType e) {
