@@ -56,13 +56,26 @@ public class XmlController {
 		}
 	}
 	
-	private void GenerateButton (StandartButtonType s) {}
+	private void GenerateButton (StandartButtonType e) {
+		String nameOfListenerOfButton = e.getELementName() + "_Listener";
+		code += "<Button\n"+
+				" 	android:id=\"@+id/"+e.getELementName()+"\"\n"+
+				"        android:layout_width=\"128dp\"\n"+			// size of buttom
+				"        android:layout_height=\"58dp\"\n"+			// size of button
+				"   	android:layout_marginBottom=\"16dp\"\n"+	// button position (location) in screen
+				"   	android:onClick=\""+nameOfListenerOfButton+"\"\n"+
+				"    	android:text=\""+e.getELementName()+"\"\n"+
+				"   	app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
+				"    	app:layout_constraintLeft_toLeftOf=\"parent\"\n"+
+				"    	app:layout_constraintRight_toRightOf=\"parent\" />\n\n\n";
+				
+	}
 	
-	private void GenerateOnOff (OnOffType s) {}
+	private void GenerateOnOff (OnOffType e) {}
 	
-	private void GenerateEmptyNotEmpty (EmptyNEmptyType s) {}
+	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {}
 	
-	private void GenerateList (ListElementType s) {}
+	private void GenerateList (ListElementType e) {}
 	
 	private String getApplicationName(String workSpaceName){
 		return workSpaceName.toLowerCase();

@@ -23,25 +23,28 @@ public class JavaController {
 			code += s.getScreenName()+" extends AppCompatActivity {\n"+
 					  " 	protected void onCreate(Bundle savedInstanceState) {\n"+
 					  " 		super.onCreate(savedInstanceState);\n"+
-					  " 		setContentView(R.layout."+xmlFileName+");\n"+
-					  "    	}\n\n";
+					  " 		setContentView(R.layout."+xmlFileName+");\n";
 		else
 			code += "MainActivity extends AppCompatActivity {\n"+
 					  " 	protected void onCreate(Bundle savedInstanceState) {\n"+
 					  " 		super.onCreate(savedInstanceState);\n"+
-					  " 		setContentView(R.layout.activity_main);\n"+
-					  "    	}\n\n";
-				
+					  " 		setContentView(R.layout.activity_main);\n";
 		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
-		while(it.hasNext()){	// going through all the elements in the screen
+		while(it.hasNext()){	// going through all the elements in the screen. generate LIST
+			Map.Entry pair2 =(Map.Entry) it.next(); 
+			Element e = (Element)pair2.getValue();	
+			if (e.getType() == ElementType.getListType()) 
+				GenerateList((ListElementType) e);	
+		}
+		code += "    	}\n\n";
+		it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen	
+		while(it.hasNext()){	// generate LISTS
 			Map.Entry pair2 =(Map.Entry) it.next(); 
 			Element e = (Element)pair2.getValue();		// current element. generate for all types of elements
 			if (e.getType() == ElementType.getStandartBtnType()) 
 				GenerateButton((StandartButtonType) e);
 			if (e.getType() == ElementType.getOnOffType()) 
 				GenerateOnOff((OnOffType) e);
-			if (e.getType() == ElementType.getListType()) 
-				GenerateList((ListElementType) e);	
 		}
 		code += "}\n";;
 		
@@ -58,12 +61,12 @@ public class JavaController {
 	}
 	
 	private void GenerateButton (StandartButtonType e) { // writing into "code" only. when finished, "code" is written to the file
-		String nameOfListenerOfButton = e.getELementName() + "_Listener";
-		String nextScreen = ((StandartButtonType) e).getMoveTo();
-		code += "";
+	
 	}
 	
-	private void GenerateOnOff (OnOffType e) {}
+	private void GenerateOnOff (OnOffType e) {
+		
+	}
 	
 	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {
 	}
