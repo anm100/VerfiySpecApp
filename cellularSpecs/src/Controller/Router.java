@@ -415,6 +415,7 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				androidStudioProjectController = new AndroidStudioProjectController(generateCodeGUI.getRootScreen(), generateCodeGUI.getPath());
 				androidStudioProjectController.GenerateJavaFiles();
 				androidStudioProjectController.GenerateXmlFiles();
+				androidStudioProjectController.GenerateAutomaticFiles();
 				break;
 		}
 

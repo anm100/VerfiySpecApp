@@ -15,9 +15,11 @@ public class JavaController {
 		String xmlFileName = getXmlFileName(s.getScreenName()); 
 		
 		// creating java code of screen	
-		code = "package com.example."+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"\n;"+
+		code = "package com.example."+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+";\n\n"+
 				  "import android.support.v7.app.AppCompatActivity;\n"+
-				  "import android.os.Bundle;\n\n"+
+				  "import android.os.Bundle;\n"+
+				  "import android.content.Intent;\n"+
+				  "import android.view.View;\n\n"+
 				  "public class ";
 		if (s.getScreenName() != rootScreen)
 			code += s.getScreenName()+" extends AppCompatActivity {\n"+
@@ -42,7 +44,7 @@ public class JavaController {
 			Map.Entry pair2 =(Map.Entry) it.next(); 
 			Element e = (Element)pair2.getValue();		// current element. generate for all types of elements
 			if (e.getType() == ElementType.getStandartBtnType()) 
-				GenerateButton((StandartButtonType) e);
+				GenerateButton((StandartButtonType) e, rootScreen);
 			if (e.getType() == ElementType.getOnOffType()) 
 				GenerateOnOff((OnOffType) e);
 		}
@@ -60,12 +62,21 @@ public class JavaController {
 		}
 	}
 	
-	private void GenerateButton (StandartButtonType e) { // writing into "code" only. when finished, "code" is written to the file
-
+	private void GenerateButton (StandartButtonType e, String rootScreen) { // writing into "code" only. when finished, "code" is written to the file
+		String nameOfListenerOfButton = e.getELementName() + "_Listener";
+		String nextScreen = ((StandartButtonType) e).getMoveTo();
+		code += "	public void   "+nameOfListenerOfButton+" (View view) {\n";
+		if (nextScreen != rootScreen)
+			code += " 		Intent intent = new Intent(this,  "+nextScreen+".class);\n";
+		else
+			code += " 		Intent intent = new Intent(this,  MainActivity.class);\n";
+		code += " 		startActivity(intent);\n"+
+				"	}\n\n";
 	}
 	
 	private void GenerateOnOff (OnOffType e) {
-		
+		String nameOfListenerOfOnOff = e.getELementName() + "_Listener";
+		code += "	public void   "+nameOfListenerOfOnOff+" (View view) {\n\n	}\n\n";
 	}
 	
 	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {

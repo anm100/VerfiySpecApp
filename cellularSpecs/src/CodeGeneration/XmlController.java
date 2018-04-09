@@ -71,7 +71,21 @@ public class XmlController {
 				
 	}
 	
-	private void GenerateOnOff (OnOffType e) {}
+	private void GenerateOnOff (OnOffType e) {
+		String nameOfListenerOfOnOff = e.getELementName() + "_Listener";
+		code += "<Switch"+
+				"    android:id=\"@+id/"+e.getELementName()+"\"\n"+
+				"    android:layout_width=\"121dp\"\n"+
+				"    android:layout_height=\"58dp\"\n"+
+				"    android:layout_marginEnd=\"16dp\"\n"+
+				"    android:layout_marginStart=\"16dp\"\n"+
+				"    android:layout_marginTop=\"16dp\"\n"+
+				"    android:onClick=\""+nameOfListenerOfOnOff+"\"\n"+
+				"    android:text=\""+e.getELementName()+"\"\n"+
+				"    app:layout_constraintEnd_toEndOf=\"parent\"\n"+
+				"    app:layout_constraintStart_toStartOf=\"parent\"\n"+
+				"    app:layout_constraintTop_toTopOf=\"parent\" />\n\n\n";
+	}
 	
 	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {}
 	

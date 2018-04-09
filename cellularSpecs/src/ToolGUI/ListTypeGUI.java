@@ -85,10 +85,10 @@ public class ListTypeGUI extends JFrame {
 		getContentPane().add(scrollPane);
 		
 		textArea = new JTextArea();
-		scrollPane.setRowHeaderView(textArea);
-		setSize(501, 405);
+		scrollPane.setViewportView(textArea);
 		
 		values=textArea.getText().split("\n");
+		setSize(501, 405);
 		comboBox.setModel(new DefaultComboBoxModel(values));
 		
 		JButton btnSave = new JButton("save");
