@@ -14,8 +14,7 @@ public class XmlController {
 	
 	String code;
 	
-	public void GenerateScreen (File file, Screen s, String rootScreen) {
-		
+	public void GenerateScreen (File file, Screen s, String rootScreen) {	
 		// creating xml code of screen
 		code = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"+
 			   "<android.support.constraint.ConstraintLayout\n"+
@@ -60,14 +59,14 @@ public class XmlController {
 		String nameOfListenerOfButton = e.getELementName() + "_Listener";
 		code += "<Button\n"+
 				" 	android:id=\"@+id/"+e.getELementName()+"\"\n"+
-				"        android:layout_width=\"128dp\"\n"+			// size of buttom
-				"        android:layout_height=\"58dp\"\n"+			// size of button
-				"   	android:layout_marginBottom=\"16dp\"\n"+	// button position (location) in screen
-				"   	android:onClick=\""+nameOfListenerOfButton+"\"\n"+
-				"    	android:text=\""+e.getELementName()+"\"\n"+
-				"   	app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
-				"    	app:layout_constraintLeft_toLeftOf=\"parent\"\n"+
-				"    	app:layout_constraintRight_toRightOf=\"parent\" />\n\n\n";
+				"   android:layout_width=\"128dp\"\n"+			// size of button
+				"   android:layout_height=\"58dp\"\n"+			// size of button
+				"   android:layout_marginBottom=\"16dp\"\n"+	// button position (location) in screen
+				"   android:onClick=\""+nameOfListenerOfButton+"\"\n"+
+				"   android:text=\""+e.getELementName()+"\"\n"+
+				"   app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
+				"   app:layout_constraintLeft_toLeftOf=\"parent\"\n"+
+				"   app:layout_constraintRight_toRightOf=\"parent\" />\n\n\n";
 				
 	}
 	
@@ -88,7 +87,6 @@ public class XmlController {
 	}
 	
 	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {
-		
 		code +="<TextView"+
 		       "     android:id=\"@+id/"+e.getELementName()+"\"\n"+
 			   "     android:layout_width=\"113dp\"\n"+
@@ -100,8 +98,7 @@ public class XmlController {
 			   "     app:layout_constraintEnd_toEndOf=\"parent\"\n"+
 			   "     app:layout_constraintHorizontal_bias=\"0.501\"\n"+
 			   "     app:layout_constraintStart_toStartOf=\"parent\"\n"+
-			   "     app:layout_constraintTop_toTopOf=\"parent\" />\n\n\n";    
-				
+			   "     app:layout_constraintTop_toTopOf=\"parent\" />\n\n\n";    		
 	}
 	
 	private void GenerateList (ListElementType e) {

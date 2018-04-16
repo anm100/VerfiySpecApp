@@ -84,13 +84,8 @@ public class JavaController {
 	}
 	
 	private void GenerateOnOff (OnOffType e) {
-		
 		String nameOfListenerOfOnOff = e.getELementName() + "_Listener";
 		code += "	public void   "+nameOfListenerOfOnOff+" (View view) {\n\n	}\n\n";
-	}
-	
-	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {
-		
 	}
 	
 	private void GenerateList (ListElementType e) {
@@ -111,7 +106,6 @@ public class JavaController {
 	            "\n ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, elements);\n"
 	            + " dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\n"
 	            + " spinner.setAdapter(dataAdapter);\n";
-				
 	}
 	
 	private String getXmlFileName(String screenName){
@@ -119,9 +113,9 @@ public class JavaController {
 		String[] r = screenName.split("(?=\\p{Upper})");
 		xmlFileName="activity"+"_";
 		for(int i=0;i<r.length;i++) 	{
-		xmlFileName=(xmlFileName+r[i].toLowerCase());
-		if(i<r.length-1)
-		xmlFileName+="_";
+			xmlFileName=(xmlFileName+r[i].toLowerCase());
+			if(i<r.length-1)
+			xmlFileName+="_";
 		}
 		return xmlFileName; 
 	}
