@@ -412,10 +412,27 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				generateCodeGUI.setVisible(true);
 				break;
 			case "_begin_generation": // 'generate code' in small screen pressed
+				//run cmd command
+				try
+				{
+				Runtime.getRuntime().exec("cmd /c start cmd.exe  /K \"android create project -a MainActivity -k com.example."+ getApplicationName(WorkSpace.getInstance().getWorkSpaceName()) + " -t 1 -p "+ generateCodeGUI.getPath() + " -g -v 1.1.0 \" ");
+				}
+				catch (Exception e3)
+				{
+					System.out.println("HEY Buddy ! U r Doing Something Wrong ");
+					e3.printStackTrace();
+				}
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				//run cmd command
 				androidStudioProjectController = new AndroidStudioProjectController(generateCodeGUI.getRootScreen(), generateCodeGUI.getPath());
 				androidStudioProjectController.GenerateJavaFiles();
 				androidStudioProjectController.GenerateXmlFiles();
-				androidStudioProjectController.GenerateAutomaticFiles();
+				//androidStudioProjectController.GenerateAutomaticFiles();
 				break;
 		}
 
@@ -638,6 +655,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 		this.elemWeCameFrom = elemWeCameFrom;
 	}
 
-
+	private String getApplicationName(String workSpaceName){
+		return workSpaceName.toLowerCase();
+	}
 	
 }

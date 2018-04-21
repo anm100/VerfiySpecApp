@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -41,8 +45,20 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating JAVA file of screen: "+screen.getScreenName());
 			File javaFile;
 			if (screen.getScreenName() != rootScreen)
-				javaFile = new File(path.toString()+"/"+screenJavaName+".java"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
-			else javaFile = new File(path.toString()+"/MainActivity.java"); // CHANGE!!! path is android project location, but java files should be in src..res..layout... something
+				javaFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/"+screenJavaName+".java"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
+			else {
+				javaFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/MainActivity.java");// CHANGE!!! path is android project location, but java files should be in src..res..layout... something
+				if(javaFile.exists())
+				{
+				javaFile.delete();
+				try {
+					javaFile.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+			     }
 			java.GenerateScreen(javaFile, screen,  rootScreen);
 		}	
 	} 
@@ -58,8 +74,31 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating XML file of screen: "+screen.getScreenName());
 			File xmlFile;
 			if (screen.getScreenName() != rootScreen)
-				xmlFile = new File(path.toString()+"/"+screenXmlName+".xml"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
-			else xmlFile = new File(path.toString()+"/activity_main.xml"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
+				xmlFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/"+screenXmlName+".xml"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
+			else{ 
+				
+				try
+		        {
+		            Files.deleteIfExists(Paths.get(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/main.xml"));
+		        }
+		        catch(NoSuchFileException e)
+		        {
+		            System.out.println("No such file/directory exists");
+		        }
+		        catch(DirectoryNotEmptyException e)
+		        {
+		            System.out.println("Directory is not empty.");
+		        }
+		        catch(IOException e)
+		        {
+		            System.out.println("Invalid permissions.");
+		        }
+		         
+		        System.out.println("Deletion successful.");
+				
+			     xmlFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/activity_main.xml"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
+			
+			    }
 			xml.GenerateScreen(xmlFile, screen, rootScreen);
 		}
 	}
