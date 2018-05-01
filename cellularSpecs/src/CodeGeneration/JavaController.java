@@ -30,17 +30,32 @@ public class JavaController {
 				  "import android.widget.Toast;\n"+
 				  "import android.view.View;\n\n"+
 				  "public class ";
-		if (s.getScreenName() != rootScreen)
-			code += s.getScreenName()+" extends AppCompatActivity {\n"+
-					  " 	protected void onCreate(Bundle savedInstanceState) {\n"+
-					  " 		super.onCreate(savedInstanceState);\n"+
-					  " 		setContentView(R.layout."+xmlFileName+");\n";
-		else
-			code += "MainActivity extends AppCompatActivity {\n"+
-					  " 	protected void onCreate(Bundle savedInstanceState) {\n"+
-					  " 		super.onCreate(savedInstanceState);\n"+
-					  " 		setContentView(R.layout.activity_main);\n";
+		if (s.getScreenName() != rootScreen) {
+			code += s.getScreenName()+" extends AppCompatActivity {\n";
+					  if (s.getDescription() != null)
+						  code += "// Screen description: "+s.getDescription()+"\n";
+					  code += " 	protected void onCreate(Bundle savedInstanceState) {\n"+
+							  " 		super.onCreate(savedInstanceState);\n"+
+							  " 		setContentView(R.layout."+xmlFileName+");\n";
+		}
+		else {
+			code += "MainActivity extends AppCompatActivity {\n";
+					  if (s.getDescription() != null)
+						  code += "// Screen description: "+s.getDescription()+"\n";
+					  code += " 	protected void onCreate(Bundle savedInstanceState) {\n"+
+							  " 		super.onCreate(savedInstanceState);\n"+
+							  " 		setContentView(R.layout.activity_main);\n\n";
+		}
 		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
+		while(it.hasNext()){	
+			Map.Entry pair2 =(Map.Entry) it.next(); 
+			Element e = (Element)pair2.getValue();	
+			if (e.getType() == ElementType.getEmptyNotEmptyType()) 
+				if (e.getComment() != null)
+					code += " // Textfield "+e.getELementName()+" comment: "+ e.getComment() + "\n\n";
+		}
+		
+		it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
 		while(it.hasNext()){	// going through all the elements in the screen. generate LIST
 			Map.Entry pair2 =(Map.Entry) it.next(); 
 			Element e = (Element)pair2.getValue();	
@@ -75,6 +90,8 @@ public class JavaController {
 		String nameOfListenerOfButton = e.getELementName() + "_Listener";
 		String nextScreen = ((StandartButtonType) e).getMoveTo();
 		code += "	public void   "+nameOfListenerOfButton+" (View view) {\n";
+		if (e.getComment() != null)
+			code += " 		// "+e.getComment()+"\n";
 		if (nextScreen != rootScreen)
 			code += " 		Intent intent = new Intent(this,  "+nextScreen+".class);\n";
 		else
@@ -85,7 +102,10 @@ public class JavaController {
 	
 	private void GenerateOnOff (OnOffType e) {
 		String nameOfListenerOfOnOff = e.getELementName() + "_Listener";
-		code += "	public void   "+nameOfListenerOfOnOff+" (View view) {\n\n	}\n\n";
+		code += "	public void   "+nameOfListenerOfOnOff+" (View view) {\n";
+		if (e.getComment() != null)
+			code += " 		// "+e.getComment()+"\n";
+		code += "	}\n\n";
 	}
 	
 	private void GenerateList (ListElementType e) {
@@ -96,8 +116,10 @@ public class JavaController {
 			input.add(values[i]);   
 		} 
 				code +="ListTypeGUI  listTypeGUI; "+"  Spinner spinner = (Spinner) findViewById(R.id.spinner); \n\n\n"+
-	            "  spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { \n\n"+
-				"@Override \n"+
+	            "  spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\n";
+				if (e.getComment() != null)
+					code += " // "+e.getComment()+"\n";
+				code += "@Override \n"+
 	            "public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\n"
 				+"String item = parent.getItemAtPosition(position).toString() \n\n\n;"+
 	            "Toast.makeText(parent.getContext(),"+ "Selected: " + "item, Toast.LENGTH_LONG).show(); \n }"+

@@ -15,7 +15,10 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Map.Entry;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -27,6 +30,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import CodeGeneration.AndroidStudioProjectController;
+import Model.Element;
 import Model.ElementType;
 import Model.EmptyNEmptyType;
 import Model.ListElementType;
@@ -61,7 +65,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 	private String path ; 
 	private VerificationController verificationController ;
 	private AddCommentGUI addCommentGUI;
-	private int elemWeCameFrom; // for COMMENT. we need to know what element we came from. 1-button, 2-onOff, 3-empNotEmp, 4-List
+	private ChooseIndexOnScreenGUI chooseIndexGUI;
+	private int elemWeCameFrom; // for COMMENT, INDEX. we need to know what element we came from. 1-button, 2-onOff, 3-empNotEmp, 4-List. Already works, no need to touch anything, just use
 	private AndroidStudioProjectController androidStudioProjectController; // code generation controller
 	private GenerateCodeGUI generateCodeGUI; // code generation GUI
 
@@ -399,8 +404,8 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 					onOfGUI.setComment(addCommentGUI.getTextFromArea());
 				if (getElemWeCameFrom() == 3)
 					emptyNotEmptyGUI.setComment(addCommentGUI.getTextFromArea());
-				if (getElemWeCameFrom() == 4)
-					addCommentGUI.setComment(addCommentGUI.getTextFromArea());
+			//	if (getElemWeCameFrom() == 4)
+			//		ListTypeGUI.setComment(addCommentGUI.getTextFromArea());       PROBLEM WITH LIST!!!
 				addCommentGUI.setVisible(false);		
 				break;
 			// code generation button listener
@@ -413,26 +418,42 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				break;
 			case "_begin_generation": // 'generate code' in small screen pressed
 				//run cmd command
-				try
-				{
-				Runtime.getRuntime().exec("cmd /c start cmd.exe  /K \"android create project -a MainActivity -k com.example."+ getApplicationName(WorkSpace.getInstance().getWorkSpaceName()) + " -t 1 -p "+ generateCodeGUI.getPath() + " -g -v 1.1.0 \" ");
+				try {
+					Runtime.getRuntime().exec("cmd /c start cmd.exe  /K \"android create project -a MainActivity -k com.example."+ getApplicationName(WorkSpace.getInstance().getWorkSpaceName()) + " -t 1 -p "+ generateCodeGUI.getPath() + " -g -v 1.1.0 \" ");
 				}
-				catch (Exception e3)
-				{
-					System.out.println("HEY Buddy ! U r Doing Something Wrong ");
+				catch (Exception e3) {
+					System.out.println("CMD run problem");
 					e3.printStackTrace();
 				}
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				try { // give CMD time to run and build the Android Studio project
+					Thread.sleep(20000);
+				} 
+				catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
 				//run cmd command
 				androidStudioProjectController = new AndroidStudioProjectController(generateCodeGUI.getRootScreen(), generateCodeGUI.getPath());
 				androidStudioProjectController.GenerateJavaFiles();
 				androidStudioProjectController.GenerateXmlFiles();
-				//androidStudioProjectController.GenerateAutomaticFiles();
+				androidStudioProjectController.GenerateAutomaticFiles();
+				break;
+			case "_choose_position_pressed":	// INDEX. 
+				chooseIndexGUI = new ChooseIndexOnScreenGUI();
+				chooseIndexGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				chooseIndexGUI.setLocation(300, 300);
+				chooseIndexGUI.setTakenIndexes(WorkSpace.getInstance().getScreenByName(screenGUI.getScreenName()).getTakenIndexes());
+				chooseIndexGUI.setVisible(true);
+				break;
+			case "_save_index":	// INDEX.
+				if (getElemWeCameFrom() == 1)	// need to know where we came from, to SAVE in the right GUI
+					buttonTypeGUI.setIndex(chooseIndexGUI.getIndexOfElement());
+				if (getElemWeCameFrom() == 2)
+					onOfGUI.setIndex(chooseIndexGUI.getIndexOfElement());
+				if (getElemWeCameFrom() == 3)
+					emptyNotEmptyGUI.setIndex(chooseIndexGUI.getIndexOfElement());
+			//	if (getElemWeCameFrom() == 4)
+			//		ListTypeGUI.setIndex(chooseIndexGUI.getIndexOfElement());      PROBLEM WITH LIST!!!
+				chooseIndexGUI.setVisible(false);
 				break;
 		}
 

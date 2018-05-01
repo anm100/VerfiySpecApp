@@ -55,67 +55,90 @@ public class XmlController {
 		}
 	}
 	
-	private void GenerateButton (StandartButtonType e) {
+	private void GenerateButton (StandartButtonType e) { // Screen size in dp is about 500x250dp		
 		String nameOfListenerOfButton = e.getELementName() + "_Listener";
 		code += "<Button\n"+
 				" 	android:id=\"@+id/"+e.getELementName()+"\"\n"+
 				"   android:layout_width=\"128dp\"\n"+			// size of button
 				"   android:layout_height=\"58dp\"\n"+			// size of button
-				"   android:layout_marginBottom=\"16dp\"\n"+	// button position (location) in screen
+				"   android:layout_marginBottom=\""+ getBottom(e) + "dp\"\n"+		// button position (location) in screen
+				"   android:layout_marginRight=\""+ getRight(e) + "dp\"\n"+
 				"   android:onClick=\""+nameOfListenerOfButton+"\"\n"+
 				"   android:text=\""+e.getELementName()+"\"\n"+
 				"   app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
-				"   app:layout_constraintLeft_toLeftOf=\"parent\"\n"+
-				"   app:layout_constraintRight_toRightOf=\"parent\" />\n\n\n";
-				
+				"   app:layout_constraintRight_toRightOf=\"parent\" />\n\n\n";			
 	}
 	
 	private void GenerateOnOff (OnOffType e) {
 		String nameOfListenerOfOnOff = e.getELementName() + "_Listener";
 		code += "<Switch"+
 				"    android:id=\"@+id/"+e.getELementName()+"\"\n"+
-				"    android:layout_width=\"121dp\"\n"+
+				"    android:layout_width=\"128dp\"\n"+
 				"    android:layout_height=\"58dp\"\n"+
-				"    android:layout_marginEnd=\"16dp\"\n"+
-				"    android:layout_marginStart=\"16dp\"\n"+
-				"    android:layout_marginTop=\"16dp\"\n"+
+				"    android:layout_marginBottom=\""+ getBottom(e) + "dp\"\n"+		
+				"    android:layout_marginRight=\""+ getRight(e) + "dp\"\n"+
 				"    android:onClick=\""+nameOfListenerOfOnOff+"\"\n"+
 				"    android:text=\""+e.getELementName()+"\"\n"+
-				"    app:layout_constraintEnd_toEndOf=\"parent\"\n"+
-				"    app:layout_constraintStart_toStartOf=\"parent\"\n"+
-				"    app:layout_constraintTop_toTopOf=\"parent\" />\n\n\n";
+			//	"    app:layout_constraintEnd_toEndOf=\"parent\"\n"+
+			//	"    app:layout_constraintStart_toStartOf=\"parent\"\n"+
+			//	"    app:layout_constraintTop_toTopOf=\"parent\" />\n\n\n";
+				"    app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
+				"    app:layout_constraintRight_toRightOf=\"parent\" />\n\n\n";		
 	}
 	
 	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {
 		code +="<TextView"+
 		       "     android:id=\"@+id/"+e.getELementName()+"\"\n"+
-			   "     android:layout_width=\"113dp\"\n"+
-		       "     android:layout_height=\"17dp\"\n"+
-			   "     android:layout_marginBottom=\"16dp\"\n"+
-			   "     android:layout_marginTop=\"8dp\"\n"+
+			   "     android:layout_width=\"128dp\"\n"+
+		       "     android:layout_height=\"58dp\"\n"+
+		       "     android:layout_marginBottom=\""+ getBottom(e) + "dp\"\n"+		
+		       "     android:layout_marginRight=\""+ getRight(e) + "dp\"\n"+
 			   "     android:text=\""+e.getELementName()+"\"\n"+
-			   "     app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
-			   "     app:layout_constraintEnd_toEndOf=\"parent\"\n"+
-			   "     app:layout_constraintHorizontal_bias=\"0.501\"\n"+
-			   "     app:layout_constraintStart_toStartOf=\"parent\"\n"+
-			   "     app:layout_constraintTop_toTopOf=\"parent\" />\n\n\n";    		
+		//	   "     app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
+		//	   "     app:layout_constraintEnd_toEndOf=\"parent\"\n"+
+		//	   "     app:layout_constraintHorizontal_bias=\"0.501\"\n"+
+		//	   "     app:layout_constraintStart_toStartOf=\"parent\"\n"+
+		//	   "     app:layout_constraintTop_toTopOf=\"parent\" />\n\n\n";    	
+				"    app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
+				"    app:layout_constraintRight_toRightOf=\"parent\" />\n\n\n";		
 	}
 	
 	private void GenerateList (ListElementType e) {
 		code +="<Spinner"+
 	          "      android:id=\"@+id/"+e.getELementName()+"\"\n"+
-			  "      android:layout_width=\"368dp\"\n"+	
-	          "      android:layout_height=\"wrap_content\"\n"+
-			  "      android:layout_marginBottom=\"16dp\"\n"+
+			  "      android:layout_width=\"128dp\"\n"+	
+	          "      android:layout_height=\"58\"\n"+
+	          "      android:layout_marginBottom=\""+ getBottom(e) + "dp\"\n"+	
+	          "      android:layout_marginRight=\""+ getRight(e) + "dp\"\n"+
 	          "      app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
-			  "      app:layout_constraintLeft_toLeftOf=\"parent\"\n"+
-	          "      app:layout_constraintRight_toRightOf=\"parent\"/>\n\n\n"; 
-			  
-				
+		//	  "      app:layout_constraintLeft_toLeftOf=\"parent\"\n"+
+	          "      app:layout_constraintRight_toRightOf=\"parent\"/>\n\n\n"; 				
 	}
 	
 	private String getApplicationName(String workSpaceName){
 		return workSpaceName.toLowerCase();
+	}
+	
+	private int getRight(Element e){
+		int dp=0;
+		if (e.getIndex() <= 3)
+			dp = 200;
+		else
+			dp = 45;
+		return dp;
+	}
+	
+	private int getBottom(Element e){
+		int dp=0; 
+		if (e.getIndex()==0 || e.getIndex()==4)
+			dp = 437;
+		if (e.getIndex()==1 || e.getIndex()==5)
+			dp = 312;
+		if (e.getIndex()==2 || e.getIndex()==6)
+			dp = 187;
+		if (e.getIndex()==3 || e.getIndex()==7)
+			dp = 62;
+		return dp;	
 	}
 
 }

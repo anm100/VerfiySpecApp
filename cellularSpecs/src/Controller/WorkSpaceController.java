@@ -111,8 +111,10 @@ public class WorkSpaceController {
 		l.setValues(elementGui.getValues());
 		WorkSpace.getLog().debug("values from element :: update"+l.getValues()[0]);
 		
-		// green until exception of LIST is fixed
-	//	l.setComment(elementGui.getComment());
+
+		l.setComment(elementGui.getComment());
+		l.setIndex(elementGui.getIndex());
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("add element to workspace struct");
@@ -132,6 +134,7 @@ public class WorkSpaceController {
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.setVisible(false);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 
 	}
 	public static void addelementToGUI(ScreenGUI screenGUI, OnOfGUI elementGui,	OnOffType l) {
@@ -139,6 +142,7 @@ public class WorkSpaceController {
 		screenGUI.addElementLabel(l);
 		Router.getInstance().getMainScreenGui().refreshWorkspace();
 		elementGui.setVisible(false);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 	}
 
 	public static void editEmentfromGUI(ScreenGUI screenGUI, OnOfGUI elementGui,OnOffType l) {
@@ -154,6 +158,7 @@ public class WorkSpaceController {
 		((JLabel)screenGUI.getEventLabel().getComponent()).getParent().update(screenGUI.getGraphics());
 		reomveFromModels(elementGui.getScreenName(),e);
 		addToModels(screenGUI,elementGui,l);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 	
 	}
 	public static void editEmentfromGUI(ScreenGUI screenGUI, ButtonTypeGUI elementGui,StandartButtonType l) {
@@ -169,6 +174,7 @@ public class WorkSpaceController {
 		((JLabel)screenGUI.getEventLabel().getComponent()).getParent().update(screenGUI.getGraphics());
 		removeFromModels(elementGui.getScreenName(),e);
 		addelementModel(screenGUI,elementGui,l);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 	
 	}
 	
@@ -177,7 +183,9 @@ public class WorkSpaceController {
 		int size;
 		l.setElementName(elementGui.getElementName());
 		l.setComment(elementGui.getComment());	// setting button comment
-
+		l.setIndex(elementGui.getIndex());		// setting button index
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
+		
 		size=elementGui.getRowsNumber();
 		for(int i=0;i<size;i++)
 		{
@@ -205,6 +213,7 @@ public class WorkSpaceController {
 		((JLabel)screenGUI.getEventLabel().getComponent()).getParent().update(screenGUI.getGraphics());
 		reomveFromModels(elementGui.getScreenName(),e);
 		addToModels(screenGUI,elementGui,l);
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 	
 	}
 	public static void addToModels(ScreenGUI screenGUI, EmptyNotEmptyGUI elementGui, EmptyNEmptyType l)	
@@ -235,6 +244,8 @@ public class WorkSpaceController {
 		l.setException(elementGui.getException().getText());
 		l.setParam(p);
 		l.setComment(elementGui.getComment());
+		l.setIndex(elementGui.getIndex());
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 		
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do  edit -->  "+l.getParamName());
@@ -247,6 +258,7 @@ public class WorkSpaceController {
 
 		}
 		WorkSpace.getLog().debug("--show element in GUI");
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 	}
 	// add ONOFF update comment  23 3 2018
 	public static void addToModels(ScreenGUI screenGUI, OnOfGUI elementGui, OnOffType  l)	
@@ -277,6 +289,8 @@ public class WorkSpaceController {
 		l.setException(elementGui.getException().getText());
 		l.setParam(p);
 		l.setComment(elementGui.getComment()); // setting comment for onoff
+		l.setIndex(elementGui.getIndex());
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 		
 		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).addElement(l);
 		WorkSpace.getLog().debug("do  edit -->  "+l.getParamName());
@@ -289,11 +303,13 @@ public class WorkSpaceController {
 
 		}
 		WorkSpace.getLog().debug("--show element in GUI");
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 	}
 	public static void reomveFromModels(String screenName,OnOffType oldOnOffType)	
 	{
 		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+oldOnOffType.getParamName());
 		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+screenName);
+		WorkSpace.getInstance().getScreenByName(screenName).unsetTakenIndex(oldOnOffType.getIndex());
 		WorkSpace.getInstance().getScreenByName(screenName).remoceElement(oldOnOffType.getELementName());
 		WorkSpace.getInstance().removeParameterInHash(oldOnOffType.getParamName());
 	}
@@ -301,6 +317,7 @@ public class WorkSpaceController {
 	{
 		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+oldOnOffType.getParamName());
 		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+screenName);
+		WorkSpace.getInstance().getScreenByName(screenName).unsetTakenIndex(oldOnOffType.getIndex());
 		WorkSpace.getInstance().getScreenByName(screenName).remoceElement(oldOnOffType.getELementName());
 		WorkSpace.getInstance().removeParameterInHash(oldOnOffType.getParamName());
 	}
@@ -308,6 +325,7 @@ public class WorkSpaceController {
 	{
 		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+oldOnOffType.getParamName());
 		WorkSpace.getLog().debug("WorkSpaceVontroller->remove from models"+screenName);
+		WorkSpace.getInstance().getScreenByName(screenName).unsetTakenIndex(oldOnOffType.getIndex());
 		WorkSpace.getInstance().getScreenByName(screenName).remoceElement(oldOnOffType.getELementName());
 		WorkSpace.getInstance().removeParameterInHash(oldOnOffType.getParamName());
 	}
@@ -350,6 +368,8 @@ public class WorkSpaceController {
 		int size;
 		l.setElementName(elementGui.getElementName());
 		l.setComment(elementGui.getComment()); // setting comment of button
+		l.setIndex(elementGui.getIndex());
+		WorkSpace.getInstance().getScreenByName(elementGui.getScreenName()).setTakenIndex(elementGui.getIndex());
 		
 		size=elementGui.getRowsNumber();
 		for(int i=0;i<size;i++)

@@ -16,12 +16,16 @@ public class Screen implements Serializable,screenInterface{
 	private String description;
 	private ArrayList<String> transPromela= new ArrayList<String>();
 	private HashMap <String,Element> elementsMap;
+	
+	private boolean[] takenIndexes = new boolean[8];	// array that saves taken positions on the screen
 	/**
 	 * @return the screenName
 	 */
 	public Screen()
 	{
 		this.elementsMap= new HashMap<String,Element>();
+		for (int i=0; i<8; i++)
+			takenIndexes[i] = false;
 	}
 	public Screen(String screenName,int cordinateX,int cordinateY,int height,int width,
 			String description)
@@ -34,6 +38,9 @@ public class Screen implements Serializable,screenInterface{
 	this.height=height;
 	this.width=width;
 	this. description= description;
+	
+	for (int i=0; i<8; i++)
+		takenIndexes[i] = false;
 	}
 	
 	public Screen(String screenName,int cordinateX,int cordinateY,String description)
@@ -43,6 +50,9 @@ public class Screen implements Serializable,screenInterface{
 	this.cordinateX=cordinateX;
 	this.cordinateY=cordinateY;
 	this. description= description;
+	
+	for (int i=0; i<8; i++)
+		takenIndexes[i] = false;
 	}
 	
 	
@@ -53,7 +63,9 @@ public class Screen implements Serializable,screenInterface{
 	public Screen(String s) {
 		setScreenName(s); 
 		this.elementsMap= new HashMap<String,Element>();
-
+		
+		for (int i=0; i<8; i++)
+			takenIndexes[i] = false;
 	}
 	 /*
 	*debug////////////////////
@@ -172,6 +184,17 @@ public class Screen implements Serializable,screenInterface{
 				+"\n"+"	  fi"; 
 	}
 	
+	public void setTakenIndex(int index) {		// indexes - positions of elements on screen
+		takenIndexes[index] = true;
+	}
+	
+	public void unsetTakenIndex(int index) {
+		takenIndexes[index] = false;
+	}
+	
+	public boolean[] getTakenIndexes(){
+		return takenIndexes;
+	}
 
 
 }

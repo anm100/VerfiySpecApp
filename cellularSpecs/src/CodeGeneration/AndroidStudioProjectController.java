@@ -1,5 +1,10 @@
 package CodeGeneration;
 
+
+
+
+///////////// YAEL REMEMBER TO RETURN THE FILES AND PATHS
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -45,20 +50,21 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating JAVA file of screen: "+screen.getScreenName());
 			File javaFile;
 			if (screen.getScreenName() != rootScreen)
-				javaFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/"+screenJavaName+".java"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
+				//javaFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/"+screenJavaName+".java"); 
+				javaFile = new File(path.toString()+"/"+screenJavaName+".java"); 
 			else {
-				javaFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/MainActivity.java");// CHANGE!!! path is android project location, but java files should be in src..res..layout... something
-				if(javaFile.exists())
-				{
-				javaFile.delete();
-				try {
-					javaFile.createNewFile();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				//javaFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/MainActivity.java");
+				javaFile = new File(path.toString()+"/MainActivity.java"); 
+				if(javaFile.exists()) {
+					javaFile.delete();
+					try {
+						javaFile.createNewFile();
+					} catch (IOException e) {
+						WorkSpace.getLog().debug("ASPC> Problem occurred while generating automatic files");
+						e.printStackTrace();
+					}
 				}
-				}
-			     }
+			}
 			java.GenerateScreen(javaFile, screen,  rootScreen);
 		}	
 	} 
@@ -74,29 +80,25 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating XML file of screen: "+screen.getScreenName());
 			File xmlFile;
 			if (screen.getScreenName() != rootScreen)
-				xmlFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/"+screenXmlName+".xml"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
-			else{ 
-				
-				try
-		        {
+				//xmlFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/"+screenXmlName+".xml"); 
+				xmlFile = new File(path.toString()+screenXmlName+".xml");
+			else { 
+				try{
 		            Files.deleteIfExists(Paths.get(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/main.xml"));
 		        }
-		        catch(NoSuchFileException e)
-		        {
-		            System.out.println("No such file/directory exists");
+		        catch(NoSuchFileException e) {
+		            System.out.println("ASPC> Problem occurred generating files: No such file/directory exists");
 		        }
-		        catch(DirectoryNotEmptyException e)
-		        {
-		            System.out.println("Directory is not empty.");
+		        catch(DirectoryNotEmptyException e){
+		            System.out.println("ASPC> Problem occurred generating files: Directory is not empty.");
 		        }
 		        catch(IOException e)
 		        {
-		            System.out.println("Invalid permissions.");
-		        }
-		         
+		            System.out.println("ASPC> Problem occurred generating files: Invalid permissions.");
+		        } 
 		        System.out.println("Deletion successful.");
-				
-			     xmlFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/activity_main.xml"); // CHANGE!!! path is android project location, but java files should be in src..main..jave...something
+			    // xmlFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/activity_main.xml"); 
+		        xmlFile = new File(path.toString()+"/activity_main.xml"); 
 			
 			    }
 			xml.GenerateScreen(xmlFile, screen, rootScreen);
@@ -116,7 +118,8 @@ public class AndroidStudioProjectController {
 	}
 	
 	private void GenerateManifestFile(){	
-		File manifestFile = new File(path.toString()+"/AndroidManifest.xml");
+		///////////////////////////////
+		File manifestFile = new File("D:\\AndroidManifest.xml"); // change
 		String code = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"+
 					  "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"+
 					  "    package=\"com.example."+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"\">\n\n"+

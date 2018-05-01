@@ -81,6 +81,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	private conditionManagment condition ;
 	private OnOfGUI thisref = this;
 	private String comment=" ";
+	private int index;
 	public OnOfGUI(String ScreenName,String eName)
 	
 	{
@@ -211,7 +212,7 @@ public class OnOfGUI extends JFrame implements ActionListener {
 
 			 lblNewLabel_2.setVisible(false);
 			lblNewLabel_2.setForeground(Color.RED);
-			lblNewLabel_2.setBounds(300, 64, 184, 14);
+			lblNewLabel_2.setBounds(300, 64, 64, 14);
 			getContentPane().add(lblNewLabel_2);
 			
 			 
@@ -383,15 +384,22 @@ public class OnOfGUI extends JFrame implements ActionListener {
 				  						 	public void actionPerformed(ActionEvent arg0) {
 				  						 	}
 				  						 });
-				  						 button_4.setBounds(412, 18, 159, 25);
+				  						 button_4.setBounds(412, 0, 159, 25);
 				  						 getContentPane().add(button_4);
 				  						 
 				  						 ///////////////////////////////////////////////////////
 				  						 JButton btnAddComment = new JButton("Add comment");
 				  						btnAddComment.setActionCommand("_add_comment_pressed");
-				  						 btnAddComment.setBounds(412, 54, 159, 23);
+				  						 btnAddComment.setBounds(412, 27, 159, 23);
 				  						 getContentPane().add(btnAddComment);
+				  						 
+				  						 JButton btnChoosePosition = new JButton("Choose position");
+				  						 btnChoosePosition.setBounds(409, 53, 162, 29);
+				  						 getContentPane().add(btnChoosePosition);
+				  						btnChoosePosition.setActionCommand("_choose_position_pressed");
+				  						 
 				  						btnAddComment.addActionListener(Router.getInstance());
+				  						btnChoosePosition.addActionListener(Router.getInstance());
 				  						 
 				  						 
 				  						Router.getInstance().setElemWeCameFrom(2); // for COMMENT. we need to know what element we came from (in the router)
@@ -428,6 +436,14 @@ public class OnOfGUI extends JFrame implements ActionListener {
 	
 	public void setComment(String comment) {
 		this.comment = comment;	
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
+		System.out.println("4 - index of element is  "+ index);
 	}
 	
 	private void loadData(	ArrayList <String> dataOfelement,String eName) {

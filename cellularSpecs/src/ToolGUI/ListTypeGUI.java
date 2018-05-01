@@ -34,7 +34,8 @@ public class ListTypeGUI extends JFrame {
 	private String values[]={""} ; 
 	JButton butListSave;
 	String ScreenName; 
-	private String comment=" ";
+	private String comment=new String(" ");
+	private int index;
 
 	public ListTypeGUI(String screenName)
 	{
@@ -122,12 +123,18 @@ public class ListTypeGUI extends JFrame {
 	//	btnAddComment.addActionListener(Router.getInstance());
 		btnAddComment.setBounds(329, 84, 120, 23);
 		getContentPane().add(btnAddComment);
+		
+		JButton btnChoosePosition = new JButton("Choose position...");
+		btnChoosePosition.setBounds(329, 116, 115, 29);
+		getContentPane().add(btnChoosePosition);
 		setSize(501, 378);
+		btnChoosePosition.setActionCommand("_choose_position_pressed");
+		btnChoosePosition.addActionListener(Router.getInstance());
 		
-		// green until exception of LIST is fixed
-	//	btnAddComment.setActionCommand("_add_comment_pressed");
+
+		btnAddComment.setActionCommand("_add_comment_pressed");
 		
-	//	Router.getInstance().setElemWeCameFrom(4);	// for COMMENT. we need to know what type of element we came from (in the router)
+		Router.getInstance().setElemWeCameFrom(4);	// for COMMENT, INDEX. we need to know what type of element we came from (in the router)
 		
 		comboBox.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent arg0) {
@@ -167,5 +174,12 @@ public class ListTypeGUI extends JFrame {
 	
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
 	}
 }

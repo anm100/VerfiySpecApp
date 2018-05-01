@@ -11,5 +11,6 @@ public interface Element {
 	public  String getStringPromela();
 	public String getException();
 	public String getComment();
+	public int getIndex();
 	
 }

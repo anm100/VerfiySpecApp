@@ -46,7 +46,6 @@ public class AddCommentGUI extends JFrame {
 		textArea.setBounds(34, 45, 310, 114);
 		contentPane.add(textArea);
 		
-		///////////////////////////////////////////////////////////////
 		JButton btnSave = new JButton("Save");
 		btnSave.setActionCommand("_save_comment");
 		btnSave.setBounds(66, 179, 89, 23);

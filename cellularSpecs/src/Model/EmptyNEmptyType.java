@@ -12,6 +12,7 @@ private List <MyAction> actions= new ArrayList<>();
 private List <MyCondition> conditions= new ArrayList<>();
 private String exception; 
 private String comment;
+private int index;
 
 public EmptyNEmptyType() {}
 
@@ -92,6 +93,13 @@ public void setComment(String comment) {
 	this.comment = comment;
 }
 
+public int getIndex() {
+	return index;
+}
+
+public void setIndex(int index) {
+	this.index = index;
+}
 
 }
 

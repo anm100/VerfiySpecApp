@@ -9,6 +9,7 @@ private final  String type=ElementType.getListType();
 private String elementName;
 private String exception;
 private String comment;
+private int index;
 
 //private List <MyCondition> conditions= new ArrayList<>(); 
 
@@ -80,6 +81,13 @@ public void setComment(String comment) {
 	this.comment = comment;
 }
 
+public int getIndex() {
+	return index;
+}
+
+public void setIndex(int index) {
+	this.index = index;
+}
 }
 
 

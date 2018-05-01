@@ -53,6 +53,8 @@ public class ButtonTypeGUI extends JFrame {
 	private   JTable apps_table;
 	private ButtonTypeGUI thisref=this; 
 	private String comment=" ";
+	private int index;
+
 	JTextArea exception;
 	public ButtonTypeGUI(String ScreenName,String eName)
 	{
@@ -221,17 +223,23 @@ public class ButtonTypeGUI extends JFrame {
 			     
 			        
 			        JButton btnNewButton = new JButton("Delete Element");
-			        btnNewButton.setBounds(331, 23, 115, 22);
+			        btnNewButton.setBounds(331, 16, 115, 22);
 			        getContentPane().add(btnNewButton);
 			        
 			        JButton btnAddComment = new JButton("Add comment");
 			        btnAddComment.addActionListener(Router.getInstance());
-			        btnAddComment.setBounds(331, 64, 115, 23);
+			        btnAddComment.setBounds(331, 50, 115, 23);
 			        getContentPane().add(btnAddComment);
 			        btnAddComment.setActionCommand("_add_comment_pressed");
 			        
+			        JButton btnChoosePosition = new JButton("Choose position...");
+			        btnChoosePosition.setBounds(331, 88, 115, 29);
+			        getContentPane().add(btnChoosePosition);
+					btnChoosePosition.setActionCommand("_choose_position_pressed");
+					btnChoosePosition.addActionListener(Router.getInstance());
 			        
-			        Router.getInstance().setElemWeCameFrom(1);	// for COMMENT. we need to know what element we came from (in the router)
+			        
+			        Router.getInstance().setElemWeCameFrom(1);	// for COMMENT, INDEX. we need to know what element we came from (in the router)
 			        
 				}
 				private void loadData(ArrayList <String> e,String eName) {
@@ -319,13 +327,18 @@ public class ButtonTypeGUI extends JFrame {
 		addNewCond.addActionListener(ButtonTypeListener);
 	}
 	
-	
-	
 	public String getComment() {
 		return comment;
 	}
 	
 	public void setComment(String comment) {
 		this.comment = comment;	
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
 	}
 }

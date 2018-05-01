@@ -10,6 +10,7 @@ private final String type=ElementType.getOnOffType();
 private String elementName; 
 private String exception;
 private String comment;
+private int index;
 
 
 
@@ -95,4 +96,11 @@ public void setComment(String comment) {
  * now get values only in Param Class 
  */
 
+public int getIndex() {
+	return index;
+}
+
+public void setIndex(int index) {
+	this.index = index;
+}
 }	

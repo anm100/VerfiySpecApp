@@ -84,6 +84,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 	private conditionManagment condition ;
 	private EmptyNotEmptyGUI thisref = this;
 	private String comment=new String(" ");
+	private int index;
 	
 	public EmptyNotEmptyGUI(String ScreenName,String eName)
 	{
@@ -195,7 +196,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 		JLabel lblNewLabel_1 = new JLabel("Parameter name");
 		lblNewLabel_1.setBounds(60, 105, 79, 14);
 		getContentPane().add(lblNewLabel_1);
-		setSize(496, 595);
+		setSize(550, 595);
 			
 			ParameterName = new JTextField();
 			ParameterName.addPropertyChangeListener(new PropertyChangeListener() {
@@ -214,7 +215,7 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 
 			 lblNewLabel_2.setVisible(false);
 			lblNewLabel_2.setForeground(Color.RED);
-			lblNewLabel_2.setBounds(320, 80, 184, 14);
+			lblNewLabel_2.setBounds(320, 80, 55, 14);
 			getContentPane().add(lblNewLabel_2);
 			
 			 
@@ -370,14 +371,22 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 				  						   textAreaOnToOff.setEditable(false);
 				  						   
 				  						   JButton button_4 = new JButton("Delete Element");
-				  						   button_4.setBounds(349, 14, 120, 25);
+				  						   button_4.setBounds(373, 14, 142, 25);
 				  						   getContentPane().add(button_4);
 				  						   	
 				  						   JButton btnAddComment = new JButton("Add comment");
 				  						   btnAddComment.addActionListener(Router.getInstance());
-				  						   btnAddComment.setBounds(349, 50, 120, 23);
+				  						   btnAddComment.setBounds(373, 41, 142, 23);
 				  						   getContentPane().add(btnAddComment);
 				  						   btnAddComment.setActionCommand("_add_comment_pressed");
+				  						   
+				  						   JButton btnChoosePosition = new JButton("Choose position");
+				  						   btnChoosePosition.setBounds(373, 66, 142, 29);
+				  						   getContentPane().add(btnChoosePosition);
+					  						btnChoosePosition.setActionCommand("_choose_position_pressed");
+					  						btnChoosePosition.addActionListener(Router.getInstance());
+
+
 				  						   
 				  						   Router.getInstance().setElemWeCameFrom(3);
 				  						   
@@ -725,5 +734,12 @@ public class EmptyNotEmptyGUI extends JFrame implements ActionListener {
 	
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
 	}
 }
