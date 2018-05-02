@@ -1,10 +1,5 @@
 package CodeGeneration;
 
-
-
-
-///////////// YAEL REMEMBER TO RETURN THE FILES AND PATHS
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -37,7 +32,7 @@ public class AndroidStudioProjectController {
 	
 	public void GenerateAutomaticFiles() { // Here will be generated all directories and files
 		GenerateManifestFile();
-	} // Here will be generated all directories and files
+	} 
 	
 	public void GenerateJavaFiles() {			 // for all screens: java.generateScreen
 		String screenJavaName;
@@ -50,11 +45,10 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating JAVA file of screen: "+screen.getScreenName());
 			File javaFile;
 			if (screen.getScreenName() != rootScreen)
-				//javaFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/"+screenJavaName+".java"); 
-				javaFile = new File(path.toString()+"/"+screenJavaName+".java"); 
+				javaFile = new File("D:/"+screenJavaName+".java"); 
 			else {
-				//javaFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/MainActivity.java");
-				javaFile = new File(path.toString()+"/MainActivity.java"); 
+				javaFile = new File("D:/"+"/MainActivity.java"); 
+				/*
 				if(javaFile.exists()) {
 					javaFile.delete();
 					try {
@@ -64,6 +58,7 @@ public class AndroidStudioProjectController {
 						e.printStackTrace();
 					}
 				}
+				*/
 			}
 			java.GenerateScreen(javaFile, screen,  rootScreen);
 		}	
@@ -80,9 +75,9 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating XML file of screen: "+screen.getScreenName());
 			File xmlFile;
 			if (screen.getScreenName() != rootScreen)
-				//xmlFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/"+screenXmlName+".xml"); 
-				xmlFile = new File(path.toString()+screenXmlName+".xml");
+				xmlFile = new File("D:/"+screenXmlName+".xml");
 			else { 
+				/*
 				try{
 		            Files.deleteIfExists(Paths.get(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/main.xml"));
 		        }
@@ -98,8 +93,8 @@ public class AndroidStudioProjectController {
 		        } 
 		        System.out.println("Deletion successful.");
 			    // xmlFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/activity_main.xml"); 
-		        xmlFile = new File(path.toString()+"/activity_main.xml"); 
-			
+			     * */
+		        xmlFile = new File("D:/activity_main.xml"); 
 			    }
 			xml.GenerateScreen(xmlFile, screen, rootScreen);
 		}
@@ -118,7 +113,6 @@ public class AndroidStudioProjectController {
 	}
 	
 	private void GenerateManifestFile(){	
-		///////////////////////////////
 		File manifestFile = new File("D:\\AndroidManifest.xml"); // change
 		String code = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"+
 					  "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"+

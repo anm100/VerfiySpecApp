@@ -24,37 +24,32 @@ public class JavaController {
 				  "import android.content.Intent;\n"+
 				  "import java.util.ArrayList;\n"+
 				  "import java.util.List;\n"+
-				  "import android.widget.ArrayAdapter;\n"+
-				  "import android.widget.Spinner;\n"+
-				  "import android.widget.AdapterView;\n"+
-				  "import android.widget.Toast;\n"+
+				  "import android.widget.*;\n"+
 				  "import android.view.View;\n\n"+
 				  "public class ";
 		if (s.getScreenName() != rootScreen) {
 			code += s.getScreenName()+" extends AppCompatActivity {\n";
 					  if (s.getDescription() != null)
 						  code += "// Screen description: "+s.getDescription()+"\n";
+					  setElementParameters(s);
 					  code += " 	protected void onCreate(Bundle savedInstanceState) {\n"+
 							  " 		super.onCreate(savedInstanceState);\n"+
-							  " 		setContentView(R.layout."+xmlFileName+");\n";
+							  " 		setContentView(R.layout."+xmlFileName+");\n\n";
 		}
 		else {
 			code += "MainActivity extends AppCompatActivity {\n";
 					  if (s.getDescription() != null)
 						  code += "// Screen description: "+s.getDescription()+"\n";
+					  setElementParameters(s);
 					  code += " 	protected void onCreate(Bundle savedInstanceState) {\n"+
 							  " 		super.onCreate(savedInstanceState);\n"+
 							  " 		setContentView(R.layout.activity_main);\n\n";
-		}
-		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
-		while(it.hasNext()){	
-			Map.Entry pair2 =(Map.Entry) it.next(); 
-			Element e = (Element)pair2.getValue();	
-			if (e.getType() == ElementType.getEmptyNotEmptyType()) 
-				if (e.getComment() != null)
-					code += " // Textfield "+e.getELementName()+" comment: "+ e.getComment() + "\n\n";
-		}
+		}	
+		findViewsById(s);
 		
+		// GENERATORS. first generate LIST, then Button and OnOff
+		
+		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen	
 		it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
 		while(it.hasNext()){	// going through all the elements in the screen. generate LIST
 			Map.Entry pair2 =(Map.Entry) it.next(); 
@@ -62,13 +57,13 @@ public class JavaController {
 			if (e.getType() == ElementType.getListType()) 
 				GenerateList((ListElementType) e);	
 		}
-		code += "    	}\n\n";
+		code += "    	}\n\n"; // end of OnCreate function
 		it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen	
-		while(it.hasNext()){	// generate LISTS
+		while(it.hasNext()){	
 			Map.Entry pair2 =(Map.Entry) it.next(); 
-			Element e = (Element)pair2.getValue();		// current element. generate for all types of elements
+			Element e = (Element)pair2.getValue();		
 			if (e.getType() == ElementType.getStandartBtnType()) 
-				GenerateButton((StandartButtonType) e, rootScreen);
+				GenerateButton((StandartButtonType) e, rootScreen, s);
 			if (e.getType() == ElementType.getOnOffType()) 
 				GenerateOnOff((OnOffType) e);
 		}
@@ -86,25 +81,46 @@ public class JavaController {
 		}
 	}
 	
-	private void GenerateButton (StandartButtonType e, String rootScreen) { // writing into "code" only. when finished, "code" is written to the file
+	private void GenerateButton (StandartButtonType e, String rootScreen, Screen s) { // writing into "code" only. when finished, "code" is written to the file. this is listener of button.
 		String nameOfListenerOfButton = e.getELementName() + "_Listener";
 		String nextScreen = ((StandartButtonType) e).getMoveTo();
+		
 		code += "	public void   "+nameOfListenerOfButton+" (View view) {\n";
-		if (e.getComment() != null)
-			code += " 		// "+e.getComment()+"\n";
-		if (nextScreen != rootScreen)
+		if (e.getComment() != " ")
+			code += " 		// Button comment: "+e.getComment()+"\n";
+		if (nextScreen != rootScreen) 
 			code += " 		Intent intent = new Intent(this,  "+nextScreen+".class);\n";
-		else
+		else 
 			code += " 		Intent intent = new Intent(this,  MainActivity.class);\n";
+		ArrayList <MyCondition> list = (ArrayList<MyCondition>) e.getConds();
+		if (list.size() > 0) {
+			setParametersValues(s);	// handle conditions
+			String paramVal=" ";
+			if (list.get(0).getParamVal().equals("OFF") || list.get(0).getParamVal().equals("NotEmpty"))
+				paramVal = "false";
+			if (list.get(0).getParamVal().equals("ON") || list.get(0).getParamVal().equals("Empty"))
+				paramVal = "true";
+			code += " 		if ( "+list.get(0).getParamName()+" == "+paramVal+" ";
+			for (int i=1; i<list.size(); i++) {
+				if (list.get(i).getParamVal().equals("OFF") || list.get(i).getParamVal().equals("NotEmpty"))
+					paramVal = "false";
+				if (list.get(i).getParamVal().equals("ON") || list.get(i).getParamVal().equals("Empty"))
+					paramVal = "true";
+				code += "&& "+list.get(i).getParamName()+" == "+paramVal+" ";
+			}
+			code += ") {\n";
+		}
+		
 		code += " 		startActivity(intent);\n"+
-				"	}\n\n";
+				"		}\n		}\n\n";
 	}
 	
 	private void GenerateOnOff (OnOffType e) {
 		String nameOfListenerOfOnOff = e.getELementName() + "_Listener";
 		code += "	public void   "+nameOfListenerOfOnOff+" (View view) {\n";
-		if (e.getComment() != null)
+		if (e.getComment() != " ")
 			code += " 		// "+e.getComment()+"\n";
+		writeCommentActionsConditions(e);
 		code += "	}\n\n";
 	}
 	
@@ -146,33 +162,77 @@ public class JavaController {
 		return workSpaceName.toLowerCase();
 	}
 	
+	private void setElementParameters(Screen s) {
+		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
+		while(it.hasNext()){	
+			Map.Entry pair2 =(Map.Entry) it.next(); 
+			Element e = (Element)pair2.getValue();
+			if (e.getType() == ElementType.getEmptyNotEmptyType()) 
+				code += "public static boolean "+e.getParamName()+"; // parameter of element "+e.getELementName()+". false means NotEmpty, true means Empty\n";
+			if (e.getType() == ElementType.getOnOffType()) 
+				code += "public static boolean "+e.getParamName()+"; // parameter of element "+e.getELementName()+". false means Off, true means On\n";
+		}
+	}
 	
+	private void findViewsById(Screen s) {	// connect between xml and java... setting elements. also show comment
+		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
+		while(it.hasNext()){	
+			Map.Entry pair2 =(Map.Entry) it.next(); 
+			Element e = (Element)pair2.getValue();
+			if (e.getType() == ElementType.getOnOffType()) {
+				code += "\n		// switch comment: "+e.getComment()+"\n"+
+						"		Switch "+e.getELementName()+"Switch = findViewById(R.id."+e.getELementName()+");\n";
+			}
+			if (e.getType() == ElementType.getEmptyNotEmptyType()) {
+				code += "\n		// textview comment: "+e.getComment()+"\n"+
+						"		TextView "+e.getELementName()+"Text = findViewById(R.id."+e.getELementName()+");\n";
+				writeCommentActionsConditions(((EmptyNEmptyType)e));
+			}
+		}
+	}
 	
+	private void setParametersValues(Screen s){
+		Iterator<Entry<String, Element>> it = WorkSpace.getInstance().getScreenByName(s.getScreenName()).getElementsMap().entrySet().iterator();	// iterator for elements in screen
+		while(it.hasNext()){	
+			Map.Entry pair2 =(Map.Entry) it.next(); 
+			Element e = (Element)pair2.getValue();
+			if (e.getType() == ElementType.getOnOffType()) 
+				code +="		"+ e.getParamName()+" = ((Switch)findViewById(R.id."+e.getELementName()+")).isChecked();\n";
+			if (e.getType() == ElementType.getEmptyNotEmptyType()) 
+				code +="		"+ e.getParamName()+" = ((TextView)findViewById(R.id."+e.getELementName()+")).getText().equals(\"\");\n";
+		}
+	}
 	
+	private void writeCommentActionsConditions(OnOffType e) {
+		ArrayList<MyCondition> cond = e.getParameter().getCond();
+		ArrayList<MyAction> act = e.getParameter().getAction();
+		if (cond.size() > 0){
+			code += " /* Conditions to be checked: \n";
+			for (int i=0; i<cond.size(); i++)
+				code += "	"+cond.get(i).getParamName() + " == "+ cond.get(i).getParamVal()+"\n";
+		}
+		if (act.size() > 0){
+			code += " Actions to be done: \n";
+			for (int i=0; i<act.size(); i++)
+				code += "	"+act.get(i).getParamName() + " = "+ act.get(i).getParamVal()+"\n";
+			code += " */ \n";
+		}
+	}
 	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	private void writeCommentActionsConditions(EmptyNEmptyType e) {
+		ArrayList<MyCondition> cond = e.getParameter().getCond();
+		ArrayList<MyAction> act = e.getParameter().getAction();
+		if (cond.size() > 0){
+			code += " /* Conditions to be checked: \n";
+			for (int i=0; i<cond.size(); i++)
+				code += "	"+cond.get(i).getParamName() + " == "+ cond.get(i).getParamVal()+"\n";
+		}
+		if (act.size() > 0){
+			code += " Actions to be done: \n";
+			for (int i=0; i<act.size(); i++)
+				code += "	"+act.get(i).getParamName() + " = "+ act.get(i).getParamVal()+"\n";
+			code += " */ \n";
+		}
+	}
 	
 }

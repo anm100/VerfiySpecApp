@@ -79,9 +79,6 @@ public class XmlController {
 				"    android:layout_marginRight=\""+ getRight(e) + "dp\"\n"+
 				"    android:onClick=\""+nameOfListenerOfOnOff+"\"\n"+
 				"    android:text=\""+e.getELementName()+"\"\n"+
-			//	"    app:layout_constraintEnd_toEndOf=\"parent\"\n"+
-			//	"    app:layout_constraintStart_toStartOf=\"parent\"\n"+
-			//	"    app:layout_constraintTop_toTopOf=\"parent\" />\n\n\n";
 				"    app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
 				"    app:layout_constraintRight_toRightOf=\"parent\" />\n\n\n";		
 	}
@@ -93,12 +90,7 @@ public class XmlController {
 		       "     android:layout_height=\"58dp\"\n"+
 		       "     android:layout_marginBottom=\""+ getBottom(e) + "dp\"\n"+		
 		       "     android:layout_marginRight=\""+ getRight(e) + "dp\"\n"+
-			   "     android:text=\""+e.getELementName()+"\"\n"+
-		//	   "     app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
-		//	   "     app:layout_constraintEnd_toEndOf=\"parent\"\n"+
-		//	   "     app:layout_constraintHorizontal_bias=\"0.501\"\n"+
-		//	   "     app:layout_constraintStart_toStartOf=\"parent\"\n"+
-		//	   "     app:layout_constraintTop_toTopOf=\"parent\" />\n\n\n";    	
+			   "     android:text=\""+e.getELementName()+"\"\n"+   	
 				"    app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
 				"    app:layout_constraintRight_toRightOf=\"parent\" />\n\n\n";		
 	}
@@ -111,7 +103,6 @@ public class XmlController {
 	          "      android:layout_marginBottom=\""+ getBottom(e) + "dp\"\n"+	
 	          "      android:layout_marginRight=\""+ getRight(e) + "dp\"\n"+
 	          "      app:layout_constraintBottom_toBottomOf=\"parent\"\n"+
-		//	  "      app:layout_constraintLeft_toLeftOf=\"parent\"\n"+
 	          "      app:layout_constraintRight_toRightOf=\"parent\"/>\n\n\n"; 				
 	}
 	
