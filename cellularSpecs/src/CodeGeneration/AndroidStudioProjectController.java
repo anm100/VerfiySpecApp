@@ -45,10 +45,10 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating JAVA file of screen: "+screen.getScreenName());
 			File javaFile;
 			if (screen.getScreenName() != rootScreen)
-				javaFile = new File("D:/"+screenJavaName+".java"); 
+				javaFile = new File(path.toString()+"/"+"app"+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/"+screenJavaName+".java"); 
 			else {
-				javaFile = new File("D:/"+"/MainActivity.java"); 
-				/*
+				javaFile = new File(path.toString()+"/"+"app"+"/"+"src"+"/"+"main"+"/"+"java"+"/"+"com"+"/"+"example"+"/"+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"/MainActivity.java"); 
+				
 				if(javaFile.exists()) {
 					javaFile.delete();
 					try {
@@ -58,7 +58,7 @@ public class AndroidStudioProjectController {
 						e.printStackTrace();
 					}
 				}
-				*/
+				
 			}
 			java.GenerateScreen(javaFile, screen,  rootScreen);
 		}	
@@ -75,11 +75,11 @@ public class AndroidStudioProjectController {
 			WorkSpace.getLog().debug("ASPC> Generating XML file of screen: "+screen.getScreenName());
 			File xmlFile;
 			if (screen.getScreenName() != rootScreen)
-				xmlFile = new File("D:/"+screenXmlName+".xml");
+				xmlFile = new File(path.toString()+"/"+"app"+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/"+screenXmlName+".xml");
 			else { 
-				/*
+				
 				try{
-		            Files.deleteIfExists(Paths.get(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/main.xml"));
+		            Files.deleteIfExists(Paths.get(path.toString()+"/"+"app"+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/activity_main.xml"));
 		        }
 		        catch(NoSuchFileException e) {
 		            System.out.println("ASPC> Problem occurred generating files: No such file/directory exists");
@@ -92,9 +92,8 @@ public class AndroidStudioProjectController {
 		            System.out.println("ASPC> Problem occurred generating files: Invalid permissions.");
 		        } 
 		        System.out.println("Deletion successful.");
-			    // xmlFile = new File(path.toString()+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/activity_main.xml"); 
-			     * */
-		        xmlFile = new File("D:/activity_main.xml"); 
+			     xmlFile = new File(path.toString()+"/"+"app"+"/"+"src"+"/"+"main"+"/"+"res"+"/"+"layout"+"/activity_main.xml"); 
+			     
 			    }
 			xml.GenerateScreen(xmlFile, screen, rootScreen);
 		}
@@ -112,8 +111,26 @@ public class AndroidStudioProjectController {
 		return xmlFileName; 
 	}
 	
-	private void GenerateManifestFile(){	
-		File manifestFile = new File("D:\\AndroidManifest.xml"); // change
+	private void GenerateManifestFile(){
+		try
+        {
+            Files.deleteIfExists(Paths.get(path.toString()+"/"+"app"+"/"+"src"+"/"+"main"+"/AndroidManifest.xml"));
+        }
+		catch(NoSuchFileException e)
+        {
+            System.out.println("No such file/directory exists");
+        }
+        catch(DirectoryNotEmptyException e)
+        {
+            System.out.println("Directory is not empty.");
+        }
+        catch(IOException e)
+        {
+            System.out.println("Invalid permissions.");
+        }
+         
+        System.out.println("Deletion successful.");
+        File manifestFile = new File(path.toString()+"/"+"app"+"/"+"src"+"/"+"main"+"/AndroidManifest.xml");
 		String code = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"+
 					  "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"+
 					  "    package=\"com.example."+getApplicationName(WorkSpace.getInstance().getWorkSpaceName())+"\">\n\n"+

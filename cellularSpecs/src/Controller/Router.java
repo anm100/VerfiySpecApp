@@ -417,23 +417,6 @@ public class Router implements ActionListener,MouseListener,MouseMotionListener 
 				generateCodeGUI.setVisible(true);
 				break;
 			case "_begin_generation": // 'generate code' in small screen pressed
-				/*
-				//run cmd command
-				try {
-					Runtime.getRuntime().exec("cmd /c start cmd.exe  /K \"android create project -a MainActivity -k com.example."+ getApplicationName(WorkSpace.getInstance().getWorkSpaceName()) + " -t 1 -p "+ generateCodeGUI.getPath() + " -g -v 1.1.0 \" ");
-				}
-				catch (Exception e3) {
-					System.out.println("CMD run problem");
-					e3.printStackTrace();
-				}
-				try { // give CMD time to run and build the Android Studio project
-					Thread.sleep(20000);
-				} 
-				catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
-				//run cmd command
-				 * */
 				androidStudioProjectController = new AndroidStudioProjectController(generateCodeGUI.getRootScreen(), generateCodeGUI.getPath());
 				androidStudioProjectController.GenerateJavaFiles();
 				androidStudioProjectController.GenerateXmlFiles();
