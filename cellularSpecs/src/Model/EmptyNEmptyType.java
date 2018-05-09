@@ -11,7 +11,7 @@ private final String type=ElementType.getEmptyNotEmptyType();
 private List <MyAction> actions= new ArrayList<>(); 
 private List <MyCondition> conditions= new ArrayList<>();
 private String exception; 
-private String comment;
+private String comment = " ";
 private int index;
 
 public EmptyNEmptyType() {}

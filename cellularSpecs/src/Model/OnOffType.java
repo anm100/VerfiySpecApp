@@ -9,7 +9,7 @@ private Param parameter;
 private final String type=ElementType.getOnOffType();
 private String elementName; 
 private String exception;
-private String comment;
+private String comment = " ";
 private int index;
 
 

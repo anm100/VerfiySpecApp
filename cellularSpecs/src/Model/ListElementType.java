@@ -8,7 +8,7 @@ private ParamList parameter ;
 private final  String type=ElementType.getListType();
 private String elementName;
 private String exception;
-private String comment;
+private String comment = " ";
 private int index;
 
 //private List <MyCondition> conditions= new ArrayList<>(); 

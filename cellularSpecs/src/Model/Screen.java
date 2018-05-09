@@ -13,7 +13,7 @@ public class Screen implements Serializable,screenInterface{
 	private int cordinateY;
 	private int height;
 	private int width;
-	private String description;
+	private String description = " ";
 	private ArrayList<String> transPromela= new ArrayList<String>();
 	private HashMap <String,Element> elementsMap;
 	

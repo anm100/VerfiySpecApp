@@ -15,7 +15,7 @@ private final String type=ElementType.getStandartBtnType();
 private final String optLogic= "&&"; 
 private ArrayList <MyAction> actions= new ArrayList<>();
 private String exception; 
-private String comment;
+private String comment = " ";
 private int index;
 
 
