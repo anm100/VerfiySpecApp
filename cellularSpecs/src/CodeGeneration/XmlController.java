@@ -82,7 +82,7 @@ public class XmlController {
 	}
 	
 	private void GenerateEmptyNotEmpty (EmptyNEmptyType e) {
-		code +="<TextView"+
+		code +="<EditText"+
 		       "     android:id=\"@+id/"+e.getELementName()+"\"\n"+
 			   "     android:layout_width=\"128dp\"\n"+
 		       "     android:layout_height=\"58dp\"\n"+
